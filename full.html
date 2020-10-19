@@ -1,9 +1,20 @@
 <html>
 <head>
 <title>Codedit - Fullscreen</title>
+<style>
+cd {
+  height: calc(100vh - 20px);
+  width: calc(100vw - 20px);
+  padding: 10px;
+}
+cd textarea {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+</style>
 </head>
 <body style="margin: 0">
-<cd style="height: 100vh; width: 100vw">/* Type some code in any language */</cd>
+<cd>/* Type some code in any language */</cd>
 <script src="https://unpkg.com/codedit/codedit.min.js"></script>
 </body>
 </html>
