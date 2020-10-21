@@ -47,17 +47,6 @@
     }
     xmlhttp.open('GET', 'https://api.github.com/repos/barhatsor/codedit/releases/latest', true); 
     xmlhttp.send();
-      
-    function htmlDecode(input){
-      var e = document.createElement('textarea');
-      e.innerHTML = input;
-      // handle case of empty input
-      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-    }
-      
-    document.querySelectorAll('.html').forEach(codedit => {
-      codedit.innerHTML = htmlDecode(codedit.innerHTML);
-    });
     </script>
     <script src="https://unpkg.com/codedit/codedit.min.js" defer></script>
   </body>
