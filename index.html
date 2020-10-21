@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="Codedit">
 <meta name="twitter:url" content="https://codedit.berryscript.com/">
 <meta name="next-head-count" content="24">
+<style>codedit,cd{display:none}</style>
 </head>
   <body>
     <div class="header">
@@ -72,8 +73,19 @@ export howTo;
           <div>Want it dark? No problem. Just add <code>background: black</code>: You can easily change anything in Codedit. No pesky iframes, just pure HTML.</div>
         </summary>
       </details>
-      <a class="button" href="/download">Download</a><a class="usage" href="/usage">Usage</a>
+      <a class="button" href="/get">Get<a class="version"></a></a><a class="usage" href="/usage">Usage</a>
     </div>
     <script src="https://unpkg.com/codedit/codedit.min.js"></script>
+    <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() { 
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            document.querySelector('.version').innerHTML = ' version ' + response.tag_name;
+        }
+    }
+    xmlhttp.open('GET', 'https://api.github.com/repos/barhatsor/codedit/releases/latest', true); 
+    xmlhttp.send();
+  </script>
   </body>
 </html>
