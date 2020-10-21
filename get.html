@@ -36,18 +36,11 @@
             var response = JSON.parse(this.responseText);
             document.querySelectorAll('.demo')[0].innerHTML = '<script src="https://unpkg.com/codedit@'+response.tag_name+'/codedit.min.js" defer><\/script>';
             document.querySelectorAll('.demo')[1].innerHTML = '<script src="https://cdn.jsdelivr.net/npm/codedit@'+response.tag_name+'/codedit.min.js" defer><\/script>';
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() { 
-                if (this.readyState == 4 && this.status == 200) {
-                  eval(this.responseText);
-                }
-            }
-            xmlhttp.open('GET', 'https://unpkg.com/codedit/codedit.min.js', true); 
-            xmlhttp.send();
         }
     }
     xmlhttp.open('GET', 'https://api.github.com/repos/barhatsor/codedit/releases/latest', true); 
     xmlhttp.send();
     </script>
+    <script src="https://unpkg.com/codedit/codedit.min.js" defer></script>
   </body>
 </html>
