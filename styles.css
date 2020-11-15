@@ -42,6 +42,7 @@ body {
   outline: none;
   user-select: none;
   font-size: 18px;
+  margin-bottom: 10px;
   transition: .2s ease;
 }
 
@@ -62,13 +63,11 @@ body {
   opacity: 0;
   font-size: 15px;
   pointer-events: none;
-  margin-top: 10px;
   overflow: hidden;
 }
 
 .features details[open] summary {
   color: #ffffffab;
-  margin-bottom: 10px;
 }
 
 .features details[open] summary::before {
@@ -79,6 +78,7 @@ body {
 .features details[open] div {
   opacity: 1;
   max-height: 90px;
+  margin-top: 10px;
   color: white;
 }
 
