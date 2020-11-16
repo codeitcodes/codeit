@@ -51,7 +51,7 @@ codedit, cd, .hljs {
   color: #d5927b;
 }
 
-.hljs-name, .hljs-section, .hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
+.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
   color: #c66c75;
 }
 
@@ -59,6 +59,6 @@ codedit, cd, .hljs {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.hljs-tag {
-  color: #a6c3d4;
+.hljs-tag, .hljs-name, .hljs-section {
+  color: #76c0ff;
 }
