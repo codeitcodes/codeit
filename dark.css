@@ -62,3 +62,7 @@ codedit, cd, .hljs {
 .hljs-tag, .hljs-name, .hljs-section {
   color: #76c0ff;
 }
+
+.hljs-attr {
+  color: #cd7e86;
+}
