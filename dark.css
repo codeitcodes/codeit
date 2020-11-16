@@ -1,0 +1,60 @@
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track {
+  background-color: #2B303B;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 10px solid transparent;
+  border-radius: 50px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  box-shadow: none;
+  min-height: 50px;
+  background-color: #5f6368;
+}
+
+::webkit-scrollbar-thumb:hover {
+  background: #777c83;
+}
+
+::webkit-scrollbar-thumb:active {
+  background: #464a4e;
+}
+
+cd textarea {
+  caret-color: #fff;
+}
+
+cd textarea::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+codedit, cd, .hljs {
+  background: #313744;
+  color: #a6c3d4;
+}
+
+.hljs-comment, .hljs-meta {
+  color: #707e84;
+  font-style: italic;
+}
+
+.hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol, .hljs-selector-pseudo {
+  color: #c7ccd4;
+}
+
+.hljs-value, .hljs-number, .hljs-built_in {
+  color: #d5927b;
+}
+
+.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
+  color: #c66c75;
+}
+
+.hljs-string {
+  color: rgba(255, 255, 255, 0.7);
+}
