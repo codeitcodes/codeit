@@ -17,6 +17,7 @@ cd {
   border-radius: 3px;
   box-shadow: 0px 4px 0px 2px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(0,0,0,0.2);
   transition: 500ms ease;
+  z-index: 1;
 }
 
 cd textarea {
@@ -26,13 +27,12 @@ cd textarea {
 }
 
 iframe {
-  position: absolute;
+  position: fixed;
   left: 0;
   border: 0;
   height: 100%;
   transition: 500ms ease;
   width: calc(50% + 3px);
-  z-index: -1;
 }
 
 cd.open {
