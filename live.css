@@ -32,6 +32,7 @@ iframe {
   border: 0;
   height: 100%;
   transition: 500ms ease;
+  z-index: -1;
 }
 
 .cd.open {
