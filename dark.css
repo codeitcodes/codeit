@@ -16,6 +16,7 @@
 
 ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track {
   background-color: #2B303B;
+  box-shadow: inset 1px 0 0 0 rgba(0,0,0,0.2);
 }
 
 ::-webkit-scrollbar:hover, ::-webkit-scrollbar-corner:hover, ::-webkit-scrollbar-track:hover {
