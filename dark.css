@@ -3,6 +3,13 @@
  * Colors based on Base16 Ocean Dark
  */
 
+@font-face {
+  font-family: 'Monaco';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Monaco'), url('Monaco.woff') format('woff');
+}
+
 ::-webkit-scrollbar {
   width: 16px;
 }
@@ -45,6 +52,7 @@ cd textarea::selection {
 codedit, cd, .hljs {
   background: #313744;
   color: #a6c3d4;
+  font-family: 'Monaco', monospace;
 }
 
 .hljs-comment, .hljs-meta {
