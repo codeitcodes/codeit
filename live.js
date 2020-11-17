@@ -7,6 +7,5 @@ toggle.onclick = () => {
 }
 
 function updateFrame(html) {
-  iframe.src = 'nul';
-  //iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+  iframe.contentDocument.querySelector('html').innerHTML = html;
 }
