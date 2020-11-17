@@ -23,11 +23,11 @@
 }
 
 ::webkit-scrollbar-thumb:hover {
-  background: #777c83;
+  background-color: #777c83;
 }
 
 ::webkit-scrollbar-thumb:active {
-  background: #464a4e;
+  background-color: #464a4e;
 }
 
 cd textarea {
