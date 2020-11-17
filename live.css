@@ -11,11 +11,13 @@ body {
   background-color: #1a1c24;
   color: #fff;
   font-size: 13px;
-  line-height: 1.4;
   font-family: 'San Francisco', sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
   font-synthesis: none;
   -moz-font-feature-settings: 'kern';
+  line-height: 1.38462;
+  font-weight: 400;
+  letter-spacing: -.005em
 }
 
 cd {
