@@ -58,7 +58,6 @@ cd.open {
   border-radius: 5px;
   padding: 7px;
   color: #ededed;
-  font-size: 10px;
   z-index: 1;
   cursor: pointer;
   outline: none;
