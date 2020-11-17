@@ -86,10 +86,6 @@ codedit, cd, .hljs {
   color: #cd7e86;
 }
 
-.hljs-function {
-  color: #c66c75;
-}
-
 .hljs-params, .hljs-title {
   color: #69aee9;
 }
