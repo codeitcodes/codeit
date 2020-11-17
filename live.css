@@ -28,20 +28,16 @@ cd textarea {
 iframe {
   position: absolute;
   left: 0;
-  width: 0%;
   border: 0;
   height: 100%;
   transition: 500ms ease;
+  width: calc(50% + 3px);
   z-index: -1;
 }
 
 cd.open {
   width: 50%;
   left: 50%;
-}
-
-cd.open ~ iframe {
-  width: calc(50% + 3px);
 }
 
 .toggle {
