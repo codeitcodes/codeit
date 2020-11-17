@@ -43,3 +43,18 @@ iframe {
 .cd.open ~ iframe {
   width: calc(50% + 3px);
 }
+
+.toggle {
+  border: 0;
+  background: #151515;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 5px;
+  padding: 7px;
+  color: white;
+  font-family: 'Monaco', sans-serif;
+  font-size: 10px;
+  z-index: 1;
+  cursor: pointer;
+}
