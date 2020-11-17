@@ -60,7 +60,7 @@ codedit, cd, .hljs {
   font-style: italic;
 }
 
-.hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol, .hljs-selector-pseudo {
+.hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol, .hljs-selector-pseudo  {
   color: #c7ccd4;
 }
 
@@ -68,7 +68,7 @@ codedit, cd, .hljs {
   color: #d5927b;
 }
 
-.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
+.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type,  {
   color: #c66c75;
 }
 
@@ -80,6 +80,6 @@ codedit, cd, .hljs {
   color: #76c0ff;
 }
 
-.hljs-attr {
+.hljs-attr, .hljs-title {
   color: #cd7e86;
 }
