@@ -57,6 +57,7 @@ iframe {
   z-index: 1;
   cursor: pointer;
   outline: none;
+  border: 0;
 }
 
 .toggle:hover {
