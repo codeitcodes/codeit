@@ -9,6 +9,7 @@ toggle.onclick = () => {
 if (localStorage.getItem('code')) {
   // If code's in storage, show it
   codedit.innerHTML = escapeHTML(localStorage.getItem('code'));
+  codedit.classList.add('open');
 }
 
 function updateFrame(html) {
