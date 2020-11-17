@@ -56,7 +56,6 @@ cd.open {
   border-radius: 5px;
   padding: 7px;
   color: #ededed;
-  font-family: 'Monaco', sans-serif;
   font-size: 10px;
   z-index: 1;
   cursor: pointer;
