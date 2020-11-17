@@ -11,6 +11,10 @@
   background-color: #2B303B;
 }
 
+::-webkit-scrollbar:hover, ::-webkit-scrollbar-corner:hover, ::-webkit-scrollbar-track:hover {
+  width: auto;
+}
+
 ::-webkit-scrollbar-thumb {
   border: 10px solid transparent;
   border-radius: 50px;
@@ -20,7 +24,6 @@
   box-shadow: none;
   min-height: 50px;
   background-color: #5f6368;
-  transition: .2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
