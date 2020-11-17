@@ -80,6 +80,14 @@ codedit, cd, .hljs {
   color: #76c0ff;
 }
 
-.hljs-attr, .hljs-title {
+.hljs-attr {
   color: #cd7e86;
+}
+
+.hljs-function {
+  color: #c66c75;
+}
+
+.hljs-params, .hljs-title {
+  color: #75bfffe8;
 }
