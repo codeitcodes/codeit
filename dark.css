@@ -20,6 +20,7 @@
   box-shadow: none;
   min-height: 50px;
   background-color: #5f6368;
+  transition: .2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -27,7 +28,7 @@
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: #55595e;
+  background-color: #5f6368;
 }
 
 cd textarea {
