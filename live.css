@@ -41,5 +41,5 @@ iframe {
 }
 
 .cd.open ~ iframe {
-  width: 50%;
+  width: calc(50% + 3px);
 }
