@@ -42,7 +42,7 @@ cd.open {
 
 .toggle {
   background: #1a1a1a;
-  position: absolute;
+  position: fixed;
   right: 10px;
   top: 10px;
   border-radius: 5px;
