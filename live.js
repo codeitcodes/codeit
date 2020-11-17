@@ -6,6 +6,13 @@ toggle.onclick = () => {
   codedit.classList.toggle('open');
 }
 
+if (localStorage.getItem('code')) {
+  // If code's in storage, show it
+  codedit.innerText = localStorage.getItem('code');
+}
+
 function updateFrame(html) {
   iframe.contentDocument.querySelector('html').innerHTML = html;
+  // Set new localStorage value
+  localStorage.setItem('code', html);
 }
