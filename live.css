@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'San Francisco';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//bassets.github.io/SFProText.woff2') format('woff2');
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -5,7 +12,10 @@ body {
   color: #fff;
   font-size: 13px;
   line-height: 1.4;
+  font-family: 'San Francisco', sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
+  font-synthesis: none;
+  -moz-font-feature-settings: 'kern';
 }
 
 cd {
