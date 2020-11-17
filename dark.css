@@ -53,6 +53,7 @@ codedit, cd, .hljs {
   background: #313744;
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
+  font-size: 11px;
 }
 
 .hljs-comment, .hljs-meta {
