@@ -63,3 +63,7 @@ iframe {
 .toggle:hover {
   background: #2a2a2e;
 }
+
+.toggle:active {
+  background: #1a1a1a;
+}
