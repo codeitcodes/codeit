@@ -69,7 +69,7 @@ codedit, cd, .hljs {
   color: #d5927b;
 }
 
-.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type,  {
+.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
   color: #c66c75;
 }
 
