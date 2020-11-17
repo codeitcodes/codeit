@@ -8,7 +8,7 @@ toggle.onclick = () => {
 
 if (localStorage.getItem('code')) {
   // If code's in storage, show it
-  codedit.innerText = localStorage.getItem('code');
+  codedit.innerHTML = localStorage.getItem('code');
 }
 
 function updateFrame(html) {
