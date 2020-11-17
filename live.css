@@ -45,16 +45,20 @@ iframe {
 }
 
 .toggle {
-  border: 0;
-  background: #151515;
+  background: #1a1a1a;
   position: absolute;
   right: 10px;
   top: 10px;
   border-radius: 5px;
   padding: 7px;
-  color: white;
+  color: #ededed;
   font-family: 'Monaco', sans-serif;
   font-size: 10px;
   z-index: 1;
   cursor: pointer;
+  outline: none;
+}
+
+.toggle:hover {
+  background: #2a2a2e;
 }
