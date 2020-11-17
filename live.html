@@ -83,7 +83,7 @@ codedits.forEach(codedit => {
     input.style.height = input.scrollHeight+'px';
     input.style.width = input.scrollWidth+'px';
     
-    updateFrame(escapeHTML(input.value));
+    updateFrame(input.value);
 
     fake.innerHTML = escapeHTML(input.value);
     hljs.highlightBlock(fake);
