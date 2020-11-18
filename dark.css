@@ -85,6 +85,7 @@ codedit, cd, .hljs {
 
 .hljs-string {
   color: rgba(255, 255, 255, 0.7);
+  color: #c1ffddad;
 }
 
 .hljs-tag, .hljs-name, .hljs-section {
