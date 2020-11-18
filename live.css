@@ -92,3 +92,8 @@ cd.open {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
+
+.error.visible {
+  bottom: 0;
+  opacity: 1;
+}
