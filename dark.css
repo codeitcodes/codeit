@@ -44,6 +44,8 @@
 
 cd textarea {
   caret-color: #fff;
+  letter-spacing: inherit;
+  line-height: inherit;
 }
 
 cd textarea::selection {
@@ -54,8 +56,15 @@ codedit, cd, .hljs {
   background: #313744;
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
-  font-size: 11px;
   border-radius: 0;
+  font-size: 13px;
+  font-synthesis: none;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-font-feature-settings: 'kern';
+  line-height: 1.38462;
+  font-weight: 400;
+  letter-spacing: -.005em;
+  padding: 12px;
 }
 
 .hljs-comment, .hljs-meta {
