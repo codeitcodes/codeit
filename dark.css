@@ -75,7 +75,7 @@ codedit, cd, .hljs {
   color: #c7ccd4;
 }
 
-.hljs-value, .hljs-number, .hljs-built_in {
+.hljs-value, .hljs-number, .hljs-built_in, .hljs-literal {
   color: #d5927b;
 }
 
