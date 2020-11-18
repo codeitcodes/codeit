@@ -13,7 +13,6 @@ if (localStorage.getItem('code')) {
 }
 
 function updateFrame(html) {
-  iframe.src = '';
   iframe.contentDocument.querySelector('html').innerHTML = html;
   // Set new localStorage value
   localStorage.setItem('code', html);
