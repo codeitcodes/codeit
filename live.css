@@ -75,3 +75,20 @@ cd.open {
 .toggle:active {
   background: #242428;
 }
+
+.error {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  bottom: -40px;
+  opacity: 0;
+  width: calc(50% - 63px);
+  text-align: center;
+  border-top: 1px solid #F28B82;
+  background: #f28b821f;
+  color: #F28B82;
+  padding: 10px 30px;
+  transition: .2s ease;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
