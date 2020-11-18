@@ -10,7 +10,6 @@ if (localStorage.getItem('code')) {
   // If code's in storage, show it
   codedit.innerHTML = escapeHTML(localStorage.getItem('code'));
   codedit.classList.add('open');
-  iframe.contentDocument.querySelector('html').innerHTML = "What's a programmer's favorite place? The Foo Bar.<style>@font-face{font-family:'San Francisco';font-style:normal;font-weight: 400;src:url('https://bassets.github.io/SFProText.woff2') format('woff2');}body{font-family:'San Francisco',sans-serif;display:grid;place-content:center;text-align:center;font-size:30px;color:white;background:radial-gradient(#2f3341,#1a1c24);}</style>";
 }
 
 function updateFrame(html) {
