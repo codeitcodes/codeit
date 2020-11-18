@@ -82,7 +82,7 @@ cd.open {
   bottom: 0;
   bottom: -40px;
   opacity: 0;
-  width: calc(50% - 63px);
+  width: calc(50% - 60px);
   text-align: center;
   border-top: 1px solid #F28B82;
   background: #f28b821f;
