@@ -64,6 +64,8 @@ cd.open {
   cursor: pointer;
   outline: none;
   border: 0;
+  box-shadow: 1px 1px 1px 1px #00000030;
+  transition: .2s ease;
 }
 
 .toggle:hover {
@@ -71,5 +73,5 @@ cd.open {
 }
 
 .toggle:active {
-  background: #1a1a1a;
+  background: #242428;
 }
