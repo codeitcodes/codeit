@@ -58,12 +58,6 @@ codedit, cd, .hljs {
   font-family: 'Monaco', monospace;
   border-radius: 0;
   font-size: 11px;
-  font-synthesis: none;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-font-feature-settings: 'kern';
-  line-height: 1.38462;
-  letter-spacing: -.005em;
-  padding: 12px;
 }
 
 .hljs-comment, .hljs-meta {
