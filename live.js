@@ -1,6 +1,7 @@
 var toggle = document.querySelector('.toggle'),
     codedit = document.querySelector('cd'),
-    iframe = document.querySelector('iframe');
+    iframe = document.querySelector('iframe'),
+    error = document.querySelector('.error');
 
 toggle.onclick = () => {
   codedit.classList.toggle('open');
@@ -18,7 +19,10 @@ function updateFrame(html) {
   
   // Run all <script> tags
   iframe.contentDocument.querySelectorAll('script').forEach(script => {
-    iframe.contentWindow.eval(script.innerHTML);
+    // Try running their code. If there's an error, display it in the console
+    try {
+      iframe.contentWindow.eval(script.innerHTML);
+    } catch(e) { error.innerHTML = e; }
   })
   
   // Set new localStorage value
