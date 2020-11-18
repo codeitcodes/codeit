@@ -22,7 +22,10 @@ function updateFrame(html) {
     // Try running their code. If there's an error, display it in the console
     try {
       iframe.contentWindow.eval(script.innerHTML);
-    } catch(e) { error.innerHTML = e; }
+      error.classList.remove('visible');
+    } catch(e) {
+      error.innerHTML = e; error.classList.add('visible');
+    }
   })
   
   // Set new localStorage value
