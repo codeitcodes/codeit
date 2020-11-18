@@ -103,7 +103,6 @@ codedits.forEach(codedit => {
   observe(input, 'paste',   delayedUpdate);
   observe(input, 'drop',    delayedUpdate);
   observe(input, 'keydown', delayedUpdate);
-  observe(input, 'input', delayedUpdate);
 
   update();
 });
