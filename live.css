@@ -34,6 +34,8 @@ cd textarea {
   width: 100vw !important;
   max-width: 100vw !important;
   min-height: calc(100vh - 24px);
+  letter-spacing: inherit;
+  line-height: inherit;
 }
 
 iframe {
