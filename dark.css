@@ -57,12 +57,11 @@ codedit, cd, .hljs {
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
   border-radius: 0;
-  font-size: 13px;
+  font-size: 11px;
   font-synthesis: none;
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-font-feature-settings: 'kern';
   line-height: 1.38462;
-  font-weight: 400;
   letter-spacing: -.005em;
   padding: 12px;
 }
