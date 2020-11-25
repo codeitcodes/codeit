@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Codedit Live</title>
-<style>codedit,cd{display:none}</style>
+<style>body{display:none}</style>
 </head>
 <body>
 <cd lang="html"><!-- Type some HTML --></cd>
@@ -124,6 +124,10 @@ function decodeHTML(input){
   e.innerHTML = input;
   return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
+ 
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.display = 'block';
+});
 </script>
 </body>
 </html>
