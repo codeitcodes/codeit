@@ -5,6 +5,10 @@
   src: url('//bassets.github.io/SFProText.woff2') format('woff2');
 }
 
+html {
+  background: #1a1c24;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
