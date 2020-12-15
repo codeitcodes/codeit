@@ -26,6 +26,7 @@ body {
   width: 100%;
   color: white;
   height: 1000px;
+  -webkit-overflow-scrolling: auto;
 }
 .navcontent p {
   margin: 0;
@@ -132,10 +133,6 @@ navbar.addEventListener('scroll', e => {
     }
   }
 })
-  
-document.ontouchmove = function(event){
-  event.preventDefault();
-}
 </script>
 </body>
 </html>
