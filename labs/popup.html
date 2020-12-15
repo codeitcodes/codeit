@@ -132,6 +132,10 @@ navbar.addEventListener('scroll', e => {
     }
   }
 })
+  
+navbar.ontouchmove = function(event){
+  event.preventDefault();
+}
 </script>
 </body>
 </html>
