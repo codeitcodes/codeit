@@ -118,7 +118,7 @@ navbar.addEventListener('scroll', e => {
       stickTop = true;
     }
     
-    if (navbar.scrollTop == 0) {
+    if (navbar.scrollTop <= 0) {
       navbar.classList.remove('open');
       navbar.style.overflow = 'hidden';
       document.body.style.overflow = '';
