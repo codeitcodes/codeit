@@ -86,10 +86,10 @@ navheader.addEventListener('click', e => {
     stickTop = false;
     navbar.classList.remove('sticky');
     navbar.style.top = '';
-    navbar.style.transition = '.2s';
+    navbar.style.transition = '.25s';
     setTimeout(() => {
       navbar.style.transition = '';
-    }, 200);
+    }, 250);
   }
   else {
     navbar.style.overflow = 'auto';
@@ -126,10 +126,10 @@ navbar.addEventListener('scroll', e => {
       stickTop = false;
       navbar.classList.remove('sticky');
       navbar.style.top = '';
-      navbar.style.transition = '.2s';
+      navbar.style.transition = '.25s';
       setTimeout(() => {
         navbar.style.transition = '';
-      }, 200);
+      }, 250);
     }
   }
 })
