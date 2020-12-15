@@ -25,6 +25,7 @@ body {
   background: black;
   width: 100%;
   color: white;
+  height: 1000px;
 }
 .navcontent p {
   margin: 0;
@@ -90,7 +91,7 @@ navheader.addEventListener('click', e => {
     }, 200);
   }
   else {
-    navbar.style.overflow = 'overlay';
+    navbar.style.overflow = 'auto';
     navbar.style.transition = '.2s';
     setTimeout(() => {
       navbar.style.transition = '';
