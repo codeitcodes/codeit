@@ -99,10 +99,10 @@ codedits.forEach(codedit => {
     window.setTimeout(update, 0);
   }
   function delayedUpdateFrame() {
-    window.setTimeout(() => { updateFrame(input.value) }, 0);
+    window.setTimeout(() => { update(); updateFrame(input.value); }, 0);
   }
 
-  observe(input, 'change', () => { updateFrame(input.value) });
+  observe(input, 'change', () => { updateFrame(input.value); update() });
   observe(input, 'cut',    delayedUpdateFrame);
   observe(input, 'paste',  delayedUpdateFrame);
   observe(input, 'drop',   delayedUpdateFrame);
