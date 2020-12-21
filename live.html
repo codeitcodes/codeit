@@ -99,14 +99,17 @@ codedits.forEach(codedit => {
     window.setTimeout(update, 0);
   }
 
+  /*
   observe(input, 'change',  update);
   observe(input, 'cut',     delayedUpdate);
   observe(input, 'paste',   delayedUpdate);
   observe(input, 'drop',    delayedUpdate);
   observe(input, 'keydown', delayedUpdate);
   observe(input, 'keyup', delayedUpdate);
+  */
 
   update();
+  window.setInterval(update, 20);
 });
 
 // Utilty functions
