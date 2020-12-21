@@ -87,7 +87,7 @@ codedits.forEach(codedit => {
     input.style.height = input.scrollHeight+'px';
     input.style.width = input.scrollWidth+'px';
     
-    updateFrame(input.value);
+    //updateFrame(input.value);
 
     fake.innerHTML = escapeHTML(input.value);
     hljs.highlightBlock(fake);
@@ -98,15 +98,16 @@ codedits.forEach(codedit => {
   function delayedUpdate() {
     window.setTimeout(update, 0);
   }
+  function delayedUpdateFrame() {
+    window.setTimeout(() => { updateFrame(input.value) }, 0);
+  }
 
-  /*
-  observe(input, 'change',  update);
-  observe(input, 'cut',     delayedUpdate);
-  observe(input, 'paste',   delayedUpdate);
-  observe(input, 'drop',    delayedUpdate);
-  observe(input, 'keydown', delayedUpdate);
-  observe(input, 'keyup', delayedUpdate);
-  */
+  observe(input, 'change', () => { updateFrame(input.value) });
+  observe(input, 'cut',    delayedUpdateFrame);
+  observe(input, 'paste',  delayedUpdateFrame);
+  observe(input, 'drop',   delayedUpdateFrame);
+  observe(input, 'keydown',delayedUpdateFrame);
+  observe(input, 'keyup',  delayedUpdateFrame);
 
   update();
   window.setInterval(update, 20);
