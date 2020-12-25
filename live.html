@@ -16,7 +16,10 @@
 <!-- <script src="//codedit.berryscript.com/packages.js"></script> -->
 <script src="https://unpkg.com/codedit/src/behave.js"></script>
 <script src="https://unpkg.com/prismjs/components/prism-core.min.js" data-manual></script>
+ 
 <script src="https://unpkg.com/prismjs/components/prism-markup.min.js"></script>
+<script src="https://unpkg.com/prismjs/components/prism-css.min.js"></script>
+<script src="https://unpkg.com/prismjs/components/prism-javascript.min.js"></script>
  
 <script src="//codedit.berryscript.com/live.js"></script>
 
@@ -97,9 +100,11 @@ codedits.forEach(codedit => {
 
      updateFrame(input.value);
 
-     var html = Prism.highlight(input.value, Prism.languages.html, 'html');
+     var markup = Prism.highlight(input.value, Prism.languages.html, 'html');
+     var css = Prism.highlight(markup, Prism.languages.css, 'css');
+     var js = Prism.highlight(css, Prism.languages.javascript, 'javascript');
 
-     fake.innerHTML = html;
+     fake.innerHTML = js;
      //hljs.highlightBlock(fake);
 
      input.style.maxWidth = fake.clientWidth+'px';
