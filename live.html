@@ -11,11 +11,14 @@
  
 <link rel="stylesheet" href="//codedit.berryscript.com/dark.css">
 <link rel="stylesheet" href="//codedit.berryscript.com/live.css">
- 
-<script src="//codedit.berryscript.com/packages.js"></script>
+<link href="https://unpkg.com/prismjs/themes/prism.css" rel="stylesheet"/>
+
+<!-- <script src="//codedit.berryscript.com/packages.js"></script> -->
+<script src="https://unpkg.com/prismjs/components/prism-core.min.js"></script>
+<script src="https://unpkg.com/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
  
 <script src="//codedit.berryscript.com/live.js"></script>
- 
+
 <script>
 // Add required CSS to head
 var css = 'cd,codedit{display:inline-flex;position:relative;font-family:monospace;width:max-content;background:#f1f3f4;border-radius:5px;padding:5px}cd textarea,codedit textarea{background:0 0;color:transparent;position:relative;border:0;resize:none;font:inherit;outline:0;caret-color:#000;white-space:pre;overflow:hidden;padding:0;z-index:1}cd pre,codedit pre{top:0;margin:0;position:absolute;padding-top:inherit}cd code,codedit code{padding:0!important;background:0 0!important}.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#d73a49}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-symbol{color:#0086b3}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#6f42c1}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.hljs-number{color:#005cc5}.hljs-string{color:#032f62}',
@@ -88,9 +91,12 @@ codedits.forEach(codedit => {
     input.style.width = input.scrollWidth+'px';
     
     //updateFrame(input.value);
-
-    fake.innerHTML = escapeHTML(input.value);
-    hljs.highlightBlock(fake);
+    
+    var code = escapeHTML(input.value);
+    var html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+   
+    fake.innerHTML = html;
+    //hljs.highlightBlock(fake);
     
     input.style.maxWidth = fake.clientWidth+'px';
   }
