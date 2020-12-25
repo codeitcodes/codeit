@@ -98,7 +98,7 @@ codedits.forEach(codedit => {
      updateFrame(input.value);
 
      var code = escapeHTML(input.value);
-     var html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+     var html = Prism.highlight(code, Prism.languages.html, 'html');
 
      fake.innerHTML = html;
      //hljs.highlightBlock(fake);
