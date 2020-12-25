@@ -85,40 +85,40 @@ codedits.forEach(codedit => {
       };
   }
 
+  var prevText = '';
   function update() {
-    input.style.height = 'auto';
-    input.style.width = 'auto';
-    input.style.height = input.scrollHeight+'px';
-    input.style.width = input.scrollWidth+'px';
-    
-    //updateFrame(input.value);
-    
-    var code = escapeHTML(input.value);
-    var html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
-   
-    fake.innerHTML = html;
-    //hljs.highlightBlock(fake);
-    
-    input.style.maxWidth = fake.clientWidth+'px';
+    if (input.value && input.value != prevText) {
+     prevText = input.value;
+     
+     input.style.height = 'auto';
+     input.style.width = 'auto';
+     input.style.height = input.scrollHeight+'px';
+     input.style.width = input.scrollWidth+'px';
+
+     updateFrame(input.value);
+
+     var code = escapeHTML(input.value);
+     var html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+
+     fake.innerHTML = html;
+     //hljs.highlightBlock(fake);
+
+     input.style.maxWidth = fake.clientWidth+'px';
+    }
   }
   // 0-timeout to get the already changed text
   function delayedUpdate() {
     window.setTimeout(update, 0);
   }
-  function delayedUpdateFrame() {
-    window.setTimeout(() => { update(); updateFrame(input.value); }, 0);
-  }
 
-  observe(input, 'change', () => { updateFrame(input.value); update() });
-  observe(input, 'cut',    delayedUpdateFrame);
-  observe(input, 'paste',  delayedUpdateFrame);
-  observe(input, 'drop',   delayedUpdateFrame);
-  observe(input, 'keydown',delayedUpdateFrame);
-  observe(input, 'keyup',  delayedUpdateFrame);
+  observe(input, 'change', update);
+  observe(input, 'cut',    delayedUpdate);
+  observe(input, 'paste',  delayedUpdate);
+  observe(input, 'drop',   delayedUpdate);
+  observe(input, 'keydown',delayedUpdate);
+  observe(input, 'keyup',  delayedUpdate);
 
   update();
-  window.setInterval(update, 10);
-  updateFrame(input.value);
 });
 
 // Utilty functions
