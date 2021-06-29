@@ -8,6 +8,7 @@ cd {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   
+  display: block;
   background: #f1f3f4;
   border-radius: 5px;
   padding: 5px;
