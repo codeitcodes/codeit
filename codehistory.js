@@ -1,21 +1,20 @@
 let history = document.querySelector('.history-wrapper');
 
-//codedit.setValue(localStorage.getItem('code'));
+let code;
+
+if (localStorage.getItem('history')) {
+  code = localStorage.getItem('history');
+}
 
 history.addEventListener('click', () => {
   
-  codedit.setValue('AAA');
-  
-  if (localStorage.getItem('history')) {
-    // if code in storage, show it
-    
-  }
+  codedit.setValue(code);
   
 });
 
 window.onbeforeunload = function() {
   
   // set new localStorage value
-  localStorage.setItem('code', codedit.code.value);
+  localStorage.setItem('code', codedit.input.value);
   
 };
