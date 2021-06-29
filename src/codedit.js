@@ -64,7 +64,7 @@ codedits.forEach(codedit => {
     
   codedit.setValue = (code) => {
     input.value = code;
-    update();
+    delayedUpdate();
   }
   
   codedit.input = input;
