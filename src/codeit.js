@@ -69,7 +69,9 @@ codeits.forEach(codeit => {
     if (textChanged) {
       
       // if lang not specified, try autodetect
-      //if (!codeit.getAttribute('lang')) {
+      if (!codeit.getAttribute('lang')) {
+        codeit.classList = '';
+      }
 
         /*lang = 'language-' + */codeit.innerText = hljs.highlightAuto(codeit.innerText).value;
         //codeit.classList = lang;
@@ -78,7 +80,7 @@ codeits.forEach(codeit => {
 
       //Prism.highlightElement(codeit);
       
-      //console.log(mutationsList);
+      console.log(mutationsList);
       
     }
         
@@ -86,7 +88,7 @@ codeits.forEach(codeit => {
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
-  observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: true, attributes: true});
+  observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
 
   Prism.highlightElement(codeit);
 
