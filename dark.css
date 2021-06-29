@@ -43,22 +43,18 @@
 }
 
 cd {
-  caret-color: #fff;
-  letter-spacing: inherit;
-  line-height: inherit;
-}
-
-cd::selection {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-cd {
   background: #313744;
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
   font-size: 11px;
+  
+  /* caret-color: #fff; */
+}
+
+cd::selection {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .hljs-comment, .hljs-meta {
