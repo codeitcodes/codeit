@@ -14,6 +14,6 @@ history.addEventListener('click', () => {
 window.onbeforeunload = function() {
   
   // set new localStorage value
-  localStorage.setItem('code', codedit.input.value);
+  localStorage.setItem('code', codedit.code.value);
   
 };
