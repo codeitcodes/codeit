@@ -31,26 +31,31 @@ codeits.forEach(codeit => {
     
     // get last mutation
     let mutation = mutationsList[mutationsList.length-1];
+    let textChanged = true;
     
     // if mutation was a textNode mutation
     if (mutation.type === 'characterData') {
       
-      // if the text didn't change, break
+      // if the text didn't change, stop
       if (mutation.oldValue === codeit.innerText) {
-        break;
+        textChanged = false;
       }
       
     }
     
-    // if lang not specified, try autodetect
-    if (!codeit.getAttribute('lang')) {
+    if (textChanged) {
       
-      lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
-      codeit.classList = lang;
+      // if lang not specified, try autodetect
+      if (!codeit.getAttribute('lang')) {
+
+        lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
+        codeit.classList = lang;
+
+      }
+
+      Prism.highlightElement(codeit);
       
     }
-    
-    Prism.highlightElement(codeit);
     
     console.log(mutationsList);
     
