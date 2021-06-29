@@ -49,6 +49,13 @@ codeits.forEach(codeit => {
           textChanged = false;
         }
 
+      } else { // if mutation was an attribute mutation
+        
+        // if this is the only mutation, stop
+        if (mutationsList.length === 1) {
+          textChanged = false;
+        }
+        
       }
       
     });
@@ -58,12 +65,12 @@ codeits.forEach(codeit => {
       // if lang not specified, try autodetect
       if (!codeit.getAttribute('lang')) {
 
-        //lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
-        //codeit.classList = lang;
+        lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
+        codeit.classList = lang;
 
       }
 
-      //Prism.highlightElement(codeit);
+      Prism.highlightElement(codeit);
       
       console.log(mutationsList);
       
