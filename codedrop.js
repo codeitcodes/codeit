@@ -32,13 +32,13 @@ codedit.addEventListener('dragover', (ev) => {
   
 })
 
-codedit.addEventListener('dragenter', () => {
+document.addEventListener('dragenter', () => {
   
   document.body.classList.add('focus');
   
 })
 
-codedit.addEventListener('dragleave', () => {
+document.addEventListener('dragleave', () => {
   
   document.body.classList.remove('focus');
   
