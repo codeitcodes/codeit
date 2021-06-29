@@ -8,7 +8,9 @@ if (localStorage.getItem('history')) {
 
 history.addEventListener('click', () => {
   
-  codedit.setValue(code);
+  if (code) {
+    codedit.setValue(code);
+  }
   
 });
 
