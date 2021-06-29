@@ -44,7 +44,7 @@ codeits.forEach(codeit => {
 
       } else if (mutation.type === 'childList') { // if mutation was a innerHTML mutation
         
-        if (removedNodes.length > 0) {
+        if (removedNodes) {
         
           // if the text didn't change, stop
           if (mutation.removedNodes[0].textContent === mutation.addedNodes[0].textContent) {
