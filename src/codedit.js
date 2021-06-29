@@ -1,12 +1,12 @@
 // Add required CSS to head
-var css = 'cd,codedit{display:inline-flex;position:relative;font-family:monospace;width:max-content;background:#f1f3f4;border-radius:5px;padding:5px}cd textarea,codedit textarea{background:0 0;color:transparent;position:relative;border:0;resize:none;font:inherit;outline:0;caret-color:#000;white-space:pre;overflow:hidden;  letter-spacing: inherit;line-height: inherit;padding:0;z-index:1}cd pre,codedit pre{top:0;margin:0;position:absolute;padding-top:inherit}cd code,codedit code{padding:0!important;background:0 0!important}.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#d73a49}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-symbol{color:#0086b3}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#6f42c1}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.hljs-number{color:#005cc5}.hljs-string{color:#032f62}',
+var css = 'cd{user-select:text;-webkit-user-select:text;overflow-wrap:break-word;white-space:pre-wrap;font-family:monospace;text-rendering:optimizeLegibility;font-feature-settings:"kern";background:#f1f3f4;border-radius:5px;padding:5px}.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#d73a49}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-symbol{color:#0086b3}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#6f42c1}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.hljs-number{color:#005cc5}.hljs-string{color:#032f62}',
     head = document.head,
     style = document.createElement('style');
 head.appendChild(style);
 style.appendChild(document.createTextNode(css));
 
 // Get all Codeits
-var codeits = document.querySelectorAll('codeit, cd');
+var codeits = document.querySelectorAll('cd');
 
 codeits.forEach(codeit => {
   
