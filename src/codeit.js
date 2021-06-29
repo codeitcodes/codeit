@@ -13,6 +13,7 @@ codeits.forEach(codeit => {
   if (codeit.getAttribute('editable') != 'false') {
     codeit.setAttribute('contenteditable', 'true');
   }
+  codeit.setAttribute('spellcheck', 'false');
   
   // set class to specified lang
   codeit.setAttribute('class', codeit.getAttribute('lang'));
