@@ -1,10 +1,12 @@
 let history = document.querySelector('.history-wrapper');
 
+codedit.setValue(localStorage.getItem('code'));
+
 history.addEventListener('click', () => {
   
   if (localStorage.getItem('history')) {
     // if code in storage, show it
-    document.querySelector('cd').setValue(localStorage.getItem('code'));
+    codedit.setValue(localStorage.getItem('code'));
   }
   
 });
