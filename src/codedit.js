@@ -64,7 +64,7 @@ codedits.forEach(codedit => {
     
   codedit.setValue = (code) => {
     input.value = code;
-    update();
+    delayedUpdate();
   }
   
   codedit.input = input;
@@ -84,7 +84,7 @@ codedits.forEach(codedit => {
 
     hljs.highlightBlock(fake);
     
-    input.style.maxWidth = fake.clientWidth+'px';
+    //input.style.maxWidth = fake.clientWidth+'px';
   }
   // 0-timeout to get the already changed text
   function delayedUpdate() {
