@@ -20,7 +20,10 @@ codeits.forEach(codeit => {
 
   // parse codeit code
   let code = codeit.innerHTML.replace(/^\n|\n$/g, '');
-  codeit.innerText = code;
+  let newtext = document.createTextNode(code);
+  
+  codeit.innerHTML = '';
+  codeit.appendChild(newtext);
   
   // create a new instance of 'MutationObserver' named 'observer', 
   // passing it a callback function
@@ -30,7 +33,7 @@ codeits.forEach(codeit => {
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
-  observer.observe(codeit.textContent, {characterData: true, childList: false, attributes: false});
+  observer.observe(newtext, {characterData: true, childList: false, attributes: false});
 
   function update() {
     input.style.height = 'auto';
