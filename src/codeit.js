@@ -89,8 +89,9 @@ codeits.forEach(codeit => {
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
   observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
-
-  Prism.highlightElement(codeit);
+  
+  codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
+  //Prism.highlightElement(codeit);
 
 });
 
