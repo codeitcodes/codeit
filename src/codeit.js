@@ -73,7 +73,7 @@ codeits.forEach(codeit => {
         codeit.classList = '';
       }
 
-        /*lang = 'language-' + */codeit.innerText = hljs.highlightAuto(codeit.innerText).value;
+        /*lang = 'language-' + */codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
         //codeit.classList = lang;
 
       //}
