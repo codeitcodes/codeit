@@ -1,5 +1,19 @@
 let codedit = document.querySelector('cd');
 
+function processFile(file) {
+  
+  if (file.type && file.type.startsWith('text/')) {
+    
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      console.log(event.target.result);
+    });
+    reader.readAsDataURL(file);
+    
+  }
+  
+}
+
 codedit.addEventListener('drop', (ev) => {
   
   // Prevent default behavior (Prevent file from being opened)
@@ -13,13 +27,13 @@ codedit.addEventListener('drop', (ev) => {
       // If dropped items aren't files, reject them
       if (ev.dataTransfer.items[i].kind === 'file') {
         var file = ev.dataTransfer.items[i].getAsFile();
-        console.log(file);
+        processFile(file);
       }
     }
   } else {
     // Use DataTransfer interface to access the file(s)
     for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-      console.log(ev.dataTransfer.files[i]);
+      processFile(ev.dataTransfer.files[i]);
     }
   }
   
