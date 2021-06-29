@@ -32,14 +32,20 @@ codedit.addEventListener('dragover', (ev) => {
   
 })
 
-document.addEventListener('dragenter', () => {
+document.addEventListener('dragenter', (ev) => {
   
-  document.body.classList.add('focus');
+  // highlight potential drop target when the draggable element enters it
+  if (ev.target == codedit) {
+    document.body.classList.add('focus');
+  }
   
 })
 
-document.addEventListener('dragleave', () => {
+document.addEventListener('dragleave', (ev) => {
   
-  document.body.classList.remove('focus');
+  // reset background of potential drop target when the draggable element leaves it
+  if (ev.target == codedit) {
+    document.body.classList.remove('focus');
+  }
   
 })
