@@ -1,4 +1,3 @@
-let codedit = document.querySelector('cd');
 let history = document.querySelector('.history-wrapper');
 
 history.addEventListener('click', () => {
