@@ -67,7 +67,7 @@ codedits.forEach(codedit => {
     delayedUpdate();
   }
   
-  codedit.input = input;
+  codedit.code = input;
 
   function update() {
     input.style.height = 'auto';
