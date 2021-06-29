@@ -6,7 +6,7 @@ function processFile(file) {
     
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
-      console.log(event.target.result);
+      codedit.setValue(event.target.result);
     });
     reader.readAsText(file);
     
