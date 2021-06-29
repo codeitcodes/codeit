@@ -1,16 +1,16 @@
-let codedit = document.querySelector('cd');
+let codeit = document.querySelector('cd');
 
 function processFile(file) {
     
   const reader = new FileReader();
   reader.addEventListener('load', (event) => {
-    codedit.setValue(event.target.result);
+    codeit.innerText = event.target.result;
   });
   reader.readAsText(file);
   
 }
 
-codedit.addEventListener('drop', (ev) => {
+codeit.addEventListener('drop', (ev) => {
   
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
@@ -35,7 +35,7 @@ codedit.addEventListener('drop', (ev) => {
   
 })
 
-codedit.addEventListener('dragover', (ev) => {
+codeit.addEventListener('dragover', (ev) => {
   
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
@@ -44,7 +44,7 @@ codedit.addEventListener('dragover', (ev) => {
   
 })
 
-codedit.addEventListener('dragleave', (ev) => {
+codeit.addEventListener('dragleave', (ev) => {
   
   document.body.classList.remove('focus');
   
