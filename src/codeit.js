@@ -47,7 +47,7 @@ codeits.forEach(codeit => {
         if (mutation.removedNodes.length > 0 && mutation.addedNodes.length > 0) {
         
           // if the text didn't change, stop
-          if (mutation.removedNodes[0].textContent === mutation.addedNodes[0].textContent) {
+          if (mutation.removedNodes[0].data === mutation.addedNodes[0].data) {
             textChanged = false;
           }
           
@@ -69,16 +69,16 @@ codeits.forEach(codeit => {
     if (textChanged) {
       
       // if lang not specified, try autodetect
-      if (!codeit.getAttribute('lang')) {
+      //if (!codeit.getAttribute('lang')) {
 
-        lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
-        codeit.classList = lang;
+        /*lang = 'language-' + */codeit.innerText = hljs.highlightAuto(codeit.innerText).value;
+        //codeit.classList = lang;
 
-      }
+      //}
 
-      Prism.highlightElement(codeit);
+      //Prism.highlightElement(codeit);
       
-      console.log(mutationsList);
+      //console.log(mutationsList);
       
     }
         
