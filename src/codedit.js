@@ -5,69 +5,31 @@ var css = 'cd,codedit{display:inline-flex;position:relative;font-family:monospac
 head.appendChild(style);
 style.appendChild(document.createTextNode(css));
 
-// Get all Codedits
-var codedits = document.querySelectorAll('codedit, cd');
+// Get all Codeits
+var codeits = document.querySelectorAll('codeit, cd');
 
-codedits.forEach(codedit => {
-  // Create the elements
-  let input = document.createElement('textarea');
-  let pre = document.createElement('pre');
-  let fake = document.createElement('code');
+codeits.forEach(codeit => {
   
-  // Input adjustments
-  input.setAttribute('spellcheck', 'false');
-  input.setAttribute('rows', 1);
-  // Set class to specified lang
-  fake.setAttribute('class', codedit.getAttribute('lang'));
-
-  // Save and clear codedit
-  let code = decodeHTML(codedit.innerHTML).replace(/^\n|\n$/g, '');
-  codedit.innerHTML = '';
-
-  // Append the elements to the DOM
-  input = codedit.appendChild(input);
-  pre = codedit.appendChild(pre);
-  fake = pre.appendChild(fake);
-  
-  // If codedit set to uneditable, hide input
-  if (codedit.getAttribute('editable') == 'false') {
-    input.style.zIndex = '-1';
+  if (codeit.getAttribute('editable') != 'false') {
+    codeit.setAttribute('contenteditable', 'true');
   }
   
-  // Set input to code
-  input.value = code;
+  // set class to specified lang
+  codeit.setAttribute('class', codeit.getAttribute('lang'));
 
-  // Init editor behavior
-  new Behave({
-    textarea: input,
-    replaceTab: true,
-    softTabs: true,
-    tabSize: 2,
-    autoOpen: true,
-    overwrite: true,
-    autoStrip: true,
-    autoIndent: true
+  // parse codeit code
+  let code = codeit.innerHTML.replace(/^\n|\n$/g, '');
+  codeit.innerText = code;
+  
+  // create a new instance of 'MutationObserver' named 'observer', 
+  // passing it a callback function
+  let observer = new MutationObserver(function(mutationsList, observer) {
+    console.log(mutationsList);
   });
 
-  // Update textarea
-  var observe;
-  if (window.attachEvent) {
-      observe = function(element, event, handler) {
-          element.attachEvent('on'+event, handler);
-      };
-  }
-  else {
-      observe = function(element, event, handler) {
-          element.addEventListener(event, handler, false);
-      };
-  }
-    
-  codedit.setValue = (code) => {
-    input.value = code;
-    delayedUpdate();
-  }
-  
-  codedit.input = input;
+  // call 'observe' on that MutationObserver instance, 
+  // passing it the element to observe, and the options object
+  observer.observe(codeit, {characterData: false, childList: true, attributes: false});
 
   function update() {
     input.style.height = 'auto';
@@ -83,21 +45,8 @@ codedits.forEach(codedit => {
     }
 
     hljs.highlightBlock(fake);
-    
-    //input.style.maxWidth = fake.clientWidth+'px';
-  }
-  // 0-timeout to get the already changed text
-  function delayedUpdate() {
-    window.setTimeout(update, 0);
   }
 
-  observe(input, 'change',  update);
-  observe(input, 'cut',     delayedUpdate);
-  observe(input, 'paste',   delayedUpdate);
-  observe(input, 'drop',    delayedUpdate);
-  observe(input, 'keydown', delayedUpdate);
-
-  update();
 });
 
 // Utilty functions
