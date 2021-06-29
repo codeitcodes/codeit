@@ -8,7 +8,7 @@ function processFile(file) {
     reader.addEventListener('load', (event) => {
       console.log(event.target.result);
     });
-    reader.readAsDataURL(file);
+    reader.readAsText(file);
     
   }
   
