@@ -30,22 +30,12 @@ codedit.addEventListener('dragover', (ev) => {
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
   
-})
-
-document.addEventListener('dragenter', (ev) => {
-  
-  // highlight potential drop target when the draggable element enters it
-  if (ev.target == codedit) {
-    ev.target.classList.add('focus');
-  }
+  document.body.classList.add('focus');
   
 })
 
-document.addEventListener('dragleave', (ev) => {
+codedit.addEventListener('dragleave', (ev) => {
   
-  // reset background of potential drop target when the draggable element leaves it
-  if (ev.target == codedit) {
-    ev.target.classList.remove('focus');
-  }
+  document.body.classList.remove('focus');
   
 })
