@@ -29,6 +29,19 @@ codeits.forEach(codeit => {
   // passing it a callback function
   let observer = new MutationObserver(function(mutationsList, observer) {
     
+    // get last mutation
+    let mutation = mutationsList[mutationsList.length-1];
+    
+    // if mutation was a textNode mutation
+    if (mutation.type === 'characterData') {
+      
+      // if the text didn't change, break
+      if (mutation.oldValue === codeit.innerText) {
+        break;
+      }
+      
+    }
+    
     // if lang not specified, try autodetect
     if (!codeit.getAttribute('lang')) {
       
@@ -45,7 +58,7 @@ codeits.forEach(codeit => {
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
-  observer.observe(codeit, {subtree: true, characterData: true, childList: true, attributes: true});
+  observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: true, attributes: true});
 
   Prism.highlightElement(codeit);
 
