@@ -1,4 +1,5 @@
 cd {
+  outline: none;
   user-select: text;
   -webkit-user-select: text;
   overflow-wrap: break-word;
