@@ -6,7 +6,7 @@ history.addEventListener('click', () => {
   
   if (localStorage.getItem('history')) {
     // if code in storage, show it
-    codedit.setValue(localStorage.getItem('code'));
+    codedit.setValue('AAA');
   }
   
 });
