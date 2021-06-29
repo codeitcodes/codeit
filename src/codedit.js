@@ -64,10 +64,10 @@ codedits.forEach(codedit => {
     
   codedit.setValue = (code) => {
     input.value = code;
-    delayedUpdate();
+    update();
   }
   
-  codedit.code = input;
+  codedit.input = input;
 
   function update() {
     input.style.height = 'auto';
