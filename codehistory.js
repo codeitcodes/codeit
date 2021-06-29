@@ -1,6 +1,6 @@
 let history = document.querySelector('.history-wrapper');
 
-codedit.setValue(localStorage.getItem('code'));
+//codedit.setValue(localStorage.getItem('code'));
 
 history.addEventListener('click', () => {
   
