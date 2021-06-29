@@ -5,7 +5,7 @@ codedit.addEventListener('drop', (ev) => {
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
   
-  document.body.classList.remove('focus');
+  ev.target.classList.remove('focus');
 
   if (ev.dataTransfer.items) {
     // Use DataTransferItemList interface to access the file(s)
@@ -36,7 +36,7 @@ document.addEventListener('dragenter', (ev) => {
   
   // highlight potential drop target when the draggable element enters it
   if (ev.target == codedit) {
-    document.body.classList.add('focus');
+    ev.target.classList.add('focus');
   }
   
 })
@@ -45,7 +45,7 @@ document.addEventListener('dragleave', (ev) => {
   
   // reset background of potential drop target when the draggable element leaves it
   if (ev.target == codedit) {
-    document.body.classList.remove('focus');
+    ev.target.classList.remove('focus');
   }
   
 })
