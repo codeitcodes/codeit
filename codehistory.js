@@ -4,9 +4,11 @@ let history = document.querySelector('.history-wrapper');
 
 history.addEventListener('click', () => {
   
+  codedit.setValue('AAA');
+  
   if (localStorage.getItem('history')) {
     // if code in storage, show it
-    codedit.setValue('AAA');
+    
   }
   
 });
