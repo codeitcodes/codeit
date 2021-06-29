@@ -29,19 +29,29 @@ codeits.forEach(codeit => {
   // passing it a callback function
   let observer = new MutationObserver(function(mutationsList, observer) {
     
-    // get last mutation
-    let mutation = mutationsList[mutationsList.length-1];
     let textChanged = true;
     
-    // if mutation was a textNode mutation
-    if (mutation.type === 'characterData') {
-      
-      // if the text didn't change, stop
-      if (mutation.oldValue === codeit.innerText) {
-        textChanged = false;
+    // run on all mutations
+    mutationsList.forEach(mutation => {
+
+      // if mutation was a textNode mutation
+      if (mutation.type === 'characterData') {
+
+        // if the text didn't change, stop
+        if (mutation.oldValue === codeit.innerText) {
+          textChanged = false;
+        }
+
+      } else if (mutation.type === 'childList') { // if mutation was a innerHTML mutation
+
+        // if the text didn't change, stop
+        if (removedNodes[0].textContent === addedNodes[0].textContent) {
+          textChanged = false;
+        }
+
       }
       
-    }
+    });
     
     if (textChanged) {
       
