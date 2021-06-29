@@ -30,7 +30,7 @@ codeits.forEach(codeit => {
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
-  observer.observe(codeit, {characterData: true, childList: true, attributes: false});
+  observer.observe(codeit.textContent, {characterData: true, childList: false, attributes: false});
 
   function update() {
     input.style.height = 'auto';
