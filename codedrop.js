@@ -4,6 +4,8 @@ codedit.addEventListener('drop', (ev) => {
   
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
+  
+  document.body.classList.remove('focus');
 
   if (ev.dataTransfer.items) {
     // Use DataTransferItemList interface to access the file(s)
@@ -25,14 +27,18 @@ codedit.addEventListener('drop', (ev) => {
 
 codedit.addEventListener('dragover', (ev) => {
   
-  document.body.classList.add('focus');
-  
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
   
 })
 
-codedit.addEventListener('dragend', () => {
+codedit.addEventListener('dragenter', () => {
+  
+  document.body.classList.add('focus');
+  
+})
+
+codedit.addEventListener('dragleave', () => {
   
   document.body.classList.remove('focus');
   
