@@ -1,16 +1,12 @@
 let codedit = document.querySelector('cd');
 
 function processFile(file) {
-  
-  if (file.type && file.type.startsWith('text/')) {
     
-    const reader = new FileReader();
-    reader.addEventListener('load', (event) => {
-      codedit.setValue(event.target.result);
-    });
-    reader.readAsText(file);
-    
-  }
+  const reader = new FileReader();
+  reader.addEventListener('load', (event) => {
+    codedit.setValue(event.target.result);
+  });
+  reader.readAsText(file);
   
 }
 
