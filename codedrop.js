@@ -5,7 +5,7 @@ codedit.addEventListener('drop', (ev) => {
   // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
   
-  ev.target.classList.remove('focus');
+  document.body.classList.remove('focus');
 
   if (ev.dataTransfer.items) {
     // Use DataTransferItemList interface to access the file(s)
