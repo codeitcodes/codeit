@@ -14,39 +14,40 @@ codeits.forEach(codeit => {
     codeit.setAttribute('contenteditable', 'true');
   }
   codeit.setAttribute('spellcheck', 'false');
-  
-  // set class to specified lang
-  codeit.setAttribute('class', codeit.getAttribute('lang'));
 
   // parse codeit code
   let code = codeit.innerHTML.replace(/^\n|\n$/g, '');
   codeit.innerText = code;
   
+  // set class to specified lang
+  let lang = codeit.getAttribute('lang');
+  if (!lang) lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
+  
+  codeit.classList = lang;
+  
   // create a new instance of 'MutationObserver' named 'observer', 
   // passing it a callback function
   let observer = new MutationObserver(function(mutationsList, observer) {
+    
+    // if lang not specified, try autodetect
+    if (!codeit.getAttribute('lang')) {
+      
+      lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
+      codeit.classList = lang;
+      
+    }
+    
+    Prism.highlightElement(codeit);
+    
     console.log(mutationsList);
+    
   });
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
   observer.observe(codeit, {subtree: true, characterData: true, childList: true, attributes: true});
 
-  function update() {
-    input.style.height = 'auto';
-    input.style.width = 'auto';
-    input.style.height = input.scrollHeight+'px';
-    input.style.width = input.scrollWidth+'px';
-    
-    fake.innerHTML = escapeHTML(input.value);
-    
-    // If lang not specified, clear class for autodetect
-    if (!codedit.getAttribute('lang')) {
-      fake.setAttribute('class', '');
-    }
-
-    hljs.highlightBlock(fake);
-  }
+  Prism.highlightElement(codeit);
 
 });
 
