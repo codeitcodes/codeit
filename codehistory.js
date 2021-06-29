@@ -8,7 +8,7 @@ history.addEventListener('click', () => {
     codedit.setValue(localStorage.getItem('code'));
   }
   
-}
+});
 
 window.onbeforeunload = function() {
   
