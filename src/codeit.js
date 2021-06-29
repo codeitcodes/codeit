@@ -55,10 +55,10 @@ codeits.forEach(codeit => {
 
       Prism.highlightElement(codeit);
       
+      console.log(mutationsList);
+      
     }
-    
-    console.log(mutationsList);
-    
+        
   });
 
   // call 'observe' on that MutationObserver instance, 
