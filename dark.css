@@ -42,17 +42,17 @@
   background-color: #5f6368;
 }
 
-cd textarea {
+cd {
   caret-color: #fff;
   letter-spacing: inherit;
   line-height: inherit;
 }
 
-cd textarea::selection {
+cd::selection {
   background: rgba(255, 255, 255, 0.15);
 }
 
-codedit, cd, .hljs {
+cd {
   background: #313744;
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
