@@ -1,12 +1,12 @@
-let history = document.querySelector('.history-wrapper');
+let github = document.querySelector('.github');
 
-history.addEventListener('click', () => {
-  
-  if (localStorage.getItem('history')) {
-    codeit.innerText = localStorage.getItem('history');
-  }
-  
-});
+github.addEventListener('click', () => {
+  body.classList.toggle('expanded');
+}
+
+if (localStorage.getItem('history')) {
+  codeit.innerText = localStorage.getItem('history');
+}
 
 window.onbeforeunload = function() {
   
