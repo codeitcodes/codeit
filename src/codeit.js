@@ -59,102 +59,118 @@ codeits.forEach(cd => {
   observer.observe(cd, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
   
   
-  function getCaretData(elem) {
-    
+  // node_walk: walk the element tree, stop when func(node) returns false
+  function node_walk(node, func) {
+    var result = func(node);
+    for(node = node.firstChild; result !== false && node; node = node.nextSibling)
+      result = node_walk(node, func);
+    return result;
+  };
+
+  // getCaretPosition: return [start, end] as offsets to elem.textContent that
+  //   correspond to the selected portion of text
+  //   (if start == end, caret is at given position and no text is selected)
+  function getCaretPosition(elem) {
     var sel = window.getSelection();
-    
-    if (sel.anchorNode && sel.anchorOffset) {
-      return [sel.anchorNode, sel.anchorOffset];
-    } else {
-      return;
+    var cum_length = [0, 0];
+
+    if(sel.anchorNode == elem)
+      cum_length = [sel.anchorOffset, sel.extentOffset];
+    else {
+      var nodes_to_find = [sel.anchorNode, sel.extentNode];
+      if(!elem.contains(sel.anchorNode) || !elem.contains(sel.extentNode))
+        return undefined;
+      else {
+        var found = [0,0];
+        var i;
+        node_walk(elem, function(node) {
+          for(i = 0; i < 2; i++) {
+            if(node == nodes_to_find[i]) {
+              found[i] = true;
+              if(found[i == 0 ? 1 : 0])
+                return false; // all done
+            }
+          }
+
+          if(node.textContent && !node.firstChild) {
+            for(i = 0; i < 2; i++) {
+              if(!found[i])
+                cum_length[i] += node.textContent.length;
+            }
+          }
+        });
+        cum_length[0] += sel.anchorOffset;
+        cum_length[1] += sel.extentOffset;
+      }
     }
-    
+    if(cum_length[0] <= cum_length[1])
+      return cum_length;
+    return [cum_length[1], cum_length[0]];
   }
 
   function setCaret(el, pos) {
-    
     var range = document.createRange();
     var sel = window.getSelection();
-    
     range.setStart(el,pos);
     range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
-    
   }
 
 
-  let indexStack = [];
+  function getTextNodesIn(node, includeWhitespaceNodes) {
+    var overallLength = 0, lastNode, textNodes = [], nonWhitespaceMatcher = /\S/;
 
-  function checkParent(elem) {
+    function getTextNodes(node) {
 
-    let parent = elem.parentNode;
-    let parentChildren = Array.from(parent.childNodes);
+      if (overallLength < caretPosInText) {
+        lastNode = node;
+        if (node.nodeType == 3) {
+          if (node.nodeValue !== ' ') {
 
-    let elemIndex = parentChildren.indexOf(elem);
+            overallLength += node.length;
+          } else {
+            overallLength += 1;
+          }
+        } else {
+          for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+            getTextNodes(node.childNodes[i]);
+          }
+        }
+      }
+    }
 
-    indexStack.unshift(elemIndex);
+    getTextNodes(node);
 
-    if (parent !== cd) {
+    if (lastNode) {
 
-      checkParent(parent);
+      return [lastNode, ((lastNode.length)-(overallLength - caretPosInText))];
 
     } else {
 
-      return;
+      return [cd, 0];
 
     }
-
-  }
-
-  let stackPos = 0;
-  let elemToSelect;
-
-  function getChild(parent, index) {
-
-    let child = parent.childNodes[index];
-
-    if (stackPos < indexStack.length-1) {
-
-      stackPos++;
-
-      getChild(child, indexStack[stackPos]);
-
-    } else {
-      
-      elemToSelect = child;
-      
-      return;
-      
-    }
-
   }
   
   
+  let caretPosInText = 0;
   
   cd.update = () => {
     
-    let caretData = getCaretData(cd);
+    let caretPos = getCaretPosition(cd);
     
-    if (caretData) {
-
-      let selectedElem = caretData[0];
-      let caretPos = caretData[1];
-
-
-      indexStack = [];
-      checkParent(selectedElem);
-
-
+    if (caretPos) {
+      
+      caretPosInText = caretPos[0];
+      
+      
       let highlightData = hljs.highlightAuto(cd.innerText);
       cd.innerHTML = highlightData.value;
-
-
-      stackPos = 0;
-      getChild(cd, indexStack[stackPos]);
-
-
-      setCaret(elemToSelect, caretPos);
+      
+      
+      let caretData = getTextNodesIn(cd);
+      setCaret(caretData[0], caretData[1]);
       
     } else {
       
