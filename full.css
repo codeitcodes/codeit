@@ -33,7 +33,7 @@ cd {
   padding: 6px;
   cursor: pointer;
   transform: translateX(-100%);
-  animation: hide .18s 1s var(--ease-function);
+  animation: show 1s, hide .18s 1s var(--ease-function);
 }
 
 .github::after {
@@ -50,6 +50,15 @@ cd {
   transform: none;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
+}
+
+@keyframes show {
+  
+  from, to {
+    transform: none;
+    box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
+  }
+  
 }
 
 @keyframes hide {
