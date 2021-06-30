@@ -8,16 +8,16 @@ style.appendChild(document.createTextNode(css));
 // Get all Codeits
 var codeits = document.querySelectorAll('cd');
 
-codeits.forEach(codeit => {
+codeits.forEach(cd => {
   
-  if (codeit.getAttribute('editable') != 'false') {
-    codeit.setAttribute('contenteditable', 'true');
+  if (cd.getAttribute('editable') != 'false') {
+    cd.setAttribute('contenteditable', 'true');
   }
-  codeit.setAttribute('spellcheck', 'false');
+  cd.setAttribute('spellcheck', 'false');
 
   // parse codeit code
-  let code = codeit.innerHTML.replace(/^\n|\n$/g, '');
-  codeit.innerText = code;
+  let code = cd.innerHTML.replace(/^\n|\n$/g, '');
+  cd.innerText = code;
   
   // create a new instance of 'MutationObserver' named 'observer', 
   // passing it a callback function
@@ -32,29 +32,13 @@ codeits.forEach(codeit => {
       if (mutation.type === 'characterData') {
 
         // if the text didn't change, stop
-        if (mutation.oldValue === codeit.innerText) {
+        if (mutation.oldValue === cd.innerText) {
           textChanged = false;
         }
 
       } else if (mutation.type === 'childList') { // if mutation was a innerHTML mutation
         
-        if (mutation.removedNodes.length > 0 && mutation.addedNodes.length > 0) {
         
-          // if the text didn't change, stop
-          if (mutation.removedNodes[0].data === mutation.addedNodes[0].data) {
-            textChanged = false;
-          }
-          
-        } else {
-          textChanged = false;
-        }
-
-      } else { // if mutation was an attribute mutation
-        
-        // if this is the only mutation, stop
-        if (mutationsList.length === 1) {
-          textChanged = false;
-        }
         
       }
       
@@ -62,8 +46,7 @@ codeits.forEach(codeit => {
     
     if (textChanged) {
 
-      let highlightData = hljs.highlightAuto(codeit.innerText);
-      codeit.innerHTML = highlightData.value;
+      cd.update();
       
       console.log(mutationsList);
       
@@ -73,9 +56,97 @@ codeits.forEach(codeit => {
 
   // call 'observe' on that MutationObserver instance, 
   // passing it the element to observe, and the options object
-  observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
+  observer.observe(cd, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
   
-  let highlightData = hljs.highlightAuto(codeit.innerText);
-  codeit.innerHTML = highlightData.value;
+  
+  
+  function getCaretData(elem) {
+    var sel = window.getSelection();
+    return [sel.anchorNode, sel.anchorOffset];
+  }
 
+  function setCaret(el, pos) {
+    var range = document.createRange();
+    var sel = window.getSelection();
+    range.setStart(el,pos);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+
+  let indexStack = [];
+
+  function checkParent(elem) {
+
+    let parent = elem.parentNode;
+    let parentChildren = Array.from(parent.childNodes);
+
+    let elemIndex = parentChildren.indexOf(elem);
+
+    indexStack.unshift(elemIndex);
+
+    if (parent !== cd) {
+
+      checkParent(parent);
+
+    } else {
+
+      return;
+
+    }
+
+  }
+
+  let stackPos = 0;
+  let elemToSelect;
+
+  function getChild(parent, index) {
+
+    let child = parent.childNodes[index];
+
+    if (stackPos < indexStack.length-1) {
+
+      stackPos++;
+
+      getChild(child, indexStack[stackPos]);
+
+    } else {
+      
+      elemToSelect = child;
+      
+      return;
+      
+    }
+
+  }
+  
+  
+  
+  cd.update = () => {
+    
+    let caretData = getCaretData(cd);
+    
+    let selectedElem = caretData[0];
+    let caretPos = caretData[1];
+    
+    
+    indexStack = [];
+    checkParent(selectedElem);
+    
+    
+    let highlightData = hljs.highlightAuto(cd.innerText);
+    cd.innerHTML = highlightData.value;
+    
+    
+    stackPos = 0;
+    getChild(cd, indexStack[stackPos]);
+    
+    
+    setCaret(elemToSelect, caretPos);
+    
+  }
+  
+  cd.update();
+  
 });
