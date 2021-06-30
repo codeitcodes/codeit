@@ -59,19 +59,28 @@ codeits.forEach(cd => {
   observer.observe(cd, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
   
   
-  
   function getCaretData(elem) {
+    
     var sel = window.getSelection();
-    return [sel.anchorNode, sel.anchorOffset];
+    
+    if (sel) {
+      return [sel.anchorNode, sel.anchorOffset];
+    } else {
+      return;
+    }
+    
   }
 
   function setCaret(el, pos) {
+    
     var range = document.createRange();
     var sel = window.getSelection();
+    
     range.setStart(el,pos);
     range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
+    
   }
 
 
@@ -127,23 +136,32 @@ codeits.forEach(cd => {
     
     let caretData = getCaretData(cd);
     
-    let selectedElem = caretData[0];
-    let caretPos = caretData[1];
-    
-    
-    indexStack = [];
-    checkParent(selectedElem);
-    
-    
-    let highlightData = hljs.highlightAuto(cd.innerText);
-    cd.innerHTML = highlightData.value;
-    
-    
-    stackPos = 0;
-    getChild(cd, indexStack[stackPos]);
-    
-    
-    setCaret(elemToSelect, caretPos);
+    if (caretData) {
+
+      let selectedElem = caretData[0];
+      let caretPos = caretData[1];
+
+
+      indexStack = [];
+      checkParent(selectedElem);
+
+
+      let highlightData = hljs.highlightAuto(cd.innerText);
+      cd.innerHTML = highlightData.value;
+
+
+      stackPos = 0;
+      getChild(cd, indexStack[stackPos]);
+
+
+      setCaret(elemToSelect, caretPos);
+      
+    } else {
+      
+      let highlightData = hljs.highlightAuto(cd.innerText);
+      cd.innerHTML = highlightData.value;
+      
+    }
     
   }
   
