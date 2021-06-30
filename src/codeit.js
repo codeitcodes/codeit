@@ -19,12 +19,6 @@ codeits.forEach(codeit => {
   let code = codeit.innerHTML.replace(/^\n|\n$/g, '');
   codeit.innerText = code;
   
-  // set class to specified lang
-  let lang = codeit.getAttribute('lang');
-  if (!lang) lang = 'language-' + hljs.highlightAuto(codeit.innerText).language;
-  
-  codeit.classList = lang;
-  
   // create a new instance of 'MutationObserver' named 'observer', 
   // passing it a callback function
   let observer = new MutationObserver(function(mutationsList, observer) {
@@ -67,20 +61,9 @@ codeits.forEach(codeit => {
     });
     
     if (textChanged) {
-      
-      // if lang not specified, try autodetect
-      if (!codeit.getAttribute('lang')) {
-        codeit.classList = '';
-      }
 
-        /*lang = 'language-' + *///codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
-        //codeit.classList = lang;
-
-      //}
-
-      //Prism.highlightElement(codeit);
-      
-      hljs.highlightElement(codeit);
+      let highlightData = hljs.highlightAuto(codeit.innerText);
+      codeit.innerHTML = highlightData.value;
       
       console.log(mutationsList);
       
@@ -92,23 +75,7 @@ codeits.forEach(codeit => {
   // passing it the element to observe, and the options object
   observer.observe(codeit, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
   
-  codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
-  //Prism.highlightElement(codeit);
+  let highlightData = hljs.highlightAuto(codeit.innerText);
+  codeit.innerHTML = highlightData.value;
 
 });
-
-// Utilty functions
-function escapeHTML(unsafe) {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function decodeHTML(input){
-  var e = document.createElement('textarea');
-  e.innerHTML = input;
-  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-}
