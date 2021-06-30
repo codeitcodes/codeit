@@ -166,6 +166,7 @@ codeits.forEach(cd => {
       
       
       let highlightData = hljs.highlightAuto(cd.innerText);
+      cd.classList = highlightData.language;
       cd.innerHTML = highlightData.value;
       
       
