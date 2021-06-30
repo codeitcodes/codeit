@@ -33,6 +33,7 @@ cd {
   padding: 6px;
   cursor: pointer;
   transform: translateX(-100%);
+  transition: .18s var(--ease-function);
   animation: show 1s, hide .18s 1s var(--ease-function);
 }
 
