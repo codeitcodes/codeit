@@ -126,7 +126,7 @@ codeits.forEach(cd => {
       if (overallLength < caretPosInText) {
         lastNode = node;
         if (node.nodeType == 3) {
-          if (node.nodeValue !== ' ' || node.nodeValue !== '\n') {
+          if (node.nodeValue !== ' ') {
 
             overallLength += node.length;
           } else {
