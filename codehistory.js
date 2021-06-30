@@ -2,7 +2,7 @@ let github = document.querySelector('.github');
 
 github.addEventListener('click', () => {
   body.classList.toggle('expanded');
-}
+})
 
 if (localStorage.getItem('history')) {
   codeit.innerText = localStorage.getItem('history');
