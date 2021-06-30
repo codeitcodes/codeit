@@ -34,7 +34,7 @@ cd {
   cursor: pointer;
   transform: translateX(-100%);
   transition: .18s var(--ease-function);
-  animation: show 1s, hide .18s 1s var(--ease-function);
+  animation: show 2s, hide .18s 2s var(--ease-function);
 }
 
 .github::after {
