@@ -73,12 +73,14 @@ codeits.forEach(codeit => {
         codeit.classList = '';
       }
 
-        /*lang = 'language-' + */codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
+        /*lang = 'language-' + *///codeit.innerHTML = hljs.highlightAuto(codeit.innerText).value;
         //codeit.classList = lang;
 
       //}
 
       //Prism.highlightElement(codeit);
+      
+      hljs.highlightElement(codeit);
       
       console.log(mutationsList);
       
