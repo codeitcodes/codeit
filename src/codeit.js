@@ -119,7 +119,7 @@ codeits.forEach(cd => {
 
 
   function getTextNodesIn(node, includeWhitespaceNodes) {
-    var overallLength = 0, lastNode, textNodes = [], nonWhitespaceMatcher = /\S/;
+    var overallLength = 0, lastNode;
 
     function getTextNodes(node) {
 
