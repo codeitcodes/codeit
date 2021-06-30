@@ -63,7 +63,7 @@ codeits.forEach(cd => {
     
     var sel = window.getSelection();
     
-    if (sel) {
+    if (sel.anchorNode && sel.anchorOffset) {
       return [sel.anchorNode, sel.anchorOffset];
     } else {
       return;
