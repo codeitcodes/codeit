@@ -1,4 +1,5 @@
-let github = document.querySelector('.github');
+let body = document.body,
+    github = document.querySelector('.github');
 
 github.addEventListener('click', () => {
   body.classList.toggle('expanded');
