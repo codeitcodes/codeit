@@ -168,8 +168,6 @@ codeits.forEach(cd => {
       cd.innerHTML = highlightData.value;
       
       
-      cd.innerHTML = cd.innerHTML.replaceAll('\n', '<br>');
-      
       let caretData = getTextNodesIn(cd);
       setCaret(caretData[0], caretData[1]);
       
