@@ -160,6 +160,8 @@ codeits.forEach(cd => {
   
   function getLengthWithoutNewlines(node) {
     
+    console.log(node);
+    
     var nodeLength = node.length;
 
     var lastChar, thisChar, counter;
@@ -176,6 +178,8 @@ codeits.forEach(cd => {
     }
 
     nodeLength -= counter;
+    
+    console.log(nodeLength, counter);
 
     return nodeLength;
     
