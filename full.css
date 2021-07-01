@@ -24,6 +24,7 @@ cd {
   position: relative;
   box-sizing: border-box;
   transition: .4s var(--cubic-function);
+  transition-property: width, left;
 }
 
 body.expanded cd {
