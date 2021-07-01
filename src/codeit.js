@@ -48,6 +48,8 @@ codeits.forEach(cd => {
 
       cd.update();
       
+      console.log(mutationsList);
+      
     }
         
   });
@@ -161,7 +163,8 @@ codeits.forEach(cd => {
     if (caretPos) {
       
       caretPosInText = caretPos[0];
-            
+      
+      
       let highlightData = hljs.highlightAuto(cd.innerText);
       cd.classList = highlightData.language;
       cd.innerHTML = highlightData.value;
@@ -182,4 +185,3 @@ codeits.forEach(cd => {
   cd.update();
   
 });
-
