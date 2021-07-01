@@ -48,8 +48,6 @@ codeits.forEach(cd => {
 
       cd.update();
       
-      console.log(mutationsList);
-      
     }
         
   });
@@ -169,6 +167,8 @@ codeits.forEach(cd => {
       cd.classList = highlightData.language;
       cd.innerHTML = highlightData.value;
       
+      
+      cd.innerHTML = cd.innerHTML.replaceAll('\n', '<br>');
       
       let caretData = getTextNodesIn(cd);
       setCaret(caretData[0], caretData[1]);
