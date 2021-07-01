@@ -164,7 +164,7 @@ codeits.forEach(cd => {
     
     var nodeLength = node.length;
 
-    var lastChar, thisChar, counter;
+    var lastChar, thisChar, counter = 0;
     for (var i = 0; i < node.nodeValue.length; i++) {
 
       thisChar = node.nodeValue[i];
