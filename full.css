@@ -34,23 +34,29 @@ cd {
   cursor: pointer;
   transform: translateX(-100%);
   transition: .18s var(--ease-function);
-  /*animation: show 2s, hide .18s 2s var(--ease-function);*/
+  animation: show 1.5s, hide .18s 2s var(--ease-function);
 }
 
 .github::after {
   content: '';
   position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 50vh;
+  width: 36px;
   transform: translateX(100%);
+  transition: inherit;
+  z-index: -1;
 }
 
 .github:hover {
   transform: none;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
+}
+
+.github:hover::after {
+  transform: none;
 }
 
 @keyframes show {
