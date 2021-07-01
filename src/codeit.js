@@ -161,9 +161,7 @@ codeits.forEach(cd => {
     if (caretPos) {
       
       caretPosInText = caretPos[0];
-      
-      cd.innerHTML = cd.innerHTML.replaceAll('\n','<span>\n</span>');
-      
+            
       let highlightData = hljs.highlightAuto(cd.innerText);
       cd.classList = highlightData.language;
       cd.innerHTML = highlightData.value;
