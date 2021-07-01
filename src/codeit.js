@@ -48,7 +48,7 @@ codeits.forEach(cd => {
 
       cd.update();
       
-      console.log(mutationsList);
+      //console.log(mutationsList);
       
     }
         
