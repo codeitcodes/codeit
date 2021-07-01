@@ -164,16 +164,12 @@ codeits.forEach(cd => {
     
     var nodeLength = node.length;
 
-    var lastChar, thisChar, counter = 0;
-    for (var i = 0; i < node.nodeValue.length; i++) {
+    var counter = 0;
+    for (var i = 0; i < nodeLength; i++) {
 
-      thisChar = node.nodeValue[i];
-
-      if (lastChar === '\\' && thisChar === 'n') {
+      if (node.nodeValue[i] == '\n') {
         counter++;
       }
-
-      lastChar = thisChar;
 
     }
 
