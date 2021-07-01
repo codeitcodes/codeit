@@ -126,11 +126,13 @@ codeits.forEach(cd => {
       if (overallLength < caretPosInText) {
         lastNode = node;
         if (node.nodeType == 3) {
-          if (node.nodeValue !== ' ') {
+          if (node.nodeValue === ' ') {
 
-            overallLength += node.length;
-          } else {
             overallLength += 1;
+          } else if (node.nodeValue.includes('\n')) {
+            overallLength += (node.length - node.nodeValue.split('\n').length);
+          } else {
+            overallLength += node.length;
           }
         } else {
           for (var i = 0, len = node.childNodes.length; i < len; ++i) {
