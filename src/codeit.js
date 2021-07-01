@@ -156,6 +156,7 @@ codeits.forEach(cd => {
   
   cd.update = () => {
     
+    cd.innerHTML = cd.innerHTML.replaceAll('\n','<span>\n</span>');
     let caretPos = getCaretPosition(cd);
     
     if (caretPos) {
