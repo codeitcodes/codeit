@@ -59,6 +59,10 @@ cd {
   transform: none;
 }
 
+.github:active {
+  background: hsl(228deg 16% 10%);
+}
+
 @keyframes show {
   
   from, to {
