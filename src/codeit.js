@@ -129,10 +129,11 @@ codeits.forEach(cd => {
           if (node.nodeValue === ' ') {
 
             overallLength += 1;
-          } else if (node.nodeValue.includes('\n')) {
-            overallLength += (node.length - node.nodeValue.split('\n').length);
+            
           } else {
-            overallLength += node.length;
+            
+            overallLength += getLengthWithoutNewlines(node);
+              
           }
         } else {
           for (var i = 0, len = node.childNodes.length; i < len; ++i) {
@@ -145,14 +146,39 @@ codeits.forEach(cd => {
     getTextNodes(node);
 
     if (lastNode) {
-
-      return [lastNode, ((lastNode.length)-(overallLength - caretPosInText))];
+      
+      var lastNodeLength = getLengthWithoutNewlines(lastNode);
+      
+      return [lastNode, (lastNodeLength - (overallLength - caretPosInText))];
 
     } else {
 
       return [cd, 0];
 
     }
+  }
+  
+  function getLengthWithoutNewlines(node) {
+    
+    var nodeLength = node.length;
+
+    var lastChar, thisChar, counter;
+    for (var i = 0; i < node.nodeValue.length; i++) {
+
+      thisChar = node.nodeValue[i];
+
+      if (lastChar === '\\' && thisChar === 'n') {
+        counter++;
+      }
+
+      lastChar = thisChar;
+
+    }
+
+    nodeLength -= counter;
+
+    return nodeLength;
+    
   }
   
   
