@@ -152,6 +152,14 @@ body.expanded .sidebar {
   cursor: pointer;
 }
 
+.sidebar .header :is(.back, .search) {
+  padding: 7px;
+  margin-right: -7px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #828689;
+}
+
 .sidebar .header .back {
   color: currentColor;
   margin-right: 0;
@@ -161,14 +169,6 @@ body.expanded .sidebar {
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-}
-
-.sidebar .header :is(.back, .search) {
-  padding: 7px;
-  margin-right: -7px;
-  cursor: pointer;
-  border-radius: 50%;
-  color: #828689;
 }
 
 .sidebar .header .search:active {
