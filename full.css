@@ -33,8 +33,8 @@ cd {
 }
 
 body.expanded cd {
-  width: calc(100% - 235px);
-  left: 235px;
+  width: calc(100% - var(--sidebar-width));
+  left: var(--sidebar-width);
 }
 
 .github {
@@ -47,6 +47,7 @@ body.expanded cd {
   border-radius: 0 500px 500px 0;
   padding: 7px 10px;
   cursor: pointer;
+  will-change: transform;
   transform: translateX(-100%);
   transition: .18s var(--ease-function), .4s var(--cubic-function) left, .4s var(--cubic-function) padding, .4s var(--cubic-function) bottom;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
@@ -57,7 +58,7 @@ body.expanded .github {
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
   padding-left: 8px;
-  left: 233px;
+  left: calc(var(--sidebar-width) - 2px);
   bottom: 0;
 }
 
@@ -115,17 +116,18 @@ body.expanded .github .left {
   background: #1a1c24;
   color: #d4d5d7;
   transition: .4s var(--cubic-function);
-  width: 235px;
-  left: -235px;
+  width: var(--sidebar-width);
+  transform: translateX(-100%);
   overflow-x: hidden;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 rgb(255 255 255 / 20%);
   z-index: 999;
   padding-right: 1px;
+  will-change: transform;
 }
 
 body.expanded .sidebar {
-  left: 0;
+  transform: none;
   pointer-events: auto;
   overflow-y: auto;
 }
@@ -151,6 +153,7 @@ body.expanded .sidebar {
 :root {
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
+  --sidebar-width: 245px;
 }
 
 body {
