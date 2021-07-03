@@ -59,7 +59,6 @@ body.expanded .github {
   animation: none;
   padding-left: 8px;
   left: calc(var(--sidebar-width) - 2px);
-  bottom: 0;
 }
 
 .github::after {
