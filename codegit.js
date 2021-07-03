@@ -42,7 +42,7 @@ searchButton.addEventListener('click', () => {
 searchBack.addEventListener('click', () => {
     
   // show all files
-  let files = fileWrapper.querySelectorAll('.file');
+  let files = fileWrapper.querySelectorAll('.file[style="display: none;"]');
   files.forEach(file => { file.style.display = '' });
   
   // hide clear button
@@ -94,6 +94,10 @@ searchInput.addEventListener('input', () => {
     // hide clear button
     searchClear.classList.remove('visible');
     
+    // show all files
+    let files = fileWrapper.querySelectorAll('.file[style="display: none;"]');
+    files.forEach(file => { file.style.display = '' });
+    
   }
   
 })
@@ -105,7 +109,7 @@ searchClear.addEventListener('click', () => {
   searchInput.innerText = '';
   
   // show all files
-  let files = fileWrapper.querySelectorAll('.file');
+  let files = fileWrapper.querySelectorAll('.file[style="display: none;"]');
   files.forEach(file => { file.style.display = '' });
   
   // hide clear button
