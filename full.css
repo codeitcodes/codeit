@@ -146,14 +146,26 @@ body.expanded .sidebar {
   z-index: 100;
 }
 
+.sidebar .header .title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar .header .back {
+  color: currentColor;
+  margin-right: 0;
+  padding: 0;
+}
+
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
 }
 
-.sidebar .header .search {
-  padding: 6px;
-  margin-right: -6px;
+.sidebar .header :is(.back, .search) {
+  padding: 7px;
+  margin-right: -7px;
   cursor: pointer;
   border-radius: 50%;
   color: #828689;
