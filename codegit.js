@@ -65,38 +65,35 @@ searchInput.addEventListener('input', () => {
   let query = searchInput.innerText.toLowerCase();
   let files = fileWrapper.querySelectorAll('.file');
   
+  // search files
+  files.forEach(file => {
+    
+    let name = file.querySelector('.name').innerText;
+    
+    if (!name.toLowerCase().includes(query)) {
+
+      file.style.display = 'none';
+
+    }
+
+    else {
+
+      file.style.display = '';
+
+    }
+
+  })
+  
   // if search query exists
   if (searchInput.innerText != '') {
     
     // show clear button
     searchClear.classList.add('visible');
-
-    files.forEach(file => {
-
-      let name = file.querySelector('.name').innerText;
-
-      if (!name.toLowerCase().includes(query)) {
-
-        file.style.display = 'none';
-
-      }
-
-      else {
-        
-        file.style.display = '';
-        
-      }
-
-    })
     
   } else {
     
     // hide clear button
     searchClear.classList.remove('visible');
-    
-    // show all files
-    let files = fileWrapper.querySelectorAll('.file[style="display: none;"]');
-    files.forEach(file => { file.style.display = '' });
     
   }
   
