@@ -131,19 +131,36 @@ body.expanded .sidebar {
 }
 
 .sidebar .header {
-  display: flex;
   height: 59px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
   margin-bottom: 9px;
   margin-top: 15px;
-  box-sizing: border-box;
   box-shadow: 0 1px 0 0 #f1f1f21c;
   background: #1a1c24;
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.sidebar :is(.titlescreen, .searchscreen) {
+  display: flex;
+  height: 59px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  transition: .18s var(--ease-function);
+}
+
+.sidebar .header.searching .titlescreen {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar .header:not(.searching) .searchscreen {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sidebar .header .title {
@@ -152,7 +169,11 @@ body.expanded .sidebar {
   cursor: pointer;
 }
 
-.sidebar .header :is(.back, .search) {
+.sidebar .searchscreen .title {
+  cursor: unset;
+}
+
+.sidebar .header :is(.back, .search, .close) {
   padding: 7px;
   margin-right: -7px;
   cursor: pointer;
@@ -166,6 +187,11 @@ body.expanded .sidebar {
   padding: 0;
 }
 
+.sidebar .searchscreen .back {
+  color: #828689;
+  margin-right: 7px;
+}
+
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
@@ -173,6 +199,37 @@ body.expanded .sidebar {
 
 .sidebar .header .search:active {
   background: rgba(0,0,0,.1);
+}
+
+.sidebar .searchinput {
+  width: 141px;
+  white-space: nowrap;
+  line-height: 20px;
+  color: #d4d5d7;
+  word-wrap: break-word;
+  position: relative;
+  height: 100%;
+  outline: none;
+  user-select: text;
+  -webkit-user-select: text;
+  overflow: hidden;
+}
+
+.sidebar .searchinput:empty::before {
+  content: 'Search...';
+  color: rgba(241,241,242,0.43);
+  pointer-events: none;
+}
+
+.sidebar .header .close {
+  opacity: 0;
+  pointer-events: none;
+  transition: .18s var(--ease-function);
+}
+
+.sidebar .header .close.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidebar .file {
