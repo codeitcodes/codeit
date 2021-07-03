@@ -138,13 +138,18 @@ body.expanded .sidebar {
   cursor: pointer;
 }
 
+.sidebar .file .icon {
+  margin-right: 7px;
+  color: #828689;
+}
+
 .sidebar .file .label {
   display: flex;
   align-items: center;
 }
 
-.sidebar .file .icon {
-  margin-right: 7px;
+.sidebar .file .arrow {
+  color: #828689;
 }
 
 .sidebar .file:active {
