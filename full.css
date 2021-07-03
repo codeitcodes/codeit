@@ -131,6 +131,27 @@ body.expanded .sidebar {
   overflow-y: auto;
 }
 
+.sidebar .file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.sidebar .file .label {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .file .icon {
+  margin-right: 7px;
+}
+
+.sidebar .file:active {
+  background: #2d3134;
+}
+
 @keyframes show {
   
   from, to {
