@@ -94,6 +94,10 @@ searchInput.addEventListener('input', () => {
     
     // hide clear button
     searchClear.classList.remove('visible');
+      
+    // show all files
+    let files = fileWrapper.querySelectorAll('.file[style="display: none;"]');
+    files.forEach(file => { file.style.display = '' });
     
   }
   
