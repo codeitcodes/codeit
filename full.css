@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
   margin: 0;
   background: #313744;
+  color: #d4d5d7;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
 }
 
 .focus::before {
@@ -39,8 +44,8 @@ body.expanded cd {
   z-index: 1000;
   background: #1a1c24;
   color: #d4d5d7;
-  border-radius: 0 50px 50px 0;
-  padding: 6px;
+  border-radius: 0 500px 500px 0;
+  padding: 7px 10px;
   cursor: pointer;
   transform: translateX(-100%);
   transition: .18s var(--ease-function), .4s var(--cubic-function) left, .4s var(--cubic-function) padding, .4s var(--cubic-function) bottom;
@@ -62,7 +67,7 @@ body.expanded .github {
   left: 0;
   bottom: 0;
   height: 50vh;
-  width: 36px;
+  width: 100%;
   transform: translateX(100%);
   transition: inherit;
   z-index: -1;
@@ -108,16 +113,19 @@ body.expanded .github .left {
   left: 0;
   height: 100%;
   background: #1a1c24;
+  color: #d4d5d7;
   transition: .4s var(--cubic-function);
-  width: 0;
+  width: 235px;
+  left: -235px;
   overflow-x: hidden;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 rgb(255 255 255 / 20%);
   z-index: 999;
+  padding-right: 1px;
 }
 
 body.expanded .sidebar {
-  width: 235px;
+  left: 0;
   pointer-events: auto;
   overflow-y: auto;
 }
@@ -143,4 +151,17 @@ body.expanded .sidebar {
 :root {
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
 }
