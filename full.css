@@ -134,8 +134,17 @@ body.expanded .sidebar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: hsl(228deg 16% 12%);
   padding: 15px 20px;
   cursor: pointer;
+}
+
+.sidebar .file:hover {
+  background: hsl(227deg 11% 16%);
+}
+
+.sidebar .file:active {
+  background: hsl(226deg 7% 19%);
 }
 
 .sidebar .file .icon {
@@ -150,10 +159,6 @@ body.expanded .sidebar {
 
 .sidebar .file .arrow {
   color: #828689;
-}
-
-.sidebar .file:active {
-  background: #2d3134;
 }
 
 @keyframes show {
