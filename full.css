@@ -118,7 +118,7 @@ body.expanded .github .left {
   transform: translateX(-100%);
   overflow-x: hidden;
   pointer-events: none;
-  box-shadow: inset -1px 0 0 0 rgb(255 255 255 / 20%);
+  box-shadow: inset -1px 0 0 0 #f1f1f21c;
   z-index: 999;
   padding-right: 1px;
   will-change: transform;
