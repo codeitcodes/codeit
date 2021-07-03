@@ -127,7 +127,40 @@ body.expanded .github .left {
 body.expanded .sidebar {
   transform: none;
   pointer-events: auto;
-  overflow-y: auto;
+  overflow-y: overlay;
+}
+
+.sidebar .header {
+  display: flex;
+  height: 59px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 9px;
+  margin-top: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 0 #f1f1f21c;
+  background: #1a1c24;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.sidebar .header .logo {
+  font-weight: 600;
+  color: rgba(241,241,242,0.92);
+}
+
+.sidebar .header .search {
+  padding: 6px;
+  margin-right: -6px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #828689;
+}
+
+.sidebar .header .search:active {
+  background: rgba(0,0,0,.1);
 }
 
 .sidebar .file {
@@ -159,6 +192,15 @@ body.expanded .sidebar {
 
 .sidebar .file .arrow {
   color: #828689;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
+  background: #1a1c24;
+  box-shadow: none;
 }
 
 @keyframes show {
