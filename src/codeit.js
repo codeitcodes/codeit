@@ -9,7 +9,7 @@ style.appendChild(document.createTextNode(css));
 var codeits = document.querySelectorAll('cd');
 
 codeits.forEach(cd => {
-  
+
   if (cd.getAttribute('editable') != 'false') {
     cd.setAttribute('contenteditable', 'true');
   }
@@ -18,95 +18,218 @@ codeits.forEach(cd => {
   // parse codeit code
   let code = cd.innerHTML.replace(/^\n|\n$/g, '');
   cd.innerText = code;
-  
-  // create a new instance of 'MutationObserver' named 'observer', 
+
+  // create a new instance of 'MutationObserver' named 'observer',
   // passing it a callback function
-  let observer = new MutationObserver(function(mutationsList, observer) {
-    
-    let textChanged = true;
-    
+
+  let updatingHighlight = false;
+
+  let textContentObserver = new MutationObserver(function(mutationsList, observer) {
+
     // run on all mutations
     mutationsList.forEach(mutation => {
 
+      /*console.log(mutation.type);
+
       // if mutation was a textNode mutation
-      if (mutation.type === 'characterData') {
+      if (mutation.type == 'characterData') {
 
         // if the text didn't change, stop
-        if (mutation.oldValue === cd.innerText) {
+        if (mutation.oldValue == cd.innerText) {
           textChanged = false;
+          console.log('Text: ' + mutation.oldValue, cd.innerText);
         }
 
-      } else if (mutation.type === 'childList') { // if mutation was a innerHTML mutation
-        
-        
-        
-      }
-      
-    });
-    
-    if (textChanged) {
+      } else if (mutation.type == 'childList') { // if mutation was a innerHTML mutation
 
+        // if mutation was from highlighting, stop
+        if (updatingHighlight == true) {
+          updatingHighlight = false;
+          textChanged = false;
+        } else {
+          updatingHighlight = true;
+          textChanged = true;
+        }
+
+      }*/
+
+    });
+
+    if (updatingHighlight == false) {
+
+      console.log('Updating Codeit from textContent', mutationsList);
+      updatingHighlight = true;
       cd.update();
-      
-      //console.log(mutationsList);
-      
+
+    } else {
+
+      //console.log('Ignoring update from highlight');
+      updatingHighlight = false;
+
     }
-        
+
+    //console.log('textContent', mutationsList);
+
   });
 
-  // call 'observe' on that MutationObserver instance, 
+
+  let innerHTMLObserver = new MutationObserver(function(mutationsList, observer) {
+
+    // run on all mutations
+    mutationsList.forEach(mutation => {
+
+      /*console.log(mutation.type);
+
+      // if mutation was a textNode mutation
+      if (mutation.type == 'characterData') {
+
+        // if the text didn't change, stop
+        if (mutation.oldValue == cd.innerText) {
+          textChanged = false;
+          console.log('Text: ' + mutation.oldValue, cd.innerText);
+        }
+
+      } else if (mutation.type == 'childList') { // if mutation was a innerHTML mutation
+
+        // if mutation was from highlighting, stop
+        if (updatingHighlight == true) {
+          updatingHighlight = false;
+          textChanged = false;
+        } else {
+          updatingHighlight = true;
+          textChanged = true;
+        }
+
+      }*/
+
+    });
+
+    console.log('Updating Codeit from innerHTML', mutationsList);
+    updatingHighlight = true;
+    cd.update();
+    //console.log('innerHTML', mutationsList);
+
+  });
+
+
+
+  // call 'observe' on that MutationObserver instance,
   // passing it the element to observe, and the options object
-  observer.observe(cd, {subtree: true, characterData: true, characterDataOldValue: true, childList: false, attributes: false});
-  
-  
-  // node_walk: walk the element tree, stop when func(node) returns false
-  function node_walk(node, func) {
-    var result = func(node);
-    for(node = node.firstChild; result !== false && node; node = node.nextSibling)
-      result = node_walk(node, func);
-    return result;
-  };
 
-  // getCaretPosition: return [start, end] as offsets to elem.textContent that
-  //   correspond to the selected portion of text
-  //   (if start == end, caret is at given position and no text is selected)
-  function getCaretPosition(elem) {
+  var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
+  //textContentObserver.observe(cd, textContentConfig);
+
+  var innerHTMLConfig = { characterData: true, attributes: false, childList: false, subtree: true };
+  innerHTMLObserver.observe(cd, innerHTMLConfig);
+
+
+  var pressedEnter = false;
+
+  cd.addEventListener('keydown', (e) => {
+
+    // trap the return key being pressed
+    if (e.keyCode == 13) {
+
+      console.log('return');
+
+      //var sel = window.getSelection();
+      //var targetNode = sel.anchorNode;
+
+      if (pressedEnter == false) {
+        cd.insertAdjacentHTML('beforeend', '\n\n');
+        pressedEnter = true;
+      } else {
+        cd.insertAdjacentHTML('beforeend', '\n');
+        pressedEnter = false;
+      }
+
+      cd.update();
+
+      // prevent the default behaviour of return key pressed
+      e.preventDefault();
+      return false;
+
+    } else {
+
+      pressedEnter = false;
+
+    }
+
+  })
+
+
+  cd.addEventListener('keyup', (e) => {
+
+    // trap the return key being pressed
+    if (e.keyCode == 13) {
+      console.log('return');
+
+      //var sel = window.getSelection();
+      //var targetNode = sel.anchorNode;
+
+      // prevent the default behaviour of return key pressed
+      e.preventDefault();
+      return false;
+    }
+
+  })
+
+
+  var nodePath = [];
+
+  function getCaretPosInInnerText(el) {
+
     var sel = window.getSelection();
-    var cum_length = [0, 0];
 
-    if(sel.anchorNode == elem)
-      cum_length = [sel.anchorOffset, sel.extentOffset];
-    else {
-      var nodes_to_find = [sel.anchorNode, sel.extentNode];
-      if(!elem.contains(sel.anchorNode) || !elem.contains(sel.extentNode))
-        return undefined;
-      else {
-        var found = [0,0];
-        var i;
-        node_walk(elem, function(node) {
-          for(i = 0; i < 2; i++) {
-            if(node == nodes_to_find[i]) {
-              found[i] = true;
-              if(found[i == 0 ? 1 : 0])
-                return false; // all done
-            }
-          }
+    var targetNode = sel.anchorNode; // node of caret
+    var caretOffset = sel.anchorOffset; // offset in node
 
-          if(node.textContent && !node.firstChild) {
-            for(i = 0; i < 2; i++) {
-              if(!found[i])
-                cum_length[i] += node.textContent.length;
-            }
+    var overallLength = 0;
+
+    //console.log(el, targetNode, caretOffset);
+
+    function getTextNodes(node) {
+
+      //If reached the target node:
+      if (node != targetNode) {
+
+        //If node type is text:
+        if (node.nodeType == 3) {
+          //if(node.nodeValue === ' ') overallLength += 1;
+
+          nodePath.push(node);
+
+          overallLength += node.nodeValue.length;
+          //console.log(node.nodeValue)
+          //console.log('node length',node.nodeValue.length)
+
+          //if (node.nodeValue === ' ') {
+        } else { //if it's an empty node, this means more nodes underneath:
+          //Go over his brother leaves:
+          for (var i = 0, len = node.childNodes.length; i < len; ++i)
+          {
+            // Call recursive call on node's children:
+            getTextNodes(node.childNodes[i]);
+
           }
-        });
-        cum_length[0] += sel.anchorOffset;
-        cum_length[1] += sel.extentOffset;
+        }
+      }else{
+        console.log('found node', node);
+
+        if (node.nodeType != 3) {
+          console.log('bad node');
+          overallLength = cd.lastChild.value.length;
+          caretOffset = 0;
+        }
       }
     }
-    if(cum_length[0] <= cum_length[1])
-      return cum_length;
-    return [cum_length[1], cum_length[0]];
+
+    getTextNodes(el);
+
+    return overallLength + caretOffset;
+
   }
+
 
   function setCaret(el, pos) {
     var range = document.createRange();
@@ -118,37 +241,49 @@ codeits.forEach(cd => {
   }
 
 
-  function getTextNodesIn(node, includeWhitespaceNodes) {
+  //Go over all nodes till reach the number of characters:
+  function getTextNodesIn(el, includeWhitespaceNodes) {
+
     var overallLength = 0, lastNode;
 
     function getTextNodes(node) {
 
-      if (overallLength < caretPosInText) {
-        lastNode = node;
-        if (node.nodeType == 3) {
-          if (node.nodeValue === ' ') {
+      //If reached the target text:
+      if (overallLength <= caretPosInText) {
 
-            overallLength += 1;
-            
-          } else {
-            
-            overallLength += getLengthWithoutNewlines(node);
-              
-          }
-        } else {
-          for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+        lastNode = node;
+
+        //If node type is text:
+        if (node.nodeType == 3)
+        {
+
+          overallLength += node.nodeValue.length;
+
+          //if (node.nodeValue === ' ') {
+        } else { //if it's an empty node, this means more nodes underneath:
+
+          //Go over his brother leaves:
+          for (var i = 0, len = node.childNodes.length; i < len; ++i)
+          {
+            // Call recursive call on node's children:
             getTextNodes(node.childNodes[i]);
+
           }
         }
+      }else{
+        //console.log('overall length:', overallLength);
       }
     }
 
-    getTextNodes(node);
+    getTextNodes(el);
 
     if (lastNode) {
-      
-      var lastNodeLength = getLengthWithoutNewlines(lastNode);
-      
+
+      var lastNodeLength = lastNode.nodeValue.length;
+
+      //end of line problem
+      //sel.anchorOffset
+      //return [lastNode, (lastNodeLength - (overallLength - caretPosInText))];
       return [lastNode, (lastNodeLength - (overallLength - caretPosInText))];
 
     } else {
@@ -157,59 +292,36 @@ codeits.forEach(cd => {
 
     }
   }
-  
-  function getLengthWithoutNewlines(node) {
-    
-    console.log(node);
-    
-    var nodeLength = node.length;
 
-    var counter = 0;
-    for (var i = 0; i < nodeLength; i++) {
 
-      if (node.nodeValue[i] == '\n') {
-        counter++;
-      }
-
-    }
-
-    nodeLength -= counter;
-    
-    console.log(nodeLength, counter);
-
-    return nodeLength;
-    
-  }
-  
-  
   let caretPosInText = 0;
-  
+
   cd.update = () => {
-    
-    let caretPos = getCaretPosition(cd);
-    
-    if (caretPos) {
-      
-      caretPosInText = caretPos[0];
-      
-      
+
+    caretPosInText = getCaretPosInInnerText(cd);
+
+    if (caretPosInText) {
+
       let highlightData = hljs.highlightAuto(cd.innerText);
       cd.classList = highlightData.language;
       cd.innerHTML = highlightData.value;
-      
-      
+
+
       let caretData = getTextNodesIn(cd);
+
+      //console.log('caretData:',caretData[1], 'node:',cd.innerHTML.length);
+
       setCaret(caretData[0], caretData[1]);
-      
+
     } else {
-      
+
       let highlightData = hljs.highlightAuto(cd.innerText);
       cd.innerHTML = highlightData.value;
-      
+
     }
-    
+
   }
-  
+
   cd.update();
-  
+
 });
