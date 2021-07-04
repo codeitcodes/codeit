@@ -136,6 +136,7 @@ codeits.forEach(cd => {
       //var targetNode = sel.anchorNode;
 
       if (pressedEnter == false) {
+        // codeit.innerHTML.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '\n' + '$2');
         cd.insertAdjacentHTML('beforeend', '\n\r');
         pressedEnter = true;
       } else {
