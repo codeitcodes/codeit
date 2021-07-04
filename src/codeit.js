@@ -136,7 +136,7 @@ codeits.forEach(cd => {
       //var targetNode = sel.anchorNode;
 
       if (pressedEnter == false) {
-        cd.insertAdjacentHTML('beforeend', '\n\n');
+        cd.insertAdjacentHTML('beforeend', '\n\r');
         pressedEnter = true;
       } else {
         cd.insertAdjacentHTML('beforeend', '\n');
