@@ -1,3 +1,7 @@
+{
+  []
+}
+
 /* 
    
    codeit by @barhatsor
@@ -6,11 +10,6 @@
    github.com/barhatsor/codeit
    
 */
-
-() => {
-  var a,
-    b;
-}
 
 (() => {
   
