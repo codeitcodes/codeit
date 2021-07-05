@@ -26,17 +26,17 @@
   codeits.forEach(cd => {
 
     // create codeit elements
-    cd.textarea = document.createElement('textarea');
+    var textarea = document.createElement('textarea');
 
-    cd.pre = document.createElement('pre');
-    cd.code = document.createElement('code');
+    var pre = document.createElement('pre');
+    var code = document.createElement('code');
 
     // style codeit textarea
-    cd.textarea.setAttribute('spellcheck', 'false');
-    cd.textarea.setAttribute('rows', 1);
+    textarea.setAttribute('spellcheck', 'false');
+    textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
-    cd.code.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
+    code.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
 
     // parse code
     cd.parsedCode = decodeHTML(cd.innerHTML).replace(/^\n|\n$/g, '');
@@ -45,9 +45,9 @@
     cd.innerHTML = '';
 
     // append codeit elements to DOM
-    cd.textarea = cd.appendChild(cd.textarea);
-    cd.pre = cd.appendChild(cd.pre);
-    cd.code = cd.pre.appendChild(cd.code);
+    cd.textarea = cd.appendChild(textarea);
+    cd.pre = cd.appendChild(pre);
+    cd.code = cd.pre.appendChild(code);
 
     // set codeit textarea value to code
     cd.textarea.value = cd.parsedCode;
