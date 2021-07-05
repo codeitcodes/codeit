@@ -51,7 +51,7 @@ cd, .hljs {
   font-size: 14px;
 }
 
-cd::selection, cd *::selection {
+cd textarea::selection {
   background: rgba(255, 255, 255, 0.15);
 }
 
