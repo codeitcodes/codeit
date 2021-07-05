@@ -89,7 +89,7 @@ codeits.forEach(codeit => {
     window.setTimeout(update, 0);
   }
 
-  observe(input, 'change',  update);
+  observe(input, 'input',  update);
   observe(input, 'cut',     delayedUpdate);
   observe(input, 'paste',   delayedUpdate);
   observe(input, 'drop',    delayedUpdate);
