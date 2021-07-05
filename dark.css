@@ -51,16 +51,16 @@ cd, .hljs {
   font-size: 14px;
 }
 
-cd textarea::selection {
-  background: rgba(255, 255, 255, 0.15);
-}
-
 cd textarea {
   caret-color: #fff;
   letter-spacing: inherit;
   line-height: inherit;
   width: 100% !important;
   max-width: 100% !important;
+}
+
+cd textarea::selection {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .hljs-comment, .hljs-meta {
