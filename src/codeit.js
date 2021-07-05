@@ -45,9 +45,9 @@
     cd.innerHTML = '';
 
     // append codeit elements to DOM
-    cd.appendChild(cd.textarea);
-    cd.appendChild(cd.pre);
-    cd.pre.appendChild(cd.code);
+    cd.textarea = cd.appendChild(cd.textarea);
+    cd.pre = cd.appendChild(cd.pre);
+    cd.code = cd.pre.appendChild(cd.code);
 
     // set codeit textarea value to code
     cd.textarea.value = cd.parsedCode;
