@@ -106,13 +106,13 @@
      };
    }
     
-    observe('input', cd.update);
-    observe('cut', cd.update);
-    observe('paste', cd.update);
-    observe('drop', cd.update);
-    observe('keydown', cd.update);
+    observe('input', update);
+    observe('cut', update);
+    observe('paste', update);
+    observe('drop', update);
+    observe('keydown', update);
 
-    cd.update();
+    update();
 
   });
   
