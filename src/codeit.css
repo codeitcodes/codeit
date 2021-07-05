@@ -1,6 +1,7 @@
 cd {
   display: inline-flex;
   position: relative;
+  overflow: overlay;
   
   font-family: monospace;
   text-rendering: optimizeLegibility;
