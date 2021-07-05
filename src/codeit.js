@@ -81,7 +81,9 @@
     cd.update = () => {
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
-
+      
+      cd.textarea.style.width = 0;
+      
       cd.textarea.style.width = cd.scrollWidth + 'px';
       cd.textarea.style.height = cd.scrollHeight + 'px';
 
