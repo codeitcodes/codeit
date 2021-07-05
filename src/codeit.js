@@ -104,13 +104,11 @@
     }
 
     cd.textarea.addEventListener('input', cd.update);
-    cd.textarea.addEventListener('cut', cd.update);
-    cd.textarea.addEventListener('paste', cd.update);
-    //cd.textarea.addEventListener('drop', cd.update);
+    //cd.textarea.addEventListener('cut', cd.update);
+    //cd.textarea.addEventListener('paste', cd.update);
     cd.textarea.addEventListener('keydown', cd.update);
     
     BehaveHooks.add('openChar:after', cd.update);
-    //BehaveHooks.add('closeChar:after', cd.update);
 
     cd.update();
 
