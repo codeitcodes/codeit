@@ -73,8 +73,8 @@ codeits.forEach(codeit => {
     
     fake.innerHTML = escapeHTML(input.value);
     
-    input.style.width = codeit.clientWidth + 'px';
-    input.style.height = codeit.clientHeight + 'px';
+    input.style.width = codeit.clientWidth - 10 + 'px';
+    input.style.height = codeit.clientHeight - 10 + 'px';
     
     // If lang not specified, clear class for autodetect
     if (!codeit.getAttribute('lang')) {
