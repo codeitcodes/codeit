@@ -7,6 +7,10 @@
    
 */
 
+() => {
+  //
+}
+
 (() => {
   
   // add codeit CSS to head
@@ -35,7 +39,7 @@
     cd.code.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
 
     // parse code
-    cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
+    cd.parsedCode = decodeHTML(cd.innerHTML).replace(/^\n|\n$/g, '');
 
     // clear codeit
     cd.innerHTML = '';
@@ -76,9 +80,7 @@
 
     cd.update = () => {
 
-      console.log("A");
-      
-      cd.code.innerText = cd.textarea.value;
+      cd.code.innerHTML = escapeHTML(cd.textarea.value);
 
       cd.textarea.style.width = cd.scrollWidth + 'px';
       cd.textarea.style.height = cd.scrollHeight + 'px';
@@ -113,5 +115,20 @@
     cd.update();
 
   });
-
+  
+  function escapeHTML(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+  
+  function decodeHTML(input){
+    var e = document.createElement('textarea');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+  }
+  
 })();
