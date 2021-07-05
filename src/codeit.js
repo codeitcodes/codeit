@@ -74,11 +74,11 @@
     cd.setValue = (code) => {
 
       textarea.value = code;
-      cd.update();
+      update();
 
     }
 
-    var update = () => {
+    function update {
 
       code.innerHTML = escapeHTML(textarea.value);
 
