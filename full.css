@@ -56,8 +56,8 @@ body.expanded .github {
   transform: none;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
-  padding-left: 8px;
-  left: calc(var(--sidebar-width) - 2px);
+  padding-left: 7.5px;
+  left: calc(var(--sidebar-width) - 0.5px);
 }
 
 .github::after {
@@ -118,10 +118,22 @@ body.expanded .github .left {
   transform: translateX(-100%);
   overflow-x: hidden;
   pointer-events: none;
-  box-shadow: inset -1px 0 0 0 #f1f1f21c;
+  box-shadow: inset -1px 0 0 0 #ffffff3d;
   z-index: 999;
   padding-right: 1px;
   will-change: transform;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -7px;
+  width: 10px;
+  height: 100%;
+  background: #00000033;
+  filter: blur(9px);
+  z-index: 101;
 }
 
 body.expanded .sidebar {
