@@ -126,7 +126,7 @@ if (localStorage.getItem('history')) {
 window.onbeforeunload = function() {
   
   // set new localStorage value
-  localStorage.setItem('code', cd.input.value);
+  localStorage.setItem('code', cd.textarea.value);
   
 };
 
