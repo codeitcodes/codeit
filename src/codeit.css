@@ -19,6 +19,7 @@ cd textarea {
   
   position: absolute;
   top: 0;
+  left: 0;
   
   border: 0;
   resize: none;
@@ -32,8 +33,7 @@ cd textarea {
   white-space: pre;
   overflow: hidden;
 
-  padding: 0;
-  padding-top: inherit;
+  padding: inherit;
   box-sizing: border-box;
   
   z-index: 1;
