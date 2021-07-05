@@ -133,7 +133,7 @@ body.expanded .github .left {
   height: 100%;
   background: #00000033;
   filter: blur(9px);
-  z-index: 101;
+  z-index: 100;
 }
 
 body.expanded .sidebar {
