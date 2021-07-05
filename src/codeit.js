@@ -78,7 +78,7 @@
 
     }
 
-    cd.update = () => {
+    update = () => {
 
       code.innerHTML = escapeHTML(textarea.value);
 
