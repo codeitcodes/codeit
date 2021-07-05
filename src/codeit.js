@@ -80,7 +80,7 @@
 
     cd.update = () => {
 
-      cd.code.innerText = cd.textarea.value;
+      cd.code.innerHTML = escapeHTML(cd.textarea.value);
 
       cd.textarea.style.width = cd.scrollWidth + 'px';
       cd.textarea.style.height = cd.scrollHeight + 'px';
@@ -92,6 +92,15 @@
 
       hljs.highlightElement(cd.code);
 
+    }
+    
+    function escapeHTML(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
     cd.textarea.addEventListener('input', cd.update);
