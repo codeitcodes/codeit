@@ -45,9 +45,9 @@
     cd.innerHTML = '';
 
     // append codeit elements to DOM
-    cd.textarea = cd.appendChild(cd.textarea);
-    cd.pre = cd.appendChild(cd.pre);
-    cd.code = cd.pre.appendChild(cd.code);
+    cd.appendChild(cd.textarea);
+    cd.appendChild(cd.pre);
+    cd.pre.appendChild(cd.code);
 
     // set codeit textarea value to code
     cd.textarea.value = cd.parsedCode;
@@ -107,7 +107,7 @@
     cd.textarea.addEventListener('cut', cd.update);
     cd.textarea.addEventListener('paste', cd.update);
     cd.textarea.addEventListener('drop', cd.update);
-    cd.textarea.addEventListener('keydown', cd.update);
+    cd.textarea.addEventListener('keydown', () => { window.setTimeout(() => { cd.update() }, 0 ));
 
     cd.update();
 
