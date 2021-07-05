@@ -78,7 +78,7 @@
 
     }
 
-    update = () => {
+    var update = () => {
 
       code.innerHTML = escapeHTML(textarea.value);
 
