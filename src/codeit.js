@@ -98,19 +98,19 @@
    var observe;
    if (window.attachEvent) {
      observe = (event, handler) => {
-       fake.attachEvent('on' + event, handler);
+       input.attachEvent('on' + event, handler);
      };
    } else {
      observe = (event, handler) => {
-       fake.addEventListener(event, handler, false);
+       input.addEventListener(event, handler, false);
      };
    }
     
-    observe('input', update);
-    observe('cut', update);
-    observe('paste', update);
-    observe('drop', update);
-    observe('keydown', update);
+   observe('input', update);
+   observe('cut', update);
+   observe('paste', update);
+   observe('drop', update);
+   observe('keydown', update);
 
     update();
 
