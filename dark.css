@@ -65,7 +65,6 @@ cd textarea::selection {
 
 .hljs-comment, .hljs-meta {
   color: #707e84;
-  font-style: italic;
 }
 
 .hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol  {
