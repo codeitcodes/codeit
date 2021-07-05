@@ -80,7 +80,7 @@
 
     cd.update = () => {
 
-      cd.code.innerHTML = /*escapeHTML(*/cd.textarea.value/*)*/;
+      cd.code.innerHTML = escapeHTML(cd.textarea.value);
 
       cd.textarea.style.width = cd.scrollWidth + 'px';
       cd.textarea.style.height = cd.scrollHeight + 'px';
@@ -94,7 +94,7 @@
 
     }
     
-    function escapeHTML(unsafe) {
+    const escapeHTML = (unsafe) => {
       return unsafe
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
