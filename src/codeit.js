@@ -17,7 +17,7 @@
   style.appendChild(document.createTextNode(css));
 
   // get all Codeits
-  window.codeits = document.querySelectorAll('cd');
+  const codeits = document.querySelectorAll('cd');
 
   codeits.forEach(cd => {
 
@@ -89,12 +89,24 @@
       hljs.highlightElement(cd.code);
 
     }
-
-    cd.code.addEventListener('input', cd.update);
-    cd.code.addEventListener('cut', cd.update);
-    cd.code.addEventListener('paste', cd.update);
-    cd.code.addEventListener('drop', cd.update);
-    cd.code.addEventListener('keydown', cd.update);
+    
+   // update textarea
+   const observe;
+   if (window.attachEvent) {
+     observe = (event, handler) => {
+       cd.code.attachEvent('on' + event, handler);
+     };
+   } else {
+     observe = (event, handler) => {
+       cd.code.addEventListener(event, handler, false);
+     };
+   }
+    
+    observe('input', cd.update);
+    observe('cut', cd.update);
+    observe('paste', cd.update);
+    observe('drop', cd.update);
+    observe('keydown', cd.update);
 
     cd.update();
 
