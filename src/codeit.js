@@ -26,17 +26,17 @@
   codeits.forEach(cd => {
 
     // create codeit elements
-    var textarea = document.createElement('textarea');
+    var input = document.createElement('textarea');
 
     var pre = document.createElement('pre');
-    var code = document.createElement('code');
+    var fake = document.createElement('code');
 
     // style codeit textarea
-    textarea.setAttribute('spellcheck', 'false');
-    textarea.setAttribute('rows', 1);
+    input.setAttribute('spellcheck', 'false');
+    input.setAttribute('rows', 1);
 
     // highlight with specified lang
-    code.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
+    fake.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
 
     // parse code
     cd.parsedCode = decodeHTML(cd.innerHTML).replace(/^\n|\n$/g, '');
@@ -45,21 +45,21 @@
     cd.innerHTML = '';
 
     // append codeit elements to DOM
-    textarea = cd.appendChild(textarea);
+    input = cd.appendChild(input);
     pre = cd.appendChild(pre);
-    code = pre.appendChild(code);
+    fake = pre.appendChild(fake);
 
     // set codeit textarea value to code
-    textarea.value = cd.parsedCode;
+    input.value = cd.parsedCode;
 
     // if codeit is uneditable, hide input
     if (cd.getAttribute('editable') == 'false') {
-      textarea.style.display = 'none';
+      input.style.display = 'none';
     }
 
     // init codeit behavior
     new Behave({
-      textarea: textarea,
+      textarea: input,
       replaceTab: true,
       softTabs: true,
       tabSize: 2,
@@ -73,24 +73,24 @@
 
     cd.setValue = (code) => {
 
-      textarea.value = code;
+      input.value = code;
       update();
 
     }
 
     function update() {
 
-      code.innerHTML = escapeHTML(textarea.value);
+      fake.innerHTML = escapeHTML(input.value);
 
-      textarea.style.width = cd.scrollWidth + 'px';
-      textarea.style.height = cd.scrollHeight + 'px';
+      input.style.width = cd.scrollWidth + 'px';
+      input.style.height = cd.scrollHeight + 'px';
 
       // if codeit lang not specified, autodetect code lang
       if (!cd.getAttribute('lang')) {
-        code.classList = 'hljs';
+        fake.classList = 'hljs';
       }
 
-      hljs.highlightElement(code);
+      hljs.highlightElement(fake);
 
     }
     
@@ -98,11 +98,11 @@
    var observe;
    if (window.attachEvent) {
      observe = (event, handler) => {
-       code.attachEvent('on' + event, handler);
+       fake.attachEvent('on' + event, handler);
      };
    } else {
      observe = (event, handler) => {
-       code.addEventListener(event, handler, false);
+       fake.addEventListener(event, handler, false);
      };
    }
     
