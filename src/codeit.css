@@ -49,7 +49,7 @@ cd pre {
 }
 
 cd code {
-  display: block;
+  display: inline-block;
   color: #333;
 }
 
