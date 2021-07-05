@@ -45,21 +45,21 @@
     cd.innerHTML = '';
 
     // append codeit elements to DOM
-    cd.textarea = cd.appendChild(textarea);
-    cd.pre = cd.appendChild(pre);
-    cd.code = cd.pre.appendChild(code);
+    textarea = cd.appendChild(textarea);
+    pre = cd.appendChild(pre);
+    code = cd.pre.appendChild(code);
 
     // set codeit textarea value to code
-    cd.textarea.value = cd.parsedCode;
+    textarea.value = cd.parsedCode;
 
     // if codeit is uneditable, hide input
     if (cd.getAttribute('editable') == 'false') {
-      cd.textarea.style.display = 'none';
+      textarea.style.display = 'none';
     }
 
     // init codeit behavior
     new Behave({
-      textarea: cd.textarea,
+      textarea: textarea,
       replaceTab: true,
       softTabs: true,
       tabSize: 2,
@@ -73,24 +73,24 @@
 
     cd.setValue = (code) => {
 
-      cd.textarea.value = code;
+      textarea.value = code;
       cd.update();
 
     }
 
     cd.update = () => {
 
-      cd.code.innerHTML = escapeHTML(cd.textarea.value);
+      code.innerHTML = escapeHTML(textarea.value);
 
-      cd.textarea.style.width = cd.scrollWidth + 'px';
-      cd.textarea.style.height = cd.scrollHeight + 'px';
+      textarea.style.width = cd.scrollWidth + 'px';
+      textarea.style.height = cd.scrollHeight + 'px';
 
       // if codeit lang not specified, autodetect code lang
       if (!cd.getAttribute('lang')) {
-        cd.code.classList = 'hljs';
+        code.classList = 'hljs';
       }
 
-      hljs.highlightElement(cd.code);
+      hljs.highlightElement(code);
 
     }
     
@@ -98,11 +98,11 @@
    var observe;
    if (window.attachEvent) {
      observe = (event, handler) => {
-       cd.code.attachEvent('on' + event, handler);
+       code.attachEvent('on' + event, handler);
      };
    } else {
      observe = (event, handler) => {
-       cd.code.addEventListener(event, handler, false);
+       code.addEventListener(event, handler, false);
      };
    }
     
