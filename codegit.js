@@ -120,13 +120,13 @@ searchClear.addEventListener('click', () => {
 
 
 if (localStorage.getItem('history')) {
-  codeit.setValue(localStorage.getItem('history'));
+  cd.setValue(localStorage.getItem('history'));
 }
 
 window.onbeforeunload = function() {
   
   // set new localStorage value
-  localStorage.setItem('code', codeit.input.value);
+  localStorage.setItem('code', cd.input.value);
   
 };
 
