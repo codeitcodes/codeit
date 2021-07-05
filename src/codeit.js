@@ -92,7 +92,7 @@ codeits.forEach(codeit => {
   observe(input, 'input',  update);
   observe(input, 'cut',     delayedUpdate);
   observe(input, 'paste',   delayedUpdate);
-  //observe(input, 'drop',    delayedUpdate);
+  observe(input, 'drop',    delayedUpdate);
   observe(input, 'keydown', delayedUpdate);
 
   update();
