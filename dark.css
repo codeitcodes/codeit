@@ -59,6 +59,7 @@ cd textarea {
   caret-color: #fff;
   letter-spacing: inherit;
   line-height: inherit;
+  max-width: 100% !important;
 }
 
 .hljs-comment, .hljs-meta {
