@@ -87,6 +87,18 @@
       
       cd.textarea.style.width = cd.scrollWidth + 'px';
       cd.textarea.style.height = cd.scrollHeight + 'px';
+      
+      function moveToSelection(){
+          var sel = document.getSelection(), // change the selection
+              ran = sel.getRangeAt(0),       // into a range
+              rec = ran.getClientRects()[0], // that we can get co-ordinates from
+              dy  = rec.top;                 // distance to move down/up
+          window.scrollBy( 0, dy );          // actual move
+
+          // console.log( sel, ran, rec, y );   // help debug
+      }
+
+      moveToSelection();
 
       // if codeit lang not specified, autodetect code lang
       if (!cd.getAttribute('lang')) {
