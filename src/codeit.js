@@ -33,6 +33,11 @@
 
     // style codeit textarea
     cd.textarea.setAttribute('spellcheck', 'false');
+    cd.textarea.setAttribute('autocorrect', 'off');
+    cd.textarea.setAttribute('autocomplete', 'off');
+    cd.textarea.setAttribute('aria-autocomplete', 'list');
+    cd.textarea.setAttribute('autocapitalize', 'off');
+    
     cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
