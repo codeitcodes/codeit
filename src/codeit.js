@@ -47,7 +47,7 @@
     // append codeit elements to DOM
     textarea = cd.appendChild(textarea);
     pre = cd.appendChild(pre);
-    code = cd.pre.appendChild(code);
+    code = pre.appendChild(code);
 
     // set codeit textarea value to code
     textarea.value = cd.parsedCode;
