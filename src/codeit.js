@@ -106,7 +106,7 @@
     cd.textarea.addEventListener('input', cd.update);
     cd.textarea.addEventListener('keydown', cd.update);
     
-    //BehaveHooks.add('openChar:after', cd.update);
+    BehaveHooks.add('openChar:after', cd.update);
 
     cd.update();
 
