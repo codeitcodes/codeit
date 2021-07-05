@@ -57,7 +57,7 @@ codeits.forEach(cd => {
 
     if (updatingHighlight == false) {
 
-      console.log('Updating Codeit from textContent', mutationsList);
+      //console.log('Updating Codeit from textContent', mutationsList);
       updatingHighlight = true;
       cd.update();
 
@@ -104,7 +104,7 @@ codeits.forEach(cd => {
 
     });
 
-    console.log('Updating Codeit from innerHTML', mutationsList);
+    //console.log('Updating Codeit from innerHTML', mutationsList);
     updatingHighlight = true;
     cd.update();
     //console.log('innerHTML', mutationsList);
@@ -117,7 +117,7 @@ codeits.forEach(cd => {
   // passing it the element to observe, and the options object
 
   var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
-  //textContentObserver.observe(cd, textContentConfig);
+  textContentObserver.observe(cd, textContentConfig);
 
   var innerHTMLConfig = { characterData: true, attributes: false, childList: false, subtree: true };
   innerHTMLObserver.observe(cd, innerHTMLConfig);
