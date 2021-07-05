@@ -20,10 +20,10 @@ body {
   content: '';
 }
 
-cd {
+body cd {
   min-height: 100vh;
-  width: 100% !important;
-  padding: 10px !important;
+  width: 100%;
+  padding: 10px;
   left: 0;
   position: relative;
   box-sizing: border-box;
