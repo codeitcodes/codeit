@@ -87,11 +87,11 @@
         charSettings = {
 
             keyMap: [
-                { open: "\"", close: "\"", canBreak: false },
-                { open: "'", close: "'", canBreak: false },
-                { open: "(", close: ")", canBreak: false },
-                { open: "[", close: "]", canBreak: true },
-                { open: "{", close: "}", canBreak: true }
+                { open: `"`, close: `"`, canBreak: false },
+                { open: `'`, close: `'`, canBreak: false },
+                { open: `(`, close: `)`, canBreak: false },
+                { open: `[`, close: `]`, canBreak: true },
+                { open: `{`, close: `}`, canBreak: true }
             ]
 
         },
@@ -304,7 +304,7 @@
                 }
 
                 var toDecrement = 0,
-                    quoteMap = ["'", "\""];
+                    quoteMap = [`'`, `"`];
                 for(i=0; i<charSettings.keyMap.length; i++) {
                     if(charSettings.keyMap[i].canBreak){
                         for(j in quoteMap){
