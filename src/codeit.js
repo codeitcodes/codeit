@@ -61,7 +61,9 @@ codeits.forEach(codeit => {
           element.addEventListener(event, handler, false);
       };
   }
-    
+  
+  codeit.input = input;
+  
   codeit.setValue = (code) => {
     input.value = code;
     update();
