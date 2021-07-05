@@ -66,7 +66,7 @@ codeits.forEach(codeit => {
   
   codeit.setValue = (code) => {
     input.value = code;
-    delayedUpdate();
+    update();
   }
 
   function update() {
@@ -78,7 +78,7 @@ codeits.forEach(codeit => {
     
     // If lang not specified, clear class for autodetect
     if (!codeit.getAttribute('lang')) {
-      fake.setAttribute('class', '');
+      fake.classList = 'hljs';
     }
 
     hljs.highlightElement(fake);
@@ -90,10 +90,10 @@ codeits.forEach(codeit => {
   }
 
   observe(input, 'input',  update);
-  observe(input, 'cut',     delayedUpdate);
-  observe(input, 'paste',   delayedUpdate);
-  observe(input, 'drop',    delayedUpdate);
-  observe(input, 'keydown', delayedUpdate);
+  observe(input, 'cut',     update);
+  observe(input, 'paste',   update);
+  observe(input, 'drop',    update);
+  observe(input, 'keydown', update);
 
   update();
 });
