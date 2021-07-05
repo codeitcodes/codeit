@@ -70,12 +70,11 @@ codeits.forEach(codeit => {
   }
 
   function update() {
-    input.style.height = 'auto';
-    input.style.width = 'auto';
-    input.style.height = input.scrollHeight+'px';
-    input.style.width = input.scrollWidth+'px';
     
     fake.innerHTML = escapeHTML(input.value);
+    
+    input.style.width = fake.clientWidth + 'px';
+    input.style.height = fake.clientHeight + 'px';
     
     // If lang not specified, clear class for autodetect
     if (!codeit.getAttribute('lang')) {
@@ -84,7 +83,6 @@ codeits.forEach(codeit => {
 
     hljs.highlightElement(fake);
     
-    input.style.maxWidth = fake.clientWidth+'px';
   }
   // 0-timeout to get the already changed text
   function delayedUpdate() {
