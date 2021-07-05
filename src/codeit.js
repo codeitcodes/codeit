@@ -109,7 +109,7 @@
     cd.textarea.addEventListener('drop', cd.update);
     //cd.textarea.addEventListener('keydown', () => { window.setTimeout(() => { cd.update() }, 0 )});
     
-    BehaveHooks.add(['keydown'], function(data) {
+    BehaveHooks.add(['openChar:after'], function(data) {
       cd.update();
     });
 
