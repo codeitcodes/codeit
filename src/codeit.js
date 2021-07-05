@@ -80,7 +80,7 @@ codeits.forEach(codeit => {
       fake.setAttribute('class', '');
     }
 
-    hljs.highlightBlock(fake);
+    hljs.highlightElement(fake);
     
     input.style.maxWidth = fake.clientWidth+'px';
   }
