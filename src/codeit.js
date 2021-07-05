@@ -17,7 +17,7 @@
   style.appendChild(document.createTextNode(css));
 
   // get all Codeits
-  const codeits = document.querySelectorAll('cd');
+  window.codeits = document.querySelectorAll('cd');
 
   codeits.forEach(cd => {
 
