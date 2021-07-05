@@ -6,7 +6,7 @@ head.appendChild(style);
 style.appendChild(document.createTextNode(css));
 
 // Get all Codeits
-var codeits = document.querySelectorAll('codeit');
+var codeits = document.querySelectorAll('cd');
 
 codeits.forEach(codeit => {
   // Create the elements
