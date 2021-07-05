@@ -59,6 +59,7 @@ cd textarea {
   caret-color: #fff;
   letter-spacing: inherit;
   line-height: inherit;
+  width: 100% !important;
   max-width: 100% !important;
 }
 
