@@ -66,7 +66,7 @@ codeits.forEach(codeit => {
   
   codeit.setValue = (code) => {
     input.value = code;
-    update();
+    delayedUpdate();
   }
 
   function update() {
