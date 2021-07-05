@@ -107,7 +107,7 @@
     cd.textarea.addEventListener('cut', cd.update);
     cd.textarea.addEventListener('paste', cd.update);
     cd.textarea.addEventListener('drop', cd.update);
-    cd.textarea.addEventListener('keydown', () => { window.setTimeout(() => { cd.update() }, 0 ));
+    cd.textarea.addEventListener('keydown', () => { window.setTimeout(() => { cd.update() }, 0 )});
 
     cd.update();
 
