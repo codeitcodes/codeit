@@ -113,7 +113,7 @@
         .replace(/'/g, "&#039;");
     }
     
-    const getPadding = (el) => {
+    const getPadding = (element) => {
       var computedStyle = getComputedStyle(element);
       
       var paddingX = parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
