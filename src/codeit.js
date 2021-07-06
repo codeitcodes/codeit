@@ -38,8 +38,13 @@
     cd.textarea.setAttribute('aria-autocomplete', 'list');
     cd.textarea.setAttribute('autocapitalize', 'off');
     
-    cd.textarea.style.minWidth = cd.clientWidth;
-    cd.textarea.style.minHeight = cd.clientHeight;
+    var computedStyle = getComputedStyle(cd);
+    
+    var cdWidth = cd.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
+    var cdHeight = cd.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom));
+    
+    cd.textarea.style.minWidth = cdWidth + 'px';
+    cd.textarea.style.minHeight = cdHeight + 'px';
     
     cd.textarea.setAttribute('rows', 1);
 
