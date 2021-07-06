@@ -122,7 +122,7 @@
       console.log(data.lines.current, data.lines.total);
       
       if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1)) {
-        cd.scrollTo(0, cd.scrollHeight);
+        cd.scrollTo(0, cd.pre.clientHeight);
       }
       
     });
