@@ -90,7 +90,7 @@
       var cdDime = getCodeitDime();
       
       if (cd.pre.clientWidth > cdDime[0]) cdDime[0] = cd.pre.clientWidth;
-      if (cd.pre.clientHeight < cdDime[1]) cdDime[1] = cd.pre.clientHeight;
+      if (cd.pre.clientHeight > cdDime[1]) cdDime[1] = cd.pre.clientHeight;
       
       cd.textarea.style.width = cdDime[0] + 'px';
       cd.textarea.style.height = cdDime[1] + 'px';
