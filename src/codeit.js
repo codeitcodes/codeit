@@ -94,12 +94,11 @@
       cd.textarea.style.height = cd.scrollHeight + 'px';
 
       // if codeit lang not specified, autodetect code lang
-      if (!cd.getAttribute('lang')) {
+      if (cd.getAttribute('lang') == undefined) {
         cd.code.classList = 'hljs';
       }
 
       hljs.highlightElement(cd.code);
-      console.log("A");
 
     }
     
