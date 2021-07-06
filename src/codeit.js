@@ -119,6 +119,8 @@
     
     BehaveHooks.add('enter:after', (data) => {
       
+      console.log(data.lines.current, data.lines.total);
+      
       if (data.lines.current == data.lines.total) {
         cd.scrollTo(0, cd.scrollHeight);
       }
