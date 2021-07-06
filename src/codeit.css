@@ -46,6 +46,9 @@ cd pre {
   font: inherit;
   letter-spacing: inherit;
   line-height: inherit;
+  
+  height: max-content;
+  width: max-content;
 }
 
 cd code {
