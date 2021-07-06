@@ -119,8 +119,14 @@ searchClear.addEventListener('click', () => {
 
 
 
-if (localStorage.getItem('history')) {
-  cd.setValue(localStorage.getItem('history'));
+window.onload = () => {
+  
+  if (localStorage.getItem('history')) {
+    
+    cd.setValue(localStorage.getItem('history'));
+    
+  }
+  
 }
 
 window.onbeforeunload = function() {
