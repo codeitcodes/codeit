@@ -120,7 +120,7 @@
     BehaveHooks.add('enter:after', (data) => {
       
       if (data.lines.current == data.lines.total) {
-        
+        cd.scrollTo(0, cd.scrollHeight);
       }
       
     });
