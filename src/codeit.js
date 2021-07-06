@@ -95,13 +95,6 @@
 
     }
     
-    cd.setValue = (code) => {
-
-      cd.textarea.value = code;
-      cd.update();
-
-    }
-    
     const escapeHTML = (unsafe) => {
       return unsafe
         .replace(/&/g, "&amp;")
@@ -117,6 +110,13 @@
     BehaveHooks.add('openChar:after', cd.update);
 
     cd.update();
+    
+    cd.setValue = (code) => {
+
+      cd.textarea.value = code;
+      setTimeout(cd.update, 0);
+
+    }
 
   });
 
