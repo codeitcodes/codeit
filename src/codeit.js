@@ -87,9 +87,14 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      cd.textarea.style.width = cd.code.clientHeight + 'px';
-      cd.textarea.style.height = cd.code.clientWidth + 'px';
-
+      cd.textarea.style.width = 0;
+      cd.textarea.style.height = 0;
+      
+      var padding = getPadding(cd);
+      
+      cd.textarea.style.width = cd.scrollHeight - padding[0] + 'px';
+      cd.textarea.style.height = cd.scrollWidth - padding[1] + 'px';
+      
       // if codeit lang not specified, autodetect code lang
       if (cd.getAttribute('lang') == undefined) {
         cd.code.classList = 'hljs';
@@ -106,6 +111,15 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+    
+    const getPadding = (el) => {
+      var computedStyle = getComputedStyle(element);
+      
+      var paddingX = parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+      var paddingY = parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+      
+      return [paddingX, paddingY];
     }
 
     cd.textarea.addEventListener('input', cd.update);
