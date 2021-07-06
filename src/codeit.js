@@ -41,7 +41,7 @@
     cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
-    cd.code.classList = cd.getAttribute('lang') ? cd.getAttribute('lang') : 'hljs';
+    cd.code.classList = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'hljs';
 
     // parse code
     cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
