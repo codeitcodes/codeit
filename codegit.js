@@ -121,15 +121,15 @@ searchClear.addEventListener('click', () => {
 
 window.onload = () => {
   
-  if (localStorage.getItem('history')) {
+  if (localStorage.getItem('code')) {
     
-    cd.setValue(localStorage.getItem('history'));
+    cd.setValue(localStorage.getItem('code'));
     
   }
   
 }
 
-window.onbeforeunload = function() {
+window.onbeforeunload = () => {
   
   // set new localStorage value
   localStorage.setItem('code', cd.textarea.value);
