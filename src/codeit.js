@@ -87,7 +87,7 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      var cdDime = [cd.code.clientWidth, cd.code.clientHeight];
+      var cdDime = [cd.pre.clientWidth, cd.pre.clientHeight];
       if (cdDime[0] < cd.clientWidth) cdDime[0] = cd.clientWidth;
       if (cdDime[1] < cd.clientHeight) cdDime[1] = cd.clientHeight;
       
