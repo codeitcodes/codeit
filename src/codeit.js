@@ -38,6 +38,9 @@
     cd.textarea.setAttribute('aria-autocomplete', 'list');
     cd.textarea.setAttribute('autocapitalize', 'off');
     
+    cd.textarea.style.minWidth = cd.clientWidth;
+    cd.textarea.style.minHeight = cd.clientHeight;
+    
     cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
@@ -88,8 +91,6 @@
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
       var cdDime = [cd.pre.clientWidth, cd.pre.clientHeight];
-      //if (cdDime[0] < cd.clientWidth) cdDime[0] = cd.clientWidth;
-      //if (cdDime[1] < cd.clientHeight) cdDime[1] = cd.clientHeight;
       
       cd.textarea.style.width = cdDime[0] + 'px';
       cd.textarea.style.height = cdDime[1] + 'px';
