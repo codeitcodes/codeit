@@ -87,9 +87,10 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      var cdDime = [cd.pre.clientWidth, cd.pre.clientHeight];
-      if (cdDime[0] < cd.clientWidth) cdDime[0] = cd.clientWidth;
-      if (cdDime[1] < cd.clientHeight) cdDime[1] = cd.clientHeight;
+      var cdDime = getCodeitDime();
+      
+      if (cd.pre.clientWidth > cdDime[0]) cdDime[0] = cd.pre.clientWidth;
+      if (cd.pre.clientHeight < cdDime[1]) cdDime[1] = cd.pre.clientHeight;
       
       cd.textarea.style.width = cdDime[0] + 'px';
       cd.textarea.style.height = cdDime[1] + 'px';
@@ -110,6 +111,20 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+    
+    const getCodeitDime = () => {
+      
+      var computedStyle = getComputedStyle(cd);
+
+      elementHeight = element.clientHeight;  // height with padding
+      elementWidth = element.clientWidth;   // width with padding
+
+      elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+      elementWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+      
+      return [elementWidth, elementHeight];
+      
     }
 
     cd.textarea.addEventListener('input', cd.update);
