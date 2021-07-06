@@ -75,7 +75,14 @@
     });
 
     // update codeit
+    
+    cd.setValue = (code) => {
 
+      cd.textarea.setAttribute('value', code);
+      cd.update();
+
+    }
+    
     cd.update = () => {
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
@@ -92,6 +99,7 @@
       }
 
       hljs.highlightElement(cd.code);
+      console.log("A");
 
     }
     
@@ -110,13 +118,6 @@
     BehaveHooks.add('openChar:after', cd.update);
 
     cd.update();
-    
-    cd.setValue = (code) => {
-
-      cd.textarea.value = code;
-      setTimeout(cd.update, 0);
-
-    }
 
   });
 
