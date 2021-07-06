@@ -115,6 +115,7 @@
     cd.textarea.addEventListener('keydown', cd.update);
     
     BehaveHooks.add('openChar:after', cd.update);
+    BehaveHooks.add('enter:after', function(data){ console.log(data); });
 
     cd.update();
 
