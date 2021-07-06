@@ -87,11 +87,8 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      cd.textarea.style.width = 0;
-      cd.textarea.style.height = 0;
-      
-      cd.textarea.style.width = cd.scrollWidth + 'px';
-      cd.textarea.style.height = cd.scrollHeight + 'px';
+      cd.textarea.style.width = cd.code.clientHeight + 'px';
+      cd.textarea.style.height = cd.code.clientWidth + 'px';
 
       // if codeit lang not specified, autodetect code lang
       if (cd.getAttribute('lang') == undefined) {
@@ -115,7 +112,14 @@
     cd.textarea.addEventListener('keydown', cd.update);
     
     BehaveHooks.add('openChar:after', cd.update);
-    BehaveHooks.add('enter:after', function(data){ console.log(data); });
+    
+    BehaveHooks.add('enter:after', (data) => {
+      
+      if (data.lines.current == data.lines.total) {
+        
+      }
+      
+    });
 
     cd.update();
 
