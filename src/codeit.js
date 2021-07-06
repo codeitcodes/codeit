@@ -76,13 +76,6 @@
 
     // update codeit
 
-    cd.setValue = (code) => {
-
-      cd.textarea.value = code;
-      cd.update();
-
-    }
-
     cd.update = () => {
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
@@ -99,6 +92,13 @@
       }
 
       hljs.highlightElement(cd.code);
+
+    }
+    
+    cd.setValue = (code) => {
+
+      cd.textarea.value = code;
+      cd.update();
 
     }
     
