@@ -78,7 +78,7 @@
     
     cd.setValue = (code) => {
 
-      cd.textarea.setAttribute('value', code);
+      cd.textarea.value = code;
       cd.update();
 
     }
