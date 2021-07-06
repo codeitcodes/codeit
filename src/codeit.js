@@ -117,8 +117,8 @@
       
       var computedStyle = getComputedStyle(cd);
 
-      elementHeight = element.clientHeight;  // height with padding
-      elementWidth = element.clientWidth;   // width with padding
+      elementHeight = cd.clientHeight;  // height with padding
+      elementWidth = cd.clientWidth;   // width with padding
 
       elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
       elementWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
