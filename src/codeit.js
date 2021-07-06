@@ -79,7 +79,7 @@
     cd.setValue = (code) => {
 
       cd.textarea.value = code;
-      setTimeout(cd.update, 0);
+      cd.update();
 
     }
     
