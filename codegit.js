@@ -28,6 +28,10 @@ github.addEventListener('click', () => {
   
   body.classList.toggle('expanded');
   
+  if (!body.classList.includes('expanded')) {
+    cd.textarea.focus();
+  }
+  
 })
 
 
