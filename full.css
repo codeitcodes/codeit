@@ -294,6 +294,74 @@ body.transitioning .sidebar {
   color: #828689;
 }
 
+.sidebar .intro {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  border-bottom: 5px solid hsl(228deg 16% 23%);
+  border-color: #f1f1f21c;
+  box-sizing: border-box;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.sidebar .intro .picture-wrapper {
+  height: 120px;
+  width: 120px;
+  margin-bottom: 25px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: block;
+  background: hsl(228deg 16% 21%);
+}
+
+.sidebar .intro .picture {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar .intro .subhead {
+  text-align: center;
+}
+
+.sidebar .intro .title {
+  color: #f1f1f2e0;
+  font-size: 19px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.sidebar .intro .subtitle {
+  color: #a6a8aa;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sidebar .button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 24px;
+  border-radius: 3px;
+  font-size: 14px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  transition: .18s var(--ease-function);
+  margin-top: 34px;
+  min-height: 40px;
+  background: hsl(228deg 16% 37%);
+  color: #fff;
+}
+
+.sidebar .button:hover {
+  background: hsl(228deg 16% 42%);
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+}
+
 .sidebar::-webkit-scrollbar {
   width: 10px;
 }
