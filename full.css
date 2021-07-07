@@ -161,6 +161,22 @@ body.transitioning .sidebar {
   transition: none;
 }
 
+.sidebar .content-wrapper {
+  display: none;
+}
+
+.sidebar:not(.intro) .content-wrapper {
+  display: block;
+}
+
+.sidebar.intro .intro-wrapper {
+  display: block;
+}
+
+.sidebar:not(.intro) .intro-wrapper {
+  display: none;
+}
+
 .sidebar .header {
   height: 59px;
   margin-bottom: 9px;
