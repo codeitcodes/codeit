@@ -87,8 +87,8 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      cd.textarea.style.width = cd.code.clientWidth + 'px';
-      cd.textarea.style.height = cd.code.clientHeight + 'px';
+      cd.textarea.style.width = cd.pre.clientWidth + 'px';
+      cd.textarea.style.height = cd.pre.clientHeight + 'px';
       
       // if codeit lang not specified, autodetect code lang
       if (cd.getAttribute('lang') == undefined) {
