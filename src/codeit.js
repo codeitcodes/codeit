@@ -125,6 +125,12 @@
       
     });
     
+    BehaveHooks.add('delete:after', (data) => {
+      
+      console.log(data.lines.current, data.lines.total);
+      
+    });
+    
     cd.addEventListener('click', () => {
       
       cd.textarea.focus();
