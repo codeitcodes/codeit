@@ -38,14 +38,6 @@
     cd.textarea.setAttribute('aria-autocomplete', 'list');
     cd.textarea.setAttribute('autocapitalize', 'off');
     
-    var computedStyle = getComputedStyle(cd);
-    
-    var cdWidth = cd.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
-    var cdHeight = cd.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom));
-    
-    cd.textarea.style.minWidth = cdWidth + 'px';
-    cd.textarea.style.minHeight = cdHeight + 'px';
-    
     cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
@@ -95,10 +87,8 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
-      var cdDime = [cd.pre.clientWidth, cd.pre.clientHeight];
-      
-      cd.textarea.style.width = cdDime[0] + 'px';
-      cd.textarea.style.height = cdDime[1] + 'px';
+      cd.textarea.style.width = cd.pre.clientWidth + 'px';
+      cd.textarea.style.height = cd.pre.clientHeight + 'px';
       
       // if codeit lang not specified, autodetect code lang
       if (cd.getAttribute('lang') == undefined) {
@@ -125,11 +115,19 @@
     
     BehaveHooks.add('enter:after', (data) => {
       
-      console.log(data.lines.current, data.lines.total);
+      setTimeout(() => {
+        
+        if (data.lines.current == data.lines.total) {
+          cd.scrollTop = cd.scrollHeight;
+        }
+        
+      }, 0);
       
-      if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1)) {
-        setTimeout(() => { cd.scrollTop = cd.scrollHeight }, 0);
-      }
+    });
+    
+    cd.addEventListener('click', () => {
+      
+      cd.textarea.focus();
       
     });
 
