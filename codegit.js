@@ -1,3 +1,7 @@
+/*
+  github
+*/
+
 const body = document.body,
     
       github = document.querySelector('.github'),
@@ -126,8 +130,9 @@ window.onload = () => {
     cd.setValue(getStorage('code'));
     
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
-    
     cd.textarea.focus();
+    
+    if (getStorage('sidebar') == true) body.classList.add('expanded');
     
   }
   
@@ -135,9 +140,10 @@ window.onload = () => {
 
 window.onbeforeunload = () => {
   
-  // set new localStorage value
+  // set localStorage values
   setStorage('code', cd.textarea.value);
   setStorage('caret', cd.textarea.selectionStart);
+  setStorage('sidebar', body.classList.contains('expanded'));
   
 };
 
