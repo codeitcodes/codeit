@@ -29,6 +29,7 @@ body cd {
   box-sizing: border-box;
   transition: .4s var(--cubic-function);
   transition-property: width, left;
+  will-change: width, left;
 }
 
 body.expanded cd {
@@ -46,9 +47,9 @@ body.expanded cd {
   border-radius: 0 500px 500px 0;
   padding: 7px 10px;
   cursor: pointer;
-  will-change: transform;
   transform: translateX(-100%);
-  transition: .18s var(--ease-function), .4s var(--cubic-function) left, .4s var(--cubic-function) padding, .4s var(--cubic-function) bottom;
+  will-change: transform, left, padding;
+  transition: .18s var(--ease-function), .4s var(--cubic-function) left, .4s var(--cubic-function) padding;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
 }
 
@@ -66,7 +67,7 @@ body.expanded .github {
   left: 0;
   bottom: 0;
   height: 50vh;
-  width: 100%;
+  width: 25px;
   transform: translateX(100%);
   transition: inherit;
   z-index: -1;
