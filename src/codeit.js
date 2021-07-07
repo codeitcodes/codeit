@@ -87,6 +87,7 @@
 
       cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
+      // resize textarea
       cd.textarea.style.width = cd.pre.clientWidth + 'px';
       cd.textarea.style.height = cd.pre.clientHeight + 'px';
       
@@ -118,7 +119,11 @@
       setTimeout(() => {
         
         // if pressed enter on one of last three lines, scroll down
-        if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1) || data.lines.current == (data.lines.total-2)) {
+        const firstLine = (data.lines.current == data.lines.total),
+              secondLine = (data.lines.current == (data.lines.total - 1)),
+              thirdLine = (data.lines.current == (data.lines.total - 2));
+        
+        if (firstLine || secondLine || thirdLine) {
           cd.scrollTop = cd.scrollHeight;
         }
         
@@ -126,6 +131,7 @@
       
     });
     
+    // focus codeit when clicked
     cd.addEventListener('click', () => {
       
       cd.textarea.focus();
