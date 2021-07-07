@@ -157,7 +157,7 @@ body.expanded .sidebar {
   overflow-y: overlay;
 }
 
-body.transitioning .github {
+body.transitioning .sidebar {
   transition: none;
 }
 
