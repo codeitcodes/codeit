@@ -1,6 +1,4 @@
 cd {
-  cursor: text;
-  
   display: inline-flex;
   position: relative;
   overflow: overlay;
@@ -14,6 +12,8 @@ cd {
   
   border-radius: 5px;
   padding: 5px;
+  
+  cursor: text;
 }
 
 cd textarea {
