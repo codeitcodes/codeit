@@ -132,7 +132,7 @@ window.onload = () => {
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     cd.textarea.focus();
     
-    if (getStorage('sidebar') == true) body.classList.add('expanded');
+    if (getStorage('sidebar') == 'true') body.classList.add('expanded');
     
   }
   
