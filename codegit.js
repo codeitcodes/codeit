@@ -1,22 +1,22 @@
-let body = document.body,
+const body = document.body,
     
-    github = document.querySelector('.github'),
+      github = document.querySelector('.github'),
     
-    sidebar = document.querySelector('.sidebar'),
-    header = sidebar.querySelector('.header'),
+      sidebar = document.querySelector('.sidebar'),
+      header = sidebar.querySelector('.header'),
     
-    titleScreen = header.querySelector('.titlescreen'),
-    searchScreen = header.querySelector('.searchscreen'),
+      titleScreen = header.querySelector('.titlescreen'),
+      searchScreen = header.querySelector('.searchscreen'),
     
-    sidebarTitle = titleScreen.querySelector('.title'),
-    sidebarLogo = sidebarTitle.querySelector('.logo'),
+      sidebarTitle = titleScreen.querySelector('.title'),
+      sidebarLogo = sidebarTitle.querySelector('.logo'),
     
-    searchButton = titleScreen.querySelector('.search'),
-    searchBack = searchScreen.querySelector('.back'),
-    searchInput = searchScreen.querySelector('.searchinput'),
-    searchClear = searchScreen.querySelector('.clear'),
+      searchButton = titleScreen.querySelector('.search'),
+      searchBack = searchScreen.querySelector('.back'),
+      searchInput = searchScreen.querySelector('.searchinput'),
+      searchClear = searchScreen.querySelector('.clear'),
     
-    fileWrapper = sidebar.querySelector('.files');
+      fileWrapper = sidebar.querySelector('.files');
 
 
 // toggle sidebar on click of bookmark
@@ -121,9 +121,10 @@ searchClear.addEventListener('click', () => {
 
 window.onload = () => {
   
-  if (localStorage.getItem('code')) {
+  if (getStorage('code')) {
     
-    cd.setValue(localStorage.getItem('code'));
+    cd.setValue(getStorage('code'));
+    cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
   }
   
@@ -132,7 +133,22 @@ window.onload = () => {
 window.onbeforeunload = () => {
   
   // set new localStorage value
-  localStorage.setItem('code', cd.textarea.value);
+  setStorage('code', cd.textarea.value);
+  setStorage('caret', cd.textarea.selectionStart);
   
 };
 
+
+
+// localStorage
+let getStorage = (item) => {
+  
+  return localStorage.getItem(item);
+  
+}
+
+let setStorage = (item, value) => {
+  
+  return localStorage.setItem(item, value);
+  
+}
