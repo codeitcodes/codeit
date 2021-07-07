@@ -1,4 +1,6 @@
 cd {
+  cursor: text;
+  
   display: inline-flex;
   position: relative;
   overflow: overlay;
