@@ -119,17 +119,11 @@
         
         console.log(data.lines.current, data.lines.total);
         
-        if (data.lines.current == data.lines.total) {
+        if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1)) {
           cd.scrollTop = cd.scrollHeight;
         }
         
       }, 0);
-      
-    });
-    
-    BehaveHooks.add('delete:after', (data) => {
-      
-      console.log(data.lines.current, data.lines.total);
       
     });
     
