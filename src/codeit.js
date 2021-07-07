@@ -117,6 +117,8 @@
       
       setTimeout(() => {
         
+        console.log(data.lines.current, data.lines.total);
+        
         if (data.lines.current == data.lines.total) {
           cd.scrollTop = cd.scrollHeight;
         }
