@@ -68,7 +68,7 @@ body.expanded .github {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 50vh;
+  height: 100vh;
   width: 25px;
   transform: translateX(100%);
   transition: inherit;
