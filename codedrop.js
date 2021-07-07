@@ -5,6 +5,7 @@ function processFile(file) {
   const reader = new FileReader();
   reader.addEventListener('load', (event) => {
     cd.setValue(event.target.result);
+    cd.textarea.focus();
   });
   reader.readAsText(file);
   
