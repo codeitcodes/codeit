@@ -127,7 +127,7 @@ window.onload = () => {
     
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
-    cd.focus();
+    cd.textarea.focus();
     
   }
   
