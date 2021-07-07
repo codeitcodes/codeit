@@ -3,23 +3,28 @@
 */
 
 const body = document.body,
-    
+      
       github = document.querySelector('.github'),
-    
+      
       sidebar = document.querySelector('.sidebar'),
-      header = sidebar.querySelector('.header'),
-    
+      introWrapper = sidebar.querySelector('.intro-wrapper'),
+      contentWrapper = sidebar.querySelector('.content-wrapper'),
+      
+      loginButton = introWrapper.querySelector('.login'),
+      
+      header = contentWrapper.querySelector('.header'),
+      
       titleScreen = header.querySelector('.titlescreen'),
       searchScreen = header.querySelector('.searchscreen'),
-    
+      
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
-    
+      
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
-    
+      
       fileWrapper = sidebar.querySelector('.files');
 
 
