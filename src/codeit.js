@@ -117,9 +117,8 @@
       
       setTimeout(() => {
         
-        console.log(data.lines.current, data.lines.total);
-        
-        if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1)) {
+        // if pressed enter on one of last three lines, scroll down
+        if (data.lines.current == data.lines.total || data.lines.current == (data.lines.total-1) || data.lines.current == (data.lines.total-2)) {
           cd.scrollTop = cd.scrollHeight;
         }
         
