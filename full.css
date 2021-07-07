@@ -51,6 +51,8 @@ body.expanded cd {
   will-change: transform, left, padding;
   transition: .18s var(--ease-function), .4s var(--cubic-function) left, .4s var(--cubic-function) padding;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
+  border: 1px solid transparent;
+  border-left: 0;
 }
 
 body.expanded .github {
