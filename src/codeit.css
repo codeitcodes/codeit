@@ -1,7 +1,7 @@
 cd {
   display: inline-flex;
   position: relative;
-  overflow: overlay;
+  overflow: auto;
   
   font-size: 14px;
   line-height: 1.5;
