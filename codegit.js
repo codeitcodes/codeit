@@ -141,6 +141,7 @@ window.onbeforeunload = () => {
 
 
 // localStorage
+
 let getStorage = (item) => {
   
   return localStorage.getItem(item);
