@@ -93,6 +93,10 @@ body.expanded .github::after {
   background: hsl(228deg 16% 10%);
 }
 
+.github svg {
+  opacity: .72;
+}
+
 .github path {
   transition: .4s var(--cubic-function);
 }
