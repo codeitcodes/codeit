@@ -124,7 +124,10 @@ window.onload = () => {
   if (getStorage('code')) {
     
     cd.setValue(getStorage('code'));
+    
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
+    
+    cd.focus();
     
   }
   
