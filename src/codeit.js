@@ -137,7 +137,9 @@
       cd.textarea.focus();
       
     });
-
+    
+    cd.textarea.setSelectionRange(0, 0);
+    
     cd.update();
 
   });
