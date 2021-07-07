@@ -37,6 +37,10 @@ body.expanded cd {
   left: var(--sidebar-width);
 }
 
+body.transitioning cd {
+  transition: none;
+}
+
 .github {
   position: fixed;
   bottom: 5px;
@@ -61,6 +65,10 @@ body.expanded .github {
   animation: none;
   padding-left: 7.5px;
   left: calc(var(--sidebar-width) - 0.5px);
+}
+
+body.transitioning .github {
+  transition: .18s var(--ease-function), 0s left, 0s padding;
 }
 
 .github::after {
@@ -147,6 +155,10 @@ body.expanded .sidebar {
   transform: none;
   pointer-events: auto;
   overflow-y: overlay;
+}
+
+body.transitioning .github {
+  transition: none;
 }
 
 .sidebar .header {
