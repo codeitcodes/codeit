@@ -32,7 +32,7 @@ cd textarea {
   outline: none;
   caret-color: black;
   white-space: pre;
-  overflow: hidden;
+  display: inline-table;
 
   padding: 0;
   box-sizing: border-box;
