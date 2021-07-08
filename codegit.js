@@ -76,6 +76,8 @@ window.onload = () => {
   
   }
   
+  loadCodeFromStorage();
+  
 }
 
 async function getGithubToken(githubCode) {
@@ -297,7 +299,7 @@ searchClear.addEventListener('click', () => {
 
 
 
-window.onload = () => {
+function loadCodeFromStorage() {
   
   // if code in storage
   if (getStorage('code')) {
