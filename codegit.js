@@ -119,7 +119,7 @@ async function renderFiles() {
   // if navigating in repository
   if (repo != '') {
     
-    query += '/repos/user/'+ repo +'/contents'+ contents;
+    query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
     
   } else { // else, show all repositories
     
@@ -199,7 +199,7 @@ async function renderFiles() {
         <div class="item repo">
           <div class="label">
             `+ repoIcon +`
-            <a class="name">`+ item.name +`</a>
+            <a class="name">`+ item.full_name +`</a>
           </div>
           `+ arrowIcon +`
         </div>
@@ -249,7 +249,8 @@ function addItemListeners() {
       if (item.classList.contains('repo')) {
         
         // change location
-        treeLoc[1] = item.innerText;
+        treeLoc[0] = item.innerText.split('/')[0],
+        treeLoc[1] = item.innerText.split('/')[1];
         setStorage('tree', treeLoc.join());
         
         // render files
