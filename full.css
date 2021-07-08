@@ -279,7 +279,7 @@ body.transitioning .sidebar {
   pointer-events: auto;
 }
 
-.sidebar .file {
+.sidebar .item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -288,25 +288,25 @@ body.transitioning .sidebar {
   cursor: pointer;
 }
 
-.sidebar .file:hover {
+.sidebar .item:hover {
   background: hsl(227deg 11% 16%);
 }
 
-.sidebar .file:active {
+.sidebar .item:active {
   background: hsl(226deg 7% 19%);
 }
 
-.sidebar .file .icon {
+.sidebar .item .icon {
   margin-right: 7px;
   color: #828689;
 }
 
-.sidebar .file .label {
+.sidebar .item .label {
   display: flex;
   align-items: center;
 }
 
-.sidebar .file .arrow {
+.sidebar .item .arrow {
   color: #828689;
 }
 
