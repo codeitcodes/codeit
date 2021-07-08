@@ -281,7 +281,7 @@ async function showFile(file, sha) {
 sidebarTitle.addEventListener('click', () => {
   
   // map tree location
-  const [user, repo, contents] = treeLoc;
+  let [user, repo, contents] = treeLoc;
   
   // if navigating in folders
   if (contents != '') {
