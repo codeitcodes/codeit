@@ -93,12 +93,14 @@ async function getGithubToken(githubCode) {
   githubToken = resp.access_token;
   setStorage('token', githubToken);
   
+  /*
   // get username
-  var user = await axios.get('https://api.github.com/user?visibility=all&sort=updated&page=1', githubToken);
+  var user = await axios.get('https://api.github.com/user', githubToken);
   
   // save location in filetree
   treeLoc = [user.login, '', ''];
   setStorage('tree', treeLoc.join());
+  */
   
   // render files
   sidebar.classList.remove('intro');
@@ -123,7 +125,7 @@ async function renderFiles() {
     
   } else { // else, show all repositories
     
-    query += '/user/repos';
+    query += '/user/repos?visibility=all&sort=updated&page=1';
     
   }
 
