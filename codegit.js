@@ -263,7 +263,7 @@ async function showFile(file, sha) {
   let query = 'https://api.github.com';
   const [user, repo, contents] = treeLoc;
   
-  query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ item.innerText;
+  query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
   
   // get the query
   var resp = await axios.get(query, githubToken);
