@@ -320,6 +320,7 @@ sidebarTitle.addEventListener('click', () => {
   let [user, repo, contents] = treeLoc;
   
   // clear selected file
+  cd.setValue('');
   setStorage('selectedFile', '');
   
   // if navigating in folders
