@@ -74,7 +74,7 @@ window.onload = () => {
     // get Github token
     getGithubToken(githubCode);
   
-  }
+  })
   
   loadCodeFromStorage();
   
