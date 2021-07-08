@@ -45,7 +45,7 @@ let githubToken, treeLoc;
 window.onload = () => {
   
   githubToken = getStorage('token');
-  treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
+  treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
 
   loginButton.addEventListener('click', () => {
   
@@ -98,7 +98,7 @@ async function getGithubToken(githubCode) {
   
   // save location in filetree
   treeLoc = [user.login, '', ''];
-  setStorage('tree', treeLoc);
+  setStorage('tree', treeLoc.join());
   
   // render files
   sidebar.classList.remove('intro');
