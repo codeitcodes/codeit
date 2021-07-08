@@ -268,8 +268,8 @@ function addItemListeners() {
         
       } else { // if item is a file
         
-        // show file
-        showFile(item, getAttr(item, 'sha'));
+        // load file
+        loadFile(item, getAttr(item, 'sha'));
         
       }
       
@@ -280,7 +280,7 @@ function addItemListeners() {
 }
 
 
-async function showFile(file, sha) {
+async function loadFile(file, sha) {
   
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
@@ -302,6 +302,7 @@ async function showFile(file, sha) {
   
   // show file content in codeit
   cd.setValue(atob(resp.content));
+  cd.textarea.focus();
   
 }
 
