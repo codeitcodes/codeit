@@ -244,6 +244,7 @@ body.transitioning .sidebar {
   color: rgba(241,241,242,0.92);
   width: 130px;
   overflow: hidden;
+  white-space: nowrap;
   -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
   mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
@@ -313,6 +314,7 @@ body.transitioning .sidebar {
 .sidebar .item .name {
   width: 130px;
   overflow: hidden;
+  white-space: nowrap;
   -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
   mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
