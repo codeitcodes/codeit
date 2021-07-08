@@ -312,11 +312,11 @@ body.transitioning .sidebar {
 }
 
 .sidebar .item .name {
-  width: 130px;
+  /* width: 130px; */
+  max-width: 245px;
   overflow: hidden;
   white-space: nowrap;
-  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
-  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  text-overflow: ellipsis;
 }
 
 .sidebar .item .arrow {
@@ -433,7 +433,8 @@ body.transitioning .sidebar {
 :root {
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
-  --sidebar-width: 245px;
+  /* --sidebar-width: 245px; */
+  --sidebar-width: 350px;
 }
 
 body {
