@@ -49,7 +49,7 @@ window.onload = () => {
 
   loginButton.addEventListener('click', () => {
 
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo');
 
   })
   
@@ -69,7 +69,7 @@ window.onload = () => {
   // if redirected from Github auth
   window.addEventListener('message', (event) => {
     
-	  var githubCode = event.data;
+    var githubCode = event.data;
     
     // get Github token
     getGithubToken(githubCode);
