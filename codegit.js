@@ -38,9 +38,7 @@ github.addEventListener('click', () => {
 
 
 // Github login
-const url = new URL(window.location.href),
-      githubCode = url.searchParams.get('code'),
-      clientId = '7ede3eed3185e59c042d';
+const clientId = '7ede3eed3185e59c042d';
 
 let githubToken, treeLoc;
 
@@ -51,7 +49,7 @@ window.onload = () => {
 
   loginButton.addEventListener('click', () => {
 
-    window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
 
   })
   
@@ -69,8 +67,10 @@ window.onload = () => {
   }
   
   // if redirected from Github auth
-  if (githubCode != null) {
-
+  window.addEventListener('message', (event) => {
+    
+	  var githubCode = event.data;
+    
     // get Github token
     getGithubToken(githubCode);
   
@@ -82,8 +82,9 @@ window.onload = () => {
 
 async function getGithubToken(githubCode) {
   
-  // post to Github with clientId, clientSecret and code
-  var resp = await axios.post('https://github.com/login/oauth/access_token?' +
+  // CORS post to Github with clientId, clientSecret and code
+  var resp = await axios.post('https://sceptercors.herokuapp.com/' +
+                              'https://github.com/login/oauth/access_token?' +
                               'client_id=' + clientId +
                               '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
                               '&code=' + githubCode);
