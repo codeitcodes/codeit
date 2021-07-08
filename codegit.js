@@ -181,7 +181,7 @@ async function renderFiles() {
       sidebarLogo.innerText = 'Repositories';
       
       // render repositories
-      resp.forEach(repo => {
+      resp.forEach(item => {
         
         out += `
         <div class="item repo">
