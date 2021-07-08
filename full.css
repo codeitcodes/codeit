@@ -369,6 +369,11 @@ body.transitioning .sidebar {
   line-height: 20px;
 }
 
+.sidebar .intro .subtitle b {
+  font-weight: 600;
+  color: rgba(241,241,242,0.72);
+}
+
 .sidebar .button {
   cursor: pointer;
   display: flex;
@@ -384,6 +389,13 @@ body.transitioning .sidebar {
   min-height: 40px;
   background: hsl(228deg 16% 37%);
   color: #fff;
+}
+
+.sidebar .button.secondary {
+  margin-top: 15px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%);
+  color: inherit;
 }
 
 .sidebar .button:hover {
