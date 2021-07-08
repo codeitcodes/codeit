@@ -217,6 +217,16 @@ async function renderFiles() {
   // add item event listeners
   addItemListeners();
   
+  // if selected file exists
+  if (getStorage('selectedFile')) {
+    
+    let selectedFile = fileWrapper.querySelector('.item[sha="'+ getStorage('selectedFile') +'"]');
+    
+    // select file
+    selectedFile.classList.add('selected');
+    
+  }
+  
 }
 
 
