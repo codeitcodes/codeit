@@ -149,12 +149,11 @@ async function renderFiles() {
         if (item.type == 'file') {
           
           out += `
-          <div class="item file">
+          <div class="item file" sha="`+ item.sha +`">
             <div class="label">
               `+ fileIcon +`
               <a class="name">`+ item.name +`</a>
             </div>
-            `+ arrowIcon +`
           </div>
           `;
           
@@ -204,6 +203,73 @@ async function renderFiles() {
   
   // add item event listeners
   addItemListeners();
+  
+}
+
+
+// adds item event listeners
+function addItemListeners() {
+  
+  let items = fileWrapper.querySelectorAll('.item');
+  
+  // run on all items
+  items.forEach(item => {
+    
+    // navigate on click
+    item.addEventListener('click', () => {
+      
+      // if item is a repository
+      if (item.classList.contains('repo')) {
+        
+        // change location
+        treeLoc[1] = item.innerText;
+        setStorage('tree', treeLoc.join());
+        
+        // render files
+        renderFiles();
+        
+      } else if (item.classList.contains('folder')) {
+        
+        // if item is a repository
+        
+        // change location
+        treeLoc[2] += '/' + item.innerText;
+        setStorage('tree', treeLoc.join());
+        
+        // render files
+        renderFiles();
+        
+      } else { // if item is a file
+        
+        // show file
+        showFile(item, getAttr(item, 'sha'));
+        
+      }
+      
+    })
+    
+  })
+  
+}
+
+
+function showFile(file, sha) {
+  
+  // save selected file
+  file.classList.add('selected');
+  setStorage('selectedFile', sha);
+  
+  // map tree location
+  let query = 'https://api.github.com';
+  const [user, repo, contents] = treeLoc;
+  
+  query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ item.innerText;
+  
+  // get the query
+  var resp = await axios.get(query, githubToken);
+  
+  // show file content in codeit
+  cd.setValue(atob(resp.content));
   
 }
 
@@ -353,6 +419,21 @@ let getStorage = (item) => {
 let setStorage = (item, value) => {
   
   return localStorage.setItem(item, value);
+  
+}
+
+
+// Attributes
+
+let getAttr = (element, item) => {
+  
+  return element.getAttribute(item);
+  
+}
+
+let setAttr = (element, item, value) => {
+  
+  return element.setAttribute(item, value);
   
 }
 
