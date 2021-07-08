@@ -136,11 +136,27 @@ async function renderFiles() {
   // if response
   if (resp) {
     
-    // if navigating in repository
-    if (repo != '') {
+    // show title
+    if (contents != '') {
+      
+      // show path
+      sidebarLogo.innerText = contents;
+      
+    } else if (repo != '') {
       
       // show repo name
       sidebarLogo.innerText = repo;
+      
+    } else {
+      
+      // show title
+      sidebarLogo.innerText = 'Repositories';
+      
+    }
+    
+    
+    // if navigating in repository
+    if (repo != '') {
       
       // render files
       resp.forEach(item => {
@@ -175,9 +191,6 @@ async function renderFiles() {
       });
       
     } else { // else, show all repositories
-      
-      // show title
-      sidebarLogo.innerText = 'Repositories';
       
       // render repositories
       resp.forEach(item => {
