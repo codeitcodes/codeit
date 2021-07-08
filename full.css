@@ -180,7 +180,7 @@ body.transitioning .sidebar {
 .sidebar .header {
   height: 59px;
   margin-bottom: 9px;
-  margin-top: 15px;
+  padding-top: 15px;
   box-shadow: 0 1px 0 0 #f1f1f21c;
   background: #1a1c24;
   position: sticky;
