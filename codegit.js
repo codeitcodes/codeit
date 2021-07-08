@@ -119,7 +119,7 @@ async function renderFiles() {
   // if navigating in repository
   if (repo != '') {
     
-    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents;
+    query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
     
   } else { // else, show all repositories
     
@@ -272,6 +272,44 @@ async function showFile(file, sha) {
   cd.setValue(atob(resp.content));
   
 }
+
+
+// traverse backwards in tree when clicked on button
+sidebarTitle.addEventListener('click', () => {
+  
+  // map tree location
+  const [user, repo, contents] = treeLoc;
+  
+  // if navigating in folders
+  if (contents != '') {
+    
+    // pop last folder
+    contents = contents.split('/');
+    contents.pop();
+    
+    // change location
+    treeLoc[2] = contents;
+    setStorage('tree', treeLoc.join());
+    
+    // render files
+    renderFiles();
+    
+  } else if (repo != '') { // if navigating in repository
+    
+    // change location
+    treeLoc[1] = '';
+    setStorage('tree', treeLoc.join());
+    
+    // render files
+    renderFiles();
+    
+  } else { // show user
+    
+    
+    
+  }
+  
+})
 
 
 
