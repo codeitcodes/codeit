@@ -255,6 +255,9 @@ function addItemListeners() {
 
 async function showFile(file, sha) {
   
+  // clear existing selections
+  fileWrapper.querySelector('.selected').classList.remove('selected');
+  
   // save selected file
   file.classList.add('selected');
   setStorage('selectedFile', sha);
