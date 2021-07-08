@@ -222,8 +222,12 @@ async function renderFiles() {
     
     let selectedFile = fileWrapper.querySelector('.item[sha="'+ getStorage('selectedFile') +'"]');
     
-    // select file
-    selectedFile.classList.add('selected');
+    if (selectedFile) {
+    
+      // select file
+      selectedFile.classList.add('selected');
+      
+    }
     
   }
   
