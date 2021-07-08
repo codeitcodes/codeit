@@ -46,7 +46,7 @@ let githubToken = getStorage('token');
 
 loginButton.addEventListener('click', () => {
   
-  window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=user:email,repo';
+  window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
   
 })
 
