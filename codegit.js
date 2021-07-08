@@ -38,15 +38,16 @@ github.addEventListener('click', () => {
 
 
 // Github login
+const url = new URL(window.location.href),
+      githubCode = url.searchParams.get('code'),
+      clientId = '7ede3eed3185e59c042d';
+
+let githubToken, treeLoc;
+
 window.onload = () => {
   
-  var url = new URL(window.location.href),
-      githubCode = url.searchParams.get('code');
-
-  const clientId = '7ede3eed3185e59c042d';
-  let githubToken = getStorage('token');
-  
-  let treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
+  githubToken = getStorage('token');
+  treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
 
   loginButton.addEventListener('click', () => {
 
