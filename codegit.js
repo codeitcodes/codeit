@@ -55,7 +55,7 @@ window.onload = () => {
   })
   
   // if not logged into Github
-  if (githubToken != null) {
+  if (githubToken == null) {
 
     // show intro screen
     sidebar.classList.add('intro');
