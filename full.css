@@ -297,10 +297,6 @@ body.transitioning .sidebar {
   background: hsl(227deg 11% 16%);
 }
 
-.sidebar .item:active {
-  background: hsl(226deg 7% 19%);
-}
-
 .sidebar .item.selected {
   background: hsl(226deg 7% 19%);
 }
