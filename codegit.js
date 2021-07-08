@@ -119,11 +119,11 @@ async function renderFiles() {
   // if navigating in repository
   if (repo != '') {
     
-    query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
+    query += '/repos/user/'+ repo +'/contents'+ contents;
     
   } else { // else, show all repositories
     
-    query += '/users/'+ user +'/repos';
+    query += '/user/repos';
     
   }
 
