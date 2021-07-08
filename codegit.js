@@ -94,7 +94,7 @@ async function getGithubToken(githubCode) {
   setStorage('token', githubToken);
   
   // get username
-  var user = await axios.get('https://api.github.com/user?access_token='+ githubToken);
+  var user = await axios.get('https://api.github.com/user', githubToken);
   
   // save location in filetree
   treeLoc = [user.login, '', ''];
@@ -126,12 +126,9 @@ async function renderFiles() {
     query += '/users/'+ user +'/repos';
     
   }
-  
-  // add access token
-  query += '?access_token=' + githubToken;
-  
+
   // get the query
-  var resp = await axios.get(query);
+  var resp = await axios.get(query, githubToken);
   
   // if response
   if (resp.length > 0) {
@@ -359,7 +356,7 @@ let setStorage = (item, value) => {
 
 // HTTP Request
 let axios = {
-  'get': (url) => {
+  'get': (url, token) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -368,13 +365,16 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-
+        
         xmlhttp.open('GET', url, true);
+        
+        xmlhttp.setRequestHeader('Authorization', token);
+        
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
   },
-  'post': (url, data) => {
+  'post': (url, data, token) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -387,11 +387,12 @@ let axios = {
         xmlhttp.open('POST', url, true);
         
         xmlhttp.setRequestHeader('Accept', 'application/json');
+        xmlhttp.setRequestHeader('Authorization', token);
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
     });
   },
-  'put': (url, data) => {
+  'put': (url, data, token) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -404,11 +405,12 @@ let axios = {
         xmlhttp.open('PUT', url, true);
 
         xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xmlhttp.setRequestHeader('Authorization', token);
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
     });
   },
-  'delete': (url) => {
+  'delete': (url, token) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -419,6 +421,8 @@ let axios = {
         };
 
         xmlhttp.open('DELETE', url, true);
+        
+        xmlhttp.setRequestHeader('Authorization', token);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
