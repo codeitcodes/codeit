@@ -130,11 +130,11 @@ async function renderFiles() {
   // get the query
   var resp = await axios.get(query, githubToken);
   
+  // save rendered HTML
+  let out = '';
+  
   // if response
-  if (resp.length > 0) {
-    
-    // save rendered HTML
-    let out = '';
+  if (resp) {
     
     // if navigating in repository
     if (repo != '') {
@@ -173,7 +173,7 @@ async function renderFiles() {
           
         }
         
-      })
+      });
       
     } else { // else, show all repositories
       
