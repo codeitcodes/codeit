@@ -37,6 +37,164 @@ github.addEventListener('click', () => {
 
 
 
+// Github login
+var url = new URL(window.location.href),
+    githubCode = url.searchParams.get('code');
+    
+const clientId = '7ede3eed3185e59c042d';
+let githubToken = getStorage('token');
+
+loginButton.addEventListener('click', () => {
+  
+  window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=user:email,repo';
+  
+})
+
+
+
+
+
+// if redirected from Github auth
+if (githubCode != null) {
+  
+  // get Github token
+  getGithubToken(githubCode);
+  
+}
+
+async function getGithubToken(githubCode) {
+  
+  // post to Github with clientId, clientSecret and code
+  var resp = await axios.post('https://github.com/login/oauth/access_token?' +
+                              'client_id=' + clientId +
+                              '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
+                              '&code=' + githubCode);
+  
+  // save token to localStorage
+  githubToken = resp.access_token;
+  setStorage('token', githubToken);
+  
+  // get username
+  var user = await axios.get('https://api.github.com/user?access_token='+ githubToken);
+  
+  // save location in filetree
+  treeLoc = [user.login, '', ''];
+  setStorage('tree', treeLoc);
+  
+  // render files
+  sidebar.classList.remove('intro');
+  renderFiles();
+  
+}
+
+
+let treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
+
+// render files
+// call this function when signed in to github
+// to render sidebar
+async function renderFiles() {
+  
+  // map tree location
+  let query = 'https://api.github.com';
+  const [user, repo, contents] = treeLoc;
+  
+  // if navigating in repository
+  if (repo != '') {
+    
+    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents;
+    
+  } else { // else, show all repositories
+    
+    query += '/users/'+ user +'/repos';
+    
+  }
+  
+  // add access token
+  query += '?access_token=' + githubToken;
+  
+  // get the query
+  var resp = await axios.get(query);
+  
+  // if response
+  if (resp.length > 0) {
+    
+    // save rendered HTML
+    let out = '';
+    
+    // if navigating in repository
+    if (repo != '') {
+      
+      // show repo name
+      sidebarLogo.innerText = repo;
+      
+      // render files
+      resp.forEach(item => {
+        
+        // if item is a file
+        if (item.type == 'file') {
+          
+          out += `
+          <div class="item file">
+            <div class="label">
+              `+ fileIcon +`
+              <a class="name">`+ item.name +`</a>
+            </div>
+            `+ arrowIcon +`
+          </div>
+          `;
+          
+          
+        } else { // if item is a folder
+          
+          out += `
+          <div class="item folder">
+            <div class="label">
+              `+ folderIcon +`
+              <a class="name">`+ item.name +`</a>
+            </div>
+            `+ arrowIcon +`
+          </div>
+          `;
+          
+        }
+        
+      })
+      
+    } else { // else, show all repositories
+      
+      // show title
+      sidebarLogo.innerText = 'Repositories';
+      
+      // render repositories
+      resp.forEach(repo => {
+        
+        out += `
+        <div class="item repo">
+          <div class="label">
+            `+ repoIcon +`
+            <a class="name">`+ item.name +`</a>
+          </div>
+          `+ arrowIcon +`
+        </div>
+        `;
+        
+      });
+      
+    }
+    
+  }
+  
+  // add rendered HTML to dom
+  fileWrapper.innerHTML = out;
+  
+}
+
+
+
+
+
+
 // open search screen on click of button
 searchButton.addEventListener('click', () => {
   
@@ -130,26 +288,44 @@ searchClear.addEventListener('click', () => {
 
 window.onload = () => {
   
+  // if not logged into Github
+  if (!githubToken) {
+    
+    // show intro screen
+    sidebar.classList.add('intro');
+    
+  } else {
+    
+    // render files
+    renderFiles();
+    
+  }
+  
+  // if code in storage
   if (getStorage('code')) {
     
+    // set codeit to code
     cd.setValue(getStorage('code'));
     
+    // set caret pos in code
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     cd.textarea.focus();
-    
-    if (getStorage('sidebar') == 'true') {
-      
-      body.classList.add('transitioning');
-      body.classList.add('expanded');
-      
-      window.setTimeout(() => {
         
-        body.classList.remove('transitioning');
-        
-      }, 400);
-      
-    }
+  }
+  
+  // if sidebar is open
+  if (getStorage('sidebar') == 'true') {
     
+    // do a silent transition
+    body.classList.add('transitioning');
+    body.classList.add('expanded');
+
+    window.setTimeout(() => {
+
+      body.classList.remove('transitioning');
+
+    }, 400);
+
   }
   
 }
@@ -178,3 +354,80 @@ let setStorage = (item, value) => {
   return localStorage.setItem(item, value);
   
 }
+
+
+// HTTP Request
+let axios = {
+  'get': (url) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(JSON.parse(this.responseText));
+          }
+        };
+
+        xmlhttp.open('GET', url, true);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  },
+  'post': (url, data) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
+            resolve(JSON.parse(this.responseText));
+          }
+        };
+
+        xmlhttp.open('POST', url, true);
+        
+        xmlhttp.setRequestHeader('Accept', 'application/json');
+        xmlhttp.send(JSON.stringify(data));
+      } catch(e) { reject(e) }
+    });
+  },
+  'put': (url, data) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
+            resolve(JSON.parse(this.responseText));
+          }
+        };
+
+        xmlhttp.open('PUT', url, true);
+
+        xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xmlhttp.send(JSON.stringify(data));
+      } catch(e) { reject(e) }
+    });
+  },
+  'delete': (url) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(JSON.parse(this.responseText));
+          }
+        };
+
+        xmlhttp.open('DELETE', url, true);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  }
+};
+
+
+
+const repoIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" fill="currentColor"></path> </svg>';
+const fileIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M14.59 2.59c-.38-.38-.89-.59-1.42-.59H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.82-4.83zM15 18H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zm0-4H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zm-2-6V3.5L18.5 9H14c-.55 0-1-.45-1-1z" fill="currentColor"></path> </svg>';
+const folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M10.59 4.59C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-1.41-1.41z" fill="currentColor"></path> </svg>';
+
+const arrowIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="arrow" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" fill="currentColor"></path> </svg>';
