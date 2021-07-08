@@ -308,7 +308,7 @@ async function loadFile(file, sha) {
   
   // set caret pos in code
   cd.textarea.setSelectionRange(0, 0);
-  cd.textarea.focus();
+  //cd.textarea.focus();
   
 }
 
@@ -320,7 +320,6 @@ sidebarTitle.addEventListener('click', () => {
   let [user, repo, contents] = treeLoc;
   
   // clear selected file
-  cd.setValue('');
   setStorage('selectedFile', '');
   
   // if navigating in folders
