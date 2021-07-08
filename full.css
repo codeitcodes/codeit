@@ -242,6 +242,10 @@ body.transitioning .sidebar {
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
+  width: 130px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
 
 .sidebar .header .search:active {
@@ -296,14 +300,21 @@ body.transitioning .sidebar {
   background: hsl(226deg 7% 19%);
 }
 
+.sidebar .item .label {
+  display: flex;
+  align-items: center;
+}
+
 .sidebar .item .icon {
   margin-right: 7px;
   color: #828689;
 }
 
-.sidebar .item .label {
-  display: flex;
-  align-items: center;
+.sidebar .item .name {
+  width: 130px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
 
 .sidebar .item .arrow {
