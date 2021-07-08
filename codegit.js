@@ -253,7 +253,7 @@ function addItemListeners() {
 }
 
 
-function showFile(file, sha) {
+async function showFile(file, sha) {
   
   // save selected file
   file.classList.add('selected');
