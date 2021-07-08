@@ -368,7 +368,7 @@ let axios = {
         
         xmlhttp.open('GET', url, true);
         
-        xmlhttp.setRequestHeader('Authorization', token);
+        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         
         xmlhttp.send();
       } catch(e) { reject(e) }
