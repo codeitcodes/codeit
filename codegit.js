@@ -94,7 +94,7 @@ async function getGithubToken(githubCode) {
   setStorage('token', githubToken);
   
   // get username
-  var user = await axios.get('https://api.github.com/user', githubToken);
+  var user = await axios.get('https://api.github.com/user?visibility=all&sort=updated&page=1', githubToken);
   
   // save location in filetree
   treeLoc = [user.login, '', ''];
