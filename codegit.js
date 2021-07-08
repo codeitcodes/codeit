@@ -48,9 +48,9 @@ window.onload = () => {
   treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
 
   loginButton.addEventListener('click', () => {
-
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo', 'Github', 'height=620,width=400');
-
+  
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo', 'Login to Github', 'height=575,width=500');
+  
   })
   
   // if not logged into Github
