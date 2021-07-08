@@ -38,27 +38,42 @@ github.addEventListener('click', () => {
 
 
 // Github login
-var url = new URL(window.location.href),
-    githubCode = url.searchParams.get('code');
-    
-const clientId = '7ede3eed3185e59c042d';
-let githubToken = getStorage('token');
-
-loginButton.addEventListener('click', () => {
+window.onload = () => {
   
-  window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
+  var url = new URL(window.location.href),
+      githubCode = url.searchParams.get('code');
+
+  const clientId = '7ede3eed3185e59c042d';
+  let githubToken = getStorage('token');
   
-})
+  let treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
 
+  loginButton.addEventListener('click', () => {
 
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo';
 
-
-
-// if redirected from Github auth
-if (githubCode != null) {
+  })
   
-  // get Github token
-  getGithubToken(githubCode);
+  // if not logged into Github
+  if (!githubToken) {
+
+    // show intro screen
+    sidebar.classList.add('intro');
+
+  } else {
+
+    // render files
+    renderFiles();
+
+  }
+  
+  // if redirected from Github auth
+  if (githubCode != null) {
+
+    // get Github token
+    getGithubToken(githubCode);
+  
+  }
   
 }
 
@@ -87,8 +102,6 @@ async function getGithubToken(githubCode) {
   
 }
 
-
-let treeLoc = getStorage('tree') ? JSON.parse(getStorage('tree')) : ['', '', ''];
 
 // render files
 // call this function when signed in to github
@@ -192,9 +205,6 @@ async function renderFiles() {
 
 
 
-
-
-
 // open search screen on click of button
 searchButton.addEventListener('click', () => {
   
@@ -287,19 +297,6 @@ searchClear.addEventListener('click', () => {
 
 
 window.onload = () => {
-  
-  // if not logged into Github
-  if (!githubToken) {
-    
-    // show intro screen
-    sidebar.classList.add('intro');
-    
-  } else {
-    
-    // render files
-    renderFiles();
-    
-  }
   
   // if code in storage
   if (getStorage('code')) {
