@@ -305,6 +305,9 @@ async function loadFile(file, sha) {
   
   // show file content in codeit
   cd.setValue(atob(resp.content));
+  
+  // set caret pos in code
+  cd.textarea.setSelectionRange(0, 0);
   cd.textarea.focus();
   
 }
@@ -315,6 +318,9 @@ sidebarTitle.addEventListener('click', () => {
   
   // map tree location
   let [user, repo, contents] = treeLoc;
+  
+  // clear selected file
+  setStorage('selectedFile', '');
   
   // if navigating in folders
   if (contents != '') {
