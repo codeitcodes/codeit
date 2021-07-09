@@ -132,6 +132,7 @@ body.expanded .github .left {
   width: var(--sidebar-width);
   transform: translateX(-100%);
   overflow-x: hidden;
+  overflow-y: overlay;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   z-index: 999;
@@ -154,7 +155,6 @@ body.expanded .github .left {
 body.expanded .sidebar {
   transform: none;
   pointer-events: auto;
-  overflow-y: overlay;
 }
 
 body.transitioning .sidebar {
