@@ -197,11 +197,15 @@ async function renderFiles() {
       // render repositories
       resp.forEach(item => {
         
+        // if repo is not user-created,
+        // show username of admin (username/repo)
+        let fullName = item.permissions.admin ? item.name : item.full_name;
+        
         out += `
-        <div class="item repo">
+        <div class="item repo" fullname="`+ item.full_name +`">
           <div class="label">
             `+ repoIcon +`
-            <a class="name">`+ item.full_name +`</a>
+            <a class="name">`+ fullName +`</a>
           </div>
           `+ arrowIcon +`
         </div>
@@ -251,8 +255,10 @@ function addItemListeners() {
       if (item.classList.contains('repo')) {
         
         // change location
-        treeLoc[0] = item.innerText.split('/')[0],
-        treeLoc[1] = item.innerText.split('/')[1];
+        let itemLoc = item.getProperty('fullname').split('/');
+        
+        treeLoc[0] = itemLoc[0],
+        treeLoc[1] = itemLoc[1];
         setStorage('tree', treeLoc.join());
         
         // render files
