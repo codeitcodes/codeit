@@ -139,10 +139,20 @@ async function renderFiles() {
   if (resp) {
     
     // show title
+    
+    sidebarLogo.classList.remove('overflow');
+    
     if (contents != '') {
       
       // show path
       sidebarLogo.innerText = repo + contents;
+      
+      // if path is too long, overflow
+      if (sidebarLogo.innerText.length > 25) {
+        
+        sidebarLogo.classList.add('overflow');
+        
+      }
       
     } else if (repo != '') {
       
