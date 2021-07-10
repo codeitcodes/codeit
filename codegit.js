@@ -142,7 +142,7 @@ async function renderFiles() {
     if (contents != '') {
       
       // show path
-      sidebarLogo.innerText = contents.slice(1);
+      sidebarLogo.innerText = repo + contents;
       
     } else if (repo != '') {
       
