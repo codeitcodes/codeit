@@ -346,7 +346,7 @@ sidebarTitle.addEventListener('click', () => {
     contents.pop();
     
     // change location
-    treeLoc[2] = contents;
+    treeLoc[2] = contents.join('/');
     setStorage('tree', treeLoc.join());
     
     // render files
