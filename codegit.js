@@ -255,7 +255,7 @@ function addItemListeners() {
       if (item.classList.contains('repo')) {
         
         // change location
-        let itemLoc = item.getProperty('fullname').split('/');
+        let itemLoc = getAttr(item, 'fullname').split('/');
         
         treeLoc[0] = itemLoc[0],
         treeLoc[1] = itemLoc[1];
