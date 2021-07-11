@@ -229,6 +229,7 @@ async function renderFiles() {
   
   // add rendered HTML to dom
   fileWrapper.innerHTML = out;
+  fileWrapper.scrollTo(0, 0);
   
   // add item event listeners
   addItemListeners();
