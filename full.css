@@ -71,7 +71,7 @@ body.transitioning .github {
   transition: .18s var(--ease-function), 0s left, 0s padding;
 }
 
-.github::after {
+.github::after, .commit::after {
   content: '';
   position: absolute;
   left: 0;
