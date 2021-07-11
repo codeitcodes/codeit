@@ -18,7 +18,6 @@ const body = document.body,
       searchScreen = header.querySelector('.searchscreen'),
       
       sidebarTitle = titleScreen.querySelector('.title'),
-      sidebarBack = sidebarTitle.querySelector('.back'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
       
       searchButton = titleScreen.querySelector('.search'),
@@ -143,9 +142,6 @@ async function renderFiles() {
     
     sidebarLogo.classList.remove('overflow');
     
-    // show back button
-    sidebarBack.style.display = '';
-    
     if (contents != '') {
       
       // show path
@@ -167,9 +163,6 @@ async function renderFiles() {
       
       // show title
       sidebarLogo.innerText = 'Repositories';
-      
-      // hide back button
-      sidebarBack.style.display = 'none';
       
     }
     
