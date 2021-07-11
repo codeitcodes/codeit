@@ -306,7 +306,7 @@ body.transitioning .sidebar {
   background: hsl(228deg 16% 12%);
   padding: 15px 20px;
   cursor: pointer;
-  scroll-margin: 74px;
+  scroll-margin: 75px;
 }
 
 .sidebar .item:hover {
