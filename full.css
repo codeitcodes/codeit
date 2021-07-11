@@ -121,6 +121,42 @@ body.expanded .github .left {
   opacity: 1;
 }
 
+.commit {
+  position: fixed;
+  bottom: 17px;
+  padding: 15px;
+  border-radius: 50%;
+  background: hsl(228deg 16% 37%);
+  color: #fff;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .18s var(--ease-function);
+  will-change: transform;
+  right: 0;
+  transform: translateX(100%);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.commit::after {
+  right: 0;
+  left: auto;
+  transform: translateX(-100%);
+  width: 35px;
+}
+
+.commit:hover {
+  background: hsl(228deg 16% 42%);
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 6%), 0 3px 7px 0 rgb(0 0 0 / 20%);
+  transform: translateX(-11px);
+}
+
+.commit:hover::after {
+  transform: translateX(11px);
+}
+
 .sidebar {
   position: fixed;
   top: 0;
