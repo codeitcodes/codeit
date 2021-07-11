@@ -94,7 +94,7 @@ body.transitioning .github {
 }
 
 body.expanded .github::after {
-  transform: none;
+  transform: translateX(-100%);
 }
 
 .github:active {
