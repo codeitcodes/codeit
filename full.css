@@ -144,7 +144,7 @@ body.expanded .github .left {
   right: 0;
   left: auto;
   transform: translateX(-100%);
-  width: 35px;
+  width: 30px;
 }
 
 .commit:hover {
