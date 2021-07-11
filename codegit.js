@@ -242,7 +242,7 @@ async function renderFiles() {
     
       // select file
       selectedFile.classList.add('selected');
-      selectedFile.scrollIntoView();
+      selectedFile.scrollIntoViewIfNeeded();
       
     }
     
