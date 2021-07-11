@@ -343,6 +343,25 @@ body.transitioning .sidebar {
   color: #828689;
 }
 
+.sidebar .more {
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #f1f1f21c;
+  margin-top: 8px;
+  height: 59px;
+  box-sizing: border-box;
+}
+
+.sidebar .more:hover {
+  background: hsl(227deg 11% 16%);
+}
+
+.sidebar .more .icon {
+  margin-right: 7px;
+}
+
 .sidebar .intro {
   height: 100%;
   display: flex;
