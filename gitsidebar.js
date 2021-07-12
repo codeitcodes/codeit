@@ -198,6 +198,9 @@ function addItemListeners() {
           // deselect file
           item.classList.remove('selected');
           
+          // clear selected file
+          setStorage('selectedFile', '');
+          
           // remove file from codeit
           cd.setValue('');
 
