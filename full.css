@@ -364,7 +364,7 @@ body.transitioning .sidebar {
   position: relative;
 }
 
-.sidebar .item.modified .label::before {
+.sidebar .file.modified .label::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -374,6 +374,14 @@ body.transitioning .sidebar {
   background: #568af2;
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d24;
+}
+
+.sidebar .file:hover .label::before {
+  box-shadow: 0 0 0 2px hsl(227deg 11% 16%);
+}
+
+.sidebar .file.selected .label::before {
+  box-shadow: 0 0 0 2px hsl(226deg 7% 19%);
 }
 
 .sidebar .item .icon {
