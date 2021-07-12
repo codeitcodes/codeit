@@ -1,4 +1,3 @@
-let cd = document.querySelector('cd');
 
 function processFile(file) {
     
