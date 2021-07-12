@@ -21,7 +21,7 @@ function loadCodeFromStorage() {
   if (getStorage('code')) {
     
     // set codeit to code
-    cd.setValue(getStorage('code'));
+    cd.setValue(atob(getStorage('code')));
     
     // set caret pos in code
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
@@ -49,7 +49,7 @@ function loadCodeFromStorage() {
 window.onbeforeunload = () => {
   
   // set localStorage values
-  setStorage('code', cd.textarea.value);
+  setStorage('code', btoa(cd.textarea.value));
   setStorage('caret', cd.textarea.selectionStart);
   setStorage('sidebar', body.classList.contains('expanded'));
   
