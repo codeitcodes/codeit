@@ -466,6 +466,11 @@ body.transitioning .sidebar {
   line-height: 20px;
 }
 
+.sidebar .intro .subtitle a {
+  color: hsl(210deg 2% 87%);
+  text-decoration: none;
+}
+
 .sidebar .intro .subtitle b {
   font-weight: 600;
   color: rgba(241,241,242,0.72);
