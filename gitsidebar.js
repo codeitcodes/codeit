@@ -149,7 +149,7 @@ async function renderFiles() {
       selectedFile.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      let fileChange = cd.textarea.addEventListener('keydown', () => {
+      let fileChange = cd.textarea.addEventListener('input', () => {
 
         // enable pushing file
         file.classList.add('modified');
@@ -158,7 +158,7 @@ async function renderFiles() {
         saveFile(file);
         
         // remove event listener
-        cd.textarea.removeEventListener('keydown', fileChange);
+        cd.textarea.removeEventListener('input', fileChange);
         
         console.log('a');
 
@@ -309,7 +309,7 @@ async function loadFile(file, sha) {
   cd.scrollTo(0, 0);
   
   // set event listener for file change
-  let fileChange = cd.textarea.addEventListener('keydown', () => {
+  let fileChange = cd.textarea.addEventListener('input', () => {
 
     // enable pushing file
     file.classList.add('modified');
@@ -318,7 +318,7 @@ async function loadFile(file, sha) {
     saveFile(file);
 
     // remove event listener
-    cd.textarea.removeEventListener('keydown', fileChange);
+    cd.textarea.removeEventListener('input', fileChange);
 
     console.log('a');
 
