@@ -193,20 +193,6 @@ function addItemListeners() {
           // load file
           loadFile(item, getAttr(item, 'sha'));
           
-        } else {
-          
-          // deselect file
-          item.classList.remove('selected');
-          
-          // clear selected file
-          setStorage('selectedFile', '');
-          
-          // remove file from codeit
-          cd.setValue('');
-
-          // set caret pos in code
-          cd.textarea.setSelectionRange(0, 0);
-          
         }
         
       }
