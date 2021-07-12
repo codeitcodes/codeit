@@ -3,7 +3,7 @@ let modifiedFiles;
 
 function saveFile(file) {
   
-  let sha = getAttr(file, 'sha');
+  const sha = getAttr(file, 'sha');
   
   modifiedFiles[sha] = [btoa(cd.textarea.value)];
   
