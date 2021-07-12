@@ -5,7 +5,7 @@ function saveFile(file) {
   
   const sha = getAttr(file, 'sha');
   
-  modifiedFiles[sha] = [btoa(cd.textarea.value)];
+  modifiedFiles[sha] = btoa(cd.textarea.value);
   
   setStorage('files', JSON.stringify(modifiedFiles));
   
