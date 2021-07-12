@@ -187,8 +187,24 @@ function addItemListeners() {
         
       } else { // if item is a file
         
-        // load file
-        loadFile(item, getAttr(item, 'sha'));
+        // if file not already selected
+        if (!item.classList.contains('selected')) {
+          
+          // load file
+          loadFile(item, getAttr(item, 'sha'));
+          
+        } else {
+          
+          // deselect file
+          item.classList.remove('selected');
+          
+          // remove file from codeit
+          cd.setValue('');
+
+          // set caret pos in code
+          cd.textarea.setSelectionRange(0, 0);
+          
+        }
         
       }
       
