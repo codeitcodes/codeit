@@ -1,5 +1,21 @@
 
+let modifiedFiles;
+
+function saveFile(file) {
+  
+  let sha = getAttr(file, 'sha');
+  
+  modifiedFiles[sha] = cd.textarea.value;
+  
+  setStorage('files', JSON.stringify(modifiedFiles));
+  
+}
+
+
 function loadCodeFromStorage() {
+  
+  // load modified files from storage
+  modifiedFiles = getStorage('files') ? JSON.parse(getStorage('files')) : [];
   
   // if code in storage
   if (getStorage('code')) {
