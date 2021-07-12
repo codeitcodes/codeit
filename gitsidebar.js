@@ -224,7 +224,7 @@ async function loadFile(file, sha) {
   
   // set caret pos in code
   cd.textarea.setSelectionRange(0, 0);
-  //cd.textarea.focus();
+  cd.scrollTo(0, 0);
   
 }
 
@@ -233,7 +233,7 @@ async function loadFile(file, sha) {
 sidebarTitle.addEventListener('click', () => {
   
   // map tree location
-  let [user, repo, contents] = treeLoc;
+  const [user, repo, contents] = treeLoc;
   
   // clear selected file
   setStorage('selectedFile', '');
@@ -242,11 +242,11 @@ sidebarTitle.addEventListener('click', () => {
   if (contents != '') {
     
     // pop last folder
-    contents = contents.split('/');
-    contents.pop();
+    let splitContents = contents.split('/');
+    splitContents.pop();
     
     // change location
-    treeLoc[2] = contents.join('/');
+    treeLoc[2] = splitContents.join('/');
     setStorage('tree', treeLoc.join());
     
     // render files
