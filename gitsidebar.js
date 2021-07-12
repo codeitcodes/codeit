@@ -149,7 +149,7 @@ async function renderFiles() {
       selectedFile.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      cd.textarea.addEventListener('input', fileChange);
+      cd.textarea.addEventListener('change', fileChange);
       
     }
     
@@ -296,7 +296,7 @@ async function loadFile(file, sha) {
   cd.scrollTo(0, 0);
   
   // set event listener for file change
-  cd.textarea.addEventListener('input', fileChange);
+  cd.textarea.addEventListener('change', fileChange);
   
 }
 
@@ -353,7 +353,7 @@ function fileChange() {
   saveFile(file);
 
   // remove event listener
-  cd.textarea.removeEventListener('input', fileChange);
+  cd.textarea.removeEventListener('change', fileChange);
   
   console.log('a');
 
