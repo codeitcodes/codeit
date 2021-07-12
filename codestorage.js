@@ -5,7 +5,7 @@ function saveFile(file) {
   
   const sha = getAttr(file, 'sha');
   
-  modifiedFiles[sha] = btoa(cd.textarea.value);
+  modifiedFiles[sha] = [btoa(cd.textarea.value)];
   
   setStorage('files', JSON.stringify(modifiedFiles));
   
@@ -15,7 +15,7 @@ function saveFile(file) {
 function loadCodeFromStorage() {
   
   // load modified files from storage
-  modifiedFiles = getStorage('files') ? JSON.parse(getStorage('files')) : [];
+  modifiedFiles = getStorage('files') ? JSON.parse(getStorage('files')) : {};
   
   // if code in storage
   if (getStorage('code')) {
