@@ -108,7 +108,7 @@ let axios = {
 
         xmlhttp.open('PUT', url, true);
 
-        xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xmlhttp.setRequestHeader('Accept', 'application/json');
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
