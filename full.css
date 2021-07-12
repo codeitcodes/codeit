@@ -343,6 +343,7 @@ body.transitioning .sidebar {
   background: hsl(228deg 16% 12%);
   padding: 15px 20px;
   cursor: pointer;
+  position: relative;
   scroll-margin: 75px;
 }
 
@@ -395,6 +396,25 @@ body.transitioning .sidebar {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.sidebar .item .push {
+  padding: 7px;
+  margin: -7px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #828689;
+  position: absolute;
+  display: none;
+  right: 20px;
+}
+
+.sidebar .item.modified .push {
+  display: block;
+}
+
+.sidebar .item .push:active {
+  background: rgba(0,0,0,.1);
 }
 
 .sidebar .item .arrow {
