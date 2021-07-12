@@ -1,6 +1,8 @@
 
 const body = document.body,
       
+      cd = document.querySelector('cd'),
+      
       github = document.querySelector('.github'),
       
       sidebar = document.querySelector('.sidebar'),
