@@ -20,7 +20,7 @@
   head.appendChild(style);
   style.appendChild(document.createTextNode(css));
 
-  // get all Codeits
+  // get all codeits
   const codeits = document.querySelectorAll('cd');
 
   codeits.forEach(cd => {
