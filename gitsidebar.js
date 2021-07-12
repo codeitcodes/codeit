@@ -149,20 +149,7 @@ async function renderFiles() {
       selectedFile.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      let fileChange = cd.textarea.addEventListener('input', () => {
-
-        // enable pushing file
-        file.classList.add('modified');
-        
-        // save modified file in localStorage
-        saveFile(file);
-        
-        // remove event listener
-        cd.textarea.removeEventListener('input', fileChange);
-        
-        console.log('a');
-
-      });
+      cd.textarea.addEventListener('input', fileChange);
       
     }
     
@@ -309,20 +296,7 @@ async function loadFile(file, sha) {
   cd.scrollTo(0, 0);
   
   // set event listener for file change
-  let fileChange = cd.textarea.addEventListener('input', () => {
-
-    // enable pushing file
-    file.classList.add('modified');
-
-    // save modified file in localStorage
-    saveFile(file);
-
-    // remove event listener
-    cd.textarea.removeEventListener('input', fileChange);
-
-    console.log('a');
-
-  });
+  cd.textarea.addEventListener('input', fileChange);
   
 }
 
@@ -366,6 +340,24 @@ sidebarTitle.addEventListener('click', () => {
   }
   
 })
+
+
+function fileChange() {
+  
+  const file = fileWrapper.querySelector('.selected');
+  
+  // enable pushing file
+  file.classList.add('modified');
+
+  // save modified file in localStorage
+  saveFile(file);
+
+  // remove event listener
+  cd.textarea.removeEventListener('input', fileChange);
+  
+  console.log('a');
+
+}
 
 
 const repoIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" fill="currentColor"></path> </svg>';
