@@ -1,4 +1,12 @@
 
+// toggle sidebar on click of bookmark
+github.addEventListener('click', () => {
+  
+  body.classList.toggle('expanded');
+  
+})
+
+
 // render files
 // call this function when signed in to github
 // to render sidebar
