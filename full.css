@@ -361,6 +361,19 @@ body.transitioning .sidebar {
 .sidebar .item .label {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.sidebar .item.modified .label::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: 8px;
+  height: 8px;
+  background: #568af2;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #191d24;
 }
 
 .sidebar .item .icon {
