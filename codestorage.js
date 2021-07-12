@@ -5,7 +5,7 @@ function saveFile(file) {
   
   let sha = getAttr(file, 'sha');
   
-  modifiedFiles[sha] = cd.textarea.value;
+  modifiedFiles[sha] = [cd.textarea.value];
   
   setStorage('files', JSON.stringify(modifiedFiles));
   
