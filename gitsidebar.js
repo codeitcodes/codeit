@@ -144,6 +144,17 @@ async function renderFiles() {
       selectedFile.classList.add('selected');
       selectedFile.scrollIntoViewIfNeeded();
       
+      // set event listener for file change
+      cd.textarea.addEventListener('keydown', () => {
+
+        // enable pushing file
+        file.classList.add('modified');
+        
+        // save modified file in localStorage
+        saveFile(file);
+
+      });
+      
     }
     
   }
