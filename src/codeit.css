@@ -37,6 +37,7 @@ cd textarea {
   display: inline-table;
 
   padding: 0;
+  min-width: 1px;
   box-sizing: border-box;
   
   z-index: 1;
