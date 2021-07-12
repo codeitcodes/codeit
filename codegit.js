@@ -69,6 +69,9 @@ window.onload = () => {
   // if redirected from Github auth
   window.addEventListener('message', (event) => {
     
+    // hide intro screen
+    sidebar.classList.remove('intro');
+    
     var githubCode = event.data;
     
     // get Github token
@@ -103,7 +106,6 @@ async function getGithubToken(githubCode) {
   */
   
   // render files
-  sidebar.classList.remove('intro');
   renderFiles();
   
 }
