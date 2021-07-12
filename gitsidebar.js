@@ -74,8 +74,12 @@ async function renderFiles() {
         // if item is a file
         if (item.type == 'file') {
           
+          // add modified flag to file
+          let modified = '';
+          if (modifiedFiles[item.sha]) modified = 'modified';
+          
           out += `
-          <div class="item file" sha="`+ item.sha +`">
+          <div class="item file `+ modified +`" sha="`+ item.sha +`">
             <div class="label">
               `+ fileIcon +`
               <a class="name">`+ item.name +`</a>
@@ -145,13 +149,18 @@ async function renderFiles() {
       selectedFile.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      cd.textarea.addEventListener('keydown', () => {
+      let fileChange = cd.textarea.addEventListener('keydown', () => {
 
         // enable pushing file
         file.classList.add('modified');
         
         // save modified file in localStorage
         saveFile(file);
+        
+        // remove event listener
+        cd.textarea.removeEventListener('keydown', fileChange);
+        
+        console.log('a');
 
       });
       
@@ -171,7 +180,7 @@ function addItemListeners() {
   items.forEach(item => {
     
     // navigate on click
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', async (e) => {
       
       // if item is a repository
       if (item.classList.contains('repo')) {
@@ -213,6 +222,27 @@ function addItemListeners() {
         } else {
           
           // push file
+          
+          // get sha of item
+          const sha = getAttr(item, 'sha');
+          
+          const content = modifiedFiles[sha];
+          
+          const message = 'Update ' + item.innerText;
+          
+          let query = 'https://api.github.com/repos/' +
+                      treeLoc[0] +
+                      '/' + treeLoc[1] +
+                      '/contents' + treeLoc[2] +
+                      '?message=' + message +
+                      '&content=' + content +
+                      '&sha=' + sha;
+          
+          var resp = await axios.put(query, githubToken);
+          
+          // delete item from array
+          delete modifiedFiles[sha];
+          
           item.classList.remove('modified');
           
         }
@@ -228,6 +258,19 @@ function addItemListeners() {
 
 async function loadFile(file, sha) {
   
+  // save previous selection in localStorage
+  if (getStorage('selectedFile')) {
+    
+    let selectedFile = fileWrapper.querySelector('.selected');
+    
+    if (selectedFile) {
+      
+      saveFile(selectedFile);
+      
+    }
+    
+  }
+  
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -237,28 +280,48 @@ async function loadFile(file, sha) {
   file.classList.add('selected');
   setStorage('selectedFile', sha);
   
-  // map tree location
-  let query = 'https://api.github.com';
-  const [user, repo, contents] = treeLoc;
+  // if file is not modified; fetch from Git
+  if (!file.classList.contains('modified')) {
   
-  query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
-  
-  // get the query
-  var resp = await axios.get(query, githubToken);
-  
-  // show file content in codeit
-  cd.setValue(atob(resp.content));
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
+
+    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
+
+    // get the query
+    var resp = await axios.get(query, githubToken);
+
+    // show file content in codeit
+    cd.setValue(atob(resp.content));
+    
+  } else { // else, load file from local storage
+    
+    const content = modifiedFiles[sha][0];
+    
+    // show file content in codeit
+    cd.setValue(atob(content));
+    
+  }
   
   // set caret pos in code
   cd.textarea.setSelectionRange(0, 0);
   cd.scrollTo(0, 0);
   
   // set event listener for file change
-  cd.textarea.addEventListener('keydown', () => {
-    
+  let fileChange = cd.textarea.addEventListener('keydown', () => {
+
     // enable pushing file
     file.classList.add('modified');
-    
+
+    // save modified file in localStorage
+    saveFile(file);
+
+    // remove event listener
+    cd.textarea.removeEventListener('keydown', fileChange);
+
+    console.log('a');
+
   });
   
 }
