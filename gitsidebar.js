@@ -209,7 +209,7 @@ function addItemListeners() {
           
         } else {
           
-          // push file
+          // commit file
           
           // get sha of item
           const sha = getAttr(item, 'sha');
@@ -221,12 +221,15 @@ function addItemListeners() {
           let query = 'https://api.github.com/repos/' +
                       treeLoc[0] +
                       '/' + treeLoc[1] +
-                      '/contents' + treeLoc[2] + '/' + item.innerText +
-                      '?message=' + message +
-                      '&content=' + content +
-                      '&sha=' + sha;
+                      '/contents' + treeLoc[2] + '/' + item.innerText;
           
-          var resp = await axios.put(query, githubToken);
+          let commitData = {
+              message: message,
+              content: content,
+              sha: sha
+            };
+          
+          var resp = await axios.put(query, githubToken, commitData);
           
           // delete item from array
           delete modifiedFiles[sha];
