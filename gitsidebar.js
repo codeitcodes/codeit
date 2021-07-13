@@ -197,7 +197,10 @@ function addItemListeners() {
       } else { // if item is a file
         
         // if not clicked on push button
-        if (e.target != item.querySelector('.push')) {
+        let clickedOnPush = (e.target == item.querySelector('.push')
+                            && e.target.parentElement == item.querySelector('.push'));
+        
+        if (!clickedOnPush) {
           
           // if file not already selected
           if (!item.classList.contains('selected')) {
