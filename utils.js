@@ -60,7 +60,7 @@ let setAttr = (element, item, value) => {
 
 // HTTP Request
 let axios = {
-  'get': (url, token) => {
+  'get': (url, token, sha) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -73,7 +73,7 @@ let axios = {
         xmlhttp.open('GET', url, true);
         
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        xmlhttp.setRequestHeader('Cache-Control', 'public');
+        xmlhttp.setRequestHeader('If-None-Match', sha);
         
         xmlhttp.send();
       } catch(e) { reject(e) }
