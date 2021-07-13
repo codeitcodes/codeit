@@ -72,8 +72,8 @@ let axios = {
         
         xmlhttp.open('GET', url, true);
         
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        xmlhttp.setRequestHeader('If-None-Match', sha);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        if (sha) xmlhttp.setRequestHeader('If-None-Match', sha);
         
         xmlhttp.send();
       } catch(e) { reject(e) }
