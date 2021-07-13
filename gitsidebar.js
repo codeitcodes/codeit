@@ -247,8 +247,6 @@ function addItemListeners() {
           
           item.classList.remove('modified');
           
-          console.log(resp);
-          
           // update SHA of file
           setAttr(item, 'sha', resp.content.sha);
           
