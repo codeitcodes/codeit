@@ -197,8 +197,8 @@ function addItemListeners() {
       } else { // if item is a file
         
         // if not clicked on push button
-        let clickedOnPush = (e.target == item.querySelector('.push')
-                            && e.target.parentElement == item.querySelector('.push'));
+        let clickedOnPush = (e.target == item.querySelector('.push') ||
+                             e.target.parentElement == item.querySelector('.push'));
         
         if (!clickedOnPush) {
           
