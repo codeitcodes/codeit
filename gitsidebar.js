@@ -214,7 +214,7 @@ function addItemListeners() {
           // get sha of item
           const sha = getAttr(item, 'sha');
           
-          const content = modifiedFiles[sha];
+          const content = modifiedFiles[sha][0];
           
           const message = 'Update ' + item.innerText;
           
