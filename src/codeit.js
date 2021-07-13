@@ -127,11 +127,15 @@
     });
     
     // focus codeit when clicked
-    cd.addEventListener('click', () => {
+    if (cd.getAttribute('editable') != 'false') {
       
-      cd.textarea.focus();
+      cd.addEventListener('click', () => {
+
+        cd.textarea.focus();
+
+      });
       
-    });
+    }
     
     cd.update();
 
