@@ -307,7 +307,7 @@ async function loadFile(file, sha) {
     query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
 
     // get the query
-    var resp = await axios.get(query, githubToken);
+    var resp = await axios.get(query, githubToken, sha);
 
     // show file content in codeit
     cd.setValue(atob(resp.content));
