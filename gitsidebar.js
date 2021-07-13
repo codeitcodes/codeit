@@ -149,7 +149,7 @@ async function renderFiles() {
       selectedFile.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      cd.textarea.addEventListener('change', fileChange);
+      cd.textarea.addEventListener('keydown', checkBackspace);
       cd.textarea.addEventListener('input', fileChange);
       
     }
@@ -188,10 +188,10 @@ function addItemListeners() {
         // if item is a folder
         
         // save selected file
-        let selectedFile = fileWrapper.querySelector('.selected');
-        
-        if (fileWrapper.querySelector('.selected').classList.contains('modified')) {
-          fileChange();
+        let selectedFile = fileWrapper.querySelector('.selected.modified');
+
+        if (selectedFile) {
+          saveFile(selectedFile);
         }
         
         // change location
@@ -259,7 +259,7 @@ function addItemListeners() {
           }
           
           // set event listener for file change
-          cd.textarea.addEventListener('change', fileChange);
+          cd.textarea.addEventListener('keydown', checkBackspace);
           cd.textarea.addEventListener('input', fileChange);
           
         }
@@ -278,7 +278,7 @@ async function loadFile(file, sha) {
   // save previous selection in localStorage
   if (getStorage('selectedFile')) {
     
-    let selectedFile = fileWrapper.querySelector('.selected');
+    let selectedFile = fileWrapper.querySelector('.selected.modified');
     
     if (selectedFile) {
       
@@ -345,10 +345,10 @@ sidebarTitle.addEventListener('click', () => {
   if (contents != '') {
     
     // save selected file
-    let selectedFile = fileWrapper.querySelector('.selected');
+    let selectedFile = fileWrapper.querySelector('.selected.modified');
 
-    if (fileWrapper.querySelector('.selected').classList.contains('modified')) {
-      fileChange();
+    if (selectedFile) {
+      saveFile(selectedFile);
     }
     
     // pop last folder
