@@ -242,6 +242,14 @@ function addItemListeners() {
           // update SHA of file
           setAttr(item, 'sha', resp.content.sha);
           
+          // if file is selected
+          if (item.classList.contains('selected')) {
+            
+            // update selection SHA
+            setStorage('selectedFile', resp.content.sha);
+            
+          }
+          
           // set event listener for file change
           cd.textarea.addEventListener('change', fileChange);
           cd.textarea.addEventListener('input', fileChange);
