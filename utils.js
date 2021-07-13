@@ -96,7 +96,7 @@ let axios = {
       } catch(e) { reject(e) }
     });
   },
-  'put': (url, data, token) => {
+  'put': (url, token, data) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -105,11 +105,11 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-
+        
         xmlhttp.open('PUT', url, true);
-
-        xmlhttp.setRequestHeader('Accept', 'application/json');
+        
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
     });
