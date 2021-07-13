@@ -251,7 +251,11 @@ function addItemListeners() {
               sha: sha
             };
           
+          // commit file
           var resp = await axios.put(query, githubToken, commitData);
+          
+          // force-update cache
+          var newFile = await axios.get(query, githubToken, sha);
           
           // delete file from modified files
           delete modifiedFiles[sha];
@@ -319,7 +323,7 @@ async function loadFile(file, sha) {
     query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
 
     // get the query
-    var resp = await axios.get(query, githubToken, sha);
+    var resp = await axios.get(query, githubToken);
 
     // show file content in codeit
     cd.setValue(atob(resp.content));
