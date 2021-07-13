@@ -300,7 +300,7 @@ async function loadFile(file, sha) {
   cd.scrollTo(0, 0);
   
   // set event listener for file change
-  cd.textarea.addEventListener('change', fileChange);
+  cd.textarea.addEventListener('keydown', checkBackspace);
   cd.textarea.addEventListener('input', fileChange);
   
 }
@@ -347,6 +347,16 @@ sidebarTitle.addEventListener('click', () => {
 })
 
 
+// check for backspace to see if file has changed
+function checkBackspace(e) {
+  
+  if (e.key === "Backspace" || e.key === "Delete") {
+    fileChange();
+  }
+  
+}
+
+// called on file change event
 function fileChange() {
   
   const file = fileWrapper.querySelector('.selected');
@@ -358,10 +368,8 @@ function fileChange() {
   saveFile(file);
 
   // remove event listener
-  cd.textarea.removeEventListener('change', fileChange);
+  cd.textarea.removeEventListener('keydown', checkBackspace);
   cd.textarea.removeEventListener('input', fileChange);
-  
-  console.log('a');
 
 }
 
