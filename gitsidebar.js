@@ -230,7 +230,7 @@ function addItemListeners() {
           if (item.classList.contains('selected')) {
               
               // get current value of file
-              content = atob(cd.textarea.value);
+              content = btoa(cd.textarea.value);
           
           } else { // else, load from storage
             
