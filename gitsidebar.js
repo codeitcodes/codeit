@@ -185,7 +185,14 @@ function addItemListeners() {
         
       } else if (item.classList.contains('folder')) {
         
-        // if item is a repository
+        // if item is a folder
+        
+        // save selected file
+        let selectedFile = fileWrapper.querySelector('.selected');
+        
+        if (fileWrapper.querySelector('.selected').classList.contains('modified')) {
+          fileChange();
+        }
         
         // change location
         treeLoc[2] += '/' + item.innerText;
@@ -336,6 +343,13 @@ sidebarTitle.addEventListener('click', () => {
   
   // if navigating in folders
   if (contents != '') {
+    
+    // save selected file
+    let selectedFile = fileWrapper.querySelector('.selected');
+
+    if (fileWrapper.querySelector('.selected').classList.contains('modified')) {
+      fileChange();
+    }
     
     // pop last folder
     let splitContents = contents.split('/');
