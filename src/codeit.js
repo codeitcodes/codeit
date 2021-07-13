@@ -57,11 +57,6 @@
     // set codeit textarea value to code
     cd.textarea.value = cd.parsedCode;
 
-    // if codeit is uneditable, hide input
-    if (cd.getAttribute('editable') == 'false') {
-      cd.textarea.style.display = 'none';
-    }
-
     // init codeit behavior
     new Behave({
       textarea: cd.textarea,
