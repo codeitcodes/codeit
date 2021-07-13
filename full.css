@@ -257,18 +257,18 @@ body.transitioning .sidebar {
   cursor: unset;
 }
 
-.sidebar .header :is(.back, .search, .clear) {
+.sidebar .header :is(.search, .clear) {
   padding: 7px;
   margin-right: -7px;
   cursor: pointer;
   border-radius: 50%;
   color: #828689;
+  transition: .18s var(--ease-function);
 }
 
 .sidebar .header .back {
   color: currentColor;
-  margin-right: 0;
-  padding: 0;
+  cursor: pointer;
   z-index: 1;
 }
 
@@ -303,6 +303,7 @@ body.transitioning .sidebar {
 
 .sidebar .header .search:active {
   background: rgba(0,0,0,.1);
+  transform: scale(0.95);
 }
 
 .sidebar .searchinput {
@@ -328,7 +329,6 @@ body.transitioning .sidebar {
 .sidebar .header .clear {
   opacity: 0;
   pointer-events: none;
-  transition: .18s var(--ease-function);
 }
 
 .sidebar .header .clear.visible {
@@ -407,6 +407,7 @@ body.transitioning .sidebar {
   position: absolute;
   display: none;
   right: 20px;
+  transition: .18s var(--ease-function);
 }
 
 .sidebar .item.modified .push {
@@ -415,6 +416,7 @@ body.transitioning .sidebar {
 
 .sidebar .item .push:active {
   background: rgba(0,0,0,.1);
+  transform: scale(0.95);
 }
 
 .sidebar .item .arrow {
