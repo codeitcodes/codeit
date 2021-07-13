@@ -234,8 +234,9 @@ function addItemListeners() {
           
           var resp = await axios.put(query, githubToken, commitData);
           
-          // delete item from array
+          // delete file from modified files
           delete modifiedFiles[sha];
+          setStorage('files', JSON.stringify(modifiedFiles));
           
           item.classList.remove('modified');
           
