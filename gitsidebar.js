@@ -234,12 +234,13 @@ function addItemListeners() {
           
           var resp = await axios.put(query, githubToken, commitData);
           
-          console.log(resp);
-          
           // delete item from array
           delete modifiedFiles[sha];
           
           item.classList.remove('modified');
+          
+          // update SHA of file
+          setAttr(item, 'sha', resp.content.sha);
           
           // set event listener for file change
           cd.textarea.addEventListener('change', fileChange);
