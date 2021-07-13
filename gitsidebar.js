@@ -221,7 +221,7 @@ function addItemListeners() {
           let query = 'https://api.github.com/repos/' +
                       treeLoc[0] +
                       '/' + treeLoc[1] +
-                      '/contents' + treeLoc[2] + '/' + file.innerText +
+                      '/contents' + treeLoc[2] + '/' + item.innerText +
                       '?message=' + message +
                       '&content=' + content +
                       '&sha=' + sha;
