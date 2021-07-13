@@ -425,3 +425,4 @@ const folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height=
 
 const pushIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="push" height="24" viewBox="0 0 24 24" width="24"> <path d="M0,0H24V24H0Z" style="fill:none"></path><polygon points="9 16 15 16 15 10 19 10 12 3 5 10 9 10 9 16" fill="currentColor" class="arrow"></polygon><rect x="5" y="18" width="14" height="2" fill="currentColor" class="base"></rect></svg>';
 const arrowIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="arrow" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" fill="currentColor"></path> </svg>';
+
