@@ -70,7 +70,7 @@ let axios = {
           }
         };
         
-        xmlhttp.open('GET', url, true);
+        xmlhttp.open('GET', 'https://sceptercors.herokuapp.com/' + url, true);
         
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.setRequestHeader('Cache-Control', 'public');
