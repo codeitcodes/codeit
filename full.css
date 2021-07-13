@@ -177,6 +177,7 @@ body.expanded .github .left {
   will-change: transform;
 }
 
+/*
 .sidebar::after {
   content: '';
   position: absolute;
@@ -188,6 +189,7 @@ body.expanded .github .left {
   filter: blur(9px);
   z-index: 100;
 }
+*/
 
 body.expanded .sidebar {
   transform: none;
