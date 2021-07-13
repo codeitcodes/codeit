@@ -156,6 +156,10 @@ async function renderFiles() {
     
   }
   
+  // remove event listener
+  cd.textarea.removeEventListener('keydown', checkBackspace);
+  cd.textarea.removeEventListener('input', fileChange);
+  
 }
 
 
