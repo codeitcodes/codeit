@@ -221,10 +221,22 @@ function addItemListeners() {
           
           // commit file
           
-          // get sha of item
+          // get sha of file
           const sha = getAttr(item, 'sha');
           
-          const content = modifiedFiles[sha][0];
+          let content;
+          
+          // if currently editing file
+          if (item.classList.contains('selected')) {
+              
+              // get current value of file
+              content = atob(cd.textarea.value);
+          
+          } else { // else, load from storage
+            
+            content = modifiedFiles[sha][0];
+            
+          }
           
           const message = 'Update ' + item.innerText;
           
