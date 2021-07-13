@@ -73,6 +73,7 @@ let axios = {
         xmlhttp.open('GET', url, true);
         
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        xmlhttp.setRequestHeader('Cache-Control', 'public');
         
         xmlhttp.send();
       } catch(e) { reject(e) }
