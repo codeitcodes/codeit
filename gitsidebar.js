@@ -239,6 +239,10 @@ function addItemListeners() {
           
           item.classList.remove('modified');
           
+          // set event listener for file change
+          cd.textarea.addEventListener('change', fileChange);
+          cd.textarea.addEventListener('input', fileChange);
+          
         }
         
       }
