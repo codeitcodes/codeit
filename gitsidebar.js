@@ -156,9 +156,6 @@ async function renderFiles() {
     
   }
   
-  // clear codeit
-  cd.setValue('');
-  
 }
 
 
