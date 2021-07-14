@@ -37,7 +37,7 @@ function startLoading() {
   loader.style.transition = 'none';
   loader.style.opacity = 1;
   
-  load();
+  window.setTimeout(load, 0);
   
   loadInterval = window.setInterval(load, 400);
   
