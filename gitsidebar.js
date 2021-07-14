@@ -12,6 +12,11 @@ github.addEventListener('click', () => {
 // to render sidebar
 async function renderFiles() {
   
+  // if not already loading, start loading
+  if (loader.style.width != '100%') {
+    startLoading();
+  }
+  
   // map tree location
   let query = 'https://api.github.com';
   const [user, repo, contents] = treeLoc;
@@ -133,6 +138,9 @@ async function renderFiles() {
   // add rendered HTML to dom
   fileWrapper.innerHTML = out;
   sidebar.scrollTo(0, 0);
+  
+  // stop loading
+  stopLoading();
   
   // add item event listeners
   addItemListeners();
@@ -319,18 +327,24 @@ async function loadFile(file, sha) {
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
-  
+    
+    // start loading
+    startLoading();
+    
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
 
     query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
-
+    
     // get the query
     var resp = await axios.get(query, githubToken);
 
     // show file content in codeit
     cd.setValue(atob(resp.content));
+    
+    // stop loading
+    stopLoading();
     
   } else { // else, load file from local storage
     
