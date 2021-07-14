@@ -405,12 +405,21 @@ body.transitioning .sidebar {
   color: #828689;
 }
 
+.sidebar .item.nonexistent .icon {
+  color: hsl(206deg 3% 42%);
+}
+
 .sidebar .item .name {
   /* width: 130px; */
   max-width: 245px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.sidebar .item.nonexistent .name {
+  font-style: italic;
+  color: grey;
 }
 
 .sidebar .item .push {
