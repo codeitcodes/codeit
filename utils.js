@@ -58,11 +58,7 @@ function load() {
   
   loadPercent += 10;
   
-  if (loadPercent == 100) {
-    
-    stopLoading();
-    
-  } else {
+  if (loadPercent != 100) {
     
     loader.style.transition = '';
     loader.style.width = loadPercent + '%';
