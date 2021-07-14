@@ -223,6 +223,7 @@ body.transitioning .sidebar {
   height: 2px;
   width: 0%;
   opacity: 0;
+  border-radius: 6px;
   pointer-events: none;
   background: #568af2;
   transition: width .4s ease, opacity .4s linear;
