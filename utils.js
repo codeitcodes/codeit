@@ -33,7 +33,7 @@ let loadInterval;
 
 function startLoading() {
   
-  loader.style.width = '';
+  loader.style.width = '0%';
   loader.style.opacity = 1;
   
   loadInterval = window.setInterval(load, 400);
@@ -51,11 +51,19 @@ function stopLoading() {
 
 function load() {
   
-  let loadPercent = loader.style.width ? Number(loader.style.width.replace('%','')) : 0;
+  let loadPercent = Number(loader.style.width.replace('%',''));
   
-  loadPercent += 8;
+  loadPercent += 10;
   
-  loader.style.width = loadPercent + '%';
+  if (loadPercent == 100) {
+    
+    stopLoading();
+    
+  } else {
+    
+    loader.style.width = loadPercent + '%';
+    
+  }
   
 }
 
