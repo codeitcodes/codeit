@@ -33,7 +33,7 @@ let loadInterval;
 
 function startLoading() {
   
-  loader.style.width = '0%';
+  loader.style.width = '';
   loader.style.opacity = 1;
   
   load();
@@ -53,7 +53,7 @@ function stopLoading() {
 
 function load() {
   
-  let loadPercent = Number(loader.style.width.replace('%',''));
+  let loadPercent = (loader.style.width ? Number(loader.style.width.replace('%','')) : 0);
   
   loadPercent += 10;
   
