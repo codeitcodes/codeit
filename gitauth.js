@@ -37,6 +37,9 @@ window.onload = () => {
     // hide intro screen
     sidebar.classList.remove('intro');
     
+    // start loading
+    startLoading();
+    
     var githubCode = event.data;
     
     // get Github token
