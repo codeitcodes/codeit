@@ -2,6 +2,15 @@
 let modifiedFiles, selectedFile;
 
 
+function changeSelectedFile(to) {
+  
+  selectedFile = to;
+  
+  setStorage('selectedFile', JSON.stringify(selectedFile));
+  
+}
+
+
 function saveFile(file) {
   
   const sha = getAttr(file, 'sha');
