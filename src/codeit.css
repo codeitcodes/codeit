@@ -18,10 +18,6 @@ cd {
   cursor: text;
 }
 
-cd.uneditable {
-  pointer-events: none;
-}
-
 cd textarea {
   background: transparent;
   color: transparent;
