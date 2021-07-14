@@ -16,10 +16,10 @@ function saveFile(file) {
 function loadCodeFromStorage() {
   
   // load modified files from storage
-  modifiedFiles = getStorage('files') ? JSON.parse(getStorage('files')) : {};
+  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
   
   // load selected file from storage
-  selectedFile = getStorage('selectedFile');
+  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {};
   
   // if code in storage
   if (getStorage('code')) {
