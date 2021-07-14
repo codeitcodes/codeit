@@ -28,7 +28,7 @@ function loadCodeFromStorage() {
   modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
   
   // load selected file from storage
-  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {};
+  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {dir: '', sha: ''};
   
   // if code in storage
   if (getStorage('code')) {
