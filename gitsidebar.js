@@ -13,7 +13,7 @@ github.addEventListener('click', () => {
 async function renderFiles() {
   
   // if not already loading, start loading
-  if (loader.style.width != '100%') {
+  if (loader.style.opacity != '1') {
     startLoading();
   }
   
