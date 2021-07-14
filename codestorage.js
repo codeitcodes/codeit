@@ -2,22 +2,27 @@
 let modifiedFiles, selectedFile;
 
 
-function changeSelectedFile(to) {
+function changeSelectedFile(fileDir, fileSha) {
   
-  selectedFile = to;
+  selectedFile = { dir: fileDir,
+                   sha: fileSha
+                 };
   
   setStorage('selectedFile', JSON.stringify(selectedFile));
   
 }
 
 
-function saveFile(file) {
+function saveFile(fileDir, fileSha, fileName, fileExists) {
+    
+  modifiedFiles[fileSha] = { dir: fileDir,
+                             sha: fileSha,
+                             name: fileName,
+                             exists: fileExists,
+                             content: btoa(cd.textarea.value)
+                           };
   
-  const sha = getAttr(file, 'sha');
-  
-  modifiedFiles[sha] = [btoa(cd.textarea.value)];
-  
-  setStorage('files', JSON.stringify(modifiedFiles));
+  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
   
 }
 
