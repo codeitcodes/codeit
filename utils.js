@@ -28,6 +28,7 @@ const body = document.body,
       fileWrapper = sidebar.querySelector('.files');
 
 
+
 // sidebar loader
 let loadInterval;
 
