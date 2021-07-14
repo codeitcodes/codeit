@@ -199,13 +199,6 @@ function addItemListeners() {
         
         // if item is a folder
         
-        // save selected file
-        let selectedFile = fileWrapper.querySelector('.selected.modified');
-
-        if (selectedFile) {
-          saveFile(selectedFile);
-        }
-        
         // change location
         treeLoc[2] += '/' + item.innerText;
         setStorage('tree', treeLoc.join());
@@ -372,18 +365,8 @@ sidebarTitle.addEventListener('click', () => {
   // map tree location
   const [user, repo, contents] = treeLoc;
   
-  // clear selected file
-  setStorage('selectedFile', '');
-  
   // if navigating in folders
   if (contents != '') {
-    
-    // save selected file
-    let selectedFile = fileWrapper.querySelector('.selected.modified');
-
-    if (selectedFile) {
-      saveFile(selectedFile);
-    }
     
     // pop last folder
     let splitContents = contents.split('/');
