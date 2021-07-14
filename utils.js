@@ -11,6 +11,7 @@ const body = document.body,
       
       loginButton = introWrapper.querySelector('.login'),
       
+      loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
       
       titleScreen = header.querySelector('.titlescreen'),
