@@ -28,6 +28,38 @@ const body = document.body,
       fileWrapper = sidebar.querySelector('.files');
 
 
+// sidebar loader
+let loadInterval;
+
+function startLoading() {
+  
+  loader.style.width = '';
+  loader.style.opacity = 1;
+  
+  loadInterval = window.setInterval(load, 400);
+  
+}
+
+function stopLoading() {
+  
+  window.clearInterval(loadInterval);
+  
+  loader.style.width = '100%';
+  loader.style.opacity = 0;
+  
+}
+
+function load() {
+  
+  let loadPercent = loader.style.width ? Number(loader.style.width.replace('%','')) : 0;
+  
+  loadPercent += 8;
+  
+  loader.style.width = loadPercent + '%';
+  
+}
+
+
 
 // localStorage
 
