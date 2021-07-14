@@ -264,7 +264,7 @@ function addItemListeners() {
           
           // delete file from modified files
           delete modifiedFiles[sha];
-          setStorage('files', JSON.stringify(modifiedFiles));
+          setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
           
           item.classList.remove('modified');
           
