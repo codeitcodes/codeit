@@ -216,6 +216,17 @@ body.transitioning .sidebar {
   display: none;
 }
 
+.sidebar .loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: #568af2;
+  transition: width .4s ease;
+  z-index: 1000;
+}
+
 .sidebar .header {
   height: 59px;
   margin-bottom: 9px;
