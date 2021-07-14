@@ -1,5 +1,6 @@
 
-let modifiedFiles;
+let modifiedFiles, selectedFile;
+
 
 function saveFile(file) {
   
@@ -16,6 +17,9 @@ function loadCodeFromStorage() {
   
   // load modified files from storage
   modifiedFiles = getStorage('files') ? JSON.parse(getStorage('files')) : {};
+  
+  // load selected file from storage
+  selectedFile = getStorage('selectedFile');
   
   // if code in storage
   if (getStorage('code')) {
