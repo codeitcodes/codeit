@@ -2,10 +2,11 @@
 let modifiedFiles, selectedFile;
 
 
-function changeSelectedFile(fileDir, fileSha) {
+function changeSelectedFile(fileDir, fileSha, fileName) {
   
   selectedFile = { dir: fileDir,
-                   sha: fileSha
+                   sha: fileSha,
+                   name: fileName
                  };
   
   setStorage('selectedFile', JSON.stringify(selectedFile));
