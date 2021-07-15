@@ -405,7 +405,7 @@ body.transitioning .sidebar {
   color: #828689;
 }
 
-.sidebar .item.nonexistent .icon {
+.sidebar .item[exists="false"] .icon {
   color: hsl(206deg 3% 42%);
 }
 
@@ -417,7 +417,7 @@ body.transitioning .sidebar {
   text-overflow: ellipsis;
 }
 
-.sidebar .item.nonexistent .name {
+.sidebar .item[exists="false"] .name {
   font-style: italic;
   color: grey;
 }
