@@ -29,6 +29,15 @@ function saveModifiedFile(fileDir, fileSha, fileName, fileExists) {
 }
 
 
+function deleteModifiedFile(fileSha) {
+    
+  delete modifiedFiles[fileSha];
+  
+  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
+  
+}
+
+
 function loadCodeFromStorage() {
   
   // load modified files from storage
