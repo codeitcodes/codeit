@@ -14,7 +14,7 @@ function changeSelectedFile(fileDir, fileSha, fileName) {
 }
 
 
-function saveFile(fileDir, fileSha, fileName, fileExists) {
+function saveModifiedFile(fileDir, fileSha, fileName, fileExists) {
     
   modifiedFiles[fileSha] = { dir: fileDir,
                              sha: fileSha,
