@@ -145,16 +145,16 @@ async function renderFiles() {
   // add item event listeners
   addItemListeners();
   
-  // if selected file exists
-  if (getStorage('selectedFile')) {
+  // if selected file is in directory
+  if (selectedFile.dir == treeLoc.join()) {
     
-    let selectedFile = fileWrapper.querySelector('.item[sha="'+ getStorage('selectedFile') +'"]');
+    let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
     
-    if (selectedFile) {
+    if (selectedItem) {
     
       // select file
-      selectedFile.classList.add('selected');
-      selectedFile.scrollIntoViewIfNeeded();
+      selectedItem.classList.add('selected');
+      selectedItem.scrollIntoViewIfNeeded();
       
       // set event listener for file change
       cd.textarea.addEventListener('keydown', checkBackspace);
@@ -263,8 +263,7 @@ function addItemListeners() {
           var newFile = await axios.get(query, githubToken, sha);
           
           // delete file from modified files
-          delete modifiedFiles[sha];
-          setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
+          deleteModifiedFile(sha);
           
           item.classList.remove('modified');
           
@@ -275,7 +274,7 @@ function addItemListeners() {
           if (item.classList.contains('selected')) {
             
             // update selection SHA
-            setStorage('selectedFile', resp.content.sha);
+            changeSelectedFile(treeLoc.join(), resp.content.sha, item.innerText, true);
             
           }
           
@@ -297,15 +296,9 @@ function addItemListeners() {
 async function loadFile(file, sha) {
   
   // save previous selection in localStorage
-  if (getStorage('selectedFile')) {
+  if (selectedFile.sha != '') {
     
-    let selectedFile = fileWrapper.querySelector('.selected.modified');
-    
-    if (selectedFile) {
-      
-      saveFile(selectedFile);
-      
-    }
+    saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
     
   }
   
@@ -314,9 +307,9 @@ async function loadFile(file, sha) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
   
-  // save selected file
+  // change selected file
   file.classList.add('selected');
-  setStorage('selectedFile', sha);
+  changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), file.innerText, getAttr(file, 'exists'));
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -327,7 +320,7 @@ async function loadFile(file, sha) {
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
-
+    
     query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
     
     // get the query
@@ -341,7 +334,7 @@ async function loadFile(file, sha) {
     
   } else { // else, load file from local storage
     
-    const content = modifiedFiles[sha][0];
+    const content = modifiedFiles[sha].content;
     
     // show file content in codeit
     cd.setValue(atob(content));
