@@ -542,7 +542,7 @@ body.transitioning .sidebar {
   
   .github {
     pointer-events: none;
-    -webkit-animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function) forwards !important;
+    animation: hide 0.18s 1.5s var(--ease-function) forwards !important;
   }
   
   body.expanded .sidebar-background {
