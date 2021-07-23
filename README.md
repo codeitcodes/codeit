@@ -1,5 +1,7 @@
 # codeit
 
+Site for codeit.
+
 ## What’s codeit?
 Javascript editor.
 
