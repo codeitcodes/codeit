@@ -18,7 +18,12 @@ learnClose.addEventListener('click', () => {
   if (learnWrapper.classList.contains('close-sidebar')) {
     
     body.classList.remove('expanded');
-    learnWrapper.classList.remove('close-sidebar');
+    
+    window.setTimeout(() => {
+      
+      learnWrapper.classList.remove('close-sidebar');
+      
+    }, 400);
     
   }
   
