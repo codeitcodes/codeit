@@ -612,6 +612,10 @@ body.transitioning .sidebar {
     width: unset;
   }
   
+  body cd {
+    -webkit-overflow-scrolling: touch;
+  }
+  
   body.expanded cd {
     width: 100%;
     transform: translateX(100vw);
@@ -625,10 +629,15 @@ body.transitioning .sidebar {
     display: none;
   }
   
+  .sidebar {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  
   body.expanded .sidebar-background {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(calc(100vw - 25px));
+    transform: translateX(100%);
   }
   
 }
