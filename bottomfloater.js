@@ -3,8 +3,6 @@
 // if isMobile
 function updateFloat() {
   
-  console.log('a');
-  
   // close sidebar
   body.classList.remove('expanded');
   
