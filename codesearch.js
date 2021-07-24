@@ -23,8 +23,6 @@ searchInput.addEventListener('focus', () => {
 // hide search on blur
 searchInput.addEventListener('blur', (e) => {
   
-  console.log(e.target);
-  
   // if not clicked on item
   if (!e.target.classList.contains('item')) {
 
