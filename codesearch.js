@@ -21,11 +21,16 @@ searchInput.addEventListener('focus', () => {
 })
 
 // hide search on blur
-searchInput.addEventListener('blur', () => {
+searchInput.addEventListener('blur', (e) => {
   
-  // show all files
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
+  // if not clicked on item
+  if (!e.target.classList.contains('item')) {
+
+    // show all files
+    let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+    files.forEach(file => { file.style.display = '' });
+    
+  }
   
   header.classList.remove('searching');
   
