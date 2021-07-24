@@ -36,6 +36,7 @@ learnOpen.addEventListener('click', () => {
   
   body.classList.add('expanded');
   sidebar.classList.add('learn');
+  learnWrapper.classList.add('close-sidebar');
   
 })
 
