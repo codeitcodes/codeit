@@ -617,6 +617,9 @@ body.transitioning .sidebar {
   width: 150px;
   padding: 25px;
   margin-bottom: 24px;
+}
+
+.sidebar .learn-wrapper .picture {
   animation: intro .4s var(--cubic-function);
 }
 
