@@ -86,7 +86,5 @@ searchClear.addEventListener('click', () => {
   
   // focus search input
   searchInput.focus();
-  
-  header.classList.add('searching');
-  
+    
 })
