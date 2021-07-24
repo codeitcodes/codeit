@@ -345,6 +345,14 @@ async function loadFile(file, sha) {
   cd.textarea.setSelectionRange(0, 0);
   cd.scrollTo(0, 0);
   
+  // if on mobile device
+  if (isMobile) {
+    
+    // show file
+    body.classList.remove('expanded');
+    
+  }
+  
   // set event listener for file change
   cd.textarea.addEventListener('keydown', checkBackspace);
   cd.textarea.addEventListener('input', fileChange);
@@ -381,7 +389,7 @@ sidebarTitle.addEventListener('click', () => {
     // render files
     renderFiles();
     
-  } else { // show user
+  } else { // show learn
     
     
     
