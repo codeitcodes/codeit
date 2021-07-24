@@ -303,11 +303,11 @@ async function loadFile(file, sha) {
   // if previous selection exists
   if (selectedFile.sha != '') {
     
-    // get DOM element
-    let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+    // get selection in modifiedFiles array
+    let selectedItem = modifiedFiles[selectedFile.sha];
     
     // if previous selection was modified
-    if (selectedItem.classList.contains('modified')) {
+    if (selectedItem) {
     
       // save previous selection in localStorage
       saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
