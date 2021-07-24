@@ -31,6 +31,15 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
+// open learn when clicked on button
+learnOpen.addEventListener('click', () => {
+  
+  body.classList.add('expanded');
+  sidebar.classList.add('learn');
+  
+})
+
+
 // if on mobile device
 if (isMobile) {
   
