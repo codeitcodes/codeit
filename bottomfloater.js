@@ -50,8 +50,13 @@ if (isMobile) {
       
     } else { // if scrolled up
       
-      // show bottom float
-      bottomFloat.classList.remove('hidden');
+      // if passed threshold
+      if ((lastScrollTop - st) > 101) {
+      
+        // show bottom float
+        bottomFloat.classList.remove('hidden');
+        
+      }
       
     }
      
