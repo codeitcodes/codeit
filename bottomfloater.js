@@ -31,16 +31,32 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
-// show bottom float when scrolled up
-let lastScrollTop = 0;
+// if on mobile device
+if (isMobile) {
+  
+  // show bottom float when scrolled up
+  
+  let lastScrollTop = 0;
+  
+  cd.addEventListener('scroll', function() {
+    
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // if scrolled down
+    if (st > lastScrollTop) {
+      
+      // hide bottom float
+      bottomFloat.classList.add('hidden');
+      
+    } else { // if scrolled up
+      
+      // show bottom float
+      bottomFloat.classList.remove('hidden');
+      
+    }
+     
+    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    
+  }, false);
 
-// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
-cd.addEventListener('scroll', function() {
-   var st = window.pageYOffset || document.documentElement.scrollTop;
-   if (st > lastScrollTop){
-      // downscroll code
-   } else {
-      // upscroll code
-   }
-   lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-}, false);
+}
