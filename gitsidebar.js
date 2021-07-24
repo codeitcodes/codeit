@@ -145,6 +145,9 @@ async function renderFiles() {
   // add item event listeners
   addItemListeners();
   
+  // hide search screen
+  header.classList.remove('searching');
+  
   // if selected file is in directory
   if (selectedFile.dir == treeLoc.join()) {
     
