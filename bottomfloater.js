@@ -12,6 +12,9 @@ function updateFloat() {
   // show selected file name
   floatLogo.innerText = selectedFile.name;
   
+  // focus codeit
+  cd.textarea.focus();
+  
 }
 
 
