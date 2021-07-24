@@ -579,15 +579,6 @@ body.transitioning .sidebar {
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
-.sidebar::-webkit-scrollbar {
-  width: 10px;
-}
-
-.sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
-  background: #1a1c24;
-  box-shadow: none;
-}
-
 .sidebar-background {
   position: fixed;
   top: 0;
@@ -600,6 +591,19 @@ body.transitioning .sidebar {
   transform: translateX(0);
   transition: .4s var(--cubic-function);
   will-change: transform;
+}
+
+@media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
+
+  .sidebar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
+    background: #1a1c24;
+    box-shadow: none;
+  }
+  
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
