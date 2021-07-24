@@ -76,11 +76,12 @@ function load() {
 
 
 // is mobile
-let isMobile = window.matchMedia('@media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px)').matches;
+let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
+// for debugging
 window.onresize = () => {
   
-  isMobile = window.matchMedia('@media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px)').matches;
+  isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
   
 }
 
