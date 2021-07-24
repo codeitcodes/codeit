@@ -220,6 +220,11 @@ function addItemListeners() {
             // load file
             loadFile(item, getAttr(item, 'sha'));
             
+          } else {
+            
+            // update bottom float
+            updateFloat();
+            
           }
           
         } else {
@@ -296,7 +301,7 @@ function addItemListeners() {
 async function loadFile(file, sha) {
   
   // save previous selection in localStorage
-  if (selectedFile.sha != '') {
+  if (selectedFile.classList.contains('modified') && selectedFile.sha != '') {
     
     saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
     
