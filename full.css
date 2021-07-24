@@ -617,6 +617,7 @@ body.transitioning .sidebar {
   width: 150px;
   padding: 25px;
   margin-bottom: 24px;
+  animation: intro .4s var(--cubic-function);
 }
 
 .sidebar .learn-wrapper .title {
@@ -716,6 +717,15 @@ body.transitioning .sidebar {
   to {
     transform: translateX(-100%);
     box-shadow: none;
+  }
+  
+}
+
+@keyframes intro {
+  
+  from {
+    transform: scale(1.07);
+    opacity: 0;
   }
   
 }
