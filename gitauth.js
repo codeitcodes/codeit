@@ -23,6 +23,14 @@ window.onload = () => {
 
     // show intro screen
     sidebar.classList.add('intro');
+    
+    // if on mobile device
+    if (isMobile) {
+      
+      // show sidebar
+      body.classList.add('visible');
+      
+    }
 
   } else {
 
