@@ -51,7 +51,7 @@ if (isMobile) {
     } else { // if scrolled up
       
       // if passed threshold
-      if ((lastScrollTop - st) > 50) {
+      if ((lastScrollTop - st) > 20) {
       
         // show bottom float
         bottomFloat.classList.remove('hidden');
