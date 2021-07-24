@@ -430,7 +430,7 @@ function fileChange() {
   file.classList.add('modified');
 
   // save modified file in localStorage
-  saveFile(file);
+  saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
 
   // remove event listener
   cd.textarea.removeEventListener('keydown', checkBackspace);
