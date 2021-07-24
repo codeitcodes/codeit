@@ -222,11 +222,11 @@ body.transitioning .sidebar {
   transition: none;
 }
 
-.sidebar .content-wrapper {
+.sidebar :is(.content-wrapper, .learn-wrapper) {
   display: none;
 }
 
-.sidebar:not(.intro) .content-wrapper {
+.sidebar:not(.intro, .learn) .content-wrapper {
   display: block;
 }
 
@@ -236,6 +236,10 @@ body.transitioning .sidebar {
 
 .sidebar:not(.intro) .intro-wrapper {
   display: none;
+}
+
+.sidebar.learn .learn-wrapper {
+  display: block;
 }
 
 .sidebar .loader {
