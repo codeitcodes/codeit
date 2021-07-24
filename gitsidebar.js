@@ -348,8 +348,8 @@ async function loadFile(file, sha) {
   // if on mobile device
   if (isMobile) {
     
-    // show file
-    body.classList.remove('expanded');
+    // update bottom float
+    updateFloat();
     
   }
   
