@@ -3,6 +3,11 @@ const body = document.body,
       
       cd = document.querySelector('cd'),
       
+      bottomFloat = document.querySelector('.bottom-float'),
+      sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
+      floatLogo = sidebarOpen.querySelector('.title'),
+      learnOpen = bottomFloat.querySelector('.learn-open'),
+      
       github = document.querySelector('.github'),
       
       sidebar = document.querySelector('.sidebar'),
