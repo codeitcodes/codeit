@@ -402,9 +402,9 @@ sidebarTitle.addEventListener('click', () => {
     // render files
     renderFiles();
     
-  } else { // show learn
+  } else { // show learn screen
     
-    
+    sidebar.classList.add('learn');
     
   }
   
