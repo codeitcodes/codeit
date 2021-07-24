@@ -150,8 +150,6 @@ async function renderFiles() {
     
     let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
     
-    console.log(selectedItem);
-    
     if (selectedItem) {
     
       // select file
@@ -165,10 +163,6 @@ async function renderFiles() {
     }
     
   }
-  
-  // remove event listener
-  cd.textarea.removeEventListener('keydown', checkBackspace);
-  cd.textarea.removeEventListener('input', fileChange);
   
 }
 
