@@ -76,12 +76,12 @@ function load() {
 
 
 // is mobile
-let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i) ?? false;
 
 // for debugging
 window.onresize = () => {
   
-  isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+  isMobile = navigator.userAgent.toLowerCase().match(/mobile/i) ?? false;
   
 }
 
