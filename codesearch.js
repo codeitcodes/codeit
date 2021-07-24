@@ -1,6 +1,12 @@
 
 // open search screen on click of button
 searchButton.addEventListener('click', () => {
+    
+  // clear search input
+  searchInput.innerText = '';
+  
+  // hide clear button
+  searchClear.classList.remove('visible');
   
   // focus search input
   searchInput.focus();
@@ -12,34 +18,16 @@ searchInput.addEventListener('focus', () => {
   
   header.classList.add('searching');
   
-  // clear search input
-  searchInput.innerText = '';
-  
-  // hide clear button
-  searchClear.classList.remove('visible');
-  
-})
-
-// hide search on blur
-searchInput.addEventListener('blur', (e) => {
-  
-  // if not clicked on item
-  if (!e.target.classList.contains('item')) {
-
-    // show all files
-    let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-    files.forEach(file => { file.style.display = '' });
-    
-  }
-  
-  header.classList.remove('searching');
-  
 })
 
 // close search screen on click of button
 searchBack.addEventListener('click', () => {
-    
-  searchInput.blur();
+  
+  // show all files
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  header.classList.remove('searching');
   
 })
 
@@ -85,6 +73,16 @@ searchInput.addEventListener('input', () => {
 
 // clear search input when clicked on button
 searchClear.addEventListener('click', () => {
+  
+  // show all files
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  // clear search input
+  searchInput.innerText = '';
+  
+  // hide clear button
+  searchClear.classList.remove('visible');
   
   // focus search input
   searchInput.focus();
