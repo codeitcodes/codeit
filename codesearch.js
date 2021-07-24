@@ -12,6 +12,12 @@ searchInput.addEventListener('focus', () => {
   
   header.classList.add('searching');
   
+  // clear search input
+  searchInput.innerText = '';
+  
+  // hide clear button
+  searchClear.classList.remove('visible');
+  
 })
 
 // hide search on blur
@@ -21,17 +27,7 @@ searchInput.addEventListener('blur', () => {
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
   files.forEach(file => { file.style.display = '' });
   
-  // hide clear button
-  searchClear.classList.remove('visible');
-  
   header.classList.remove('searching');
-  
-  // clear search input
-  window.setTimeout(() => {
-    
-    searchInput.innerText = '';
-    
-  }, 180);
   
 })
 
@@ -85,17 +81,9 @@ searchInput.addEventListener('input', () => {
 // clear search input when clicked on button
 searchClear.addEventListener('click', () => {
   
-  // clear search input
-  searchInput.innerText = '';
-  
-  // show all files
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
-  
-  // hide clear button
-  searchClear.classList.remove('visible');
-  
   // focus search input
   searchInput.focus();
+  
+  header.classList.add('searching');
   
 })
