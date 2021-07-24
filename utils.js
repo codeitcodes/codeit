@@ -13,6 +13,7 @@ const body = document.body,
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
       contentWrapper = sidebar.querySelector('.content-wrapper'),
+      learnWrapper = sidebar.querySelector('.learn-wrapper'),
       
       loginButton = introWrapper.querySelector('.login'),
       
@@ -30,7 +31,11 @@ const body = document.body,
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
       
-      fileWrapper = sidebar.querySelector('.files');
+      fileWrapper = sidebar.querySelector('.files'),
+      
+      learnFork = learnWrapper.querySelector('.fork'),
+      learnTutorial = learnWrapper.querySelector('.tutorial'),
+      learnClose = learnWrapper.querySelector('.close');
 
 
 
