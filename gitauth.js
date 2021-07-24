@@ -28,7 +28,7 @@ window.onload = () => {
     if (isMobile) {
       
       // show sidebar
-      body.classList.add('visible');
+      body.classList.add('expanded');
       
     }
 
