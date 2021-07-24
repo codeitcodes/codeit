@@ -612,10 +612,6 @@ body.transitioning .sidebar {
     overflow-x: hidden;
   }
   
-  ::-webkit-scrollbar {
-    width: unset;
-  }
-  
   body cd {
     -webkit-overflow-scrolling: touch;
   }
