@@ -17,13 +17,6 @@ searchInput.addEventListener('focus', () => {
 // hide search on blur
 searchInput.addEventListener('blur', () => {
   
-  header.classList.remove('searching');
-  
-})
-
-// close search screen on click of button
-searchBack.addEventListener('click', () => {
-    
   // show all files
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
   files.forEach(file => { file.style.display = '' });
@@ -39,6 +32,13 @@ searchBack.addEventListener('click', () => {
     searchInput.innerText = '';
     
   }, 180);
+  
+})
+
+// close search screen on click of button
+searchBack.addEventListener('click', () => {
+    
+  searchInput.blur();
   
 })
 
