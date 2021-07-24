@@ -71,6 +71,11 @@ function loadCodeFromStorage() {
 
     }, 400);
 
+  } else {
+    
+    // update bottom floater
+    updateFloat();
+    
   }
   
 }
