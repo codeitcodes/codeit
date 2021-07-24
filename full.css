@@ -675,6 +675,7 @@ body.transitioning .sidebar {
 }
 
 :root {
+    tab-size: 2;
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
   --sidebar-width: 350px;
@@ -687,6 +688,7 @@ body {
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
