@@ -300,10 +300,19 @@ function addItemListeners() {
 
 async function loadFile(file, sha) {
   
-  // save previous selection in localStorage
-  if (selectedFile.classList.contains('modified') && selectedFile.sha != '') {
+  // if previous selection exists
+  if (selectedFile.sha != '') {
     
-    saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
+    // get DOM element
+    let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+    
+    // if previous selection was modified
+    if (selectedItem.classList.contains('modified')) {
+    
+      // save previous selection in localStorage
+      saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
+      
+    }
     
   }
   
