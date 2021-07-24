@@ -220,7 +220,7 @@ function addItemListeners() {
             // load file
             loadFile(item, getAttr(item, 'sha'));
             
-          } else {
+          } else if (isMobile) { // if on mobile device
             
             // update bottom float
             updateFloat();
