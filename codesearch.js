@@ -2,10 +2,22 @@
 // open search screen on click of button
 searchButton.addEventListener('click', () => {
   
-  header.classList.add('searching');
-  
   // focus search input
   searchInput.focus();
+  
+})
+
+// open search on focus
+searchInput.addEventListener('focus', () => {
+  
+  header.classList.add('searching');
+  
+})
+
+// hide search on blur
+searchInput.addEventListener('blur', () => {
+  
+  header.classList.remove('searching');
   
 })
 
