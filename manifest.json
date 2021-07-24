@@ -1,0 +1,9 @@
+{
+  "name": "Codeit",
+  "short_name": "Codeit",
+  "background_color": "#0b0d1a",
+  "theme_color": "#313744",
+  "display": "standalone",
+  "start_url": "/full",
+  "orientation": "portrait"
+}
