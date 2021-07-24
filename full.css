@@ -569,7 +569,6 @@ body.transitioning .sidebar {
   font-size: 14px;
   box-sizing: border-box;
   text-transform: uppercase;
-  transition: .18s var(--ease-function);
   margin-top: 34px;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
