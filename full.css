@@ -625,6 +625,10 @@ body.transitioning .sidebar {
     display: flex;
   }
   
+  body.expanded .bottom-float {
+    transform: translateX(100vw);
+  }
+  
   .github {
     display: none;
   }
