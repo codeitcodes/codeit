@@ -40,7 +40,7 @@ if (isMobile) {
   
   cd.addEventListener('scroll', function() {
     
-    var st = window.pageYOffset || document.documentElement.scrollTop;
+    var st = cd.scrollTop;
     
     // if scrolled down
     if (st > lastScrollTop) {
