@@ -626,7 +626,7 @@ body.transitioning .sidebar {
   }
   
   body.expanded .bottom-float {
-    transform: translateX(100vw);
+    transform: translateX(calc(50% + 45px));
   }
   
   .github {
