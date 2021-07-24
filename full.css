@@ -620,7 +620,13 @@ body.transitioning .sidebar {
 }
 
 .sidebar .learn-wrapper .picture {
+  transform: scale(1.07);
+  opacity: 0;
   animation: intro .4s var(--cubic-function);
+}
+
+.sidebar .learn-wrapper.close-sidebar .picture {
+  animation: intro .4s .4s var(--cubic-function);
 }
 
 .sidebar .learn-wrapper .title {
@@ -729,6 +735,11 @@ body.transitioning .sidebar {
   from {
     transform: scale(1.07);
     opacity: 0;
+  }
+  
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
   
 }
