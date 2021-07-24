@@ -71,6 +71,11 @@ body.transitioning cd {
   padding: 16px 20px;
 }
 
+.bottom-float .sidebar-open {
+  width: 100%;
+  border-radius: 20px 0 0 20px;
+}
+
 .bottom-float .sidebar-open:active {
   background: hsl(228deg 16% 10%);
 }
