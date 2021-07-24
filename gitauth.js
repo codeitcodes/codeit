@@ -18,27 +18,6 @@ window.onload = () => {
   
   })
   
-  // if not logged into Github
-  if (githubToken == null) {
-
-    // show intro screen
-    sidebar.classList.add('intro');
-    
-    // if on mobile device
-    if (isMobile) {
-      
-      // show sidebar
-      body.classList.add('expanded');
-      
-    }
-
-  } else {
-
-    // render files
-    renderFiles();
-
-  }
-  
   // if redirected from Github auth
   window.addEventListener('message', (event) => {
     
@@ -56,6 +35,27 @@ window.onload = () => {
   })
   
   loadCodeFromStorage();
+  
+  // if not logged into Github
+  if (githubToken == null) {
+
+    // show intro screen
+    sidebar.classList.add('intro');
+
+    // if on mobile device
+    if (isMobile) {
+
+      // show sidebar
+      body.classList.add('expanded');
+
+    }
+
+  } else {
+
+    // render files
+    renderFiles();
+
+  }
   
 }
 
