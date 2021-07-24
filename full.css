@@ -28,17 +28,70 @@ body cd {
   position: relative;
   box-sizing: border-box;
   transition: .4s var(--cubic-function);
-  transition-property: width, left;
-  will-change: width, left;
+  transition-property: width, transform;
+  will-change: transform;
 }
 
 body.expanded cd {
   width: calc(100% - var(--sidebar-width));
-  left: var(--sidebar-width);
+  transform: translateX(var(--sidebar-width));
 }
 
 body.transitioning cd {
   transition: none;
+}
+
+.bottom-float {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 45px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 45px);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  background: #1a1c24;
+  color: #d4d5d7;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 17%), 0 6px 8px rgb(0 0 0 / 29%);
+  transition: .4s var(--cubic-function);
+  transition-property: opacity, transform;
+  will-change: transform;
+  height: 56px;
+  z-index: 5;
+}
+
+.bottom-float.hidden {
+  transform: translateX(-50%) translateY(calc(56px + env(safe-area-inset-bottom) + 45px));
+}
+
+.bottom-float .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.bottom-float .sidebar-open:active {
+  background: hsl(228deg 16% 10%);
+}
+
+.bottom-float .logo {
+  margin-left: 10px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.bottom-float .learn-open {
+  background: hsl(0deg 0% 100% / 5%);
+  border-left: 1px solid hsl(0deg 0% 100% / 5%);
+  border-radius: 0 20px 20px 0;
+}
+
+.bottom-float .learn-open:active {
+  background: hsl(0deg 0% 100% / 7%);
 }
 
 .github {
@@ -253,6 +306,11 @@ body.transitioning .sidebar {
 
 .sidebar .searchscreen .back {
   color: #828689;
+  margin-right: 0;
+  transition: .18s var(--ease-function);
+}
+
+.sidebar .header.searching .searchscreen .back {
   margin-right: 7px;
 }
 
@@ -263,6 +321,11 @@ body.transitioning .sidebar {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 235px;
+  transition: .18s var(--ease-function);
+}
+
+.sidebar .header.searching .logo {
+  margin-left: 7px;
 }
 
 .sidebar .header .title:hover .logo.overflow {
@@ -308,6 +371,7 @@ body.transitioning .sidebar {
 .sidebar .header .clear {
   opacity: 0;
   pointer-events: none;
+  transition: none;
 }
 
 .sidebar .header .clear.visible {
@@ -540,11 +604,25 @@ body.transitioning .sidebar {
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
   
+  body {
+    overflow-x: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+    width: unset;
+  }
+  
+  body.expanded cd {
+    width: 100%;
+    transform: translateX(100vw);
+  }
+  
+  .bottom-float {
+    display: flex;
+  }
+  
   .github {
-    pointer-events: none;
-    transform: none;
-    box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
-    animation: hide 0.18s 1.5s var(--ease-function) forwards !important;
+    display: none;
   }
   
   body.expanded .sidebar-background {
