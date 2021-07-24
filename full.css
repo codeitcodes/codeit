@@ -623,7 +623,7 @@ body.transitioning .sidebar {
   animation: intro .4s .1s var(--cubic-function) backwards;
 }
 
-.sidebar .learn-wrapper.sidebar-close .button {
+.sidebar .learn-wrapper.close-sidebar .button {
   animation: intro .4s .5s var(--cubic-function) backwards;
 }
 
