@@ -13,17 +13,20 @@ learnTutorial.addEventListener('click', () => {
 
 learnClose.addEventListener('click', () => {
   
-  sidebar.classList.remove('learn');
-  
   if (learnWrapper.classList.contains('close-sidebar')) {
     
     body.classList.remove('expanded');
+    learnWrapper.classList.remove('close-sidebar');
     
     window.setTimeout(() => {
       
-      learnWrapper.classList.remove('close-sidebar');
+      sidebar.classList.remove('learn');
       
     }, 400);
+    
+  } else {
+    
+    sidebar.classList.remove('learn');
     
   }
   
