@@ -34,7 +34,7 @@ const body = document.body,
       fileWrapper = sidebar.querySelector('.files'),
       
       learnFork = learnWrapper.querySelector('.fork'),
-      learnTutorial = learnWrapper.querySelector('.tutorial'),
+      learnInstall = learnWrapper.querySelector('.install'),
       learnClose = learnWrapper.querySelector('.close');
 
 
