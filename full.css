@@ -666,6 +666,10 @@ body.transitioning .sidebar {
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
   
+  :root {
+    --sidebar-width: 100vw;
+  }
+  
   body {
     overflow-x: hidden;
   }
@@ -732,7 +736,6 @@ body.transitioning .sidebar {
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
   --sidebar-width: 350px;
-  --sidebar-width: 100vw;
 }
 
 body {
