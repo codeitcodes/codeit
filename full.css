@@ -611,6 +611,10 @@ body.transitioning .sidebar {
   margin-right: 7px;
 }
 
+.sidebar .intro-wrapper .button.secondary {
+  margin-top: 34px;
+}
+
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
