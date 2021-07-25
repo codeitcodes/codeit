@@ -20,6 +20,7 @@ const FILES_TO_CACHE = [
   '/codestorage.js',
   '/bottomfloater.js',
   '/codelearn.js',
+  'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js',
   '/dark.css',
   '/Monaco.woff',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
