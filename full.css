@@ -732,6 +732,7 @@ body.transitioning .sidebar {
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
   --sidebar-width: 350px;
+  --sidebar-width: 100vw;
 }
 
 body {
