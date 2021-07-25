@@ -539,7 +539,7 @@ body.transitioning .sidebar {
 .sidebar .intro .title {
   color: #f1f1f2e0;
   font-size: 19px;
-  margin-bottom: 18px;
+  margin-bottom: 19px;
   font-weight: 500;
 }
 
@@ -612,7 +612,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .intro-wrapper .button.secondary {
-  margin-top: 34px;
+  margin-top: 44px;
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
