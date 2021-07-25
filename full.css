@@ -546,6 +546,7 @@ body.transitioning .sidebar {
   color: #a6a8aa;
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: 0.2px;
 }
 
 .sidebar .intro .subtitle a {
@@ -620,17 +621,20 @@ body.transitioning .sidebar {
   width: 150px;
   padding: 25px;
   margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
   margin-bottom: 9px;
+  letter-spacing: -.004em;
   display: flex;
   align-items: center;
 }
 
-.sidebar .learn-wrapper .button.fork {
+.sidebar .learn-wrapper .button.install {
   margin-top: 39px;
+  margin-top: 42px;
 }
 
 .sidebar-background {
