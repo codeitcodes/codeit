@@ -536,14 +536,6 @@ body.transitioning .sidebar {
   text-align: center;
 }
 
-.sidebar .learn-wrapper .intro .subhead {
-  animation: intro .4s .05s var(--cubic-function) backwards;
-}
-
-.sidebar .learn-wrapper.close-sidebar .intro .subhead {
-  animation: intro .4s .45s var(--cubic-function) backwards;
-}
-
 .sidebar .intro .title {
   color: #f1f1f2e0;
   font-size: 19px;
@@ -619,30 +611,12 @@ body.transitioning .sidebar {
   margin-right: 7px;
 }
 
-.sidebar .learn-wrapper .button {
-  animation: intro .4s .1s var(--cubic-function) backwards;
-}
-
-.sidebar .learn-wrapper.close-sidebar .button {
-  animation: intro .4s .5s var(--cubic-function) backwards;
-}
-
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
   padding: 25px;
   margin-bottom: 24px;
-}
-
-.sidebar .learn-wrapper .picture {
-  transform: scale(1.07);
-  opacity: 0;
-  animation: intro .4s var(--cubic-function) forwards;
-}
-
-.sidebar .learn-wrapper.close-sidebar .picture {
-  animation: intro .4s .4s var(--cubic-function) forwards;
 }
 
 .sidebar .learn-wrapper .title {
@@ -742,20 +716,6 @@ body.transitioning .sidebar {
   to {
     transform: translateX(-100%);
     box-shadow: none;
-  }
-  
-}
-
-@keyframes intro {
-  
-  from {
-    transform: scale(1.07);
-    opacity: 0;
-  }
-  
-  to {
-    transform: scale(1);
-    opacity: 1;
   }
   
 }
