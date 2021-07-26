@@ -674,7 +674,7 @@ body.transitioning .sidebar {
     --sidebar-width: 100vw;
   }
   
-  body {
+  body.expanded {
     overflow-x: hidden;
   }
   
@@ -700,7 +700,7 @@ body.transitioning .sidebar {
   }
   
   .sidebar {
-    width: 100%;
+    width: 100vw;
     -webkit-overflow-scrolling: touch;
   }
   
