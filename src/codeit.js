@@ -1,3 +1,7 @@
+/*
+  github
+*/
+
 /* 
    
    codeit by @barhatsor
@@ -12,7 +16,10 @@
 window.codeit = {
 
   'init': (cd) => {
-
+    
+    // if element is not a <cd> element, return
+    if (cd.nodeName.toUpperCase() != 'CD') return false;
+    
     // create codeit elements
     cd.textarea = document.createElement('textarea');
 
@@ -35,8 +42,7 @@ window.codeit = {
     cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
 
     // clear codeit
-    const cdEl = document.createElement('cd');
-    cd.replaceWith(cdEl);
+    cd.innerHTML = '';
 
     // append codeit elements to DOM
     cd.appendChild(cd.textarea);
@@ -125,19 +131,22 @@ window.codeit = {
       });
 
     }
-
+    
     cd.update();
-
+    
+    return cd;
+    
   },
 
   'destroy': (cd) => {
-  
-    // change codeit to raw code
-    const preEl = document.createElement('pre'),
-          codeEl = document.createElement('code');
     
-    preEl.appendChild(codeEl);
-    cd.replaceWith(preEl);
+    // if element is not a <cd> element, return
+    if (cd.nodeName.toUpperCase() != 'CD') return false;
+    
+    // remove codeit and swap with raw code
+    cd.innerHTML = cd.textarea.value;
+    
+    return cd;
     
   }
 
