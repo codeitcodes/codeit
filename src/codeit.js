@@ -35,7 +35,8 @@ window.codeit = {
     cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
 
     // clear codeit
-    cd.innerHTML = '';
+    const cdEl = document.createElement('cd');
+    cd.replaceWith(cdEl);
 
     // append codeit elements to DOM
     cd.appendChild(cd.textarea);
@@ -130,10 +131,14 @@ window.codeit = {
   },
 
   'destroy': (cd) => {
-
-    // set codeit content to raw text
-    cd.innerText = cd.innerText;
-
+  
+    // change codeit to raw code
+    const preEl = document.createElement('pre'),
+          codeEl = document.createElement('code');
+    
+    preEl.appendChild(codeEl);
+    cd.replaceWith(preEl);
+    
   }
 
 };
