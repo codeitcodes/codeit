@@ -132,7 +132,7 @@ window.codeit = {
   'destroy': (cd) => {
 
     // set codeit content to raw text
-    cd.innerText = cd.parsedCode;
+    cd.innerText = cd.innerText;
 
   }
 
