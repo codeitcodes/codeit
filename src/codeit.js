@@ -143,7 +143,8 @@ window.codeit = {
     // if element is not a <cd> element, return
     if (cd.nodeName.toUpperCase() != 'CD') return false;
     
-    // remove codeit and swap with raw code
+    // clear codeit and swap with raw code,
+    // saving as much original references as possible
     cd.innerHTML = cd.textarea.value;
     
     return cd;
