@@ -593,20 +593,20 @@ body.transitioning .sidebar {
   color: hsl(220deg 4% 84% / 92%);
 }
 
-.sidebar .button:hover {
+.sidebar .button:active {
   background: hsl(228deg 16% 42%);
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
-.sidebar .button.secondary:hover {
+.sidebar .button.secondary:active {
   background: hsla(0,0%,100%,.2);
 }
 
-.sidebar .button.secondary:hover {
+.sidebar .button.secondary:active {
   background: hsla(0,0%,100%,.2);
 }
 
-.sidebar .button.teritary:hover {
+.sidebar .button.teritary:active {
   background: transparent;
   color: hsl(220deg 4% 84%);
 }
