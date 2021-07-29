@@ -5,6 +5,7 @@ body {
   background: #313744;
   color: #d4d5d7;
   font-family: 'Inter', sans-serif;
+  height: 100vh;
 }
 
 .focus::before {
