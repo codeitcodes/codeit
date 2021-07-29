@@ -16,14 +16,6 @@ function updateFloat() {
   // show selected file name
   floatLogo.innerText = selectedFile.name;
   
-  // when sidebar animation finished
-  window.setTimeout(() => {
-    
-    // focus codeit
-    cd.textarea.focus();
-    
-  }, 400);
-  
 }
 
 
