@@ -56,7 +56,7 @@ function loadCodeFromStorage() {
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
     // scroll to pos in code
-    cd.scrollTop = getStorage('scrollPos');
+    cd.scrollTop = Number(getStorage('scrollPos'));
         
   }
   
