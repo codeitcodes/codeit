@@ -427,7 +427,10 @@ function fileChange() {
   
   // enable pushing file
   file.classList.add('modified');
-
+  
+  // change bottom float flag
+  bottomFloat.classList.add('modified');
+  
   // save modified file in localStorage
   saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
 
