@@ -46,7 +46,7 @@
   
 }
 
-cd, .hljs {
+cd-el, .hljs {
   background: #313744;
   color: #a6c3d4;
   font-family: 'Monaco', monospace;
@@ -55,11 +55,11 @@ cd, .hljs {
   font-size: 14px;
 }
 
-cd textarea {
+cd-el textarea {
   caret-color: #fff;
 }
 
-cd textarea::selection {
+cd-el textarea::selection {
   background: rgba(255, 255, 255, 0.15);
 }
 
