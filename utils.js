@@ -1,8 +1,4 @@
 
-const version = '1.0.6';
-
-
-
 const body = document.body,
       
       cd = document.querySelector('cd-el'),
@@ -37,9 +33,17 @@ const body = document.body,
       
       fileWrapper = sidebar.querySelector('.files'),
       
+      versionEl = learnWrapper.querySelector('.version'),
+      
       learnFork = learnWrapper.querySelector('.fork'),
       learnInstall = learnWrapper.querySelector('.install'),
       learnClose = learnWrapper.querySelector('.close');
+
+
+
+// version
+const version = '1.0.7';
+versionEl.innerText = version;
 
 
 
