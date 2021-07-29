@@ -20,7 +20,7 @@ body {
   content: '';
 }
 
-body cd {
+body cd-el {
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -32,12 +32,12 @@ body cd {
   will-change: transform;
 }
 
-body.expanded cd {
+body.expanded cd-el {
   width: calc(100% - var(--sidebar-width));
   transform: translateX(var(--sidebar-width));
 }
 
-body.transitioning cd {
+body.transitioning cd-el {
   transition: none;
 }
 
@@ -678,11 +678,11 @@ body.transitioning .sidebar {
     overflow-x: hidden;
   }
   
-  body cd {
+  body cd-el {
     -webkit-overflow-scrolling: touch;
   }
   
-  body.expanded cd {
+  body.expanded cd-el {
     width: 100%;
     transform: translateX(100vw);
   }
