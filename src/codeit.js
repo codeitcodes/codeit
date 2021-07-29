@@ -92,7 +92,14 @@ class CodeitElement extends HTMLElement {
       
       // if codeit lang not specified, autodetect code lang
       if (cd.getAttribute('lang') == undefined) {
+        
         cd.code.classList = 'hljs';
+        
+      } else {
+        
+        // highlight with specified lang
+        cd.code.classList = cd.getAttribute('lang');
+        
       }
 
       hljs.highlightElement(cd.code);
