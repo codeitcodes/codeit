@@ -7,10 +7,6 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-::selection {
-  background: rgba(255, 255, 255, 0.15);
-}
-
 .focus::before {
   position: fixed;
   left: 0;
