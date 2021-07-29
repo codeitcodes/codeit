@@ -62,7 +62,7 @@ window.onload = () => {
 async function getGithubToken(githubCode) {
   
   // CORS post to Github with clientId, clientSecret and code
-  var resp = await axios.post('https://sceptercors.herokuapp.com/' +
+  var resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
                               'https://github.com/login/oauth/access_token?' +
                               'client_id=' + clientId +
                               '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
