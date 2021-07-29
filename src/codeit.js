@@ -5,7 +5,7 @@
 /* 
    
    codeit by @barhatsor
-   v2.2.2
+   v2.2.3
    MIT License
    
    github.com/barhatsor/codeit
@@ -20,6 +20,8 @@ class CodeitElement extends HTMLElement {
     // always call super first in constructor
     super();
     
+    let cd = this;
+    
     // create a shadow root
     let shadow = this.attachShadow({mode: 'open'});
     
@@ -31,40 +33,40 @@ class CodeitElement extends HTMLElement {
     style.appendChild(document.createTextNode(css));
     
     // create codeit elements
-    this.textarea = document.createElement('textarea');
+    cd.textarea = document.createElement('textarea');
 
-    this.pre = document.createElement('pre');
-    this.code = document.createElement('code');
+    cd.pre = document.createElement('pre');
+    cd.code = document.createElement('code');
     
     // style codeit textarea
-    this.textarea.setAttribute('spellcheck', 'false');
-    this.textarea.setAttribute('autocorrect', 'off');
-    this.textarea.setAttribute('autocomplete', 'off');
-    this.textarea.setAttribute('aria-autocomplete', 'list');
-    this.textarea.setAttribute('autocapitalize', 'off');
+    cd.textarea.setAttribute('spellcheck', 'false');
+    cd.textarea.setAttribute('autocorrect', 'off');
+    cd.textarea.setAttribute('autocomplete', 'off');
+    cd.textarea.setAttribute('aria-autocomplete', 'list');
+    cd.textarea.setAttribute('autocapitalize', 'off');
     
-    this.textarea.setAttribute('rows', 1);
+    cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
-    this.code.classList = (this.getAttribute('lang') != undefined) ? this.getAttribute('lang') : 'hljs';
+    cd.code.classList = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'hljs';
 
     // parse code
-    this.parsedCode = this.innerText.replace(/^\n|\n$/g, '');
+    cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
 
     // clear codeit
-    this.innerHTML = '';
+    cd.innerHTML = '';
 
     // append codeit elements to DOM
-    this.appendChild(this.textarea);
-    this.appendChild(this.pre);
-    this.pre.appendChild(this.code);
+    shadow.appendChild(cd.textarea);
+    shadow.appendChild(cd.pre);
+    shadow.pre.appendChild(cd.code);
 
     // set codeit textarea value to code
-    this.textarea.value = this.parsedCode;
+    cd.textarea.value = cd.parsedCode;
 
     // init codeit behavior
     new Behave({
-      textarea: this.textarea,
+      textarea: cd.textarea,
       replaceTab: true,
       softTabs: true,
       tabSize: 2,
@@ -76,27 +78,27 @@ class CodeitElement extends HTMLElement {
 
     // update codeit
     
-    this.setValue = (code) => {
+    cd.setValue = (code) => {
 
-      this.textarea.value = code;
-      this.update();
+      cd.textarea.value = code;
+      cd.update();
 
     }
     
-    this.update = () => {
+    cd.update = () => {
 
-      this.code.innerHTML = escapeHTML(this.textarea.value);
+      cd.code.innerHTML = escapeHTML(cd.textarea.value);
       
       // resize textarea
-      this.textarea.style.width = this.pre.clientWidth + 'px';
-      this.textarea.style.height = this.pre.clientHeight + 'px';
+      cd.textarea.style.width = cd.pre.clientWidth + 'px';
+      cd.textarea.style.height = cd.pre.clientHeight + 'px';
       
       // if codeit lang not specified, autodetect code lang
-      if (this.getAttribute('lang') == undefined) {
-        this.code.classList = 'hljs';
+      if (cd.getAttribute('lang') == undefined) {
+        cd.code.classList = 'hljs';
       }
 
-      hljs.highlightElement(this.code);
+      hljs.highlightElement(cd.code);
 
     }
     
@@ -109,10 +111,10 @@ class CodeitElement extends HTMLElement {
         .replace(/'/g, "&#039;");
     }
 
-    this.textarea.addEventListener('input', this.update);
-    this.textarea.addEventListener('keydown', this.update);
+    cd.textarea.addEventListener('input', cd.update);
+    cd.textarea.addEventListener('keydown', cd.update);
     
-    BehaveHooks.add('openChar:after', this.update);
+    BehaveHooks.add('openChar:after', cd.update);
     
     BehaveHooks.add('enter:after', (data) => {
       
@@ -124,7 +126,7 @@ class CodeitElement extends HTMLElement {
               thirdLine = (data.lines.current == (data.lines.total - 2));
         
         if (firstLine || secondLine || thirdLine) {
-          this.scrollTop = this.scrollHeight;
+          cd.scrollTop = cd.scrollHeight;
         }
         
       }, 0);
@@ -132,17 +134,17 @@ class CodeitElement extends HTMLElement {
     });
     
     // focus codeit when clicked
-    if (this.getAttribute('editable') != 'false') {
+    if (cd.getAttribute('editable') != 'false') {
       
-      this.addEventListener('click', () => {
+      cd.addEventListener('click', () => {
 
-        this.textarea.focus();
+        cd.textarea.focus();
 
       });
       
     }
     
-    this.update();
+    cd.update();
     
   }
   
