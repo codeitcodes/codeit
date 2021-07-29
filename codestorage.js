@@ -55,9 +55,8 @@ function loadCodeFromStorage() {
     // set caret pos in code
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
-    // scroll to caret
-    cd.textarea.focus();
-    cd.textarea.blur();
+    // scroll to pos in code
+    cd.scrollTop = getStorage('scrollPos');
         
   }
   
@@ -87,7 +86,10 @@ window.onbeforeunload = () => {
   
   // set localStorage values
   setStorage('code', btoa(cd.textarea.value));
+  
   setStorage('caret', cd.textarea.selectionStart);
+  setStorage('scrollPos', cd.scrollTop);
+  
   setStorage('sidebar', body.classList.contains('expanded'));
   
 };
