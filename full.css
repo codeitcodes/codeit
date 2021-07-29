@@ -44,7 +44,7 @@ body.transitioning cd-el {
 .bottom-float {
   position: fixed;
   bottom: calc(env(safe-area-inset-bottom) + 45px);
-  left: 50%;
+  left: 50vw;
   transform: translateX(-50%);
   width: calc(100vw - 45px);
   display: none;
