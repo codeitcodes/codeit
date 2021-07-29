@@ -222,6 +222,10 @@ body.transitioning .sidebar {
   transition: none;
 }
 
+.sidebar .wrapper {
+  height: 100%;
+}
+
 .sidebar :is(.content-wrapper, .learn-wrapper) {
   display: none;
 }
@@ -653,10 +657,6 @@ body.transitioning .sidebar {
 
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
   
-  :root {
-    --sidebar-width: 350px;
-  }  
-  
   .sidebar::-webkit-scrollbar {
     width: 10px;
   }
@@ -700,7 +700,6 @@ body.transitioning .sidebar {
   }
   
   .sidebar {
-    width: 100vw;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -739,6 +738,7 @@ body.transitioning .sidebar {
     tab-size: 2;
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
+  --sidebar-width: 350px;
 }
 
 body {
