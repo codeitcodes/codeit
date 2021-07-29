@@ -56,8 +56,8 @@ function loadCodeFromStorage() {
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
     // scroll to pos in code
-    cd.scrollTop = Number(getStorage('scrollPos'));
-        
+    cd.scrollTo(getStorage('scrollPos').split()[0], getStorage('scrollPos').split()[1]);
+    
   }
   
   // if sidebar is open
@@ -88,7 +88,7 @@ window.onbeforeunload = () => {
   setStorage('code', btoa(cd.textarea.value));
   
   setStorage('caret', cd.textarea.selectionStart);
-  setStorage('scrollPos', cd.scrollTop);
+  setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
   
   setStorage('sidebar', body.classList.contains('expanded'));
   
