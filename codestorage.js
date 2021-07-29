@@ -56,7 +56,7 @@ function loadCodeFromStorage() {
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
     // scroll to pos in code
-    cd.scrollTo(getStorage('scrollPos').split()[0], getStorage('scrollPos').split()[1]);
+    cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
     
   }
   
