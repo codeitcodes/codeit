@@ -1,4 +1,4 @@
-cd {
+:host {
   display: inline-flex;
   position: relative;
   overflow: auto;
@@ -18,7 +18,7 @@ cd {
   cursor: text;
 }
 
-cd textarea {
+textarea {
   background: transparent;
   color: transparent;
   
@@ -43,7 +43,7 @@ cd textarea {
   z-index: 1;
 }
 
-cd pre {
+pre {
   margin: 0;
   
   font: inherit;
@@ -54,7 +54,7 @@ cd pre {
   width: max-content;
 }
 
-cd code {
+code {
   display: inline-block;
   color: #333;
 }
