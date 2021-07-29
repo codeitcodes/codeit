@@ -18,7 +18,7 @@ const FILES_TO_CACHE = [
   '/gitsidebar.js',
   '/codesearch.js',
   '/codestorage.js',
-  '/bottomfloater.js',
+  '/bottomfloat.js',
   '/codelearn.js',
   'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js',
   '/dark.css',
