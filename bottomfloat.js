@@ -48,10 +48,6 @@ learnOpen.addEventListener('click', () => {
 // if on mobile device
 if (isMobile) {
   
-  // if selected file is modified, show flag
-  if (selectedFile.modified == true) bottomFloat.classList.add('modified');
-  else bottomFloat.classList.remove('modified');
-  
   // show bottom float when scrolled up
   
   let lastScrollTop = 0;
