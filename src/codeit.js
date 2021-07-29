@@ -151,4 +151,4 @@ class CodeitElement extends HTMLElement {
 }
 
 // define the codeit element
-window.customElements.define('code-it', CodeitElement);
+window.customElements.define('cd-el', CodeitElement);
