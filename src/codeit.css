@@ -45,17 +45,13 @@ cd-el textarea {
 
 cd-el pre {
   margin: 0;
-  
   font: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  
   height: max-content;
   width: max-content;
 }
 
 cd-el code {
-  color: #333;
+  font: inherit;
 }
 
 /* github-gist.css */
