@@ -701,6 +701,7 @@ body.transitioning .sidebar {
   }
   
   body.expanded cd-el {
+    width: 100vw;
     transform: translateX(100vw);
   }
   
