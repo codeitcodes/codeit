@@ -10,7 +10,7 @@ function updateFloat() {
   bottomFloat.classList.remove('hidden');
   
   // if selected file is modified, show flag
-  if (selectedFile.modified == true) bottomFloat.classList.add('modified');
+  if (modifiedFiles[selectedFile.sha]) bottomFloat.classList.add('modified');
   else bottomFloat.classList.remove('modified');
   
   // show selected file name
