@@ -1,4 +1,4 @@
-:host {
+cd-el {
   display: inline-flex;
   position: relative;
   overflow: auto;
@@ -18,7 +18,7 @@
   cursor: text;
 }
 
-textarea {
+cd-el textarea {
   background: transparent;
   color: transparent;
   
@@ -43,7 +43,7 @@ textarea {
   z-index: 1;
 }
 
-pre {
+cd-el pre {
   margin: 0;
   
   font: inherit;
@@ -54,7 +54,7 @@ pre {
   width: max-content;
 }
 
-code {
+cd-el code {
   display: inline-block;
   color: #333;
 }
