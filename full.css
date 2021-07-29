@@ -469,10 +469,8 @@ body.transitioning .sidebar {
   cursor: pointer;
   border-radius: 50%;
   color: #828689;
-  position: absolute;
   display: none;
-  right: 20px;
-  transition: .18s var(--ease-function);
+  transition: .18s var( --ease-function);
 }
 
 .sidebar .item.modified .push {
