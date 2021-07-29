@@ -5,7 +5,7 @@ const version = '1.0.6';
 
 const body = document.body,
       
-      cd = document.querySelector('cd'),
+      cd = document.querySelector('cd-el'),
       
       bottomFloat = document.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
