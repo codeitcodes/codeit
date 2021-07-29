@@ -54,6 +54,8 @@ function loadCodeFromStorage() {
     
     // set caret pos in code
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
+    
+    // scroll to caret
     cd.textarea.focus();
     cd.textarea.blur();
         
