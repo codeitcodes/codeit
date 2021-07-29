@@ -89,6 +89,22 @@ body.transitioning cd-el {
   font-weight: 500;
 }
 
+.bottom-float .badge {
+  position: absolute;
+  bottom: 16px;
+  left: 35px;
+  width: 8px;
+  height: 8px;
+  background: #568af2;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #191d25;
+  display: none;
+}
+
+.bottom-float.modified .badge {
+  display: block;
+}
+
 .bottom-float .learn-open {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
