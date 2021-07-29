@@ -59,7 +59,7 @@ class CodeitElement extends HTMLElement {
     // append codeit elements to DOM
     shadow.appendChild(cd.textarea);
     shadow.appendChild(cd.pre);
-    shadow.pre.appendChild(cd.code);
+    cd.pre.appendChild(cd.code);
 
     // set codeit textarea value to code
     cd.textarea.value = cd.parsedCode;
