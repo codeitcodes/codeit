@@ -1,5 +1,5 @@
 
-// function runs on updateFile() in gitsidebar.js
+// function runs in loadFile() in gitsidebar.js
 // if isMobile
 function updateFloat() {
   
@@ -8,6 +8,10 @@ function updateFloat() {
   
   // show bottom floater
   bottomFloat.classList.remove('hidden');
+  
+  // if selected file is modified, show flag
+  if (selectedFile.modified) bottomFloat.classList.add('modified');
+  else bottomFloat.classList.remove('modified');
   
   // show selected file name
   floatLogo.innerText = selectedFile.name;
