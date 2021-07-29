@@ -525,7 +525,7 @@ body.transitioning .sidebar {
   margin-bottom: 25px;
   border-radius: 50%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 23px;
   display: block;
   background: hsl(228deg 16% 21%);
 }
