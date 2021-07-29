@@ -223,7 +223,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .wrapper {
-  height: 100%;
+  height: max-content;
 }
 
 .sidebar :is(.content-wrapper, .learn-wrapper) {
