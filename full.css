@@ -263,11 +263,12 @@ body.transitioning .sidebar {
 }
 
 .sidebar .loader {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   opacity: 0;
   height: 2px;
+  margin-bottom: -2px;
   border-radius: 6px;
   pointer-events: none;
   background: #568af2;
