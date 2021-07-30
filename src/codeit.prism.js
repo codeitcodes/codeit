@@ -84,7 +84,7 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      cd.code.innerHTML = cd.textarea.value;
+      //cd.code.innerHTML = cd.textarea.value;
       
       // resize textarea
       cd.textarea.style.width = cd.pre.clientWidth + 'px';
@@ -97,7 +97,7 @@ class CodeitElement extends HTMLElement {
 
         cd.code.innerHTML = html;
         
-      });
+      }, 30);
 
     }
     
