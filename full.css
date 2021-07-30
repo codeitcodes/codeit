@@ -135,7 +135,7 @@ body.transitioning cd-el {
 }
 
 body.expanded .github {
-  transform: none;
+  transform: translateX(var(--sidebar-width));
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
   padding-left: 7.5px;
@@ -159,7 +159,7 @@ body.transitioning .github {
 }
 
 .github:hover {
-  transform: none;
+  left: 0;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   animation: none;
 }
