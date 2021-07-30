@@ -23,7 +23,7 @@ class CodeitElement extends HTMLElement {
     let cd = this;
     
     // add codeit CSS to head
-    const css = 'cd-el{display:inline-flex;position:relative;overflow:auto;font-size:14px;line-height:1.5;font-family:monospace;text-rendering:optimizeLegibility;font-feature-settings:"kern";background:#f1f3f4;color:#333;border-radius:5px;padding:5px;cursor:text}cd-el textarea{background:0 0;color:transparent;position:absolute;border:0;resize:none;font:inherit;letter-spacing:inherit;line-height:inherit;outline:0;caret-color:#000;white-space:pre;display:inline-table;padding:0;min-width:1px;box-sizing:border-box;z-index:1}cd-el pre{margin:0;font:inherit;height:max-content;width:max-content}cd-el code{font:inherit}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#d73a49}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-symbol{color:#0086b3}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#6f42c1}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.hljs-number{color:#005cc5}.hljs-string{color:#032f62}',
+    const css = 'cd-el{display:inline-flex;position:relative;overflow:auto;font-size:14px;line-height:1.5;font-family:monospace;text-rendering:optimizeLegibility;font-feature-settings:"kern";background:#f1f3f4;color:#333;border-radius:5px;padding:5px;cursor:text}cd-el textarea{background:0 0;color:transparent;position:absolute;border:0;resize:none;font:inherit;letter-spacing:inherit;line-height:inherit;outline:0;caret-color:#000;white-space:pre;display:inline-table;padding:0;min-width:1px;box-sizing:border-box;z-index:1}cd-el pre{margin:0;font:inherit;height:max-content;width:max-content}cd-el code{font:inherit}code[class*=language-],pre[class*=language-]{color:#fff;background:0 0;text-shadow:0 -.1em .2em #000;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}:not(pre)>code[class*=language-],pre[class*=language-]{background:#4c3f33}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:.3em solid #7a6651;border-radius:.5em;box-shadow:1px 1px .5em #000 inset}:not(pre)>code[class*=language-]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6651;box-shadow:1px 1px .3em -.1em #000 inset;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#997f66}.token.punctuation{opacity:.7}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag{color:#d1939e}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#bce051}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f4b73d}.token.atrule,.token.attr-value,.token.keyword{color:#d1939e}.token.important,.token.regex{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.deleted{color:red}',
           head = document.head,
           style = document.createElement('style');
     head.appendChild(style);
@@ -45,7 +45,7 @@ class CodeitElement extends HTMLElement {
     cd.textarea.setAttribute('rows', 1);
 
     // highlight with specified lang
-    cd.code.classList = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'hljs';
+    cd.code.classList = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'js';
 
     // parse code
     cd.parsedCode = cd.innerText.replace(/^\n|\n$/g, '');
@@ -83,26 +83,15 @@ class CodeitElement extends HTMLElement {
     }
     
     cd.update = () => {
-
-      cd.code.innerHTML = escapeHTML(cd.textarea.value);
+      
+      // Returns a highlighted HTML string
+      const html = Prism.highlight(escapeHTML(cd.textarea.value), Prism.languages.javascript, 'javascript');
+      
+      cd.code.innerHTML = html;
       
       // resize textarea
       cd.textarea.style.width = cd.pre.clientWidth + 'px';
       cd.textarea.style.height = cd.pre.clientHeight + 'px';
-      
-      // if codeit lang not specified, autodetect code lang
-      if (cd.getAttribute('lang') == undefined) {
-        
-        cd.code.classList = 'hljs';
-        
-      } else {
-        
-        // highlight with specified lang
-        cd.code.classList = cd.getAttribute('lang');
-        
-      }
-
-      hljs.highlightElement(cd.code);
 
     }
     
