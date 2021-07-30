@@ -1,3 +1,60 @@
+cd-el {
+  display: inline-flex;
+  position: relative;
+  overflow: auto;
+  
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: monospace;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  
+  background: #f1f3f4;
+  color: #333;
+  
+  border-radius: 5px;
+  padding: 5px;
+  
+  cursor: text;
+}
+
+cd-el textarea {
+  background: transparent;
+  color: transparent;
+  
+  position: absolute;
+  
+  border: 0;
+  resize: none;
+  
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  
+  outline: none;
+  caret-color: black;
+  white-space: pre;
+  display: inline-table;
+
+  padding: 0;
+  min-width: 1px;
+  box-sizing: border-box;
+  
+  z-index: 1;
+}
+
+cd-el pre {
+  margin: 0;
+  font: inherit;
+  height: max-content;
+  width: max-content;
+}
+
+cd-el code {
+  font: inherit;
+}
+
+
 /**
  * prism.js Dark theme for JavaScript, CSS and HTML
  * Based on the slides of the talk “/Reg(exp){2}lained/”
