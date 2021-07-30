@@ -290,7 +290,7 @@ body.transitioning .sidebar {
 .sidebar :is(.titlescreen, .searchscreen) {
   display: flex;
   height: 59px;
-  width: 100vw;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
