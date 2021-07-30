@@ -686,6 +686,24 @@ body.transitioning .sidebar {
     box-shadow: none;
   }
   
+  .sidebar .button:hover {
+    background: hsl(228deg 16% 42%);
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  }
+
+  .sidebar .button.secondary:hover {
+    background: hsla(0,0%,100%,.2);
+  }
+
+  .sidebar .button.secondary:hover {
+    background: hsla(0,0%,100%,.2);
+  }
+
+  .sidebar .button.teritary:hover {
+    background: transparent;
+    color: hsl(220deg 4% 84%);
+  }
+  
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
