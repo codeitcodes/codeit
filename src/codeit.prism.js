@@ -85,7 +85,7 @@ class CodeitElement extends HTMLElement {
     cd.update = () => {
       
       // Returns a highlighted HTML string
-      const html = Prism.highlight(escapeHTML(cd.textarea.value), Prism.languages.javascript, 'javascript');
+      const html = Prism.highlight(cd.textarea.value, Prism.languages.javascript, 'javascript');
       
       cd.code.innerHTML = html;
       
