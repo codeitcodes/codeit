@@ -90,10 +90,14 @@ class CodeitElement extends HTMLElement {
       cd.textarea.style.width = cd.pre.clientWidth + 'px';
       cd.textarea.style.height = cd.pre.clientHeight + 'px';
       
-      // Returns a highlighted HTML string
-      const html = Prism.highlight(cd.textarea.value, Prism.languages.javascript, 'javascript');
-      
-      cd.code.innerHTML = html;
+      window.setTimeout(() => {
+        
+        // Returns a highlighted HTML string
+        const html = Prism.highlight(cd.textarea.value, Prism.languages.javascript, 'javascript');
+
+        cd.code.innerHTML = html;
+        
+      });
 
     }
     
