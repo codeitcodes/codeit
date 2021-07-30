@@ -23,6 +23,15 @@ function updateFloat() {
 sidebarOpen.addEventListener('click', () => {
   
   body.classList.add('expanded');
+
+  let selectedItem = document.querySelector('.selected');
+  
+  if (selectedItem) {
+
+    // scroll to selected file
+    selectedItem.scrollIntoViewIfNeeded();
+
+  }
   
 })
 
