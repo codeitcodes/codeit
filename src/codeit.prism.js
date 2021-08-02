@@ -268,7 +268,7 @@ class CodeitElement extends HTMLElement {
             caretOffset = 0;
           }
           
-          break;
+          return;
         }
       }
 
