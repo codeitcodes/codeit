@@ -214,7 +214,8 @@ class CodeitElement extends HTMLElement {
       event.stopPropagation();
       
       // add newline
-      cd.insert('\n');
+      //cd.insert('\n');
+      document.execCommand('insertHTML', false, '\n');
       
     }
     
