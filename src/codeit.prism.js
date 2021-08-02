@@ -210,7 +210,7 @@ class CodeitElement extends HTMLElement {
     if (event.key === 'Enter') {
 
       // prevent the default behaviour of return key pressed
-      preventDefault(event);
+      event.preventDefault();
       event.stopPropagation();
       
       // add newline
@@ -343,7 +343,7 @@ class CodeitElement extends HTMLElement {
   let caretPosInText = 0;
   let prev;
 
-  cd.update = async () => {
+  cd.update = () => {
     
     if (cd.textContent !== prev) {
       
@@ -351,7 +351,7 @@ class CodeitElement extends HTMLElement {
 
       if (caretPosInText) {
 
-        await cd.highlight();
+        cd.highlight();
 
 
         let caretData = getTextNodesIn(cd);
