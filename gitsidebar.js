@@ -355,7 +355,7 @@ async function loadFile(file, sha) {
   }
   
   // set caret pos in code
-  cd.setSelectionRange(0, 0);
+  cd.setSelection(0, 0);
   cd.scrollTo(0, 0);
   
   // if on mobile device
