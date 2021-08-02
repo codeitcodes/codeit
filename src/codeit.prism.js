@@ -168,7 +168,7 @@ class CodeitElement extends HTMLElement {
           cd.highlight();
           
           // select pos in text
-          cd.select(caretPosInText);
+          cd.setSelection(caretPosInText);
 
         } else { // no need to select, just highlight
           
