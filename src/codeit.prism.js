@@ -362,14 +362,25 @@ class CodeitElement extends HTMLElement {
         caretPosInText = getCaretPosInInnerText(cd);
 
         if (caretPosInText) {
-
+          
+          console.log('caretPosInText:', caretPosInText);
+          
+          console.log('highlighting...');
+          
+          cd.highlight();
+          
           let caretData = getTextNodesIn(cd);
 
-          cd.highlight(caretData[1]);
+          console.log('caretData:', caretData);
 
-          console.log('caretData:',caretData[1], 'node:',caretData[0]);
-
-          setCaret(caretData[0], caretData[1]);
+          let [startNode, startOffset] = caretData;
+          
+          console.log('selecting...');
+          
+          let s = window.getSelection();
+          s.setBaseAndExtent(startNode, startOffset, startNode, startOffset)
+          
+          //setCaret(caretData[0], caretData[1]);
 
         }
 
