@@ -84,7 +84,7 @@ class CodeitElement extends HTMLElement {
       // run on all mutations
       mutationsList.forEach(mutation => {
         
-        console.log(mutation.type);
+        console.log('[textContent observer]', mutation.type);
         
       });
 
@@ -98,7 +98,7 @@ class CodeitElement extends HTMLElement {
       // run on all mutations
       mutationsList.forEach(mutation => {
         
-        console.log(mutation.type);
+        console.log('[innerHTML observer]', mutation.type);
         
       });
 
@@ -141,6 +141,12 @@ class CodeitElement extends HTMLElement {
         console.log('highlighting...', cd.innerHTML, cd.prev);
         debounceHighlight();
 
+      } else if (cd.childNodes.length == 1) {
+        
+        // if disabled highlighting
+        console.log('else highlighting...', cd.innerHTML, cd.prev);
+        debounceHighlight();
+        
       }
 
       cd.prev = cd.textContent;
