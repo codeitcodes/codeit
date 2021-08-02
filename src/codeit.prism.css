@@ -17,10 +17,11 @@ cd-el {
   background: #f1f3f4;
   color: #333;
   
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
   
   cursor: text;
+  tab-size: 2;
 }
 
 
