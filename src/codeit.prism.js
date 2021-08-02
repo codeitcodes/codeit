@@ -47,6 +47,7 @@ class CodeitElement extends HTMLElement {
 
     // highlight with specified lang
     cd.lang = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'js';
+    cd.classList = 'lang-js';
 
     // parse code
     cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
