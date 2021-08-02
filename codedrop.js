@@ -3,8 +3,8 @@ function processFile(file) {
     
   const reader = new FileReader();
   reader.addEventListener('load', (event) => {
-    cd.setValue(event.target.result);
-    cd.textarea.focus();
+    cd.textContent = event.target.result;
+    cd.focus();
   });
   reader.readAsText(file);
   
