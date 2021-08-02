@@ -352,7 +352,7 @@ body.transitioning .sidebar {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 235px;
-  transition: .18s var(--ease-function);
+  transition: .18s var(--ease-function) margin-left;
 }
 
 .sidebar .header.searching .logo {
