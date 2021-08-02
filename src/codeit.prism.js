@@ -138,6 +138,59 @@ class CodeitElement extends HTMLElement {
 
     })
 
+
+    let caretPosInText = 0;
+    let prev;
+
+    cd.update = () => {
+
+      if (cd.textContent !== prev) {
+
+        debounceHighlight();
+
+      }
+
+      prev = cd.textContent;
+
+    }
+
+    function debounceHighlight() {
+      
+      // highlight in async thread
+      debounce(() => {
+        
+        // if codeit is focused
+        if (document.activeElement == cd) {
+          
+          // get caret pos in text
+          let caretPosInText = cd.getSelection();
+          
+          cd.highlight();
+          
+          // select pos in text
+          cd.select(caretPosInText);
+
+        } else { // no need to select, just highlight
+          
+          cd.highlight();
+          
+        }
+
+      }, 30);
+
+    }
+    
+    cd.setSelection = (caretPosInText) => {
+            
+      // get caret node and offset
+      let c = getCaretPosAndNode(caretPosInText);
+
+      // select
+      let s = window.getSelection();
+      s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
+      
+    }
+    
     // get caret pos in text
     cd.getSelection = () => {
 
@@ -244,59 +297,6 @@ class CodeitElement extends HTMLElement {
         };
 
       }
-    }
-
-
-    let caretPosInText = 0;
-    let prev;
-
-    cd.update = () => {
-
-      if (cd.textContent !== prev) {
-
-        debounceHighlight();
-
-      }
-
-      prev = cd.textContent;
-
-    }
-
-    function debounceHighlight() {
-      
-      // highlight in async thread
-      debounce(() => {
-        
-        // if codeit is focused
-        if (document.activeElement == cd) {
-          
-          // get caret pos in text
-          let caretPosInText = cd.getSelection();
-          
-          cd.highlight();
-          
-          // select pos in text
-          cd.select(caretPosInText);
-
-        } else { // no need to select, just highlight
-          
-          cd.highlight();
-          
-        }
-
-      }, 30);
-
-    }
-    
-    cd.select = (caretPosInText) => {
-            
-      // get caret node and offset
-      let c = getCaretPosAndNode(caretPosInText);
-
-      // select
-      let s = window.getSelection();
-      s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
-      
     }
 
     cd.update();
