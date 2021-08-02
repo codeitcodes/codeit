@@ -53,7 +53,7 @@ function loadCodeFromStorage() {
     cd.textContent = atob(getStorage('code'));
     
     // set caret pos in code
-    cd.setSelectionRange(getStorage('caret'), getStorage('caret'));
+    cd.setSelection(getStorage('caret'), getStorage('caret'));
     
     // scroll to pos in code
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
