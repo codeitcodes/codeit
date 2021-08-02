@@ -52,12 +52,14 @@ class CodeitElement extends HTMLElement {
     cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
 
     // highlight codeit
-    cd.highlight = () => {
+    cd.highlight = (pos) => {
 
       // Returns a highlighted HTML string
-      const html = Prism.highlight(cd.textContent, Prism.languages.javascript, 'javascript');
+      //const html = Prism.highlight(cd.textContent, Prism.languages.javascript, 'javascript');
 
-      cd.innerHTML = html;
+      //cd.innerHTML = html;
+      
+      Prism.highlightElement(cd, pos);
     
     }
     
@@ -362,7 +364,7 @@ class CodeitElement extends HTMLElement {
 
           let caretData = getTextNodesIn(cd);
 
-          cd.highlight();
+          cd.highlight(caretData[1]);
 
           console.log('caretData:',caretData[1], 'node:',caretData[0]);
 
