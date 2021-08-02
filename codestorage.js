@@ -21,7 +21,7 @@ function saveModifiedFile(fileDir, fileSha, fileName, fileExists) {
                              sha: fileSha,
                              name: fileName,
                              exists: fileExists,
-                             content: btoa(cd.textarea.value)
+                             content: btoa(cd.textContent)
                            };
   
   setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
@@ -53,7 +53,7 @@ function loadCodeFromStorage() {
     cd.textContent = atob(getStorage('code'));
     
     // set caret pos in code
-    cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
+    cd.setSelectionRange(getStorage('caret'), getStorage('caret'));
     
     // scroll to pos in code
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
@@ -85,9 +85,9 @@ function loadCodeFromStorage() {
 window.onbeforeunload = () => {
   
   // set localStorage values
-  setStorage('code', btoa(cd.textarea.value));
+  setStorage('code', btoa(cd.textContent));
   
-  setStorage('caret', cd.textarea.selectionStart);
+  setStorage('caret', cd.textContent.selectionStart);
   setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
   
   setStorage('sidebar', body.classList.contains('expanded'));
