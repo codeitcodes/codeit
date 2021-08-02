@@ -267,6 +267,8 @@ class CodeitElement extends HTMLElement {
             overallLength = cd.lastChild.value.length;
             caretOffset = 0;
           }
+          
+          break;
         }
       }
 
