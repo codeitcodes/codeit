@@ -358,7 +358,7 @@ class CodeitElement extends HTMLElement {
 
         console.log('caretData:',caretData[1], 'node:',caretData[0]);
 
-        //setCaret(caretData[0], caretData[1]);
+        setCaret(caretData[0], caretData[1]);
 
       } else {
 
