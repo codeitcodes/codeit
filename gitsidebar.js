@@ -160,8 +160,8 @@ async function renderFiles() {
       selectedItem.scrollIntoViewIfNeeded();
       
       // set event listener for file change
-      cd.textarea.addEventListener('keydown', checkBackspace);
-      cd.textarea.addEventListener('input', fileChange);
+      cd.addEventListener('keydown', checkBackspace);
+      cd.addEventListener('input', fileChange);
       
     }
     
@@ -239,7 +239,7 @@ function addItemListeners() {
           if (item.classList.contains('selected')) {
               
               // get current value of file
-              content = btoa(cd.textarea.value);
+              content = btoa(cd.textContent);
           
           } else { // else, load from storage
             
@@ -283,8 +283,8 @@ function addItemListeners() {
           }
           
           // set event listener for file change
-          cd.textarea.addEventListener('keydown', checkBackspace);
-          cd.textarea.addEventListener('input', fileChange);
+          cd.addEventListener('keydown', checkBackspace);
+          cd.addEventListener('input', fileChange);
           
         }
         
@@ -340,7 +340,7 @@ async function loadFile(file, sha) {
     var resp = await axios.get(query, githubToken);
 
     // show file content in codeit
-    cd.setValue(atob(resp.content));
+    cd.textContent = atob(resp.content);
     
     // stop loading
     stopLoading();
@@ -350,12 +350,12 @@ async function loadFile(file, sha) {
     const content = modifiedFiles[sha].content;
     
     // show file content in codeit
-    cd.setValue(atob(content));
+    cd.textContent = atob(content);
     
   }
   
   // set caret pos in code
-  cd.textarea.setSelectionRange(0, 0);
+  cd.setSelectionRange(0, 0);
   cd.scrollTo(0, 0);
   
   // if on mobile device
@@ -367,8 +367,8 @@ async function loadFile(file, sha) {
   }
   
   // set event listener for file change
-  cd.textarea.addEventListener('keydown', checkBackspace);
-  cd.textarea.addEventListener('input', fileChange);
+  cd.addEventListener('keydown', checkBackspace);
+  cd.addEventListener('input', fileChange);
   
 }
 
@@ -435,8 +435,8 @@ function fileChange() {
   saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
 
   // remove event listener
-  cd.textarea.removeEventListener('keydown', checkBackspace);
-  cd.textarea.removeEventListener('input', fileChange);
+  cd.removeEventListener('keydown', checkBackspace);
+  cd.removeEventListener('input', fileChange);
 
 }
 
