@@ -5,7 +5,7 @@
 /* 
    
    codeit by @barhatsor
-   v2.3.0
+   v2.3.1
    MIT License
    
    github.com/barhatsor/codeit
