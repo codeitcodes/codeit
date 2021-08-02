@@ -5,7 +5,7 @@
 /* 
    
    codeit by @barhatsor
-   v2.2.5
+   v2.3.0
    MIT License
    
    github.com/barhatsor/codeit
@@ -199,7 +199,7 @@ class CodeitElement extends HTMLElement {
 
     cd.addEventListener('keydown', (event) => {
 
-      handleNewline(event);
+      //handleNewline(event);
 
     })
 
@@ -280,16 +280,6 @@ class CodeitElement extends HTMLElement {
 
       return overallLength + caretOffset;
 
-    }
-
-
-    function setCaret(el, pos) {
-      var range = document.createRange();
-      var sel = window.getSelection();
-      range.setStart(el,pos);
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
     }
 
 
@@ -385,8 +375,6 @@ class CodeitElement extends HTMLElement {
           
           let s = window.getSelection();
           s.setBaseAndExtent(startNode, startOffset, startNode, startOffset)
-          
-          //setCaret(caretData[0], caretData[1]);
 
         }
 
