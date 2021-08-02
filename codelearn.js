@@ -8,8 +8,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(display-mode: standalone)').matches) {
     displayMode = 'standalone';
   }
-  // Log launch display mode
-  console.log('DISPLAY_MODE_LAUNCH:', displayMode);
 });
 
 window.addEventListener('appinstalled', logAppInstalled);
@@ -39,9 +37,9 @@ function installPWA(evt) {
   deferredInstallPrompt.userChoice
     .then((choice) => {
       if (choice.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
+        console.log('Accepted the install prompt');
       } else {
-        console.log('User dismissed the A2HS prompt');
+        console.log('Dismissed the install prompt');
       }
       deferredInstallPrompt = null;
     });
