@@ -132,19 +132,23 @@ class CodeitElement extends HTMLElement {
     })
 
 
-    let caretPosInText = 0;
-    let prev;
+    cd.prev = '';
 
     cd.update = () => {
 
-      if (cd.innerHTML !== prev) {
+      if (cd.textContent !== cd.prev) {
         
-        console.log('highlighting...', cd.innerHTML, prev);
+        console.log('highlighting...', cd.innerHTML, cd.prev);
         debounceHighlight();
 
+      } else if (cd.innerHTML !== cd.prev) {
+        
+        console.log('else highlighting...', cd.prev, cd.innerHTML);
+        debounceHighlight();
+        
       }
 
-      prev = cd.innerHTML;
+      cd.prev = cd.textContent;
 
     }
 
