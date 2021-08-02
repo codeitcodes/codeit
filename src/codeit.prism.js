@@ -246,8 +246,8 @@ class CodeitElement extends HTMLElement {
             nodePath.push(node);
 
             overallLength += node.nodeValue.length;
-            //console.log(node.nodeValue)
-            //console.log('node length',node.nodeValue.length)
+            console.log(node.nodeValue)
+            console.log('node length',node.nodeValue.length)
 
             //if (node.nodeValue === ' ') {
           } else { //if it's an empty node, this means more nodes underneath:
