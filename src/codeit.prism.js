@@ -141,11 +141,6 @@ class CodeitElement extends HTMLElement {
         console.log('highlighting...', cd.innerHTML, cd.prev);
         debounceHighlight();
 
-      } else if (cd.innerHTML !== cd.prev) {
-        
-        console.log('else highlighting...', cd.prev, cd.innerHTML);
-        debounceHighlight();
-        
       }
 
       cd.prev = cd.textContent;
