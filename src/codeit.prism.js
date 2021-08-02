@@ -136,12 +136,12 @@ class CodeitElement extends HTMLElement {
 
     cd.update = () => {
 
-      if (cd.textContent !== cd.prev) {
+      if (cd.textContent != cd.prev) {
         
         console.log('highlighting...', cd.innerHTML, cd.prev);
         debounceHighlight();
 
-      } else if (cd.innerHTML !== cd.prev && cd.childNodes.length == 1) {
+      } else if (cd.innerHTML != cd.prev && cd.childNodes.length == 1) {
         
         // if disabled highlighting
         console.log('else highlighting...', cd.innerHTML, cd.prev);
