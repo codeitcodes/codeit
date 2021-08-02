@@ -71,6 +71,12 @@ class CodeitElement extends HTMLElement {
       
     }
     
+    cd.setValue = (code) => {
+      
+      cd.textContent = code;
+      
+    }
+    
     /*
     BehaveHooks.add('enter:after', (data) => {
       
