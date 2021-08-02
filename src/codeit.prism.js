@@ -231,44 +231,48 @@ class CodeitElement extends HTMLElement {
       var caretOffset = sel.anchorOffset; // offset in node
 
       var overallLength = 0;
+      
+      var foundNode = false;
 
       //console.log(el, targetNode, caretOffset);
 
       function getTextNodes(node) {
+        
+        if (!foundNode) {
+        
+          //If reached the target node:
+          if (node != targetNode) {
 
-        //If reached the target node:
-        if (node != targetNode) {
+            //If node type is text:
+            if (node.nodeType == 3) {
+              //if(node.nodeValue === ' ') overallLength += 1;
 
-          //If node type is text:
-          if (node.nodeType == 3) {
-            //if(node.nodeValue === ' ') overallLength += 1;
+              nodePath.push(node);
 
-            nodePath.push(node);
+              overallLength += node.nodeValue.length;
+              console.log(node.nodeValue)
+              console.log('node length',node.nodeValue.length)
 
-            overallLength += node.nodeValue.length;
-            console.log(node.nodeValue)
-            console.log('node length',node.nodeValue.length)
+              //if (node.nodeValue === ' ') {
+            } else { //if it's an empty node, this means more nodes underneath:
+              //Go over his brother leaves:
+              for (var i = 0, len = node.childNodes.length; i < len; ++i)
+              {
+                // Call recursive call on node's children:
+                getTextNodes(node.childNodes[i]);
 
-            //if (node.nodeValue === ' ') {
-          } else { //if it's an empty node, this means more nodes underneath:
-            //Go over his brother leaves:
-            for (var i = 0, len = node.childNodes.length; i < len; ++i)
-            {
-              // Call recursive call on node's children:
-              getTextNodes(node.childNodes[i]);
+              }
+            }
+          }else{
+            console.log('found node', node);
+            foundNode = true;
 
+            if (node.nodeType != 3) {
+              console.log('bad node');
+              overallLength = cd.lastChild.value.length;
+              caretOffset = 0;
             }
           }
-        }else{
-          console.log('found node', node);
-
-          if (node.nodeType != 3) {
-            console.log('bad node');
-            overallLength = cd.lastChild.value.length;
-            caretOffset = 0;
-          }
-          
-          return;
         }
       }
 
