@@ -138,7 +138,8 @@ class CodeitElement extends HTMLElement {
     cd.update = () => {
 
       if (cd.innerHTML !== prev) {
-
+        
+        console.log('highlighting...');
         debounceHighlight();
 
       }
