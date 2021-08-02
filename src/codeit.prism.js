@@ -356,7 +356,7 @@ class CodeitElement extends HTMLElement {
 
         let caretData = getTextNodesIn(cd);
 
-        console.log('caretData:',caretData[1], 'node:',cd.innerHTML.length);
+        console.log('caretData:',caretData[1], 'node:',caretData[0]);
 
         setCaret(caretData[0], caretData[1]);
 
@@ -372,7 +372,7 @@ class CodeitElement extends HTMLElement {
 
   }
     
-    cd.highlight();
+    cd.update();
     
   }
   
