@@ -138,7 +138,8 @@ class CodeitElement extends HTMLElement {
 
     })
 
-    function getCaretPosInInnerText() {
+    // get caret pos in text
+    cd.getSelection = () => {
 
       var sel = window.getSelection();
 
@@ -270,7 +271,7 @@ class CodeitElement extends HTMLElement {
         if (document.activeElement == cd) {
           
           // get caret pos in text
-          let caretPosInText = getCaretPosInText(cd);
+          let caretPosInText = cd.getSelection();
           
           cd.highlight();
           
