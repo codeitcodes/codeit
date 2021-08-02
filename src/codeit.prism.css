@@ -1,6 +1,10 @@
 cd-el {
-  display: inline-flex;
-  position: relative;
+	outline: none;
+  user-select: text;
+  -webkit-user-select: text;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  
   overflow: auto;
   
   font-size: 14px;
@@ -9,6 +13,7 @@ cd-el {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   
+  display: block;
   background: #f1f3f4;
   color: #333;
   
@@ -16,42 +21,6 @@ cd-el {
   padding: 5px;
   
   cursor: text;
-}
-
-cd-el textarea {
-  background: transparent;
-  color: transparent;
-  
-  position: absolute;
-  
-  border: 0;
-  resize: none;
-  
-  font: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  
-  outline: none;
-  caret-color: black;
-  white-space: pre;
-  display: inline-table;
-
-  padding: 0;
-  min-width: 1px;
-  box-sizing: border-box;
-  
-  z-index: 1;
-}
-
-cd-el pre {
-  margin: 0;
-  font: inherit;
-  height: max-content;
-  width: max-content;
-}
-
-cd-el code {
-  font: inherit;
 }
 
 
