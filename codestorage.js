@@ -50,7 +50,7 @@ function loadCodeFromStorage() {
   if (getStorage('code')) {
     
     // set codeit to code
-    cd.setValue(atob(getStorage('code')));
+    cd.textContent = atob(getStorage('code'));
     
     // set caret pos in code
     cd.textarea.setSelectionRange(getStorage('caret'), getStorage('caret'));
