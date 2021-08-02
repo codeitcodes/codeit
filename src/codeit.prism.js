@@ -137,13 +137,13 @@ class CodeitElement extends HTMLElement {
 
     cd.update = () => {
 
-      if (cd.textContent !== prev) {
+      if (cd.innerHTML !== prev) {
 
         debounceHighlight();
 
       }
 
-      prev = cd.textContent;
+      prev = cd.innerHTML;
 
     }
 
