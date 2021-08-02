@@ -55,11 +55,11 @@ cd-el {
   font-size: 14px;
 }
 
-cd-el textarea {
+cd-el {
   caret-color: #fff;
 }
 
-cd-el textarea::selection {
+cd-el::selection {
   background: rgba(255, 255, 255, 0.15);
 }
 
