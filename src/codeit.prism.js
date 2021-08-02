@@ -79,18 +79,16 @@ class CodeitElement extends HTMLElement {
     // create a new instance of 'MutationObserver' named 'observer',
     // passing it a callback function
 
-    let updatingHighlight = false;
-
     let textContentObserver = new MutationObserver(function(mutationsList, observer) {
 
       // run on all mutations
       mutationsList.forEach(mutation => {
-
+        
+        console.log(mutation.type);
+        
       });
 
       cd.update();
-
-      console.log('textContent', mutationsList);
 
     });
 
@@ -99,13 +97,13 @@ class CodeitElement extends HTMLElement {
 
       // run on all mutations
       mutationsList.forEach(mutation => {
-
+        
+        console.log(mutation.type);
+        
       });
 
       cd.update();
       
-      console.log('innerHTML', mutationsList);
-
     });
 
 
@@ -113,12 +111,7 @@ class CodeitElement extends HTMLElement {
     // call 'observe' on that MutationObserver instance,
     // passing it the element to observe, and the options object
 
-    var textContentConfig = {
-      characterData: false,
-      attributes: false,
-      childList: true,
-      subtree: false
-    };
+    var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
     
     textContentObserver.observe(cd, textContentConfig);
 
