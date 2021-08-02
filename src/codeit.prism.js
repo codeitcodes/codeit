@@ -352,10 +352,9 @@ class CodeitElement extends HTMLElement {
 
       if (caretPosInText) {
 
-        cd.highlight();
-
-
         let caretData = getTextNodesIn(cd);
+        
+        cd.highlight();
 
         console.log('caretData:',caretData[1], 'node:',caretData[0]);
 
