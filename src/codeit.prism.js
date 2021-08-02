@@ -141,7 +141,7 @@ class CodeitElement extends HTMLElement {
         console.log('highlighting...', cd.innerHTML, cd.prev);
         debounceHighlight();
 
-      } else if (cd.childNodes.length == 1) {
+      } else if (cd.innerHTML !== cd.prev && cd.childNodes.length == 1) {
         
         // if disabled highlighting
         console.log('else highlighting...', cd.innerHTML, cd.prev);
