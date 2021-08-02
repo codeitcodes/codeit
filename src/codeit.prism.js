@@ -17,7 +17,7 @@ class CodeitElement extends HTMLElement {
 
   constructor() {
 
-    // always call super first in constructor
+    // call super to get codeit element
     super();
 
     let cd = this;
@@ -47,7 +47,6 @@ class CodeitElement extends HTMLElement {
 
     // highlight with specified lang
     cd.lang = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'js';
-    cd.classList = 'lang-js';
 
     // parse code
     cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
@@ -60,20 +59,12 @@ class CodeitElement extends HTMLElement {
 
       cd.innerHTML = html;
 
-      //Prism.highlightElement(cd);
-
     }
 
     function debounce(func, time) {
 
       window.setTimeout(func, time);
       
-    }
-
-    cd.setValue = (code) => {
-
-      cd.textContent = code;
-
     }
 
     const escapeHTML = (unsafe) => {
@@ -95,41 +86,11 @@ class CodeitElement extends HTMLElement {
       // run on all mutations
       mutationsList.forEach(mutation => {
 
-        /*console.log(mutation.type);
-        // if mutation was a textNode mutation
-        if (mutation.type == 'characterData') {
-          // if the text didn't change, stop
-          if (mutation.oldValue == cd.innerText) {
-            textChanged = false;
-            console.log('Text: ' + mutation.oldValue, cd.innerText);
-          }
-        } else if (mutation.type == 'childList') { // if mutation was a innerHTML mutation
-          // if mutation was from highlighting, stop
-          if (updatingHighlight == true) {
-            updatingHighlight = false;
-            textChanged = false;
-          } else {
-            updatingHighlight = true;
-            textChanged = true;
-          }
-        }*/
-
       });
 
-      if (updatingHighlight == false) {
+      cd.update();
 
-        //console.log('Updating Codeit from textContent', mutationsList);
-        updatingHighlight = true;
-        cd.update();
-
-      } else {
-
-        //console.log('Ignoring update from highlight');
-        updatingHighlight = false;
-
-      }
-
-      //console.log('textContent', mutationsList);
+      console.log('textContent', mutationsList);
 
     });
 
@@ -139,31 +100,11 @@ class CodeitElement extends HTMLElement {
       // run on all mutations
       mutationsList.forEach(mutation => {
 
-        /*console.log(mutation.type);
-        // if mutation was a textNode mutation
-        if (mutation.type == 'characterData') {
-          // if the text didn't change, stop
-          if (mutation.oldValue == cd.innerText) {
-            textChanged = false;
-            console.log('Text: ' + mutation.oldValue, cd.innerText);
-          }
-        } else if (mutation.type == 'childList') { // if mutation was a innerHTML mutation
-          // if mutation was from highlighting, stop
-          if (updatingHighlight == true) {
-            updatingHighlight = false;
-            textChanged = false;
-          } else {
-            updatingHighlight = true;
-            textChanged = true;
-          }
-        }*/
-
       });
 
-      //console.log('Updating Codeit from innerHTML', mutationsList);
-      updatingHighlight = true;
       cd.update();
-      //console.log('innerHTML', mutationsList);
+      
+      console.log('innerHTML', mutationsList);
 
     });
 
@@ -178,6 +119,7 @@ class CodeitElement extends HTMLElement {
       childList: true,
       subtree: false
     };
+    
     textContentObserver.observe(cd, textContentConfig);
 
     var innerHTMLConfig = {
@@ -186,6 +128,7 @@ class CodeitElement extends HTMLElement {
       childList: false,
       subtree: true
     };
+    
     innerHTMLObserver.observe(cd, innerHTMLConfig);
 
 
@@ -195,91 +138,65 @@ class CodeitElement extends HTMLElement {
 
     })
 
-    function handleNewline(event) {
-
-      // trap the return key being pressed
-      if (event.key === 'Enter') {
-
-        // prevent the default behaviour of return key pressed
-        event.preventDefault();
-        event.stopPropagation();
-
-        // add newline
-        //cd.insert('\n');
-        document.execCommand('insertHTML', false, '\n');
-
-      }
-
-    }
-
-
-    var nodePath = [];
-
-    function getCaretPosInInnerText(el) {
+    function getCaretPosInInnerText() {
 
       var sel = window.getSelection();
 
       var targetNode = sel.anchorNode; // node of caret
       var caretOffset = sel.anchorOffset; // offset in node
 
-      var overallLength = 0;
-
-      var foundNode = false;
-
-      //console.log(el, targetNode, caretOffset);
+      var overallLength = 0,
+          foundNode = false;
 
       function getTextNodes(node) {
 
         if (!foundNode) {
 
-          //If reached the target node:
+          // if reached target node
           if (node != targetNode) {
 
-            //If node type is text:
+            // if node type is text
             if (node.nodeType == 3) {
-              //if(node.nodeValue === ' ') overallLength += 1;
-
-              nodePath.push(node);
-
+              
               overallLength += node.nodeValue.length;
-              console.log(node.nodeValue)
-              console.log('node length', node.nodeValue.length)
 
-              //if (node.nodeValue === ' ') {
-            } else { //if it's an empty node, this means more nodes underneath:
-              //Go over his brother leaves:
+            } else { // if it's an empty node, this means there's more nodes underneath
+              
+              // go over his brother leaves
               for (var i = 0, len = node.childNodes.length; i < len; ++i) {
-                // Call recursive call on node's children:
+                
+                // call recursive call on node's children
                 getTextNodes(node.childNodes[i]);
 
               }
+              
             }
           } else {
-            console.log('found node', node);
+            
             foundNode = true;
-
+            
+            // if not found text node, return
             if (node.nodeType != 3) {
-              console.log('bad node');
-              //overallLength = cd.textContent.length;
-              //caretOffset = 0;
               return false;
             }
+            
           }
         }
       }
 
-      getTextNodes(el);
+      // init recursive call
+      getTextNodes(cd);
 
       return overallLength + caretOffset;
 
     }
 
 
-    //Go over all nodes till reach the number of characters:
-    function getTextNodesIn(el) {
+    // go over all nodes until reaching the right number of characters
+    function getCaretPosAndNode(caretPosInText) {
 
       var overallLength = 0,
-        lastNode;
+          lastNode;
 
       function getTextNodes(node) {
 
@@ -307,7 +224,7 @@ class CodeitElement extends HTMLElement {
       }
       
       // init recursive call
-      getTextNodes(el);
+      getTextNodes(cd);
       
       if (lastNode) {
 
@@ -348,22 +265,37 @@ class CodeitElement extends HTMLElement {
       
       // highlight in async thread
       debounce(() => {
-
-        caretPosInText = getCaretPosInInnerText(cd);
-
-        if (caretPosInText) {
-
-          cd.highlight();
-
-          let c = getTextNodesIn(cd);
-          let s = window.getSelection();
+        
+        // if codeit is focused
+        if (document.activeElement == cd) {
           
-          s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
+          // get caret pos in text
+          let caretPosInText = getCaretPosInText(cd);
+          
+          cd.highlight();
+          
+          // select pos in text
+          cd.select(caretPosInText);
 
+        } else { // no need to select, just highlight
+          
+          cd.highlight();
+          
         }
 
       }, 30);
 
+    }
+    
+    cd.select = (caretPosInText) => {
+            
+      // get caret node and offset
+      let c = getCaretPosAndNode(caretPosInText);
+
+      // select
+      let s = window.getSelection();
+      s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
+      
     }
 
     cd.update();
