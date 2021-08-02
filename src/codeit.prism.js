@@ -343,7 +343,7 @@ class CodeitElement extends HTMLElement {
   let caretPosInText = 0;
   let prev;
 
-  cd.update = () => {
+  cd.update = async () => {
     
     if (cd.textContent !== prev) {
       
@@ -351,7 +351,7 @@ class CodeitElement extends HTMLElement {
 
       if (caretPosInText) {
 
-        cd.highlight();
+        await cd.highlight();
 
 
         let caretData = getTextNodesIn(cd);
