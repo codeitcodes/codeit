@@ -14,26 +14,26 @@
 
 // create a class for the codeit element
 class CodeitElement extends HTMLElement {
-  
+
   constructor() {
-    
+
     // always call super first in constructor
     super();
-    
+
     let cd = this;
-    
+
     // add codeit CSS to head
     const css = `cd-el{outline:0;user-select:text;-webkit-user-select:text;overflow-wrap:break-word;white-space:pre-wrap;overflow:auto;font-size:14px;line-height:1.5;font-family:monospace;text-rendering:optimizeLegibility;font-feature-settings:"kern";display:block;background:#f1f3f4;color:#333;border-radius:10px;padding:10px;cursor:text;tab-size:2}code[class*=language-],pre[class*=language-]{color:#fff;background:0 0;text-shadow:0 -.1em .2em #000;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}:not(pre)>code[class*=language-],pre[class*=language-]{background:#4c3f33}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:.3em solid #7a6651;border-radius:.5em;box-shadow:1px 1px .5em #000 inset}:not(pre)>code[class*=language-]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6651;box-shadow:1px 1px .3em -.1em #000 inset;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#997f66}.token.punctuation{opacity:.7}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag{color:#d1939e}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#bce051}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f4b73d}.token.atrule,.token.attr-value,.token.keyword{color:#d1939e}.token.important,.token.regex{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.deleted{color:red}`,
-          head = document.head,
-          style = document.createElement('style');
+      head = document.head,
+      style = document.createElement('style');
     head.appendChild(style);
     style.appendChild(document.createTextNode(css));
-    
+
     // if editable property is true
     cd.editable = (cd.getAttribute('editable') == 'false') ? false : true;
-    
+
     if (cd.editable) {
-      
+
       // make codeit editable
       cd.setAttribute('contenteditable', 'plaintext-only');
       cd.setAttribute('spellcheck', 'false');
@@ -42,7 +42,7 @@ class CodeitElement extends HTMLElement {
       cd.setAttribute('aria-autocomplete', 'list');
       cd.setAttribute('autocapitalize', 'off');
       cd.setAttribute('data-gramm', 'false');
-      
+
     }
 
     // highlight with specified lang
@@ -53,47 +53,29 @@ class CodeitElement extends HTMLElement {
     cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
 
     // highlight codeit
-    cd.highlight = (pos) => {
+    cd.highlight = () => {
 
       // Returns a highlighted HTML string
-      //const html = Prism.highlight(cd.textContent, Prism.languages.javascript, 'javascript');
+      const html = Prism.highlight(cd.textContent, Prism.languages.javascript, 'javascript');
 
-      //cd.innerHTML = html;
-      
-      Prism.highlightElement(cd, pos);
-    
+      cd.innerHTML = html;
+
+      //Prism.highlightElement(cd);
+
     }
-    
-    cd.debounce = (func, time) => {
-      
+
+    function debounce(func, time) {
+
       window.setTimeout(func, time);
       
     }
-    
+
     cd.setValue = (code) => {
-      
+
       cd.textContent = code;
-      
+
     }
-    
-    /*
-    BehaveHooks.add('enter:after', (data) => {
-      
-      cd.debounce(() => {
-        
-        // if pressed enter on one of last three lines, scroll down
-        const firstLine = (data.lines.current == data.lines.total),
-              secondLine = (data.lines.current == (data.lines.total - 1)),
-              thirdLine = (data.lines.current == (data.lines.total - 2));
-        
-        if (firstLine || secondLine || thirdLine) {
-          cd.scrollTop = cd.scrollHeight;
-        }
-        
-      }, 0);
-      
-    });*/
-    
+
     const escapeHTML = (unsafe) => {
       return unsafe
         .replace(/&/g, "&amp;")
@@ -102,7 +84,7 @@ class CodeitElement extends HTMLElement {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
-    
+
     // create a new instance of 'MutationObserver' named 'observer',
     // passing it a callback function
 
@@ -190,10 +172,20 @@ class CodeitElement extends HTMLElement {
     // call 'observe' on that MutationObserver instance,
     // passing it the element to observe, and the options object
 
-    var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
+    var textContentConfig = {
+      characterData: false,
+      attributes: false,
+      childList: true,
+      subtree: false
+    };
     textContentObserver.observe(cd, textContentConfig);
 
-    var innerHTMLConfig = { characterData: true, attributes: false, childList: false, subtree: true };
+    var innerHTMLConfig = {
+      characterData: true,
+      attributes: false,
+      childList: false,
+      subtree: true
+    };
     innerHTMLObserver.observe(cd, innerHTMLConfig);
 
 
@@ -231,15 +223,15 @@ class CodeitElement extends HTMLElement {
       var caretOffset = sel.anchorOffset; // offset in node
 
       var overallLength = 0;
-      
+
       var foundNode = false;
 
       //console.log(el, targetNode, caretOffset);
 
       function getTextNodes(node) {
-        
+
         if (!foundNode) {
-        
+
           //If reached the target node:
           if (node != targetNode) {
 
@@ -251,26 +243,26 @@ class CodeitElement extends HTMLElement {
 
               overallLength += node.nodeValue.length;
               console.log(node.nodeValue)
-              console.log('node length',node.nodeValue.length)
+              console.log('node length', node.nodeValue.length)
 
               //if (node.nodeValue === ' ') {
             } else { //if it's an empty node, this means more nodes underneath:
               //Go over his brother leaves:
-              for (var i = 0, len = node.childNodes.length; i < len; ++i)
-              {
+              for (var i = 0, len = node.childNodes.length; i < len; ++i) {
                 // Call recursive call on node's children:
                 getTextNodes(node.childNodes[i]);
 
               }
             }
-          }else{
+          } else {
             console.log('found node', node);
             foundNode = true;
 
             if (node.nodeType != 3) {
               console.log('bad node');
-              overallLength = cd.lastChild.value.length;
-              caretOffset = 0;
+              //overallLength = cd.textContent.length;
+              //caretOffset = 0;
+              return false;
             }
           }
         }
@@ -284,53 +276,54 @@ class CodeitElement extends HTMLElement {
 
 
     //Go over all nodes till reach the number of characters:
-    function getTextNodesIn(el, includeWhitespaceNodes) {
+    function getTextNodesIn(el) {
 
-      var overallLength = 0, lastNode;
+      var overallLength = 0,
+        lastNode;
 
       function getTextNodes(node) {
 
-        //If reached the target text:
+        // if not reached the target text
         if (overallLength <= caretPosInText) {
 
           lastNode = node;
 
-          //If node type is text:
-          if (node.nodeType == 3)
-          {
+          // if node type is text
+          if (node.nodeType == 3) {
 
             overallLength += node.nodeValue.length;
 
-            //if (node.nodeValue === ' ') {
-          } else { //if it's an empty node, this means more nodes underneath:
+          } else { // if it's an empty node, this means there's more nodes underneath
 
-            //Go over his brother leaves:
-            for (var i = 0, len = node.childNodes.length; i < len; ++i)
-            {
-              // Call recursive call on node's children:
+            // go over his brother leaves
+            for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+              
+              // call recursive call on node's children
               getTextNodes(node.childNodes[i]);
 
             }
           }
-        }else{
-          //console.log('overall length:', overallLength);
         }
       }
-
+      
+      // init recursive call
       getTextNodes(el);
-
+      
       if (lastNode) {
 
-        var lastNodeLength = lastNode.nodeValue.length;
-
-        //end of line problem
-        //sel.anchorOffset
-        //return [lastNode, (lastNodeLength - (overallLength - caretPosInText))];
-        return [lastNode, (lastNodeLength - (overallLength - caretPosInText))];
+        let lastNodeLength = lastNode.nodeValue.length;
+        
+        return {
+          startNode: lastNode,
+          startOffset: (lastNodeLength - (overallLength - caretPosInText))
+        };
 
       } else {
 
-        return [cd, 0];
+        return {
+          startNode: cd,
+          startOffset: 0
+        };
 
       }
     }
@@ -352,40 +345,31 @@ class CodeitElement extends HTMLElement {
     }
 
     function debounceHighlight() {
-
-      cd.debounce(() => {
+      
+      // highlight in async thread
+      debounce(() => {
 
         caretPosInText = getCaretPosInInnerText(cd);
 
         if (caretPosInText) {
-          
-          console.log('caretPosInText:', caretPosInText);
-          
-          console.log('highlighting...');
-          
+
           cd.highlight();
-          
-          let caretData = getTextNodesIn(cd);
 
-          console.log('caretData:', caretData);
-
-          let [startNode, startOffset] = caretData;
-          
-          console.log('selecting...');
-          
+          let c = getTextNodesIn(cd);
           let s = window.getSelection();
-          s.setBaseAndExtent(startNode, startOffset, startNode, startOffset)
+          
+          s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
 
         }
 
       }, 30);
 
     }
-    
+
     cd.update();
-    
+
   }
-  
+
 }
 
 // define the codeit element
