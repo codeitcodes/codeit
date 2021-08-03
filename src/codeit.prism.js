@@ -137,11 +137,10 @@ class CodeitElement extends HTMLElement {
         let [padding] = findPadding(before);
         newLinePadding = padding;
         
-        // if char before caret is "{" and char after is "}" indent new line
-        let bracketOne = (before.slice(-1) === '{');
-        let bracketTwo = (after.charAt(0) === '}');
+        // if char before caret is "{" indent new line
+        const indentOn = (before.slice(-1) === '{');
         
-        if (bracketOne && bracketTwo) {
+        if (indentOn) {
           
           // indent new line
           newLinePadding += cd.options.tab;
