@@ -116,6 +116,7 @@ body.transitioning cd-el {
 }
 
 .github {
+  display: flex;
   position: fixed;
   bottom: 5px;
   left: 0;
