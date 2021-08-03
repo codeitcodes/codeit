@@ -126,10 +126,23 @@ class CodeitElement extends HTMLElement {
     // IDE-style behaviors
     
     let newLinePadding = false;
+    let pressedEnter = false;
     
     function handleNewLine(event) {
       
       if (event.key === 'Enter') {
+        
+        pressedEnter = true;
+        
+      }
+      
+    }
+    
+    function addNewLinePadding(event) {
+      
+      if (pressedEnter) {
+        
+        pressedEnter = false;
         
         const before = beforeCursor();
         const after = afterCursor();
@@ -165,23 +178,9 @@ class CodeitElement extends HTMLElement {
           
         }
         
-      } else {
-        
-        // clear new line padding
-        newLinePadding = false;
-        
-      }
-      
-    }
-    
-    function addNewLinePadding() {
-      
-      // if new line padding exists
-      if (newLinePadding) {
-      
         // add new line padding
         insert(newLinePadding);
-      
+        
       }
       
     }
