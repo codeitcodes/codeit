@@ -24,10 +24,6 @@ cd-el {
   tab-size: 2;
 }
 
-cd-el *::selection {
-  background: transparent;
-}
-
 
 /**
  * prism.js Dark theme for JavaScript, CSS and HTML
