@@ -133,6 +133,9 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Enter') {
         
+        event.preventPropagation();
+        event.preventDefault();
+        
         const before = beforeCursor();
         const after = afterCursor();
         
@@ -159,10 +162,11 @@ class CodeitElement extends HTMLElement {
           
         }
         
-      } else {
-        
-        // clear new line padding
-        newLinePadding = false;
+        if (newLinePadding) {
+          insert('\n' + newLinePadding);
+        } else {
+          insert('\n');
+        }
         
       }
       
@@ -174,9 +178,9 @@ class CodeitElement extends HTMLElement {
       if (newLinePadding) {
         
         // add new line padding
-        insert(newLinePadding);
+        //insert(newLinePadding);
         
-        newLinePadding = false;
+        //newLinePadding = false;
       
       }
       
