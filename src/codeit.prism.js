@@ -466,7 +466,7 @@ class CodeitElement extends HTMLElement {
           return [
             lastNode,
             (lastNodeLength - (overallLength - caretPosInText))
-          };
+          ];
 
         } else {
 
