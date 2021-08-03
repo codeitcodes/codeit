@@ -113,6 +113,7 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
+      if (cd.options.preserveIdent) handleDelNewLine(event);
       if (cd.options.catchTab) handleTabCharacters(event);
       if (cd.options.addClosing) handleSelfClosingCharacters(event);
 
@@ -166,6 +167,27 @@ class CodeitElement extends HTMLElement {
           
         }
         
+      }
+      
+    }
+    
+    function handleDelNewLine(event) {
+      
+      if (event.key === 'Backspace' || event.key === 'Delete') {
+        
+        const before = beforeCursor();
+        
+        let [padding] = findPaddingThisLine(before);
+        
+        if (padding) {
+          
+          event.stopPropagation();
+          event.preventDefault();
+          
+          while (var i = padding.length-1;i < 0; i--) document.execCommand('delete');
+          
+        }
+      
       }
       
     }
@@ -287,7 +309,7 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    cd.findPaddingThisLine = (text) => {
+    function findPaddingThisLine(text) {
       
       // find beginning of this line
       let i = text.length - 1;
@@ -296,9 +318,7 @@ class CodeitElement extends HTMLElement {
       
       // find padding of previous line
       let j = i;
-      while (j >= 0 && text[j] !== '\n') j--;
-      j++;
-      
+      while (j >= 0 && text[j] !== '\n') j--;      
       return [text.substring(i, j) || '', i, j];
       
     }
