@@ -323,9 +323,10 @@ class CodeitElement extends HTMLElement {
     let cd = this;
     
     // if changed codeit lang
-    if (name == 'lang') {
+    if (name == 'lang' && oldValue !== newValue) {
       
-      // highlight
+      // force highlight
+      cd.prev = '';
       cd.update();
       
     } else if (name == 'editable') { // if changed codeit editable
