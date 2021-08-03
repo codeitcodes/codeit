@@ -184,7 +184,7 @@ class CodeitElement extends HTMLElement {
           event.stopPropagation();
           event.preventDefault();
           
-          while (var i = padding.length-1;i < 0; i--) document.execCommand('delete');
+          for (let i = padding.length-1;i < 0; i--) document.execCommand('delete');
           
         }
       
