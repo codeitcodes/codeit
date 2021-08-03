@@ -162,7 +162,7 @@ class CodeitElement extends HTMLElement {
           // add new line padding
           insert(newLinePadding);
           
-        }, 30);
+        }, 0);
         
       }
       
