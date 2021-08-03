@@ -292,7 +292,7 @@ class CodeitElement extends HTMLElement {
           cd.highlight(cd.lang);
           
           // restore pos in text
-          cd.setSelection(pos.start, pos.end);
+          cd.setSelection(pos.start);
 
         } else { // no need to move caret, just highlight
           
