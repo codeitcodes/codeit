@@ -138,6 +138,9 @@ class CodeitElement extends HTMLElement {
 
       if (cd.textContent !== cd.prev) {
         
+        // escape HTML
+        cd.textContent = cd.textContent;
+        
         debounceHighlight();
         
       }
