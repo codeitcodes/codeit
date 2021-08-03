@@ -198,7 +198,7 @@ class CodeitElement extends HTMLElement {
             const pos = cd.getSelection();
             
             // remove full length tab or just remaining padding
-            const len = Math.min(options.tab.length, padding.length);
+            const len = Math.min(cd.options.tab.length, padding.length);
             document.execCommand('delete');
             pos.start -= len;
             pos.end -= len;
@@ -211,7 +211,7 @@ class CodeitElement extends HTMLElement {
         } else {
           
           // add tab
-          insert(options.tab);
+          insert(cd.options.tab);
           
         }
         
