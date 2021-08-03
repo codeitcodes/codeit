@@ -85,13 +85,7 @@ class CodeitElement extends HTMLElement {
     // create a new instance of 'MutationObserver',
     // passing it a callback function
 
-    let textContentObserver = new MutationObserver(function(mutationsList, observer) {
-
-      cd.update();
-
-    });
-    
-    let innerHTMLObserver = new MutationObserver(function(mutationsList, observer) {
+    let updateObserver = new MutationObserver(function(mutationsList, observer) {
 
       cd.update();
 
@@ -102,7 +96,7 @@ class CodeitElement extends HTMLElement {
 
     var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
     
-    textContentObserver.observe(cd, textContentConfig);
+    updateObserver.observe(cd, textContentConfig);
     
     var innerHTMLConfig = {
       characterData: true,
@@ -111,7 +105,7 @@ class CodeitElement extends HTMLElement {
       subtree: true
     };
 
-    innerHTMLObserver.observe(cd, innerHTMLConfig);
+    updateObserver.observe(cd, innerHTMLConfig);
 
 
     cd.addEventListener('keydown', (event) => {
