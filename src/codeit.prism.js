@@ -172,11 +172,11 @@ class CodeitElement extends HTMLElement {
       
       // if new line padding exists
       if (newLinePadding) {
-      
-        console.log(newLinePadding);
         
         // add new line padding
         insert(newLinePadding);
+        
+        newLinePadding = false;
       
       }
       
