@@ -325,8 +325,7 @@ class CodeitElement extends HTMLElement {
     // if changed codeit lang
     if (name == 'lang') {
       
-      // force highlight
-      cd.prev = '';
+      // highlight
       cd.update();
       
     } else if (name == 'editable') { // if changed codeit editable
