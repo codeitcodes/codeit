@@ -141,29 +141,27 @@ class CodeitElement extends HTMLElement {
         let bracketOne = (before.slice(-1) === '{');
         let bracketTwo = (after.charAt(0) === '}');
         
-        // indent new line
-        if (bracketOne && bracketTwo) {
-          
-          newLinePadding += cd.options.tab;
-          
-          // get caret pos in text
-          const pos = cd.getSelection();
-          
-          // move adjacent "}" down one line
-          insert('\n');
-          
-          // restore pos in text
-          cd.setSelection(pos);
-          
-        }
-        
         // if char after caret is "\n" and "}"
         let newlineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
         
         // indent new line
-        if (bracketOne && newlineBracket) {
+        if (bracketOne && (bracketTwo || newlineBracket)) {
           
           newLinePadding += cd.options.tab;
+          
+          // if "}" is next to caret
+          if (bracketOne && bracketTwo) {
+          
+            // get caret pos in text
+            const pos = cd.getSelection();
+
+            // move adjacent "}" down one line
+            insert('\n');
+
+            // restore pos in text
+            cd.setSelection(pos);
+            
+          }
           
         }
         
