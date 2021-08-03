@@ -292,10 +292,13 @@ class CodeitElement extends HTMLElement {
       // find beginning of this line
       let i = text.length - 1;
       while (i >= 0 && text[i] !== cd.options.tab) i--;
+      i++;
       
       // find padding of previous line
       let j = i;
       while (j >= 0 && text[j] !== '\n') j--;
+      j--;
+      
       return [text.substring(i, j) || '', i, j];
       
     }
