@@ -136,10 +136,7 @@ class CodeitElement extends HTMLElement {
     
     cd.update = (force) => {
 
-      if (cd.textContent !== cd.prev) {
-        
-        // escape HTML
-        cd.textContent = cd.textContent;
+      if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
         debounceHighlight();
         
