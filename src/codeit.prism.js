@@ -4,8 +4,8 @@
 
 /* 
    
-   codeit.js by @barhatsor
-   v2.3.1
+   codeit.js
+   v2.3.3
    MIT License
    
    github.com/barhatsor/codeit
@@ -34,6 +34,15 @@ class CodeitElement extends HTMLElement {
       style = document.createElement('style');
     head.appendChild(style);
     style.appendChild(document.createTextNode(css));
+    
+    // set default options
+    cd.options = {
+      tab: '\t',
+      catchTab: true,
+      preserveIdent: true,
+      addClosing: true,
+      history: true
+    };
 
     // if edit property is true
     cd.edit = (cd.getAttribute('edit') == 'false') ? false : true;
@@ -72,26 +81,18 @@ class CodeitElement extends HTMLElement {
       window.setTimeout(func, time);
       
     }
-
-    const escapeHTML = (unsafe) => {
-      return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
+    
 
     // create a new instance of 'MutationObserver',
     // passing it a callback function
 
-    let textContentObserver = new MutationObserver(function(mutationsList, observer) {
+    const textContentObserver = new MutationObserver(function(mutationsList, observer) {
 
       cd.update();
 
     });
     
-    let innerHTMLObserver = new MutationObserver(function(mutationsList, observer) {
+    const innerHTMLObserver = new MutationObserver(function(mutationsList, observer) {
 
       cd.update();
 
@@ -100,27 +101,116 @@ class CodeitElement extends HTMLElement {
     // call 'observe' on that MutationObserver instance,
     // passing it the element to observe, and the options object
 
-    var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
+    const textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
     
     textContentObserver.observe(cd, textContentConfig);
     
-    var innerHTMLConfig = {
-      characterData: true,
-      attributes: false,
-      childList: false,
-      subtree: true
-    };
+    const innerHTMLConfig = { characterData: true, attributes: false, childList: false, subtree: true };
 
     innerHTMLObserver.observe(cd, innerHTMLConfig);
 
 
     cd.addEventListener('keydown', (event) => {
 
-      //handleNewline(event);
+      if (cd.options.preserveIdent) beforeNewLine(event);
 
     })
+    
+    cd.addEventListener('keyup', (event) => {
 
+      if (cd.options.preserveIdent) afterNewLine(event);
 
+    })
+    
+    
+    // IDE-style behaviors
+    
+    let newLinePadding;
+    
+    function beforeNewLine(event) {
+      
+      if (event.key === 'Enter') {
+        
+        const before = beforeCursor();
+        const after = afterCursor();
+        
+        let [padding] = findPadding(before);
+        newLinePadding = padding;
+        
+        // if char before caret is "{" and char after is "}" indent new line
+        let bracketOne = (before.slice(-1) === '{');
+        let bracketTwo = (after.charAt(0) === '}');
+        
+        if (bracketOne && bracketTwo) {
+          
+          // indent new line
+          newLinePadding += cd.options.tab;
+          
+          // get caret pos in text
+          const pos = cd.getSelection();
+          
+          // move adjacent "}" down one line
+          insert('\n');
+          
+          // restore pos in text
+          cd.setSelection(pos);
+          
+        }
+        
+      }
+      
+    }
+    
+    function afterNewLine(event) {
+      
+      // add new line padding
+      insert(newLinePadding);
+      
+    }
+    
+    function beforeCursor() {
+      const s = getSelection();
+      const r0 = s.getRangeAt(0);
+      const r = document.createRange();
+      r.selectNodeContents(cd);
+      r.setEnd(r0.startContainer, r0.startOffset);
+      return r.toString();
+    }
+    
+    function afterCursor() {
+      const s = getSelection();
+      const r0 = s.getRangeAt(0);
+      const r = document.createRange();
+      r.selectNodeContents(cd);
+      r.setStart(r0.endContainer, r0.endOffset);
+      return r.toString();
+    }
+    
+    function findPadding(text) {
+      
+      // find beginning of previous line
+      let i = text.length - 1;
+      while (i >= 0 && text[i] !== '\n') i--;
+      i++;
+      
+      // find padding of previous line
+      let j = i;
+      while (j < text.length && /[ \t]/.test(text[j])) j++;
+      return [text.substring(i, j) || '', i, j];
+      
+    }
+    
+    function insert(text) {
+      text = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+      document.execCommand('insertHTML', false, text);
+    }
+    
+    
     cd.prev = '';
     
     cd.update = () => {
@@ -144,15 +234,15 @@ class CodeitElement extends HTMLElement {
         if (document.activeElement == cd) {
           
           // get caret pos in text
-          let caretPosInText = cd.getSelection();
+          const pos = cd.getSelection();
           
           cd.lang = getLang();
           cd.highlight(cd.lang);
           
-          // select pos in text
-          cd.setSelection(caretPosInText);
+          // restore pos in text
+          cd.setSelection(pos);
 
-        } else { // no need to select, just highlight
+        } else { // no need to move caret, just highlight
           
           cd.lang = getLang();
           cd.highlight(cd.lang);
@@ -181,10 +271,10 @@ class CodeitElement extends HTMLElement {
     cd.setSelection = (caretPosInText) => {
             
       // get caret node and offset
-      let c = getCaretPosAndNode(caretPosInText);
+      const c = getCaretPosAndNode(caretPosInText);
 
       // select
-      let s = window.getSelection();
+      const s = window.getSelection();
       s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
       
     }
@@ -192,12 +282,12 @@ class CodeitElement extends HTMLElement {
     // get caret pos in text
     cd.getSelection = () => {
 
-      var sel = window.getSelection();
+      const sel = window.getSelection();
 
-      var targetNode = sel.anchorNode; // node of caret
-      var caretOffset = sel.anchorOffset; // offset in node
+      const targetNode = sel.anchorNode; // node of caret
+      const caretOffset = sel.anchorOffset; // offset in node
 
-      var overallLength = 0,
+      let overallLength = 0,
           foundNode = false;
 
       function getTextNodes(node) {
@@ -247,7 +337,7 @@ class CodeitElement extends HTMLElement {
     // go over all nodes until reaching the right number of characters
     function getCaretPosAndNode(caretPosInText) {
 
-      var overallLength = 0,
+      let overallLength = 0,
           lastNode;
 
       function getTextNodes(node) {
@@ -280,7 +370,7 @@ class CodeitElement extends HTMLElement {
       
       if (lastNode) {
 
-        let lastNodeLength = lastNode.nodeValue.length;
+        const lastNodeLength = lastNode.nodeValue.length;
         
         return {
           startNode: lastNode,
