@@ -299,6 +299,7 @@ class CodeitElement extends HTMLElement {
       let j = i;
       console.log('here 2');
       while (i >= 0 && text[i] !== '\n') j--;
+      console.log('here 3');
       return ['', i, j];
       
     }
