@@ -87,7 +87,7 @@ window.onbeforeunload = () => {
   // set localStorage values
   setStorage('code', btoa(cd.textContent));
   
-  setStorage('caret', cd.getSelection());
+  setStorage('caret', cd.getSelection()[0]);
   setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
   
   setStorage('sidebar', body.classList.contains('expanded'));
