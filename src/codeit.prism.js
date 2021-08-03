@@ -191,6 +191,7 @@ class CodeitElement extends HTMLElement {
           
           // get padding of line
           let [padding, start] = findPadding(before);
+          console.log(padding, start);
           
           if (padding.length > 0) {
             
@@ -199,9 +200,9 @@ class CodeitElement extends HTMLElement {
             
             // remove full length tab or just remaining padding
             const len = Math.min(cd.options.tab.length, padding.length);
+            cd.setSelection(start);
             document.execCommand('delete');
-            pos.start -= len;
-            pos.end -= len;
+            pos -= len;
             
             // restore pos in text
             cd.setSelection(pos);
