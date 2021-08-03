@@ -157,6 +157,13 @@ class CodeitElement extends HTMLElement {
           
         }
         
+        window.setTimeout(() => {
+          
+          // add new line padding
+          insert(newLinePadding);
+          
+        }, 30);
+        
       }
       
     }
@@ -166,7 +173,7 @@ class CodeitElement extends HTMLElement {
       if (event.key === 'Enter') {
       
         // add new line padding
-        insert(newLinePadding);
+        //insert(newLinePadding);
       
       }
       
