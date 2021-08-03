@@ -14,7 +14,13 @@
 
 // create a class for the codeit element
 class CodeitElement extends HTMLElement {
-
+  
+  // Specify observed attributes so that
+  // attributeChangedCallback will work
+  static get observedAttributes() {
+    return ['lang', 'editable'];
+  }
+  
   constructor() {
 
     // call super to get codeit element
@@ -46,16 +52,16 @@ class CodeitElement extends HTMLElement {
     }
 
     // highlight with specified lang
-    cd.lang = (cd.getAttribute('lang') != undefined) ? cd.getAttribute('lang') : 'js';
+    cd.lang = getLang();
 
     // parse code
     cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
 
     // highlight codeit
-    cd.highlight = () => {
-
-      // Returns a highlighted HTML string
-      const html = Prism.highlight(cd.textContent, Prism.languages.javascript, 'javascript');
+    cd.highlight = (lang) => {
+      
+      // returns a highlighted HTML string
+      const html = Prism.highlight(cd.textContent, Prism.languages[lang], lang);
 
       cd.innerHTML = html;
 
@@ -134,7 +140,7 @@ class CodeitElement extends HTMLElement {
 
     cd.prev = '';
     
-    cd.update = (force) => {
+    cd.update = () => {
 
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
@@ -157,19 +163,36 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           let caretPosInText = cd.getSelection();
           
-          cd.highlight();
+          cd.lang = getLang();
+          cd.highlight(cd.lang);
           
           // select pos in text
           cd.setSelection(caretPosInText);
 
         } else { // no need to select, just highlight
           
-          cd.highlight();
+          cd.lang = getLang();
+          cd.highlight(cd.lang);
           
         }
 
       }, 30);
 
+    }
+    
+    function getLang() {
+      
+      // highlight with specified lang
+      if (cd.getAttribute('lang') != undefined && cd.getAttribute('lang') != '') {
+
+        return cd.getAttribute('lang');
+
+      } else {
+
+        return 'plaintext';
+        
+      }
+      
     }
     
     cd.setSelection = (caretPosInText) => {
@@ -294,7 +317,43 @@ class CodeitElement extends HTMLElement {
     cd.update();
 
   }
+  
+  attributeChangedCallback(name, oldValue, newValue) {
+    
+    let cd = this;
+    
+    // if changed codeit lang
+    if (name == 'lang') {
+      
+      // force highlight
+      cd.prev = '';
+      cd.update();
+      
+    } else if (name == 'editable') { // if changed codeit editable
+      
+      // get editable property
+      cd.editable = (newValue == 'false') ? false : true;
 
+      if (cd.editable) {
+
+        // make codeit editable
+        cd.setAttribute('contenteditable', 'plaintext-only');
+        cd.setAttribute('spellcheck', 'false');
+        cd.setAttribute('autocorrect', 'off');
+        cd.setAttribute('autocomplete', 'off');
+        cd.setAttribute('aria-autocomplete', 'list');
+        cd.setAttribute('autocapitalize', 'off');
+        cd.setAttribute('data-gramm', 'false');
+
+      } else {
+        
+        // make codeit uneditable
+        cd.setAttribute('contenteditable', 'false');
+        
+      }
+
+  }
+  
 }
 
 // define the codeit element
