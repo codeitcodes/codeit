@@ -24,8 +24,8 @@ cd-el {
   tab-size: 2;
 }
 
-cd-el *:selection {
-	background: transparent;
+cd-el *::selection {
+  background: transparent;
 }
 
 
