@@ -120,9 +120,7 @@ class CodeitElement extends HTMLElement {
     
     
     // IDE-style behaviors
-    
-    let newLinePadding = false;
-    
+        
     function handleNewLine(event) {
       
       if (event.key === 'Enter') {
@@ -131,7 +129,7 @@ class CodeitElement extends HTMLElement {
         const after = afterCursor();
         
         let [padding] = findPadding(before);
-        newLinePadding = padding;
+        let newLinePadding = padding;
         
         // if char before caret is "{" and char after is "}" indent new line
         let bracketOne = (before.slice(-1) === '{');
@@ -140,9 +138,6 @@ class CodeitElement extends HTMLElement {
         let newLineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
         
         if (bracketOne && (bracketTwo || newLineBracket)) {
-          
-          // indent new line
-          newLinePadding += cd.options.tab;
           
           if (bracketTwo) {
           
@@ -156,6 +151,9 @@ class CodeitElement extends HTMLElement {
             cd.setSelection(pos.start);
             
           }
+          
+          // indent new line
+          newLinePadding += cd.options.tab;
           
         }
         
