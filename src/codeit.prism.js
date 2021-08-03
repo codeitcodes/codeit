@@ -297,7 +297,7 @@ class CodeitElement extends HTMLElement {
       // find padding of previous line
       let j = i;
       while (j >= 0 && text[j] !== '\n') j--;
-      j--;
+      j++;
       
       return [text.substring(i, j) || '', i, j];
       
