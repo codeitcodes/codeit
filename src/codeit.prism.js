@@ -18,7 +18,7 @@ class CodeitElement extends HTMLElement {
   // Specify observed attributes so that
   // attributeChangedCallback will work
   static get observedAttributes() {
-    return ['lang', 'editable'];
+    return ['lang', 'edit'];
   }
   
   constructor() {
@@ -35,10 +35,10 @@ class CodeitElement extends HTMLElement {
     head.appendChild(style);
     style.appendChild(document.createTextNode(css));
 
-    // if editable property is true
-    cd.editable = (cd.getAttribute('editable') == 'false') ? false : true;
+    // if edit property is true
+    cd.edit = (cd.getAttribute('edit') == 'false') ? false : true;
 
-    if (cd.editable) {
+    if (cd.edit) {
 
       // make codeit editable
       cd.setAttribute('contenteditable', 'plaintext-only');
@@ -304,12 +304,12 @@ class CodeitElement extends HTMLElement {
       cd.prev = '';
       cd.update();
       
-    } else if (name == 'editable') { // if changed codeit editable
+    } else if (name == 'edit') { // if changed codeit edit property
       
-      // get editable property
-      cd.editable = (newValue == 'false') ? false : true;
+      // get edit property
+      cd.edit = (newValue == 'false') ? false : true;
 
-      if (cd.editable) {
+      if (cd.edit) {
 
         // make codeit editable
         cd.setAttribute('contenteditable', 'plaintext-only');
