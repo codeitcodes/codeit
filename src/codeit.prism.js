@@ -150,7 +150,7 @@ class CodeitElement extends HTMLElement {
             const pos = cd.getSelection();
 
             // move adjacent "}" down one line
-            insert('\n');
+            insert('\n' + newLinePadding);
 
             // restore pos in text
             cd.setSelection(pos.start);
