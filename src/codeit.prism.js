@@ -184,7 +184,7 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           let pos = cd.getSelection();
           
-          if (pos.start === pos.end) {
+          if (pos.start === pos.end && start === pos.start) {
             
             event.stopPropagation();
             event.preventDefault();
