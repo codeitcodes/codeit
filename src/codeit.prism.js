@@ -137,16 +137,13 @@ class CodeitElement extends HTMLElement {
         let [padding] = findPadding(before);
         newLinePadding = padding;
         
-        // if char before caret is "{" and char after is "}" indent new line
+        // if char before caret is "{" and char after is "}"
         let bracketOne = (before.slice(-1) === '{');
         let bracketTwo = (after.charAt(0) === '}');
         
-        // if char after caret is "\n" and "}"
-        let newlineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
-        
-        if (bracketOne && (bracketTwo || newlineBracket)) {
+        // indent new line
+        if (bracketOne && bracketTwo) {
           
-          // indent new line
           newLinePadding += cd.options.tab;
           
           // get caret pos in text
@@ -157,6 +154,16 @@ class CodeitElement extends HTMLElement {
           
           // restore pos in text
           cd.setSelection(pos);
+          
+        }
+        
+        // if char after caret is "\n" and "}"
+        let newlineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
+        
+        // indent new line
+        if (bracketOne && newlineBracket) {
+          
+          newLinePadding += cd.options.tab;
           
         }
         
