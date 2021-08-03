@@ -137,27 +137,23 @@ class CodeitElement extends HTMLElement {
         let [padding] = findPadding(before);
         newLinePadding = padding;
         
-        // if char before caret is "{" indent new line
-        const indentOn = (before.slice(-1) === '{');
-        const bracketTwo = (after.charAt(0) === '}');
+        // if char before caret is "{" and char after is "}" indent new line
+        let bracketOne = (before.slice(-1) === '{');
+        let bracketTwo = (after.charAt(0) === '}');
         
-        if (indentOn) {
+        if (bracketOne && bracketTwo) {
           
           // indent new line
           newLinePadding += cd.options.tab;
           
-          if (bracketTwo) {
+          // get caret pos in text
+          const pos = cd.getSelection();
           
-            // get caret pos in text
-            const pos = cd.getSelection();
+          // move adjacent "}" down one line
+          insert('\n');
 
-            // move adjacent "}" down one line
-            insert('\n');
-
-            // restore pos in text
-            cd.setSelection(pos);
-            
-          }
+          // restore pos in text
+          cd.setSelection(pos);
           
         }
         
@@ -173,7 +169,7 @@ class CodeitElement extends HTMLElement {
     function addNewLinePadding() {
       
       // if new line padding exists
-      if (newLinePadding !== false) {
+      if (newLinePadding) {
       
         // add new line padding
         insert(newLinePadding);
