@@ -287,6 +287,20 @@ class CodeitElement extends HTMLElement {
       
     }
     
+    cd.findPaddingThisLine = (text) => {
+      
+      // find beginning of this line
+      let i = text.length - 1;
+      while (i >= 0 && text[i] !== cd.options.tab) i--;
+      i++;
+      
+      // find padding of previous line
+      let j = i;
+      while (i >= 0 && text[i] !== '\n') j--;
+      return ['', i, j];
+      
+    }
+    
     function insert(text) {
       text = text
         .replace(/&/g, '&amp;')
