@@ -113,6 +113,7 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
+      if (cd.options.catchTab) handleTabCharacters(event)
 
     })
     
@@ -174,6 +175,46 @@ class CodeitElement extends HTMLElement {
         // add new line padding
         insert(newLinePadding);
       
+      }
+      
+    }
+    
+    function handleTabCharacters(event) {
+      
+      if (event.key === 'Tab') {
+        
+        event.preventDefault();
+        
+        if (event.shiftKey) {
+          
+          const before = beforeCursor();
+          
+          // get padding of line
+          let [padding, start] = findPadding(before);
+          
+          if (padding.length > 0) {
+            
+            // get caret pos in text
+            const pos = cd.getSelection();
+            
+            // remove full length tab or just remaining padding
+            const len = Math.min(options.tab.length, padding.length);
+            document.execCommand('delete');
+            pos.start -= len;
+            pos.end -= len;
+            
+            // restore pos in text
+            cd.setSelection(pos);
+            
+          }
+          
+        } else {
+          
+          // add tab
+          insert(options.tab);
+          
+        }
+        
       }
       
     }
