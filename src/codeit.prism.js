@@ -163,8 +163,12 @@ class CodeitElement extends HTMLElement {
     
     function afterNewLine(event) {
       
-      // add new line padding
-      insert(newLinePadding);
+      if (event.key === 'Enter') {
+      
+        // add new line padding
+        insert(newLinePadding);
+      
+      }
       
     }
     
