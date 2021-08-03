@@ -59,7 +59,7 @@ cd-el {
   caret-color: #fff;
 }
 
-cd-el, cd-el *::selection {
+cd-el::selection, cd-el *::selection {
   background: rgba(255, 255, 255, 0.15);
 }
 
