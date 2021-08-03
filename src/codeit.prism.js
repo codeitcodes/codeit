@@ -351,6 +351,8 @@ class CodeitElement extends HTMLElement {
         cd.setAttribute('contenteditable', 'false');
         
       }
+      
+    }
 
   }
   
