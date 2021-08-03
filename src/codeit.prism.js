@@ -181,13 +181,13 @@ class CodeitElement extends HTMLElement {
         
         if (padding) {
           
-          event.stopPropagation();
-          event.preventDefault();
-          
           // get caret pos in text
           let pos = cd.getSelection();
           
           if (pos.start === pos.end) {
+            
+            event.stopPropagation();
+            event.preventDefault();
             
             for (let i = padding.length-1;i >= 0; i--) document.execCommand('delete');
 
