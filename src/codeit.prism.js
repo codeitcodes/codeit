@@ -337,8 +337,8 @@ class CodeitElement extends HTMLElement {
 
       const sel = window.getSelection();
 
-      const targetNode = sel.anchorNode; // node of caret
-      const caretOffset = sel.anchorOffset; // offset in node
+      const targetNode = sel.focusNode; // node of caret
+      const caretOffset = sel.focusOffset; // offset in node
 
       let overallLength = 0,
           foundNode = false;
