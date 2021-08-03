@@ -189,7 +189,7 @@ class CodeitElement extends HTMLElement {
           
           cd.setSelection(start + 1);
           
-          for (let i = padding.length-1;i < 0; i--) document.execCommand('delete');
+          for (let i = padding.length-1;i > 0; i--) document.execCommand('delete');
           
           pos.start -= padding.length;
             
