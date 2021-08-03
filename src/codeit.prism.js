@@ -4,7 +4,7 @@
 
 /* 
    
-   codeit by @barhatsor
+   codeit.js by @barhatsor
    v2.3.1
    MIT License
    
