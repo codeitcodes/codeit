@@ -149,18 +149,18 @@ class CodeitElement extends HTMLElement {
           // indent new line
           newLinePadding += cd.options.tab;
           
-          if (!newlineBracket) {
+          // get caret pos in text
+          const pos = cd.getSelection();
           
-            // get caret pos in text
-            const pos = cd.getSelection();
-
+          if (!newlineBracket) {
+            
             // move adjacent "}" down one line
             insert('\n');
-
-            // restore pos in text
-            cd.setSelection(pos);
             
           }
+
+          // restore pos in text
+          cd.setSelection(pos);
           
         }
         
