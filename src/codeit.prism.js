@@ -480,34 +480,30 @@ class CodeitElement extends HTMLElement {
       }
       
       // if start and end pos exist
-      if (endPos) {
+      if (endPos && startPos !== endPos) {
         
-        if (startPos !== endPos) {
-          
-          // get start and end nodes
-          const [startNode, startOffset] = getCaretTextNode(startPos);
-          const [endNode, endOffset] = getCaretTextNode(endPos);
-          
-          return {
-            startNode: startNode,
-            startOffset: startOffset,
-            endNode: endNode,
-            endOffset: endPos
-          };
-          
-        } else {
-          
-          // get start nodes
-          const [startNode, startOffset] = getCaretTextNode(startPos);
-          
-          return {
-            startNode: startNode,
-            startOffset: startOffset,
-            endNode: startNode,
-            endOffset: startOffset
-          };
-          
-        }
+        // get start and end nodes
+        const [startNode, startOffset] = getCaretTextNode(startPos);
+        const [endNode, endOffset] = getCaretTextNode(endPos);
+
+        return {
+          startNode: startNode,
+          startOffset: startOffset,
+          endNode: endNode,
+          endOffset: endPos
+        };
+        
+      } else {
+        
+        // get start nodes
+        const [startNode, startOffset] = getCaretTextNode(startPos);
+
+        return {
+          startNode: startNode,
+          startOffset: startOffset,
+          endNode: startNode,
+          endOffset: startOffset
+        };
         
       }
       
