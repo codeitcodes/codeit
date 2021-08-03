@@ -101,7 +101,7 @@ class CodeitElement extends HTMLElement {
     // call 'observe' on that MutationObserver instance,
     // passing it the element to observe, and the options object
 
-    var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: false };
+    var textContentConfig = { characterData: false, attributes: false, childList: true, subtree: true };
     
     textContentObserver.observe(cd, textContentConfig);
 
