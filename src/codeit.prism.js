@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.3
+   v2.3.4
    MIT License
    
    github.com/barhatsor/codeit
@@ -113,7 +113,8 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
-      if (cd.options.catchTab) handleTabCharacters(event)
+      if (cd.options.catchTab) handleTabCharacters(event);
+      if (cd.options.addClosing) handleSelfClosingCharacters(event);
 
     })
     
@@ -217,6 +218,51 @@ class CodeitElement extends HTMLElement {
         
       }
       
+    }
+    
+    function handleSelfClosingCharacters(event) {
+      
+      const open = `([{'"`;
+      const close = `)]}'"`;
+      
+      const codeAfter = afterCursor();
+      const codeBefore = beforeCursor();
+      
+      const escapeCharacter = codeBefore.substr(codeBefore.length - 1) === '\\';
+      const charAfter = codeAfter.charAt(0);
+      
+      if (close.includes(event.key) && !escapeCharacter && charAfter === event.key) {
+        
+        // closing char already exists next to cursor,
+        // move right
+        
+        const pos = cd.getSelection();
+        
+        event.preventDefault();
+        pos.start = ++pos.end;
+        
+        cd.setSelection(pos.start);
+        
+      } else if (
+        open.includes(event.key)
+        && !escapeCharacter
+        && (`"'`.includes(event.key) || ['', ' ', '\n'].includes(charAfter))
+      ) {
+        
+        event.preventDefault();
+        
+        const pos = cd.getSelection();
+        
+        const wrapText = pos.start == pos.end ? '' : window.getSelection().toString();
+        const text = event.key + wrapText + close[open.indexOf(event.key)];
+        
+        insert(text);
+        pos.start++;
+        pos.end++;
+        
+        cd.setSelection(pos.start);
+        
+      }
     }
     
     function beforeCursor() {
