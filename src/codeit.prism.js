@@ -470,10 +470,10 @@ class CodeitElement extends HTMLElement {
 
         } else {
 
-          return {
+          return [
             cd,
             0
-          };
+          ];
 
         }
         
