@@ -112,22 +112,22 @@ class CodeitElement extends HTMLElement {
 
     cd.addEventListener('keydown', (event) => {
 
-      if (cd.options.preserveIdent) beforeNewLine(event);
+      if (cd.options.preserveIdent) handleNewLine(event);
 
     })
     
     cd.addEventListener('keyup', (event) => {
 
-      if (cd.options.preserveIdent) afterNewLine(event);
+      //if (cd.options.preserveIdent) afterNewLine(event);
 
     })
     
     
     // IDE-style behaviors
     
-    let newLinePadding;
+    let newLinePadding = false;
     
-    function beforeNewLine(event) {
+    function handleNewLine(event) {
       
       if (event.key === 'Enter') {
         
@@ -157,23 +157,22 @@ class CodeitElement extends HTMLElement {
           
         }
         
-        window.setTimeout(() => {
-          
-          // add new line padding
-          insert(newLinePadding);
-          
-        }, 0);
+      } else {
+        
+        // clear new line padding
+        newLinePadding = false;
         
       }
       
     }
     
-    function afterNewLine(event) {
+    function addNewLinePadding() {
       
-      if (event.key === 'Enter') {
+      // if new line padding exists
+      if (newLinePadding) {
       
         // add new line padding
-        //insert(newLinePadding);
+        insert(newLinePadding);
       
       }
       
@@ -228,6 +227,7 @@ class CodeitElement extends HTMLElement {
 
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
+        addNewLinePadding();
         debounceHighlight();
         
       }
