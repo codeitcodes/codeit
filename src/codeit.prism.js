@@ -146,7 +146,7 @@ class CodeitElement extends HTMLElement {
         if (bracketOne && bracketTwo) {
           
           // indent new line
-          //newLinePadding += cd.options.tab;
+          newLinePadding += cd.options.tab;
           
           // get caret pos in text
           const pos = cd.getSelection();
@@ -173,7 +173,7 @@ class CodeitElement extends HTMLElement {
       // if new line padding exists
       if (newLinePadding) {
       
-        console.log('a');
+        console.log(newLinePadding);
         
         // add new line padding
         insert(newLinePadding);
