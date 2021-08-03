@@ -154,7 +154,7 @@ class CodeitElement extends HTMLElement {
           insert('\n');
 
           // restore pos in text
-          cd.setSelection(pos);
+          cd.setSelection(pos.start);
           
         }
         
@@ -191,7 +191,6 @@ class CodeitElement extends HTMLElement {
           
           // get padding of line
           let [padding, start] = findPadding(before);
-          console.log(padding, start);
           
           if (padding.length > 0) {
             
@@ -202,10 +201,11 @@ class CodeitElement extends HTMLElement {
             const len = Math.min(cd.options.tab.length, padding.length);
             cd.setSelection(start + 1);
             document.execCommand('delete');
-            pos -= len;
+            pos.start -= len;
+            pos.end -= len;
             
             // restore pos in text
-            cd.setSelection(pos);
+            cd.setSelection(pos.start, pos.end);
             
           }
           
@@ -221,7 +221,7 @@ class CodeitElement extends HTMLElement {
     }
     
     function beforeCursor() {
-      const s = getSelection();
+      const s = window.getSelection();
       const r0 = s.getRangeAt(0);
       const r = document.createRange();
       r.selectNodeContents(cd);
@@ -230,7 +230,7 @@ class CodeitElement extends HTMLElement {
     }
     
     function afterCursor() {
-      const s = getSelection();
+      const s = window.getSelection();
       const r0 = s.getRangeAt(0);
       const r = document.createRange();
       r.selectNodeContents(cd);
@@ -293,7 +293,7 @@ class CodeitElement extends HTMLElement {
           cd.highlight(cd.lang);
           
           // restore pos in text
-          cd.setSelection(pos);
+          cd.setSelection(pos.start, pos.end);
 
         } else { // no need to move caret, just highlight
           
@@ -321,123 +321,196 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    cd.setSelection = (caretPosInText) => {
-            
-      // get caret node and offset
-      const c = getCaretPosAndNode(caretPosInText);
+    cd.setSelection = (startPos, endPos) => {
+      
+      let c;
+      
+      if (endPos) {
+        
+        // get caret node and offset
+        c = getCaretNode(startPos, endPos);
+      
+      } else {
+        
+        // get caret node and offset
+        c = getCaretNode(startPos);
+        
+      }
 
       // select
       const s = window.getSelection();
-      s.setBaseAndExtent(c.startNode, c.startOffset, c.startNode, c.startOffset);
+      s.setBaseAndExtent(c.startNode, c.startOffset, c.endNode, c.endOffset);
       
     }
     
     // get caret pos in text
     cd.getSelection = () => {
+      
+      function getCaretPos(targetNode, caretOffset) { 
 
-      const sel = window.getSelection();
+        let overallLength = 0,
+            foundNode = false;
 
-      const targetNode = sel.focusNode; // node of caret
-      const caretOffset = sel.focusOffset; // offset in node
+        function getTextNodes(node) {
 
-      let overallLength = 0,
-          foundNode = false;
+          if (!foundNode) {
 
-      function getTextNodes(node) {
+            // if reached target node
+            if (node != targetNode) {
 
-        if (!foundNode) {
+              // if node type is text
+              if (node.nodeType == 3) {
 
-          // if reached target node
-          if (node != targetNode) {
+                overallLength += node.nodeValue.length;
 
-            // if node type is text
-            if (node.nodeType == 3) {
-              
-              overallLength += node.nodeValue.length;
+              } else { // if it's an empty node, this means there's more nodes underneath
 
-            } else { // if it's an empty node, this means there's more nodes underneath
-              
-              // go over his brother leaves
-              for (var i = 0, len = node.childNodes.length; i < len; ++i) {
-                
-                // call recursive call on node's children
-                getTextNodes(node.childNodes[i]);
+                // go over his brother leaves
+                for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+
+                  // call recursive call on node's children
+                  getTextNodes(node.childNodes[i]);
+
+                }
 
               }
-              
+            } else {
+
+              foundNode = true;
+
+              // if not found text node, return
+              if (node.nodeType != 3) {
+                return false;
+              }
+
             }
-          } else {
-            
-            foundNode = true;
-            
-            // if not found text node, return
-            if (node.nodeType != 3) {
-              return false;
-            }
-            
           }
         }
+
+        // init recursive call
+        getTextNodes(cd);
+
+        return overallLength + caretOffset;
+        
       }
-
-      // init recursive call
-      getTextNodes(cd);
-
-      return overallLength + caretOffset;
+      
+      const s = window.getSelection();
+      
+      // if selection is collapsed
+      if (s.isCollapsed) {
+        
+        // get only start position of caret
+        const startPos = getCaretPos(s.anchorNode, s.anchorOffset);
+        
+        return {
+          start: startPos,
+          end: startPos
+        };
+        
+      } else {
+        
+        // get start and end positions of caret
+        const startPos = getCaretPos(s.anchorNode, s.anchorOffset);
+        const endPos = getCaretPos(s.focusNode, s.focusOffset);
+        
+        return {
+          start: startPos,
+          end: endPos
+        };
+        
+      }
 
     }
 
 
     // go over all nodes until reaching the right number of characters
-    function getCaretPosAndNode(caretPosInText) {
+    function getCaretNode(startPos, endPos) {
+      
+      function getCaretTextNode(caretPosInText) {
 
-      let overallLength = 0,
-          lastNode;
+        let overallLength = 0,
+            lastNode;
 
-      function getTextNodes(node) {
+        function getTextNodes(node) {
 
-        // if not reached the target text
-        if (overallLength <= caretPosInText) {
+          // if not reached the target text
+          if (overallLength <= caretPosInText) {
 
-          lastNode = node;
+            lastNode = node;
 
-          // if node type is text
-          if (node.nodeType == 3) {
+            // if node type is text
+            if (node.nodeType == 3) {
 
-            overallLength += node.nodeValue.length;
+              overallLength += node.nodeValue.length;
 
-          } else { // if it's an empty node, this means there's more nodes underneath
+            } else { // if it's an empty node, this means there's more nodes underneath
 
-            // go over his brother leaves
-            for (var i = 0, len = node.childNodes.length; i < len; ++i) {
-              
-              // call recursive call on node's children
-              getTextNodes(node.childNodes[i]);
+              // go over his brother leaves
+              for (var i = 0, len = node.childNodes.length; i < len; ++i) {
 
+                // call recursive call on node's children
+                getTextNodes(node.childNodes[i]);
+
+              }
             }
           }
         }
-      }
-      
-      // init recursive call
-      getTextNodes(cd);
-      
-      if (lastNode) {
 
-        const lastNodeLength = lastNode.nodeValue.length;
+        // init recursive call
+        getTextNodes(cd);
+
+        if (lastNode) {
+
+          const lastNodeLength = lastNode.nodeValue.length;
+
+          return [
+            lastNode,
+            (lastNodeLength - (overallLength - caretPosInText))
+          };
+
+        } else {
+
+          return {
+            cd,
+            0
+          };
+
+        }
         
-        return {
-          startNode: lastNode,
-          startOffset: (lastNodeLength - (overallLength - caretPosInText))
-        };
-
-      } else {
-
-        return {
-          startNode: cd,
-          startOffset: 0
-        };
-
       }
+      
+      // if start and end pos exist
+      if (endPos) {
+        
+        if (startPos !== endPos) {
+          
+          // get start and end nodes
+          const [startNode, startOffset] = getCaretTextNode(startPos);
+          const [endNode, endOffset] = getCaretTextNode(endPos);
+          
+          return {
+            startNode: startNode,
+            startOffset: startOffset,
+            endNode: endNode,
+            endOffset: endPos
+          };
+          
+        } else {
+          
+          // get start nodes
+          const [startNode, startOffset] = getCaretTextNode(startPos);
+          
+          return {
+            startNode: startNode,
+            startOffset: startOffset,
+            endNode: startNode,
+            endOffset: startOffset
+          };
+          
+        }
+        
+      }
+      
     }
 
     cd.update();
