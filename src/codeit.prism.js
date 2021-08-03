@@ -298,7 +298,7 @@ class CodeitElement extends HTMLElement {
       // find padding of previous line
       let j = i;
       console.log('here 2');
-      while (i >= 0 && text[i] !== '\n') j--;
+      while (j >= 0 && text[j] !== '\n') j--;
       console.log('here 3');
       return ['', i, j];
       
