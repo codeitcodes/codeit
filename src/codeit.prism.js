@@ -118,12 +118,6 @@ class CodeitElement extends HTMLElement {
 
     })
     
-    cd.addEventListener('keyup', (event) => {
-
-      //if (cd.options.preserveIdent) afterNewLine(event);
-
-    })
-    
     
     // IDE-style behaviors
     
@@ -143,19 +137,25 @@ class CodeitElement extends HTMLElement {
         let bracketOne = (before.slice(-1) === '{');
         let bracketTwo = (after.charAt(0) === '}');
         
-        if (bracketOne && bracketTwo) {
+        let newLineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
+        
+        if (bracketOne && (bracketTwo || newLineBracket)) {
           
           // indent new line
           newLinePadding += cd.options.tab;
           
-          // get caret pos in text
-          const pos = cd.getSelection();
+          if (bracketTwo) {
           
-          // move adjacent "}" down one line
-          insert('\n');
+            // get caret pos in text
+            const pos = cd.getSelection();
 
-          // restore pos in text
-          cd.setSelection(pos.start);
+            // move adjacent "}" down one line
+            insert('\n');
+
+            // restore pos in text
+            cd.setSelection(pos.start);
+            
+          }
           
         }
         
@@ -168,20 +168,6 @@ class CodeitElement extends HTMLElement {
           
         }
         
-      }
-      
-    }
-    
-    function addNewLinePadding() {
-      
-      // if new line padding exists
-      if (newLinePadding) {
-        
-        // add new line padding
-        //insert(newLinePadding);
-        
-        //newLinePadding = false;
-      
       }
       
     }
@@ -320,7 +306,6 @@ class CodeitElement extends HTMLElement {
 
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
-        addNewLinePadding();
         debounceHighlight();
         
       }
