@@ -187,13 +187,15 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           let pos = cd.getSelection();
           
-          for (let i = padding.length-1;i >= 0; i--) document.execCommand('delete');
-          
-          pos.start -= padding.length;
-            
-          // restore pos in text
           if (pos.start === pos.end) {
+            
+            for (let i = padding.length-1;i >= 0; i--) document.execCommand('delete');
+
+            pos.start -= padding.length;
+
+            // restore pos in text
             cd.setSelection(pos.start);
+            
           }
           
         }
