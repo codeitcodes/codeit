@@ -139,21 +139,21 @@ class CodeitElement extends HTMLElement {
         
         if (bracketOne && (bracketTwo || newLineBracket)) {
           
+          // indent new line
+          newLinePadding += cd.options.tab;
+          
           if (bracketTwo) {
           
             // get caret pos in text
             const pos = cd.getSelection();
 
             // move adjacent "}" down one line
-            insert('\n' + newLinePadding);
+            insert('\n' + padding);
 
             // restore pos in text
             cd.setSelection(pos.start);
             
           }
-          
-          // indent new line
-          newLinePadding += cd.options.tab;
           
         }
         
