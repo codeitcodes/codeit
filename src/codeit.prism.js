@@ -177,14 +177,24 @@ class CodeitElement extends HTMLElement {
         
         const before = beforeCursor();
         
-        let [padding] = findPaddingThisLine(before);
+        let [padding, start] = findPaddingThisLine(before);
         
         if (padding) {
           
           event.stopPropagation();
           event.preventDefault();
           
+          // get caret pos in text
+          let pos = cd.getSelection();
+          
+          cd.setSelection(start + 1);
+          
           for (let i = padding.length-1;i < 0; i--) document.execCommand('delete');
+          
+          pos.start -= padding.length;
+            
+          // restore pos in text
+          cd.setSelection(pos.start);
           
         }
       
