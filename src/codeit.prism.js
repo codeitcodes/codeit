@@ -133,9 +133,6 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Enter') {
         
-        event.preventPropagation();
-        event.preventDefault();
-        
         const before = beforeCursor();
         const after = afterCursor();
         
@@ -163,9 +160,12 @@ class CodeitElement extends HTMLElement {
         }
         
         if (newLinePadding) {
+          
+          event.stopPropagation();
+          event.preventDefault();
+          
           insert('\n' + newLinePadding);
-        } else {
-          insert('\n');
+          
         }
         
       }
