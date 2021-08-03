@@ -139,20 +139,25 @@ class CodeitElement extends HTMLElement {
         
         // if char before caret is "{" indent new line
         const indentOn = (before.slice(-1) === '{');
+        const bracketTwo = (after.charAt(0) === '}');
         
         if (indentOn) {
           
           // indent new line
           newLinePadding += cd.options.tab;
           
-          // get caret pos in text
-          const pos = cd.getSelection();
+          if (bracketTwo) {
           
-          // move adjacent "}" down one line
-          insert('\n');
+            // get caret pos in text
+            const pos = cd.getSelection();
 
-          // restore pos in text
-          cd.setSelection(pos);
+            // move adjacent "}" down one line
+            insert('\n');
+
+            // restore pos in text
+            cd.setSelection(pos);
+            
+          }
           
         }
         
@@ -168,7 +173,7 @@ class CodeitElement extends HTMLElement {
     function addNewLinePadding() {
       
       // if new line padding exists
-      if (newLinePadding) {
+      if (newLinePadding !== false) {
       
         // add new line padding
         insert(newLinePadding);
