@@ -202,10 +202,9 @@ class CodeitElement extends HTMLElement {
             cd.setSelection(start + 1);
             document.execCommand('delete');
             pos.start -= len;
-            pos.end -= len;
             
             // restore pos in text
-            cd.setSelection(pos.start, pos.end);
+            cd.setSelection(pos.start);
             
           }
           
