@@ -141,7 +141,10 @@ class CodeitElement extends HTMLElement {
         let bracketOne = (before.slice(-1) === '{');
         let bracketTwo = (after.charAt(0) === '}');
         
-        if (bracketOne && bracketTwo) {
+        // if char after caret is "\n" and "}"
+        let newlineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
+        
+        if (bracketOne && (bracketTwo || newlineBracket)) {
           
           // indent new line
           newLinePadding += cd.options.tab;
