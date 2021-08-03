@@ -192,7 +192,9 @@ class CodeitElement extends HTMLElement {
           pos.start -= padding.length;
             
           // restore pos in text
-          cd.setSelection(pos.start);
+          if (pos.start === pos.end) {
+            cd.setSelection(pos.start);
+          }
           
         }
       
