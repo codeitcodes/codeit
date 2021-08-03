@@ -152,12 +152,8 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           const pos = cd.getSelection();
           
-          if (!newlineBracket) {
-            
-            // move adjacent "}" down one line
-            insert('\n');
-            
-          }
+          // move adjacent "}" down one line
+          insert('\n');
 
           // restore pos in text
           cd.setSelection(pos);
