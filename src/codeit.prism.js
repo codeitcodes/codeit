@@ -306,14 +306,29 @@ class CodeitElement extends HTMLElement {
         // get caret pos in text
         const pos = cd.getSelection();
         
+        const closeCharWhitespace = (
+          [' ', '\n'].includes(charAfter)
+          && close.includes(codeAfter.charAt(1))
+        );
+        
         // if deleting self closing characters
-        if (close.includes(charAfter)
+        if ((close.includes(charAfter) || closeCharWhitespace)
             && charBefore === open[close.indexOf(charAfter)]
             && pos.start === pos.end
-           ){
+           ) {
           
-          // delete char after
-          cd.setSelection(pos.start + 1);
+          // delete chars after
+          if (closeCharWhitespace) {
+            
+            cd.setSelection(pos.start + 2);
+            document.execCommand('delete');
+            
+          } else { // delete char after
+            
+            cd.setSelection(pos.start + 1);
+            
+          }
+          
           document.execCommand('delete');
           
         }
