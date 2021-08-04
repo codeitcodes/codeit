@@ -247,8 +247,8 @@ class CodeitElement extends HTMLElement {
     
     function handleSelfClosingCharacters(event) {
       
-      const open = `([{'"`;
-      const close = `)]}'"`;
+      const open = `([{'"\``;
+      const close = `)]}'"\``;
       
       const codeAfter = afterCursor();
       const codeBefore = beforeCursor();
@@ -294,8 +294,8 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Backspace' || event.key === 'Delete') {
         
-        const open = `([{'"`;
-        const close = `)]}'"`;
+        const open = `([{'"\``;
+        const close = `)]}'"\``;
 
         const codeAfter = afterCursor();
         const codeBefore = beforeCursor();
