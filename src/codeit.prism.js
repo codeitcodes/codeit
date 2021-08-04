@@ -389,7 +389,7 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    function findPaddingThisLine(text) {
+    cd.findPaddingThisLine = (text) => {
       
       // find beginning of this line
       let i = text.length - 1;
