@@ -324,21 +324,28 @@ class CodeitElement extends HTMLElement {
             && pos.start === pos.end
            ) {
           
+          let len;
+          
           // delete chars after
           if (closeCharWhitespace) {
             
-            cd.setSelection(pos.start + 2);
+            len = 2;
+            
+            cd.setSelection(pos.start + len);
             document.execCommand('delete');
             
           } else { // delete char after
             
-            cd.setSelection(pos.start + 1);
+            len = 1;
+            
+            cd.setSelection(pos.start + len);
             
           }
           
           document.execCommand('delete');
           
           // restore pos in text
+          pos.start -= len;
           cd.setSelection(pos.start);
           
         }
