@@ -299,7 +299,8 @@ class CodeitElement extends HTMLElement {
 
         const codeAfter = afterCursor();
         const codeBefore = beforeCursor();
-
+        
+        const charBefore = codeBefore.slice(-1);
         const charAfter = codeAfter.charAt(0);
         
         // get caret pos in text
@@ -307,7 +308,7 @@ class CodeitElement extends HTMLElement {
         
         // if deleting self closing characters
         if (close.includes(charAfter)
-            && codeBefore === open[close.indexOf(charAfter)]
+            && charBefore === open[close.indexOf(charAfter)]
             && pos.start === pos.end
            ){
           
