@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.4
+   v2.3.5
    MIT License
    
    github.com/barhatsor/codeit
@@ -699,4 +699,3 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-
