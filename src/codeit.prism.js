@@ -118,16 +118,10 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
-      
       if (cd.options.addClosing) handleDelClosingCharacters(event);
-      
       if (cd.options.preserveIdent) handleDelNewLine(event);
-      
       if (cd.options.catchTab) handleTabCharacters(event);
-      
       if (cd.options.addClosing) handleSelfClosingCharacters(event);
-      
-      cd.update();
 
     })
     
@@ -144,11 +138,17 @@ class CodeitElement extends HTMLElement {
         let [padding] = findPadding(before);
         let newLinePadding = padding;
         
-        // if char before caret is "{" and char after is "}" indent new line
-        let bracketOne = (before.slice(-1) === '{');
-        let bracketTwo = (after.charAt(0) === '}');
+        const charBefore = before.slice(-1);
+        const charAfter = after.charAt(0);
         
-        let newLineBracket = (after.charAt(0) === '\n' && after.charAt(1) === '}');
+        // if char before caret is opening bracket
+        // and char after is closing bracket indent new line
+        let bracketOne = (cd.options.closeBrackets.includes(charAfter));
+        let bracketTwo = (charBefore ===
+                          cd.options.openBrackets[ cd.options.closeBrackets.indexOf( charAfter ) );
+        
+        let newLineBracket = (charAfter === '\n'
+                              && cd.options.closeBrackets.includes( after.charAt(1) ));
         
         if (bracketOne && (bracketTwo || newLineBracket)) {
           
