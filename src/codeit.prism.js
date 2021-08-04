@@ -252,8 +252,8 @@ class CodeitElement extends HTMLElement {
     
     function handleSelfClosingCharacters(event) {
       
-      const open = cd.options.openBracket + cd.options.quotation;
-      const close = cd.options.closeBracket + cd.options.quotation;
+      const open = cd.options.openBracket + cd.options.quot;
+      const close = cd.options.closeBracket + cd.options.quot;
       
       const codeAfter = afterCursor();
       const codeBefore = beforeCursor();
