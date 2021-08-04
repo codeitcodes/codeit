@@ -602,8 +602,9 @@ class CodeitElement extends HTMLElement {
 
         // init recursive call
         getTextNodes(cd);
-
-        if (lastNode) {
+        
+        // if text node exists
+        if (lastNode.nodeValue) {
 
           const lastNodeLength = lastNode.nodeValue.length;
 
