@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.5
+   v2.3.6
    MIT License
    
    github.com/barhatsor/codeit
@@ -349,9 +349,6 @@ class CodeitElement extends HTMLElement {
           }
           
           document.execCommand('delete');
-          
-          // restore pos in text
-          //cd.setSelection(pos.start);
           
         }
         
