@@ -116,6 +116,7 @@ class CodeitElement extends HTMLElement {
       if (cd.options.preserveIdent) handleDelNewLine(event);
       if (cd.options.catchTab) handleTabCharacters(event);
       if (cd.options.addClosing) handleSelfClosingCharacters(event);
+      if (cd.options.addClosing) handleDelClosingCharacters(event);
 
     })
     
@@ -287,6 +288,37 @@ class CodeitElement extends HTMLElement {
         cd.setSelection(pos.start);
         
       }
+    }
+    
+    function handleDelClosingCharacters(event) {
+      
+      if (event.key === 'Backspace' || event.key === 'Delete') {
+        
+        const open = `([{'"`;
+        const close = `)]}'"`;
+
+        const codeAfter = afterCursor();
+        const codeBefore = beforeCursor();
+
+        const charAfter = codeAfter.charAt(0);
+        
+        // get caret pos in text
+        const pos = cd.getSelection();
+        
+        // if deleting self closing characters
+        if (close.includes(charAfter)
+            && codeBefore === open[close.indexOf(charAfter)]
+            && pos.start === pos.end
+           ){
+          
+          // delete char after
+          cd.setSelection(pos.start + 1);
+          document.execCommand('delete');
+          
+        }
+        
+      }
+      
     }
     
     function beforeCursor() {
