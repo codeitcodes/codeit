@@ -234,7 +234,7 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           let pos = cd.getSelection();
           
-          if (padding.length > 0 && start === pos.start) {
+          if (padding.length > 0) {
             
             // remove full length tab or just remaining padding
             const len = Math.min(cd.options.tab.length, padding.length);
