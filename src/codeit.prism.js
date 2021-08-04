@@ -189,7 +189,8 @@ class CodeitElement extends HTMLElement {
         
         const before = beforeCursor();
         
-        let [padding, end, start] = findPaddingThisLine(before);
+        let [padding, start] = findPaddingThisLine(before);
+        start++;
         
         if (padding) {
           
