@@ -166,7 +166,7 @@ body.transitioning .github {
 }
 
 .github:hover::after {
-  transform: translateX(-50%);
+  transform: translateX(-20px);
 }
 
 body.expanded .github::after {
