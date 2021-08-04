@@ -3,12 +3,7 @@
  * Colors based on Base16 Ocean Dark
  */
 
-@font-face {
-  font-family: 'Monaco';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Monaco'), url('Monaco.woff') format('woff');
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&display=swap');
 
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
 
@@ -49,10 +44,11 @@
 cd-el {
   background: #313744;
   color: #a6c3d4;
-  font-family: 'Monaco', monospace;
+  font-family: 'Roboto Mono', 'Source Code Pro', monospace;
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
   font-size: 14px;
+  font-size: 1rem;
 }
 
 cd-el {
@@ -63,9 +59,6 @@ cd-el::selection, cd-el *::selection {
   background: #505560;
 }
 
-.hljs-comment, .hljs-meta {
-  color: #707e84;
-}
 
 .hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol  {
   color: #c7ccd4;
@@ -95,3 +88,80 @@ cd-el::selection, cd-el *::selection {
 .hljs-params, .hljs-title {
   color: #69aee9;
 }
+
+
+
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #707e84;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.token.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #d5927b;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.template-string {
+  color: #c1ffd5ad;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #9a6e3a;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #c66c75;
+}
+
+.token.function,
+.token.class-name {
+  color: #69aee9;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
