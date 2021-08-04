@@ -60,7 +60,7 @@ cd-el {
 }
 
 cd-el::selection, cd-el *::selection {
-  background: rgba(255, 255, 255, 0.15);
+  background: #505560;
 }
 
 .hljs-comment, .hljs-meta {
