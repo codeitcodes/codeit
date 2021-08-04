@@ -389,14 +389,14 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    function findPaddingThisLine(text) {
+    cd.findPaddingThisLine = (text) => {
       
       // find beginning of this line
       let i = text.length - 1;
       while (i >= 0 && text[i] !== cd.options.tab) i--;
       i++;
       
-      // find padding of previous line
+      // find padding of this line
       let j = i;
       while (j >= 0 && text[j] !== '\n') j--;      
       return [text.substring(i, j) || '', i, j];
