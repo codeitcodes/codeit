@@ -323,7 +323,7 @@ class CodeitElement extends HTMLElement {
         
         // if deleting brackets with whitespace in between
         const closeCharWhitespace = (
-          ['', ' ', '\n'].includes(charAfter)
+          [' ', '\n'].includes(charAfter)
           && cd.options.closeBrackets.includes(codeAfter.charAt(1))
           && charBefore === open[close.indexOf(codeAfter.charAt(1))]
         );
