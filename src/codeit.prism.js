@@ -145,7 +145,7 @@ class CodeitElement extends HTMLElement {
         // and char after is closing bracket indent new line
         let bracketOne = (cd.options.closeBrackets.includes(charAfter));
         let bracketTwo = (charBefore ===
-                          cd.options.openBrackets[ cd.options.closeBrackets.indexOf( charAfter ) );
+                          cd.options.openBrackets[ cd.options.closeBrackets.indexOf( charAfter ) ]);
         
         let newLineBracket = (charAfter === '\n'
                               && cd.options.closeBrackets.includes( after.charAt(1) ));
