@@ -303,17 +303,24 @@ class CodeitElement extends HTMLElement {
         const charBefore = codeBefore.slice(-1);
         const charAfter = codeAfter.charAt(0);
         
-        // get caret pos in text
-        const pos = cd.getSelection();
-        
-        const closeCharWhitespace = (
-          [' ', '\n'].includes(charAfter)
-          && close.includes(codeAfter.charAt(1))
+        // if deleting self closing characters
+        const closeCharAdjacent = (
+          close.includes(charAfter)
+          && charBefore === open[close.indexOf(charAfter)]
         );
         
         // if deleting self closing characters
-        if ((close.includes(charAfter) || closeCharWhitespace)
-            && charBefore === open[close.indexOf(charAfter)]
+        // with whitespace in between
+        const closeCharWhitespace = (
+          ['', ' ', '\n'].includes(charAfter)
+          && close.includes(codeAfter.charAt(1))
+          && charBefore === open[close.indexOf(codeAfter.charAt(1))]
+        );
+        
+        // get caret pos in text
+        const pos = cd.getSelection();
+        
+        if ((closeCharAdjacent || closeCharWhitespace)
             && pos.start === pos.end
            ) {
           
