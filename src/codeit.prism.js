@@ -118,10 +118,16 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
+      
       if (cd.options.addClosing) handleDelClosingCharacters(event);
+      
       if (cd.options.preserveIdent) handleDelNewLine(event);
+      
       if (cd.options.catchTab) handleTabCharacters(event);
+      
       if (cd.options.addClosing) handleSelfClosingCharacters(event);
+      
+      cd.update();
 
     })
     
