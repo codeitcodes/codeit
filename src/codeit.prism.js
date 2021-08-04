@@ -398,7 +398,7 @@ class CodeitElement extends HTMLElement {
       
       // find padding of this line
       let j = i;
-      while (j >= 0 && text[j] !== '\n') j--;      
+      while (j >= 0 && text[j] !== '\n' && text[j] === cd.options.tab) j--;      
       return [text.substring(i, j) || '', i, j];
       
     }
