@@ -38,10 +38,15 @@ class CodeitElement extends HTMLElement {
     // set default options
     cd.options = {
       tab: '\t',
+      
       catchTab: true,
       preserveIdent: true,
       addClosing: true,
-      history: true
+      
+      openBrackets: `([{`,
+      closeBrackets: `)]}`,
+      
+      quot: `'"\``
     };
 
     // if edit property is true
@@ -247,8 +252,8 @@ class CodeitElement extends HTMLElement {
     
     function handleSelfClosingCharacters(event) {
       
-      const open = `([{'"\``;
-      const close = `)]}'"\``;
+      const open = cd.options.openBracket + cd.options.quotation;
+      const close = cd.options.closeBracket + cd.options.quotation;
       
       const codeAfter = afterCursor();
       const codeBefore = beforeCursor();
@@ -271,7 +276,8 @@ class CodeitElement extends HTMLElement {
       } else if (
         open.includes(event.key)
         && !escapeCharacter
-        && (`"'`.includes(event.key) || ['', ' ', '\n'].includes(charAfter))
+        && (cd.options.quot.includes(event.key)
+            || ['', ' ', '\n'].includes(charAfter))
       ) {
         
         event.preventDefault();
@@ -294,8 +300,8 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Backspace' || event.key === 'Delete') {
         
-        const open = `([{'"\``;
-        const close = `)]}'"\``;
+        const open = cd.options.openBracket + cd.options.quot;
+        const close = cd.options.closeBracket + cd.options.quot;
 
         const codeAfter = afterCursor();
         const codeBefore = beforeCursor();
@@ -309,12 +315,11 @@ class CodeitElement extends HTMLElement {
           && charBefore === open[close.indexOf(charAfter)]
         );
         
-        // if deleting '{' and '}' char exists
-        // with whitespace in between
+        // if deleting brackets with whitespace in between
         const closeCharWhitespace = (
-          [' ', '\n'].includes(charAfter)
-          && codeAfter.charAt(1) === '}'
-          && charBefore === '{'
+          ['', ' ', '\n'].includes(charAfter)
+          && cd.options.closeBracket.includes(codeAfter.charAt(1))
+          && charBefore === open[close.indexOf(codeAfter.charAt(1))]
         );
         
         // get caret pos in text
