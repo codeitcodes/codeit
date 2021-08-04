@@ -252,8 +252,8 @@ class CodeitElement extends HTMLElement {
     
     function handleSelfClosingCharacters(event) {
       
-      const open = cd.options.openBracket + cd.options.quot;
-      const close = cd.options.closeBracket + cd.options.quot;
+      const open = cd.options.openBrackets + cd.options.quot;
+      const close = cd.options.closeBrackets + cd.options.quot;
       
       const codeAfter = afterCursor();
       const codeBefore = beforeCursor();
@@ -300,8 +300,8 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Backspace' || event.key === 'Delete') {
         
-        const open = cd.options.openBracket + cd.options.quot;
-        const close = cd.options.closeBracket + cd.options.quot;
+        const open = cd.options.openBrackets + cd.options.quot;
+        const close = cd.options.closeBrackets + cd.options.quot;
 
         const codeAfter = afterCursor();
         const codeBefore = beforeCursor();
@@ -318,7 +318,7 @@ class CodeitElement extends HTMLElement {
         // if deleting brackets with whitespace in between
         const closeCharWhitespace = (
           ['', ' ', '\n'].includes(charAfter)
-          && cd.options.closeBracket.includes(codeAfter.charAt(1))
+          && cd.options.closeBrackets.includes(codeAfter.charAt(1))
           && charBefore === open[close.indexOf(codeAfter.charAt(1))]
         );
         
