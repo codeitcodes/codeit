@@ -309,43 +309,35 @@ class CodeitElement extends HTMLElement {
           && charBefore === open[close.indexOf(charAfter)]
         );
         
-        // if deleting self closing characters
+        // if deleting '{' and '}' char exists
         // with whitespace in between
         const closeCharWhitespace = (
-          ['', ' ', '\n'].includes(charAfter)
-          && close.includes(codeAfter.charAt(1))
-          && charBefore === open[close.indexOf(codeAfter.charAt(1))]
+          [' ', '\n'].includes(charAfter)
+          && codeAfter.charAt(1) === '}'
+          && charBefore === '{'
         );
         
         // get caret pos in text
         const pos = cd.getSelection();
         
         if ((closeCharAdjacent || closeCharWhitespace)
-            && pos.start === pos.end
-           ) {
-          
-          let len;
+            && pos.start === pos.end) {
           
           // delete chars after
           if (closeCharWhitespace) {
             
-            len = 2;
-            
-            cd.setSelection(pos.start + len);
+            cd.setSelection(pos.start + 2);
             document.execCommand('delete');
             
           } else { // delete char after
             
-            len = 1;
-            
-            cd.setSelection(pos.start + len);
+            cd.setSelection(pos.start + 1);
             
           }
           
           document.execCommand('delete');
           
           // restore pos in text
-          pos.start -= (len - 1);
           cd.setSelection(pos.start);
           
         }
