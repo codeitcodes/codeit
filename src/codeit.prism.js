@@ -291,7 +291,7 @@ class CodeitElement extends HTMLElement {
         pos.start++;
         pos.end++;
         
-        cd.setSelection(pos.start);
+        cd.setSelection(pos.end);
         
       }
     }
