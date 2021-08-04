@@ -196,7 +196,7 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           let pos = cd.getSelection();
           
-          if (pos.start === pos.end && start === (pos.start - 1)) {
+          if (pos.start === pos.end && start === pos.start) {
             
             event.stopPropagation();
             event.preventDefault();
@@ -389,7 +389,7 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    function findPaddingThisLine(text) {
+    cd.findPaddingThisLine = (text) => {
       
       // find beginning of this line
       let i = text.length - 1;
