@@ -5,6 +5,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&display=swap');
 
+@import url('/fonts/fonts.css');
+
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
 
   ::-webkit-scrollbar {
