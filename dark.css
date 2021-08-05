@@ -44,11 +44,13 @@
 cd-el {
   background: #313744;
   color: #a6c3d4;
+  /* These two fonts are being considered */
   font-family: 'Google Sans Mono', 'Source Code Pro', monospace;
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
+  /* These two font sizes are being considered */
   font-size: 14px;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 cd-el {
