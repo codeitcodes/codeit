@@ -44,7 +44,7 @@
 cd-el {
   background: #313744;
   color: #a6c3d4;
-  font-family: 'Source Code Pro', 'Google Sans Mono', monospace;
+  font-family: 'Google Sans Mono', 'Source Code Pro', monospace;
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
   font-size: 14px;
@@ -62,19 +62,6 @@ cd-el::selection, cd-el *::selection {
 
 .hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol  {
   color: #c7ccd4;
-}
-
-.hljs-value, .hljs-number, .hljs-built_in, .hljs-literal {
-  color: #d5927b;
-}
-
-.hljs-selector-attr, .hljs-selector-tag, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-selector, .hljs-keyword, .hljs-type {
-  color: #c66c75;
-}
-
-.hljs-string {
-  color: rgba(255, 255, 255, 0.7);
-  color: #c1ffd5ad;
 }
 
 .hljs-tag, .hljs-name, .hljs-section {
