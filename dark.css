@@ -53,6 +53,8 @@ cd-el {
   /* "Google Sans Mono" is best with 16px */
   font-size: 16px;
   
+  letter-spacing: .05px;
+  
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
 }
