@@ -3,8 +3,6 @@
  * Colors based on Base16 Ocean Dark
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&display=swap');
-
 @import url('/fonts/fonts.css');
 
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
@@ -98,12 +96,13 @@ cd-el::selection, cd-el *::selection {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #707e84;
+  font-style: italic;
+  color: #8ca7b2f7;
 }
 
 .token.punctuation {
-  opacity: .7;
-  color: inherit;
+  color: hsl(202deg 39% 74%);
+  color: #c7ccd4;
 }
 
 .token.namespace {
@@ -127,21 +126,22 @@ cd-el::selection, cd-el *::selection {
 .token.builtin,
 .token.inserted,
 .token.template-string {
-  color: #c1ffd5ad;
+  color: #c1ffd5cc;
 }
 
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string {
-  color: #9a6e3a;
+.style .token.string,
+.token.interpolation .token.punctuation {
+  color: #d07ee8;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #c66c75;
+  color: #e49199;
 }
 
 .token.function,
@@ -152,7 +152,7 @@ cd-el::selection, cd-el *::selection {
 .token.regex,
 .token.important,
 .token.variable {
-  color: #e90;
+  color: #c1ffd5cc;
 }
 
 .token.important,
