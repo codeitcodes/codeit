@@ -54,6 +54,7 @@ cd-el {
   font-size: 16px;
   
   letter-spacing: .05px;
+  line-height: 1.5;
   
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
