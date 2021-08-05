@@ -144,6 +144,10 @@ cd-el::selection, cd-el *::selection {
   color: #e49199;
 }
 
+.token.parameter .token.keyword {
+  color: #a6c3d4;
+}
+
 .token.function,
 .token.class-name {
   color: #69aee9;
