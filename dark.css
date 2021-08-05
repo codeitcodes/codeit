@@ -89,8 +89,7 @@ cd-el::selection, cd-el *::selection {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  font-style: italic;
-  color: #8ca7b2f7;
+  color: #9da5b4;
 }
 
 .token.punctuation {
