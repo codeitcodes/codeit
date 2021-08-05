@@ -47,13 +47,7 @@ cd-el {
   
   font-family: 'Google Sans Mono', 'Source Code Pro', monospace;
   
-  /* "Source Code Pro" is best with 14px */
-  font-size: 14px;
-  
-  /* "Google Sans Mono" is best with 16px */
   font-size: 16px;
-  
-  letter-spacing: .05px;
   line-height: 1.5;
   
   -webkit-font-smoothing: antialiased;
