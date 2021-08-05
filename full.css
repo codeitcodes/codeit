@@ -4,7 +4,7 @@ body {
   margin: 0;
   background: #313744;
   color: #d4d5d7;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Google Sans Text', sans-serif;
 }
 
 .focus::before {
