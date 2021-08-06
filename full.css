@@ -143,9 +143,6 @@ body.transitioning cd-el {
 }
 
 .loader1 {
-  /* animation: rotate 2s linear infinite; */
-  /* position: absolute; */
-  /* transform: scale(1.2); */
   opacity: 0;
   transform: rotate(0.25turn);
   transition: 0.14s var(--ease-function);
@@ -161,6 +158,8 @@ body.transitioning cd-el {
   stroke-dasharray: 1, 150;
   stroke-dashoffset: 0;
   stroke-linecap: round;
+  transform-origin: center;
+  transition: .18s var(--ease-function);
 }
 
 @keyframes stroke {
@@ -168,10 +167,12 @@ body.transitioning cd-el {
     stroke-dasharray: 1, 150;
     stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -35;
   }
+
   100% {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
@@ -183,11 +184,73 @@ body.transitioning cd-el {
   animation: rotate 2s .1s linear infinite;
 }
 
-.push-wrapper.pushing .loader1 circle {
+.push-wrapper.pushing .loader1 .circle {
   animation: stroke 1.5s .1s ease-in-out infinite;
 }
 
-.loader1 .circle {}
+.loader1 .fill {
+  opacity: 0;
+  stroke-dasharray: 150, 150;
+  transition: 0.18s var(--ease-function), 0.14s 0.14s var(--ease-function) color;
+}
+
+.push-wrapper.pushed .loader1 .fill {
+  opacity: 1;
+  transform: scale(0.87);
+  stroke-width: 4.5;
+}
+
+.push-wrapper.pushed .loader1 {
+  animation-play-state: paused;
+  transition: .1s var(--ease-function);
+}
+
+.push-wrapper.pushed .loader1 .circle {
+  transform: scale(0.87);
+}
+
+.push-wrapper.pushed .arrow {
+  opacity: 0;
+  transform: scale(0.87);
+}
+
+.push-wrapper .checked {
+  opacity: 0;
+  transform: scale(1.15);
+  transform-origin: center;
+  transition: .18s var(--ease-function);
+}
+
+.push-wrapper.pushed .checked {
+  opacity: 1;
+  transform: none;
+}
+
+.push-wrapper .checkmark {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform-origin: center;
+  overflow: visible;
+  transform: scale(0.9);
+}
+
+.push-wrapper .checkmark-border {
+  stroke-width: 8px;
+  stroke: #25292e;
+}
+
+.push-wrapper .checkmark path {
+  transform: translateX(4px) translateY(-2px);
+  stroke-linecap: round;
+  transition: stroke-dashoffset .14s .14s var(--ease-function);
+  stroke-dashoffset: 29.7833385;
+  stroke-dasharray: 29.7833385;
+}
+
+.push-wrapper.pushed .checkmark path {
+  stroke-dashoffset: 0;
+}
 
 .github {
   display: flex;
