@@ -105,15 +105,89 @@ body.transitioning cd-el {
   display: block;
 }
 
-.bottom-float .learn-open {
+.bottom-float .push-wrapper {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
   border-radius: 0 20px 20px 0;
 }
 
-.bottom-float .learn-open:active {
+.bottom-float .push-wrapper:active {
   background: hsl(0deg 0% 100% / 7%);
 }
+
+.push-wrapper .arrow {
+  position: relative;
+  transition: .18s var(--ease-function);
+  will-change: transform;
+  transform-origin: center;
+}
+
+.push-wrapper.pushing .base {
+  opacity: 0;
+  transform: translateY(4px) translateX(6px);
+  width: 1px;
+  height: 1px;
+}
+
+.push-wrapper .base {
+  transition: 0.1s var(--ease-function), .1s .1s var(--ease-function) opacity;
+}
+
+.push-wrapper.pushing .arrow {
+  transform: scale(0.8) translateY(2.2px);
+}
+
+.push-wrapper .push {
+  position: absolute;
+  overflow: visible;
+}
+
+.loader1 {
+  /* animation: rotate 2s linear infinite; */
+  /* position: absolute; */
+  /* transform: scale(1.2); */
+  opacity: 0;
+  transform: rotate(0.25turn);
+  transition: 0.14s var(--ease-function);
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1.25turn);
+  }
+}
+
+.loader1 circle {
+  stroke-dasharray: 1, 150;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+}
+
+@keyframes stroke {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.push-wrapper.pushing .loader1 {
+  opacity: 1;
+  animation: rotate 2s .1s linear infinite;
+}
+
+.push-wrapper.pushing .loader1 circle {
+  animation: stroke 1.5s .1s ease-in-out infinite;
+}
+
+.loader1 .circle {}
 
 .github {
   display: flex;
