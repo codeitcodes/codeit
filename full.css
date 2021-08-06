@@ -191,13 +191,15 @@ body.transitioning cd-el {
 .loader1 .fill {
   opacity: 0;
   stroke-dasharray: 150, 150;
-  transition: 0.18s var(--ease-function), 0.14s 0.14s var(--ease-function) color;
+  transition: 0.18s var(--ease-function), 0.18s 0.18s var(--ease-function) color;
 }
 
 .push-wrapper.pushed .loader1 .fill {
   opacity: 1;
   transform: scale(0.87);
   stroke-width: 4.5;
+  color: #21be99;
+  color: #63b47c;
 }
 
 .push-wrapper.pushed .loader1 {
@@ -243,13 +245,15 @@ body.transitioning cd-el {
 .push-wrapper .checkmark path {
   transform: translateX(4px) translateY(-2px);
   stroke-linecap: round;
-  transition: stroke-dashoffset .14s .14s var(--ease-function);
+  transition: stroke-dashoffset .14s .14s var(--ease-function), .18s .18s var(--ease-function) color;
   stroke-dashoffset: 29.7833385;
   stroke-dasharray: 29.7833385;
 }
 
 .push-wrapper.pushed .checkmark path {
   stroke-dashoffset: 0;
+  color: #21be99;
+  color: #63b47c;
 }
 
 .github {
