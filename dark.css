@@ -6,7 +6,11 @@
 @import url('/fonts/fonts.css');
 
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
-
+  
+  cd {
+    font-size: 16px;
+  }
+  
   ::-webkit-scrollbar {
     width: 16px;
   }
@@ -90,8 +94,7 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.punctuation {
-  color: hsl(202deg 39% 74%);
-  color: #c7ccd4;
+  color: inherit;
 }
 
 .token.namespace {
@@ -124,7 +127,7 @@ cd-el::selection, cd-el *::selection {
 .language-css .token.string,
 .style .token.string,
 .token.interpolation .token.punctuation {
-  color: #d07ee8;
+  color: #ce8be2f7;
 }
 
 .token.atrule,
