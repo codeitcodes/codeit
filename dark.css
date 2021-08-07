@@ -7,10 +7,6 @@
 
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
   
-  cd-el {
-    font-size: 16px;
-  }
-  
   ::-webkit-scrollbar {
     width: 16px;
   }
