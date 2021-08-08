@@ -6,7 +6,7 @@ const body = document.body,
       bottomFloat = document.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
-      learnOpen = bottomFloat.querySelector('.learn-open'),
+      pushWrapper = bottomFloat.querySelector('.push-wrapper'),
       
       github = document.querySelector('.github'),
       
