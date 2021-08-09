@@ -36,12 +36,10 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
-// open learn when clicked on button
-learnOpen.addEventListener('click', () => {
+// push when clicked on button
+pushWrapper.addEventListener('click', () => {
   
-  body.classList.add('expanded');
-  sidebar.classList.add('learn');
-  learnWrapper.classList.add('close-sidebar');
+  
   
 })
 
