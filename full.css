@@ -929,6 +929,7 @@ body {
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
   touch-action: manipulation;
+  overscroll-behavior: none;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
