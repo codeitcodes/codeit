@@ -104,7 +104,7 @@ cd-el::selection, cd-el *::selection {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #efab95;
+  color: #e5b09f;
 }
 
 .token.selector,
