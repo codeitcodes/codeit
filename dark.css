@@ -123,7 +123,7 @@ cd-el::selection, cd-el *::selection {
 .language-css .token.string,
 .style .token.string,
 .token.interpolation .token.punctuation {
-  color: #ce8be2f7;
+  color: hsl(286deg 60% 72% / 93%);
 }
 
 .token.atrule,
