@@ -98,7 +98,6 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.property,
-.token.tag,
 .token.boolean,
 .token.number,
 .token.constant,
@@ -107,8 +106,7 @@ cd-el::selection, cd-el *::selection {
   color: #e5b09f;
 }
 
-.token.selector,
-.token.attr-name,
+.token.attr-value,
 .token.string,
 .token.char,
 .token.builtin,
@@ -127,14 +125,17 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.atrule,
-.token.attr-value,
+.token.selector,
+.token.attr-name,
 .token.keyword {
   color: #e49199;
 }
 
 .token.function,
-.token.class-name {
+.token.class-name,
+.token.tag {
   color: #74b4ec;
+  color: #75bfff;
 }
 
 .token.regex,
