@@ -4,7 +4,7 @@ body {
   margin: 0;
   background: #313744;
   color: #d4d5d7;
-  font-family: 'Inter', 'Google Sans Text', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .focus::before {
@@ -854,11 +854,12 @@ body.transitioning .sidebar {
     --sidebar-width: 100vw;
   }
   
-  body.expanded {
+  body {
     overflow-x: hidden;
   }
   
   body cd-el {
+    transition-property: transform;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -938,4 +939,3 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
 }
-
