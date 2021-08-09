@@ -90,7 +90,7 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.punctuation {
-  color: inherit;
+  color: #a6c3d4;
 }
 
 .token.namespace {
