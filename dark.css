@@ -143,6 +143,10 @@ cd-el::selection, cd-el *::selection {
   color: #c1ffd5cc;
 }
 
+.token.interpolation {
+  color: #a6c3d4;
+}
+
 .token.important,
 .token.bold {
   font-weight: bold;
