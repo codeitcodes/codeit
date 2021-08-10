@@ -44,7 +44,6 @@ const body = document.body,
 // version
 const version = '1.0.7';
 versionEl.innerText = version;
-console.log('%cCodeit v' + version, 'font-style: italic; color: gray');
 
 
 
