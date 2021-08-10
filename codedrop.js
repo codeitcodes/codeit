@@ -1,5 +1,5 @@
 
-function getFileExtension(src) {
+function getFileLang(src) {
   
   var EXTENSIONS = {
     'js': 'javascript',
