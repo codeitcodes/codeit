@@ -72,9 +72,11 @@ class CodeitElement extends HTMLElement {
     cd.highlight = (lang) => {
       
       // change codeit class to given language
-      var className = cd.className;
-      className = className.replace(lang, ' ') + ' language-' + lang;
-      cd.className = className.replace(/\s+/g, ' ').trim();
+      const prefix = 'language-';
+      const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
+      cd.className = classes.join(' ').trim();
+      
+      cd.classList.add('language-' + lang);
       
       // highlight element
       Prism.highlightElement(cd);
