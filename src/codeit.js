@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.6
+   v2.3.7
    MIT License
    
    github.com/barhatsor/codeit
@@ -68,16 +68,16 @@ class CodeitElement extends HTMLElement {
     // highlight with specified lang
     cd.lang = getLang();
 
-    // parse code
-    cd.textContent = cd.textContent.replace(/^\n|\n$/g, '');
-
     // highlight codeit
     cd.highlight = (lang) => {
       
-      // returns a highlighted HTML string
-      const html = Prism.highlight(cd.textContent, Prism.languages[lang], lang);
-
-      cd.innerHTML = html;
+      // change codeit class to given language
+      var className = cd.className;
+      className = className.replace(lang, ' ') + ' language-' + lang;
+      cd.className = className.replace(/\s+/g, ' ').trim();
+      
+      // highlight element
+      Prism.highlightElement(cd);
 
     }
 
