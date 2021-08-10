@@ -97,7 +97,6 @@ cd-el::selection, cd-el *::selection {
 
 .token.operator,
 .token.entity,
-.token.url,
 .language-css .token.string,
 .style .token.string,
 .token.interpolation .token.punctuation {
