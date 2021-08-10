@@ -89,6 +89,7 @@ cd-el::selection, cd-el *::selection {
 .token.attr-value,
 .token.string,
 .token.char,
+.token.url,
 .token.builtin,
 .token.inserted,
 .token.template-string {
