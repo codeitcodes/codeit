@@ -324,21 +324,7 @@ async function loadFile(file, sha) {
   file.classList.add('selected');
   changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), file.innerText, getAttr(file, 'exists'));
   
-  var EXTENSIONS = {
-		'js': 'javascript',
-		'py': 'python',
-		'rb': 'ruby',
-		'ps1': 'powershell',
-		'psm1': 'powershell',
-		'sh': 'bash',
-		'bat': 'batch',
-		'h': 'c',
-		'tex': 'latex'
-	};
-  
-  // use file extension as codeit language
-  var extension = (/\.(\w+)$/.exec(file.innerText) || [, 'none'])[1];
-  cd.lang = EXTENSIONS[extension] || extension;
+  cd.lang = getFileLang(file.innerText);
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
