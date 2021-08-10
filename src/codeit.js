@@ -705,3 +705,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
+console.log('%ccodeit.js 2.3.7', 'font-style: italic; color: gray');
