@@ -50,6 +50,7 @@ function loadCodeFromStorage() {
   if (getStorage('code')) {
     
     // set codeit to code
+    cd.lang = getStorage('lang');
     cd.textContent = atob(getStorage('code'));
     
     // set caret pos in code
@@ -86,6 +87,7 @@ window.onbeforeunload = () => {
   
   // set localStorage values
   setStorage('code', btoa(cd.textContent));
+  setStorage('lang', cd.lang);
   
   setStorage('caret', cd.getSelection().start);
   setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
