@@ -130,14 +130,14 @@ cd-el::selection, cd-el *::selection {
 
 .token.important,
 .token.bold {
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .token.italic {
-  font-style: italic;
+  font-style: normal;
 }
 
 .token.entity {
-  cursor: help;
+  cursor: unset;
 }
 
