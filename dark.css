@@ -62,26 +62,6 @@ cd-el::selection, cd-el *::selection {
   background: #505560;
 }
 
-
-.hljs-key, .hljs-attribute, .hljs-literal, .hljs-bullet, .hljs-symbol  {
-  color: #c7ccd4;
-}
-
-.hljs-tag, .hljs-name, .hljs-section {
-  color: #76c0ff;
-}
-
-.hljs-attr, .hljs-emphasis, .hljs-quote, .hljs-strong, .hljs-template-variable, .hljs-variable {
-  color: #cd7e86;
-}
-
-.hljs-params, .hljs-title {
-  color: #69aee9;
-}
-
-
-
-
 .token.comment,
 .token.prolog,
 .token.doctype,
