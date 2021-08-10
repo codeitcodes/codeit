@@ -1,17 +1,16 @@
 'use strict';
 
-// Update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v1';
+// update cache names any time any of the cached files change
+const CACHE_NAME = 'static-cache-v1.7';
 
-// List of files to cache
+// list of files to cache
 const FILES_TO_CACHE = [
-  '/offline.html',
-  '/index.html',
-  '/full.css',
-  '/icons/manifest-icon-512.png',
-  '/icons/apple-icon-180.png',
-  '/src/behave.js',
+  
   '/src/codeit.js',
+  
+  '/full.html',
+  '/full.css',
+  
   '/utils.js',
   '/gitauth.js',
   '/codedrop.js',
@@ -20,19 +19,29 @@ const FILES_TO_CACHE = [
   '/codestorage.js',
   '/bottomfloat.js',
   '/codelearn.js',
-  'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js',
+  
   '/dark.css',
-  '/Monaco.woff',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+  
+  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js',
+  
+  '/fonts/fonts.css',
+  '/fonts/googlesansmono.woff2',
+  
+  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+  'https://fonts.gstatic.com/s/inter/v3/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2',
+  
+  '/offline.html'
+  
 ];
 
 self.addEventListener('install', (evt) => {
   
-  // Precache static resources
+  // precache static resources
   evt.waitUntil(
-      caches.open(CACHE_NAME).then((cache) => {
-        return cache.addAll(FILES_TO_CACHE);
-      })
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
   
   self.skipWaiting();
@@ -41,15 +50,13 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
   
-  // Remove previous cached data from disk.
+  // remove previous cached data from disk
   evt.waitUntil(
-      caches.keys().then((keyList) => {
-        return Promise.all(keyList.map((key) => {
-          
-          console.log('deleting cache');
-          return caches.delete(key);
-        }));
-      })
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        return caches.delete(key);
+      }));
+    })
   );
   
   self.clients.claim();
