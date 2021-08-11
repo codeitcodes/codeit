@@ -101,6 +101,8 @@ class CodeitElement extends HTMLElement {
     
     function debounceRecordHistory() {
       
+      if (recording) return;
+      
       debounce(() => {
         
         recordHistory();
