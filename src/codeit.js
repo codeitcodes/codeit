@@ -99,15 +99,11 @@ class CodeitElement extends HTMLElement {
     }
     
     function debounceRecordHistory() {
-      @@
+      
       debounce(() => {
         
-        if (shouldRecord(event)) {
-          
-          recordHistory();
-          recording = false;
-          
-        }
+        recordHistory();
+        recording = false;
       
       }, 300);
       
