@@ -1,7 +1,7 @@
 {
   "name": "Codeit",
   "short_name": "Codeit",
-  "background_color": "#0b0d1a",
+  "background_color": "#313744",
   "theme_color": "#313744",
   "display": "fullscreen",
   "start_url": "/full",
