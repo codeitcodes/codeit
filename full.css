@@ -766,7 +766,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .button.teritary:active {
-  background: transparent;
+  background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
 }
 
@@ -843,7 +843,7 @@ body.transitioning .sidebar {
   }
 
   .sidebar .button.teritary:hover {
-    background: transparent;
+    background: hsl(228deg 16% 37% / 12%);
     color: hsl(220deg 4% 84%);
   }
   
