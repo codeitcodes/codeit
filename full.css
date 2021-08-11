@@ -7,6 +7,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+body.expanded {
+  overflow-y: hidden;
+}
+
 .focus::before {
   position: fixed;
   left: 0;
