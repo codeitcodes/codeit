@@ -101,7 +101,13 @@ class CodeitElement extends HTMLElement {
     
     function debounceRecordHistory() {
       
-      if (recording) return;
+      // if change originated from 
+      if (recording) {
+        
+        recording = false;
+        return;
+        
+      }
       
       debounce(() => {
         
@@ -413,7 +419,7 @@ class CodeitElement extends HTMLElement {
         if (record) {
           
           cd.innerHTML = record.html;
-          cd.setSelection(record.pos);
+          cd.setSelection(record.pos.start);
           
         }
         
