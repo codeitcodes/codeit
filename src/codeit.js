@@ -405,6 +405,8 @@ class CodeitElement extends HTMLElement {
         at--;
         const record = history[at];
         
+        console.log(history, record);
+        
         if (record) {
           
           cd.innerHTML = record.html;
@@ -422,6 +424,8 @@ class CodeitElement extends HTMLElement {
         
         at++;
         const record = history[at];
+        
+        console.log(history, record);
         
         if (record) {
           
@@ -461,8 +465,10 @@ class CodeitElement extends HTMLElement {
 
       const maxHistory = 300;
       if (at > maxHistory) {
+        
         at = maxHistory;
         history.splice(0, 1);
+        
       }
       
     }
