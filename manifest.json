@@ -3,7 +3,7 @@
   "short_name": "Codeit",
   "background_color": "#0b0d1a",
   "theme_color": "#313744",
-  "display": "standalone",
+  "display": "fullscreen",
   "start_url": "/full",
   "orientation": "portrait",
   "icons": [
