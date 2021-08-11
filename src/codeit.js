@@ -443,7 +443,7 @@ class CodeitElement extends HTMLElement {
     function recordHistory() {
       
       // if codeit not focused
-      if (document.activeElement == cd) return;
+      if (document.activeElement != cd) return;
 
       const html = cd.innerHTML;
       
