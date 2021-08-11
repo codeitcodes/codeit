@@ -85,6 +85,7 @@ class CodeitElement extends HTMLElement {
 
     }
     
+    let history = [];
     let at = -1;
     let recording = false;
     
