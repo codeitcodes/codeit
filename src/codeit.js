@@ -98,8 +98,8 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    function debounceRecordHistory(event) {
-      
+    function debounceRecordHistory() {
+      @@
       debounce(() => {
         
         if (shouldRecord(event)) {
@@ -401,25 +401,41 @@ class CodeitElement extends HTMLElement {
     }
     
     function handleUndoRedo(event) {
+      
       if (isUndo(event)) {
+        
         event.preventDefault();
+        
         at--;
-        const record = history[at]
+        const record = history[at];
+        
         if (record) {
-          editor.innerHTML = record.html
-          restore(record.pos)
+          
+          cd.innerHTML = record.html;
+          cd.setSelection(record.pos);
+          
         }
-        if (at < 0) at = 0
+        
+        if (at < 0) at = 0;
+        
       }
+      
       if (isRedo(event)) {
-        preventDefault(event)
-        at++
-        const record = history[at]
+        
+        event.preventDefault();
+        
+        at++;
+        const record = history[at];
+        
         if (record) {
-          editor.innerHTML = record.html
-          restore(record.pos)
+          
+          cd.innerHTML = record.html;
+          cd.setSelection(record.pos);
+          
         }
-        if (at >= history.length) at--
+        
+        if (at >= history.length) at--;
+        
       }
     }
 
@@ -531,6 +547,8 @@ class CodeitElement extends HTMLElement {
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
         debounceHighlight();
+        
+        debounceRecordHistory();
         
       }
 
