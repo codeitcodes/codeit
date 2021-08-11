@@ -27,6 +27,7 @@ body cd-el {
   left: 0;
   position: relative;
   box-sizing: border-box;
+  padding-bottom: 50px;
   transition: .4s var(--cubic-function);
   transition-property: width, transform;
   will-change: transform;
@@ -43,7 +44,7 @@ body.transitioning cd-el {
 
 .bottom-float {
   position: fixed;
-  bottom: 45px /*calc(env(safe-area-inset-bottom) +*/;
+  bottom: calc(45px + env(safe-area-inset-bottom));
   left: 50vw;
   transform: translateX(-50%);
   width: calc(100vw - 45px);
@@ -859,6 +860,7 @@ body.transitioning .sidebar {
   }
   
   body cd-el {
+    padding-bottom: calc(56px + 45px + 15px + env(safe-area-inset-bottom));
     transition-property: transform;
     -webkit-overflow-scrolling: touch;
   }
