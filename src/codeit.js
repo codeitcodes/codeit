@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.7
+   v2.3.8
    MIT License
    
    github.com/barhatsor/codeit
@@ -46,7 +46,9 @@ class CodeitElement extends HTMLElement {
       openBrackets: `([{`,
       closeBrackets: `)]}`,
       
-      quot: `'"\``
+      quot: `'"\``,
+      
+      history: true
     };
 
     // if edit property is true
@@ -82,14 +84,42 @@ class CodeitElement extends HTMLElement {
       Prism.highlightElement(cd);
 
     }
-
+    
+    let at = -1;
+    let recording = false;
+    
+    function shouldRecord(event) {
+      
+      return !isUndo(event) && !isRedo(event)
+        && event.key !== 'Meta'
+        && event.key !== 'Control'
+        && event.key !== 'Alt'
+        && !event.key.startsWith('Arrow');
+      
+    }
+    
+    function debounceRecordHistory(event) {
+      
+      debounce(() => {
+        
+        if (shouldRecord(event)) {
+          
+          recordHistory();
+          recording = false;
+          
+        }
+      
+      }, 300);
+      
+    }
+    
     function debounce(func, time) {
 
       window.setTimeout(func, time);
       
     }
     
-
+    
     // create a new instance of 'MutationObserver',
     // passing it a callback function
 
@@ -120,11 +150,23 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       if (cd.options.preserveIdent) handleNewLine(event);
+      
       if (cd.options.addClosing) handleDelClosingCharacters(event);
+      
       if (cd.options.preserveIdent) handleDelNewLine(event);
+      
       if (cd.options.catchTab) handleTabCharacters(event);
+      
       if (cd.options.addClosing) handleSelfClosingCharacters(event);
-
+      
+      if (cd.options.history) {
+        handleUndoRedo(event);
+        if (shouldRecord(event) && !recording) {
+          recordHistory();
+          recording = true;
+        }
+      }
+      
     })
     
     
@@ -358,6 +400,61 @@ class CodeitElement extends HTMLElement {
       
     }
     
+    function handleUndoRedo(event) {
+      if (isUndo(event)) {
+        event.preventDefault();
+        at--;
+        const record = history[at]
+        if (record) {
+          editor.innerHTML = record.html
+          restore(record.pos)
+        }
+        if (at < 0) at = 0
+      }
+      if (isRedo(event)) {
+        preventDefault(event)
+        at++
+        const record = history[at]
+        if (record) {
+          editor.innerHTML = record.html
+          restore(record.pos)
+        }
+        if (at >= history.length) at--
+      }
+    }
+
+    function recordHistory() {
+      
+      // if codeit not focused
+      if (document.activeElement == cd) return;
+
+      const html = cd.innerHTML;
+      
+      // get caret pos in text
+      const pos = cd.getSelection();
+
+      const lastRecord = history[at];
+      
+      if (lastRecord) {
+        
+        if (lastRecord.html === html
+          && lastRecord.pos.start === pos.start
+          && lastRecord.pos.end === pos.end) return;
+        
+      }
+
+      at++;
+      history[at] = {html, pos};
+      history.splice(at + 1);
+
+      const maxHistory = 300;
+      if (at > maxHistory) {
+        at = maxHistory;
+        history.splice(0, 1);
+      }
+      
+    }
+    
     function beforeCursor() {
       const s = window.getSelection();
       const r0 = s.getRangeAt(0);
@@ -402,6 +499,18 @@ class CodeitElement extends HTMLElement {
       while (j >= 0 && text[j] === cd.options.tab) j++;      
       return [text.substring(i, j) || '', i, j];
       
+    }
+    
+    function isCtrl(event) {
+      return event.metaKey || event.ctrlKey;
+    }
+
+    function isUndo(event) {
+      return isCtrl(event) && !event.shiftKey && event.code === 'KeyZ';
+    }
+
+    function isRedo(event) {
+      return isCtrl(event) && event.shiftKey && event.code === 'KeyZ';
     }
     
     function insert(text) {
@@ -707,4 +816,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.3.7', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.3.8', 'font-style: italic; color: gray');
