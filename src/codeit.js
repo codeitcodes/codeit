@@ -411,7 +411,7 @@ class CodeitElement extends HTMLElement {
         
         event.preventDefault();
         
-        //at--;
+        at--;
         const record = history[at];
         
         console.log(history, record);
@@ -431,7 +431,7 @@ class CodeitElement extends HTMLElement {
         
         event.preventDefault();
         
-        //at++;
+        at++;
         const record = history[at];
         
         console.log(history, record);
