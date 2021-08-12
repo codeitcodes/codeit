@@ -555,19 +555,23 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      console.log('update');
-      
-      if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+      debounce(() => {
         
-        console.log('updating');
-        
-        debounceHighlight();
-        
-        debounceRecordHistory();
-        
-      }
+        console.log('update');
 
-      cd.prev = cd.textContent;
+        if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+
+          console.log('updating');
+
+          debounceHighlight();
+
+          debounceRecordHistory();
+
+        }
+
+        cd.prev = cd.textContent;
+        
+      }, 30);
 
     }
 
