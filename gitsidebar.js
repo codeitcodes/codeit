@@ -326,8 +326,6 @@ async function loadFile(file, sha) {
   file.classList.add('selected');
   changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), selectedFileName, getAttr(file, 'exists'));
   
-  cd.lang = getFileLang(selectedFileName);
-  
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
     
@@ -357,6 +355,9 @@ async function loadFile(file, sha) {
     cd.textContent = atob(content);
     
   }
+  
+  // change codeit lang
+  cd.lang = getFileLang(selectedFileName);
   
   // set caret pos in code
   cd.setSelection(0, 0);
