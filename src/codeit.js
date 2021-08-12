@@ -71,21 +71,7 @@ class CodeitElement extends HTMLElement {
     cd.lang = getLang();
 
     // highlight codeit
-    cd.highlight = async (lang, pos) => {
-      
-      // change codeit class to given language
-      const prefix = 'language-';
-      const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
-      cd.className = classes.join(' ').trim();
-      
-      cd.classList.add('language-' + lang);
-      
-      console.log(pos);
-      
-      // highlight element
-      await Prism.highlightElement(cd, pos);
-
-    }
+    cd.highlight = Prism.highlightElement;
     
     let history = [];
     let at = -1;
@@ -557,7 +543,7 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      console.log('update');
+      console.log('in');
 
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
@@ -576,7 +562,7 @@ class CodeitElement extends HTMLElement {
     function debounceHighlight() {
       
       // highlight in async thread
-      debounce(async () => {
+      debounce(() => {
         
         // if codeit is focused
         if (document.activeElement == cd) {
@@ -585,7 +571,16 @@ class CodeitElement extends HTMLElement {
           const pos = cd.getSelection();
           
           cd.lang = getLang();
-          await cd.highlight(cd.lang, pos);
+          
+          // change codeit class to given language
+          const prefix = 'language-';
+          const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
+          cd.className = classes.join(' ').trim();
+
+          cd.classList.add('language-' + cd.lang);
+
+          // highlight codeit
+          Prism.highlightElement(cd, pos);
           
           // restore pos in text
           cd.setSelection(pos.start);
