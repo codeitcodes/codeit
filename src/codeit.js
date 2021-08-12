@@ -563,9 +563,9 @@ class CodeitElement extends HTMLElement {
 
           console.log('updating');
 
-          debounceHighlight();
+          //debounceHighlight();
 
-          debounceRecordHistory();
+          //debounceRecordHistory();
 
         }
 
