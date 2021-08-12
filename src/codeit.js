@@ -71,7 +71,7 @@ class CodeitElement extends HTMLElement {
     cd.lang = getLang();
 
     // highlight codeit
-    cd.highlight = (lang, pos) => {
+    cd.highlight = async (lang, pos) => {
       
       // change codeit class to given language
       const prefix = 'language-';
@@ -83,7 +83,7 @@ class CodeitElement extends HTMLElement {
       console.log(pos);
       
       // highlight element
-      Prism.highlightElement(cd, pos);
+      await Prism.highlightElement(cd, pos);
 
     }
     
@@ -576,7 +576,7 @@ class CodeitElement extends HTMLElement {
     function debounceHighlight() {
       
       // highlight in async thread
-      debounce(() => {
+      debounce(async () => {
         
         // if codeit is focused
         if (document.activeElement == cd) {
@@ -585,7 +585,7 @@ class CodeitElement extends HTMLElement {
           const pos = cd.getSelection();
           
           cd.lang = getLang();
-          cd.highlight(cd.lang, pos);
+          await cd.highlight(cd.lang, pos);
           
           // restore pos in text
           cd.setSelection(pos.start);
@@ -593,7 +593,7 @@ class CodeitElement extends HTMLElement {
         } else { // no need to move caret, just highlight
           
           cd.lang = getLang();
-          cd.highlight(cd.lang);
+          cd.highlight(cd.lang, true);
           
         }
 
