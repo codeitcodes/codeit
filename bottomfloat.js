@@ -61,6 +61,24 @@ if (isMobile) {
       // hide bottom float
       bottomFloat.classList.add('hidden');
       
+      // if scrolled to end
+      if (st >= cd.scrollHeight) {
+        
+        // set timeout
+        window.setTimeout(() => {
+          
+          // if still on bottom of codeit
+          if (st >= cd.scrollHeight) {
+            
+            // show bottom float
+            bottomFloat.classList.remove('hidden');
+            
+          }
+          
+        }, 400);
+        
+      }
+      
     } else { // if scrolled up
       
       // if passed threshold
