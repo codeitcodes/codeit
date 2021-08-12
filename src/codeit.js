@@ -554,8 +554,12 @@ class CodeitElement extends HTMLElement {
     cd.prev = '';
     
     cd.update = () => {
-
+      
+      console.log('update');
+      
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+        
+        console.log('updating');
         
         debounceHighlight();
         
@@ -845,4 +849,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.3.8', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.3.9', 'font-style: italic; color: gray');
