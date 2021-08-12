@@ -686,6 +686,9 @@ class CodeitElement extends HTMLElement {
       
       const s = window.getSelection();
       
+      // collapse empty text nodes
+      cd.normalize();
+      
       // if selection is collapsed
       if (s.isCollapsed) {
         
