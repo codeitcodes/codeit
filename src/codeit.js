@@ -579,12 +579,10 @@ class CodeitElement extends HTMLElement {
           const pos = cd.getSelection();
           
           // highlight codeit
-          cd.highlight(cd.lang, pos, () => {
-            
-            // restore pos in text
-            cd.setSelection(pos.start);
-            
-          });
+          cd.highlight(cd.lang, pos);
+          
+          // restore pos in text
+          cd.setSelection(pos.start);
 
         } else { // no need to move caret, just highlight
           
