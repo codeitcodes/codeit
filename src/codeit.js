@@ -571,7 +571,7 @@ class CodeitElement extends HTMLElement {
 
         cd.prev = cd.textContent;
         
-      }, 30);
+      }, 0);
 
     }
 
