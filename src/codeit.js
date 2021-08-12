@@ -71,7 +71,19 @@ class CodeitElement extends HTMLElement {
     cd.lang = getLang();
 
     // highlight codeit
-    cd.highlight = Prism.highlightElement;
+    cd.highlight = (lang, pos, callback) => {
+
+      // change codeit class to given language
+      const prefix = 'language-';
+      const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
+      cd.className = classes.join(' ').trim();
+
+      cd.classList.add('language-' + lang);
+
+      // highlight element
+      Prism.highlightElement(cd, pos, callback);
+
+    }
     
     let history = [];
     let at = -1;
@@ -570,20 +582,14 @@ class CodeitElement extends HTMLElement {
           // get caret pos in text
           const pos = cd.getSelection();
           
-          cd.lang = getLang();
-          
-          // change codeit class to given language
-          const prefix = 'language-';
-          const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
-          cd.className = classes.join(' ').trim();
-
-          cd.classList.add('language-' + cd.lang);
-
           // highlight codeit
-          cd.highlight(cd, pos);
-          
-          // restore pos in text
-          cd.setSelection(pos.start);
+          cd.lang = getLang();
+          cd.highlight(cd, pos, () => {
+            
+            // restore pos in text
+            cd.setSelection(pos.start);
+            
+          });
 
         } else { // no need to move caret, just highlight
           
