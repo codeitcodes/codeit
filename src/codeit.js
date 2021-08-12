@@ -71,7 +71,7 @@ class CodeitElement extends HTMLElement {
     cd.lang = getLang();
 
     // highlight codeit
-    cd.highlight = (lang) => {
+    cd.highlight = (lang, pos) => {
       
       // change codeit class to given language
       const prefix = 'language-';
@@ -81,7 +81,7 @@ class CodeitElement extends HTMLElement {
       cd.classList.add('language-' + lang);
       
       // highlight element
-      Prism.highlightElement(cd);
+      Prism.highlightElement(cd, pos);
 
     }
     
@@ -563,7 +563,7 @@ class CodeitElement extends HTMLElement {
 
           console.log('updating');
 
-          //debounceHighlight();
+          debounceHighlight();
 
           //debounceRecordHistory();
 
@@ -587,7 +587,7 @@ class CodeitElement extends HTMLElement {
           const pos = cd.getSelection();
           
           cd.lang = getLang();
-          cd.highlight(cd.lang);
+          cd.highlight(cd.lang, pos);
           
           // restore pos in text
           cd.setSelection(pos.start);
