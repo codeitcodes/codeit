@@ -562,7 +562,7 @@ class CodeitElement extends HTMLElement {
     function debounceHighlight() {
       
       // highlight in async thread
-      debounce(() => {
+      debounce(async () => {
         
         // if codeit is focused
         if (document.activeElement == cd) {
@@ -580,7 +580,7 @@ class CodeitElement extends HTMLElement {
           cd.classList.add('language-' + cd.lang);
 
           // highlight codeit
-          Prism.highlightElement(cd, pos);
+          await Prism.highlightElement(cd, pos);
           
           // restore pos in text
           cd.setSelection(pos.start);
