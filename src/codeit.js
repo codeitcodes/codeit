@@ -68,7 +68,7 @@ class CodeitElement extends HTMLElement {
     }
 
     // highlight with specified lang
-    cd.lang = getLang();
+    cd.lang = cd.lang || 'plain';
 
     // highlight codeit
     cd.highlight = (lang, pos, callback) => {
@@ -583,8 +583,7 @@ class CodeitElement extends HTMLElement {
           const pos = cd.getSelection();
           
           // highlight codeit
-          cd.lang = getLang();
-          cd.highlight(cd, pos, () => {
+          cd.highlight(cd.lang, pos, () => {
             
             // restore pos in text
             cd.setSelection(pos.start);
@@ -593,28 +592,12 @@ class CodeitElement extends HTMLElement {
 
         } else { // no need to move caret, just highlight
           
-          cd.lang = getLang();
           cd.highlight(cd.lang, true);
           
         }
 
       }, 30);
 
-    }
-    
-    function getLang() {
-      
-      // highlight with specified lang
-      if (cd.getAttribute('lang') != undefined && cd.getAttribute('lang') != '') {
-
-        return cd.getAttribute('lang');
-
-      } else {
-
-        return 'plaintext';
-        
-      }
-      
     }
     
     cd.setSelection = (startPos, endPos) => {
