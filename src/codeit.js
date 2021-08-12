@@ -554,12 +554,8 @@ class CodeitElement extends HTMLElement {
     cd.prev = '';
     
     cd.update = () => {
-      
-      console.log('in');
 
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
-        
-        console.log('updating');
 
         debounceHighlight();
 
