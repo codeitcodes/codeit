@@ -80,6 +80,8 @@ class CodeitElement extends HTMLElement {
       
       cd.classList.add('language-' + lang);
       
+      console.log(pos);
+      
       // highlight element
       Prism.highlightElement(cd, pos);
 
@@ -414,7 +416,7 @@ class CodeitElement extends HTMLElement {
         at--;
         const record = history[at];
         
-        console.log(history, record);
+        console.log(history, record, at);
         
         if (record) {
           
@@ -434,7 +436,7 @@ class CodeitElement extends HTMLElement {
         at++;
         const record = history[at];
         
-        console.log(history, record);
+        console.log(history, record, at);
         
         if (record) {
           
@@ -555,23 +557,19 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      debounce(() => {
+      console.log('update');
+
+      if (cd.textContent !== '' && cd.textContent !== cd.prev) {
         
-        console.log('update');
+        console.log('updating');
 
-        if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+        debounceHighlight();
 
-          console.log('updating');
+        debounceRecordHistory();
 
-          debounceHighlight();
+      }
 
-          //debounceRecordHistory();
-
-        }
-
-        cd.prev = cd.textContent;
-        
-      }, 0);
+      cd.prev = cd.textContent;
 
     }
 
