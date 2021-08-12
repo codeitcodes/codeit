@@ -320,11 +320,13 @@ async function loadFile(file, sha) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
   
+  const selectedFileName = file.querySelector('.name').innerText;
+  
   // change selected file
   file.classList.add('selected');
-  changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), file.innerText, getAttr(file, 'exists'));
+  changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), selectedFileName, getAttr(file, 'exists'));
   
-  cd.lang = getFileLang(file.innerText);
+  cd.lang = getFileLang(selectedFileName);
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -336,7 +338,7 @@ async function loadFile(file, sha) {
     let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
     
-    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ file.innerText;
+    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ selectedFileName;
     
     // get the query
     var resp = await axios.get(query, githubToken);
