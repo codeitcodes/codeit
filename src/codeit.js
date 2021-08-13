@@ -43,10 +43,10 @@ class CodeitElement extends HTMLElement {
       preserveIdent: true,
       addClosing: true,
       
-      openBrackets: `([{`,
-      closeBrackets: `)]}`,
+      openBrackets: ['(', '[', '{'],
+      closeBrackets: [')', ']', '}'],
       
-      quot: `'"\``,
+      quot: [`'`, `"`, '`'],
       
       history: true
     };
