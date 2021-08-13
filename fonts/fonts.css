@@ -1,33 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 @font-face {
   font-family: 'Google Sans Mono';
   src: url('googlesansmono.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Google Sans Text';
-  src: url('googlesanstext.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Mono';
-  src: url('SFMonoRegular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Mono';
-  src: url('SFMonoRegularItalic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
   font-display: swap;
 }
