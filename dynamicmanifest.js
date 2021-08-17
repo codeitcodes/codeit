@@ -7,7 +7,8 @@ let manifest = {
   "background_color": "#313744",
   "theme_color": "#313744",
   "display": "fullscreen",
-  "start_url": "/full",
+  "scope": window.location.href,
+  "start_url": window.location.href + "/full",
   "orientation": "portrait",
   "icons": [
     {
