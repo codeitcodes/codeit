@@ -11,13 +11,13 @@ let manifest = {
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/manifest-icon-192.png",
+      "src": window.location.href + "/icons/manifest-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/manifest-icon-512.png",
+      "src": window.location.href + "/icons/manifest-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -32,7 +32,7 @@ if (!isMobile) {
   
   manifest.icons = [
     {
-      "src": "icons/mac-icon-512-padding.png",
+      "src": window.location.href + "/icons/mac-icon-512-padding.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
