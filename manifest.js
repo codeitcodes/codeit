@@ -8,18 +8,18 @@ let manifest = {
   "background_color": "#313744",
   "theme_color": "#313744",
   "display": "fullscreen",
-  "scope": window.location.href,
-  "start_url": window.location.href + "/full",
+  "scope": window.location.origin,
+  "start_url": window.location.origin + "/full",
   "orientation": "portrait",
   "icons": [
     {
-      "src": window.location.href + "/icons/manifest-icon-192.png",
+      "src": window.location.origin + "/icons/manifest-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": window.location.href + "/icons/manifest-icon-512.png",
+      "src": window.location.origin + "/icons/manifest-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -34,7 +34,7 @@ if (!isMobile) {
   
   manifest.icons = [
     {
-      "src": window.location.href + "/icons/mac-icon-512-padding.png",
+      "src": window.location.origin + "/icons/mac-icon-512-padding.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
