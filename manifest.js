@@ -10,7 +10,7 @@ let manifest = {
   "display": "fullscreen",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
-  "orientation": "portrait",
+  "orientation": "natural",
   "icons": [
     {
       "src": window.location.origin + "/icons/manifest-icon-192.png",
