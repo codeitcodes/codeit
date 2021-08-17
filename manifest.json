@@ -17,7 +17,7 @@
       "src": "icons/mac-icon-512-padding.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     }
   ]
 }
