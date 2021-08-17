@@ -10,7 +10,7 @@ let manifest = {
   "display": "standalone",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
-  "orientation": "natural",
+  "orientation": "any",
   "icons": [
     {
       "src": window.location.origin + "/icons/manifest-icon-192.png",
