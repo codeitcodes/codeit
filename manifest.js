@@ -7,7 +7,7 @@ let manifest = {
   "description": "Mobile code editor connected to Github.",
   "background_color": "#313744",
   "theme_color": "#313744",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
   "orientation": "natural",
