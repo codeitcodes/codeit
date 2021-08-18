@@ -19,16 +19,16 @@ function getFileLang(src) {
 }
 
 function processFile(file) {
-  
-  console.log(file);
-  
+    
   const reader = new FileReader();
   
   reader.addEventListener('load', (event) => {
     
-    console.log(event);
-    //cd.textContent = event.target.result;
-    //cd.focus();
+    cd.textContent = event.target.result;
+    cd.lang = getFileLang(file.name);
+    cd.focus();
+    
+    console.log('%Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes', 'font-style: italic; color: gray');
     
   });
   
