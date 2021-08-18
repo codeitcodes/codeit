@@ -28,7 +28,7 @@ function processFile(file) {
     cd.lang = getFileLang(file.name);
     cd.focus();
     
-    console.log('%Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes', 'font-style: italic; color: gray');
+    console.log('%sLoaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes', 'font-style: italic; color: gray');
     
   });
   
