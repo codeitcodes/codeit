@@ -19,12 +19,14 @@ function getFileLang(src) {
 }
 
 function processFile(file) {
-    
+  
+  console.log(file);
+  
   const reader = new FileReader();
   
   reader.addEventListener('load', (event) => {
     
-    console.log(event.target);
+    console.log(event);
     //cd.textContent = event.target.result;
     //cd.focus();
     
