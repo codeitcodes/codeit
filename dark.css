@@ -93,7 +93,9 @@ cd-el::selection, cd-el *::selection {
 .token.url,
 .token.builtin,
 .token.inserted,
-.token.template-string {
+.token.template-string,
+.token.regex,
+.token.variable {
   color: #c1ffd5cc;
 }
 
@@ -117,11 +119,6 @@ cd-el::selection, cd-el *::selection {
 .token.tag {
   color: #74b4ec;
   color: #75bfff;
-}
-
-.token.regex,
-.token.variable {
-  color: #c1ffd5cc;
 }
 
 .token.interpolation {
