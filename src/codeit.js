@@ -736,7 +736,7 @@ class CodeitElement extends HTMLElement {
         getTextNodes(cd);
         
         // if text node exists
-        if (lastNode.nodeValue) {
+        if (lastNode && lastNode.nodeValue) {
 
           const lastNodeLength = lastNode.nodeValue.length;
 
