@@ -63,6 +63,7 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.comment,
+.token.important,
 .token.prolog,
 .token.doctype,
 .token.cdata {
@@ -119,7 +120,6 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.regex,
-.token.important,
 .token.variable {
   color: #c1ffd5cc;
 }
