@@ -554,12 +554,17 @@ class CodeitElement extends HTMLElement {
     cd.prev = '';
     
     cd.update = () => {
-
+      
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
 
         debounceHighlight();
-
-        debounceRecordHistory();
+        
+        // if codeit is focused
+        if (document.activeElement == cd) {
+          
+          debounceRecordHistory();
+          
+        }
 
       }
 
@@ -572,23 +577,14 @@ class CodeitElement extends HTMLElement {
       // highlight in async thread
       debounce(() => {
         
-        // if codeit is focused
-        if (document.activeElement == cd) {
-          
-          // get caret pos in text
-          const pos = cd.getSelection();
-          
-          // highlight codeit
-          cd.highlight(cd.lang);
-          
-          // restore pos in text
-          cd.setSelection(pos.start);
+        // get caret pos in text
+        const pos = cd.getSelection();
 
-        } else { // no need to move caret, just highlight
-          
-          cd.highlight(cd.lang);
-          
-        }
+        // highlight codeit
+        cd.highlight(cd.lang);
+
+        // restore pos in text
+        cd.setSelection(pos.start);
 
       }, 30);
 
