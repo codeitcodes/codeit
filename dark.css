@@ -45,7 +45,7 @@ cd-el {
   background: #313744;
   color: #a6c3d4;
   
-  font-family: 'Google Sans Mono', 'SF Mono', 'Source Code Pro', monospace;
+  font-family: 'Google Sans Mono', 'SF Mono', monospace;
   
   font-size: 14px;
   line-height: 1.5;
@@ -75,7 +75,7 @@ cd-el::selection, cd-el *::selection {
 }
 
 .token.namespace {
-  opacity: .7;
+  opacity: 1;
 }
 
 .token.property,
