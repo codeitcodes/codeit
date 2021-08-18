@@ -395,6 +395,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .wrapper {
+  width: 100%;
   height: max-content;
 }
 
