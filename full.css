@@ -157,7 +157,7 @@ body.transitioning cd-el {
   transform-origin: 20.95px 20.95px;
 }
 
-.push-wrapper.checked .push-svg {
+.push-wrapper.checked {
   pointer-events: none;
 }
 .push-wrapper.checked .push-svg #check {
