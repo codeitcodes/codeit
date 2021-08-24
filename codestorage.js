@@ -2,27 +2,16 @@
 let modifiedFiles, selectedFile;
 
 
-function changeSelectedFile(fileDir, fileSha, fileName, fileExists) {
+function changeSelectedFile(newSelectedFile) {
   
-  selectedFile = { dir: fileDir,
-                   sha: fileSha,
-                   name: fileName,
-                   exists: fileExists,
-                 };
-  
-  setStorage('selectedFile', JSON.stringify(selectedFile));
+  setStorage('selectedFile', JSON.stringify(newSelectedFile));
   
 }
 
 
-function saveModifiedFile(fileDir, fileSha, fileName, fileExists) {
-    
-  modifiedFiles[fileSha] = { dir: fileDir,
-                             sha: fileSha,
-                             name: fileName,
-                             exists: fileExists,
-                             content: btoa(cd.textContent)
-                           };
+function saveModifiedFile(modifiedFile) {
+  
+  modifiedFiles[modifiedFile.sha] = modifiedFile;
   
   setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
   
