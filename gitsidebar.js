@@ -179,7 +179,7 @@ function addItemListeners() {
   items.forEach(item => {
     
     // navigate on click
-    item.addEventListener('click', async (e) => {
+    item.addEventListener('click', (e) => {
       
       // if item is a repository
       if (item.classList.contains('repo')) {
@@ -228,63 +228,26 @@ function addItemListeners() {
           
         } else {
           
-          // commit file
+          // push file
+          
+          // play push animation
+          item.classList.add('checked');
+          
+          // build file and commit
+          let file = {};
+          let commit = {};
           
           // get sha of file
-          const sha = getAttr(item, 'sha');
+          file.sha = getAttr(item, 'sha');
           
-          let content;
+          // get file selected
+          file.selected = item.classList.contains('selected');
           
-          // if currently editing file
-          if (item.classList.contains('selected')) {
-              
-              // get current value of file
-              content = btoa(cd.textContent);
+          // set commit message
+          commit.message = 'Update ' + item.innerText;
           
-          } else { // else, load from storage
-            
-            content = modifiedFiles[sha][0];
-            
-          }
-          
-          const message = 'Update ' + item.innerText;
-          
-          let query = 'https://api.github.com/repos/' +
-                      treeLoc[0] +
-                      '/' + treeLoc[1] +
-                      '/contents' + treeLoc[2] + '/' + item.innerText;
-          
-          let commitData = {
-              message: message,
-              content: content,
-              sha: sha
-            };
-          
-          // commit file
-          var resp = await axios.put(query, githubToken, commitData);
-          
-          // force-update cache
-          var newFile = await axios.get(query, githubToken, sha);
-          
-          // delete file from modified files
-          deleteModifiedFile(sha);
-          
-          item.classList.remove('modified');
-          
-          // update SHA of file
-          setAttr(item, 'sha', resp.content.sha);
-          
-          // if file is selected
-          if (item.classList.contains('selected')) {
-            
-            // update selection SHA
-            changeSelectedFile(treeLoc.join(), resp.content.sha, item.innerText, true);
-            
-          }
-          
-          // set event listener for file change
-          cd.addEventListener('keydown', checkBackspace);
-          cd.addEventListener('input', fileChange);
+          // push file asynchronously
+          pushFile(file, commit);
           
         }
         
