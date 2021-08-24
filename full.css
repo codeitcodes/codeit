@@ -131,8 +131,8 @@ body.transitioning cd-el {
 }
 
 .bottom-float .push-wrapper:active {
-  background: hsl(0deg 0% 100% / 7%);
   background: #35373e;
+  background: #2e3037;
 }
 
 .push-svg {
