@@ -272,7 +272,16 @@ async function loadFile(file, sha) {
     if (selectedItem) {
     
       // save previous selection in localStorage
-      saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
+      
+      const previousFile = {
+        dir: treeLoc.join(),
+        sha: selectedFile.sha,
+        name: selectedFile.name,
+        exists: selectedFile.exists,
+        content: btoa(cd.textContent)
+      };
+      
+      saveModifiedFile(previousFile);
       
     }
     
@@ -286,8 +295,17 @@ async function loadFile(file, sha) {
   const selectedFileName = file.querySelector('.name').innerText;
   
   // change selected file
+  
   file.classList.add('selected');
-  changeSelectedFile(treeLoc.join(), getAttr(file, 'sha'), selectedFileName, getAttr(file, 'exists'));
+  
+  const newSelectedFile = {
+    dir: treeLoc.join(),
+    sha: getAttr(file, 'sha'),
+    name: selectedFileName,
+    exists: getAttr(file, 'exists')
+  };
+  
+  changeSelectedFile(newSelectedFile);
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -400,7 +418,16 @@ function fileChange() {
   bottomFloat.classList.add('modified');
   
   // save modified file in localStorage
-  saveModifiedFile(treeLoc.join(), selectedFile.sha, selectedFile.name, selectedFile.exists);
+  
+  const modifiedFile = {
+    dir: treeLoc.join(),
+    sha: selectedFile.sha,
+    name: selectedFile.name,
+    exists: selectedFile.exists,
+    content: btoa(cd.textContent)
+  };
+  
+  saveModifiedFile(modifiedFile);
 
   // remove event listener
   cd.removeEventListener('keydown', checkBackspace);
