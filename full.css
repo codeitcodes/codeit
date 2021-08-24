@@ -82,6 +82,7 @@ body.transitioning cd-el {
   display: flex;
   align-items: center;
   padding: 16px 20px;
+  transition: .18s var(--ease-function);
 }
 
 .bottom-float .sidebar-open {
@@ -122,6 +123,7 @@ body.transitioning cd-el {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
   border-radius: 0 20px 20px 0;
+  width: 69.85px;
   transition: .18s var(--ease-function);
 }
 
@@ -139,6 +141,12 @@ body.transitioning cd-el {
   overflow: visible;
   width: 39.5px;
 }
+
+.bottom-float .push-wrapper .push-svg {
+  position: absolute;
+  left: 12px;
+}
+
 .push-svg *:not(g, #bounding-box) {
   will-change: transform;
 }
