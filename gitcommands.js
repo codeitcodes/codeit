@@ -63,9 +63,16 @@ async function pushFile(file, commit) {
 
   // if file is selected
   if (file.selected) {
-
+    
+    const newSelectedFile = {
+      dir: treeLoc.join(),
+      sha: resp.content.sha,
+      name: file.name,
+      exists: true
+    };
+    
     // update selection SHA
-    changeSelectedFile(treeLoc.join(), resp.content.sha, file.name, true);
+    changeSelectedFile(newSelectedFile);
 
   }
   
