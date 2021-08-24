@@ -4,12 +4,9 @@ const body = document.body,
       cd = document.querySelector('cd-el'),
       
       bottomFloat = document.querySelector('.bottom-float'),
-      
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
-      
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
-      pushIcon = pushWrapper.querySelector('.push-svg'),
       
       github = document.querySelector('.github'),
       
