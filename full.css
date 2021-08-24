@@ -124,6 +124,9 @@ body.transitioning cd-el {
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
   border-radius: 0 20px 20px 0;
   width: 69.85px;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
   transition: .18s var(--ease-function);
 }
 
