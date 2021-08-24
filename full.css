@@ -701,14 +701,18 @@ body.transitioning .sidebar {
   border-radius: 50%;
   
   display: none;
-  transition: .18s var( --ease-function);
 }
 
 .sidebar .item.modified .push-wrapper {
   display: flex;
 }
 
-.sidebar .item .push-wrapper:active {
+.sidebar .item .push-wrapper .push-svg {
+  border-radius: 50%;
+  transition: .18s var( --ease-function);
+}
+
+.sidebar .item .push-wrapper:active .push-svg {
   background: rgba(0,0,0,.1);
   transform: scale(0.95);
 }
