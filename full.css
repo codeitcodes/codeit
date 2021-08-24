@@ -127,11 +127,6 @@ body.transitioning cd-el {
   transition: .18s var(--ease-function);
 }
 
-.bottom-float .push-wrapper:hover {
-  background: hsl(0deg 0% 100% / 4%);
-  background: #2e3037;
-}
-
 .bottom-float .push-wrapper:active {
   background: hsl(0deg 0% 100% / 7%);
   background: #35373e;
