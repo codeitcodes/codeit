@@ -89,7 +89,9 @@ async function renderFiles() {
               `+ fileIcon +`
               <a class="name">`+ item.name +`</a>
             </div>
-            `+ pushIcon +`
+            <div class="push-wrapper">
+              `+ pushIcon +`
+            </div>
           </div>
           `;
           
