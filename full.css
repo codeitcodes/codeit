@@ -122,151 +122,203 @@ body.transitioning cd-el {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
   border-radius: 0 20px 20px 0;
+  transition: .18s var(--ease-function);
+}
+
+.bottom-float .push-wrapper:hover {
+  background: hsl(0deg 0% 100% / 4%);
+  background: #2e3037;
 }
 
 .bottom-float .push-wrapper:active {
   background: hsl(0deg 0% 100% / 7%);
+  background: #35373e;
 }
 
-.push-wrapper .arrow {
-  position: relative;
-  transition: .18s var(--ease-function);
+.push-svg {
+  overflow: visible;
+  width: 40.93px;
+}
+.push-svg *:not(g, #bounding-box) {
   will-change: transform;
-  transform-origin: center;
+}
+.push-svg #push, .push-svg #check {
+  fill: transparent;
+  transform-origin: 75% 75%;
+  transition: .2s ease;
+}
+.push-svg #push {
+  fill: rgba(241,241,242,0.8);
+}
+.push-svg #check {
+  fill: transparent;
+}
+.push-svg #circle {
+  transform-origin: 20.95px 20.95px;
 }
 
-.push-wrapper.pushing .base {
-  opacity: 0;
-  transform: translateY(4px) translateX(6px);
-  width: 1px;
-  height: 1px;
+.push-wrapper.checked .push-svg {
+  pointer-events: none;
+}
+.push-wrapper.checked .push-svg #check {
+  transform: scale(0);
+  fill: rgb(23, 191, 99);
+  transition: none;
+  animation: heart 0.25s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.push-wrapper.checked .push-svg #push {
+  fill: transparent;
+  transform: scale(0);
+}
+.push-wrapper.checked .push-svg #circle {
+  animation: circle .25s forwards;
+}
+.push-wrapper.checked .push-svg #grp1 {
+  opacity: 1;
+  transition: 0.1s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp1 #oval1 {
+  transform: scale(0) translate(0, -30px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp1 #oval2 {
+  transform: scale(0) translate(10px, -50px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp2 {
+  opacity: 1;
+  transition: 0.1s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp2 #oval1 {
+  transform: scale(0) translate(30px, -15px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp2 #oval2 {
+  transform: scale(0) translate(60px, -15px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp3 {
+  opacity: 1;
+  transition: 0.1s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp3 #oval1 {
+  transform: scale(0) translate(30px, 0px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp3 #oval2 {
+  transform: scale(0) translate(60px, 10px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp4 {
+  opacity: 1;
+  transition: 0.1s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp4 #oval1 {
+  transform: scale(0) translate(30px, 15px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp4 #oval2 {
+  transform: scale(0) translate(40px, 50px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp5 {
+  opacity: 1;
+  transition: 0.2s all 0.2s;
+}
+.push-wrapper.checked .push-svg #grp5 #oval1 {
+  transform: scale(0) translate(-10px, 20px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp5 #oval2 {
+  transform: scale(0) translate(-60px, 30px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp6 {
+  opacity: 1;
+  transition: 0.2s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp6 #oval1 {
+  transform: scale(0) translate(-30px, 0px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp6 #oval2 {
+  transform: scale(0) translate(-60px, -5px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp7 {
+  opacity: 1;
+  transition: 0.2s 0.2s;
+}
+.push-wrapper.checked .push-svg #grp7 #oval1 {
+  transform: scale(0) translate(-30px, -15px);
+  transform-origin: 50% 50%;
+  transition: 0.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp7 #oval2 {
+  transform: scale(0) translate(-55px, -30px);
+  transform-origin: 50% 50%;
+  transition: 1.2s transform 0.2s;
+}
+.push-wrapper.checked .push-svg #grp2 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
+}
+.push-wrapper.checked .push-svg #grp3 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
+}
+.push-wrapper.checked .push-svg #grp4 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
+}
+.push-wrapper.checked .push-svg #grp5 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
+}
+.push-wrapper.checked .push-svg #grp6 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
+}
+.push-wrapper.checked .push-svg #grp7 {
+  opacity: 1;
+  transition: 0.2s opacity 0.2s;
 }
 
-.push-wrapper .base {
-  transition: 0.1s var(--ease-function), .1s .1s var(--ease-function) opacity;
-}
-
-.push-wrapper.pushing .arrow {
-  transform: scale(0.8) translateY(2.2px);
-}
-
-.push-wrapper .push {
-  position: absolute;
-  overflow: visible;
-}
-
-.loader1 {
-  opacity: 0;
-  transform: rotate(0.25turn);
-  transition: 0.14s var(--ease-function);
-}
-
-@keyframes rotate {
-  to {
-    transform: rotate(1.25turn);
+@keyframes circle {
+  from {
+    transform: scale(0) translateY(-0.05px);
+    stroke-width: 2px;
   }
-}
-
-.loader1 circle {
-  stroke-dasharray: 1, 150;
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-  transform-origin: center;
-  transition: .18s var(--ease-function);
-}
-
-@keyframes stroke {
-  0% {
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
-  }
-
   50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
+    transform: scale(4.8) translateY(-0.05px);
+    stroke-width: 2.1px;
+    transform-origin: 20.91px 20.9px;
   }
-
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
+  to {
+    transform: scale(15) translateY(-0.05px);
+    stroke-width: 0;
+    transform-origin: 20.821px 20.821px;
   }
 }
-
-.push-wrapper.pushing .loader1 {
-  opacity: 1;
-  animation: rotate 2s .1s linear infinite;
-}
-
-.push-wrapper.pushing .loader1 .circle {
-  animation: stroke 1.5s .1s ease-in-out infinite;
-}
-
-.loader1 .fill {
-  opacity: 0;
-  stroke-dasharray: 150, 150;
-  transition: 0.18s var(--ease-function), 0.18s 0.18s var(--ease-function) color;
-}
-
-.push-wrapper.pushed .loader1 .fill {
-  opacity: 1;
-  transform: scale(0.87);
-  stroke-width: 4.5;
-  color: #21be99;
-  color: #63b47c;
-}
-
-.push-wrapper.pushed .loader1 {
-  animation-play-state: paused;
-  transition: .1s var(--ease-function);
-}
-
-.push-wrapper.pushed .loader1 .circle {
-  transform: scale(0.87);
-}
-
-.push-wrapper.pushed .arrow {
-  opacity: 0;
-  transform: scale(0.87);
-}
-
-.push-wrapper .checked {
-  opacity: 0;
-  transform: scale(1.15);
-  transform-origin: center;
-  transition: .18s var(--ease-function);
-}
-
-.push-wrapper.pushed .checked {
-  opacity: 1;
-  transform: none;
-}
-
-.push-wrapper .checkmark {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  transform-origin: center;
-  overflow: visible;
-  transform: scale(0.9);
-}
-
-.push-wrapper .checkmark-border {
-  stroke-width: 8px;
-  stroke: #25292e;
-}
-
-.push-wrapper .checkmark path {
-  transform: translateX(4px) translateY(-2px);
-  stroke-linecap: round;
-  transition: stroke-dashoffset .14s .14s var(--ease-function), .18s .18s var(--ease-function) color;
-  stroke-dashoffset: 29.7833385;
-  stroke-dasharray: 29.7833385;
-}
-
-.push-wrapper.pushed .checkmark path {
-  stroke-dashoffset: 0;
-  color: #21be99;
-  color: #63b47c;
+@keyframes heart {
+  from {
+    transform: scale(0.2);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .github {
