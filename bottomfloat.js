@@ -36,10 +36,30 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
+// show push icon in button
+pushWrapper.innerHTML = pushIcon;
+
 // push when clicked on button
 pushWrapper.addEventListener('click', () => {
+     
+  // play push animation
+  pushWrapper.classList.add('checked');
   
+  // build file and commit
+  let file = {};
+  let commit = {};
   
+  // get sha of file
+  file.sha = getAttr(item, 'sha');
+  
+  // get file selected
+  file.selected = item.classList.contains('selected');
+
+  // set commit message
+  commit.message = 'Update ' + item.innerText;
+
+  // push file asynchronously
+  pushFile(file, commit);
   
 })
 
