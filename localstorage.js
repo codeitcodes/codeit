@@ -27,6 +27,13 @@ function deleteModifiedFileLS(fileSha) {
 }
 
 
+function changeTreeLocLS(treeLoc) {
+  
+  setStorage('tree', treeLoc.join());
+  
+}
+
+
 function loadLS() {
   
   // load modified files from storage
