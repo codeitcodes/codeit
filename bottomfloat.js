@@ -55,10 +55,10 @@ pushWrapper.addEventListener('click', () => {
   if (selectedItem) {
   
     // set commit message
-    commit.message = 'Update ' + item.innerText;
+    commit.message = 'Update ' + selectedItem.innerText;
     
     // set commit file
-    file.sha = getAttr(item, 'sha');
+    file.sha = getAttr(selectedItem, 'sha');
     file.selected = true;
 
     // push file asynchronously
