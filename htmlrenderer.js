@@ -10,30 +10,15 @@ github.addEventListener('click', () => {
 // render files
 // call this function when signed in to github
 // to render sidebar
-async function renderFiles() {
+async function renderFilesHTML() {
   
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
     startLoading();
   }
   
-  // map tree location
-  let query = 'https://api.github.com';
-  const [user, repo, contents] = treeLoc;
-  
-  // if navigating in repository
-  if (repo != '') {
-    
-    query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
-    
-  } else { // else, show all repositories
-    
-    query += '/user/repos?visibility=all&sort=updated&page=1';
-    
-  }
-
-  // get the query
-  var resp = await axios.get(query, githubToken);
+  // get items in current tree from git
+  const resp = git.getItems(treeLoc);
   
   // save rendered HTML
   let out = '';
@@ -117,8 +102,8 @@ async function renderFiles() {
       // render repositories
       resp.forEach(item => {
         
-        // if repo is not user-created,
-        // show username of admin (username/repo)
+        // if user does not have admin permissions in repo,
+        // show admin name in title ([admin]/[repo])
         let fullName = item.permissions.admin ? item.name : item.full_name;
         
         out += `
@@ -145,7 +130,7 @@ async function renderFiles() {
   stopLoading();
   
   // add item event listeners
-  addItemListeners();
+  addHTMLItemListeners();
   
   // hide search screen
   header.classList.remove('searching');
@@ -173,7 +158,7 @@ async function renderFiles() {
 
 
 // adds item event listeners
-function addItemListeners() {
+function addHTMLItemListeners() {
   
   let items = fileWrapper.querySelectorAll('.item');
   
@@ -191,10 +176,10 @@ function addItemListeners() {
         
         treeLoc[0] = itemLoc[0],
         treeLoc[1] = itemLoc[1];
-        setStorage('tree', treeLoc.join());
+        saveTreeLocLS(treeLoc);
         
         // render files
-        renderFiles();
+        renderFilesHTML();
         
       } else if (item.classList.contains('folder')) {
         
@@ -202,10 +187,10 @@ function addItemListeners() {
         
         // change location
         treeLoc[2] += '/' + item.innerText;
-        setStorage('tree', treeLoc.join());
+        saveTreeLocLS(treeLoc);
         
         // render files
-        renderFiles();
+        renderFilesHTML();
         
       } else { // if item is a file
         
@@ -219,7 +204,7 @@ function addItemListeners() {
           if (!item.classList.contains('selected')) {
             
             // load file
-            loadFile(item, getAttr(item, 'sha'));
+            loadFileInUI(item, getAttr(item, 'sha'));
             
           } else if (isMobile) { // if on mobile device
             
@@ -233,7 +218,7 @@ function addItemListeners() {
           // push file
           
           // play push animation
-          item.classList.add('checked');
+          playPushAnimation(item);
           
           // create commit   
           let commit = {};
@@ -247,10 +232,10 @@ function addItemListeners() {
           file.selected = item.classList.contains('selected');
           
           // push file asynchronously
-          const newSha = pushFile(file, commit);
+          const newSha = git.push(file, commit);
           
           // update file sha
-          sidebar.updateFile(newSha);
+          updateFileInHTML(newSha);
           
         }
         
@@ -263,7 +248,7 @@ function addItemListeners() {
 }
 
 
-async function loadFile(file, sha) {
+async function loadFileInHTML(file, sha) {
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -271,14 +256,8 @@ async function loadFile(file, sha) {
     // start loading
     startLoading();
     
-    // map tree location
-    let query = 'https://api.github.com';
-    const [user, repo, contents] = treeLoc;
-    
-    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ selectedFileName;
-    
-    // get the query
-    var resp = await axios.get(query, githubToken);
+    // get file from git
+    git.getFile(treeLoc, selectedFileName);
 
     // show file content in codeit
     cd.textContent = atob(resp.content);
