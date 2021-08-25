@@ -36,6 +36,19 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
+function playPushAnimation(element) {
+  
+  let endAnimDuration = 0.18; // s
+  let checkDelay = 2 - endAnimDuration;
+  
+  window.setTimeout(() => {
+
+    element.classList.remove('checked');
+
+  }, (checkDelay * 1000));
+  
+}
+
 // show push icon in button
 pushWrapper.innerHTML = pushIcon;
 
@@ -43,7 +56,7 @@ pushWrapper.innerHTML = pushIcon;
 pushWrapper.addEventListener('click', () => {
      
   // play push animation
-  pushWrapper.classList.add('checked');
+  playPushAnimation(pushWrapper);
   
   // create commit
   let commit = {};
@@ -51,7 +64,7 @@ pushWrapper.addEventListener('click', () => {
   
   // get selected file
   let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
-    
+  
   if (selectedItem) {
   
     // set commit message
@@ -62,7 +75,7 @@ pushWrapper.addEventListener('click', () => {
     file.selected = true;
 
     // push file asynchronously
-    pushFile(file, commit);
+    git.push(file, commit);
     
   }
   
