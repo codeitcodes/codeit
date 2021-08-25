@@ -1,6 +1,32 @@
 
 let git = {
+  
+  // get items
+  // get items in tree
+  'getItems': async (treeLoc) => {
+    
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
 
+    // if navigating in repository
+    if (repo != '') {
+
+      query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
+
+    } else { // else, show all repositories
+
+      query += '/user/repos?visibility=all&sort=updated&page=1';
+
+    }
+
+    // get the query
+    const resp = await axios.get(query, githubToken);
+    
+    return resp;
+    
+  },
+  
   // push file
   // function pushes file to git
   'push': async (file, commit) => {
