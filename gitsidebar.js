@@ -235,17 +235,16 @@ function addItemListeners() {
           // play push animation
           item.classList.add('checked');
           
-          // build commit
-          const commitMessage = 'Update ' + item.innerText;
+          // create commit   
+          let commit = {};
+          let file = {};
           
-          const file = {
-            sha: getAttr(item, 'sha'),
-            selected: item.classList.contains('selected')
-          };
+          // set commit message
+          commit.message = 'Update ' + item.innerText;
           
-          const commit = {
-            message: commitMessage
-          };
+          // set commit file
+          file.sha = getAttr(item, 'sha');
+          file.selected = item.classList.contains('selected');
           
           // push file asynchronously
           pushFile(file, commit);
