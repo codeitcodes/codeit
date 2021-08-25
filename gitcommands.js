@@ -57,33 +57,14 @@ async function pushFile(file, commit) {
 
   }
   
-   
-  // update SHA of file
-  setAttr(file.element, 'sha', resp.content.sha);
-
-  // if file is selected
-  if (file.selected) {
-    
-    const newSelectedFile = {
-      dir: treeLoc.join(),
-      sha: resp.content.sha,
-      name: file.name,
-      exists: true
-    };
-    
-    // update selection SHA
-    changeSelectedFile(newSelectedFile);
-
-  }
-  
-
-  // set event listener for file change
-  cd.addEventListener('keydown', checkBackspace);
-  cd.addEventListener('input', fileChange);
-  
-  
   return resp.content.sha;
   
 }
 
 
+// create repo
+// function creates a new repository
+// (indev)
+function createRepo(repo) {
+  
+}
