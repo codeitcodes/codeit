@@ -1,6 +1,22 @@
 
 let git = {
   
+  // get file
+  'getFile': async (treeLoc) => {
+    
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
+    
+    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ selectedFileName;
+    
+    // get the query
+    var resp = await axios.get(query, githubToken);
+    
+    return resp;
+    
+  },
+  
   // get items
   // get items in tree
   'getItems': async (treeLoc) => {
