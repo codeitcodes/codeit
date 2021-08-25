@@ -2,7 +2,7 @@
 let git = {
   
   // get file
-  'getFile': async (treeLoc) => {
+  'getFile': async (treeLoc, fileName) => {
     
     // map tree location
     let query = 'https://api.github.com';
