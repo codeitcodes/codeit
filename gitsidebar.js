@@ -236,13 +236,11 @@ function addItemListeners() {
           item.classList.add('checked');
           
           // build file and commit
+          
           let file = {};
           let commit = {};
           
-          // get sha of file
           file.sha = getAttr(item, 'sha');
-          
-          // get file selected
           file.selected = item.classList.contains('selected');
           
           // set commit message
