@@ -27,7 +27,7 @@ function deleteModifiedFileLS(fileSha) {
 }
 
 
-function changeTreeLocLS(treeLoc) {
+function saveTreeLocLS(treeLoc) {
   
   setStorage('tree', treeLoc.join());
   
