@@ -181,7 +181,7 @@ function addItemListeners() {
   items.forEach(item => {
     
     // navigate on click
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', async (e) => {
       
       // if item is a repository
       if (item.classList.contains('repo')) {
@@ -247,7 +247,10 @@ function addItemListeners() {
           file.selected = item.classList.contains('selected');
           
           // push file asynchronously
-          pushFile(file, commit);
+          const newSha = pushFile(file, commit);
+          
+          // update file sha
+          sidebar.updateFile(newSha);
           
         }
         
@@ -261,51 +264,6 @@ function addItemListeners() {
 
 
 async function loadFile(file, sha) {
-  
-  // if previous selection exists
-  if (selectedFile.sha != '') {
-    
-    // get selection in modifiedFiles array
-    let selectedItem = modifiedFiles[selectedFile.sha];
-    
-    // if previous selection was modified
-    if (selectedItem) {
-    
-      // save previous selection in localStorage
-      
-      const previousFile = {
-        dir: treeLoc.join(),
-        sha: selectedFile.sha,
-        name: selectedFile.name,
-        exists: selectedFile.exists,
-        content: btoa(cd.textContent)
-      };
-      
-      saveModifiedFile(previousFile);
-      
-    }
-    
-  }
-  
-  // clear existing selections
-  if (fileWrapper.querySelector('.selected')) {
-    fileWrapper.querySelector('.selected').classList.remove('selected');
-  }
-  
-  const selectedFileName = file.querySelector('.name').innerText;
-  
-  // change selected file
-  
-  file.classList.add('selected');
-  
-  const newSelectedFile = {
-    dir: treeLoc.join(),
-    sha: getAttr(file, 'sha'),
-    name: selectedFileName,
-    exists: getAttr(file, 'exists')
-  };
-  
-  changeSelectedFile(newSelectedFile);
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -330,7 +288,7 @@ async function loadFile(file, sha) {
     
   } else { // else, load file from local storage
     
-    const content = modifiedFiles[sha].content;
+    const content = codeStorage.modifiedFiles[sha].content;
     
     // show file content in codeit
     cd.textContent = atob(content);
@@ -433,4 +391,47 @@ function fileChange() {
   cd.removeEventListener('keydown', checkBackspace);
   cd.removeEventListener('input', fileChange);
 
+}
+
+function setupEditor() {
+  
+  // if code in storage
+  if (getStorage('code')) {
+    
+    // set codeit to code
+    cd.lang = getStorage('lang');
+    cd.textContent = atob(getStorage('code'));
+
+    // set caret pos in code
+    cd.setSelection(getStorage('caret'), getStorage('caret'));
+
+    // scroll to pos in code
+    cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
+
+  }
+    
+}
+
+function setupSidebar() {
+  
+  // if sidebar is open
+  if (getStorage('sidebar') == 'true') {
+    
+    // do a silent transition
+    body.classList.add('transitioning');
+    body.classList.add('expanded');
+
+    window.setTimeout(() => {
+
+      body.classList.remove('transitioning');
+
+    }, 400);
+
+  } else {
+    
+    // update bottom floater
+    updateFloat();
+    
+  }
+  
 }
