@@ -45,21 +45,26 @@ pushWrapper.addEventListener('click', () => {
   // play push animation
   pushWrapper.classList.add('checked');
   
-  // build file and commit
-  let file = {};
+  // create commit
   let commit = {};
+  let file = {};
   
-  // get sha of file
-  file.sha = getAttr(item, 'sha');
+  // get selected file
+  let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+    
+  if (selectedItem) {
   
-  // get file selected
-  file.selected = item.classList.contains('selected');
+    // set commit message
+    commit.message = 'Update ' + item.innerText;
+    
+    // set commit file
+    file.sha = getAttr(item, 'sha');
+    file.selected = true;
 
-  // set commit message
-  commit.message = 'Update ' + item.innerText;
-
-  // push file asynchronously
-  pushFile(file, commit);
+    // push file asynchronously
+    pushFile(file, commit);
+    
+  }
   
 })
 
