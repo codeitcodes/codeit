@@ -467,11 +467,11 @@ function codeChange() {
     
   }
   
+  // update line numbers in async thread
+  asyncThread(() => { Prism.plugins.lineNumbers.resize(cd) }, 20);
+  
   // save code in async thread
   asyncThread(saveBeforeUnloadLS, 300);
-  
-  // update line numbers
-  Prism.plugins.lineNumbers.resize(cd);
 
 }
 
@@ -511,9 +511,6 @@ function setupEditor() {
     // set codeit to code
     cd.lang = getStorage('lang') || 'plain';
     cd.textContent = atob(getStorage('code'));
-    
-    // update line numbers
-    Prism.plugins.lineNumbers.resize(cd);
     
     // set caret pos in code
     cd.setSelection(getStorage('caret'), getStorage('caret'));
