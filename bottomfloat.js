@@ -76,13 +76,13 @@ pushWrapper.addEventListener('click', () => {
     
     const commit = {
       message: commitMessage,
-      file: [{
+      file: {
         dir: treeLoc.join(),
         sha: getAttr(selectedItem, 'sha'),
         name: selectedItem.innerText,
         content: btoa(cd.textContent),
         selected: true
-      }]
+      }
     };
     
     // push file asynchronously
