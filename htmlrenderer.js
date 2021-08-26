@@ -200,7 +200,8 @@ function addHTMLItemListeners() {
         // if not clicked on push button
         let pushWrapper = item.querySelector('.push-wrapper');
         let clickedOnPush = (e.target == pushWrapper ||
-                             Array.from(pushWrapper.children).includes(e.target));
+                             Array.from(pushWrapper.children).includes(e.target) || 
+                             Array.from(pushWrapper.children[0].children).includes(e.target));
         
         if (!clickedOnPush) {
           
