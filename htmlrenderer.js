@@ -427,7 +427,7 @@ function checkBackspace(e) {
 function codeChange() {
   
   // save code in async thread
-  debounce(() => {
+  asyncThread(() => {
     
     saveBeforeUnloadLS();
     
