@@ -68,11 +68,11 @@ class CodeitElement extends HTMLElement {
     }
 
     // highlight with specified lang
-    cd.lang = cd.lang || 'plain';
+    cd.lang = (cd.lang !== null) ? cd.lang : 'plain';
 
     // highlight codeit
     cd.highlight = (lang) => {
-
+      
       // change codeit class to given language
       const prefix = 'language-';
       const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
@@ -86,6 +86,7 @@ class CodeitElement extends HTMLElement {
     }
     
     cd.history = [];
+    
     let at = -1;
     let recording = false;
     
@@ -789,9 +790,17 @@ class CodeitElement extends HTMLElement {
     // if changed codeit lang
     if (name == 'lang' && oldValue !== newValue) {
       
-      // force highlight
-      cd.prev = '';
-      cd.update();
+      if (newValue !== null) {
+        
+        // force highlight
+        cd.prev = '';
+        cd.update();
+        
+      } else {
+      
+        cd.lang = 'plain';
+        
+      }
       
     } else if (name == 'edit') { // if changed codeit edit property
       
