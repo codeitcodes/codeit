@@ -194,20 +194,12 @@
 		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
 	});
 
-	Prism.hooks.add('init', function (env) {
-		if (!env.code) {
-			return;
-		}
+	window.onload = () => {
 
-		var code = /** @type {Element} */ (env.element);
+		var code = cd;
 
 		// Abort if line numbers already exists
 		if (code.querySelector('.line-numbers-rows')) {
-			return;
-		}
-
-		// only add line numbers if <code> or one of its ancestors has the `line-numbers` class
-		if (!Prism.util.isActive(code, PLUGIN_NAME)) {
 			return;
 		}
 
