@@ -53,7 +53,7 @@ window.onload = () => {
 
   }
   
-  setupWorkspace();
+  setupApp();
   
 }
 
