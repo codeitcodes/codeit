@@ -82,3 +82,9 @@ function saveSidebarStateLS() {
   setStorage('sidebar', body.classList.contains('expanded'));
   
 }
+
+function saveAuthTokenLS(authToken) {
+  
+  setStorage('token', authToken);
+  
+}
