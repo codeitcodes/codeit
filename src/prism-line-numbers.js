@@ -216,8 +216,6 @@
 		element.appendChild(lineNumbersWrapper);
 
 		resizeElements([element]);
-		
-		Prism.hooks.run('line-numbers', Prism);
 	};
 
 	Prism.hooks.add('line-numbers', function (env) {
