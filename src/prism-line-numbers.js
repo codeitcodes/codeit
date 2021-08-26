@@ -63,7 +63,7 @@
 		 * @returns {void}
 		 */
 		resize: function (element) {
-			window.setTimeout(() => { addLineRows(element) }, 0);
+			addLineRows(element);
 		},
 
 		/**
@@ -168,6 +168,8 @@
 			info.lineHeights.forEach(function (height, lineNumber) {
 				if (wrapper.children[lineNumber]) {
 					wrapper.children[lineNumber].style.height = height + 'px';
+				} else {
+					wrapper.children[lineNumber+1].style.height = height + 'px';
 				}
 			});
 		});
@@ -203,8 +205,6 @@
 	});
 
 	function addLineRows(element) {
-				console.log('here');
-
 		// Abort if line numbers already exists
 		if (!element.querySelector('.line-numbers-rows')) {
 
