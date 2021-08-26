@@ -216,6 +216,21 @@
 
 		resizeElements([element]);
 	};
+	
+	Prism.hooks.add('complete', function (env) {
+		if (!env.code) {
+			return;
+		}
+		
+		var code = /** @type {Element} */ (env.element);
+		
+		// only add line numbers if <code> or one of its ancestors has the `line-numbers` class
+		if (!Prism.util.isActive(code, PLUGIN_NAME)) {
+			return;
+		}
+		
+		addLineRows(code);
+	}
 
 	Prism.hooks.add('line-numbers', function (env) {
 		env.plugins = env.plugins || {};
