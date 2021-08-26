@@ -64,7 +64,6 @@
 		 */
 		resize: function (element) {
 			addLineRows(element);
-			window.setTimeout(() => { resizeElements([element]) }, 20);
 		},
 
 		/**
@@ -221,6 +220,8 @@
 		lineNumbersWrapper.innerHTML = lines;
 
 		element.appendChild(lineNumbersWrapper);
+		
+		window.setTimeout(() => { resizeElements([element]) }, 20);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
@@ -231,7 +232,6 @@
 		var code = /** @type {Element} */ (env.element);
 		
 		addLineRows(code);
-		window.setTimeout(() => { resizeElements([code]) }, 20);
 	});
 
 	Prism.hooks.add('line-numbers', function (env) {
