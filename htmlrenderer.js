@@ -480,9 +480,9 @@ function protectUnsavedCode() {
   const selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
   
   const loggedIntoGit = (githubToken != null),
-        cacheFileExists = (selectedItem != null);
+        cacheFileNotExist = (selectedFile.dir == treeLoc.join() && selectedItem == null);
   
-  const protectUnsavedCode = (loggedIntoGit ? !cacheFileExists : false);
+  const protectUnsavedCode = (loggedIntoGit ? cacheFileNotExist : false);
   
   if (protectUnsavedCode == true) {
     
