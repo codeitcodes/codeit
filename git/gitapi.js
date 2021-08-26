@@ -45,8 +45,10 @@ let git = {
   
   // push file
   // function pushes file to git
-  'push': async (treeLoc, file, commit) => {
-
+  'push': async (commit) => {
+    
+    const treeLoc = commit.file.dir.split(',');
+    
     let query = 'https://api.github.com/repos/' +
                 treeLoc[0] +
                 '/' + treeLoc[1] +
@@ -54,18 +56,18 @@ let git = {
 
     let commitData = {
       message: commit.message,
-      content: file.content,
-      sha: file.sha
+      content: commit.file.content,
+      sha: commit.file.sha
     };
 
     // commit file
     var resp = await axios.put(query, githubToken, commitData);
     
     // if updating an existing file
-    if (file.sha) {
+    if (commit.file.sha) {
       
       // force-update cache
-      await axios.get(query, githubToken, file.sha);
+      await axios.get(query, githubToken, commit.file.sha);
       
     }
 
