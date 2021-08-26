@@ -18,6 +18,9 @@ async function renderFilesHTML() {
     startLoading();
   }
   
+  // map tree location
+  const [user, repo, contents] = treeLoc;
+  
   // get items in current tree from git
   const resp = await git.getItems(treeLoc);
   
