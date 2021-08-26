@@ -220,7 +220,7 @@
 		resizeElements([code]);
 
 		Prism.hooks.run('line-numbers', env);
-	});
+	};
 
 	Prism.hooks.add('line-numbers', function (env) {
 		env.plugins = env.plugins || {};
