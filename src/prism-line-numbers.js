@@ -88,7 +88,7 @@
 		elements = elements.filter(function (e) {
 			var codeStyles = getStyles(e);
 			var whiteSpace = codeStyles['white-space'];
-			return whiteSpace === 'pre-wrap' || whiteSpace === 'pre-line';
+			return true;
 		});
 
 		if (elements.length == 0) {
