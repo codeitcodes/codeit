@@ -169,6 +169,12 @@
 				wrapper.children[lineNumber].style.height = height + 'px';
 			});
 		});
+		
+		elements.map(element => {
+			var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
+			
+			element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
+		});
 	}
 
 	/**
