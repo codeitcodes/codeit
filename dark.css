@@ -74,6 +74,10 @@ cd-el::selection, cd-el *::selection {
   color: #a6c3d4;
 }
 
+.token.doctype .token.punctuation {
+  color: inherit;
+}
+
 .token.namespace {
   opacity: 1;
 }
