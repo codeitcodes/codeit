@@ -428,7 +428,7 @@ function codeChange() {
     
     saveBeforeUnloadLS();
     
-    const selectedEl = fileWrapper.querySelector('.selected');
+    const selectedEl = fileWrapper.querySelector('.selected:not(.modified)');
 
     // if selected file exists
     if (selectedEl) {
