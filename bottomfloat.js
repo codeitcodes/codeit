@@ -58,18 +58,19 @@ pushWrapper.innerHTML = pushIcon;
 
 // push when clicked on button
 pushWrapper.addEventListener('click', () => {
-     
-  // play push animation
-  playPushAnimation(pushWrapper);
-  
-  // file cannot be modified
-  // if its SHA was updated
-  bottomFloat.classList.remove('modified');
   
   // get selected item
   let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
   
   if (selectedItem) {
+    
+    // play push animation
+    playPushAnimation(pushWrapper);
+    
+    // file cannot be modified
+    // if its SHA was updated
+    selectedItem.classList.remove('modified');
+    bottomFloat.classList.remove('modified');
     
     // create commit
     let commitMessage = 'Update ' + selectedItem.innerText;
