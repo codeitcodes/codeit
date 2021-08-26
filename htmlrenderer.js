@@ -218,7 +218,7 @@ function addHTMLItemListeners() {
           // push file
           
           // play push animation
-          playPushAnimation(item);
+          playPushAnimation(item.querySelector('.push-wrapper'));
           
           // file cannot be modified
           // if its SHA was updated
