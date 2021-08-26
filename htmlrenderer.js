@@ -251,6 +251,51 @@ function addHTMLItemListeners() {
 
 async function loadFileInHTML(file, sha) {
   
+  // if previous selection exists
+  if (selectedFile.sha != '') {
+
+    // get selection in modifiedFiles array
+    let selectedItem = modifiedFiles[selectedFile.sha];
+
+    // if previous selection was modified
+    if (selectedItem) {
+
+      // save previous selection in localStorage
+
+      const previousFile = {
+        dir: treeLoc.join(),
+        sha: selectedFile.sha,
+        name: selectedFile.name,
+        exists: selectedFile.exists,
+        content: btoa(cd.textContent)
+      };
+
+      saveModifiedFileLS(previousFile);
+
+    }
+
+  }
+
+  // clear existing selections
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+
+  const selectedFileName = file.querySelector('.name').innerText;
+
+  // change selected file
+
+  file.classList.add('selected');
+
+  const newSelectedFile = {
+    dir: treeLoc.join(),
+    sha: getAttr(file, 'sha'),
+    name: selectedFileName,
+    exists: getAttr(file, 'exists')
+  };
+
+  changeSelectedFile(newSelectedFile);
+  
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
     
@@ -315,7 +360,7 @@ sidebarTitle.addEventListener('click', () => {
     saveTreeLocLS(treeLoc);
     
     // render files
-    renderFiles();
+    renderFilesHTML();
     
   } else if (repo != '') { // if navigating in repository
     
@@ -324,7 +369,7 @@ sidebarTitle.addEventListener('click', () => {
     saveTreeLocLS(treeLoc);
     
     // render files
-    renderFiles();
+    renderFilesHTML();
     
   } else { // show learn screen
     
