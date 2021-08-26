@@ -231,7 +231,7 @@
 		var code = /** @type {Element} */ (env.element);
 		
 		addLineRows(code);
-		window.setTimeout(() => { resizeElements([element]) }, 300);
+		window.setTimeout(() => { resizeElements([code]) }, 300);
 	});
 
 	Prism.hooks.add('line-numbers', function (env) {
