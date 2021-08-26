@@ -43,6 +43,8 @@ function playPushAnimation(element) {
   let endAnimDuration = 0.18; // s
   let checkDelay = 2 - endAnimDuration;
   
+  element.classList.add('checked');
+  
   window.setTimeout(() => {
 
     element.classList.remove('checked');
