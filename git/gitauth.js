@@ -42,14 +42,9 @@ window.onload = () => {
     // show intro screen
     sidebar.classList.add('intro');
 
-    // if on mobile device
-    if (isMobile) {
-
-      // show sidebar
-      body.classList.add('expanded');
-      saveSidebarStateLS();
-
-    }
+    // show sidebar
+    body.classList.add('expanded');
+    saveSidebarStateLS();
 
   } else {
     
@@ -57,6 +52,9 @@ window.onload = () => {
     renderSidebarHTML();
 
   }
+  
+  setupEditor();
+  setupSidebar();
   
 }
 
