@@ -53,8 +53,6 @@ window.onload = () => {
 
   }
   
-  setupApp();
-  
 }
 
 async function getGithubToken(githubCode) {
