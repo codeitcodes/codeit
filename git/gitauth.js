@@ -52,9 +52,14 @@ window.onload = () => {
     }
 
   } else {
-
-    // render files
-    renderFilesHTML();
+    
+    // if sidebar is open
+    if (getStorage('sidebar') == 'true') {
+      
+      // render sidebar
+      renderSidebarHTML();
+      
+    }
 
   }
   
@@ -82,7 +87,7 @@ async function getGithubToken(githubCode) {
   setStorage('tree', treeLoc.join());
   */
   
-  // render files
-  renderFilesHTML();
+  // render sidebar
+  renderSidebarHTML();
   
 }
