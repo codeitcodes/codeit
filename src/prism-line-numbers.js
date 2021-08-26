@@ -237,7 +237,7 @@
 			return;
 		}
 		
-		window.setTimeout(() => { addLineRows(code) }, 20);
+		addLineRows(code);
 	});
 
 	Prism.hooks.add('line-numbers', function (env) {
