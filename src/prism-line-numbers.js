@@ -64,7 +64,6 @@
 		 */
 		resize: function (element) {
 			addLineRows(element);
-			resizeElements([element]);
 		},
 
 		/**
@@ -164,7 +163,7 @@
 			var wrapper = info.element.querySelector('.line-numbers-rows');
 
 			lineNumberSizer.style.display = 'none';
-			//lineNumberSizer.innerHTML = '';
+			lineNumberSizer.innerHTML = '';
 
 			info.lineHeights.forEach(function (height, lineNumber) {
 				wrapper.children[lineNumber].style.height = height + 'px';
