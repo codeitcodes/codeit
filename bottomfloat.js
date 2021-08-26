@@ -22,9 +22,7 @@ function updateFloat() {
 
 // open sidebar when clicked on button
 sidebarOpen.addEventListener('click', () => {
-  
-  renderSidebarHTML();
-  
+    
   body.classList.add('expanded');
   saveSidebarStateLS();
 
@@ -93,16 +91,8 @@ pushWrapper.addEventListener('click', () => {
     // delete file from local storage
     deleteModifiedFileLS(commit.file.sha);
     
-    // update selection SHA
-    
-    const newSelectedFile = {
-      dir: commit.file.dir,
-      sha: newSha,
-      name: commit.file.name,
-      exists: true
-    };
-    
-    changeSelectedFileLS(newSelectedFile);
+    // update file in HTML
+    updateFileShaHTML(selectedItem, newSha);
     
   }
   
