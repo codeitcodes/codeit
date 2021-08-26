@@ -63,8 +63,8 @@
 		 * @returns {void}
 		 */
 		resize: function (element) {
-			//addLineRows(element);
-			//window.setTimeout(() => { resizeElements([element]) }, 300);
+			addLineRows(element);
+			window.setTimeout(() => { resizeElements([element]) }, 20);
 		},
 
 		/**
@@ -230,8 +230,8 @@
 		
 		var code = /** @type {Element} */ (env.element);
 		
-		//addLineRows(code);
-		//window.setTimeout(() => { resizeElements([code]) }, 300);
+		addLineRows(code);
+		window.setTimeout(() => { resizeElements([code]) }, 20);
 	});
 
 	Prism.hooks.add('line-numbers', function (env) {
