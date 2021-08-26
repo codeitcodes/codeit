@@ -73,12 +73,12 @@ let git = {
     if (commit.file.sha) {
       
       // force-update cache
-      await axios.get(query, githubToken, lastTreeRequestTime);
-      await axios.get('https://api.github.com/repos/' +
-                      treeLoc[0] +
-                      '/' + treeLoc[1] +
-                      '/contents' + treeLoc[2],
-                      githubToken, lastTreeRequestTime);
+      axios.get(query, githubToken, lastTreeRequestTime);
+      axios.get('https://api.github.com/repos/' +
+                treeLoc[0] +
+                '/' + treeLoc[1] +
+                '/contents' + treeLoc[2],
+                githubToken, lastTreeRequestTime);
       
     }
 
