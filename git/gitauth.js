@@ -53,13 +53,8 @@ window.onload = () => {
 
   } else {
     
-    // if sidebar is open
-    if (getStorage('sidebar') == 'true') {
-      
-      // render sidebar
-      renderSidebarHTML();
-      
-    }
+    // render sidebar
+    renderSidebarHTML();
 
   }
   
