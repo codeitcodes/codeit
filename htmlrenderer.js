@@ -19,7 +19,7 @@ async function renderFilesHTML() {
   }
   
   // get items in current tree from git
-  const resp = git.getItems(treeLoc);
+  const resp = await git.getItems(treeLoc);
   
   // save rendered HTML
   let out = '';
@@ -228,15 +228,26 @@ function addHTMLItemListeners() {
           // set commit message
           commit.message = 'Update ' + item.innerText;
           
-          // set commit file
+          // get SHA of file
           file.sha = getAttr(item, 'sha');
-          file.selected = item.classList.contains('selected');
+                    
+          // if currently editing file
+          if (item.classList.contains('selected')) {
+
+            // get current value of file
+            file.content = btoa(cd.textContent);
+
+          } else { // else, load from storage
+
+            file.content = modifiedFiles[file.sha][0];
+
+          }
           
           // push file asynchronously
-          const newSha = git.push(file, commit);
+          const newSha = await git.push(treeLoc, file, commit);
           
-          // update file sha
-          updateFileInHTML(newSha);
+          // update file in HTML
+          updateFileShaHTML(item, file.sha, newSha);
           
         }
         
@@ -253,7 +264,7 @@ async function loadFileInHTML(file, sha) {
   
   // if previous selection exists
   if (selectedFile.sha != '') {
-
+  
     // get selection in modifiedFiles array
     let selectedItem = modifiedFiles[selectedFile.sha];
 
@@ -294,7 +305,7 @@ async function loadFileInHTML(file, sha) {
     exists: getAttr(file, 'exists')
   };
 
-  changeSelectedFile(newSelectedFile);
+  changeSelectedFileLS(newSelectedFile);
   
   // if file is not modified; fetch from Git
   if (!file.classList.contains('modified')) {
@@ -303,7 +314,7 @@ async function loadFileInHTML(file, sha) {
     startLoading();
     
     // get file from git
-    const resp = git.getFile(treeLoc, selectedFileName);
+    const resp = await git.getFile(treeLoc, selectedFileName);
 
     // show file content in codeit
     cd.textContent = atob(resp.content);
@@ -327,6 +338,11 @@ async function loadFileInHTML(file, sha) {
   cd.setSelection(0, 0);
   cd.scrollTo(0, 0);
   
+  // save code in local storage
+  saveCodeLS();
+  saveCodePosLS();
+  saveCodeLangLS();
+  
   // if on mobile device
   if (isMobile) {
     
@@ -338,6 +354,29 @@ async function loadFileInHTML(file, sha) {
   // set event listener for file change
   cd.addEventListener('keydown', checkBackspace);
   cd.addEventListener('input', fileChange);
+  
+}
+
+
+function updateFileShaHTML(file, oldSha, newSha) {
+  
+  // delete file from local storage
+  deleteModifiedFileLS(oldSha);
+  
+  // file cannot be modified
+  // if its SHA was updated
+  file.classList.remove('modified');
+  
+  // update SHA of file
+  setAttr(file, 'sha', newSha);
+  
+  // if file is selected
+  if (file.classList.contains('selected')) {
+
+    // update selection SHA
+    changeSelectedFileLS(treeLoc.join(), newSha, file.innerText, true);
+
+  }
   
 }
 
