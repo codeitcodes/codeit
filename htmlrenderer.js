@@ -478,8 +478,16 @@ function setupEditor() {
   
   const selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
   
+  const loggedIntoGit = (githubToken != null),
+        cacheFileExists = (selectedItem != null);
+  
+  // protect unsaved code
+  // if logged into github but
+  // cache didn't change yet
+  const protectUnsavedCode = (loggedIntoGit ? cacheFileExists : true);
+  
   // if code in storage
-  if (getStorage('code') && !selectedItem) {
+  if (getStorage('code') && protectUnsavedCode) {
     
     // set codeit to code
     cd.lang = getStorage('lang');
@@ -516,5 +524,12 @@ function setupSidebar() {
     updateFloat();
     
   }
+  
+}
+
+function setupApp() {
+  
+  setupEditor();
+  setupSidebar();
   
 }
