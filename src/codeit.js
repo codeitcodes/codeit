@@ -67,9 +67,6 @@ class CodeitElement extends HTMLElement {
 
     }
 
-    // highlight with specified lang
-    cd.lang = (cd.lang !== null) ? cd.lang : 'plain';
-
     // highlight codeit
     cd.highlight = (lang) => {
       
@@ -78,8 +75,9 @@ class CodeitElement extends HTMLElement {
       const classes = cd.className.split(' ').filter(c => !c.startsWith(prefix));
       cd.className = classes.join(' ').trim();
       
-      cd.classList.add('language-' + lang);
-
+      if (lang != null) cd.classList.add('language-' + lang);
+      else cd.classList.add('language-plain');
+      
       // highlight element
       Prism.highlightElement(cd);
 
@@ -790,17 +788,9 @@ class CodeitElement extends HTMLElement {
     // if changed codeit lang
     if (name == 'lang' && oldValue !== newValue) {
       
-      if (newValue !== null) {
-        
-        // force highlight
-        cd.prev = '';
-        cd.update();
-        
-      } else {
-      
-        cd.lang = 'plain';
-        
-      }
+      // force highlight
+      cd.prev = '';
+      cd.update();
       
     } else if (name == 'edit') { // if changed codeit edit property
       
