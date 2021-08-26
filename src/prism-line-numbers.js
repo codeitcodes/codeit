@@ -221,7 +221,7 @@
 
 		element.appendChild(lineNumbersWrapper);
 
-		window.setTimeout(() => { resizeElements([element]) }, 20);
+		window.setTimeout(() => { resizeElements([element]) }, 300);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
