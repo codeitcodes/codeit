@@ -225,34 +225,37 @@ function addHTMLItemListeners() {
           item.classList.remove('modified');
           
           
-          // create commit   
-          let commit = {};
-          let commitFile = {};
-          
-          // set commit message
-          commit.message = 'Update ' + item.innerText;
-          
-          // get SHA of file
-          commitFile.sha = getAttr(item, 'sha');
+          // create commit
+          let commitMessage = 'Update ' + item.innerText;
+
+          let commit = {
+            message: commitMessage,
+            file: [{
+              dir: treeLoc.join(),
+              sha: getAttr(item, 'sha'),
+              name: selectedItem.innerText,
+              selected: true
+            }]
+          };
                     
           // if currently editing file
           if (item.classList.contains('selected')) {
 
             // get current value of file
-            commitFile.content = btoa(cd.textContent);
+            commit.file.content = btoa(cd.textContent);
 
           } else { // else, load from storage
 
-            commitFile.content = modifiedFiles[commitFile.sha][0];
+            commit.file.content = modifiedFiles[commitFile.sha][0];
             
           }
           
           
           // push file asynchronously
-          const newSha = await git.push(treeLoc, commitFile, commit);
+          const newSha = await git.push(commit);
           
           // delete file from local storage
-          deleteModifiedFileLS(commitFile.sha);
+          deleteModifiedFileLS(commit.file.sha);
           
           // update file in HTML
           updateFileShaHTML(item, newSha);
