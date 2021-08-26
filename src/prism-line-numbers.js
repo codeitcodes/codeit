@@ -88,7 +88,7 @@
 		elements = elements.filter(function (e) {
 			var codeStyles = getStyles(e);
 			var whiteSpace = codeStyles['white-space'];
-			return true;
+			return whiteSpace === 'pre-wrap' || whiteSpace === 'pre-line';
 		});
 
 		if (elements.length == 0) {
@@ -96,7 +96,7 @@
 		}
 
 		var infos = elements.map(function (element) {
-			var codeElement = element.querySelector('code');
+			var codeElement = element;
 			var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
 			if (!codeElement || !lineNumbersWrapper) {
 				return undefined;
