@@ -178,8 +178,8 @@ function addHTMLItemListeners() {
         treeLoc[1] = itemLoc[1];
         saveTreeLocLS(treeLoc);
         
-        // render files
-        renderFilesHTML();
+        // render sidebar
+        renderSidebarHTML();
         
       } else if (item.classList.contains('folder')) {
         
@@ -189,8 +189,8 @@ function addHTMLItemListeners() {
         treeLoc[2] += '/' + item.innerText;
         saveTreeLocLS(treeLoc);
         
-        // render files
-        renderFilesHTML();
+        // render sidebar
+        renderSidebarHTML();
         
       } else { // if item is a file
         
@@ -407,8 +407,8 @@ sidebarTitle.addEventListener('click', () => {
     treeLoc[2] = splitContents.join('/');
     saveTreeLocLS(treeLoc);
     
-    // render files
-    renderFilesHTML();
+    // render sidebar
+    renderSidebarHTML();
     
   } else if (repo != '') { // if navigating in repository
     
@@ -416,8 +416,8 @@ sidebarTitle.addEventListener('click', () => {
     treeLoc[1] = '';
     saveTreeLocLS(treeLoc);
     
-    // render files
-    renderFilesHTML();
+    // render sidebar
+    renderSidebarHTML();
     
   } else { // show learn screen
     
