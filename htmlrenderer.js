@@ -335,7 +335,7 @@ async function loadFileInHTML(file, sha) {
     
   } else { // else, load file from local storage
     
-    const content = codeStorage.modifiedFiles[sha].content;
+    const content = modifiedFiles[sha].content;
     
     // show file content in codeit
     cd.textContent = atob(content);
