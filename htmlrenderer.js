@@ -8,10 +8,10 @@ github.addEventListener('click', () => {
 })
 
 
-// render files
+// render sidebar
 // call this function when signed in to github
 // to render sidebar
-async function renderFilesHTML() {
+async function renderSidebarHTML() {
   
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
