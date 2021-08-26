@@ -544,7 +544,7 @@ function setupSidebar() {
   
 }
 
-function setupApp() {
+function setupCodeitApp() {
   
   setupEditor();
   setupSidebar();
