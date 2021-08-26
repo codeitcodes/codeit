@@ -355,7 +355,7 @@ body.expanded .github {
   left: 0;
 }
 
-body.transitioning .github {
+body.transitioning :is(.github, .github *) {
   transition: none;
 }
 
