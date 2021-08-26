@@ -195,13 +195,13 @@
 		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
 	});
 
-	function addLineRows(code) {
+	function addLineRows(element) {
 		// Abort if line numbers already exists
-		if (code.querySelector('.line-numbers-rows')) {
+		if (element.querySelector('.line-numbers-rows')) {
 			return;
 		}
 
-		var match = env.code.match(NEW_LINE_EXP);
+		var match = element.textContent.match(NEW_LINE_EXP);
 		var linesNum = match ? match.length + 1 : 1;
 		var lineNumbersWrapper;
 
@@ -213,11 +213,11 @@
 		lineNumbersWrapper.className = 'line-numbers-rows';
 		lineNumbersWrapper.innerHTML = lines;
 
-		env.element.appendChild(lineNumbersWrapper);
+		element.appendChild(lineNumbersWrapper);
 
-		resizeElements([code]);
-
-		Prism.hooks.run('line-numbers', env);
+		resizeElements([element]);
+		
+		Prism.hooks.run('line-numbers', Prism);
 	};
 
 	Prism.hooks.add('line-numbers', function (env) {
