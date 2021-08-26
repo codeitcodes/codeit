@@ -220,6 +220,11 @@ function addHTMLItemListeners() {
           // play push animation
           playPushAnimation(item);
           
+          // file cannot be modified
+          // if its SHA was updated
+          file.classList.remove('modified');
+          
+          
           // create commit   
           let commit = {};
           let file = {};
@@ -239,11 +244,15 @@ function addHTMLItemListeners() {
           } else { // else, load from storage
 
             file.content = modifiedFiles[file.sha][0];
-
+            
           }
+          
           
           // push file asynchronously
           const newSha = await git.push(treeLoc, file, commit);
+          
+          // delete file from local storage
+          deleteModifiedFileLS(oldSha);
           
           // update file in HTML
           updateFileShaHTML(item, file.sha, newSha);
@@ -354,13 +363,6 @@ async function loadFileInHTML(file, sha) {
 
 
 function updateFileShaHTML(file, oldSha, newSha) {
-  
-  // delete file from local storage
-  deleteModifiedFileLS(oldSha);
-  
-  // file cannot be modified
-  // if its SHA was updated
-  file.classList.remove('modified');
   
   // update SHA of file
   setAttr(file, 'sha', newSha);
