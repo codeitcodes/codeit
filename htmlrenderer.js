@@ -469,6 +469,9 @@ function codeChange() {
   
   // save code in async thread
   asyncThread(saveBeforeUnloadLS, 300);
+  
+  // update line numbers
+  Prism.plugins.lineNumbers.resize(cd);
 
 }
 
@@ -508,13 +511,16 @@ function setupEditor() {
     // set codeit to code
     cd.lang = getStorage('lang') || 'plain';
     cd.textContent = atob(getStorage('code'));
-
+    
+    // update line numbers
+    Prism.plugins.lineNumbers.resize(cd);
+    
     // set caret pos in code
     cd.setSelection(getStorage('caret'), getStorage('caret'));
 
     // scroll to pos in code
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
-
+    
   }
   
 }
