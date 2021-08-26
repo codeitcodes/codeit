@@ -3,6 +3,7 @@
 github.addEventListener('click', () => {
   
   body.classList.toggle('expanded');
+  saveSidebarStateLS();
   
 })
 
@@ -399,7 +400,7 @@ function setupSidebar() {
     // do a silent transition
     body.classList.add('transitioning');
     body.classList.add('expanded');
-
+    
     window.setTimeout(() => {
 
       body.classList.remove('transitioning');
