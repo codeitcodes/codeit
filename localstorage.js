@@ -48,6 +48,8 @@ function loadLS() {
   
   setupSidebar();
   
+  body.classList.add('loaded');
+  
 }
 
 function saveBeforeUnloadLS() {
