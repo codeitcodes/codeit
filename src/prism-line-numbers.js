@@ -230,7 +230,7 @@
 		}
 		
 		addLineRows(code);
-	}
+	});
 
 	Prism.hooks.add('line-numbers', function (env) {
 		env.plugins = env.plugins || {};
