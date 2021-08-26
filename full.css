@@ -30,6 +30,19 @@ body.expanded {
   position: absolute;
   height: 100%;
   width: 100%;
+  transition: .4s var(--cubic-function);
+  transition-property: width, transform;
+  will-change: transform;
+  overflow: hidden;
+}
+
+body.expanded .cd-wrapper {
+  width: calc(100% - var(--sidebar-width));
+  transform: translateX(var(--sidebar-width));
+}
+
+body.transitioning .cd-wrapper {
+  transition: none;
 }
 
 body cd-el {
@@ -41,18 +54,6 @@ body cd-el {
   box-sizing: border-box;
   white-space: pre-wrap;
   padding-bottom: 50px;
-  transition: .4s var(--cubic-function);
-  transition-property: width, transform;
-  will-change: transform;
-}
-
-body.expanded cd-el {
-  width: calc(100% - var(--sidebar-width));
-  transform: translateX(var(--sidebar-width));
-}
-
-body.transitioning cd-el {
-  transition: none;
 }
 
 .bottom-float {
@@ -967,15 +968,15 @@ body.loaded .splash-container {
     overflow-x: hidden;
   }
   
-  body cd-el {
-    padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
-    transition-property: transform;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  body.expanded cd-el {
+  body.expanded .cd-wrapper {
     width: 100%;
     height: 100%;
+    transition-property: transform;
+  }
+  
+  body cd-el {
+    padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
   }
   
   .bottom-float {
