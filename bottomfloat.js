@@ -60,6 +60,10 @@ pushWrapper.addEventListener('click', () => {
   // play push animation
   playPushAnimation(pushWrapper);
   
+  // file cannot be modified
+  // if its SHA was updated
+  bottomFloat.classList.remove('modified');
+  
   // create commit
   let commit = {};
   let file = {};
@@ -77,7 +81,7 @@ pushWrapper.addEventListener('click', () => {
     file.selected = true;
 
     // push file asynchronously
-    git.push(file, commit);
+    git.push(treeLoc, file, commit);
     
   }
   
