@@ -356,7 +356,7 @@ body.expanded .github {
 }
 
 body.transitioning .github {
-  transition: .18s var(--ease-function), 0s left, 0s padding;
+  transition: none;
 }
 
 .github::after {
