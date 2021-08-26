@@ -31,7 +31,7 @@
 		 * @returns {Element|undefined}
 		 */
 		getLine: function (element, number) {
-			if (element.tagName !== 'PRE' || !element.classList.contains(PLUGIN_NAME)) {
+			if (!element.classList.contains(PLUGIN_NAME)) {
 				return;
 			}
 
