@@ -230,12 +230,12 @@ function addHTMLItemListeners() {
 
           let commit = {
             message: commitMessage,
-            file: [{
+            file: {
               dir: treeLoc.join(),
               sha: getAttr(item, 'sha'),
               name: selectedItem.innerText,
               selected: true
-            }]
+            }
           };
                     
           // if currently editing file
