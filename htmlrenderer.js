@@ -204,7 +204,7 @@ function addHTMLItemListeners() {
           if (!item.classList.contains('selected')) {
             
             // load file
-            loadFileInUI(item, getAttr(item, 'sha'));
+            loadFileInHTML(item, getAttr(item, 'sha'));
             
           } else if (isMobile) { // if on mobile device
             
@@ -257,7 +257,7 @@ async function loadFileInHTML(file, sha) {
     startLoading();
     
     // get file from git
-    git.getFile(treeLoc, selectedFileName);
+    const resp = git.getFile(treeLoc, selectedFileName);
 
     // show file content in codeit
     cd.textContent = atob(resp.content);
@@ -311,7 +311,7 @@ sidebarTitle.addEventListener('click', () => {
     
     // change location
     treeLoc[2] = splitContents.join('/');
-    setStorage('tree', treeLoc.join());
+    saveTreeLocLS(treeLoc);
     
     // render files
     renderFiles();
@@ -320,7 +320,7 @@ sidebarTitle.addEventListener('click', () => {
     
     // change location
     treeLoc[1] = '';
-    setStorage('tree', treeLoc.join());
+    saveTreeLocLS(treeLoc);
     
     // render files
     renderFiles();
@@ -364,7 +364,7 @@ function fileChange() {
     content: btoa(cd.textContent)
   };
   
-  saveModifiedFile(modifiedFile);
+  saveModifiedFileLS(modifiedFile);
 
   // remove event listener
   cd.removeEventListener('keydown', checkBackspace);
