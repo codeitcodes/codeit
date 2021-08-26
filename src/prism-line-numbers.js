@@ -194,7 +194,7 @@
 		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
 	});
 
-	Prism.hooks.add('complete', function (env) {
+	Prism.hooks.add('init', function (env) {
 		if (!env.code) {
 			return;
 		}
