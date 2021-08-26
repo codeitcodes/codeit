@@ -64,6 +64,7 @@ pushWrapper.addEventListener('click', () => {
   // if its SHA was updated
   bottomFloat.classList.remove('modified');
   
+  
   // create commit
   let commit = {};
   let file = {};
@@ -80,8 +81,15 @@ pushWrapper.addEventListener('click', () => {
     file.sha = getAttr(selectedItem, 'sha');
     file.selected = true;
 
+    
     // push file asynchronously
     git.push(treeLoc, file, commit);
+    
+    // delete file from local storage
+    deleteModifiedFileLS(oldSha);
+    
+    // update selection SHA
+    changeSelectedFileLS(treeLoc.join(), newSha, file.innerText, true);
     
   }
   
