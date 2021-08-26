@@ -45,32 +45,7 @@ let git = {
   
   // push file
   // function pushes file to git
-  'push': async (file, commit) => {
-
-    let content;
-
-    // if updating an existing file
-    if (file.sha) {
-
-      // if currently editing file
-      if (file.selected) {
-
-        // get current value of file
-        content = btoa(cd.textContent);
-
-      } else { // else, load from storage
-
-        content = modifiedFiles[file.sha][0];
-
-      }
-
-    } else { // if creating a new file
-
-      content = file.content;
-      file.sha = '';
-
-    }
-
+  'push': async (treeLoc, file, commit) => {
 
     let query = 'https://api.github.com/repos/' +
                 treeLoc[0] +
@@ -79,17 +54,16 @@ let git = {
 
     let commitData = {
       message: commit.message,
-      content: content,
+      content: file.content,
       sha: file.sha
     };
 
     // commit file
     var resp = await axios.put(query, githubToken, commitData);
-
-
+    
     // if updating an existing file
     if (file.sha) {
-
+      /*
       // force-update cache
       var newFile = await axios.get(query, githubToken, file.sha);
 
@@ -97,7 +71,7 @@ let git = {
       deleteModifiedFile(file.sha);
 
       file.element.classList.remove('modified');
-
+      */
     }
 
     return resp.content.sha;
