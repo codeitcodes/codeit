@@ -200,12 +200,6 @@
 		}
 
 		var code = /** @type {Element} */ (env.element);
-		var pre = /** @type {HTMLElement} */ (code.parentNode);
-
-		// works only for <code> wrapped inside <pre> (not inline)
-		if (!pre || !/pre/i.test(pre.nodeName)) {
-			return;
-		}
 
 		// Abort if line numbers already exists
 		if (code.querySelector('.line-numbers-rows')) {
@@ -216,11 +210,6 @@
 		if (!Prism.util.isActive(code, PLUGIN_NAME)) {
 			return;
 		}
-
-		// Remove the class 'line-numbers' from the <code>
-		code.classList.remove(PLUGIN_NAME);
-		// Add the class 'line-numbers' to the <pre>
-		pre.classList.add(PLUGIN_NAME);
 
 		var match = env.code.match(NEW_LINE_EXP);
 		var linesNum = match ? match.length + 1 : 1;
@@ -233,13 +222,9 @@
 		lineNumbersWrapper.className = 'line-numbers-rows';
 		lineNumbersWrapper.innerHTML = lines;
 
-		if (pre.hasAttribute('data-start')) {
-			pre.style.counterReset = 'linenumber ' + (parseInt(pre.getAttribute('data-start'), 10) - 1);
-		}
-
 		env.element.appendChild(lineNumbersWrapper);
 
-		resizeElements([pre]);
+		resizeElements([code]);
 
 		Prism.hooks.run('line-numbers', env);
 	});
