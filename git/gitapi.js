@@ -71,9 +71,14 @@ let git = {
       
       await axios.get(query, githubToken, commit.file.sha);
       
-      await axios.get(query.replace(commit.file.name, ''),
+      await axios.get('https://api.github.com/repos/' +
+                      treeLoc[0] +
+                      '/' + treeLoc[1] +
+                      '/contents' + treeLoc[2],
+                      
                       githubToken,
-                      commit.file.sha);
+                      
+                      'fser435435redfgd');
       
     }
 
