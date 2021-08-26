@@ -152,7 +152,7 @@ let axios = {
         xmlhttp.open('GET', url, true);
         
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        if (lastModified) xmlhttp.setRequestHeader('Last-Modified', (new Date().toGMTString()));
+        if (lastModified) xmlhttp.setRequestHeader('If-Modified-Since', lastModified);
         
         xmlhttp.send();
       } catch(e) { reject(e) }
