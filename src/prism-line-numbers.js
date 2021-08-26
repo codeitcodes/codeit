@@ -63,7 +63,7 @@
 		 * @returns {void}
 		 */
 		resize: function (element) {
-			addLineRows(element);
+			window.setTimeout(() => { addLineRows(element) }, 0);
 		},
 
 		/**
