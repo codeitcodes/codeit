@@ -428,38 +428,33 @@ function checkBackspace(e) {
 // called on code change event
 function codeChange() {
   
+  const selectedEl = fileWrapper.querySelector('.selected:not(.modified)');
+  
+  // if selected file exists
+  if (selectedEl) {
+    
+    // enable pushing file
+    selectedEl.classList.add('modified');
+
+    // enable pushing from bottom float
+    bottomFloat.classList.add('modified');
+    
+    // save modified file in localStorage
+
+    const modifiedFile = {
+      dir: treeLoc.join(),
+      sha: selectedFile.sha,
+      name: selectedFile.name,
+      exists: selectedFile.exists,
+      content: btoa(cd.textContent)
+    };
+
+    saveModifiedFileLS(modifiedFile);
+    
+  }
+  
   // save code in async thread
-  asyncThread(() => {
-    
-    saveBeforeUnloadLS();
-    
-    const selectedEl = fileWrapper.querySelector('.selected:not(.modified)');
-
-    // if selected file exists
-    if (selectedEl) {
-
-      // enable pushing file
-      selectedEl.classList.add('modified');
-
-      // enable pushing from bottom float
-      bottomFloat.classList.add('modified');
-
-
-      // save modified file in localStorage
-
-      const modifiedFile = {
-        dir: treeLoc.join(),
-        sha: selectedFile.sha,
-        name: selectedFile.name,
-        exists: selectedFile.exists,
-        content: btoa(cd.textContent)
-      };
-
-      saveModifiedFileLS(modifiedFile);
-
-    }
-    
-  }, 300);
+  asyncThread(saveBeforeUnloadLS, 300);
 
 }
 
