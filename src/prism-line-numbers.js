@@ -191,7 +191,7 @@
 		}
 		lastWidth = window.innerWidth;
 
-		resizeElements(Array.prototype.slice.call(document.querySelectorAll('pre.' + PLUGIN_NAME)));
+		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
 	});
 
 	Prism.hooks.add('complete', function (env) {
@@ -219,6 +219,7 @@
 
 		lineNumbersWrapper = document.createElement('span');
 		lineNumbersWrapper.setAttribute('aria-hidden', 'true');
+		lineNumbersWrapper.setAttribute('contenteditable', 'false');
 		lineNumbersWrapper.className = 'line-numbers-rows';
 		lineNumbersWrapper.innerHTML = lines;
 
