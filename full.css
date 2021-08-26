@@ -715,6 +715,7 @@ body.transitioning .sidebar {
 
 .sidebar .item .push-wrapper .push-svg {
   border-radius: 50%;
+  will-change: transform;
   transition: .18s var( --ease-function);
 }
 
