@@ -42,7 +42,7 @@ const body = document.body,
 
 
 // version
-const version = '1.0.7';
+const version = '1.1.3';
 versionEl.innerText = version;
 
 
@@ -89,12 +89,12 @@ function load() {
 
 
 // is mobile
-let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i) ?? false;
+let isMobile = window.matchMedia('only screen and (max-width: 760px)').matches;
 
 // for debugging
 window.onresize = () => {
   
-  isMobile = navigator.userAgent.toLowerCase().match(/mobile/i) ?? false;
+  isMobile = window.matchMedia('only screen and (max-width: 760px)').matches;
   
 }
 
@@ -125,6 +125,14 @@ let getAttr = (element, item) => {
 let setAttr = (element, item, value) => {
   
   return element.setAttribute(item, value);
+  
+}
+
+
+// asynchronous thread
+let asyncThread = (callback, time) => {
+  
+  window.setTimeout(callback, time);
   
 }
 
