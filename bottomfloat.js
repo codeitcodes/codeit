@@ -23,6 +23,8 @@ function updateFloat() {
 // open sidebar when clicked on button
 sidebarOpen.addEventListener('click', () => {
   
+  renderSidebarHTML();
+  
   body.classList.add('expanded');
   saveSidebarStateLS();
 
