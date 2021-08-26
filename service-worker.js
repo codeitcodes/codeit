@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v2';
+const CACHE_NAME = 'static-cache-v3';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -12,19 +12,18 @@ const FILES_TO_CACHE = [
   '/full.css',
   
   '/utils.js',
-  '/gitauth.js',
+  '/manifest.js',
+  '/git/gitapi.js',
+  '/git/gitauth.js',
   '/codedrop.js',
-  '/gitsidebar.js',
-  '/codesearch.js',
-  '/codestorage.js',
+  '/htmlrenderer.js',
+  '/spotlightsearch.js',
+  '/localstorage.js',
   '/bottomfloat.js',
-  '/codelearn.js',
+  '/pwainstall.js',
   
   '/dark.css',
-  
-  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js',
-  
+    
   '/fonts/fonts.css',
   '/fonts/googlesansmono.woff2',
   
