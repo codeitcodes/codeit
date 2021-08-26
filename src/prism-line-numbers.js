@@ -63,7 +63,7 @@
 		 * @returns {void}
 		 */
 		resize: function (element) {
-			addLineRows(element);
+			//addLineRows(element);
 			//window.setTimeout(() => { resizeElements([element]) }, 300);
 		},
 
@@ -230,7 +230,7 @@
 		
 		var code = /** @type {Element} */ (env.element);
 		
-		addLineRows(code);
+		//addLineRows(code);
 		//window.setTimeout(() => { resizeElements([code]) }, 300);
 	});
 
