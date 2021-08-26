@@ -1,4 +1,6 @@
 
+let lastTreeRequestTime = new Date().toGMTString();
+
 let git = {
   
   // get file
@@ -39,6 +41,9 @@ let git = {
     // get the query
     const resp = await axios.get(query, githubToken);
     
+    // update last request time
+    lastTreeRequestTime = new Date().toGMTString();
+    
     return resp;
     
   },
@@ -68,7 +73,7 @@ let git = {
     if (commit.file.sha) {
       
       // force-update cache
-      await axios.get(query, githubToken, commit.file.sha);
+      await axios.get(query, githubToken, lastTreeRequestTime);
       
     }
 
