@@ -195,8 +195,9 @@ function addHTMLItemListeners() {
       } else { // if item is a file
         
         // if not clicked on push button
-        let clickedOnPush = (e.target == item.querySelector('.push') ||
-                             e.target.parentElement == item.querySelector('.push'));
+        let pushWrapper = item.querySelector('.push-wrapper');
+        let clickedOnPush = (e.target == pushWrapper ||
+                             Array.from(pushWrapper.children).includes(e.target));
         
         if (!clickedOnPush) {
           
@@ -218,7 +219,7 @@ function addHTMLItemListeners() {
           // push file
           
           // play push animation
-          playPushAnimation(item.querySelector('.push-wrapper'));
+          playPushAnimation(pushWrapper);
           
           // file cannot be modified
           // if its SHA was updated
