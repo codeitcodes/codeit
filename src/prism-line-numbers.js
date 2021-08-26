@@ -168,8 +168,6 @@
 			info.lineHeights.forEach(function (height, lineNumber) {
 				if (wrapper.children[lineNumber]) {
 					wrapper.children[lineNumber].style.height = height + 'px';
-				} else {
-					wrapper.children[lineNumber+1].style.height = height + 'px';
 				}
 			});
 		});
