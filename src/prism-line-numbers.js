@@ -198,30 +198,30 @@
 		}
 		lastWidth = window.innerWidth;
 
-		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
+		resizeElements(Array.prototype.slice.call(document.querySelectorAll('.' + PLUGIN_NAME)));
 	});
 
 	function addLineRows(element) {
 		// Abort if line numbers already exists
-		if (element.querySelector('.line-numbers-rows')) {
-			return;
+		if (!element.querySelector('.line-numbers-rows')) {
+
+			var match = element.textContent.match(NEW_LINE_EXP);
+			var linesNum = match ? match.length + 1 : 1;
+			var lineNumbersWrapper;
+
+			var lines = new Array(linesNum + 1).join('<span></span>');
+
+			lineNumbersWrapper = document.createElement('span');
+			lineNumbersWrapper.setAttribute('aria-hidden', 'true');
+			lineNumbersWrapper.setAttribute('contenteditable', 'false');
+			lineNumbersWrapper.className = 'line-numbers-rows';
+			lineNumbersWrapper.innerHTML = lines;
+
+			element.appendChild(lineNumbersWrapper);
+			
 		}
 
-		var match = element.textContent.match(NEW_LINE_EXP);
-		var linesNum = match ? match.length + 1 : 1;
-		var lineNumbersWrapper;
-
-		var lines = new Array(linesNum + 1).join('<span></span>');
-
-		lineNumbersWrapper = document.createElement('span');
-		lineNumbersWrapper.setAttribute('aria-hidden', 'true');
-		lineNumbersWrapper.setAttribute('contenteditable', 'false');
-		lineNumbersWrapper.className = 'line-numbers-rows';
-		lineNumbersWrapper.innerHTML = lines;
-
-		element.appendChild(lineNumbersWrapper);
-		
-		window.setTimeout(() => { resizeElements([element]) }, 20);
+		window.setTimeout(() => { resizeElements([element]) }, 0);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
