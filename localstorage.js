@@ -80,4 +80,5 @@ function saveCodeLangLS() {
 function saveSidebarStateLS() {
   
   setStorage('sidebar', body.classList.contains('expanded'));
+  
 }
