@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.3.9
+   v2.4.0
    MIT License
    
    github.com/barhatsor/codeit
@@ -85,7 +85,7 @@ class CodeitElement extends HTMLElement {
 
     }
     
-    let history = [];
+    cd.history = [];
     let at = -1;
     let recording = false;
     
@@ -412,10 +412,8 @@ class CodeitElement extends HTMLElement {
         event.preventDefault();
         
         at--;
-        const record = history[at];
-        
-        console.log(history, record, at);
-        
+        const record = cd.history[at];
+                
         if (record) {
           
           cd.innerHTML = record.html;
@@ -432,9 +430,7 @@ class CodeitElement extends HTMLElement {
         event.preventDefault();
         
         at++;
-        const record = history[at];
-        
-        console.log(history, record, at);
+        const record = cd.history[at];
         
         if (record) {
           
@@ -443,7 +439,7 @@ class CodeitElement extends HTMLElement {
           
         }
         
-        if (at >= history.length) at--;
+        if (at >= cd.history.length) at--;
         
       }
     }
@@ -458,7 +454,7 @@ class CodeitElement extends HTMLElement {
       // get caret pos in text
       const pos = cd.getSelection();
 
-      const lastRecord = history[at];
+      const lastRecord = cd.history[at];
       
       if (lastRecord) {
         
@@ -469,14 +465,14 @@ class CodeitElement extends HTMLElement {
       }
 
       at++;
-      history[at] = {html, pos};
-      history.splice(at + 1);
+      cd.history[at] = {html, pos};
+      cd.history.splice(at + 1);
 
       const maxHistory = 300;
       if (at > maxHistory) {
         
         at = maxHistory;
-        history.splice(0, 1);
+        cd.history.splice(0, 1);
         
       }
       
@@ -828,4 +824,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.3.9', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.0', 'font-style: italic; color: gray');
