@@ -34,7 +34,7 @@ window.onload = () => {
   
   })
   
-  loadCodeFromStorage();
+  loadLS();
   
   // if not logged into Github
   if (githubToken == null) {
@@ -47,13 +47,14 @@ window.onload = () => {
 
       // show sidebar
       body.classList.add('expanded');
+      saveSidebarStateLS();
 
     }
 
   } else {
 
     // render files
-    renderFiles();
+    renderFilesHTML();
 
   }
   
@@ -70,7 +71,7 @@ async function getGithubToken(githubCode) {
   
   // save token to localStorage
   githubToken = resp.access_token;
-  setStorage('token', githubToken);
+  saveAuthTokenLS(githubToken);
   
   /*
   // get username
@@ -82,6 +83,6 @@ async function getGithubToken(githubCode) {
   */
   
   // render files
-  renderFiles();
+  renderFilesHTML();
   
 }
