@@ -357,6 +357,9 @@ async function loadFileInHTML(file, sha) {
   saveCodePosLS();
   saveCodeLangLS();
   
+  // update line numbers
+  Prism.plugins.lineNumbers.resize(cd);
+  
   // if on mobile device
   if (isMobile) {
     
