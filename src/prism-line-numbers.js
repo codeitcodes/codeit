@@ -224,7 +224,7 @@
 			
 		}
 
-		window.setTimeout(() => { resizeElements([element]) }, 0);
+		resizeElements([element]);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
