@@ -28,6 +28,10 @@ function processFile(file) {
     cd.lang = getFileLang(file.name);
     cd.focus();
     
+    saveCodeLS();
+    saveCodePosLS();
+    saveCodeLangLS();
+    
     console.log('Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes');
     
   });
