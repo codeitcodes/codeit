@@ -234,7 +234,7 @@ function addHTMLItemListeners() {
             file: {
               dir: treeLoc.join(),
               sha: getAttr(item, 'sha'),
-              name: selectedItem.innerText,
+              name: item.innerText,
               selected: true
             }
           };
