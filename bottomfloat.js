@@ -80,6 +80,7 @@ pushWrapper.addEventListener('click', () => {
         dir: treeLoc.join(),
         sha: getAttr(selectedItem, 'sha'),
         name: selectedItem.innerText,
+        content: btoa(cd.textContent),
         selected: true
       }]
     };
