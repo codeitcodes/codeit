@@ -142,28 +142,21 @@ cd-el::selection, cd-el *::selection {
   cursor: unset;
 }
 
-
 .line-numbers {
-	position: relative;
-	padding-left: 3.8em;
-	counter-reset: linenumber;
+  position: relative;
+  padding-left: calc(1em + 30px);
+  padding-left: calc(1.2em + 30px);
+  counter-reset: linenumber;
 }
 
 .line-numbers .line-numbers-rows {
-	position: absolute;
-	pointer-events: none;
-	top: 0;
-	font-size: 100%;
-	left: -3.8em;
-	width: 3em; /* works for line-numbers below 1000 lines */
-	letter-spacing: -1px;
-	border-right: 1px solid #999;
-
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
+  position: absolute;
+  cursor: default;
+  top: 10px;
+  left: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  line-height: 1.5;
 }
 
 .line-numbers-rows > span {
@@ -173,8 +166,11 @@ cd-el::selection, cd-el *::selection {
 
 .line-numbers-rows > span:before {
   content: counter(linenumber);
-  color: #999;
+  color: #636d83;
   display: block;
-  padding-right: 0.8em;
   text-align: right;
+  padding-right: 10px;
+  padding-left: 10px;
+  white-space: nowrap;
+  min-width: 1.2em;
 }
