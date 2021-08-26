@@ -1,12 +1,13 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v15';
+const CACHE_NAME = 'static-cache-v16';
 
 // list of files to cache
 const FILES_TO_CACHE = [
   
   '/src/codeit.js',
+  '/src/prism.js',
   
   '/full.html',
   '/full.css',
