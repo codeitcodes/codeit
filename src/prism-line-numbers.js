@@ -195,6 +195,8 @@
 	});
 
 	function addLineRows(element) {
+		console.log('here');
+		
 		// Abort if line numbers already exists
 		if (element.querySelector('.line-numbers-rows')) {
 			return;
