@@ -66,36 +66,36 @@ pushWrapper.addEventListener('click', () => {
   // if its SHA was updated
   bottomFloat.classList.remove('modified');
   
-  
-  // create commit
-  let commit = {};
-  let commitFile = {};
-  
   // get selected item
   let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
   
   if (selectedItem) {
-  
-    // set commit message
-    commit.message = 'Update ' + selectedItem.innerText;
     
-    // set commit file
-    commitFile.sha = getAttr(selectedItem, 'sha');
-    commitFile.selected = true;
-
+    // create commit
+    let commitMessage = 'Update ' + selectedItem.innerText;
+    
+    const commit = {
+      message: commitMessage,
+      file: [{
+        dir: treeLoc.join(),
+        sha: getAttr(selectedItem, 'sha'),
+        name: selectedItem.innerText,
+        selected: true
+      }]
+    };
     
     // push file asynchronously
-    const newSha = git.push(treeLoc, commitFile, commit);
+    const newSha = git.push(commit);
     
     // delete file from local storage
-    deleteModifiedFileLS(commitFile.sha);
+    deleteModifiedFileLS(commit.file.sha);
     
     // update selection SHA
     
     const newSelectedFile = {
-      dir: treeLoc.join(),
+      dir: commit.file.dir,
       sha: newSha,
-      name: selectedItem.innerText,
+      name: commit.file.name,
       exists: true
     };
     
