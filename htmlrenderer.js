@@ -468,7 +468,7 @@ function codeChange() {
   }
   
   // update line numbers
-  asyncThread(() => { Prism.plugins.lineNumbers.resize(cd) }, 0);
+  Prism.plugins.lineNumbers.resize(cd);
   
   // save code in async thread
   asyncThread(saveBeforeUnloadLS, 300);
