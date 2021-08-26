@@ -713,6 +713,10 @@ body.transitioning .sidebar {
   display: flex;
 }
 
+.sidebar .item .push-wrapper.checked {
+  display: flex;
+}
+
 .sidebar .item .push-wrapper .push-svg {
   border-radius: 50%;
   will-change: transform;
