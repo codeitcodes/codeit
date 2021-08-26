@@ -63,15 +63,10 @@ let git = {
     
     // if updating an existing file
     if (file.sha) {
-      /*
+      
       // force-update cache
-      var newFile = await axios.get(query, githubToken, file.sha);
-
-      // delete file from modified files
-      deleteModifiedFile(file.sha);
-
-      file.element.classList.remove('modified');
-      */
+      await axios.get(query, githubToken, file.sha);
+      
     }
 
     return resp.content.sha;
