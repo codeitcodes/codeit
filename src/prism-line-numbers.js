@@ -166,7 +166,9 @@
 			lineNumberSizer.innerHTML = '';
 
 			info.lineHeights.forEach(function (height, lineNumber) {
-				wrapper.children[lineNumber].style.height = height + 'px';
+				if (wrapper.children[lineNumber]) {
+					wrapper.children[lineNumber].style.height = height + 'px';
+				}
 			});
 		});
 
