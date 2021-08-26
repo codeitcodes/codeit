@@ -896,6 +896,20 @@ body.transitioning .sidebar {
   will-change: transform;
 }
 
+.splash-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #313744;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  overflow: hidden;
+}
+
 @media only screen and (min-width: 760px), (max-device-width: 768px) and (min-device-width: 1024px) {
   
   :root {
