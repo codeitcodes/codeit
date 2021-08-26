@@ -369,7 +369,9 @@ function updateFileShaHTML(file, newSha) {
   
   // if file is selected
   if (file.classList.contains('selected')) {
-
+    
+    // update selection SHA
+    
     const newSelectedFile = {
       dir: treeLoc.join(),
       sha: newSha,
