@@ -63,6 +63,7 @@
 		 * @returns {void}
 		 */
 		resize: function (element) {
+			addLineRows(element);
 			resizeElements([element]);
 		},
 
@@ -194,10 +195,7 @@
 		resizeElements(Array.prototype.slice.call(document.querySelectorAll(PLUGIN_NAME)));
 	});
 
-	window.onload = () => {
-
-		var code = cd;
-
+	function addLineRows(code) {
 		// Abort if line numbers already exists
 		if (code.querySelector('.line-numbers-rows')) {
 			return;
