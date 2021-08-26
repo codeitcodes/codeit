@@ -52,7 +52,8 @@ let git = {
     let query = 'https://api.github.com/repos/' +
                 treeLoc[0] +
                 '/' + treeLoc[1] +
-                '/contents' + treeLoc[2] + '/' + file.name;
+                '/contents' + treeLoc[2] +
+                '/' + commit.file.name;
 
     let commitData = {
       message: commit.message,
