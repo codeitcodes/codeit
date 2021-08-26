@@ -139,7 +139,7 @@ let asyncThread = (callback, time) => {
 
 // HTTP Request
 let axios = {
-  'get': (url, token, sha) => {
+  'get': (url, token, lastModified) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -152,7 +152,7 @@ let axios = {
         xmlhttp.open('GET', url, true);
         
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        if (sha) xmlhttp.setRequestHeader('If-None-Match', sha);
+        if (lastModified) xmlhttp.setRequestHeader('Last-Modified', (new Date().toGMTString()));
         
         xmlhttp.send();
       } catch(e) { reject(e) }
