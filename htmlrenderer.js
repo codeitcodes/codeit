@@ -476,8 +476,10 @@ function setupEditor() {
   cd.addEventListener('keydown', checkBackspace);
   cd.addEventListener('input', codeChange);
   
+  const selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+  
   // if code in storage
-  if (getStorage('code')) {
+  if (getStorage('code') && !selectedItem) {
     
     // set codeit to code
     cd.lang = getStorage('lang');
