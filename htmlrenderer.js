@@ -222,40 +222,40 @@ function addHTMLItemListeners() {
           
           // file cannot be modified
           // if its SHA was updated
-          file.classList.remove('modified');
+          item.classList.remove('modified');
           
           
           // create commit   
           let commit = {};
-          let file = {};
+          let commitFile = {};
           
           // set commit message
           commit.message = 'Update ' + item.innerText;
           
           // get SHA of file
-          file.sha = getAttr(item, 'sha');
+          commitFile.sha = getAttr(item, 'sha');
                     
           // if currently editing file
           if (item.classList.contains('selected')) {
 
             // get current value of file
-            file.content = btoa(cd.textContent);
+            commitFile.content = btoa(cd.textContent);
 
           } else { // else, load from storage
 
-            file.content = modifiedFiles[file.sha][0];
+            commitFile.content = modifiedFiles[commitFile.sha][0];
             
           }
           
           
           // push file asynchronously
-          const newSha = await git.push(treeLoc, file, commit);
+          const newSha = await git.push(treeLoc, commitFile, commit);
           
           // delete file from local storage
-          deleteModifiedFileLS(oldSha);
+          deleteModifiedFileLS(commitFile.sha);
           
           // update file in HTML
-          updateFileShaHTML(item, file.sha, newSha);
+          updateFileShaHTML(item, newSha);
           
         }
         
@@ -362,7 +362,7 @@ async function loadFileInHTML(file, sha) {
 }
 
 
-function updateFileShaHTML(file, oldSha, newSha) {
+function updateFileShaHTML(file, newSha) {
   
   // update SHA of file
   setAttr(file, 'sha', newSha);
@@ -370,8 +370,14 @@ function updateFileShaHTML(file, oldSha, newSha) {
   // if file is selected
   if (file.classList.contains('selected')) {
 
-    // update selection SHA
-    changeSelectedFileLS(treeLoc.join(), newSha, file.innerText, true);
+    const newSelectedFile = {
+      dir: treeLoc.join(),
+      sha: newSha,
+      name: file.innerText,
+      exists: true
+    };
+    
+    changeSelectedFileLS(newSelectedFile);
 
   }
   
