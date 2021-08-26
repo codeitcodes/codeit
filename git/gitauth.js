@@ -53,8 +53,7 @@ window.onload = () => {
 
   }
   
-  setupEditor();
-  setupSidebar();
+  setupWorkspace();
   
 }
 
