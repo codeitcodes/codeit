@@ -147,10 +147,6 @@ async function renderFilesHTML() {
       selectedItem.classList.add('selected');
       selectedItem.scrollIntoViewIfNeeded();
       
-      // set event listener for file change
-      cd.addEventListener('keydown', checkBackspace);
-      cd.addEventListener('input', fileChange);
-      
     }
     
   }
@@ -350,11 +346,7 @@ async function loadFileInHTML(file, sha) {
     updateFloat();
     
   }
-  
-  // set event listener for file change
-  cd.addEventListener('keydown', checkBackspace);
-  cd.addEventListener('input', fileChange);
-  
+ 
 }
 
 
@@ -419,45 +411,58 @@ sidebarTitle.addEventListener('click', () => {
 })
 
 
-// check for backspace to see if file has changed
+// check for backspace to see if code has changed
 function checkBackspace(e) {
   
   if (e.key === "Backspace" || e.key === "Delete") {
-    fileChange();
+    codeChange();
   }
   
 }
 
-// called on file change event
-function fileChange() {
+// called on code change event
+function codeChange() {
   
-  const file = fileWrapper.querySelector('.selected');
-  
-  // enable pushing file
-  file.classList.add('modified');
-  
-  // change bottom float flag
-  bottomFloat.classList.add('modified');
-  
-  // save modified file in localStorage
-  
-  const modifiedFile = {
-    dir: treeLoc.join(),
-    sha: selectedFile.sha,
-    name: selectedFile.name,
-    exists: selectedFile.exists,
-    content: btoa(cd.textContent)
-  };
-  
-  saveModifiedFileLS(modifiedFile);
+  // save code in async thread
+  debounce(() => {
+    
+    saveBeforeUnloadLS();
+    
+    const selectedEl = fileWrapper.querySelector('.selected');
 
-  // remove event listener
-  cd.removeEventListener('keydown', checkBackspace);
-  cd.removeEventListener('input', fileChange);
+    // if selected file exists
+    if (selectedEl) {
+
+      // enable pushing file
+      selectedEl.classList.add('modified');
+
+      // enable pushing from bottom float
+      bottomFloat.classList.add('modified');
+
+
+      // save modified file in localStorage
+
+      const modifiedFile = {
+        dir: treeLoc.join(),
+        sha: selectedFile.sha,
+        name: selectedFile.name,
+        exists: selectedFile.exists,
+        content: btoa(cd.textContent)
+      };
+
+      saveModifiedFileLS(modifiedFile);
+
+    }
+    
+  }, 300);
 
 }
 
 function setupEditor() {
+  
+  // add editor event listeners
+  cd.addEventListener('keydown', checkBackspace);
+  cd.addEventListener('input', codeChange);
   
   // if code in storage
   if (getStorage('code')) {
@@ -473,7 +478,7 @@ function setupEditor() {
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
 
   }
-    
+  
 }
 
 function setupSidebar() {
