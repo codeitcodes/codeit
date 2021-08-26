@@ -39,6 +39,7 @@ body cd-el {
   left: 0;
   position: relative;
   box-sizing: border-box;
+  white-space: pre-wrap;
   padding-bottom: 50px;
   transition: .4s var(--cubic-function);
   transition-property: width, transform;
