@@ -85,7 +85,6 @@
 	 * @param {HTMLElement[]} elements
 	 */
 	function resizeElements(elements) {
-		console.log('here');
 		elements = elements.filter(function (e) {
 			var codeStyles = getStyles(e);
 			var whiteSpace = codeStyles['white-space'];
@@ -202,6 +201,8 @@
 	});
 
 	function addLineRows(element) {
+				console.log('here');
+
 		// Abort if line numbers already exists
 		if (!element.querySelector('.line-numbers-rows')) {
 
