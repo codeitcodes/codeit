@@ -154,6 +154,9 @@ async function renderSidebarHTML() {
     
   }
   
+  // protect unsaved code
+  protectUnsavedCode();
+  
 }
 
 
@@ -470,27 +473,41 @@ function codeChange() {
 
 }
 
-function setupEditor() {
-  
-  // add editor event listeners
-  cd.addEventListener('keydown', checkBackspace);
-  cd.addEventListener('input', codeChange);
+// protect unsaved code
+// if logged into github but
+// cache didn't change yet
+function protectUnsavedCode() {
   
   const selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
   
   const loggedIntoGit = (githubToken != null),
         cacheFileExists = (selectedItem != null);
   
-  // protect unsaved code
-  // if logged into github but
-  // cache didn't change yet
-  const protectUnsavedCode = (loggedIntoGit ? cacheFileExists : true);
+  const protectUnsavedCode = (loggedIntoGit ? !cacheFileExists : false);
+  
+  if (protectUnsavedCode == true) {
+    
+    // clear codeit
+    cd.lang = 'plain';
+    cd.textContent = '';
+    
+    saveBeforeUnloadLS();
+    
+  }
+  
+}
+
+function setupEditor() {
+  
+  // add editor event listeners
+  cd.addEventListener('keydown', checkBackspace);
+  cd.addEventListener('input', codeChange);
   
   // if code in storage
-  if (getStorage('code') && protectUnsavedCode) {
+  if (getStorage('code')) {
     
     // set codeit to code
-    cd.lang = getStorage('lang');
+    cd.lang = getStorage('lang') || 'plain';
     cd.textContent = atob(getStorage('code'));
 
     // set caret pos in code
