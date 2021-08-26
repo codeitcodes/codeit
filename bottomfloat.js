@@ -93,7 +93,7 @@ pushWrapper.addEventListener('click', () => {
     const newSelectedFile = {
       dir: treeLoc.join(),
       sha: newSha,
-      name: file.innerText,
+      name: selectedItem.innerText,
       exists: true
     };
     
