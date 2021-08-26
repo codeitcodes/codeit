@@ -43,10 +43,6 @@ function loadLS() {
   
   // load selected file from storage
   selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {dir: '', sha: ''};
-    
-  setupEditor();
-  
-  setupSidebar();
   
   body.classList.add('loaded');
   
