@@ -4,6 +4,8 @@ let modifiedFiles, selectedFile;
 
 function changeSelectedFileLS(newSelectedFile) {
   
+  selectedFile = newSelectedFile;
+  
   setStorage('selectedFile', JSON.stringify(newSelectedFile));
   
 }
