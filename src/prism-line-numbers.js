@@ -173,12 +173,6 @@
 				}
 			});
 		});
-
-		elements.map(element => {
-			var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
-
-			element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
-		});
 	}
 
 	/**
@@ -201,18 +195,16 @@
 		}
 		lastWidth = window.innerWidth;
 		
-		//window.setTimeout(() => {
-			resizeElements(Array.prototype.slice.call(document.querySelectorAll('.' + PLUGIN_NAME)));
-		//}, 0);
+		addLineRows(document.querySelector('.' + PLUGIN_NAME));
 	});
 
 	function addLineRows(element) {
+		var match = element.textContent.match(NEW_LINE_EXP);
+		var linesNum = match ? match.length + 1 : 1;
+		var lineNumbersWrapper;
+		
 		// Abort if line numbers already exists
 		if (!element.querySelector('.line-numbers-rows')) {
-
-			var match = element.textContent.match(NEW_LINE_EXP);
-			var linesNum = match ? match.length + 1 : 1;
-			var lineNumbersWrapper;
 
 			var lines = new Array(linesNum + 1).join('<span></span>');
 
@@ -225,10 +217,43 @@
 			element.appendChild(lineNumbersWrapper);
 			
 		}
-
-		//window.setTimeout(() => {
+		
+		lineNumbersWrapper = lineNumbersWrapper || element.querySelector('.line-numbers-rows');
+		
+		// change padding of element according
+		// to number of lines
+		
+		var lineNumberLength = 1.2; // em
+		var lineNumberPadding = (13.5 * 2); // px
+		
+		// 99 or less
+		if (linesNum < 100) {
+			lineNumberLength = 1.2;
+		} else if (linesNum < 1000) { // 999 or less
+			lineNumberLength = 1.78;
+		} else if (linesNum < 10000) { // 9999 or less
+			lineNumberLength = 2.42;
+		} else if (linesNum < 100000) { // 99999 or less
+			lineNumberLength = 3;
+		} else if (linesNum < 1000000) { // 999999 or less
+			lineNumberLength = 3.58;
+		} else if (linesNum < 10000000) { // 9999999 or less
+			lineNumberLength = 4.2;
+		} else if (linesNum < 100000000) { // 99999999 or less (~100 million lines)
+			lineNumberLength = 4.78;
+		}
+		
+		// change padding of element
+		element.style.paddingLeft = 'calc(' + 
+						lineNumberLength + 'px' +
+						' + ' +
+						lineNumberPadding + 'em' +
+						')';
+		
+		// calculate line numbers asynchronously
+		window.setTimeout(() => {
 			resizeElements([element]);
-		//}, 0);
+		}, 0);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
