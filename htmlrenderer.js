@@ -521,6 +521,9 @@ function setupEditor() {
     // scroll to pos in code
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
     
+    // update line numbers
+    Prism.plugins.lineNumbers.resize(cd);
+    
   }
   
 }
