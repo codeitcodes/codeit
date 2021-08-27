@@ -198,8 +198,10 @@
 			return;
 		}
 		lastWidth = window.innerWidth;
-
-		resizeElements(Array.prototype.slice.call(document.querySelectorAll('.' + PLUGIN_NAME)));
+		
+		window.setTimeout(() => {
+			resizeElements(Array.prototype.slice.call(document.querySelectorAll('.' + PLUGIN_NAME)));
+		}, 0);
 	});
 
 	function addLineRows(element) {
@@ -222,7 +224,9 @@
 			
 		}
 
-		resizeElements([element]);
+		window.setTimeout(() => {
+			resizeElements([element]);
+		}, 0);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
