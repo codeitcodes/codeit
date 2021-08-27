@@ -10,6 +10,8 @@ const FILES_TO_CACHE = [
   '/src/prism.js',
   '/src/prism-line-numbers.js',
   
+  'https://beautifier.io/js/lib/beautifier.min.js',
+  
   '/full.html',
   '/full.css',
   
