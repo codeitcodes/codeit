@@ -224,7 +224,7 @@
 		// to number of lines
 		
 		var lineNumberLength = 1.2; // em
-		var lineNumberPadding = (13.5 * 2); // px
+		var lineNumberPadding = (13.5 + 13.5); // px
 		
 		// 99 or less
 		if (linesNum < 100) {
@@ -245,9 +245,9 @@
 		
 		// change padding of element
 		element.style.paddingLeft = 'calc(' + 
-						lineNumberLength + 'px' +
+						lineNumberLength + 'em' +
 						' + ' +
-						lineNumberPadding + 'em' +
+						lineNumberPadding + 'px' +
 						')';
 		
 		// calculate line numbers asynchronously
