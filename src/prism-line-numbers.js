@@ -177,7 +177,9 @@
 		elements.map(element => {
 			var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
 
-			element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
+			window.setTimeout(() => {
+				element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
+			}, 0);
 		});
 	}
 
