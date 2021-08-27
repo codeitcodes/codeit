@@ -177,9 +177,7 @@
 		elements.map(element => {
 			var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
 
-			window.setTimeout(() => {
-				element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
-			}, 0);
+			element.style.paddingLeft = lineNumbersWrapper.clientWidth + 10 + 'px';
 		});
 	}
 
@@ -203,9 +201,9 @@
 		}
 		lastWidth = window.innerWidth;
 		
-		window.setTimeout(() => {
+		//window.setTimeout(() => {
 			resizeElements(Array.prototype.slice.call(document.querySelectorAll('.' + PLUGIN_NAME)));
-		}, 0);
+		//}, 0);
 	});
 
 	function addLineRows(element) {
@@ -228,9 +226,9 @@
 			
 		}
 
-		window.setTimeout(() => {
+		//window.setTimeout(() => {
 			resizeElements([element]);
-		}, 0);
+		//}, 0);
 	};
 	
 	Prism.hooks.add('complete', function (env) {
