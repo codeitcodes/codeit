@@ -68,6 +68,7 @@ cd-el::selection, cd-el *::selection {
 .token.doctype,
 .token.cdata {
   color: hsl(219deg 13% 66% / 72%);
+  color: hsl(222deg 7% 64% / 72%);
   color: hsl(218deg 7% 64% / 72%);
 }
 
