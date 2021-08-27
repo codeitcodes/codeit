@@ -368,8 +368,9 @@ body.transitioning :is(.github, .github *) {
   left: 0;
   bottom: 0;
   height: 100vh;
-  width: 25px;
-  transform: translateX(100%);
+  width: 10px;
+  cursor: default;
+  transform: translateX(45px);
   transition: inherit;
   z-index: -1;
 }
@@ -380,13 +381,13 @@ body.transitioning :is(.github, .github *) {
   animation: none;
 }
 
-.github:hover::after {
-  transform: translateX(-20px);
+body:not(.expanded) .github:hover::after {
+  pointer-events: none;
 }
 
 body.expanded .github::after {
-  transform: translateX(-100%);
-  pointer-events: none;
+  transform: translateX(0);
+  cursor: w-resize;
 }
 
 .github:active {
