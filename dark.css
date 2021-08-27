@@ -67,7 +67,8 @@ cd-el::selection, cd-el *::selection {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #9da5b4;
+  color: hsl(219deg 13% 66% / 72%);
+  color: hsl(218deg 7% 64% / 72%);
 }
 
 .token.punctuation {
