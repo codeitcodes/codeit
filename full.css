@@ -933,7 +933,7 @@ body.loaded .splash-container {
   }
 
   .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
-    background: #1a1c24;
+    background: transparent;
     box-shadow: none;
   }
   
