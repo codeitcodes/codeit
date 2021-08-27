@@ -109,6 +109,8 @@
 			if (!lineNumberSizer) {
 				lineNumberSizer = document.createElement('span');
 				lineNumberSizer.className = 'line-numbers-sizer';
+				lineNumberSizer.setAttribute('aria-hidden', 'true');
+				lineNumberSizer.setAttribute('contenteditable', 'false');
 
 				codeElement.appendChild(lineNumberSizer);
 			}
