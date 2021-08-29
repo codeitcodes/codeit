@@ -53,7 +53,7 @@ learnInstall.addEventListener('click', installPWA);
 
 learnFork.addEventListener('click', () => {
   
-  window.location.href = 'https://github.com/barhatsor/codeit-app';
+  window.location.href = 'https://github.com/barhatsor/codeit';
   
 })
 
