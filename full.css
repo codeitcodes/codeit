@@ -89,6 +89,7 @@ body cd-el {
 
 .bottom-float .sidebar-open {
   width: 100%;
+  overflow: hidden;
   border-radius: 20px 0 0 20px;
 }
 
