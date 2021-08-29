@@ -1,3 +1,3 @@
 # Codeit
 
-Mobile code editor connected to Github.
+Mobile code editor connected to Git.
