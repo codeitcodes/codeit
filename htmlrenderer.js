@@ -531,30 +531,25 @@ function setupEditor() {
   
   
   // update line numbers on screen resize
-  
-  var lastWidth = undefined;
-	window.addEventListener('resize', () => {
-    
-    // if width didn't change, return
-		if (lastWidth === window.innerWidth) return;
+  window.addEventListener('resize', () => {
     
     // update line numbers
     updateLineNumbersHTML();
     
-	});
+  });
   
   
   // update line numbers when finished highlighting
   Prism.hooks.add('complete', function (env) {
     
-		if (!env.code) {
-			return;
-		}
+    if (!env.code) {
+      return;
+    }
     
     // update line numbers
     updateLineNumbersHTML();
     
-	});
+  });
   
 }
 
