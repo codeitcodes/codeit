@@ -572,6 +572,8 @@ function updateLineNumbersHTML() {
     return;
     
   }
+  
+  cd.classList.add('line-numbers');
 
   // update line numbers
   Prism.plugins.lineNumbers.resize(cd);
