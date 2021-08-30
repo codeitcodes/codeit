@@ -53,7 +53,7 @@ body cd-el {
   left: 0;
   position: relative;
   box-sizing: border-box;
-  white-space: pre-wrap;
+  white-space: pre;
   padding-bottom: 50px;
 }
 
@@ -978,6 +978,7 @@ body.loaded .splash-container {
   }
   
   body cd-el {
+    white-space: pre-wrap;
     padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
     -webkit-overflow-scrolling: touch;
   }
