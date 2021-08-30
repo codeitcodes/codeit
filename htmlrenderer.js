@@ -361,7 +361,7 @@ async function loadFileInHTML(file, sha) {
   saveCodeLangLS();
   
   // update line numbers
-  Prism.plugins.lineNumbers.resize(cd);
+  updateLineNumbersHTML();
   
   // if on mobile device
   if (isMobile) {
@@ -474,7 +474,7 @@ function codeChange() {
   }
   
   // update line numbers
-  Prism.plugins.lineNumbers.resize(cd);
+  updateLineNumbersHTML();
   
   // save code in async thread
   asyncThread(saveBeforeUnloadLS, 300);
@@ -525,7 +525,7 @@ function setupEditor() {
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
     
     // update line numbers
-    Prism.plugins.lineNumbers.resize(cd);
+    updateLineNumbersHTML();
     
   }
   
@@ -538,16 +538,8 @@ function setupEditor() {
     // if width didn't change, return
 		if (lastWidth === window.innerWidth) return;
     
-    // if editor isn't in view, return
-    if (body.classList.contains('expanded')) return;
-    
-    // if mobile but not in landscape, return
-    if (isMobile && !isLandscape) return;
-    
-		lastWidth = window.innerWidth;
-		
-		// update line numbers
-    Prism.plugins.lineNumbers.resize(cd);
+    // update line numbers
+    updateLineNumbersHTML();
     
 	});
   
@@ -559,16 +551,25 @@ function setupEditor() {
 			return;
 		}
     
-    // if editor isn't in view, return
-    if (body.classList.contains('expanded')) return;
-    
-    // if mobile but not in landscape, return
-    if (isMobile && !isLandscape) return;
-    
-		// update line numbers
-    Prism.plugins.lineNumbers.resize(cd);
+    // update line numbers
+    updateLineNumbersHTML();
     
 	});
+  
+}
+
+function updateLineNumbersHTML() {
+  
+  // if editor isn't in view, return
+  if (body.classList.contains('expanded')) return;
+
+  // if mobile but not in landscape, return
+  if (isMobile && !isLandscape) return;
+
+  lastWidth = window.innerWidth;
+
+  // update line numbers
+  Prism.plugins.lineNumbers.resize(cd);
   
 }
 
