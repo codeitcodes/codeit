@@ -248,7 +248,7 @@ function addHTMLItemListeners() {
           if (item.classList.contains('selected')) {
 
             // get current value of file
-            commit.file.content = btoa(cd.textContent);
+            commit.file.content = encodeUnicode(cd.textContent);
 
           } else { // else, load from storage
 
@@ -295,7 +295,7 @@ async function loadFileInHTML(file, sha) {
         sha: selectedFile.sha,
         name: selectedFile.name,
         exists: selectedFile.exists,
-        content: btoa(cd.textContent)
+        content: encodeUnicode(cd.textContent)
       };
 
       saveModifiedFileLS(previousFile);
@@ -334,7 +334,7 @@ async function loadFileInHTML(file, sha) {
     const resp = await git.getFile(treeLoc, selectedFileName);
 
     // show file content in codeit
-    cd.textContent = atob(resp.content);
+    cd.textContent = decodeUnicode(resp.content);
     
     // stop loading
     stopLoading();
@@ -344,7 +344,7 @@ async function loadFileInHTML(file, sha) {
     const content = modifiedFiles[sha].content;
     
     // show file content in codeit
-    cd.textContent = atob(content);
+    cd.textContent = decodeUnicode(content);
     
   }
   
@@ -466,7 +466,7 @@ function codeChange() {
       sha: selectedFile.sha,
       name: selectedFile.name,
       exists: selectedFile.exists,
-      content: btoa(cd.textContent)
+      content: encodeUnicode(cd.textContent)
     };
 
     saveModifiedFileLS(modifiedFile);
@@ -516,7 +516,7 @@ function setupEditor() {
     
     // set codeit to code
     cd.lang = getStorage('lang') || 'plain';
-    cd.textContent = atob(getStorage('code'));
+    cd.textContent = decodeUnicode(getStorage('code'));
     
     // set caret pos in code
     cd.setSelection(getStorage('caret'), getStorage('caret'));
