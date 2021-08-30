@@ -561,8 +561,14 @@ function updateLineNumbersHTML() {
   // if mobile but not in landscape, return
   if (isMobile && !isLandscape) {
     
-    cd.querySelector('.line-numbers-rows').remove();
+    if (cd.querySelector('.line-numbers-rows')) {
+      
+      cd.querySelector('.line-numbers-rows').remove();
+      
+    }
+    
     cd.classList.remove('line-numbers');
+    
     return;
     
   }
