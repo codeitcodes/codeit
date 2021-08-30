@@ -526,6 +526,7 @@ function setupEditor() {
     
   }
   
+  
   // update line numbers on screen resize
   
   var lastWidth = undefined;
@@ -542,6 +543,25 @@ function setupEditor() {
     
 		lastWidth = window.innerWidth;
 		
+		// update line numbers
+    Prism.plugins.lineNumbers.resize(cd);
+    
+	});
+  
+  
+  // update line numbers when finished highlighting
+  Prism.hooks.add('complete', function (env) {
+    
+		if (!env.code) {
+			return;
+		}
+    
+    // if editor isn't in view, return
+    if (body.classList.contains('expanded')) return;
+    
+    // if mobile but not in landscape, return
+    if (isMobile && !isLandscape) return;
+    
 		// update line numbers
     Prism.plugins.lineNumbers.resize(cd);
     
