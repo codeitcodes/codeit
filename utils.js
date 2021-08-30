@@ -89,14 +89,7 @@ function load() {
 
 
 // is mobile
-let isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
-
-// for debugging
-window.onresize = () => {
-  
-  isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
-  
-}
+const isMobile = window.matchMedia('only screen and (hover: none) and (pointer: coarse)').matches;
 
 
 // localStorage
