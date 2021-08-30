@@ -526,6 +526,27 @@ function setupEditor() {
     
   }
   
+  // update line numbers on screen resize
+  
+  var lastWidth = undefined;
+	window.addEventListener('resize', () => {
+    
+    // if width didn't change, return
+		if (lastWidth === window.innerWidth) return;
+    
+    // if editor isn't in view, return
+    if (body.classList.contains('expanded')) return;
+    
+    // if mobile but not in landscape, return
+    if (isMobile && !isLandscape) return;
+    
+		lastWidth = window.innerWidth;
+		
+		// update line numbers
+    Prism.plugins.lineNumbers.resize(cd);
+    
+	});
+  
 }
 
 function setupSidebar() {
