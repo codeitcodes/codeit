@@ -8,7 +8,7 @@ const FILES_TO_CACHE = [
   
   '/src/codeit.js',
   '/src/prism.js',
-  '/src/prism-line-numbers.js',
+  '/src/codeit-line-numbers.js',
   
   'https://unpkg.com/prettier/standalone.js',
   
