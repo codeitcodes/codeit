@@ -91,13 +91,13 @@ function load() {
 // mobile media queries
 
 let isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
-let isLandscape = (isMobile && window.matchMedia('(orientation: landscape)').matches);
+let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
 // for debugging
 window.addEventListener('resize', () => {
   
   isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
-  isLandscape = (isMobile && window.matchMedia('(orientation: landscape)').matches);
+  isLandscape = window.matchMedia('(orientation: landscape)').matches;
   
 });
 
