@@ -568,6 +568,7 @@ function updateLineNumbersHTML() {
     }
     
     cd.classList.remove('line-numbers');
+    cd.style.paddingLeft = '';
     
     return;
     
