@@ -551,6 +551,14 @@ function setupEditor() {
     
   });
   
+  
+  // disable context menu
+  window.addEventListener('contextmenu', (e) => {
+    
+    e.preventDefault();
+    
+  });
+  
 }
 
 function updateLineNumbersHTML() {
