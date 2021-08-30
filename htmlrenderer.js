@@ -1,3 +1,6 @@
+/*
+  github
+*/
 
 // toggle sidebar on click of bookmark
 github.addEventListener('click', () => {
