@@ -89,12 +89,14 @@ function load() {
 
 
 // is mobile
-//const isMobile = window.matchMedia('only screen and (hover: none) and (pointer: coarse)').matches;
-const isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
+let isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
 
-if (isMobile) {
-  body.classList.add('mobile');
-}
+// for debugging
+window.addEventListener('resize', () => {
+  
+  isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
+  
+});
 
 
 // localStorage
