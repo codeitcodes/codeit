@@ -556,7 +556,7 @@ function setupEditor() {
 function updateLineNumbersHTML() {
   
   // if editor isn't in view, return
-  if (body.classList.contains('expanded')) return;
+  if (isMobile && body.classList.contains('expanded')) return;
 
   // if mobile but not in landscape, return
   if (isMobile && !isLandscape) {
