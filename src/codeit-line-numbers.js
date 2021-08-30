@@ -188,16 +188,6 @@
 		return window.getComputedStyle ? getComputedStyle(element) : (element.currentStyle || null);
 	}
 
-	var lastWidth = undefined;
-	window.addEventListener('resize', function () {
-		if (config.assumeViewportIndependence && lastWidth === window.innerWidth) {
-			return;
-		}
-		lastWidth = window.innerWidth;
-		
-		addLineRows(document.querySelector('.' + PLUGIN_NAME));
-	});
-
 	function addLineRows(element) {
 		var match = element.textContent.match(NEW_LINE_EXP);
 		var linesNum = match ? match.length + 1 : 1;
