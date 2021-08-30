@@ -62,7 +62,7 @@ window.onbeforeunload = saveBeforeUnloadLS;
 
 function saveCodeLS() {
   
-  setStorage('code', btoa(cd.textContent));
+  setStorage('code', encodeUnicode(cd.textContent));
   
 }
 
