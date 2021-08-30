@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v18';
+const CACHE_NAME = 'static-cache-v19';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -10,7 +10,7 @@ const FILES_TO_CACHE = [
   '/src/prism.js',
   '/src/prism-line-numbers.js',
   
-  'https://beautifier.io/js/lib/beautifier.min.js',
+  'https://unpkg.com/prettier/standalone.js',
   
   '/full.html',
   '/full.css',
