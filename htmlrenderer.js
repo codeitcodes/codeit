@@ -559,9 +559,13 @@ function updateLineNumbersHTML() {
   if (body.classList.contains('expanded')) return;
 
   // if mobile but not in landscape, return
-  if (isMobile && !isLandscape) return;
-
-  lastWidth = window.innerWidth;
+  if (isMobile && !isLandscape) {
+    
+    cd.querySelector('.line-numbers-rows').remove();
+    cd.classList.remove('line-numbers');
+    return;
+    
+  }
 
   // update line numbers
   Prism.plugins.lineNumbers.resize(cd);
