@@ -25,6 +25,7 @@
     border-radius: 8px;
     box-shadow: none;
     min-height: 50px;
+    min-width: 50px;
     background-color: #5f6368;
   }
 
