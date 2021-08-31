@@ -65,8 +65,6 @@ cd-el::selection, cd-el *::selection {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: hsl(219deg 13% 66% / 72%);
-  color: hsl(222deg 7% 64% / 72%);
   color: hsl(218deg 7% 64% / 72%);
 }
 
@@ -144,7 +142,6 @@ cd-el::selection, cd-el *::selection {
 
 .line-numbers {
   position: relative;
-  padding-left: calc(1em + 30px);
   padding-left: calc(1.2em + 30px);
   counter-reset: linenumber;
 }
