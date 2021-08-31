@@ -917,6 +917,7 @@ body.transitioning .sidebar {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column;
   z-index: 3000;
   overflow: hidden;
 }
