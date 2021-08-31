@@ -25,6 +25,7 @@ const FILES_TO_CACHE = [
   '/localstorage.js',
   '/bottomfloat.js',
   '/pwainstall.js',
+  '/service-worker.js',
   
   '/dark.css',
     
