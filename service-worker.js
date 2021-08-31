@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v21';
+const CACHE_NAME = 'static-cache-v22';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -36,6 +36,7 @@ const FILES_TO_CACHE = [
   
   '/icons/manifest-icon-512.png',
   '/icons/apple-icon-180.png',
+  '/icons/mac-favicon.png',
   
   '/offline.html'
   
