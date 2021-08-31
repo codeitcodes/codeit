@@ -559,16 +559,6 @@ function setupEditor() {
     
   });
   
-  
-  // override copy behavior to copy text
-  // instead of highlighted HTML
-  cd.addEventListener('copy', (e) => {
-    
-    e.preventDefault();
-    navigator.clipboard.writeText(cd.textContent);
-    
-  });
-  
 }
 
 function updateLineNumbersHTML() {
