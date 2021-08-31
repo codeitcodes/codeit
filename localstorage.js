@@ -46,8 +46,6 @@ function loadLS() {
   
   setupCodeitApp();
   
-  body.classList.add('loaded');
-  
 }
 
 function saveBeforeUnloadLS() {
