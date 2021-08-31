@@ -29,17 +29,41 @@ let manifest = {
 
 
 
+function isMac() {
+  return navigator.platform.indexOf('Mac') > -1
+}
+
+function isWindows() {
+  return navigator.platform.indexOf('Win') > -1
+}
+
+
 // if not on mobile, display special icons
 if (!isMobile) {
   
-  manifest.icons = [
-    {
-      "src": window.location.origin + "/icons/mac-icon-512-padding.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ];
+  if (isMac) {
+
+    manifest.icons = [
+      {
+        "src": window.location.origin + "/icons/mac-icon-512-padding.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ];
+    
+  } else {
+    
+    manifest.icons = [
+      {
+        "src": window.location.origin + "/icons/mac-favicon.png",
+        "sizes": "844x844",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ];
+    
+  }
   
   // change page favicon
   var link = document.querySelector("link[rel*='icon']");
