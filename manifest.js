@@ -41,7 +41,7 @@ function isWindows() {
 // if not on mobile, display special icons
 if (!isMobile) {
   
-  if (isMac) {
+  if (isMac()) {
 
     manifest.icons = [
       {
