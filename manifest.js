@@ -13,13 +13,7 @@ let manifest = {
   "orientation": "any",
   "icons": [
     {
-      "src": window.location.origin + "/icons/manifest-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": window.location.origin + "/icons/manifest-icon-512.png",
+      "src": window.location.origin + "/icons/android-app-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
