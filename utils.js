@@ -46,6 +46,13 @@ const version = '1.1.7';
 versionEl.innerText = version;
 
 
+// dev build
+let isDev = false;
+if (window.location.href.includes('dev')) {
+  isDev = true;
+}
+
+
 
 // sidebar loader
 let loadInterval;
