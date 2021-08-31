@@ -907,7 +907,7 @@ body.transitioning .sidebar {
   will-change: transform;
 }
 
-.splash-container {
+.splash-wrapper {
   position: fixed;
   top: 0;
   right: 0;
@@ -921,8 +921,40 @@ body.transitioning .sidebar {
   overflow: hidden;
 }
 
-body.loaded .splash-container {
+body.loaded .splash-wrapper {
   display: none;
+}
+
+.splash-wrapper .logo {
+  width: 175px;
+  height: 175px;
+}
+
+.splash-wrapper .tip {
+  margin-top: 17px;
+  text-align: center;
+  box-shadow: inset 0px 0 0 1px rgb(0 0 0 / 20%);
+  background: #2B303B;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 18px;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding: 18px;
+}
+
+.splash-wrapper .tip .title {
+  color: rgba(241,241,242,0.92);
+  font-size: 11px;
+  margin-bottom: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+}
+
+.splash-wrapper .tip .content {
+  font-size: 12px;
+  letter-spacing: 0.1px;
 }
 
 @media only screen and (min-device-width: 1024px) {
