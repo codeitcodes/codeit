@@ -215,10 +215,10 @@
   
   <script>
     
-    // show fresh message if not loaded after 1.5s
+    // show fresh message if not loaded after 500ms
     window.setTimeout(() => {
       document.querySelector('.splash-wrapper').classList.add('fresh');
-    }, 100);
+    }, 500);
     
     // Register service worker
     if ('serviceWorker' in navigator) {
