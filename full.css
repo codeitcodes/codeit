@@ -924,6 +924,23 @@ body.loaded .splash-wrapper {
   display: none;
 }
 
+.spinner-loader {
+  width: 7px;
+  height: 50px;
+  background: white;
+  border-radius: 3px;
+  margin-bottom: 50px;
+  transform-origin: center;
+  animation: spinner-rotate 0.5s infinite;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
 .splash-wrapper .logo {
   width: 175px;
   height: 175px;
