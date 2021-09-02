@@ -37,7 +37,7 @@ class CodeitElement extends HTMLElement {
     
     // set default options
     cd.options = {
-      tab: '\t',
+      tab: '  ',
       
       catchTab: true,
       preserveIdent: true,
@@ -504,7 +504,7 @@ class CodeitElement extends HTMLElement {
       
       // find padding of previous line
       let j = i;
-      while (j < text.length && /[ \t]/.test(text[j])) j++;
+      while (j < text.length && text[j] === cd.options.tab) j++;
       return [text.substring(i, j) || '', i, j];
       
     }
