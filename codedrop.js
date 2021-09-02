@@ -28,6 +28,8 @@ function processFile(file) {
     cd.lang = getFileLang(file.name);
     cd.focus();
     
+    cd.history = [];
+    
     saveCodeLS();
     saveCodePosLS();
     saveCodeLangLS();
