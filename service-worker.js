@@ -39,6 +39,7 @@ const FILES_TO_CACHE = [
   '/icons/iphone-app-180.png',
   '/icons/mac-favicon.png',
   '/icons/mac-icon-512.png',
+  '/icons/mac-icon-512-padding.png',
   
   '/offline.html'
   
