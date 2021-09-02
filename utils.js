@@ -42,7 +42,7 @@ const body = document.body,
 
 
 // version
-const version = '1.1.7';
+const version = '1.2.8';
 versionEl.innerText = version;
 
 
