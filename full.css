@@ -924,6 +924,21 @@ body.loaded .splash-wrapper {
   display: none;
 }
 
+.splash-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #313744;
+  z-index: 10;
+}
+
+.splash-wrapper.fresh::before {
+  content: unset;
+}
+
 .spinner-loader {
   width: 7px;
   height: 50px;
