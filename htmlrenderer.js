@@ -355,6 +355,9 @@ async function loadFileInHTML(file, sha) {
   cd.setSelection(0, 0);
   cd.scrollTo(0, 0);
   
+  // clear codeit history
+  cd.history = [];
+  
   // save code in local storage
   saveCodeLS();
   saveCodePosLS();
