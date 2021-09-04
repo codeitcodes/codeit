@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.4
+   v2.4.3
    MIT License
    
    github.com/barhatsor/codeit
@@ -245,7 +245,7 @@ class CodeitElement extends HTMLElement {
           let pos = cd.getSelection();
 
           // if selection is empty and caret is next to tabs
-          if (pos.start === pos.end && start === pos.start) {
+          if (pos.start === pos.end && (start + padding.length) === pos.start) {
             
             for (let i = 0; i < padding.length; i++) document.execCommand('delete');
             
@@ -819,4 +819,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.4', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.3', 'font-style: italic; color: gray');
