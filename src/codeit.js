@@ -171,7 +171,7 @@ class CodeitElement extends HTMLElement {
         
       }
 
-      if (cd.options.catchTab) handleTabCharacters(event);
+      /*if (cd.options.catchTab) handleTabCharacters(event);
       
       if (cd.options.history) {
         handleUndoRedo(event);
@@ -179,7 +179,7 @@ class CodeitElement extends HTMLElement {
           recordHistory();
           recording = true;
         }
-      }
+      }*/
       
     })
     
