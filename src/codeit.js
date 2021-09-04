@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.3
+   v2.4.5
    MIT License
    
    github.com/barhatsor/codeit
@@ -504,7 +504,7 @@ class CodeitElement extends HTMLElement {
       let linePadding = '';
       while (thisLine.length > 0 && isTab(thisLine.substr(0, tabLength))) {
         
-        thisLine = thisLine.slice(tabLength, -1);
+        thisLine = thisLine.slice(tabLength);
         linePadding += cd.options.tab;
         
       }
@@ -819,4 +819,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.3', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.5', 'font-style: italic; color: gray');
