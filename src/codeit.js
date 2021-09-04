@@ -171,7 +171,7 @@ class CodeitElement extends HTMLElement {
         
       }
 
-      /*@@if (cd.options.catchTab) handleTabCharacters(event);
+      if (cd.options.catchTab) handleTabCharacters(event);
       
       if (cd.options.history) {
         handleUndoRedo(event);
@@ -179,7 +179,7 @@ class CodeitElement extends HTMLElement {
           recordHistory();
           recording = true;
         }
-      }*/
+      }
       
     })
     
@@ -580,7 +580,7 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      /*@@if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+      if (cd.textContent !== '' && cd.textContent !== cd.prev) {
 
         debounceHighlight();
         
@@ -593,7 +593,7 @@ class CodeitElement extends HTMLElement {
 
       }
 
-      cd.prev = cd.textContent;*/
+      cd.prev = cd.textContent;
 
     }
 
