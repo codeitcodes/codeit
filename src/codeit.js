@@ -580,20 +580,20 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
-      if (cd.textContent !== '' && cd.textContent !== cd.prev) {
+      /*@@if (cd.textContent !== '' && cd.textContent !== cd.prev) {
 
         debounceHighlight();
         
         // if codeit is focused
-        /*@@if (document.activeElement == cd) {
+        if (document.activeElement == cd) {
           
           debounceRecordHistory();
           
-        }*/
+        }
 
       }
 
-      cd.prev = cd.textContent;
+      cd.prev = cd.textContent;*/
 
     }
 
