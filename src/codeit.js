@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.3
+   v2.4.4
    MIT License
    
    github.com/barhatsor/codeit
@@ -237,26 +237,17 @@ class CodeitElement extends HTMLElement {
         
         const before = beforeCursor();
         
-        let [padding, start] = findPaddingThisLine(before);
-        padding += ' ';
-        start++;
+        let [padding, start] = getPadding(before);
         
-        if (padding) {
+        if (padding.length > 0) {
           
           // get caret pos in text
           let pos = cd.getSelection();
-          
+
+          // if selection is empty and caret is next to tabs
           if (pos.start === pos.end && start === pos.start) {
             
-            event.stopPropagation();
-            event.preventDefault();
-            
-            for (let i = padding.length-1;i >= 0; i--) document.execCommand('delete');
-
-            pos.start -= padding.length;
-
-            // restore pos in text
-            cd.setSelection(pos.start);
+            for (let i = 0; i < padding.length; i++) document.execCommand('delete');
             
           }
           
@@ -503,12 +494,12 @@ class CodeitElement extends HTMLElement {
       
       const tabLength = cd.options.tab.length;
       
-      // find beginning of this line
+      // find beginning of previous line
       let i = text.length - 1;
       while (i >= 0 && text[i] !== '\n') i--;
       i++;
       
-      // find padding of this line
+      // find padding of previous line
       let thisLine = text.substr(i);
       let linePadding = '';
       while (thisLine.length > 0 && isTab(thisLine.substr(0, tabLength))) {
@@ -519,20 +510,6 @@ class CodeitElement extends HTMLElement {
       }
       
       return [linePadding, i];
-      
-    }
-    
-    function findPaddingThisLine(text) {
-      
-      // find beginning of this line
-      let i = text.length - 1;
-      while (i >= 0 && text[i] !== '\n') i--;
-      i++;
-      
-      // find padding of this line
-      let j = i;
-      while (j >= 0 && text[j] === cd.options.tab) j++;      
-      return [text.substring(i, j) || '', i, j];
       
     }
     
@@ -842,4 +819,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.3', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.4', 'font-style: italic; color: gray');
