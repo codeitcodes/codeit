@@ -74,27 +74,8 @@
 
 		// find the braces to match
 		/** @type {string[]} */
-		var toMatch = [];
-		if (Prism.util.isActive(code, 'match-braces')) {
-			toMatch.push('(', '[', '{');
-		}
-
-		if (toMatch.length == 0) {
-			// nothing to match
-			return;
-		}
-
-		if (!code.__listenerAdded) {
-			// code blocks might be highlighted more than once
-			code.addEventListener('mousedown', function removeBraceSelected() {
-				var className = mapClassName('brace-selected');
-				Array.prototype.slice.call(code.querySelectorAll('.' + className)).forEach(function (e) {
-					e.classList.remove(className);
-				});
-			});
-			Object.defineProperty(code, '__listenerAdded', { value: true });
-		}
-
+		var toMatch = ['(', '[', '{'];
+		
 		/** @type {HTMLSpanElement[]} */
 		var punctuation = Array.prototype.slice.call(
 			code.querySelectorAll('span.' + mapClassName('token') + '.' + mapClassName('punctuation'))
