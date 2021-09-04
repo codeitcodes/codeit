@@ -56,7 +56,7 @@
 	 */
 	function hoverBrace() {
 		[this, getPartnerBrace(this)].forEach(function (e) {
-			e.classList.add(mapClassName('brace-hover'));
+			e.classList.add(mapClassName('brace-focus'));
 		});
 	}
 	/**
@@ -64,7 +64,7 @@
 	 */
 	function leaveBrace() {
 		[this, getPartnerBrace(this)].forEach(function (e) {
-			e.classList.remove(mapClassName('brace-hover'));
+			e.classList.remove(mapClassName('brace-focus'));
 		});
 	}
 	
