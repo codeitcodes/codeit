@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.5
+   v2.4.6
    MIT License
    
    github.com/barhatsor/codeit
@@ -153,15 +153,25 @@ class CodeitElement extends HTMLElement {
 
     cd.addEventListener('keydown', (event) => {
 
-      if (cd.options.preserveIdent) handleNewLine(event);
-      
-      if (cd.options.addClosing) handleDelClosingCharacters(event);
-      
-      if (cd.options.preserveIdent) handleDelNewLine(event);
-      
+      // get caret pos in text
+      const pos = cd.getSelection();
+
+      // if selection is empty
+      if (pos.start === pos.end) {
+        
+        if (cd.options.preserveIdent) handleNewLine(event);
+        
+        if (cd.options.addClosing) handleDelClosingCharacters(event);
+        
+        if (cd.options.preserveIdent) handleDelNewLine(event);
+        
+        if (cd.options.addClosing) handleSelfClosingCharacters(event);
+
+        //if (cd.options.preserveIdent) alignBracket(event);
+        
+      }
+
       if (cd.options.catchTab) handleTabCharacters(event);
-      
-      if (cd.options.addClosing) handleSelfClosingCharacters(event);
       
       if (cd.options.history) {
         handleUndoRedo(event);
@@ -398,6 +408,30 @@ class CodeitElement extends HTMLElement {
       }
       
     }
+
+    /*
+    function alignBracket(event) {
+      
+      // if typed a closing bracket
+      if (event.key === '}' || event.key === ']') {
+        
+        const before = beforeCursor();
+        const textBefore = before.substr(cd.options.tab.length);
+
+        // in case of a one-liner, do nothing
+        if (textBefore !== cd.options.tab) {
+          return;
+        }
+
+        // match brackets
+        Prism.plugins.matchBraces.match(cd);
+
+        
+        
+      }
+      
+    }
+    */
     
     function handleUndoRedo(event) {
       
@@ -819,4 +853,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.5', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.6', 'font-style: italic; color: gray');
