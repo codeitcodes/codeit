@@ -1,4 +1,3 @@
-
 (function () {
 
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
@@ -56,10 +55,6 @@
 	 * @this {HTMLElement}
 	 */
 	function hoverBrace() {
-		if (!Prism.util.isActive(this, 'brace-hover', true)) {
-			return;
-		}
-
 		[this, getPartnerBrace(this)].forEach(function (e) {
 			e.classList.add(mapClassName('brace-hover'));
 		});
@@ -72,28 +67,10 @@
 			e.classList.remove(mapClassName('brace-hover'));
 		});
 	}
-	/**
-	 * @this {HTMLElement}
-	 */
-	function clickBrace() {
-		if (!Prism.util.isActive(this, 'brace-select', true)) {
-			return;
-		}
-
-		[this, getPartnerBrace(this)].forEach(function (e) {
-			e.classList.add(mapClassName('brace-selected'));
-		});
-	}
 
 	Prism.hooks.add('complete', function (env) {
 
-		/** @type {HTMLElement} */
 		var code = env.element;
-		var pre = code.parentElement;
-
-		if (!pre || pre.tagName != 'PRE') {
-			return;
-		}
 
 		// find the braces to match
 		/** @type {string[]} */
@@ -107,17 +84,15 @@
 			return;
 		}
 
-		if (!pre.__listenerAdded) {
+		if (!code.__listenerAdded) {
 			// code blocks might be highlighted more than once
-			pre.addEventListener('mousedown', function removeBraceSelected() {
-				// the code element might have been replaced
-				var code = pre.querySelector('code');
+			code.addEventListener('mousedown', function removeBraceSelected() {
 				var className = mapClassName('brace-selected');
 				Array.prototype.slice.call(code.querySelectorAll('.' + className)).forEach(function (e) {
 					e.classList.remove(className);
 				});
 			});
-			Object.defineProperty(pre, '__listenerAdded', { value: true });
+			Object.defineProperty(code, '__listenerAdded', { value: true });
 		}
 
 		/** @type {HTMLSpanElement[]} */
@@ -168,9 +143,8 @@
 				closing.id = pairId + 'close';
 
 				[opening, closing].forEach(function (e) {
-					e.addEventListener('mouseenter', hoverBrace);
-					e.addEventListener('mouseleave', leaveBrace);
-					e.addEventListener('click', clickBrace);
+					e.addEventListener('focus', hoverBrace);
+					e.addEventListener('blur', leaveBrace);
 				});
 			});
 		});
