@@ -450,7 +450,7 @@ function checkBackspace(e) {
 
 // called on code change event
 function codeChange() {
-  
+  /*
   const selectedEl = fileWrapper.querySelector('.selected:not(.modified)');
   
   // if selected file exists
@@ -481,7 +481,7 @@ function codeChange() {
   
   // save code in async thread
   asyncThread(saveBeforeUnloadLS, 300);
-
+  */
 }
 
 // protect unsaved code
