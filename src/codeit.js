@@ -509,11 +509,11 @@ class CodeitElement extends HTMLElement {
       i++;
       
       // find padding of this line
-      let thisLine = text.substring(i);
+      let thisLine = text.substr(i);
       let paddingCount = 0;
-      while (thisLine.length > 0 && isTab(thisLine.substring(0, tabLength))) {
+      while (thisLine.length > 0 && isTab(thisLine.substr(0, tabLength))) {
         
-        thisLine.slice(tabLength, -1);
+        thisLine = thisLine.slice(tabLength, -1);
         paddingCount++;
         
       }
