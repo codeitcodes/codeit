@@ -585,11 +585,11 @@ class CodeitElement extends HTMLElement {
         debounceHighlight();
         
         // if codeit is focused
-        if (document.activeElement == cd) {
+        /*@@if (document.activeElement == cd) {
           
           debounceRecordHistory();
           
-        }
+        }*/
 
       }
 
