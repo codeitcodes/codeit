@@ -443,7 +443,7 @@ sidebarTitle.addEventListener('click', () => {
 function checkBackspace(e) {
   
   if (e.key === "Backspace" || e.key === "Delete") {
-    codeChange();
+    //@@codeChange();
   }
   
 }
