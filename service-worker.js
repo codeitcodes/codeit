@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v34';
+const CACHE_NAME = 'static-cache-v35';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -9,6 +9,7 @@ const FILES_TO_CACHE = [
   '/src/codeit.js',
   '/src/prism.js',
   '/src/codeit-line-numbers.js',
+  '/src/codeit-match-braces.js',
   
   'https://unpkg.com/prettier/standalone.js',
   
