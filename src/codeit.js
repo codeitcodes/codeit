@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.0
+   v2.4.1
    MIT License
    
    github.com/barhatsor/codeit
@@ -308,8 +308,8 @@ class CodeitElement extends HTMLElement {
     
     function handleSelfClosingCharacters(event) {
       
-      const open = cd.options.openBrackets + cd.options.quot;
-      const close = cd.options.closeBrackets + cd.options.quot;
+      const open = cd.options.openBrackets.join('') + cd.options.quot.join('');
+      const close = cd.options.closeBrackets.join('') + cd.options.quot.join('');
       
       const codeAfter = afterCursor();
       const codeBefore = beforeCursor();
@@ -356,8 +356,8 @@ class CodeitElement extends HTMLElement {
       
       if (event.key === 'Backspace' || event.key === 'Delete') {
         
-        const open = cd.options.openBrackets + cd.options.quot;
-        const close = cd.options.closeBrackets + cd.options.quot;
+        const open = cd.options.openBrackets.join('') + cd.options.quot.join('');
+        const close = cd.options.closeBrackets.join('') + cd.options.quot.join('');
 
         const codeAfter = afterCursor();
         const codeBefore = beforeCursor();
@@ -823,4 +823,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.0', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.1', 'font-style: italic; color: gray');
