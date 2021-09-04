@@ -510,15 +510,15 @@ class CodeitElement extends HTMLElement {
       
       // find padding of this line
       let thisLine = text.substr(i);
-      let paddingCount = 0;
+      let linePadding = '';
       while (thisLine.length > 0 && isTab(thisLine.substr(0, tabLength))) {
         
         thisLine = thisLine.slice(tabLength, -1);
-        paddingCount++;
+        linePadding += cd.options.tab;
         
       }
       
-      return [paddingCount, i];
+      return [linePadding, i];
       
     }
     
