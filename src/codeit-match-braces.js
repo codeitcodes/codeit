@@ -67,11 +67,12 @@
 			e.classList.remove(mapClassName('brace-hover'));
 		});
 	}
-
-	Prism.hooks.add('complete', function (env) {
-
-		var code = env.element;
-
+	
+	/**
+	 * Re-match braces for element
+	 */
+	function rematch(code) {
+		
 		// find the braces to match
 		/** @type {string[]} */
 		var toMatch = ['(', '[', '{'];
@@ -141,6 +142,26 @@
 				brace.element.classList.add(mapClassName('brace-level-' + (level % LEVEL_WARP + 1)));
 			}
 		});
+	}
+	
+	/**
+	 * Global exports
+	 */
+	var config = Prism.plugins.matchBraces = {
+		/**
+		 * Matches braces for an element
+		 */
+		match: function (element) {
+			rematch(element);
+		}
+	}
+
+	Prism.hooks.add('complete', function (env) {
+
+		var code = env.element;
+		
+		rematch(code);
+		
 	});
 
 }());
