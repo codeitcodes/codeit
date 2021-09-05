@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.7
+   v2.5.0
    MIT License
    
    github.com/barhatsor/codeit
@@ -259,7 +259,7 @@ class CodeitElement extends HTMLElement {
           // if selection is empty and caret is next to tabs
           if (pos.start === pos.end && (start + padding.length) === pos.start) {
             
-            for (let i = 0; i < padding.length; i++) document.execCommand('delete');
+            for (let i = 0; i < padding.length; i++) deleteCurrentSelection();
             
           }
           
@@ -293,12 +293,13 @@ class CodeitElement extends HTMLElement {
             
             cd.setSelection(start + tabLength);
             
-            for (let i = 0; i < tabLength; i++) document.execCommand('delete');
+            for (let i = 0; i < tabLength; i++) deleteCurrentSelection();
             
             pos.start -= tabLength;
+            pos.end -= tabLength;
             
             // restore pos in text
-            cd.setSelection(pos.start);
+            cd.setSelection(pos.start, pos.end);
             
           }
           
@@ -395,7 +396,7 @@ class CodeitElement extends HTMLElement {
           if (closeCharWhitespace) {
             
             cd.setSelection(pos.start + 2);
-            document.execCommand('delete');
+            deleteCurrentSelection();
             
           } else { // delete char after
             
@@ -403,7 +404,7 @@ class CodeitElement extends HTMLElement {
             
           }
           
-          document.execCommand('delete');
+          deleteCurrentSelection();
           
         }
         
@@ -447,7 +448,7 @@ class CodeitElement extends HTMLElement {
         if (record) {
           
           cd.innerHTML = record.html;
-          cd.setSelection(record.pos.start);
+          cd.setSelection(record.pos.start, record.pos.end);
           
         }
         
@@ -465,7 +466,7 @@ class CodeitElement extends HTMLElement {
         if (record) {
           
           cd.innerHTML = record.html;
-          cd.setSelection(record.pos);
+          cd.setSelection(record.pos.start, record.pos.end);
           
         }
         
@@ -513,7 +514,7 @@ class CodeitElement extends HTMLElement {
       if (event.key === 'Backspace' || event.key === 'Delete') {
         
         event.preventDefault();
-        
+                
         // when deleting in large files,
         // the browser reparses the element tree and slows down
         // override with range.deleteContents() fixes the problem
@@ -528,6 +529,18 @@ class CodeitElement extends HTMLElement {
       // get current selection
       var s = window.getSelection();
       var r0 = s.getRangeAt(0);
+      
+      // if selection is empty, select the char before
+      if (r0.collapsed) {
+        
+        var textSel = cd.getSelection();
+        
+        cd.setSelection((textSel.start - 1), textSel.end);
+        
+        // get current range
+        r0 = s.getRangeAt(0);
+        
+      }
       
       // create range
       var r = document.createRange();
@@ -667,7 +680,7 @@ class CodeitElement extends HTMLElement {
         cd.highlight(cd.lang);
 
         // restore pos in text
-        cd.setSelection(pos.start);
+        cd.setSelection(pos.start, pos.end);
 
       }, 30);
 
@@ -911,4 +924,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.7', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.0', 'font-style: italic; color: gray');
