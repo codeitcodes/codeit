@@ -181,6 +181,8 @@ class CodeitElement extends HTMLElement {
         }
       }
       
+      overrideDeleteText(event);
+      
     })
     
     
@@ -506,22 +508,73 @@ class CodeitElement extends HTMLElement {
       
     }
     
+    function overrideDeleteText(event) {
+      
+      // when deleting in large files,
+      // the browser reparses the element tree and slows down
+      // override with range.deleteContents() fixes the problem
+      event.preventDefault();
+      deleteCurrentSelection();
+      
+    }
+    
+    function deleteCurrentSelection() {
+      
+      // get current selection
+      var s = window.getSelection();
+      var r0 = s.getRangeAt(0);
+      
+      // create range
+      var r = document.createRange();
+      
+      // set range to selection
+      r.setStart(r0.startContainer, r0.startOffset);
+      r.setEnd(r0.endContainer, r0.endOffset);
+      
+      // delete range contents
+      r.deleteContents();
+      
+      // delete range
+      r.detach();
+      
+    }
+    
     function beforeCursor() {
+      
+      // get current selection
       const s = window.getSelection();
       const r0 = s.getRangeAt(0);
+      
+      // create range from cursor to beginning of text
       const r = document.createRange();
       r.selectNodeContents(cd);
       r.setEnd(r0.startContainer, r0.startOffset);
-      return r.toString();
+      
+      // save range text and delete it
+      const text = r.toString();
+      r.detach();
+      
+      return text;
+      
     }
     
     function afterCursor() {
+      
+      // get current selection
       const s = window.getSelection();
       const r0 = s.getRangeAt(0);
+      
+      // create range from cursor to beginning of text
       const r = document.createRange();
       r.selectNodeContents(cd);
       r.setStart(r0.endContainer, r0.endOffset);
-      return r.toString();
+      
+      // save range text and delete it
+      const text = r.toString();
+      r.detach();
+      
+      return text;
+      
     }
     
     function getPadding(text) {
