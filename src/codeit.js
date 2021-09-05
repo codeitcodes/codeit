@@ -100,20 +100,7 @@ class CodeitElement extends HTMLElement {
     
     function debounceRecordHistory() {
       
-      // if change originated from 
-      if (recording) {
-        
-        recording = false;
-        return;
-        
-      }
-      
-      debounce(() => {
-        
-        recordHistory();
-        recording = false;
-      
-      }, 300);
+      debounce(recordHistory, 300);
       
     }
     
@@ -176,14 +163,25 @@ class CodeitElement extends HTMLElement {
       if (cd.options.history) {
         handleUndoRedo(event);
         if (shouldRecord(event) && !recording) {
-          recordHistory();
+          debounceRecordHistory();
           recording = true;
         }
       }
       
       overrideDeleteText(event);
       
-    })
+    });
+    
+    cd.addEventListener('keyup', (event) => {
+      
+        if (shouldRecord(event) && recording) {
+
+          debounceRecordHistory();
+          recording = false;
+
+        }
+      
+    }
     
     
     // IDE-style behaviors
@@ -656,13 +654,6 @@ class CodeitElement extends HTMLElement {
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
 
         debounceHighlight();
-        
-        // if codeit is focused
-        if (document.activeElement == cd) {
-          
-          debounceRecordHistory();
-          
-        }
 
       }
 
