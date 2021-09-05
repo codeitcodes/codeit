@@ -673,7 +673,7 @@ class CodeitElement extends HTMLElement {
         cd.highlight(cd.lang);
 
         // restore pos in text
-        cd.setSelection(pos.start, pos.end);
+        cd.setSelection(pos.start);
 
       }, 30);
 
@@ -834,7 +834,7 @@ class CodeitElement extends HTMLElement {
 
           return [
             cd,
-            0
+            cd.textContent.length
           ];
 
         }
