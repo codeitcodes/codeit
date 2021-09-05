@@ -150,9 +150,6 @@ body cd-el {
   left: 12px;
 }
 
-.push-svg *:not(g, #bounding-box) {
-  /* will-change: transform; */
-}
 .push-svg #push, .push-svg #check {
   fill: transparent;
   transform-origin: 75% 75%;
@@ -725,7 +722,6 @@ body.transitioning .sidebar {
 
 .sidebar .item .push-wrapper .push-svg {
   border-radius: 50%;
-  will-change: transform;
   transition: .18s var( --ease-function);
 }
 
