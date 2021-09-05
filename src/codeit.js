@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.4.6
+   v2.4.7
    MIT License
    
    github.com/barhatsor/codeit
@@ -181,7 +181,8 @@ class CodeitElement extends HTMLElement {
         }
       }
       
-      overrideDeleteText(event);
+      // if selection exists
+      if (pos.start !== pos.end) overrideDeleteText(event);
       
     })
     
@@ -911,4 +912,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.4.6', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.4.7', 'font-style: italic; color: gray');
