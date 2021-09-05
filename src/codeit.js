@@ -510,11 +510,16 @@ class CodeitElement extends HTMLElement {
     
     function overrideDeleteText(event) {
       
-      // when deleting in large files,
-      // the browser reparses the element tree and slows down
-      // override with range.deleteContents() fixes the problem
-      event.preventDefault();
-      deleteCurrentSelection();
+      if (event.key === 'Backspace' || event.key === 'Delete') {
+        
+        event.preventDefault();
+        
+        // when deleting in large files,
+        // the browser reparses the element tree and slows down
+        // override with range.deleteContents() fixes the problem
+        deleteCurrentSelection();
+        
+      }
       
     }
     
