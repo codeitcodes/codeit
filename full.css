@@ -151,7 +151,7 @@ body cd-el {
 }
 
 .push-svg *:not(g, #bounding-box) {
-  will-change: transform;
+  /* will-change: transform; */
 }
 .push-svg #push, .push-svg #check {
   fill: transparent;
