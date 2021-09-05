@@ -542,8 +542,18 @@ class CodeitElement extends HTMLElement {
         
       }
       
-      // delete current range contents
-      r0.deleteContents();
+      // create range
+      var r = document.createRange();
+      
+      // set range to selection
+      r.setStart(r0.startContainer, r0.startOffset);
+      r.setEnd(r0.endContainer, r0.endOffset);
+      
+      // delete range contents
+      r.deleteContents();
+      
+      // delete range
+      r.detach();
       
     }
 
