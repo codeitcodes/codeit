@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.5.0
+   v2.5.1
    MIT License
    
    github.com/barhatsor/codeit
@@ -542,16 +542,28 @@ class CodeitElement extends HTMLElement {
         
       }
       
+      // delete current range contents
+      r0.deleteContents();
+      
+    }
+
+    function insert(text) {
+      
+      // get current selection
+      var s = window.getSelection();
+      var r0 = s.getRangeAt(0);
+      
       // create range
       var r = document.createRange();
       
       // set range to selection
       r.setStart(r0.startContainer, r0.startOffset);
       r.setEnd(r0.endContainer, r0.endOffset);
-      
-      // delete range contents
-      r.deleteContents();
-      
+
+      // insert text node at start of range
+      var textEl = document.createTextNode(text);
+      r.insertNode(textEl);
+
       // delete range
       r.detach();
       
@@ -634,16 +646,6 @@ class CodeitElement extends HTMLElement {
 
     function isRedo(event) {
       return isCtrl(event) && event.shiftKey && event.code === 'KeyZ';
-    }
-    
-    function insert(text) {
-      text = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-      document.execCommand('insertHTML', false, text);
     }
     
     
@@ -924,4 +926,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.0', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.1', 'font-style: italic; color: gray');
