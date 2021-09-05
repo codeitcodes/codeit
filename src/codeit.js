@@ -181,8 +181,7 @@ class CodeitElement extends HTMLElement {
         }
       }
       
-      // if selection exists
-      if (pos.start !== pos.end) overrideDeleteText(event);
+      overrideDeleteText(event);
       
     })
     
@@ -847,7 +846,7 @@ class CodeitElement extends HTMLElement {
           startNode: startNode,
           startOffset: startOffset,
           endNode: endNode,
-          endOffset: endPos
+          endOffset: endOffset
         };
         
       } else {
