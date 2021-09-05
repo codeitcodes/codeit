@@ -181,7 +181,7 @@ class CodeitElement extends HTMLElement {
 
         }
       
-    }
+    });
     
     
     // IDE-style behaviors
