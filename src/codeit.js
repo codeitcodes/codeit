@@ -831,7 +831,9 @@ class CodeitElement extends HTMLElement {
           ];
 
         } else {
-
+          
+          console.log('error');
+          
           return [
             cd,
             0
