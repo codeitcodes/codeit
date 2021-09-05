@@ -542,12 +542,8 @@ class CodeitElement extends HTMLElement {
         
       }
       
-      // create range
-      var r = document.createRange();
-      
-      // set range to selection
-      r.setStart(r0.startContainer, r0.startOffset);
-      r.setEnd(r0.endContainer, r0.endOffset);
+      // clone current range
+      var r = r0.cloneRange();
       
       // delete range contents
       r.deleteContents();
@@ -562,20 +558,14 @@ class CodeitElement extends HTMLElement {
       // get current selection
       var s = window.getSelection();
       var r0 = s.getRangeAt(0);
-      
-      // create range
-      var r = document.createRange();
-      
-      // set range to selection
-      r.setStart(r0.startContainer, r0.startOffset);
-      r.setEnd(r0.endContainer, r0.endOffset);
 
+      var rangeCollapsed = r0.collapsed;
+      
       // insert text node at start of range
       var textEl = document.createTextNode(text);
-      r.insertNode(textEl);
+      r0.insertNode(textEl);
 
-      // delete range
-      r.detach();
+      if (rangeCollapsed) r0.collapse();
       
     }
     
