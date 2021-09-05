@@ -834,7 +834,7 @@ class CodeitElement extends HTMLElement {
 
           return [
             cd,
-            cd.textContent.length
+            cd.textContent.length-1
           ];
 
         }
