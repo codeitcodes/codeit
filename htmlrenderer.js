@@ -252,7 +252,7 @@ function addHTMLItemListeners() {
 
           } else { // else, load from storage
 
-            commit.file.content = modifiedFiles[commitFile.sha][0];
+            commit.file.content = modifiedFiles[commit.file.sha][0];
             
           }
           
