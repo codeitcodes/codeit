@@ -796,13 +796,13 @@ class CodeitElement extends HTMLElement {
 
           // if not reached the target text
           if (overallLength <= caretPosInText) {
-
-            lastNode = node;
-
+            
             // if node type is text
             if (node.nodeType == 3) {
 
               overallLength += node.nodeValue.length;
+              
+              lastNode = node;
 
             } else { // if it's an empty node, this means there's more nodes underneath
 
@@ -831,9 +831,7 @@ class CodeitElement extends HTMLElement {
           ];
 
         } else {
-          
-          console.log('error');
-          
+        
           return [
             cd,
             0
