@@ -7,15 +7,10 @@ body {
   height: 100%;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
-  transition: .4s var(--cubic-function) background;
 }
 
 body.expanded {
   background: #1a1c24;
-}
-
-body.transitioning {
-  transition: none;
 }
 
 .focus::before {
