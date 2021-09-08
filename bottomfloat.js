@@ -4,7 +4,7 @@
 function updateFloat() {
   
   // close sidebar
-  body.classList.remove('expanded');
+  toggleSidebar(false);
   saveSidebarStateLS();
   
   // show bottom floater
@@ -23,7 +23,7 @@ function updateFloat() {
 // open sidebar when clicked on button
 sidebarOpen.addEventListener('click', () => {
     
-  body.classList.add('expanded');
+  toggleSidebar(true);
   saveSidebarStateLS();
 
   let selectedItem = document.querySelector('.selected');
