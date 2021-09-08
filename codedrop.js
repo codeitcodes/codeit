@@ -109,3 +109,16 @@ cd.addEventListener('dragleave', (ev) => {
   }
   
 })
+
+if ('launchQueue' in window) {
+  launchQueue.setConsumer((launchParams) => {
+    // nothing to do when the queue is empty.
+    if (!launchParams.files.length) {
+      return;
+    }
+    for (const fileHandle of launchParams.files) {
+      // handle the file
+      console.log(fileHandle);
+    }
+  });
+}
