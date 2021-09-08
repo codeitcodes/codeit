@@ -984,91 +984,86 @@ body.loaded .splash-wrapper {
   letter-spacing: 0.1px;
 }
 
-@media only screen and (min-device-width: 1024px) {
-  
-  :root {
-    --sidebar-width: 350px;
-  }
-  
-  .sidebar::-webkit-scrollbar {
-    width: 10px;
-  }
 
-  .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
-    background: transparent;
-    box-shadow: none;
-  }
-  
-  .sidebar .button:hover {
-    background: hsl(228deg 16% 42%);
-    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
-  }
 
-  .sidebar .button.secondary:hover {
-    background: hsla(0,0%,100%,.2);
-  }
-
-  .sidebar .button.secondary:hover {
-    background: hsla(0,0%,100%,.2);
-  }
-
-  .sidebar .button.teritary:hover {
-    background: hsl(228deg 16% 37% / 12%);
-    color: hsl(220deg 4% 84%);
-  }
-  
+body:not(.mobile) {
+  --sidebar-width: 350px;
 }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
-  
-  :root {
-    --sidebar-width: 100vw;
-  }
-  
-  body {
-    width: 100vw;
-    overflow-x: hidden;
-  }
-  
-  body.expanded .cd-wrapper {
-    width: 100%;
-    height: 100%;
-    transition-property: transform;
-  }
-  
-  body cd-el {
-    white-space: pre-wrap;
-    padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .bottom-float {
-    display: flex;
-  }
-  
-  body.expanded .bottom-float {
-    transform: translateX(calc(50% + 45px));
-  }
-  
-  .github {
-    display: none;
-  }
-  
-  body.expanded .github {
-    transform: translateX(0);
-  }
-  
-  .sidebar {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  body.expanded .sidebar-background {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(100%);
-  }
-  
+body:not(.mobile) .sidebar::-webkit-scrollbar {
+  width: 10px;
 }
+
+body:not(.mobile) .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+
+body:not(.mobile) .sidebar .button:hover {
+  background: hsl(228deg 16% 42%);
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+}
+
+body:not(.mobile) .sidebar .button.secondary:hover {
+  background: hsla(0,0%,100%,.2);
+}
+
+body:not(.mobile) .sidebar .button.secondary:hover {
+  background: hsla(0,0%,100%,.2);
+}
+
+body:not(.mobile) .sidebar .button.teritary:hover {
+  background: hsl(228deg 16% 37% / 12%);
+  color: hsl(220deg 4% 84%);
+}
+
+
+
+body.mobile {
+  width: 100vw;
+  overflow-x: hidden;
+  --sidebar-width: 100vw;
+}
+
+body.mobile.expanded .cd-wrapper {
+  width: 100%;
+  height: 100%;
+  transition-property: transform;
+}
+
+body.mobile cd-el {
+  white-space: pre-wrap;
+  padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+
+body.mobile .bottom-float {
+  display: flex;
+}
+
+body.mobile.expanded .bottom-float {
+  transform: translateX(calc(50% + 45px));
+}
+
+body.mobile .github {
+  display: none;
+}
+
+body.mobile.expanded .github {
+  transform: translateX(0);
+}
+
+body.mobile .sidebar {
+  -webkit-overflow-scrolling: touch;
+}
+
+body.mobile.expanded .sidebar-background {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(100%);
+}
+
+
 
 @keyframes show {
   
@@ -1093,7 +1088,7 @@ body.loaded .splash-wrapper {
   
 }
 
-:root {
+body {
     tab-size: 2;
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
