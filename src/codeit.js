@@ -141,11 +141,11 @@ class CodeitElement extends HTMLElement {
     cd.addEventListener('keydown', (event) => {
 
       // get caret pos in text
-      const pos = cd.getSelection();
+      const s = window.getSelection();
 
       // if selection is empty
-      if (pos.start === pos.end) {
-        
+      if (s.isCollapsed) {
+
         if (cd.options.preserveIdent) handleNewLine(event);
         
         if (cd.options.addClosing) handleDelClosingCharacters(event);
