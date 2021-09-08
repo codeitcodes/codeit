@@ -5,6 +5,7 @@ body {
   background: #313744;
   color: #d4d5d7;
   height: 100%;
+  font-size: 16px;
   font-family: 'Inter', sans-serif;
 }
 
@@ -51,6 +52,7 @@ body cd-el {
   padding: 10px;
   padding: 10.5px 13.5px;
   left: 0;
+  font-size: 16px;
   position: relative;
   box-sizing: border-box;
   white-space: pre;
