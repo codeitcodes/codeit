@@ -18,6 +18,14 @@ let manifest = {
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "file_handlers": [
+    {
+      "action": "./?file=true",
+      "accept": {
+        "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
+      }
+    }
   ]
 };
 
