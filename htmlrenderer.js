@@ -446,12 +446,12 @@ function toggleSidebar(open) {
   if (open) {
     
     body.classList.add('expanded');
-    document.querySelector('meta[name="theme-color"]').content = '#313744';
+    document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     
   } else {
     
     body.classList.remove('expanded');
-    document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+    document.querySelector('meta[name="theme-color"]').content = '#313744';
     
   }
   
