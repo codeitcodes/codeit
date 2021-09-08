@@ -12,7 +12,6 @@
 <meta name="theme-color" content="#313744">
 
 <meta name="apple-mobile-web-app-status-bar-style" content="#313744">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codeit">
 
 <meta charset="utf-8">
@@ -213,22 +212,32 @@
   
   <script>
     
-    // show fresh message if not loaded after 500ms
+    // show fresh message if not loaded after 700ms
     // (really slow connection)
     window.setTimeout(() => {
-      document.querySelector('.splash-wrapper').classList.add('fresh');
-    }, 500);
+      
+      if (!body.classList.contains('loaded')) {
+        
+        document.querySelector('.splash-wrapper').classList.add('fresh');
+        
+      }
+      
+    }, 700);
     
     // Register service worker
     if ('serviceWorker' in navigator) {
+      
       window.addEventListener('load', () => {
+        
         navigator.serviceWorker.register('/service-worker.js')
           .then((reg) => {
             console.log('Service worker registered.', reg);
         });
         
         body.classList.add('loaded');
+        
       });
+      
     }
     
   </script>
