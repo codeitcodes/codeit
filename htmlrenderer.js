@@ -607,7 +607,7 @@ function setupSidebar() {
 
       body.classList.remove('transitioning');
 
-    }, 400);
+    }, 0);
 
   } else {
     
