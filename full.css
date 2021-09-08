@@ -5,6 +5,7 @@ body {
   background: #313744;
   color: #d4d5d7;
   height: 100%;
+  overflow: hidden;
   font-family: 'Inter', sans-serif;
 }
 
