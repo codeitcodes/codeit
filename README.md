@@ -8,5 +8,6 @@
   </h3>
 </p>
 <p align="center">
-  <a href="https://discord.gg/47RFy3Vfmg"><img src="/icons/social/discord"></a>
+  <a href="https://discord.gg/47RFy3Vfmg"><img src="/icons/social/discord.svg" width="27" height="27"></a>
+  <a href="https://twitter.com/codeitwastaken"><img src="/icons/social/twitter.svg" width="27" height="27"></a>
 </p>
