@@ -5,7 +5,8 @@
 // toggle sidebar on click of bookmark
 github.addEventListener('click', () => {
   
-  body.classList.toggle('expanded');
+  toggleSidebar(body.classList.contains('expanded'));
+  
   saveSidebarStateLS();
   
 })
@@ -599,7 +600,8 @@ function setupSidebar() {
     
     // do a silent transition
     body.classList.add('transitioning');
-    body.classList.add('expanded');
+    
+    toggleSidebar(true);
     
     window.setTimeout(() => {
 
