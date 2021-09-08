@@ -541,12 +541,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .header :is(.search, .clear) {
-  padding: 7px;
-  margin-right: -7px;
-  cursor: pointer;
-  border-radius: 50%;
   color: #828689;
-  transition: .18s var(--ease-function);
 }
 
 .sidebar .header .back {
@@ -813,6 +808,19 @@ body.transitioning .sidebar {
   color: rgba(241,241,242,0.72);
 }
 
+.roundbutton {
+  padding: 7px;
+  margin: -7px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: .18s var(--ease-function);
+}
+
+.roundbutton:active {
+  background: rgba(0,0,0,.1);
+  transform: scale(0.95);
+}
+
 .sidebar .button {
   cursor: pointer;
   display: flex;
@@ -998,6 +1006,22 @@ body:not(.mobile) .sidebar::-webkit-scrollbar {
 body:not(.mobile) .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
+}
+
+body:not(.mobile) .roundbutton {
+  transition: .18s var(--ease-function) transform;
+}
+
+body:not(.mobile) .roundbutton:hover {
+  background: rgba(0,0,0,.1);
+}
+
+body:not(.mobile) .sidebar .item .push-wrapper .push-svg {
+  transition: .18s var(--ease-function) transform;
+}
+
+body:not(.mobile) .sidebar .item .push-wrapper:hover .push-svg {
+  background: rgba(0,0,0,.1);
 }
 
 body:not(.mobile) .sidebar .button:hover {
