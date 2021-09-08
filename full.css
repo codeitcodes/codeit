@@ -1006,7 +1006,7 @@ body:not(.mobile) .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollba
 }
 
 body:not(.mobile) .roundbutton {
-  transition: .18s var(--ease-function) transform;
+  transition: .18s var(--ease-function), 0s background;
 }
 
 body:not(.mobile) .roundbutton:hover {
@@ -1014,7 +1014,7 @@ body:not(.mobile) .roundbutton:hover {
 }
 
 body:not(.mobile) .sidebar .item .push-wrapper .push-svg {
-  transition: .18s var(--ease-function) transform;
+  transition: .18s var(--ease-function), 0s background;
 }
 
 body:not(.mobile) .sidebar .item .push-wrapper:hover .push-svg {
