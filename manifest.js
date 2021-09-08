@@ -21,7 +21,7 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": "./?file=true",
+      "action": window.location.origin + "/full/?file=true",
       "accept": {
         "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
       }
