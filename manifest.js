@@ -5,7 +5,7 @@ let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
   "description": "Mobile code editor connected to Github.",
-  "background_color": "#0b0d1a",
+  "background_color": "#313744",
   "theme_color": "#313744",
   "display": "standalone",
   "scope": window.location.origin,
@@ -56,6 +56,10 @@ if (!isMobile) {
   var link = document.querySelector("link[rel*='icon']");
   link.href = 'icons/mac-favicon.png';
     
+} else if (!window.safari) {
+  
+  manifest.background_color = '#0b0d1a';
+  
 }
 
 
