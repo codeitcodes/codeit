@@ -10,8 +10,7 @@ body {
 }
 
 body.expanded {
-  overflow: hidden;
-  height: 100%;
+  background: #1a1c24;
 }
 
 .focus::before {
