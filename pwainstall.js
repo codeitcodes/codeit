@@ -61,8 +61,10 @@ learnClose.addEventListener('click', () => {
   
   if (learnWrapper.classList.contains('close-sidebar')) {
     
-    body.classList.remove('expanded');
+    toggleSidebar(false);
     learnWrapper.classList.remove('close-sidebar');
+    
+    saveSidebarStateLS();
     
     window.setTimeout(() => {
       
