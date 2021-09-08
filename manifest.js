@@ -5,7 +5,7 @@ let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
   "description": "Mobile code editor connected to Github.",
-  "background_color": "#313744",
+  "background_color": "#0b0d1a",
   "theme_color": "#313744",
   "display": "standalone",
   "scope": window.location.origin,
