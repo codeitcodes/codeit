@@ -546,18 +546,15 @@ body.transitioning .sidebar {
 
 .sidebar .header .back {
   color: currentColor;
-  cursor: pointer;
   z-index: 1;
 }
 
 .sidebar .searchscreen .back {
   color: #828689;
-  margin-right: 0;
-  transition: .18s var(--ease-function);
 }
 
 .sidebar .header.searching .searchscreen .back {
-  margin-right: 7px;
+  margin-right: 0;
 }
 
 .sidebar .header .logo {
