@@ -42,9 +42,18 @@ window.onload = () => {
     // show intro screen
     sidebar.classList.add('intro');
 
+    // do a silent transition
+    body.classList.add('transitioning');
+    
     // show sidebar
-    body.classList.add('expanded');
+    toggleSidebar(true);
     saveSidebarStateLS();
+    
+    window.setTimeout(() => {
+      
+      body.classList.remove('transitioning');
+      
+    }, 0);
 
   } else {
     
