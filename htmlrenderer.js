@@ -5,7 +5,7 @@
 // toggle sidebar on click of bookmark
 github.addEventListener('click', () => {
   
-  toggleSidebar(body.classList.contains('expanded'));
+  toggleSidebar(!body.classList.contains('expanded'));
   
   saveSidebarStateLS();
   
