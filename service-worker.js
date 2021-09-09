@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v54';
+const CACHE_NAME = 'static-cache-v55';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -26,7 +26,6 @@ const FILES_TO_CACHE = [
   '/localstorage.js',
   '/bottomfloat.js',
   '/pwainstall.js',
-  '/service-worker.js',
   
   '/dark.css',
     
@@ -64,8 +63,6 @@ self.addEventListener('activate', (evt) => {
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
         if (key !== CACHE_NAME) {
-          console.log('[ServiceWorker] Removing old cache', key);
-
           return caches.delete(key);
         }
       }));
