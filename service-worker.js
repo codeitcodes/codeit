@@ -11,8 +11,6 @@ const FILES_TO_CACHE = [
   '/src/codeit-line-numbers.js',
   '/src/codeit-match-braces.js',
   
-  'https://unpkg.com/prettier/standalone.js',
-  
   '/full.html',
   '/full.css',
   
