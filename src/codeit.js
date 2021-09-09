@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.5.1
+   v2.5.2
    MIT License
    
    github.com/barhatsor/codeit
@@ -538,13 +538,16 @@ class CodeitElement extends HTMLElement {
       }
       
       // clone current range
-      var r = r0.cloneRange();
+      var newRange = r0.cloneRange();
       
-      // delete range contents
-      r.deleteContents();
+      // collapse current range
+      r0.collapse();
       
-      // delete range
-      r.detach();
+      // delete new range contents
+      newRange.deleteContents();
+      
+      // delete new range
+      newRange.detach();
       
     }
 
@@ -555,14 +558,14 @@ class CodeitElement extends HTMLElement {
       var r0 = s.getRangeAt(0);
       
       // clone current range
-      var r = r0.cloneRange();
+      var newRange = r0.cloneRange();
       
       // insert text node at start of range
       var textEl = document.createTextNode(text);
-      r.insertNode(textEl);
+      newRange.insertNode(textEl);
       
       // delete range
-      r.detach();
+      newRange.detach();
       
       
       let moveToEnd = true;
@@ -592,13 +595,13 @@ class CodeitElement extends HTMLElement {
       const r0 = s.getRangeAt(0);
       
       // create range from cursor to beginning of text
-      const r = document.createRange();
-      r.selectNodeContents(cd);
-      r.setEnd(r0.startContainer, r0.startOffset);
+      const newRange = document.createRange();
+      newRange.selectNodeContents(cd);
+      newRange.setEnd(r0.startContainer, r0.startOffset);
       
       // save range text and delete it
-      const text = r.toString();
-      r.detach();
+      const text = newRange.toString();
+      newRange.detach();
       
       return text;
       
@@ -611,13 +614,13 @@ class CodeitElement extends HTMLElement {
       const r0 = s.getRangeAt(0);
       
       // create range from cursor to beginning of text
-      const r = document.createRange();
-      r.selectNodeContents(cd);
-      r.setStart(r0.endContainer, r0.endOffset);
+      const newRange = document.createRange();
+      newRange.selectNodeContents(cd);
+      newRange.setStart(r0.endContainer, r0.endOffset);
       
       // save range text and delete it
-      const text = r.toString();
-      r.detach();
+      const text = newRange.toString();
+      newRange.detach();
       
       return text;
       
@@ -932,4 +935,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.1', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.2', 'font-style: italic; color: gray');
