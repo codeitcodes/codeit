@@ -113,7 +113,7 @@ if (isMobile) {
 
 if (isSafari) {
   
-  body.classList.add('on-safari');
+  body.classList.add('safari');
   
 }
 
