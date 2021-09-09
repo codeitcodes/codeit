@@ -46,7 +46,7 @@ if (!isMobile) {
   var link = document.querySelector("link[rel*='icon']");
   link.href = 'icons/mac-favicon.png';
     
-} else if (!window.safari) {
+} else if (!isSafari) {
   
   manifest.background_color = '#0b0d1a';
   
