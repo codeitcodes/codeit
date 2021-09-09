@@ -230,7 +230,7 @@ class CodeitElement extends HTMLElement {
           event.stopPropagation();
           event.preventDefault();
 
-          insert('\n', newLinePadding);
+          insert('\n' + newLinePadding);
           
         }
         
