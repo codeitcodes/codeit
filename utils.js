@@ -95,9 +95,10 @@ function load() {
 
 
 
-// mobile media queries
+// device and platform queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
+const isSafari = window.safari ?? false;
 
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isWindows = navigator.platform.indexOf('Win') > -1;
