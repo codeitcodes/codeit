@@ -30,16 +30,6 @@ let manifest = {
 };
 
 
-
-function isMac() {
-  return navigator.platform.indexOf('Mac') > -1
-}
-
-function isWindows() {
-  return navigator.platform.indexOf('Win') > -1
-}
-
-
 // if not on mobile, display special icons
 if (!isMobile) {
   
