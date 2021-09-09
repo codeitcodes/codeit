@@ -1129,3 +1129,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+html {
+  -webkit-text-size-adjust: none;
+}
