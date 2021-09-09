@@ -5,17 +5,17 @@
 /* 
    
    codeit.js
-   v2.5.3
+   v2.5.4
    MIT License
    
-   github.com/barhatsor/codeit
+   github.com/barhatsor/codeitjs
    
 */
 
 // create a class for the codeit element
 class CodeitElement extends HTMLElement {
   
-  // Specify observed attributes so that
+  // specify observed attributes so
   // attributeChangedCallback will work
   static get observedAttributes() {
     return ['lang', 'edit'];
@@ -670,14 +670,16 @@ class CodeitElement extends HTMLElement {
     
     cd.update = () => {
       
+      if (cd.textContent === '') cd.textContent = '\n';
+      
       if (cd.textContent !== '' && cd.textContent !== cd.prev) {
-
+        
         debounceHighlight();
-
+        
       }
-
+      
       cd.prev = cd.textContent;
-
+      
     }
 
     function debounceHighlight() {
@@ -694,7 +696,7 @@ class CodeitElement extends HTMLElement {
         // restore pos in text
         cd.setSelection(pos.start);
 
-      }, 30);
+      }, 0);
 
     }
     
@@ -933,4 +935,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.3', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.4', 'font-style: italic; color: gray');
