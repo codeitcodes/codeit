@@ -222,7 +222,7 @@ class CodeitElement extends HTMLElement {
             insert('\n' + padding);
 
             // restore pos in text
-            cd.setSelection(pos.start);
+            //cd.setSelection(pos.start);
             
           }
           
@@ -230,10 +230,10 @@ class CodeitElement extends HTMLElement {
         
         if (newLinePadding) {
           
-          event.stopPropagation();
-          event.preventDefault();
+          //event.stopPropagation();
+          //event.preventDefault();
           
-          insert('\n' + newLinePadding);
+          insert(newLinePadding);
           
         }
         
@@ -557,13 +557,15 @@ class CodeitElement extends HTMLElement {
       var s = window.getSelection();
       var r0 = s.getRangeAt(0);
 
-      var rangeCollapsed = r0.collapsed;
+      // clone current range
+      var r = r0.cloneRange();
       
       // insert text node at start of range
       var textEl = document.createTextNode(text);
-      r0.insertNode(textEl);
+      r.insertNode(textEl);
 
-      if (rangeCollapsed) r0.collapse();
+      // delete range
+      r.detach();
       
     }
     
