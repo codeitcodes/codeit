@@ -1,15 +1,5 @@
 'use strict';
 
-window.addEventListener('DOMContentLoaded', () => {
-  let displayMode = 'browser tab';
-  if (navigator.standalone) {
-    displayMode = 'standalone-ios';
-  }
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    displayMode = 'standalone';
-  }
-});
-
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
