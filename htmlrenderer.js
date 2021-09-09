@@ -230,6 +230,7 @@ function addHTMLItemListeners() {
           // file cannot be modified
           // if its SHA was updated
           item.classList.remove('modified');
+          bottomFloat.classList.remove('modified');
           
           
           // create commit
