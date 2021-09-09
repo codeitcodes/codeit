@@ -341,7 +341,6 @@ body cd-el {
   color: #d4d5d7;
   border-radius: 0 500px 500px 0;
   padding: 7px 10px;
-  cursor: pointer;
   transform: translateX(0);
   left: -45px;
   will-change: transform;
@@ -533,7 +532,6 @@ body.transitioning .sidebar {
 .sidebar .header .title {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .sidebar .searchscreen .title {
@@ -628,7 +626,6 @@ body.transitioning .sidebar {
   justify-content: space-between;
   background: hsl(228deg 16% 12%);
   padding: 15px 20px;
-  cursor: pointer;
   position: relative;
   scroll-margin: 75px;
 }
@@ -697,12 +694,9 @@ body.transitioning .sidebar {
   width: 39.5px;
   position: absolute;
   right: 12.5px;
-    
   padding: 7px;
   margin: -7px;
-  cursor: pointer;
   border-radius: 50%;
-  
   display: none;
 }
 
@@ -730,7 +724,6 @@ body.transitioning .sidebar {
 
 .sidebar .more {
   padding: 15px 20px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   border-top: 1px solid #f1f1f21c;
@@ -808,7 +801,6 @@ body.transitioning .sidebar {
 .roundbutton {
   padding: 7px;
   margin: -7px;
-  cursor: pointer;
   border-radius: 50%;
   transition: .18s var(--ease-function);
 }
@@ -819,7 +811,6 @@ body.transitioning .sidebar {
 }
 
 .sidebar .button {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -989,6 +980,17 @@ body.loaded .splash-wrapper {
 .splash-wrapper .tip .content {
   font-size: 12px;
   letter-spacing: 0.1px;
+}
+
+
+body:not(.platform-mac) .github,
+body:not(.platform-mac) .sidebar .header .title,
+body:not(.platform-mac) .sidebar .item,
+body:not(.platform-mac) .sidebar .item .push-wrapper,
+body:not(.platform-mac) .sidebar .more,
+body:not(.platform-mac) .roundbutton,
+body:not(.platform-mac) .sidebar .button {
+  cursor: pointer;
 }
 
 
