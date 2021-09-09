@@ -226,17 +226,18 @@
       
     }, 700);
     
+    window.addEventListener('load', () => {
+        
+        body.classList.add('loaded');
+      
+    });
+    
     // Register service worker
     if ('serviceWorker' in navigator) {
       
       window.addEventListener('load', () => {
         
-        navigator.serviceWorker.register('/service-worker.js')
-          .then((reg) => {
-            console.log('Service worker registered.', reg);
-        });
-        
-        body.classList.add('loaded');
+        navigator.serviceWorker.register('/service-worker.js');
         
       });
       
