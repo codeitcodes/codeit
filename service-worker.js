@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v53';
+const CACHE_NAME = 'static-cache-v54';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -40,9 +40,7 @@ const FILES_TO_CACHE = [
   '/icons/iphone-app-180.png',
   '/icons/mac-favicon.png',
   '/icons/mac-icon-512.png',
-  '/icons/mac-icon-512-padding.png',
-  
-  '/offline.html'
+  '/icons/mac-icon-512-padding.png'
   
 ];
 
@@ -91,7 +89,7 @@ self.addEventListener('fetch', (evt) => {
     }).catch(function() {
 
       // If both fail, show a generic fallback:
-      return caches.match('offline.html');
+      return caches.match('full.html');
 
     })
   );
