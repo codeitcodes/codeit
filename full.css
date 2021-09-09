@@ -691,12 +691,11 @@ body.transitioning .sidebar {
 }
 
 .sidebar .item .push-wrapper {
-  width: 39.5px;
+  width: 53.5px;
   position: absolute;
-  right: 12.5px;
-  padding: 7px;
-  margin: -7px;
+  right: -1.5px;
   border-radius: 50%;
+  box-sizing: border-box;
   display: none;
 }
 
