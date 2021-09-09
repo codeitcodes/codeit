@@ -1,5 +1,20 @@
 'use strict';
 
+window.addEventListener('DOMContentLoaded', () => {
+  let displayMode = 'browser tab';
+  if (navigator.standalone) {
+    displayMode = 'standalone-ios';
+  }
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    displayMode = 'standalone';
+  }
+  
+  if (displayMode == 'browser tab') {
+    //window.location.href = 'https://codeit.berryscript.com';
+  }
+  
+});
+
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
