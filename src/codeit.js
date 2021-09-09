@@ -230,8 +230,8 @@ class CodeitElement extends HTMLElement {
         
         if (newLinePadding) {
           
+          event.stopPropagation();
           event.preventDefault();
-          event.preventPropagation();
           
           // get caret pos in text
           const pos = cd.getSelection();
