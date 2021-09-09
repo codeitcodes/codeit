@@ -98,7 +98,7 @@ function load() {
 // device and platform queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
-const isSafari = window.safari ?? false;
+const isSafari = (isMobile && (window.safari ?? false));
 
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isWindows = navigator.platform.indexOf('Win') > -1;
@@ -108,6 +108,12 @@ let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 if (isMobile) {
   
   body.classList.add('mobile');
+  
+}
+
+if (isSafari) {
+  
+  body.classList.add('on-safari');
   
 }
 
