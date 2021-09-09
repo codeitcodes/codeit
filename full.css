@@ -590,7 +590,7 @@ body.transitioning .sidebar {
 }
 
 .sidebar .searchinput {
-  width: 141px;
+  width: calc(var(--sidebar-width) - 103px);
   white-space: nowrap;
   line-height: 20px;
   color: #d4d5d7;
