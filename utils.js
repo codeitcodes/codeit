@@ -42,7 +42,7 @@ const body = document.body,
 
 
 // version
-const version = '1.2.8';
+const version = '1.3.0';
 versionEl.innerText = version;
 
 
@@ -98,11 +98,25 @@ function load() {
 // mobile media queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
+
+const isMac = navigator.platform.indexOf('Mac') > -1;
+const isWindows = navigator.platform.indexOf('Win') > -1;
+
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
 if (isMobile) {
   
   body.classList.add('mobile');
+  
+}
+
+if (isMac) {
+  
+  body.classList.add('platform-mac');
+  
+} else if (isWindows) {
+  
+  body.classList.add('platform-win');
   
 }
 
