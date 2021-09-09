@@ -219,10 +219,7 @@ class CodeitElement extends HTMLElement {
             const pos = cd.getSelection();
 
             // move adjacent "}" down one line
-            insert('\n' + padding);
-
-            // restore pos in text
-            //cd.setSelection(pos.start);
+            insert('\n' + padding, { moveToEnd: false });
             
           }
           
@@ -232,14 +229,8 @@ class CodeitElement extends HTMLElement {
           
           event.stopPropagation();
           event.preventDefault();
-          
-          // get caret pos in text
-          const pos = cd.getSelection();
-          
-          insert(newLinePadding);
-          
-          // change pos in text
-          cd.setSelection(pos.start + newLinePadding.length + 1);
+
+          insert('\n', newLinePadding);
           
         }
         
@@ -557,21 +548,40 @@ class CodeitElement extends HTMLElement {
       
     }
 
-    function insert(text) {
+    function insert(text, options) {
       
       // get current selection
       var s = window.getSelection();
       var r0 = s.getRangeAt(0);
-
+      
       // clone current range
       var r = r0.cloneRange();
       
       // insert text node at start of range
       var textEl = document.createTextNode(text);
       r.insertNode(textEl);
-
+      
       // delete range
       r.detach();
+      
+      
+      let moveToEnd = true;
+      if (options) moveToEnd = options.moveToEnd;
+      
+      // if moving caret to end of inserted text
+      if (moveToEnd) {
+        
+        // get caret pos in text
+        let pos = cd.getSelection();
+        
+        // move caret to end of inserted text
+        pos.start += text.length;
+        pos.end += text.length;
+        
+        // change pos in text
+        cd.setSelection(pos.start, pos.end);
+          
+      }
       
     }
     
