@@ -694,8 +694,6 @@ body.transitioning .sidebar {
   width: 53.5px;
   position: absolute;
   right: -1.5px;
-  border-radius: 50%;
-  box-sizing: border-box;
   display: none;
 }
 
