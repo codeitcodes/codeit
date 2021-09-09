@@ -525,12 +525,15 @@ class CodeitElement extends HTMLElement {
       var s = window.getSelection();
       var r0 = s.getRangeAt(0);
       
+      // get selection in text content
+      let textSel = cd.getSelection();
+      
       // if selection is empty, select the char before
       if (r0.collapsed) {
         
-        var textSel = cd.getSelection();
+        textSel.start--;
         
-        cd.setSelection((textSel.start - 1), textSel.end);
+        cd.setSelection(textSel.start, textSel.end);
         
         // get current range
         r0 = s.getRangeAt(0);
@@ -538,16 +541,17 @@ class CodeitElement extends HTMLElement {
       }
       
       // clone current range
-      var newRange = r0.cloneRange();
+      //var newRange = r0.cloneRange();
       
-      // collapse current range
-      r0.collapse();
+      // delete current range contents
+      // (also deletes the range itself)
+      r0.deleteContents();
       
-      // delete new range contents
-      newRange.deleteContents();
+      // create a new range at start of original
+      cd.setSelection(textSel.start);
       
       // delete new range
-      newRange.detach();
+      //newRange.detach();
       
     }
 
