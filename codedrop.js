@@ -110,17 +110,20 @@ cd.addEventListener('dragleave', (ev) => {
   
 })
 
-var launchFile;
-
 if ('launchQueue' in window) {
-  launchQueue.setConsumer((launchParams) => {
+  launchQueue.setConsumer(async (launchParams) => {
     // nothing to do when the queue is empty.
     if (!launchParams.files.length) {
       return;
     }
     for (const fileHandle of launchParams.files) {
+      
       // handle the file
-      launchFile = fileHandle;
+      const fileData = await fileHandle.getFile();
+      
+      processFile(fileData);
+      
     }
+    
   });
 }
