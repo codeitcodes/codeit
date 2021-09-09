@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.5.2
+   v2.5.3
    MIT License
    
    github.com/barhatsor/codeit
@@ -540,18 +540,12 @@ class CodeitElement extends HTMLElement {
         
       }
       
-      // clone current range
-      //var newRange = r0.cloneRange();
-      
       // delete current range contents
       // (also deletes the range itself)
       r0.deleteContents();
       
       // create a new range at start of original
       cd.setSelection(textSel.start);
-      
-      // delete new range
-      //newRange.detach();
       
     }
 
@@ -939,4 +933,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.2', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.3', 'font-style: italic; color: gray');
