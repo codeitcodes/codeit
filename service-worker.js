@@ -91,7 +91,7 @@ self.addEventListener('fetch', (evt) => {
 
     }).catch(function() {
 
-      // If both fail, show a generic fallback:
+      // If both fail, show the fallback:
       return caches.match('full.html');
 
     })
