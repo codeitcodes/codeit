@@ -999,7 +999,8 @@ body:not(.mobile) .sidebar::-webkit-scrollbar {
   width: 10px;
 }
 
-body:not(.mobile) .sidebar::-webkit-scrollbar-corner, .sidebar::-webkit-scrollbar-track {
+body:not(.mobile) .sidebar::-webkit-scrollbar-corner,
+body:not(.mobile) .sidebar::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
 }
