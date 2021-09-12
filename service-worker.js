@@ -83,15 +83,15 @@ self.addEventListener('fetch', (evt) => {
 
   evt.respondWith(
 
-    // Try the cache
+    // try the cache
     caches.match(evt.request).then(function(response) {
 
-      // Fall back to network
+      // fall back to network
       return response || fetch(evt.request);
 
     }).catch(function() {
 
-      // If both fail, show the fallback:
+      // if both fail, show the fallback:
       return caches.match('full.html');
 
     })
