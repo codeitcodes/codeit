@@ -561,7 +561,7 @@ body.transitioning .sidebar {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 235px;
+  max-width: calc(var(--sidebar-width) - 115px);
   transition: .18s var(--ease-function) margin-left;
 }
 
