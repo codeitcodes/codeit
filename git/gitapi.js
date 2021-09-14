@@ -39,9 +39,6 @@ let git = {
     // get the query
     const resp = await axios.get(query, githubToken);
     
-    // update last request time
-    lastTreeRequestTime = new Date().toGMTString();
-    
     return resp;
     
   },
