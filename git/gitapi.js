@@ -71,7 +71,7 @@ let git = {
     if (commit.file.sha) {
       
       // force-update cache
-      axios.get(query, githubToken, resp.content.sha);
+      axios.get(query, githubToken, commit.file.sha);
       
     }
 
