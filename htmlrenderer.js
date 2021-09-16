@@ -472,7 +472,7 @@ function onEditorKeyup(event) {
   // if code has changed
   if (hasKeyChangedCode(event)) {
     
-    console.log('d');
+    console.log('Keyup changed code. Saved code to local storage.');
     
     // save code to local storage
     codeChange();
@@ -482,7 +482,7 @@ function onEditorKeyup(event) {
   // if caret position has changed
   if (hasKeyChangedCaretPos(event)) {
     
-    console.log('c');
+    console.log('Used arrow keys to navigate code. Saved the caret pos to local storage.');
     
     // save caret pos to local storage
     saveCodePosLS();
@@ -494,27 +494,10 @@ function onEditorKeyup(event) {
 // when clicked on editor, save new caret position
 function onEditorClick(event) {
   
-  console.log('c');
+  console.log('The editor was clicked and the caret pos was changed. Saved the caret pos to local storage.');
   
   // save caret pos to local storage
   saveCodePosLS();
-  
-}
-
-// when clicked on editor,
-// check if mouse is down 
-// to see if selection has changed
-function onEditorMousemove(event) {
-  
-  // if mouse is down
-  if (cd.mouseDown === true) {
-    
-    console.log('c'); 
-    
-    // save caret pos to local storage
-    saveCodePosLS();
-    
-  }
   
 }
 
@@ -607,11 +590,7 @@ function setupEditor() {
   
   cd.addEventListener('keyup', onEditorKeyup);
   cd.addEventListener('click', onEditorClick);
-  cd.addEventListener('mousemove', onEditorMousemove);
-  
-  cd.addEventListener('mousedown', () => { console.log('a'); cd.mouseDown = true });
-  cd.addEventListener('mouseup', () => { console.log('b'); cd.mouseDown = false });
-  
+      
   // if code in storage
   if (getStorage('code')) {
     
