@@ -692,9 +692,9 @@ class CodeitElement extends HTMLElement {
 
         // highlight codeit
         cd.highlight(cd.lang);
-
+        
         // restore pos in text
-        cd.setSelection(pos.start);
+        cd.setSelection(pos.start, pos.end);
 
       }, 0);
 
