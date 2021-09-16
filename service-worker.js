@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v65';
+const CACHE_NAME = 'static-cache-v66';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -76,8 +76,6 @@ self.addEventListener('activate', (evt) => {
   );
   
   self.clients.claim();
-  
-  if (window) window.location.reload(true);
   
 });
 
