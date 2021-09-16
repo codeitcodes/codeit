@@ -56,17 +56,15 @@ function saveBeforeUnloadLS() {
   
 }
 
-window.onbeforeunload = saveBeforeUnloadLS;
-
 function saveCodeLS() {
   
-  setStorage('code', encodeUnicode(cd.textContent));
+  setStorage('code', cd.innerHTML);
   
 }
 
 function saveCodePosLS() {
   
-  setStorage('caret', cd.getSelection().start);
+  setStorage('caret', (cd.getSelection().start + ',' + cd.getSelection().end));
   setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
   
 }
