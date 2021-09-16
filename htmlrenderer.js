@@ -506,7 +506,7 @@ function codeChange() {
   updateLineNumbersHTML();
   
   // save code in async thread
-  asyncThread(saveBeforeUnloadLS, 300);
+  asyncThread(saveBeforeUnloadLS, 30);
   
 }
 
