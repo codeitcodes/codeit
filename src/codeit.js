@@ -5,7 +5,7 @@
 /* 
    
    codeit.js
-   v2.5.4
+   v2.5.5
    MIT License
    
    github.com/barhatsor/codeitjs
@@ -98,9 +98,9 @@ class CodeitElement extends HTMLElement {
       
     }
     
-    function debounceRecordHistory() {
+    cd.recordHistory = () => {
       
-      debounce(recordHistory, 300);
+      debounce(recordHistoryAsync, 300);
       
     }
     
@@ -163,7 +163,7 @@ class CodeitElement extends HTMLElement {
       if (cd.options.history) {
         handleUndoRedo(event);
         if (shouldRecord(event) && !recording) {
-          debounceRecordHistory();
+          cd.recordHistory();
           recording = true;
         }
       }
@@ -176,7 +176,7 @@ class CodeitElement extends HTMLElement {
       
         if (shouldRecord(event) && recording) {
 
-          debounceRecordHistory();
+          cd.recordHistory();
           recording = false;
 
         }
@@ -470,7 +470,7 @@ class CodeitElement extends HTMLElement {
       }
     }
 
-    function recordHistory() {
+    function recordHistoryAsync() {
       
       // if codeit not focused
       if (document.activeElement != cd) return;
@@ -890,6 +890,7 @@ class CodeitElement extends HTMLElement {
     }
 
     cd.update();
+    cd.recordHistory();
 
   }
   
@@ -935,4 +936,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.4', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.5', 'font-style: italic; color: gray');
