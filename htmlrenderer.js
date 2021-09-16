@@ -545,11 +545,11 @@ function setupEditor() {
     
     // set codeit to code
     cd.lang = getStorage('lang') || 'plain';
-    cd.textContent = decodeUnicode(getStorage('code'));
+    cd.innerHTML = getStorage('code');
     
     // set caret pos in code
-    cd.setSelection(getStorage('caret'), getStorage('caret'));
-
+    cd.setSelection(getStorage('caret').split(',')[0], getStorage('caret').split(',')[1]);
+    
     // scroll to pos in code
     cd.scrollTo(getStorage('scrollPos').split(',')[0], getStorage('scrollPos').split(',')[1]);
     
