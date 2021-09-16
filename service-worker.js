@@ -77,7 +77,7 @@ self.addEventListener('activate', (evt) => {
   
   self.clients.claim();
   
-  window.location.reload(true);
+  if (window) window.location.reload(true);
   
 });
 
