@@ -598,9 +598,6 @@ function setupEditor() {
     cd.lang = getStorage('lang') || 'plain';
     cd.innerHTML = getStorage('code');
     
-    // save code history
-    cd.recordHistory();
-    
     // set caret pos in code
     cd.setSelection(getStorage('caret').split(',')[0], getStorage('caret').split(',')[1]);
     
@@ -609,6 +606,9 @@ function setupEditor() {
     
     // update line numbers
     updateLineNumbersHTML();
+    
+    // save code history
+    cd.recordHistory();
     
   }
   
