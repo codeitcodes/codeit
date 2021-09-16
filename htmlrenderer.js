@@ -513,11 +513,10 @@ function onEditorMousemove(event) {
 // check for key to see if code has changed
 function hasKeyChangedCode(event) {
       
-  return !isUndo(event) && !isRedo(event)
-    && event.key !== 'Meta'
-    && event.key !== 'Control'
-    && event.key !== 'Alt'
-    && !event.key.startsWith('Arrow');
+  return event.key !== 'Meta'
+      && event.key !== 'Control'
+      && event.key !== 'Alt'
+      && !event.key.startsWith('Arrow');
 
 }
 
@@ -529,16 +528,9 @@ function hasKeyChangedCaretPos(event) {
 
 }
 
-function isCtrl(event) {
+// check for meta key (Ctrl/Command)
+function isKeyEventMeta(event) {
   return event.metaKey || event.ctrlKey;
-}
-
-function isUndo(event) {
-  return isCtrl(event) && !event.shiftKey && event.code === 'KeyZ';
-}
-
-function isRedo(event) {
-  return isCtrl(event) && event.shiftKey && event.code === 'KeyZ';
 }
 
 // called on code change event
