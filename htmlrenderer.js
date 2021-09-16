@@ -598,6 +598,9 @@ function setupEditor() {
     cd.lang = getStorage('lang') || 'plain';
     cd.innerHTML = getStorage('code');
     
+    // save code history
+    cd.recordHistory();
+    
     // set caret pos in code
     cd.setSelection(getStorage('caret').split(',')[0], getStorage('caret').split(',')[1]);
     
@@ -643,11 +646,9 @@ function setupEditor() {
 
 function updateLineNumbersHTML() {
   
-  // if editor isn't in view, return
-  if (isMobile && body.classList.contains('expanded')) return;
-
-  // if mobile but not in landscape, return
-  if (isMobile && !isLandscape) {
+  // if mobile but not in landscape,
+  // or if editor isn't in view, return
+  if (isMobile && (!isLandscape || body.classList.contains('expanded'))) {
     
     if (cd.querySelector('.line-numbers-rows')) {
       
