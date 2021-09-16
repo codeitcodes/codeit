@@ -465,13 +465,80 @@ function toggleSidebar(open) {
 }
 
 
-// check for backspace to see if code has changed
-function checkBackspace(e) {
+// check for key to see if code
+// or caret position have changed
+function onEditorKeyup(event) {
   
-  if (e.key === "Backspace" || e.key === "Delete") {
+  // if code has changed
+  if (hasKeyChangedCode(event)) {
+    
+    // save code to local storage
     codeChange();
+    
   }
   
+  // if caret position has changed
+  if (hasKeyChangedCaretPos(event)) {
+    
+    // save caret pos to local storage
+    saveCodePosLS();
+    
+  }
+  
+}
+
+// when clicked on editor, save new caret position
+function onEditorClick(event) {
+  
+  // save caret pos to local storage
+  saveCodePosLS();
+  
+}
+
+// when clicked on editor,
+// check if mouse is down 
+// to see if selection has changed
+function onEditorMousemove(event) {
+  
+  // if mouse is down
+  if (cd.mouseDown === true) {
+    
+    // save caret pos to local storage
+    saveCodePosLS();
+    
+  }
+  
+}
+
+// check for key to see if code has changed
+function hasKeyChangedCode(event) {
+      
+  return !isUndo(event) && !isRedo(event)
+    && event.key !== 'Meta'
+    && event.key !== 'Control'
+    && event.key !== 'Alt'
+    && !event.key.startsWith('Arrow');
+
+}
+
+// check for key to see
+// if caret position has changed
+function hasKeyChangedCaretPos(event) {
+      
+  return event.key.startsWith('Arrow');
+
+}
+
+function isCtrl(event) {
+  return event.metaKey || event.ctrlKey;
+}
+
+function isUndo(event) {
+  return isCtrl(event) && !event.shiftKey && event.code === 'KeyZ';
+}
+
+function isRedo(event) {
+  return isCtrl(event) && event.shiftKey && event.code === 'KeyZ';
 }
 
 // called on code change event
@@ -537,8 +604,13 @@ function protectUnsavedCode() {
 function setupEditor() {
   
   // add editor event listeners
-  cd.addEventListener('keydown', checkBackspace);
-  cd.addEventListener('input', codeChange);
+  
+  cd.addEventListener('keyup', onEditorKeyup);
+  cd.addEventListener('click', onEditorClick);
+  cd.addEventListener('mousemove', onEditorMousemove);
+  
+  cd.addEventListener('mousedown', () => { cd.mouseDown = true });
+  cd.addEventListener('mouseup', () => { cd.mouseDown = false });
   
   // if code in storage
   if (getStorage('code')) {
