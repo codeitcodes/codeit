@@ -472,6 +472,8 @@ function onEditorKeyup(event) {
   // if code has changed
   if (hasKeyChangedCode(event)) {
     
+    console.log('d');
+    
     // save code to local storage
     codeChange();
     
@@ -479,6 +481,8 @@ function onEditorKeyup(event) {
   
   // if caret position has changed
   if (hasKeyChangedCaretPos(event)) {
+    
+    console.log('c');
     
     // save caret pos to local storage
     saveCodePosLS();
@@ -489,6 +493,8 @@ function onEditorKeyup(event) {
 
 // when clicked on editor, save new caret position
 function onEditorClick(event) {
+  
+  console.log('c');
   
   // save caret pos to local storage
   saveCodePosLS();
@@ -502,6 +508,8 @@ function onEditorMousemove(event) {
   
   // if mouse is down
   if (cd.mouseDown === true) {
+    
+    console.log('c'); 
     
     // save caret pos to local storage
     saveCodePosLS();
@@ -601,8 +609,8 @@ function setupEditor() {
   cd.addEventListener('click', onEditorClick);
   cd.addEventListener('mousemove', onEditorMousemove);
   
-  cd.addEventListener('mousedown', () => { cd.mouseDown = true });
-  cd.addEventListener('mouseup', () => { cd.mouseDown = false });
+  cd.addEventListener('mousedown', () => { console.log('a'); cd.mouseDown = true });
+  cd.addEventListener('mouseup', () => { console.log('b'); cd.mouseDown = false });
   
   // if code in storage
   if (getStorage('code')) {
