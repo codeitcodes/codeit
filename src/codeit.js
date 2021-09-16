@@ -890,7 +890,6 @@ class CodeitElement extends HTMLElement {
     }
 
     cd.update();
-    cd.recordHistory();
 
   }
   
