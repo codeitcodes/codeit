@@ -48,13 +48,6 @@ function loadLS() {
   
 }
 
-function saveBeforeUnloadLS() {
-  
-  // save code to local storage
-  saveCodeLS();
-  
-}
-
 function saveCodeLS() {
   
   setStorage('code', cd.innerHTML);
