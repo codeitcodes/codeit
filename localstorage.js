@@ -19,14 +19,6 @@ function saveModifiedFileLS(modifiedFile) {
   
 }
 
-function changeModifiedFilePropLS(prop, value) {
-  
-  modifiedFiles[modifiedFile.sha][prop] = value;
-  
-  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
-  
-}
-
 function deleteModifiedFileLS(fileSha) {
     
   delete modifiedFiles[fileSha];
