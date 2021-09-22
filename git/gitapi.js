@@ -63,14 +63,6 @@ let git = {
 
     // commit file
     var resp = await axios.put(query, githubToken, commitData);
-    
-    // if updating an existing file
-    if (commit.file.sha) {
-      
-      // force-update cache
-      axios.get(query, githubToken, commit.file.sha);
-      
-    }
 
     return resp.content.sha;
 
