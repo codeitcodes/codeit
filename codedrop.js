@@ -31,7 +31,8 @@ function processFile(file) {
     cd.history = [];
     
     saveCodeLS();
-    saveCodePosLS();
+    saveCodeCaretPosLS();
+    saveCodeScrollPosLS();
     saveCodeLangLS();
     
     console.log('Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes');
