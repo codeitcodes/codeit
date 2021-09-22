@@ -50,9 +50,8 @@ function loadLS() {
 
 function saveBeforeUnloadLS() {
   
-  // set localStorage values
+  // save code to local storage
   saveCodeLS();
-  saveCodePosLS();
   
 }
 
