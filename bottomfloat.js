@@ -40,8 +40,8 @@ sidebarOpen.addEventListener('click', () => {
 
 function playPushAnimation(element) {
   
-  let endAnimDuration = 0.18; // s
-  let checkDelay = 2 - endAnimDuration;
+  const endAnimDuration = 0.18; // s
+  const checkDelay = 2 - endAnimDuration;
   
   element.classList.add('checked');
   
@@ -57,7 +57,7 @@ function playPushAnimation(element) {
 pushWrapper.innerHTML = pushIcon;
 
 // push when clicked on button
-pushWrapper.addEventListener('click', () => {
+pushWrapper.addEventListener('click', async () => {
   
   // get selected item
   let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
@@ -87,10 +87,27 @@ pushWrapper.addEventListener('click', () => {
     };
     
     // push file asynchronously
-    const newSha = git.push(commit);
+    const newSha = await git.push(commit);
+    
+    
+    // create a new modified file and delete the old one to fix
+    // Github API requests not refreshing browser private cache 1 minute after commit
+    // (https://github.com/barhatsor/codeit/issues/36)
+
+    // create a new modified file
+
+    let newModifiedFile = modifiedFiles[commit.file.sha];
+
+    newModifiedFile.sha = newSha;
+    newModifiedFile.nonexistent = true;
+    newModifiedFile.content = commit.file.content;
+
+    // save new modified file to local storage
+    saveModifiedFileLS(newModifiedFile);
     
     // delete file from local storage
     deleteModifiedFileLS(commit.file.sha);
+    
     
     // update file in HTML
     updateFileShaHTML(selectedItem, newSha);
