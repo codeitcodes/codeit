@@ -262,8 +262,25 @@ function addHTMLItemListeners() {
           // push file asynchronously
           const newSha = await git.push(commit);
           
-          // delete file from local storage
+          
+          // create a new modified file and delete the old one to fix
+          // Github API requests not refreshing browser private cache 1 minute after commit
+          // (https://github.com/barhatsor/codeit/issues/36)
+          
+          // create a new modified file
+          
+          let newModifiedFile = modifiedFiles[commit.file.sha];
+          
+          newModifiedFile.sha = newSha;
+          newModifiedFile.nonexistent = true;
+          newModifiedFile.content = commit.file.content;
+          
+          // save new modified file to local storage
+          saveModifiedFileLS(newModifiedFile);
+          
+          // delete old modified file from local storage
           deleteModifiedFileLS(commit.file.sha);
+          
           
           // update file in HTML
           updateFileShaHTML(item, newSha);
@@ -296,7 +313,7 @@ async function loadFileInHTML(file, sha) {
         dir: treeLoc.join(),
         sha: selectedFile.sha,
         name: selectedFile.name,
-        exists: selectedFile.exists,
+        nonexistent: selectedFile.nonexistent,
         content: encodeUnicode(cd.textContent)
       };
 
@@ -316,12 +333,14 @@ async function loadFileInHTML(file, sha) {
   // change selected file
 
   file.classList.add('selected');
-
+  
+  const fileNonexistent = (getAttr(file, 'nonexistent') == 'true') ? true : false;
+  
   const newSelectedFile = {
     dir: treeLoc.join(),
     sha: getAttr(file, 'sha'),
     name: selectedFileName,
-    exists: getAttr(file, 'exists')
+    nonexistent: fileNonexistent
   };
 
   changeSelectedFileLS(newSelectedFile);
@@ -384,6 +403,9 @@ function updateFileShaHTML(file, newSha) {
   // update SHA of file
   setAttr(file, 'sha', newSha);
   
+  // fix file caching
+  setAttr(file, 'nonexistent', 'true');
+  
   // if file is selected
   if (file.classList.contains('selected')) {
     
@@ -393,7 +415,7 @@ function updateFileShaHTML(file, newSha) {
       dir: treeLoc.join(),
       sha: newSha,
       name: file.innerText,
-      exists: true
+      nonexistent: true
     };
     
     changeSelectedFileLS(newSelectedFile);
@@ -552,7 +574,7 @@ function codeChange() {
       dir: treeLoc.join(),
       sha: selectedFile.sha,
       name: selectedFile.name,
-      exists: selectedFile.exists,
+      nonexistent: selectedFile.nonexistent,
       content: encodeUnicode(cd.textContent)
     };
 
