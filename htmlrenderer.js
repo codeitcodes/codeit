@@ -527,19 +527,11 @@ function isKeyEventMeta(event) {
 // called on code change event
 function codeChange() {
   
-  const selectedEl = fileWrapper.querySelector('.selected:not(.modified)');
-  
-  // if selected file exists
-  if (selectedEl) {
-    
-    // enable pushing file
-    selectedEl.classList.add('modified');
+  // if modified file is not in localStorage
+  if (!modifiedFiles[selectedFile.sha]) {
 
-    // enable pushing from bottom float
-    bottomFloat.classList.add('modified');
-    
     // save modified file in localStorage
-
+    
     const modifiedFile = {
       dir: treeLoc.join(),
       sha: selectedFile.sha,
@@ -549,6 +541,22 @@ function codeChange() {
     };
 
     saveModifiedFileLS(modifiedFile);
+    
+    
+    // enable pushing file in HTML
+    
+    const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+  
+    // if selected file exists
+    if (selectedEl) {
+
+      // enable pushing file
+      selectedEl.classList.add('modified');
+
+      // enable pushing from bottom float
+      bottomFloat.classList.add('modified');
+
+    }
     
   }
   
