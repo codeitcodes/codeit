@@ -485,7 +485,7 @@ function onEditorKeyup(event) {
     console.log('Used arrow keys to navigate code. Saved the caret pos to local storage.');
     
     // save caret pos to local storage
-    saveCodePosLS();
+    saveCodeCaretPosLS();
     
   }
   
@@ -497,7 +497,20 @@ function onEditorClick(event) {
   console.log('The editor was clicked and the caret pos was changed. Saved the caret pos to local storage.');
   
   // save caret pos to local storage
-  saveCodePosLS();
+  saveCodeCaretPosLS();
+  
+}
+
+// when scrolled editor, save new scroll position
+
+let editorScrollTimeout;
+
+function onEditorScroll(event) {
+  
+  if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
+  
+  // when stopped scrolling, save scroll pos
+  editorScrollTimeout = window.setTimeout(saveCodeScrollPosLS, 300);
   
 }
 
@@ -564,7 +577,7 @@ function codeChange() {
   updateLineNumbersHTML();
   
   // save code in async thread
-  asyncThread(saveBeforeUnloadLS, 30);
+  asyncThread(saveCodeLS, 30);
   
 }
 
@@ -586,7 +599,7 @@ function protectUnsavedCode() {
     cd.lang = 'plain';
     cd.textContent = '';
     
-    saveBeforeUnloadLS();
+    saveCodeLS();
     
   }
   
@@ -598,6 +611,7 @@ function setupEditor() {
   
   cd.addEventListener('keyup', onEditorKeyup);
   cd.addEventListener('click', onEditorClick);
+  cd.addEventListener('scroll', onEditorScroll);
       
   // if code in storage
   if (getStorage('code')) {
