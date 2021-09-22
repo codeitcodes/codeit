@@ -62,9 +62,14 @@ function saveCodeLS() {
   
 }
 
-function saveCodePosLS() {
+function saveCodeCaretPosLS() {
   
   setStorage('caret', (cd.getSelection().start + ',' + cd.getSelection().end));
+  
+}
+
+function saveCodeScrollPosLS() {
+  
   setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
   
 }
