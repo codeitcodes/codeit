@@ -381,7 +381,8 @@ async function loadFileInHTML(file, sha) {
   
   // save code in local storage
   saveCodeLS();
-  saveCodePosLS();
+  saveCodeCaretPosLS();
+  saveCodeScrollPosLS();
   saveCodeLangLS();
   
   // update line numbers
