@@ -495,8 +495,6 @@ function onEditorKeyup(event) {
   // if code has changed
   if (hasKeyChangedCode(event)) {
 
-    console.log('Keyup changed code. Saved code to local storage.');
-
     // save code to local storage
     codeChange();
 
@@ -504,8 +502,6 @@ function onEditorKeyup(event) {
 
   // if caret position has changed
   if (hasKeyChangedCaretPos(event)) {
-
-    console.log('Used arrow keys to navigate code. Saved the caret pos to local storage.');
 
     // save caret pos to local storage
     saveCodeCaretPosLS();
@@ -516,8 +512,6 @@ function onEditorKeyup(event) {
 
 // when clicked on editor, save new caret position
 function onEditorClick(event) {
-
-  console.log('The editor was clicked and the caret pos was changed. Saved the caret pos to local storage.');
 
   // save caret pos to local storage
   saveCodeCaretPosLS();
@@ -533,10 +527,7 @@ function onEditorScroll(event) {
   if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
 
   // when stopped scrolling, save scroll pos
-  editorScrollTimeout = window.setTimeout(() => {
-      console.log('Stopped scrolling editor. Saved scroll pos to local storage.');
-      saveCodeScrollPosLS();
-  }, 300);
+  editorScrollTimeout = window.setTimeout(saveCodeScrollPosLS, 300);
 
 }
 
