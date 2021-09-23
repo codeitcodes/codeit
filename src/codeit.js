@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.5.6
+   v2.5.8
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -1021,4 +1021,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.6', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.8', 'font-style: italic; color: gray');

@@ -1,15 +1,21 @@
 
 let modifiedFiles, selectedFile;
 
-
-function changeSelectedFileLS(newSelectedFile) {
+// load local storage
+function loadLS() {
   
-  selectedFile = newSelectedFile;
+  // load modified files from storage
+  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
   
-  setStorage('selectedFile', JSON.stringify(newSelectedFile));
+  // load selected file from storage
+  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {};
+  
+  setupCodeitApp();
   
 }
 
+
+// modified files
 
 function saveModifiedFileLS(modifiedFile) {
   
@@ -28,46 +34,61 @@ function deleteModifiedFileLS(fileSha) {
 }
 
 
-function saveTreeLocLS(treeLoc) {
-  
-  setStorage('tree', treeLoc.join());
-  
-}
+// selected file
 
-
-function loadLS() {
+function changeSelectedFileLS(newSelectedFile) {
   
-  // load modified files from storage
-  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
+  selectedFile = newSelectedFile;
   
-  // load selected file from storage
-  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {dir: '', sha: ''};
-  
-  setupCodeitApp();
+  updateSelectedFileLS();
   
 }
 
 function saveCodeLS() {
   
-  setStorage('code', cd.innerHTML);
+  selectedFile.content = encodeUnicode(cd.innerHTML);
+  
+  updateSelectedFileLS();
   
 }
 
 function saveCodeCaretPosLS() {
   
-  setStorage('caret', (cd.getSelection().start + ',' + cd.getSelection().end));
+  const codeSel = cd.getSelection();
+  selectedFile.caretPos = (codeSel.start + ',' + codeSel.end);
+  
+  updateSelectedFileLS();
   
 }
 
 function saveCodeScrollPosLS() {
   
-  setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
+  selectedFile.scrollPos = (cd.scrollLeft + ',' + cd.scrollTop);
+    
+  updateSelectedFileLS();
   
 }
 
 function saveCodeLangLS() {
   
-  setStorage('lang', cd.lang);
+  selectedFile.lang = cd.lang;
+    
+  updateSelectedFileLS();
+  
+}
+
+function updateSelectedFileLS() {
+  
+  setStorage('selectedFile', JSON.stringify(selectedFile));
+  
+}
+
+
+// miscellaneous
+
+function saveTreeLocLS(treeLoc) {
+  
+  setStorage('tree', treeLoc.join());
   
 }
 
