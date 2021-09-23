@@ -205,8 +205,8 @@ class CodeitElement extends HTMLElement {
         let bracketTwo = (charAfter ===
                           cd.options.closeBrackets[ cd.options.openBrackets.indexOf( charBefore ) ]);
 
-        let newLineBracket = (charAfter === '\n'
-                              && cd.options.closeBrackets.includes( after.charAt(1) ));
+        let newLineBracket = (charBefore === '{' &&
+                              [closingBracketNextToCursor(after)] );
 
         if (bracketOne && (bracketTwo || newLineBracket)) {
 
@@ -368,18 +368,26 @@ class CodeitElement extends HTMLElement {
         const charBefore = codeBefore.slice(-1);
         const charAfter = codeAfter.charAt(0);
 
-        // if deleting self closing characters
-        const closeCharAdjacent = (
-          close.includes(charAfter)
-          && charBefore === open[close.indexOf(charAfter)]
-        );
+        let closeCharAdjacent = false;
 
-        // if deleting brackets with whitespace in between
-        const closeCharWhitespace = (
-          [' ', '\n'].includes(charAfter)
-          && cd.options.closeBrackets.includes(codeAfter.charAt(1))
-          && charBefore === open[close.indexOf(codeAfter.charAt(1))]
-        );
+        let closeCharWhitespace = false;
+        let closeCharPadding = 0;
+
+        // if the char before is not an opening bracket
+        if (charBefore !== '{') {
+
+          // check if a closing char is nearby
+          closeCharAdjacent = (
+            close.includes(charAfter)
+            && charBefore === open[close.indexOf(charAfter)]
+          );
+
+        } else { // if the char before is an opening bracket
+
+          // check if a closing bracket is nearby
+          [closeCharWhitespace, closeCharPadding] = closingBracketNextToCursor(codeAfter);
+
+        }
 
         // get caret pos in text
         const pos = cd.getSelection();
@@ -390,8 +398,7 @@ class CodeitElement extends HTMLElement {
           // delete chars after
           if (closeCharWhitespace) {
 
-            cd.setSelection(pos.start + 2);
-            deleteCurrentSelection();
+            cd.setSelection(pos.start, pos.start + closeCharPadding);
 
           } else { // delete char after
 
@@ -407,6 +414,33 @@ class CodeitElement extends HTMLElement {
 
     }
 
+    // check if next line contains bracket
+    function closingBracketNextToCursor(text) {
+
+      // check if this line contains closing bracket
+      let i = 0;
+      while (i < text.length && text[i] !== '\n' && text[i] !== '}') {
+
+        // if there's text between the brackets, return false
+        if (text[i] !== ' ') return [false, 0];
+
+        i++;
+
+      }
+
+      // if this line contains closing bracket, return its location
+      if (text[i] === '}') return [true, i+1];
+
+      // find beginning of next line
+      while (i < text.length && text[i] !== '\n') i++;
+      i++;
+
+      // check if next line contains bracket
+      while (i < text.length && text[i] !== '\n' && text[i] !== '}') i++;
+
+      return [(text[i] === '}'), i+1];
+
+    }
 
     function alignBracket(event) {
 
@@ -417,10 +451,8 @@ class CodeitElement extends HTMLElement {
 
         let textBefore = before;
 
-        // in case of a one-liner, do nothing
-        if (textBefore !== cd.options.tab) {
-          //TBD@@return;
-        }
+        // if there's text between brackets, return
+        if (textBetweenBrackets(textBefore)) return;
 
         // run on all text to cursor, and find the matching padding
         let bracketArr = [];
@@ -458,6 +490,31 @@ class CodeitElement extends HTMLElement {
         insert(newPadding);
 
       }
+
+    }
+
+    // check if there is text between matching brackets
+    function textBetweenBrackets(text) {
+
+      let encouteredNewline = false;
+
+      // go back text and search for an opening bracket
+      let i = text.length - 1;
+      while (i >= 0 && text[i] !== '{') {
+
+        // if there's text between the brackets, return true
+        if (text[i] !== ' ' && text[i] !== '\n') return true;
+
+        // if there's a newline between brackets, save
+        if (text[i] === '\n') encouteredNewline = true;
+
+        i--;
+
+      }
+
+      // if not found matching bracket or not encountered newline,
+      // then there is text between brackets
+      return (text[i] !== '{' || !encouteredNewline);
 
     }
 
@@ -654,7 +711,7 @@ class CodeitElement extends HTMLElement {
 
     }
 
-    // Calculate padding of the current line
+    // calculate padding of current line
     function getPadding(text) {
 
       const tabLength = cd.options.tab.length;
@@ -679,9 +736,7 @@ class CodeitElement extends HTMLElement {
     }
 
     function isTab(str) {
-
       return str === cd.options.tab;
-
     }
 
     function isCtrl(event) {
