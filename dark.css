@@ -1,5 +1,5 @@
-/* 
- * Syntax highlighting 
+/*
+ * Syntax highlighting
  * Colors based on Base16 Ocean Dark
  */
 
@@ -45,12 +45,12 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 cd-el {
   background: #313744;
   color: #a6c3d4;
-  
+
   font-family: 'Google Sans Mono', 'Roboto Mono', 'SF Mono', monospace;
-  
+
   font-size: 14px;
   line-height: 1.5;
-  
+
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
 }
@@ -156,6 +156,7 @@ cd-el::selection, cd-el *::selection {
   left: 0;
   user-select: none;
   -webkit-user-select: none;
+  pointer-events: none;
   line-height: inherit;
   font-size: inherit;
 }
