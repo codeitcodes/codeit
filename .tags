@@ -112,3 +112,4 @@ toString	.\src\prism.js	/^var _self="undefined"!=typeof window?window:"undefined
 updateFileShaHTML	.\htmlrenderer.js	/^function updateFileShaHTML(file, newSha) {$/;"	f
 updateFloat	.\bottomfloat.js	/^function updateFloat() {$/;"	f
 updateLineNumbersHTML	.\htmlrenderer.js	/^function updateLineNumbersHTML() {$/;"	f
+updateSelectedFileLS	.\localstorage.js	/^function updateSelectedFileLS() {$/;"	f
