@@ -46,7 +46,7 @@ function changeSelectedFileLS(newSelectedFile) {
 
 function saveCodeLS() {
 
-  selectedFile.content = encodeUnicode(cd.innerHTML);
+  selectedFile.content = encodeUnicode(cd.textContent);
 
   updateSelectedFileLS();
 
