@@ -238,7 +238,7 @@ function addHTMLItemListeners() {
 async function pushFileFromHTML(fileEl) {
 
   // play push animation
-  playPushAnimation(pushWrapper);
+  playPushAnimation(fileEl.querySelector('.push-wrapper'));
 
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
