@@ -618,18 +618,22 @@ class CodeitElement extends HTMLElement {
       // if selection is empty, select the char before
       if (r0.collapsed) {
 
-        textSel.start--;
-
-        cd.setSelection(textSel.start, textSel.end);
+        cd.setSelection(textSel.start-1, textSel.end);
 
         // get current range
         r0 = s.getRangeAt(0);
 
       }
 
+      // get selection length
+      let selectionLength = r0.toString().length;
+
       // delete current range contents
       // (also deletes the range itself)
       r0.deleteContents();
+
+      // remove the length of the selection from caret position
+      textSel.start = Math.max(textSel.start, textSel.end) - selectionLength;
 
       // create a new range at start of original
       cd.setSelection(textSel.start);

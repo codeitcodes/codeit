@@ -107,6 +107,8 @@ function onFileEclipsedInCache(oldSha, newSha) {
   let fileToUpdate = modifiedFiles[oldSha];
 
   fileToUpdate.sha = newSha;
+  fileToUpdate.caretPos = [0, 0];
+  fileToUpdate.scrollPos = [0, 0];
   fileToUpdate.eclipsed = true;
 
   updateModFilesLS();
