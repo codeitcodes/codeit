@@ -427,7 +427,7 @@ function onEditorKeyup(event) {
   if (hasKeyChangedCaretPos(event)) {
 
     // save caret pos to local storage
-    saveCodeCaretPosLS();
+    saveSelectedFileCaretPos();
 
   }
 
@@ -437,7 +437,7 @@ function onEditorKeyup(event) {
 function onEditorClick(event) {
 
   // save caret pos to local storage
-  saveCodeCaretPosLS();
+  saveSelectedFileCaretPos();
 
 }
 
@@ -507,7 +507,7 @@ function codeChange() {
   updateLineNumbersHTML();
 
   // save code in async thread
-  asyncThread(saveCodeLS, 30);
+  asyncThread(saveSelectedFileContent, 30);
 
 }
 
