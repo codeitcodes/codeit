@@ -248,7 +248,7 @@ async function pushFileFromHTML(fileEl) {
   const fileSelected = fileEl.classList.contains('selected');
 
   // create commit
-  const commitMessage = 'Update ' + item.innerText;
+  const commitMessage = 'Update ' + fileEl.innerText;
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
   let commit = {
@@ -282,7 +282,7 @@ async function loadFileInHTML(fileEl, fileSha) {
       updateModFileContent(selectedFile.sha, selectedFile.content);
       updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
       updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
-      
+
     }
 
   }
