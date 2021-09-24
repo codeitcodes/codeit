@@ -58,11 +58,11 @@ function playPushAnimation(element) {
 pushWrapper.innerHTML = pushIcon;
 
 // push when clicked on button
-pushWrapper.addEventListener('click', async () => {
+pushWrapper.addEventListener('click', () => {
 
   // get selected file element
   let selectedEl = fileWrapper.querySelector('.file.modified[sha="'+ selectedFile.sha +'"]');
-  
+
   if (selectedEl) {
 
     pushFileFromHTML(selectedEl);

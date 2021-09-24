@@ -90,7 +90,6 @@ onFileEclipsedInCache	.\file.js	/^function onFileEclipsedInCache(oldSha, newSha)
 overrideDeleteText	.\src\codeit.js	/^    function overrideDeleteText(event) {$/;"	f
 pairIdCounter	.\src\codeit-match-braces.js	/^	var pairIdCounter = 0;$/;"	v
 processFile	.\codedrop.js	/^function processFile(file) {$/;"	f
-pushFileFromHTML	.\htmlrenderer.js	/^function pushFileFromHTML(fileEl) {$/;"	f
 recordHistoryAsync	.\src\codeit.js	/^    function recordHistoryAsync() {$/;"	f
 rematch	.\src\codeit-match-braces.js	/^	function rematch(code) {$/;"	f
 resizeElements	.\src\codeit-line-numbers.js	/^	function resizeElements(elements) {$/;"	f

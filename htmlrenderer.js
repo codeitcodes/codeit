@@ -171,7 +171,7 @@ function addHTMLItemListeners() {
   items.forEach(item => {
 
     // navigate on click
-    item.addEventListener('click', async (e) => {
+    item.addEventListener('click', (e) => {
 
       // if item is a repository
       if (item.classList.contains('repo')) {
@@ -235,7 +235,7 @@ function addHTMLItemListeners() {
 
 
 // push file to Git from HTML element
-function pushFileFromHTML(fileEl) {
+async function pushFileFromHTML(fileEl) {
 
   // play push animation
   playPushAnimation(pushWrapper);
