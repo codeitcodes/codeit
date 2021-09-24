@@ -148,7 +148,7 @@ function onFileEclipsedInCache(oldSha, newSha) {
 
     }
 
-  }, 60 * 1000); // 60s
+  }, 65 * 1000); // 65s
 
 }
 
