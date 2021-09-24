@@ -52,6 +52,7 @@ getPartnerBrace	.\src\codeit-match-braces.js	/^	function getPartnerBrace(brace) 
 getStyles	.\src\codeit-line-numbers.js	/^	function getStyles(element) {$/;"	f
 handleUndoRedo	.\src\codeit.js	/^    function handleUndoRedo(event) {$/;"	f
 hasKeyChangedCaretPos	.\htmlrenderer.js	/^function hasKeyChangedCaretPos(event) {$/;"	f
+hasKeyChangedCode	.\htmlrenderer.js	/^function hasKeyChangedCode(event) {$/;"	f
 hoverBrace	.\src\codeit-match-braces.js	/^	function hoverBrace() {$/;"	f
 howTo	.\index.html	/^function howTo(do, this) {$/;"	f
 insert	.\src\codeit.js	/^    function insert(text, options) {$/;"	f

@@ -416,7 +416,7 @@ function toggleSidebar(open) {
 function onEditorKeyup(event) {
 
   // if code has changed
-  if (cd.textContent !== cd.prev) {
+  if (hasKeyChangedCode(event)) {
 
     // save code to local storage
     codeChange();
@@ -451,6 +451,16 @@ function onEditorScroll(event) {
 
   // when stopped scrolling, save scroll pos
   editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 300);
+
+}
+
+// check for key to see if code has changed
+function hasKeyChangedCode(event) {
+
+  return event.key !== 'Meta'
+      && event.key !== 'Control'
+      && event.key !== 'Alt'
+      && !event.key.startsWith('Arrow');
 
 }
 
