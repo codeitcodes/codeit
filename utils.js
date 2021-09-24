@@ -1,40 +1,40 @@
 
 const body = document.body,
-      
+
       cd = document.querySelector('cd-el'),
-      
+
       bottomFloat = document.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
-      
+
       github = document.querySelector('.github'),
-      
+
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
       contentWrapper = sidebar.querySelector('.content-wrapper'),
       learnWrapper = sidebar.querySelector('.learn-wrapper'),
-      
+
       loginButton = introWrapper.querySelector('.login'),
-      
+
       loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
-      
+
       titleScreen = header.querySelector('.titlescreen'),
       searchScreen = header.querySelector('.searchscreen'),
-      
+
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
-      
+
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
-      
+
       fileWrapper = sidebar.querySelector('.files'),
-      
+
       versionEl = learnWrapper.querySelector('.version'),
-      
+
       learnFork = learnWrapper.querySelector('.fork'),
       learnInstall = learnWrapper.querySelector('.install'),
       learnClose = learnWrapper.querySelector('.close');
@@ -42,7 +42,7 @@ const body = document.body,
 
 
 // version
-const version = '1.3.0';
+const version = '1.3.5';
 versionEl.innerText = version;
 
 
@@ -58,39 +58,39 @@ if (window.location.href.includes('dev')) {
 let loadInterval;
 
 function startLoading() {
-  
+
   loader.style.width = '0%';
   loader.style.transition = 'none';
   loader.style.opacity = 1;
-  
+
   window.setTimeout(load, 0);
-  
+
   loadInterval = window.setInterval(load, 400);
-  
+
 }
 
 function stopLoading() {
-  
+
   window.clearInterval(loadInterval);
-  
+
   loader.style.width = '100%';
   loader.style.opacity = 0;
-  
+
 }
 
 function load() {
-  
+
   let loadPercent = Number(loader.style.width.replace('%',''));
-  
+
   loadPercent += 10;
-  
+
   if (loadPercent != 100) {
-    
+
     loader.style.transition = '';
     loader.style.width = loadPercent + '%';
-    
+
   }
-  
+
 }
 
 
@@ -106,31 +106,31 @@ const isWindows = navigator.platform.indexOf('Win') > -1;
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
 if (isMobile) {
-  
+
   body.classList.add('mobile');
-  
+
 }
 
 if (isSafari) {
-  
+
   body.classList.add('safari');
-  
+
 }
 
 if (isMac) {
-  
+
   body.classList.add('platform-mac');
-  
+
 } else if (isWindows) {
-  
+
   body.classList.add('platform-win');
-  
+
 }
 
 window.addEventListener('resize', () => {
-  
+
   isLandscape = window.matchMedia('(orientation: landscape)').matches;
-  
+
 });
 
 
@@ -157,38 +157,38 @@ let decodeUnicode = (str) => {
 // localStorage
 
 let getStorage = (item) => {
-  
+
   return localStorage.getItem(item);
-  
+
 }
 
 let setStorage = (item, value) => {
-  
+
   return localStorage.setItem(item, value);
-  
+
 }
 
 
 // Attributes
 
 let getAttr = (element, item) => {
-  
+
   return element.getAttribute(item);
-  
+
 }
 
 let setAttr = (element, item, value) => {
-  
+
   return element.setAttribute(item, value);
-  
+
 }
 
 
 // asynchronous thread
 let asyncThread = (callback, time) => {
-  
+
   window.setTimeout(callback, time);
-  
+
 }
 
 
@@ -203,11 +203,11 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-        
+
         xmlhttp.open('GET', url, true);
-        
+
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        
+
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
@@ -223,7 +223,7 @@ let axios = {
         };
 
         xmlhttp.open('POST', url, true);
-        
+
         xmlhttp.setRequestHeader('Accept', 'application/json');
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send(JSON.stringify(data));
@@ -239,11 +239,11 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-        
+
         xmlhttp.open('PUT', url, true);
-        
+
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        
+
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
     });
@@ -259,7 +259,7 @@ let axios = {
         };
 
         xmlhttp.open('DELETE', url, true);
-        
+
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }

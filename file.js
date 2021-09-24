@@ -3,7 +3,7 @@ let modifiedFiles, selectedFile;
 
 // create a file
 function createFile(dir, sha, name, content, lang,
-                    scrollPos, caretPos, eclipsed) {
+                    caretPos, scrollPos, eclipsed) {
 
   return {
     dir: dir,
@@ -11,8 +11,8 @@ function createFile(dir, sha, name, content, lang,
     name: name,
     content: content,
     lang: lang,
-    scrollPos: scrollPos,
     caretPos: caretPos,
+    scrollPos: scrollPos,
     eclipsed: eclipsed
   }
 
@@ -22,10 +22,10 @@ function createFile(dir, sha, name, content, lang,
 // selected file
 
 function changeSelectedFile(dir, sha, name, content, lang,
-                            scrollPos, caretPos, eclipsed) {
+                            caretPos, scrollPos, eclipsed) {
 
   selectedFile = createFile(dir, sha, name, content, lang,
-                            scrollPos, caretPos, eclipsed);
+                            caretPos, scrollPos, eclipsed);
 
   updateSelectedFileLS();
 
@@ -75,6 +75,14 @@ function addSelectedFileToModFiles() {
 
 }
 
+function updateModFileContent(sha, content) {
+
+  modifiedFiles[sha].content = content;
+
+  updateModFilesLS();
+
+}
+
 // when Git file is eclipsed (not updated) in browser private cache,
 // store the updated file in modifiedFiles object for 1 minute after commit
 function onFileEclipsedInCache(oldSha, newSha) {
@@ -117,6 +125,10 @@ function onFileEclipsedInCache(oldSha, newSha) {
 
       // remove the updated file from modifiedFiles
       deleteModFile(oldSha);
+
+      // update file element sha in HTML
+      const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]'');
+      if (fileEl) setAttr(fileEl, 'sha', newSha);
 
     }
 

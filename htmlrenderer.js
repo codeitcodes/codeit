@@ -74,10 +74,11 @@ async function renderSidebarHTML() {
 
           // add modified flag to file
           let modified = '';
-          if (modifiedFiles[item.sha]) modified = 'modified';
+          if (modifiedFiles[item.sha] &&
+              !modifiedFiles[item.sha].eclipsed) modified = ' modified';
 
           out += `
-          <div class="item file `+ modified +`" sha="`+ item.sha +`">
+          <div class="item file`+ modified +`" sha="`+ item.sha +`">
             <div class="label">
               `+ fileIcon +`
               <a class="name">`+ item.name +`</a>
@@ -146,20 +147,17 @@ async function renderSidebarHTML() {
   // if selected file is in directory
   if (selectedFile.dir == treeLoc.join()) {
 
-    let selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+    let selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
 
-    if (selectedItem) {
+    if (selectedEl) {
 
       // select file
-      selectedItem.classList.add('selected');
-      selectedItem.scrollIntoViewIfNeeded();
+      selectedEl.classList.add('selected');
+      selectedEl.scrollIntoViewIfNeeded();
 
     }
 
   }
-
-  // protect unsaved code
-  protectUnsavedCode();
 
 }
 
@@ -223,67 +221,7 @@ function addHTMLItemListeners() {
         } else {
 
           // push file
-
-          // play push animation
-          playPushAnimation(pushWrapper);
-
-          // file cannot be modified
-          // if its SHA was updated
-          item.classList.remove('modified');
-          bottomFloat.classList.remove('modified');
-
-
-          // create commit
-          let commitMessage = 'Update ' + item.innerText;
-
-          let commit = {
-            message: commitMessage,
-            file: {
-              dir: treeLoc.join(),
-              sha: getAttr(item, 'sha'),
-              name: item.innerText,
-              selected: true
-            }
-          };
-
-          // if currently editing file
-          if (item.classList.contains('selected')) {
-
-            // get current value of file
-            commit.file.content = encodeUnicode(cd.textContent);
-
-          } else { // else, load from storage
-
-            commit.file.content = modifiedFiles[commit.file.sha][0];
-
-          }
-
-
-          // push file asynchronously
-          const newSha = await git.push(commit);
-
-
-          // create a new modified file and delete the old one to fix
-          // Github API requests not refreshing browser private cache 1 minute after commit
-          // (https://github.com/barhatsor/codeit/issues/36)
-
-          // create a new modified file
-
-          let newModifiedFile = modifiedFiles[commit.file.sha];
-
-          newModifiedFile.sha = newSha;
-          newModifiedFile.nonexistent = true;
-          newModifiedFile.content = commit.file.content;
-
-          // save new modified file to local storage
-          saveModifiedFileLS(newModifiedFile);
-
-          // delete old modified file from local storage
-          deleteModifiedFileLS(commit.file.sha);
-
-
-          // update file in HTML
-          updateFileShaHTML(item, newSha);
+          pushFileFromHTML(item);
 
         }
 
@@ -296,28 +234,52 @@ function addHTMLItemListeners() {
 }
 
 
-async function loadFileInHTML(file, sha) {
+// push file to Git from HTML element
+function pushFileFromHTML(fileEl) {
 
-  // if previous selection exists
-  if (selectedFile.sha != '') {
+  // play push animation
+  playPushAnimation(pushWrapper);
 
-    // get selection in modifiedFiles array
+  // disable pushing file in HTML
+  fileEl.classList.remove('modified');
+  bottomFloat.classList.remove('modified');
+
+  // get file selected status
+  const fileSelected = fileEl.classList.contains('selected');
+
+  // create commit
+  const commitMessage = 'Update ' + item.innerText;
+  const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
+
+  let commit = {
+    message: commitMessage,
+    file: commitFile
+  };
+
+  // push file asynchronously
+  const newSha = await git.push(commit);
+
+  // Git file is eclipsed (not updated) in browser private cache,
+  // so store the updated file in modifiedFiles object for 1 minute after commit
+  onFileEclipsedInCache(commit.file.sha, newSha);
+
+}
+
+
+// load file in sidebar and codeit
+async function loadFileInHTML(fileEl, fileSha) {
+
+  // if previous file selection exists
+  if (selectedFile.sha) {
+
+    // get previous selection in modifiedFiles array
     let selectedItem = modifiedFiles[selectedFile.sha];
 
     // if previous selection was modified
     if (selectedItem) {
 
       // save previous selection in localStorage
-
-      const previousFile = {
-        dir: treeLoc.join(),
-        sha: selectedFile.sha,
-        name: selectedFile.name,
-        nonexistent: selectedFile.nonexistent,
-        content: encodeUnicode(cd.textContent)
-      };
-
-      saveModifiedFileLS(previousFile);
+      updateModFileContent(selectedFile.sha, selectedFile.content);
 
     }
 
@@ -328,62 +290,50 @@ async function loadFileInHTML(file, sha) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
 
-  const selectedFileName = file.querySelector('.name').innerText;
 
-  // change selected file
+  // select the new file
 
-  file.classList.add('selected');
-
-  const fileNonexistent = (getAttr(file, 'nonexistent') == 'true') ? true : false;
-
-  const newSelectedFile = {
-    dir: treeLoc.join(),
-    sha: getAttr(file, 'sha'),
-    name: selectedFileName,
-    nonexistent: fileNonexistent
-  };
-
-  changeSelectedFileLS(newSelectedFile);
+  fileEl.classList.add('selected');
 
   // if file is not modified; fetch from Git
-  if (!file.classList.contains('modified')) {
+  if (!modifiedFiles[fileSha]) {
 
     // start loading
     startLoading();
 
     // get file from git
-    const resp = await git.getFile(treeLoc, selectedFileName);
+    const resp = await git.getFile(treeLoc, fileEl.innerText);
 
-    // show file content in codeit
-    cd.textContent = decodeUnicode(resp.content);
+    // change selected file
+    changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
+                       [0, 0], [0, 0], false);
 
     // stop loading
     stopLoading();
 
-  } else { // else, load file from local storage
+  } else { // else, load file from modifiedFiles object
 
-    const content = modifiedFiles[sha].content;
+    const modFile = modifiedFiles[fileSha];
 
-    // show file content in codeit
-    cd.textContent = decodeUnicode(content);
+    changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
+                       modFile.caretPos, modFile.scrollPos, modFile.eclipsed);
 
   }
 
-  // change codeit lang
-  cd.lang = getFileLang(selectedFileName);
+  // show file content in codeit
+  cd.textContent = decodeUnicode(selectedFile.content);
 
-  // set caret pos in code
-  cd.setSelection(0, 0);
-  cd.scrollTo(0, 0);
+  // change codeit lang
+  cd.lang = selectedFile.lang;
+
+  // set caret pos in codeit
+  cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+
+  // set scroll pos in codeit
+  cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
   // clear codeit history
   cd.history = [];
-
-  // save code in local storage
-  saveCodeLS();
-  saveCodeCaretPosLS();
-  saveCodeScrollPosLS();
-  saveCodeLangLS();
 
   // update line numbers
   updateLineNumbersHTML();
@@ -393,33 +343,6 @@ async function loadFileInHTML(file, sha) {
 
     // update bottom float
     updateFloat();
-
-  }
-
-}
-
-
-function updateFileShaHTML(file, newSha) {
-
-  // update SHA of file
-  setAttr(file, 'sha', newSha);
-
-  // fix file caching
-  setAttr(file, 'nonexistent', 'true');
-
-  // if file is selected
-  if (file.classList.contains('selected')) {
-
-    // update selection SHA
-
-    const newSelectedFile = {
-      dir: treeLoc.join(),
-      sha: newSha,
-      name: file.innerText,
-      nonexistent: true
-    };
-
-    changeSelectedFileLS(newSelectedFile);
 
   }
 
@@ -493,7 +416,7 @@ function toggleSidebar(open) {
 function onEditorKeyup(event) {
 
   // if code has changed
-  if (hasKeyChangedCode(event)) {
+  if (cd.textContent !== cd.prev) {
 
     // save code to local storage
     codeChange();
@@ -531,16 +454,6 @@ function onEditorScroll(event) {
 
 }
 
-// check for key to see if code has changed
-function hasKeyChangedCode(event) {
-
-  return event.key !== 'Meta'
-      && event.key !== 'Control'
-      && event.key !== 'Alt'
-      && !event.key.startsWith('Arrow');
-
-}
-
 // check for key to see
 // if caret position has changed
 function hasKeyChangedCaretPos(event) {
@@ -557,27 +470,27 @@ function isKeyEventMeta(event) {
 // called on code change event
 function codeChange() {
 
-  // if modified file is not in localStorage
+  // if selected file is not in modifiedFiles
   if (!modifiedFiles[selectedFile.sha]) {
 
-    // save modified file in localStorage
+    // add selected file to modifiedFiles
+    addSelectedFileToModFiles();
 
-    const modifiedFile = {
-      dir: treeLoc.join(),
-      sha: selectedFile.sha,
-      name: selectedFile.name,
-      nonexistent: selectedFile.nonexistent,
-      content: encodeUnicode(cd.textContent)
-    };
+    // if selected file is eclipsed,
+    // change the sha of file element in HTML to new sha
+    if (selectedFile.eclipsed) {
 
-    saveModifiedFileLS(modifiedFile);
+      let selectedEl = fileWrapper.querySelector('.file.selected');
+      setAttr(selectedEl, 'sha', selectedFile.sha);
+
+    }
 
 
     // enable pushing file in HTML
 
     const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
 
-    // if selected file exists
+    // if selected file element exists in HTML
     if (selectedEl) {
 
       // enable pushing file
@@ -595,30 +508,6 @@ function codeChange() {
 
   // save code in async thread
   asyncThread(saveCodeLS, 30);
-
-}
-
-// protect unsaved code
-// if logged into github but
-// cache didn't change yet
-function protectUnsavedCode() {
-
-  const selectedItem = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
-
-  const loggedIntoGit = (githubToken != null),
-        cacheFileNotExist = (selectedFile.dir == treeLoc.join() && selectedItem == null);
-
-  const protectUnsavedCode = (loggedIntoGit ? cacheFileNotExist : false);
-
-  if (protectUnsavedCode == true) {
-
-    // clear codeit
-    cd.lang = 'plain';
-    cd.textContent = '';
-
-    saveCodeLS();
-
-  }
 
 }
 
