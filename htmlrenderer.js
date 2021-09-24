@@ -450,7 +450,7 @@ function onEditorScroll(event) {
   if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
 
   // when stopped scrolling, save scroll pos
-  editorScrollTimeout = window.setTimeout(saveCodeScrollPosLS, 300);
+  editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 300);
 
 }
 
