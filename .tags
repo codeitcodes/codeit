@@ -31,6 +31,7 @@ codeChange	.\htmlrenderer.js	/^function codeChange() {$/;"	f
 createFile	.\file.js	/^function createFile(dir, sha, name, content, lang,$/;"	f
 debounceHighlight	.\src\codeit.js	/^    function debounceHighlight() {$/;"	f
 deleteCurrentSelection	.\src\codeit.js	/^    function deleteCurrentSelection() {$/;"	f
+deleteModFile	.\file.js	/^function deleteModFile(fileSha) {$/;"	f
 function.getCaretPos	.\src\codeit.js	/^      function getCaretPos(targetNode, caretOffset) {$/;"	f
 getCaretNode	.\src\codeit.js	/^    function getCaretNode(startPos, endPos) {$/;"	f
 getCaretNode.getCaretTextNode	.\src\codeit.js	/^      function getCaretTextNode(caretPosInText) {$/;"	f
@@ -85,6 +86,7 @@ mapClassName	.\src\codeit-match-braces.js	/^	function mapClassName(name) {$/;"	f
 onEditorClick	.\htmlrenderer.js	/^function onEditorClick(event) {$/;"	f
 onEditorKeyup	.\htmlrenderer.js	/^function onEditorKeyup(event) {$/;"	f
 onEditorScroll	.\htmlrenderer.js	/^function onEditorScroll(event) {$/;"	f
+onFileEclipsedInCache	.\file.js	/^function onFileEclipsedInCache(oldSha, newSha) {$/;"	f
 overrideDeleteText	.\src\codeit.js	/^    function overrideDeleteText(event) {$/;"	f
 pairIdCounter	.\src\codeit-match-braces.js	/^	var pairIdCounter = 0;$/;"	v
 processFile	.\codedrop.js	/^function processFile(file) {$/;"	f

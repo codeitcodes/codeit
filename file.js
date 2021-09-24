@@ -127,7 +127,7 @@ function onFileEclipsedInCache(oldSha, newSha) {
       deleteModFile(oldSha);
 
       // update file element sha in HTML
-      const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]'');
+      const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
       if (fileEl) setAttr(fileEl, 'sha', newSha);
 
     }
