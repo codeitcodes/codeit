@@ -83,6 +83,22 @@ function updateModFileContent(sha, content) {
 
 }
 
+function updateModFileCaretPos(sha, caretPos) {
+
+  modifiedFiles[sha].caretPos = caretPos;
+
+  updateModFilesLS();
+
+}
+
+function updateModFileScrollPos(sha, scrollPos) {
+
+  modifiedFiles[sha].scrollPos = scrollPos;
+
+  updateModFilesLS();
+
+}
+
 // when Git file is eclipsed (not updated) in browser private cache,
 // store the updated file in modifiedFiles object for 1 minute after commit
 function onFileEclipsedInCache(oldSha, newSha) {

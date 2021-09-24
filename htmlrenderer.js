@@ -280,7 +280,9 @@ async function loadFileInHTML(fileEl, fileSha) {
 
       // save previous selection in localStorage
       updateModFileContent(selectedFile.sha, selectedFile.content);
-
+      updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+      updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+      
     }
 
   }
