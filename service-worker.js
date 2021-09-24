@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v67';
+const CACHE_NAME = 'static-cache-v68';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -16,6 +16,7 @@ const FILES_TO_CACHE = [
 
   '/utils.js',
   '/manifest.js',
+  '/file.js',
   '/git/gitapi.js',
   '/git/gitauth.js',
   '/codedrop.js',

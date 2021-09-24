@@ -17,6 +17,7 @@ PARTNER.{	.\src\codeit-match-braces.js	/^		'{': '}',$/;"	p
 PLUGIN_NAME	.\src\codeit-line-numbers.js	/^	var PLUGIN_NAME = 'line-numbers';$/;"	v
 addHTMLItemListeners	.\htmlrenderer.js	/^function addHTMLItemListeners() {$/;"	f
 addLineRows	.\src\codeit-line-numbers.js	/^	function addLineRows(element) {$/;"	f
+addSelectedFileToModFiles	.\file.js	/^function addSelectedFileToModFiles() {$/;"	f
 afterCursor	.\src\codeit.js	/^    function afterCursor() {$/;"	f
 alignBracket	.\src\codeit.js	/^    function alignBracket(event) {$/;"	f
 beforeCursor	.\src\codeit.js	/^    function beforeCursor() {$/;"	f
@@ -25,14 +26,15 @@ cd.options.catchTab	.\src\codeit.js	/^      catchTab: true,$/;"	p
 cd.options.openBrackets	.\src\codeit.js	/^      openBrackets: ['(', '[', '{'],$/;"	p
 cd.options.preserveIdent	.\src\codeit.js	/^      preserveIdent: true,$/;"	p
 cd.options.tab	.\src\codeit.js	/^      tab: '  ',$/;"	p
-changeSelectedFileLS	.\localstorage.js	/^function changeSelectedFileLS(newSelectedFile) {$/;"	f
+changeSelectedFile	.\file.js	/^function changeSelectedFile(dir, sha, name, content, lang,$/;"	f
 codeChange	.\htmlrenderer.js	/^function codeChange() {$/;"	f
 const.dir	.\htmlrenderer.js	/^        dir: treeLoc.join(),$/;"	p
 const.dir	.\htmlrenderer.js	/^      dir: treeLoc.join(),$/;"	p
 const.dir	.\htmlrenderer.js	/^    dir: treeLoc.join(),$/;"	p
+createFile	.\file.js	/^function createFile(dir, sha, name, content, lang,$/;"	f
 debounceHighlight	.\src\codeit.js	/^    function debounceHighlight() {$/;"	f
 deleteCurrentSelection	.\src\codeit.js	/^    function deleteCurrentSelection() {$/;"	f
-deleteModifiedFileLS	.\localstorage.js	/^function deleteModifiedFileLS(fileSha) {$/;"	f
+deleteModFile	.\file.js	/^function deleteModFile(fileSha) {$/;"	f
 function.getCaretPos	.\src\codeit.js	/^      function getCaretPos(targetNode, caretOffset) {$/;"	f
 getCaretNode	.\src\codeit.js	/^    function getCaretNode(startPos, endPos) {$/;"	f
 getCaretNode.getCaretTextNode	.\src\codeit.js	/^      function getCaretTextNode(caretPosInText) {$/;"	f
@@ -86,6 +88,7 @@ mapClassName	.\src\codeit-match-braces.js	/^	function mapClassName(name) {$/;"	f
 onEditorClick	.\htmlrenderer.js	/^function onEditorClick(event) {$/;"	f
 onEditorKeyup	.\htmlrenderer.js	/^function onEditorKeyup(event) {$/;"	f
 onEditorScroll	.\htmlrenderer.js	/^function onEditorScroll(event) {$/;"	f
+onFileEclipsedInCache	.\file.js	/^function onFileEclipsedInCache(oldSha, newSha) {$/;"	f
 overrideDeleteText	.\src\codeit.js	/^    function overrideDeleteText(event) {$/;"	f
 pairIdCounter	.\src\codeit-match-braces.js	/^	var pairIdCounter = 0;$/;"	v
 processFile	.\codedrop.js	/^function processFile(file) {$/;"	f
@@ -95,11 +98,10 @@ rematch	.\src\codeit-match-braces.js	/^	function rematch(code) {$/;"	f
 resizeElements	.\src\codeit-line-numbers.js	/^	function resizeElements(elements) {$/;"	f
 saveAuthTokenLS	.\localstorage.js	/^function saveAuthTokenLS(authToken) {$/;"	f
 saveBeforeInstallPromptEvent	.\pwainstall.js	/^function saveBeforeInstallPromptEvent(evt) {$/;"	f
-saveCodeCaretPosLS	.\localstorage.js	/^function saveCodeCaretPosLS() {$/;"	f
-saveCodeLS	.\localstorage.js	/^function saveCodeLS() {$/;"	f
-saveCodeLangLS	.\localstorage.js	/^function saveCodeLangLS() {$/;"	f
-saveCodeScrollPosLS	.\localstorage.js	/^function saveCodeScrollPosLS() {$/;"	f
-saveModifiedFileLS	.\localstorage.js	/^function saveModifiedFileLS(modifiedFile) {$/;"	f
+saveSelectedFileCaretPos	.\file.js	/^function saveSelectedFileCaretPos() {$/;"	f
+saveSelectedFileContent	.\file.js	/^function saveSelectedFileContent() {$/;"	f
+saveSelectedFileLang	.\file.js	/^function saveSelectedFileLang() {$/;"	f
+saveSelectedFileScrollPos	.\file.js	/^function saveSelectedFileScrollPos() {$/;"	f
 saveSidebarStateLS	.\localstorage.js	/^function saveSidebarStateLS() {$/;"	f
 saveTreeLocLS	.\localstorage.js	/^function saveTreeLocLS(treeLoc) {$/;"	f
 setupCodeitApp	.\htmlrenderer.js	/^function setupCodeitApp() {$/;"	f
@@ -112,4 +114,5 @@ toString	.\src\prism.js	/^var _self="undefined"!=typeof window?window:"undefined
 updateFileShaHTML	.\htmlrenderer.js	/^function updateFileShaHTML(file, newSha) {$/;"	f
 updateFloat	.\bottomfloat.js	/^function updateFloat() {$/;"	f
 updateLineNumbersHTML	.\htmlrenderer.js	/^function updateLineNumbersHTML() {$/;"	f
+updateModFilesLS	.\localstorage.js	/^function updateModFilesLS() {$/;"	f
 updateSelectedFileLS	.\localstorage.js	/^function updateSelectedFileLS() {$/;"	f
