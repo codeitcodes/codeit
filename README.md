@@ -1,6 +1,7 @@
 <h1 align="center">
-  <img src="/icons/mac-favicon.png" height="100" width="100">
-  <br>Codeit
+  <a href="https://codeit.berryscript.com"><img src="/icons/mac-favicon.png" height="100" width="100"></a>
+  <br>
+  Codeit
 </h1>
 <p align="center">
   <h3 align="center">  
