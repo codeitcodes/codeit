@@ -422,7 +422,7 @@ class CodeitElement extends HTMLElement {
       while (i < text.length && text[i] !== '\n' && text[i] !== '}') {
 
         // if there's text between the brackets, return false
-        if (text[i] !== ' ') return [false, 0];
+        if (text[i] !== ' ' && text[i] !== '\t') return [false, 0];
 
         i++;
 
@@ -451,8 +451,8 @@ class CodeitElement extends HTMLElement {
 
         let textBefore = before;
 
-        // if there's text between brackets, return
-        if (textBetweenBrackets(textBefore)) return;
+        // if bracket pair is a one-liner, return
+        if (isOneLiner(textBefore)) return;
 
         // run on all text to cursor, and find the matching padding
         let bracketArr = [];
@@ -493,28 +493,16 @@ class CodeitElement extends HTMLElement {
 
     }
 
-    // check if there is text between matching brackets
-    function textBetweenBrackets(text) {
+    // check if there's text
+    // on the same line as closing bracket
+    function isOneLiner(text) {
 
-      let encouteredNewline = false;
-
-      // go back text and search for an opening bracket
+      // go back text and stop when encountered
+      // a char that isn't a space or a tab
       let i = text.length - 1;
-      while (i >= 0 && text[i] !== '{') {
+      while (i >= 0 && (text[i] === ' ' || text[i] === '\t')) i--;
 
-        // if there's text between the brackets, return true
-        if (text[i] !== ' ' && text[i] !== '\n') return true;
-
-        // if there's a newline between brackets, save
-        if (text[i] === '\n') encouteredNewline = true;
-
-        i--;
-
-      }
-
-      // if not found matching bracket or not encountered newline,
-      // then there is text between brackets
-      return (text[i] !== '{' || !encouteredNewline);
+      return (text[i] !== '\n');
 
     }
 
