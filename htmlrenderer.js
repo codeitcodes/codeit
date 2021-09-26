@@ -346,6 +346,11 @@ async function loadFileInHTML(fileEl, fileSha) {
     // update bottom float
     updateFloat();
 
+  } else { // if on desktop
+    
+    // check codeit scrollbar
+    checkScrollbar();
+    
   }
 
 }
