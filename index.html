@@ -84,6 +84,27 @@ if ('serviceWorker' in navigator) {
 
 }
 
+function checkPWA() {
+  
+  let displayMode = 'browser tab';
+
+  if (navigator.standalone) {
+    displayMode = 'standalone-ios';
+  }
+
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    displayMode = 'standalone';
+  }
+
+  if (displayMode != 'browser tab') {
+    window.location.href = '/full';
+  }
+
+};
+
+checkPWA();
+document.addEventListener('visibilitychange', checkPWA);
+
 const isMobile = navigator.userAgent.match('Mobile') || false;
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isSafari = navigator.standalone || false;
