@@ -132,13 +132,31 @@ window.addEventListener('resize', () => {
 
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+  
+  let displayMode = 'browser tab';
+  
+  if (navigator.standalone) {
+    displayMode = 'standalone-ios';
+  }
+  
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    displayMode = 'standalone';
+  }
+
+  if (displayMode == 'browser tab') {
+    window.location.href = '/';
+  }
+  
+});
+
 
 // base64 encode/decode
 
 let encodeUnicode = (str) => {
   // first we use encodeURIComponent to get percent-encoded UTF-8,
   // then we convert the percent encodings into raw bytes which
-  // can be fed into btoa.
+  // can be fed into btoa
   return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
       function toSolidBytes(match, p1) {
           return String.fromCharCode('0x' + p1);
@@ -146,7 +164,7 @@ let encodeUnicode = (str) => {
 }
 
 let decodeUnicode = (str) => {
-  // going backwards: from bytestream, to percent-encoding, to original string.
+  // going backwards: from bytestream, to percent-encoding, to original string
   return decodeURIComponent(atob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
