@@ -432,6 +432,18 @@ function onEditorKeyup(event) {
     saveSelectedFileCaretPos();
 
   }
+
+}
+
+// when clicked on editor, save new caret position
+function onEditorClick() {
+
+  // save caret pos to local storage
+  saveSelectedFileCaretPos();
+
+}
+
+function onEditorKeydown() {
   
   // if on desktop
   if (!isMobile) {
@@ -450,22 +462,14 @@ function onEditorKeyup(event) {
     }
     
   }
-
-}
-
-// when clicked on editor, save new caret position
-function onEditorClick(event) {
-
-  // save caret pos to local storage
-  saveSelectedFileCaretPos();
-
+  
 }
 
 // when scrolled editor, save new scroll position
 
 let editorScrollTimeout;
 
-function onEditorScroll(event) {
+function onEditorScroll() {
 
   if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
 
@@ -544,11 +548,12 @@ function codeChange() {
 function setupEditor() {
 
   // add editor event listeners
-
+  
   cd.addEventListener('keyup', onEditorKeyup);
   cd.addEventListener('click', onEditorClick);
+  cd.addEventListener('keydown', onEditorKeydown);
   cd.addEventListener('scroll', onEditorScroll);
-
+  
   // if code in storage
   if (selectedFile.content) {
 
