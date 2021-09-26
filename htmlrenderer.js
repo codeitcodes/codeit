@@ -518,8 +518,11 @@ function isKeyEventMeta(event) {
 function codeChange() {
 
   // if selected file is not in modifiedFiles
-  if (!modifiedFiles[selectedFile.sha]) {
-
+  // or if it is in modifiedFiles and not eclipsed
+  if (!modifiedFiles[selectedFile.sha] ||
+      (modifiedFiles[selectedFile.sha] &&
+       !modifiedFiles[selectedFile.sha].eclipsed)) {
+    
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
