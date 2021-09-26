@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (displayMode == 'browser tab') {
-    window.location.href = '/';
+    //window.location.href = '/';
   }
   
 });
