@@ -618,7 +618,21 @@ function setupEditor() {
     e.preventDefault();
 
   });
-
+  
+  // disable Ctrl/Cmd+S
+  document.addEventListener('keydown', (e) => {
+    
+    if (e.key === 's' && isKeyEventMeta(e)) {
+      
+      e.preventDefault();
+      
+      if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
+      else console.log('[Ctrl+S] Always saving. Always saving.');
+      
+    }
+    
+  }, false);
+  
 }
 
 function updateLineNumbersHTML() {
@@ -678,4 +692,4 @@ function setupCodeitApp() {
   setupSidebar();
 
 }
-
+  
