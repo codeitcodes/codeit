@@ -44,6 +44,7 @@ window.addEventListener('appinstalled', logAppInstalled);
 // Log the installation
 function logAppInstalled(evt) {
   console.log('Codeit installed succesfully.', evt);
+  window.location.href = '/full';
 }
 
 let deferredInstallPrompt = null;
