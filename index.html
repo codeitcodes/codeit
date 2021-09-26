@@ -54,7 +54,6 @@ window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
 function saveBeforeInstallPromptEvent(evt) {
   evt.preventDefault();
   deferredInstallPrompt = evt;
-  learnInstall.classList.remove('disabled');
 }
 
 // Event handler for butInstall - Does the PWA installation.
