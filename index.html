@@ -37,9 +37,8 @@
 
 </head>
 <body ontouchstart=""></body>
-<script src="utils.js"></script>
-<script src="manifest.js"></script>
 <script>
+
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
@@ -84,5 +83,10 @@ if ('serviceWorker' in navigator) {
   });
 
 }
+
+const isMobile = navigator.userAgent.match('Mobile') || false;
+const isSafari = navigator.standalone || false;
+
 </script>
+<script src="manifest.js"></script>
 </html>
