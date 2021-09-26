@@ -432,6 +432,24 @@ function onEditorKeyup(event) {
     saveSelectedFileCaretPos();
 
   }
+  
+  // if on desktop
+  if (!isMobile) {
+    
+    // if codeit is horizontally scrollable
+    if (cd.scrollWidth > cd.clientWidth) {
+    
+      // move sidebar arrow up to make
+      // way for horizontal scrollbar
+      github.classList.add('scrollbar');
+      
+    } else {
+      
+      github.classList.remove('scrollbar');
+      
+    }
+    
+  }
 
 }
 
