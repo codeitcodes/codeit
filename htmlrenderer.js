@@ -458,8 +458,7 @@ function onEditorScroll() {
 
 function checkScrollbar() {
   
-  // if on desktop
-  if (!isMobile) {
+  window.setTimeout(() => {
     
     // if codeit is horizontally scrollable
     if (cd.scrollWidth > cd.clientWidth) {
@@ -474,7 +473,7 @@ function checkScrollbar() {
       
     }
     
-  }
+  }, 0);
   
 }
 
@@ -553,7 +552,7 @@ function setupEditor() {
   cd.addEventListener('click', onEditorClick);
   cd.addEventListener('scroll', onEditorScroll);
   
-  cd.addEventListener('input', checkScrollbar);
+  if (!isMobile) cd.addEventListener('keydown', checkScrollbar);
   
   // if code in storage
   if (selectedFile.content) {
