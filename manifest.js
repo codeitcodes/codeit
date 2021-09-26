@@ -44,7 +44,7 @@ if (!isMobile) {
   
   // change page favicon
   var link = document.querySelector("link[rel*='icon']");
-  link.href = 'icons/mac-favicon.png';
+  link.href = '/icons/app-favicon.png';
   
 } else if (!isSafari) {
   
