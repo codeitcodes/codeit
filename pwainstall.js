@@ -8,9 +8,9 @@ window.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(display-mode: standalone)').matches) {
     displayMode = 'standalone';
   }
-  
+
   if (displayMode == 'browser tab') {
-    //window.location.href = 'https://codeit.berryscript.com';
+    //window.location.href = '/';
   }
   
 });
@@ -57,30 +57,30 @@ learnInstall.addEventListener('click', installPWA);
 
 
 learnFork.addEventListener('click', () => {
-  
+
   window.location.href = 'https://github.com/barhatsor/codeit';
-  
+
 })
 
 learnClose.addEventListener('click', () => {
-  
+
   if (learnWrapper.classList.contains('close-sidebar')) {
-    
+
     toggleSidebar(false);
     learnWrapper.classList.remove('close-sidebar');
-    
+
     saveSidebarStateLS();
-    
+
     window.setTimeout(() => {
-      
+
       sidebar.classList.remove('learn');
-      
+
     }, 400);
-    
+
   } else {
-    
+
     sidebar.classList.remove('learn');
-    
+
   }
-  
+
 })
