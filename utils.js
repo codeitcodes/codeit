@@ -32,17 +32,16 @@ const body = document.body,
       searchClear = searchScreen.querySelector('.clear'),
 
       fileWrapper = sidebar.querySelector('.files'),
-
+      
       versionEl = learnWrapper.querySelector('.version'),
-
-      learnFork = learnWrapper.querySelector('.fork'),
-      learnInstall = learnWrapper.querySelector('.install'),
-      learnClose = learnWrapper.querySelector('.close');
+      learnClose = learnWrapper.querySelector('.close'),
+      
+      logoutButton = learnWrapper.querySelector('.logout');
 
 
 
 // version
-const version = '1.3.5';
+const version = '1.3.6';
 versionEl.innerText = version;
 
 
