@@ -380,11 +380,19 @@ sidebarTitle.addEventListener('click', () => {
     // render sidebar
     renderSidebarHTML();
 
-  } else { // show learn screen
+  } else { // show learn page
 
     sidebar.classList.add('learn');
 
   }
+
+})
+
+
+// close learn page on click of button
+learnClose.addEventListener('click', () => {
+
+  sidebar.classList.remove('learn');
 
 })
 
