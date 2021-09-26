@@ -929,7 +929,7 @@ body.loaded .splash-wrapper {
   z-index: 10;
 }
 
-.splash-wrapper.fresh::before {
+.splash-wrapper.connection::before {
   content: unset;
 }
 
