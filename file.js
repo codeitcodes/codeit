@@ -100,9 +100,13 @@ function updateModFileScrollPos(sha, scrollPos) {
 }
 
 // when Git file is eclipsed (not updated) in browser private cache,
-// store the updated file in modifiedFiles object for 1 minute after commit
+// store the updated file under old sha as key
+// and store the updated file under new sha as key
+// in modifiedFiles object for 1 minute after commit
 function onFileEclipsedInCache(oldSha, newSha) {
-
+  
+  // store the updated file under old sha as key
+  
   // find the eclipsed file
   let fileToUpdate = modifiedFiles[oldSha];
 
@@ -110,46 +114,53 @@ function onFileEclipsedInCache(oldSha, newSha) {
   fileToUpdate.caretPos = [0, 0];
   fileToUpdate.scrollPos = [0, 0];
   fileToUpdate.eclipsed = true;
-
-  updateModFilesLS();
-
-  // if file is selected
+  
+  // if file to update is selected
   if (selectedFile.sha === oldSha) {
-
-    // update selected file
+    
+    // update its content
+    // to the selected file contents
+    updateModFileContent(oldSha, selectedFile.content);
+    
+    // update selected file sha to the new sha
     selectedFile.sha = newSha;
-    selectedFile.eclipsed = true;
-
+     
     updateSelectedFileLS();
-
+    
   }
-
-
-  // set 1 minute timeout to remove updated file
+  
+  
+  // store the updated file under new sha as key
+  modifiedFiles[newSha] = fileToUpdate;
+  
+  
+  // update modified files in local storage
+  updateModFilesLS();
+  
+  
+  // set 1 minute timeout to remove updated files
   window.setTimeout(() => {
-
-    // if not commited again while in timout
-    if (fileToUpdate.sha === newSha) {
-
-      // if file is selected
-      if (selectedFile.sha === newSha) {
-
-        // update selected file
-        selectedFile.eclipsed = false;
-
-        updateSelectedFileLS();
-
-      }
-
-      // remove the updated file from modifiedFiles
-      deleteModFile(oldSha);
-
-      // update file element sha in HTML
-      const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
-      if (fileEl) setAttr(fileEl, 'sha', newSha);
-
+    
+    // remove the updated file under old sha as key
+    // from modifiedFiles
+    deleteModFile(oldSha);
+    
+    // if file element under old sha exists in HTML,
+    // update it to the new sha
+    const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
+    if (fileEl) setAttr(fileEl, 'sha', newSha);
+    
+    
+    // if not edited updated file under new sha as key
+    // while in timeout (file is still eclipsed)
+    if (modifiedFiles[newSha].eclipsed) {
+      
+      // remove the updated file under new sha as key
+      // from modifiedFiles
+      deleteModFile(newSha);
+      
     }
-
+    
   }, 65 * 1000); // 65s
 
 }
@@ -160,4 +171,4 @@ function deleteModFile(fileSha) {
 
   updateModFilesLS();
 
-}
+}  
