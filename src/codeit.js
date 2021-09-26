@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.5.8
+   v2.5.9
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -447,9 +447,7 @@ class CodeitElement extends HTMLElement {
       // if typed a closing bracket
       if (event.key === '}') {
 
-        const before = beforeCursor();
-
-        let textBefore = before;
+        const textBefore = beforeCursor();
 
         // if bracket pair is a one-liner, return
         if (isOneLiner(textBefore)) return;
@@ -462,15 +460,31 @@ class CodeitElement extends HTMLElement {
 
           if (textBefore[i] == '{') {
 
-            const textBeforeBracket = textBefore.substr(0, i);
+            const bracketRange = cd.dropper.atTextPos(i);
 
-            const [padding] = getPadding(textBeforeBracket);
+            if (cd.dropper.is('punctuation', bracketRange)) {
 
-            bracketArr.push(padding);
+              const textBeforeBracket = textBefore.substr(0, i);
+
+              const [padding] = getPadding(textBeforeBracket);
+
+              bracketArr.push(padding);
+
+            }
+
+            bracketRange.detach();
 
           } else if (textBefore[i] == '}') {
 
-            bracketArr.pop();
+            const bracketRange = cd.dropper.atTextPos(i);
+
+            if (cd.dropper.is('punctuation', bracketRange)) {
+
+              bracketArr.pop();
+
+            }
+
+            bracketRange.detach();
 
           }
 
@@ -478,16 +492,20 @@ class CodeitElement extends HTMLElement {
 
         }
 
-        const newPadding = bracketArr[bracketArr.length-1];
+        if (bracketArr.length > 0) {
 
-        const [oldPadding, startPos] = getPadding(before);
+          const newPadding = bracketArr[bracketArr.length-1];
 
-        // remove old padding
-        cd.setSelection(startPos, startPos + oldPadding.length);
-        deleteCurrentSelection();
+          const [oldPadding, startPos] = getPadding(textBefore);
 
-        // insert new padding
-        insert(newPadding);
+          // remove old padding
+          cd.setSelection(startPos, startPos + oldPadding.length);
+          deleteCurrentSelection();
+
+          // insert new padding
+          insert(newPadding);
+
+        }
 
       }
 
@@ -503,6 +521,31 @@ class CodeitElement extends HTMLElement {
       while (i >= 0 && (text[i] === ' ' || text[i] === '\t')) i--;
 
       return (text[i] !== '\n');
+
+    }
+
+    cd.dropper = {};
+
+    // check if there's only punctuation in range
+    cd.dropper.is = (className, range) => {
+
+      return range.startContainer.parentElement
+             .classList.contains(className);
+
+    }
+
+    // drop range at position in text
+    cd.dropper.atTextPos = (startPos) => {
+
+      // get cursor node and offset
+      const cursor = getCaretNode(startPos);
+
+      // send new range to node and offset
+      const newRange = document.createRange();
+      newRange.setStart(cursor.startNode, cursor.startOffset);
+      newRange.setEnd(cursor.endNode, cursor.endOffset);
+
+      return newRange;
 
     }
 
@@ -1013,4 +1056,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.8', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.5.9', 'font-style: italic; color: gray');
