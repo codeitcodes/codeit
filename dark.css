@@ -97,6 +97,8 @@ cd-el::selection, cd-el *::selection {
 
 .token.attr-value,
 .token.string,
+.language-css .token.string,
+.style .token.string,
 .token.char,
 .token.url,
 .token.builtin,
@@ -109,8 +111,6 @@ cd-el::selection, cd-el *::selection {
 
 .token.operator,
 .token.entity,
-.language-css .token.string,
-.style .token.string,
 .token.interpolation .token.punctuation {
   color: hsl(286deg 60% 72% / 93%);
 }
