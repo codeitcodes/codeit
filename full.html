@@ -197,18 +197,16 @@
 
   <script src="bottomfloat.js"></script>
 
-  <script src="pwainstall.js"></script>
-
 
   <script>
 
-    // show fresh message if not loaded after 700ms
+    // show connection message if not loaded after 700ms
     // (really slow connection)
     window.setTimeout(() => {
 
       if (!body.classList.contains('loaded')) {
 
-        document.querySelector('.splash-wrapper').classList.add('fresh');
+        document.querySelector('.splash-wrapper').classList.add('connection');
 
       }
 
