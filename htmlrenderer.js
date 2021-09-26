@@ -443,7 +443,20 @@ function onEditorClick() {
 
 }
 
-function onEditorKeydown() {
+// when scrolled editor, save new scroll position
+
+let editorScrollTimeout;
+
+function onEditorScroll() {
+
+  if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
+
+  // when stopped scrolling, save scroll pos
+  editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 300);
+
+}
+
+function checkScrollbar() {
   
   // if on desktop
   if (!isMobile) {
@@ -463,19 +476,6 @@ function onEditorKeydown() {
     
   }
   
-}
-
-// when scrolled editor, save new scroll position
-
-let editorScrollTimeout;
-
-function onEditorScroll() {
-
-  if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
-
-  // when stopped scrolling, save scroll pos
-  editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 300);
-
 }
 
 // check for key to see if code has changed
@@ -551,8 +551,9 @@ function setupEditor() {
   
   cd.addEventListener('keyup', onEditorKeyup);
   cd.addEventListener('click', onEditorClick);
-  cd.addEventListener('keydown', onEditorKeydown);
   cd.addEventListener('scroll', onEditorScroll);
+  
+  cd.addEventListener('input', checkScrollbar);
   
   // if code in storage
   if (selectedFile.content) {
