@@ -496,7 +496,8 @@ function hasKeyChangedCode(event) {
   return event.key !== 'Meta'
       && event.key !== 'Control'
       && event.key !== 'Alt'
-      && !event.key.startsWith('Arrow');
+      && !event.key.startsWith('Arrow')
+      && !isKeyEventMeta(event);
 
 }
 
