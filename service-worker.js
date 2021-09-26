@@ -24,7 +24,6 @@ const FILES_TO_CACHE = [
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
-  '/pwainstall.js',
 
   '/dark.css',
 
