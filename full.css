@@ -344,7 +344,7 @@ body cd-el {
   transform: translateX(0);
   left: -45px;
   will-change: transform;
-  transition: .18s var(--ease-function), .4s var(--cubic-function) transform, .4s var(--cubic-function) padding;
+  transition: .18s var(--ease-function), .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
   border: 1px solid transparent;
   border-left: 0;
@@ -392,6 +392,10 @@ body.expanded .github::after {
 
 .github:active {
   background: hsl(228deg 16% 10%);
+}
+
+.github.scrollbar {
+  bottom: calc(16px + 5px);
 }
 
 .github svg {
