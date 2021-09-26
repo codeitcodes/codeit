@@ -881,8 +881,7 @@ body.transitioning .sidebar {
   align-items: center;
 }
 
-.sidebar .learn-wrapper .button.install {
-  margin-top: 39px;
+.sidebar .learn-wrapper .button.logout {
   margin-top: 42px;
 }
 
