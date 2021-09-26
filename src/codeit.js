@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.5.9
+   v2.6.0
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -190,47 +190,56 @@ class CodeitElement extends HTMLElement {
 
       if (event.key === 'Enter') {
 
-        const before = beforeCursor();
-        const after = afterCursor();
+        const cursor = cd.dropper.cursor();
+        const inStringOrComment = (cd.dropper.isIn('string', cursor) ||
+                                   cd.dropper.isIn('comment', cursor));
 
-        let [padding] = getPadding(before);
-        let newLinePadding = padding;
+        // if cursor is not in string or comment
+        if (!inStringOrComment && cursor.collapsed) {
 
-        const charBefore = before.slice(-1);
-        const charAfter = after.charAt(0);
+          const before = beforeCursor();
+          const after = afterCursor();
 
-        // if char before caret is opening bracket
-        // and char after is closing bracket indent new line
-        let bracketOne = (cd.options.openBrackets.includes(charBefore));
-        let bracketTwo = (charAfter ===
-                          cd.options.closeBrackets[ cd.options.openBrackets.indexOf( charBefore ) ]);
+          let [padding] = getPadding(before);
+          let newLinePadding = padding;
 
-        let newLineBracket = (charBefore === '{' &&
-                              [closingBracketNextToCursor(after)] );
+          const charBefore = before.slice(-1);
+          const charAfter = after.charAt(0);
 
-        if (bracketOne && (bracketTwo || newLineBracket)) {
+          // if char before caret is opening bracket
+          // and char after is closing bracket indent new line
+          let bracketOne = (cd.options.openBrackets.includes(charBefore));
+          let bracketTwo = (charAfter ===
+                            cd.options.closeBrackets[ cd.options.openBrackets.indexOf( charBefore ) ]);
 
-          // indent new line
-          newLinePadding += cd.options.tab;
+          let newLineBracket = (charBefore === '{' &&
+                                [closingBracketNextToCursor(after)] );
 
-          if (bracketTwo) {
+          if (bracketOne && (bracketTwo || newLineBracket)) {
 
-            // get caret pos in text
-            const pos = cd.getSelection();
+            // indent new line
+            newLinePadding += cd.options.tab;
 
-            // move adjacent "}" down one line
-            insert('\n' + padding, { moveToEnd: false });
+            if (bracketTwo) {
+
+              // get caret pos in text
+              const pos = cd.getSelection();
+
+              // move adjacent "}" down one line
+              insert('\n' + padding, { moveToEnd: false });
+
+            }
 
           }
 
-        }
+          if (newLinePadding) {
 
-        if (newLinePadding) {
+            event.stopPropagation();
+            event.preventDefault();
 
-          event.stopPropagation();
-          event.preventDefault();
+            insert('\n' + newLinePadding);
 
-          insert('\n' + newLinePadding);
+          }
 
         }
 
@@ -462,7 +471,7 @@ class CodeitElement extends HTMLElement {
 
             const bracketRange = cd.dropper.atTextPos(i);
 
-            if (cd.dropper.is('punctuation', bracketRange)) {
+            if (cd.dropper.isIn('punctuation', bracketRange)) {
 
               const textBeforeBracket = textBefore.substr(0, i);
 
@@ -478,7 +487,7 @@ class CodeitElement extends HTMLElement {
 
             const bracketRange = cd.dropper.atTextPos(i);
 
-            if (cd.dropper.is('punctuation', bracketRange)) {
+            if (cd.dropper.isIn('punctuation', bracketRange)) {
 
               bracketArr.pop();
 
@@ -526,8 +535,9 @@ class CodeitElement extends HTMLElement {
 
     cd.dropper = {};
 
-    // check if there's only punctuation in range
-    cd.dropper.is = (className, range) => {
+    // check if a range is in an element
+    // with a given class
+    cd.dropper.isIn = (className, range) => {
 
       return range.startContainer.parentElement
              .classList.contains(className);
@@ -546,6 +556,17 @@ class CodeitElement extends HTMLElement {
       newRange.setEnd(cursor.endNode, cursor.endOffset);
 
       return newRange;
+
+    }
+
+    // get current range
+    cd.dropper.cursor = () => {
+
+      // get current selection
+      const s = window.getSelection();
+      const currRange = s.getRangeAt(0);
+
+      return currRange;
 
     }
 
@@ -640,8 +661,8 @@ class CodeitElement extends HTMLElement {
     function deleteCurrentSelection() {
 
       // get current selection
-      var s = window.getSelection();
-      var r0 = s.getRangeAt(0);
+      const s = window.getSelection();
+      let r0 = s.getRangeAt(0);
 
       // get selection in text content
       let textSel = cd.getSelection();
@@ -674,14 +695,14 @@ class CodeitElement extends HTMLElement {
     function insert(text, options) {
 
       // get current selection
-      var s = window.getSelection();
-      var r0 = s.getRangeAt(0);
+      const s = window.getSelection();
+      const r0 = s.getRangeAt(0);
 
       // clone current range
-      var newRange = r0.cloneRange();
+      const newRange = r0.cloneRange();
 
       // insert text node at start of range
-      var textEl = document.createTextNode(text);
+      const textEl = document.createTextNode(text);
       newRange.insertNode(textEl);
 
       // delete range
@@ -1056,4 +1077,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.5.9', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.6.0', 'font-style: italic; color: gray');
