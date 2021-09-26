@@ -17,12 +17,6 @@ window.onload = () => {
     window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo', 'Login with Github', 'height=575,width=575');
 
   })
-  
-  logoutButton.addEventListener('click', () => {
-    
-    
-    
-  })
 
   // if redirected from Github auth
   window.addEventListener('message', (event) => {
