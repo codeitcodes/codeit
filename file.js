@@ -152,8 +152,8 @@ function onFileEclipsedInCache(oldSha, newSha) {
     
     // if not edited updated file under new sha as key
     // while in timeout (file is still eclipsed)
-    if (modifiedFiles[newSha]
-        && modifiedFiles[newSha].eclipsed) {
+    if (modifiedFiles[newSha] &&
+        modifiedFiles[newSha].eclipsed) {
       
       // remove the updated file under new sha as key
       // from modifiedFiles
