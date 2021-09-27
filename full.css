@@ -927,10 +927,12 @@ body.loaded .splash-wrapper {
   bottom: 0;
   background: #313744;
   z-index: 10;
+  transition: .18s var(--ease-function);
 }
 
 .splash-wrapper.connection::before {
-  content: unset;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .spinner-loader {
