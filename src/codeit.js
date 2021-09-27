@@ -845,9 +845,17 @@ class CodeitElement extends HTMLElement {
     cd.setSelection = (startPos, endPos) => {
 
       let c;
-
+      
+      // if start pos is bigger than codeit length,
+      // set start pos to codeit length
+      if (startPos > cd.textContent.length) startPos = cd.textContent.length-1;
+      
       if (endPos) {
-
+        
+        // if end pos is bigger than codeit length,
+        // set end pos to codeit length
+        if (endPos > cd.textContent.length) endPos = cd.textContent.length-1;
+        
         // get caret node and offset
         c = getCaretNode(startPos, endPos);
 
