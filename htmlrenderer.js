@@ -220,7 +220,10 @@ function addHTMLItemListeners() {
           }
 
         } else {
-
+          
+          // play push animation
+          playPushAnimation(fileEl.querySelector('.push-wrapper'));
+          
           // push file
           pushFileFromHTML(item);
 
@@ -237,9 +240,6 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-
-  // play push animation
-  playPushAnimation(fileEl.querySelector('.push-wrapper'));
 
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
