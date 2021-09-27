@@ -571,6 +571,9 @@ function setupEditor() {
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
     cd.textContent = decodeUnicode(selectedFile.content);
+    
+    // check codeit scrollbar
+    if (!isMobile) checkScrollbar();
 
     // set caret pos in code
     cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
