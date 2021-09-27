@@ -912,12 +912,10 @@ body.transitioning .sidebar {
   flex-flow: column;
   z-index: 3000;
   overflow: hidden;
-  transition: .18s var(--ease-function) opacity;
 }
 
 body.loaded .splash-wrapper {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .splash-wrapper::before {
