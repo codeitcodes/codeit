@@ -180,7 +180,7 @@ function setTimeoutForEclipsedFiles() {
       
     }, 65 * 1000); // 65s
 
-  }
+  });
   
 }
 
