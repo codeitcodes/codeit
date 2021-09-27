@@ -710,9 +710,6 @@ function setupSidebar() {
     }
     
   }
-  
-  // check codeit scrollbar
-  if (!isMobile) checkScrollbar();
 
 }
 
