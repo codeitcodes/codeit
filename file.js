@@ -118,7 +118,6 @@ function onFileEclipsedInCache(oldSha, newSha) {
 
   fileToUpdate.sha = newSha;
   fileToUpdate.caretPos = [0, 0];
-  fileToUpdate.scrollPos = [0, 0];
   fileToUpdate.eclipsed = true;
   
   // if file to update is selected
