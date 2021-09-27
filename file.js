@@ -193,7 +193,7 @@ function getLatestVersion(item) {
       
       // version sha points to another version,
       // follow the trail
-      followTrail(modifiedFiles[crumb].sha);
+      return followTrail(modifiedFiles[crumb].sha);
       
     }
     
