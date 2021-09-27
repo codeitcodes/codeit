@@ -319,7 +319,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     const modFile = modifiedFiles[fileSha];
 
     changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
-                       modFile.caretPos, modFile.scrollPos, modFile.eclipsed);
+                       modFile.caretPos, modFile.scrollPos, false);
 
   }
 
