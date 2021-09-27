@@ -665,14 +665,19 @@ function updateLineNumbersHTML() {
 }
 
 function setupSidebar() {
+  
+  // if not logged in to Github
+  if (githubToken == null) {
 
-  // if sidebar is open
-  if (getStorage('sidebar') == 'true') {
+    // show intro screen
+    sidebar.classList.add('intro');
 
     // do a silent transition
     body.classList.add('transitioning');
 
+    // show sidebar
     toggleSidebar(true);
+    saveSidebarStateLS();
 
     window.setTimeout(() => {
 
@@ -680,21 +685,43 @@ function setupSidebar() {
 
     }, 0);
 
-  } else {
+  } else { // if logged in to Github
+    
+    // if sidebar is open
+    if (getStorage('sidebar') == 'true') {
 
-    // update bottom floater
-    updateFloat();
+      // do a silent transition
+      body.classList.add('transitioning');
 
+      toggleSidebar(true);
+
+      window.setTimeout(() => {
+
+        body.classList.remove('transitioning');
+
+      }, 0);
+      
+      
+      // render sidebar
+      renderSidebarHTML();
+
+    } else if (isMobile) {
+
+      // update bottom floater
+      updateFloat();
+
+    }
+    
   }
 
 }
 
 function setupCodeitApp() {
-    
-  setupEditor();
+  
   setupSidebar();
+  setupEditor();
   
   setTimeoutForEclipsedFiles();
 
 }
-
+  
