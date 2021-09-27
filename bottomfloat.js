@@ -11,9 +11,16 @@ function updateFloat() {
   bottomFloat.classList.remove('hidden');
 
   // if selected file is modified, show flag
-  if (!selectedFile.eclipsed &&
-      modifiedFiles[selectedFile.sha]) bottomFloat.classList.add('modified');
-  else bottomFloat.classList.remove('modified');
+  if (modifiedFiles[selectedFile.sha] &&
+      !modifiedFiles[selectedFile.sha].eclipsed) {
+    
+    bottomFloat.classList.add('modified');
+    
+  } else {
+    
+    bottomFloat.classList.remove('modified');
+    
+  }
 
   // show selected file name
   floatLogo.innerText = selectedFile.name;
