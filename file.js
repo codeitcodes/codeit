@@ -203,8 +203,7 @@ function getLatestVersion(item) {
   if (modifiedFiles[item.sha]) {
     
     // get latest version
-    let file = followTrail(item.sha);
-    return file;
+    return followTrail(item.sha);
     
   } else {
     
