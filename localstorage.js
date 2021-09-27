@@ -16,14 +16,14 @@ function loadLS() {
   }
   
   // if modified files exist in storage
-  if (getStorage('modifiedFiles')) {
+  if (getStorage('modifiedFiles') && getStorage('modifiedFiles') != '{}') {
     
     // load modified files from storage
     modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
     
   } else {
     
-    modifiedFiles = [];
+    modifiedFiles = {};
     
   }
   
@@ -42,7 +42,7 @@ function updateSelectedFileLS() {
 
 function updateModFilesLS() {
 
-  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
+  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles));
 
 }
 
