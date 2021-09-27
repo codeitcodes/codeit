@@ -187,7 +187,7 @@ function getLatestVersion(item) {
     if (modifiedFiles[crumb].sha === crumb) {
       
       // reached the most recent version
-      return modifiedFiles[sha];
+      return modifiedFiles[crumb];
       
     } else {
       
