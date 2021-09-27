@@ -222,7 +222,7 @@ function addHTMLItemListeners() {
         } else {
           
           // play push animation
-          playPushAnimation(fileEl.querySelector('.push-wrapper'));
+          playPushAnimation(item.querySelector('.push-wrapper'));
           
           // push file
           pushFileFromHTML(item);
@@ -580,6 +580,9 @@ function setupEditor() {
 
     // update line numbers
     updateLineNumbersHTML();
+    
+    // check codeit scrollbar
+    if (!isMobile) checkScrollbar();
 
     // save code history
     cd.recordHistory();
@@ -587,12 +590,15 @@ function setupEditor() {
   }
 
 
-  // update line numbers on screen resize
+  // update on screen resize
   window.addEventListener('resize', () => {
 
     // update line numbers
     updateLineNumbersHTML();
-
+    
+    // check codeit scrollbar
+    if (!isMobile) checkScrollbar();
+    
   });
 
 
@@ -628,7 +634,7 @@ function setupEditor() {
       
     }
     
-  }, false);
+  });
   
 }
 
