@@ -942,7 +942,7 @@ body.loaded .splash-wrapper {
   pointer-events: none;
 }
 
-body.mobile.expanded .splash-wrapper, body.expanded .splash-wrapper::before {
+body.mobile.expanded .splash-wrapper, body.mobile.expanded .splash-wrapper::before {
   background: #1a1c24;
 }
 
