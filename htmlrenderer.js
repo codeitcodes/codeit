@@ -501,7 +501,7 @@ function hasKeyChangedCode(event) {
       && (!isKeyEventMeta(event) || 
           (isKeyEventMeta(event) && event.key === 'V') ||
           (isKeyEventMeta(event) && event.key === 'X') ||
-          (isKeyEventMeta(event) && event.key === 'Z');
+          (isKeyEventMeta(event) && event.key === 'Z'));
   
 }
 
