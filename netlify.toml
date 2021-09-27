@@ -9,3 +9,9 @@
   to = "https://codeit.codes"
   status = 301
   force = true
+
+[[redirects]]
+  from = "https://codeit.berryscript.com/full"
+  to = "https://codeit.codes/full"
+  status = 301
+  force = true
