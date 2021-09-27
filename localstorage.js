@@ -3,7 +3,7 @@
 function loadLS() {
   
   // if selected file exists in storage
-  if (getStorage('selectedFile') {
+  if (getStorage('selectedFile')) {
     
     // load selected file from storage
     selectedFile = JSON.parse(getStorage('selectedFile'));
