@@ -139,10 +139,6 @@ function onFileEclipsedInCache(oldSha, newSha) {
   modifiedFiles[newSha] = fileToUpdate;
   
   
-  // remove file under old sha as key content
-  modifiedFiles[oldSha].content = '';
-  
-  
   // update modified files in local storage
   updateModFilesLS();
   
