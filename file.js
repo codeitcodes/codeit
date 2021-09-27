@@ -175,4 +175,41 @@ function deleteModFile(fileSha) {
 
   updateModFilesLS();
 
-}  
+}
+
+// follow breadcrumb trail of file versions until
+// reached latest version
+function getLatestVersion(item) {
+  
+  function followTrail(crumb) {
+    
+    // if version sha matches its key
+    // (it dosen't point to another version)
+    if (modifiedFiles[crumb].sha === crumb) {
+      
+      // reached the most recent version
+      return modifiedFiles[sha];
+      
+    } else {
+      
+      // version sha points to another version,
+      // follow the trail
+      followTrail(modifiedFiles[crumb].sha);
+      
+    }
+    
+  }
+  
+  // if item is in modifiedFiles object
+  if (modifiedFiles[item.sha]) {
+    
+    // get latest version
+    return followTrail(item.sha);
+    
+  } else {
+    
+    return item;
+    
+  }
+  
+}
