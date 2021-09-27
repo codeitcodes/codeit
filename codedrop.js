@@ -1,6 +1,6 @@
 
 function getFileLang(src) {
-
+  
   var EXTENSIONS = {
     'js': 'javascript',
     'py': 'python',
@@ -12,6 +12,8 @@ function getFileLang(src) {
     'h': 'c',
     'tex': 'latex'
   };
+  
+  src = src.replaceAll('\n', '');
 
   var extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
   return EXTENSIONS[extension] || extension;
