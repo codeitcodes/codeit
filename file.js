@@ -105,6 +105,12 @@ function updateModFileScrollPos(sha, scrollPos) {
 // in modifiedFiles object for 1 minute after commit
 function onFileEclipsedInCache(oldSha, newSha) {
   
+  // if file element under old sha exists in HTML,
+  // update it to the new sha
+  const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
+  if (fileEl) setAttr(fileEl, 'sha', newSha);
+  
+  
   // store the updated file under old sha as key
   
   // find the eclipsed file
@@ -134,6 +140,10 @@ function onFileEclipsedInCache(oldSha, newSha) {
   modifiedFiles[newSha] = fileToUpdate;
   
   
+  // remove file under old sha as key content
+  modifiedFiles[oldSha].content = '';
+  
+  
   // update modified files in local storage
   updateModFilesLS();
   
@@ -144,12 +154,6 @@ function onFileEclipsedInCache(oldSha, newSha) {
     // remove the updated file under old sha as key
     // from modifiedFiles
     deleteModFile(oldSha);
-    
-    // if file element under old sha exists in HTML,
-    // update it to the new sha
-    const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
-    if (fileEl) setAttr(fileEl, 'sha', newSha);
-    
     
     // if not edited updated file under new sha as key
     // while in timeout (file is still eclipsed)
