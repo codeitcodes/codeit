@@ -36,32 +36,6 @@ window.onload = () => {
 
   loadLS();
 
-  // if not logged into Github
-  if (githubToken == null) {
-
-    // show intro screen
-    sidebar.classList.add('intro');
-
-    // do a silent transition
-    body.classList.add('transitioning');
-
-    // show sidebar
-    toggleSidebar(true);
-    saveSidebarStateLS();
-
-    window.setTimeout(() => {
-
-      body.classList.remove('transitioning');
-
-    }, 0);
-
-  } else {
-
-    // render sidebar
-    renderSidebarHTML();
-
-  }
-
 }
 
 async function getGithubToken(githubCode) {
