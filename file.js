@@ -165,6 +165,25 @@ function onFileEclipsedInCache(oldSha, newSha) {
 
 }
 
+function setTimeoutForEclipsedFiles() {
+  
+  const eclipsedFiles = Object.values(modifiedFiles).filter(file => file.eclipsed);
+  
+  eclipsedFiles.forEach((file => {
+    
+    // set 1 minute timeout to remove updated files
+    window.setTimeout(() => {
+      
+      // remove the updated file under old sha as key
+      // from modifiedFiles
+      deleteModFile(file.sha);
+      
+    }, 65 * 1000); // 65s
+
+  }
+  
+}
+
 function deleteModFile(fileSha) {
 
   delete modifiedFiles[fileSha];
@@ -208,4 +227,4 @@ function getLatestVersion(item) {
     
   }
   
-}
+}  
