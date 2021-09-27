@@ -1,15 +1,25 @@
 
 // load local storage
 function loadLS() {
-
-  // load selected file from storage
-  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {};
-
+  
+  // if selected file exists in storage
+  if (getStorage('selectedFile') {
+    
+    // load selected file from storage
+    selectedFile = JSON.parse(getStorage('selectedFile'));
+    
+  } else {
+    
+    // load empty file
+    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+    
+  }
+  
   // load modified files from storage
-  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
-
+  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : [];
+  
   setupCodeitApp();
-
+  
 }
 
 
