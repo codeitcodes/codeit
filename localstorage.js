@@ -42,7 +42,7 @@ function updateSelectedFileLS() {
 
 function updateModFilesLS() {
 
-  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles));
+  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
 
 }
 
