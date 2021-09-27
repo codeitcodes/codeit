@@ -912,10 +912,12 @@ body.transitioning .sidebar {
   flex-flow: column;
   z-index: 3000;
   overflow: hidden;
+  transition: .18s var(--ease-function) opacity;
 }
 
 body.loaded .splash-wrapper {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .splash-wrapper::before {
@@ -927,12 +929,16 @@ body.loaded .splash-wrapper {
   bottom: 0;
   background: #313744;
   z-index: 10;
-  transition: .18s var(--ease-function);
+  transition: .18s var(--ease-function) opacity;
 }
 
 .splash-wrapper.connection::before {
   opacity: 0;
   pointer-events: none;
+}
+
+body.expanded .splash-wrapper, body.expanded .splash-wrapper::before {
+  background: #1a1c24;
 }
 
 .spinner-loader {
