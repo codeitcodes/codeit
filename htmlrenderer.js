@@ -694,9 +694,11 @@ function setupSidebar() {
 }
 
 function setupCodeitApp() {
-
+    
   setupEditor();
   setupSidebar();
+  
+  setTimeoutForEclipsedFiles();
 
 }
-  
+
