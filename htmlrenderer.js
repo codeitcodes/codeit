@@ -522,7 +522,7 @@ function isKeyEventMeta(event) {
 function codeChange() {
 
   // if selected file is not in modifiedFiles
-  // or if it is in modifiedFiles and not eclipsed
+  // or if it is in modifiedFiles and eclipsed
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
