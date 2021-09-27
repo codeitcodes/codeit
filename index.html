@@ -1,79 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html style="background: #313744" translate="no">
 <head>
-<head>
-<title>Codedit</title>
-<link rel="stylesheet" href="styles.css">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Library for creating interactive code snippets. For blogs, sites and docs.">
-<meta property="og:type" content="website">
-<meta property="og:description" content="Library for creating interactive code snippets. For blogs, sites and docs.">
-<meta property="og:image" content="https://www.berryscript.com/codedit.png">
-<meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:description" content="https://www.berryscript.com/codedit.png">
-<meta name="twitter:image" content="https://www.berryscript.com/codedit.png">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#ffffff">
-<meta property="og:title" content="Codedit">
-<meta property="og:url" content="https://codedit.berryscript.com/">
-<meta name="twitter:title" content="Codedit">
-<meta name="twitter:url" content="https://codedit.berryscript.com/">
-<meta name="next-head-count" content="24">
-<style>codedit,cd{display:none}</style>
-</head>
-  <body>
-    <div class="header">
-      Codedit
-      <p class="subtitle">Library for creating interactive code snippets.</p>
-    </div>
-    <div class="wrapper">
-      <cd class="demo">
-/* Edit me! */
+<title>Codeit</title>
 
-function howTo(do, this) {
-  // We first create a try catch
-  try {
-    if (replace(/\bno\-me\b/) != -1) {
-      return process(block, true, 0x0F) + ` class="${cls}"`;
-    }
-    catch (e) {
-      // Handle exception
-    }
-    // Then we run on all the classes
-    for (var i = 0 / 2; i &amp; lt; classes.length; i++) {
-      // And log the undefined ones.  
-      if (checkCondition(classes[i]) === undefined)
-        console.log('undefined');
-    }
-    // Return a complete HTML
-    return block;
+<link rel="stylesheet" href="/full.css">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
+<meta charset="utf-8">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#313744">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="#313744">
+<meta name="apple-mobile-web-app-title" content="Codeit">
+
+<meta http-equiv="origin-trial" content="AtbcQmOd+WisBL4b2qGmtXd/QahoOCChLYJ3qsd6Pbojn4n5c475ZmeJIbF7HznSatEg/iNzC3VeFjJX/eFyFgAAAABceyJvcmlnaW4iOiJodHRwczovL2NvZGVpdC5iZXJyeXNjcmlwdC5jb206NDQzIiwiZmVhdHVyZSI6IkZpbGVIYW5kbGluZyIsImV4cGlyeSI6MTYzNDA4MzE5OX0=">
+
+<meta charset="utf-8">
+<meta name="description" content="Mobile code editor connected to Git. Free and open source.">
+<meta property="og:title" content="Codeit - Mobile code editor">
+<meta property="og:description" content="Mobile code editor connected to Git. Free and open source.">
+<meta property="og:url" content="https://codeit.codes">
+<meta property="og:image" content="/images/banner-og.png">
+<meta property="og:type" content="application">
+<meta property="og:site_name" content="Codeit mobile code editor">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="keywords" content="web, code, code editor, editor, javascript, tool">
+<meta name="next-head-count" content="24">
+<meta name="robots" content="all">
+
+<link rel="shortcut icon" href="/icons/android-app-512.png">
+<link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
+
+<link rel="apple-touch-startup-image" href="/splashes/apple-splash-2048-2732.jpg">
+
+</head>
+<body ontouchstart=""></body>
+<script>
+
+window.addEventListener('appinstalled', logAppInstalled);
+
+// Log the installation
+function logAppInstalled(evt) {
+  console.log('Codeit installed succesfully.', evt);
+  window.location.href = '/full';
 }
 
-// Export the function to use later
-export howTo;</cd>
-    </div>
-    <div class="features">
-      <details>
-        <summary>
-          Code with a single element
-          <div>Just add a <code>&lt;cd&gt;</code> tag in your HTML and it'll automagically turn into editable code, no Javascript needed.</div>
-        </summary>
-      </details>
-      <details>
-        <summary>
-          Everything you'd expect from a code editor
-          <div>Codedit autocompletes stuff like brackets and tabs. It also autodetects your code's language and highlights it accordingly.</div>
-        </summary>
-      </details>
-      <details>
-        <summary>
-          Flexible and stylable
-          <div>Want it dark? No problem. Just add <code>background: black</code>: You can easily change anything in Codedit. No pesky iframes, just pure HTML.</div>
-        </summary>
-      </details>
-      <a class="button" href="/full" target="_blank">Launch Codedit<span class="version"></span></a><a class="usage" href="/live">Get v1.0.7</a>
-    </div>
-    <script src="https://unpkg.com/codedit@1.0.7/codedit.min.js"></script>
-  </body>
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+
+// Saves the event & shows install button.
+function saveBeforeInstallPromptEvent(evt) {
+  evt.preventDefault();
+  deferredInstallPrompt = evt;
+}
+
+// Event handler for butInstall - Does the PWA installation.
+function installPWA(evt) {
+  deferredInstallPrompt.prompt();
+  // Log user response to prompt.
+  deferredInstallPrompt.userChoice
+    .then((choice) => {
+      if (choice.outcome === 'accepted') {
+        console.log('Accepted the install prompt');
+      } else {
+        console.log('Dismissed the install prompt');
+      }
+      deferredInstallPrompt = null;
+    });
+}
+
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+
+  window.addEventListener('load', () => {
+
+    navigator.serviceWorker.register('/service-worker.js');
+
+  });
+
+}
+
+function checkPWA() {
+  
+  let displayMode = 'browser tab';
+
+  if (navigator.standalone) {
+    displayMode = 'standalone-ios';
+  }
+
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    displayMode = 'standalone';
+  }
+
+  if (displayMode != 'browser tab') {
+    window.location.href = '/full';
+  }
+
+};
+
+checkPWA();
+document.addEventListener('visibilitychange', checkPWA);
+
+const isMobile = navigator.userAgent.match('Mobile') || false;
+const isMac = navigator.platform.indexOf('Mac') > -1;
+const isSafari = navigator.standalone || false;
+
+</script>
+<script src="manifest.js"></script>
 </html>

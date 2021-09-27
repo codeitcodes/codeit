@@ -1,48 +1,47 @@
 
 const body = document.body,
-      
+
       cd = document.querySelector('cd-el'),
-      
+
       bottomFloat = document.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
-      
+
       github = document.querySelector('.github'),
-      
+
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
       contentWrapper = sidebar.querySelector('.content-wrapper'),
       learnWrapper = sidebar.querySelector('.learn-wrapper'),
-      
+
       loginButton = introWrapper.querySelector('.login'),
-      
+
       loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
-      
+
       titleScreen = header.querySelector('.titlescreen'),
       searchScreen = header.querySelector('.searchscreen'),
-      
+
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
-      
+
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
-      
+
       fileWrapper = sidebar.querySelector('.files'),
       
       versionEl = learnWrapper.querySelector('.version'),
+      learnClose = learnWrapper.querySelector('.close'),
       
-      learnFork = learnWrapper.querySelector('.fork'),
-      learnInstall = learnWrapper.querySelector('.install'),
-      learnClose = learnWrapper.querySelector('.close');
+      logoutButton = learnWrapper.querySelector('.logout');
 
 
 
 // version
-const version = '1.1.7';
+const version = '1.4.1';
 versionEl.innerText = version;
 
 
@@ -58,53 +57,96 @@ if (window.location.href.includes('dev')) {
 let loadInterval;
 
 function startLoading() {
-  
+
   loader.style.width = '0%';
   loader.style.transition = 'none';
   loader.style.opacity = 1;
-  
+
   window.setTimeout(load, 0);
-  
+
   loadInterval = window.setInterval(load, 400);
-  
+
 }
 
 function stopLoading() {
-  
+
   window.clearInterval(loadInterval);
-  
+
   loader.style.width = '100%';
   loader.style.opacity = 0;
-  
+
 }
 
 function load() {
-  
+
   let loadPercent = Number(loader.style.width.replace('%',''));
-  
+
   loadPercent += 10;
-  
+
   if (loadPercent != 100) {
-    
+
     loader.style.transition = '';
     loader.style.width = loadPercent + '%';
-    
+
   }
-  
+
 }
 
 
 
-// mobile media queries
+// device and platform queries
 
-let isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
+const isMobile = navigator.userAgent.match('Mobile') ?? false;
+const isSafari = navigator.standalone ?? false;
+
+const isMac = navigator.platform.indexOf('Mac') > -1;
+const isWindows = navigator.platform.indexOf('Win') > -1;
+
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
-// for debugging
+if (isMobile) {
+
+  body.classList.add('mobile');
+
+}
+
+if (isSafari) {
+
+  body.classList.add('safari');
+
+}
+
+if (isMac) {
+
+  body.classList.add('platform-mac');
+
+} else if (isWindows) {
+
+  body.classList.add('platform-win');
+
+}
+
 window.addEventListener('resize', () => {
-  
-  isMobile = window.matchMedia('only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)').matches;
+
   isLandscape = window.matchMedia('(orientation: landscape)').matches;
+
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  
+  let displayMode = 'browser tab';
+  
+  if (navigator.standalone) {
+    displayMode = 'standalone-ios';
+  }
+  
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    displayMode = 'standalone';
+  }
+
+  if (displayMode == 'browser tab') {
+    //window.location.href = '/';
+  }
   
 });
 
@@ -114,7 +156,7 @@ window.addEventListener('resize', () => {
 let encodeUnicode = (str) => {
   // first we use encodeURIComponent to get percent-encoded UTF-8,
   // then we convert the percent encodings into raw bytes which
-  // can be fed into btoa.
+  // can be fed into btoa
   return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
       function toSolidBytes(match, p1) {
           return String.fromCharCode('0x' + p1);
@@ -122,7 +164,7 @@ let encodeUnicode = (str) => {
 }
 
 let decodeUnicode = (str) => {
-  // going backwards: from bytestream, to percent-encoding, to original string.
+  // going backwards: from bytestream, to percent-encoding, to original string
   return decodeURIComponent(atob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
@@ -132,44 +174,44 @@ let decodeUnicode = (str) => {
 // localStorage
 
 let getStorage = (item) => {
-  
+
   return localStorage.getItem(item);
-  
+
 }
 
 let setStorage = (item, value) => {
-  
+
   return localStorage.setItem(item, value);
-  
+
 }
 
 
 // Attributes
 
 let getAttr = (element, item) => {
-  
+
   return element.getAttribute(item);
-  
+
 }
 
 let setAttr = (element, item, value) => {
-  
+
   return element.setAttribute(item, value);
-  
+
 }
 
 
 // asynchronous thread
 let asyncThread = (callback, time) => {
-  
+
   window.setTimeout(callback, time);
-  
+
 }
 
 
 // HTTP Request
 let axios = {
-  'get': (url, token, sha) => {
+  'get': (url, token) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -178,12 +220,11 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-        
+
         xmlhttp.open('GET', url, true);
-        
+
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        if (sha) xmlhttp.setRequestHeader('If-None-Match', sha);
-        
+
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
@@ -199,7 +240,7 @@ let axios = {
         };
 
         xmlhttp.open('POST', url, true);
-        
+
         xmlhttp.setRequestHeader('Accept', 'application/json');
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send(JSON.stringify(data));
@@ -215,11 +256,11 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
-        
+
         xmlhttp.open('PUT', url, true);
-        
+
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        
+
         xmlhttp.send(JSON.stringify(data));
       } catch(e) { reject(e) }
     });
@@ -235,7 +276,7 @@ let axios = {
         };
 
         xmlhttp.open('DELETE', url, true);
-        
+
         xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }

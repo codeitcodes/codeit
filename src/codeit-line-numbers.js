@@ -5,7 +5,7 @@
 	}
 
 	/**
-	 * Plugin name which is used as a class name for <pre> which is activating the plugin
+	 * Plugin name which is used as a class name for element which is activating the plugin
 	 *
 	 * @type {string}
 	 */
@@ -26,7 +26,7 @@
 		/**
 		 * Get node for provided line number
 		 *
-		 * @param {Element} element pre element
+		 * @param {Element} element
 		 * @param {number} number line number
 		 * @returns {Element|undefined}
 		 */
@@ -59,7 +59,7 @@
 		 *
 		 * This function will not add line numbers. It will only resize existing ones.
 		 *
-		 * @param {HTMLElement} element A `<pre>` element with line numbers.
+		 * @param {HTMLElement} element an element with line numbers.
 		 * @returns {void}
 		 */
 		resize: function (element) {

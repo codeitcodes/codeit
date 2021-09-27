@@ -39,9 +39,6 @@ let git = {
     // get the query
     const resp = await axios.get(query, githubToken);
     
-    // update last request time
-    lastTreeRequestTime = new Date().toGMTString();
-    
     return resp;
     
   },
@@ -66,14 +63,6 @@ let git = {
 
     // commit file
     var resp = await axios.put(query, githubToken, commitData);
-    
-    // if updating an existing file
-    if (commit.file.sha) {
-      
-      // force-update cache
-      axios.get(query, githubToken, resp.content.sha);
-      
-    }
 
     return resp.content.sha;
 

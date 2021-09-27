@@ -1,53 +1,59 @@
-/* 
- * Syntax highlighting 
+/*
+ * Syntax highlighting
  * Colors based on Base16 Ocean Dark
  */
 
 @import url('/fonts/fonts.css');
 
-@media only screen and (min-device-width: 1024px) {
-  
-  ::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
-  }
 
-  ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track {
-    background-color: #2B303B;
-    box-shadow: inset 1px 0 0 0 rgba(0,0,0,0.2);
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    border: 10px solid transparent;
-    border-radius: 50px;
-    background-clip: padding-box;
-    border: 4px solid transparent;
-    border-radius: 8px;
-    box-shadow: none;
-    min-height: 50px;
-    min-width: 50px;
-    background-color: #5f6368;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #777c83;
-  }
-
-  ::-webkit-scrollbar-thumb:active {
-    background-color: #5f6368;
-  }
-  
+body:not(.mobile) ::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
 }
+
+body:not(.mobile) ::-webkit-scrollbar-track {
+  background-color: #2B303B;
+  box-shadow: inset 1px 0 0 0 rgba(0,0,0,0.2);
+}
+
+body:not(.mobile) ::-webkit-scrollbar-track:horizontal {
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2);
+}
+
+body:not(.mobile) ::-webkit-scrollbar-corner {
+  background-color: #2B303B;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb {
+  border: 10px solid transparent;
+  border-radius: 50px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  box-shadow: none;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: #5f6368;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb:hover {
+  background-color: #777c83;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb:active {
+  background-color: #5f6368;
+}
+
 
 cd-el {
   background: #313744;
   color: #a6c3d4;
-  
-  font-family: 'Google Sans Mono', 'SF Mono', monospace;
-  
+
+  font-family: 'Google Sans Mono', 'Roboto Mono', 'SF Mono', monospace;
+
   font-size: 14px;
   line-height: 1.5;
-  
+
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
 }
@@ -91,6 +97,8 @@ cd-el::selection, cd-el *::selection {
 
 .token.attr-value,
 .token.string,
+.language-css .token.string,
+.style .token.string,
 .token.char,
 .token.url,
 .token.builtin,
@@ -103,8 +111,6 @@ cd-el::selection, cd-el *::selection {
 
 .token.operator,
 .token.entity,
-.language-css .token.string,
-.style .token.string,
 .token.interpolation .token.punctuation {
   color: hsl(286deg 60% 72% / 93%);
 }
@@ -153,7 +159,9 @@ cd-el::selection, cd-el *::selection {
   left: 0;
   user-select: none;
   -webkit-user-select: none;
-  line-height: 1.5;
+  pointer-events: none;
+  line-height: inherit;
+  font-size: inherit;
 }
 
 .line-numbers-rows > span {
@@ -170,4 +178,6 @@ cd-el::selection, cd-el *::selection {
   padding-left: 13.5px;
   white-space: nowrap;
   min-width: 1.2em;
+  line-height: inherit;
+  font-size: inherit;
 }

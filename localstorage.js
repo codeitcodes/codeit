@@ -1,90 +1,68 @@
 
-let modifiedFiles, selectedFile;
-
-
-function changeSelectedFileLS(newSelectedFile) {
-  
-  selectedFile = newSelectedFile;
-  
-  setStorage('selectedFile', JSON.stringify(newSelectedFile));
-  
-}
-
-
-function saveModifiedFileLS(modifiedFile) {
-  
-  modifiedFiles[modifiedFile.sha] = modifiedFile;
-  
-  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
-  
-}
-
-
-function deleteModifiedFileLS(fileSha) {
-    
-  delete modifiedFiles[fileSha];
-  
-  setStorage('modifiedFiles', JSON.stringify(modifiedFiles));
-  
-}
-
-
-function saveTreeLocLS(treeLoc) {
-  
-  setStorage('tree', treeLoc.join());
-  
-}
-
-
+// load local storage
 function loadLS() {
   
-  // load modified files from storage
-  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : {};
+  // if selected file exists in storage
+  if (getStorage('selectedFile')) {
+    
+    // load selected file from storage
+    selectedFile = JSON.parse(getStorage('selectedFile'));
+    
+  } else {
+    
+    // load empty file
+    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+    
+  }
   
-  // load selected file from storage
-  selectedFile = getStorage('selectedFile') ? JSON.parse(getStorage('selectedFile')) : {dir: '', sha: ''};
+  // if modified files exist in storage
+  if (getStorage('modifiedFiles')) {
+    
+    // load modified files from storage
+    modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
+    
+  } else {
+    
+    modifiedFiles = {};
+    
+  }
   
   setupCodeitApp();
   
 }
 
-function saveBeforeUnloadLS() {
-  
-  // set localStorage values
-  saveCodeLS();
-  saveCodePosLS();
-  
+
+// files
+
+function updateSelectedFileLS() {
+
+  setStorage('selectedFile', JSON.stringify(selectedFile));
+
 }
 
-window.onbeforeunload = saveBeforeUnloadLS;
+function updateModFilesLS() {
 
-function saveCodeLS() {
-  
-  setStorage('code', encodeUnicode(cd.textContent));
-  
+  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+
 }
 
-function saveCodePosLS() {
-  
-  setStorage('caret', cd.getSelection().start);
-  setStorage('scrollPos', (cd.scrollLeft + ',' + cd.scrollTop));
-  
-}
 
-function saveCodeLangLS() {
-  
-  setStorage('lang', cd.lang);
-  
+// miscellaneous
+
+function saveTreeLocLS(treeLoc) {
+
+  setStorage('tree', treeLoc.join());
+
 }
 
 function saveSidebarStateLS() {
-  
+
   setStorage('sidebar', body.classList.contains('expanded'));
-  
+
 }
 
 function saveAuthTokenLS(authToken) {
-  
+
   setStorage('token', authToken);
-  
+
 }
