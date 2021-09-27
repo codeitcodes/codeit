@@ -982,6 +982,16 @@ body.loaded .splash-wrapper {
   letter-spacing: 0.1px;
 }
 
+.splash-wrapper a {
+  color: inherit;
+  cursor: default;
+  text-decoration: none;
+}
+
+.splash-wrapper a:hover {
+  text-decoration: underline;
+}
+
 
 body:not(.platform-mac) .github,
 body:not(.platform-mac) .sidebar .header .title,
@@ -989,7 +999,8 @@ body:not(.platform-mac) .sidebar .item,
 body:not(.platform-mac) .sidebar .item .push-wrapper,
 body:not(.platform-mac) .sidebar .more,
 body:not(.platform-mac) .roundbutton,
-body:not(.platform-mac) .sidebar .button {
+body:not(.platform-mac) .sidebar .button,
+body:not(.platform-mac) .splash-wrapper a {
   cursor: pointer;
 }
 
