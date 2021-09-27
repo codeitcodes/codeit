@@ -719,7 +719,7 @@ function setupSidebar() {
 function setupCodeitApp() {
   
   setupSidebar();
-  setupEditor();
+  window.setTimeout(setupEditor, 0);
   
   setTimeoutForEclipsedFiles();
 
