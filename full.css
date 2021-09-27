@@ -988,7 +988,11 @@ body.loaded .splash-wrapper {
   text-decoration: none;
 }
 
-.splash-wrapper a:hover {
+.splash-wrapper a:active {
+  text-decoration: underline;
+}
+
+body:not(.mobile) .splash-wrapper a:hover {
   text-decoration: underline;
 }
 
