@@ -580,9 +580,6 @@ function setupEditor() {
 
     // update line numbers
     updateLineNumbersHTML();
-    
-    // check codeit scrollbar
-    if (!isMobile) checkScrollbar();
 
     // save code history
     cd.recordHistory();
@@ -713,6 +710,9 @@ function setupSidebar() {
     }
     
   }
+  
+  // check codeit scrollbar
+  if (!isMobile) checkScrollbar();
 
 }
 
