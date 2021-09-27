@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-body {
+html, body {
   margin: 0;
   background: #313744;
   color: #d4d5d7;
@@ -1117,7 +1117,7 @@ body {
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
 }
 
-body {
+html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
@@ -1130,8 +1130,42 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: none;
 }
 
-html {
-  -webkit-text-size-adjust: none;
+@media print {
+  
+  * {
+    color: black !important;
+  }
+
+  html, body {
+    overflow: auto !important;
+    background: white !important;
+  }
+
+  .cd-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  body cd-el {
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  .line-numbers .line-numbers-rows {
+    opacity: .7 !important;
+  }
+
+  .github {
+    display: none !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
 }
