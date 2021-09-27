@@ -72,25 +72,24 @@ async function renderSidebarHTML() {
         // if item is a file
         if (item.type == 'file') {
           
-          item = getLatestVersion(item);
+          let file = getLatestVersion(item);
           
           // add modified flag to file
           let modified = '';
-          if (modifiedFiles[item.sha] &&
-              !modifiedFiles[item.sha].eclipsed) modified = ' modified';
+          if (modifiedFiles[file.sha] &&
+              !modifiedFiles[file.sha].eclipsed) modified = ' modified';
           
           out += `
-          <div class="item file`+ modified +`" sha="`+ item.sha +`">
+          <div class="item file`+ modified +`" sha="`+ file.sha +`">
             <div class="label">
               `+ fileIcon +`
-              <a class="name">`+ item.name +`</a>
+              <a class="name">`+ file.name +`</a>
             </div>
             <div class="push-wrapper">
               `+ pushIcon +`
             </div>
           </div>
           `;
-
 
         } else { // if item is a folder
 
