@@ -530,16 +530,6 @@ function codeChange() {
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
-    // if selected file is eclipsed,
-    // change the sha of file element in HTML to new sha
-    if (selectedFile.eclipsed) {
-
-      let selectedEl = fileWrapper.querySelector('.file.selected');
-      setAttr(selectedEl, 'sha', selectedFile.sha);
-
-    }
-
-
     // enable pushing file in HTML
 
     const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
