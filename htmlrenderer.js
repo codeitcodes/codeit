@@ -71,12 +71,14 @@ async function renderSidebarHTML() {
 
         // if item is a file
         if (item.type == 'file') {
-
+          
+          item = getLatestVersion(item);
+          
           // add modified flag to file
           let modified = '';
           if (modifiedFiles[item.sha] &&
               !modifiedFiles[item.sha].eclipsed) modified = ' modified';
-
+          
           out += `
           <div class="item file`+ modified +`" sha="`+ item.sha +`">
             <div class="label">
