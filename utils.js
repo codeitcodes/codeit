@@ -41,7 +41,7 @@ const body = document.body,
 
 
 // version
-const version = '1.4.0';
+const version = '1.4.1';
 versionEl.innerText = version;
 
 
