@@ -16,7 +16,7 @@ function loadLS() {
   }
   
   // if modified files exist in storage
-  if (getStorage('modifiedFiles') && getStorage('modifiedFiles') != '{}') {
+  if (getStorage('modifiedFiles')) {
     
     // load modified files from storage
     modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
