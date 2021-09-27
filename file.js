@@ -169,7 +169,7 @@ function setTimeoutForEclipsedFiles() {
   
   const eclipsedFiles = Object.values(modifiedFiles).filter(file => file.eclipsed);
   
-  eclipsedFiles.forEach((file => {
+  eclipsedFiles.forEach(file => {
     
     // set 1 minute timeout to remove updated files
     window.setTimeout(() => {
