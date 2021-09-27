@@ -62,11 +62,14 @@ pushWrapper.addEventListener('click', () => {
   
   // get selected file element
   let selectedEl = fileWrapper.querySelector('.file.modified[sha="'+ selectedFile.sha +'"]');
-
+  
+  // if selected file element is modified
   if (selectedEl) {
     
+    // play push animation
     playPushAnimation(pushWrapper);
     
+    // 
     pushFileFromHTML(selectedEl);
     
   }
