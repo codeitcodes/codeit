@@ -15,8 +15,17 @@ function loadLS() {
     
   }
   
-  // load modified files from storage
-  modifiedFiles = getStorage('modifiedFiles') ? JSON.parse(getStorage('modifiedFiles')) : [];
+  // if modified files exist in storage
+  if (getStorage('modifiedFiles')) {
+    
+    // load modified files from storage
+    modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
+    
+  } else {
+    
+    modifiedFiles = [];
+    
+  }
   
   setupCodeitApp();
   
