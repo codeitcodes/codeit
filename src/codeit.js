@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.6.0
+   v2.6.1
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -140,7 +140,7 @@ class CodeitElement extends HTMLElement {
 
     cd.addEventListener('keydown', (event) => {
 
-      // get caret pos in text
+      // get current selection
       const s = window.getSelection();
 
       // if selection is empty
@@ -190,56 +190,47 @@ class CodeitElement extends HTMLElement {
 
       if (event.key === 'Enter') {
 
-        const cursor = cd.dropper.cursor();
-        const inStringOrComment = (cd.dropper.isIn('string', cursor) ||
-                                   cd.dropper.isIn('comment', cursor));
+        const before = beforeCursor();
+        const after = afterCursor();
 
-        // if cursor is not in string or comment
-        if (!inStringOrComment && cursor.collapsed) {
+        let [padding] = getPadding(before);
+        let newLinePadding = padding;
 
-          const before = beforeCursor();
-          const after = afterCursor();
+        const charBefore = before.slice(-1);
+        const charAfter = after.charAt(0);
 
-          let [padding] = getPadding(before);
-          let newLinePadding = padding;
+        // if char before caret is opening bracket
+        // and char after is closing bracket indent new line
+        let bracketOne = (cd.options.openBrackets.includes(charBefore));
+        let bracketTwo = (charAfter ===
+                          cd.options.closeBrackets[ cd.options.openBrackets.indexOf( charBefore ) ]);
 
-          const charBefore = before.slice(-1);
-          const charAfter = after.charAt(0);
+        let newLineBracket = (charBefore === '{' &&
+                              [closingBracketNextToCursor(after)] );
 
-          // if char before caret is opening bracket
-          // and char after is closing bracket indent new line
-          let bracketOne = (cd.options.openBrackets.includes(charBefore));
-          let bracketTwo = (charAfter ===
-                            cd.options.closeBrackets[ cd.options.openBrackets.indexOf( charBefore ) ]);
+        if (bracketOne && (bracketTwo || newLineBracket)) {
 
-          let newLineBracket = (charBefore === '{' &&
-                                [closingBracketNextToCursor(after)] );
+          // indent new line
+          newLinePadding += cd.options.tab;
 
-          if (bracketOne && (bracketTwo || newLineBracket)) {
+          if (bracketTwo) {
 
-            // indent new line
-            newLinePadding += cd.options.tab;
+            // get caret pos in text
+            const pos = cd.getSelection();
 
-            if (bracketTwo) {
-
-              // get caret pos in text
-              const pos = cd.getSelection();
-
-              // move adjacent "}" down one line
-              insert('\n' + padding, { moveToEnd: false });
-
-            }
+            // move adjacent "}" down one line
+            insert('\n' + padding, { moveToEnd: false });
 
           }
 
-          if (newLinePadding) {
+        }
 
-            event.stopPropagation();
-            event.preventDefault();
+        if (newLinePadding) {
 
-            insert('\n' + newLinePadding);
+          event.stopPropagation();
+          event.preventDefault();
 
-          }
+          insert('\n' + newLinePadding);
 
         }
 
@@ -319,49 +310,87 @@ class CodeitElement extends HTMLElement {
     }
 
     function handleSelfClosingCharacters(event) {
-
-      const open = cd.options.openBrackets.join('') + cd.options.quot.join('');
-      const close = cd.options.closeBrackets.join('') + cd.options.quot.join('');
-
-      const codeAfter = afterCursor();
-      const codeBefore = beforeCursor();
-
-      const escapeCharacter = codeBefore.substr(codeBefore.length - 1) === '\\';
-      const charAfter = codeAfter.charAt(0);
-
-      if (close.includes(event.key) && !escapeCharacter && charAfter === event.key) {
-
-        // closing char already exists next to cursor,
-        // move right
-
-        const pos = cd.getSelection();
-
-        event.preventDefault();
-        pos.start = ++pos.end;
-
-        cd.setSelection(pos.start);
-
-      } else if (
-        open.includes(event.key)
-        && !escapeCharacter
-        && (cd.options.quot.includes(event.key)
-            || ['', ' ', '\n'].includes(charAfter))
-      ) {
-
-        event.preventDefault();
-
-        const pos = cd.getSelection();
-
-        const wrapText = pos.start == pos.end ? '' : window.getSelection().toString();
-        const text = event.key + wrapText + close[open.indexOf(event.key)];
-
-        insert(text);
-        pos.start++;
-        pos.end++;
-
-        cd.setSelection(pos.end);
-
+      
+      const cursor = cd.dropper.cursor();
+      const inStringOrComment = (cursor.in('string') || cursor.in('comment'));
+      
+      // if cursor is not in string or comment
+      if (!inStringOrComment) {
+        
+        // join brackets and quotation marks
+        // to get chars to autocomplete
+        const open = cd.options.openBrackets.join('') + cd.options.quot.join('');
+        const close = cd.options.closeBrackets.join('') + cd.options.quot.join('');
+        
+        // get code before and after cursor
+        const codeAfter = afterCursor();
+        const codeBefore = beforeCursor();
+        
+        const charBefore = codeBefore.charAt(0);
+        const charAfter = codeAfter.charAt(0);
+        
+        // check if typed an opening or closing char
+        const typedOpeningChar = open.includes(event.key);
+        const typedClosingChar = open.includes(event.key);
+        
+        // closing char is next to cursor if
+        // the chars before and after the cursor are
+        // matching opening and closing chars
+        const closingCharNextToCursor = (charBefore === open[close.indexOf(event.key)] 
+                                         && charAfter === event.key);
+        
+        // if typed opening char
+        if (typedOpeningChar) {
+          
+          // if selection exists
+          if (!cursor.collapsed) {
+            
+            // prevent default behavior
+            event.preventDefault();
+            
+            // get caret pos in text
+            const pos = cd.getSelection();
+            
+            // get the text to wrap
+            const textToWrap = window.getSelection().toString();
+            
+            // wrap the text with matching opening and closing chars
+            const wrappedText = event.key + textToWrap + close[open.indexOf(event.key)];
+            
+            // insert wrapped text
+            insert(wrappedText);
+            
+            // place caret at end of selection
+            pos.end++;
+            cd.setSelection(pos.end);
+            
+          } else {
+            
+            // insert matching closing char
+            insert(close[open.indexOf(event.key)]);
+            
+          }
+          
+        }
+        
+        // if typed closing char but closing char
+        // is already next to cursor
+        if (typedClosingChar && closingCharNextToCursor) {
+          
+          // prevent default behavior
+          event.preventDefault();
+          
+          // get caret pos in text
+          const pos = cd.getSelection();
+          
+          // move caret one char right
+          pos.start++;
+          cd.setSelection(pos.start);
+          
+        }
+        
       }
+        
     }
 
     function handleDelClosingCharacters(event) {
@@ -422,7 +451,7 @@ class CodeitElement extends HTMLElement {
       }
 
     }
-
+    
     // check if next line contains bracket
     function closingBracketNextToCursor(text) {
 
@@ -564,8 +593,10 @@ class CodeitElement extends HTMLElement {
 
       // get current selection
       const s = window.getSelection();
-      const currRange = s.getRangeAt(0);
-
+      let currRange = s.getRangeAt(0);
+      
+      currRange.in = cd.dropper.isIn;
+      
       return currRange;
 
     }
@@ -1085,4 +1116,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.6.0', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.6.1', 'font-style: italic; color: gray');
