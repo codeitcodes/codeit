@@ -134,8 +134,8 @@ window.addEventListener('resize', () => {
 
 });
 
-window.addEventListener('online', () => { isOffline = false; onOnline() });
-window.addEventListener('offline', () => { isOffline = true; onOffline() });
+window.addEventListener('online', () => { isOffline = false });
+window.addEventListener('offline', () => { isOffline = true });
 
 window.addEventListener('DOMContentLoaded', () => {
   
