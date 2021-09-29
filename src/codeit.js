@@ -577,9 +577,9 @@ class CodeitElement extends HTMLElement {
       newRange.setStart(cursor.startNode, cursor.startOffset);
       newRange.setEnd(cursor.endNode, cursor.endOffset);
 
-      currRange.in = (className) => {
+      newRange.in = (className) => {
         
-        return cd.dropper.isIn(className, currRange);
+        return cd.dropper.isIn(className, newRange);
         
       }
 
@@ -1119,4 +1119,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.6.3', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.6.4', 'font-style: italic; color: gray');
