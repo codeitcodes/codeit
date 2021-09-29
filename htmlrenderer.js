@@ -715,7 +715,7 @@ function setupSidebar() {
 
 function setupCodeitApp() {
   
-  window.requestAnimationFrame(setupEditor);
+  window.setTimeout(setupEditor, 0);
   setupSidebar();
   
   setTimeoutForEclipsedFiles();
