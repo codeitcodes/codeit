@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.6.1
+   v2.6.2
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -500,7 +500,7 @@ class CodeitElement extends HTMLElement {
 
             const bracketRange = cd.dropper.atTextPos(i);
 
-            if (cd.dropper.isIn('punctuation', bracketRange)) {
+            if (bracketRange.in('punctuation')) {
 
               const textBeforeBracket = textBefore.substr(0, i);
 
@@ -516,7 +516,7 @@ class CodeitElement extends HTMLElement {
 
             const bracketRange = cd.dropper.atTextPos(i);
 
-            if (cd.dropper.isIn('punctuation', bracketRange)) {
+            if (bracketRange.in('punctuation')) {
 
               bracketArr.pop();
 
@@ -595,7 +595,11 @@ class CodeitElement extends HTMLElement {
       const s = window.getSelection();
       let currRange = s.getRangeAt(0);
       
-      currRange.in = cd.dropper.isIn;
+      currRange.in = (className) => {
+        
+        return cd.dropper.isIn(className, currRange);
+        
+      }
       
       return currRange;
 
@@ -1116,4 +1120,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.6.1', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.6.2', 'font-style: italic; color: gray');
