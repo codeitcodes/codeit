@@ -5,7 +5,7 @@
 /*
 
    codeit.js
-   v2.6.2
+   v2.6.3
    MIT License
 
    github.com/barhatsor/codeitjs
@@ -331,7 +331,7 @@ class CodeitElement extends HTMLElement {
         
         // check if typed an opening or closing char
         const typedOpeningChar = open.includes(event.key);
-        const typedClosingChar = open.includes(event.key);
+        const typedClosingChar = close.includes(event.key);
         
         // closing char is next to cursor if
         // the chars before and after the cursor are
@@ -348,9 +348,6 @@ class CodeitElement extends HTMLElement {
             // prevent default behavior
             event.preventDefault();
             
-            // get caret pos in text
-            const pos = cd.getSelection();
-            
             // get the text to wrap
             const textToWrap = window.getSelection().toString();
             
@@ -360,14 +357,10 @@ class CodeitElement extends HTMLElement {
             // insert wrapped text
             insert(wrappedText);
             
-            // place caret at end of selection
-            pos.end++;
-            cd.setSelection(pos.end);
-            
           } else {
             
             // insert matching closing char
-            insert(close[open.indexOf(event.key)]);
+            insert(close[open.indexOf(event.key)], { moveToEnd: false });
             
           }
           
@@ -1120,4 +1113,4 @@ class CodeitElement extends HTMLElement {
 
 // define the codeit element
 window.customElements.define('cd-el', CodeitElement);
-console.log('%ccodeit.js 2.6.2', 'font-style: italic; color: gray');
+console.log('%ccodeit.js 2.6.3', 'font-style: italic; color: gray');
