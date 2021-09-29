@@ -170,6 +170,9 @@ body cd-el {
 .push-wrapper.checked {
   pointer-events: none;
 }
+.push-wrapper.checked .push-svg {
+  transition: none;
+}
 .push-wrapper.checked .push-svg #check {
   transform: scale(0);
   fill: rgb(23, 191, 99);
