@@ -577,6 +577,12 @@ class CodeitElement extends HTMLElement {
       newRange.setStart(cursor.startNode, cursor.startOffset);
       newRange.setEnd(cursor.endNode, cursor.endOffset);
 
+      currRange.in = (className) => {
+        
+        return cd.dropper.isIn(className, currRange);
+        
+      }
+
       return newRange;
 
     }
