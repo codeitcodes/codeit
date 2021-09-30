@@ -6,7 +6,6 @@ const code = window.location.toString().replace(/.+code=/, '');
 try {
   
   window.opener.postMessage(code, window.location);
-  window.close();
   
 } catch(e) {
   
@@ -15,6 +14,8 @@ try {
   window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
   
 }
+
+window.close();
 
 </script>
 </html>
