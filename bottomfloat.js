@@ -11,9 +11,16 @@ function updateFloat() {
   bottomFloat.classList.remove('hidden');
 
   // if selected file is modified, show flag
-  if (!selectedFile.eclipsed &&
-      modifiedFiles[selectedFile.sha]) bottomFloat.classList.add('modified');
-  else bottomFloat.classList.remove('modified');
+  if (modifiedFiles[selectedFile.sha] &&
+      !modifiedFiles[selectedFile.sha].eclipsed) {
+    
+    bottomFloat.classList.add('modified');
+    
+  } else {
+    
+    bottomFloat.classList.remove('modified');
+    
+  }
 
   // show selected file name
   floatLogo.innerText = selectedFile.name;
@@ -59,14 +66,19 @@ pushWrapper.innerHTML = pushIcon;
 
 // push when clicked on button
 pushWrapper.addEventListener('click', () => {
-
+  
   // get selected file element
   let selectedEl = fileWrapper.querySelector('.file.modified[sha="'+ selectedFile.sha +'"]');
-
+  
+  // if selected file element is modified
   if (selectedEl) {
-
+    
+    // play push animation
+    playPushAnimation(pushWrapper);
+    
+    // 
     pushFileFromHTML(selectedEl);
-
+    
   }
 
 })

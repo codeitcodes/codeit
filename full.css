@@ -170,6 +170,9 @@ body cd-el {
 .push-wrapper.checked {
   pointer-events: none;
 }
+.push-wrapper.checked .push-svg {
+  transition: none;
+}
 .push-wrapper.checked .push-svg #check {
   transform: scale(0);
   fill: rgb(23, 191, 99);
@@ -758,7 +761,7 @@ body.transitioning .sidebar {
 .sidebar .intro .picture-wrapper {
   height: 120px;
   width: 120px;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
   border-radius: 50%;
   box-sizing: border-box;
   padding: 23px;
@@ -778,7 +781,7 @@ body.transitioning .sidebar {
 .sidebar .intro .title {
   color: #f1f1f2e0;
   font-size: 19px;
-  margin-bottom: 19px;
+  margin-bottom: 20px;
   font-weight: 500;
 }
 
@@ -815,19 +818,34 @@ body.transitioning .sidebar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 24px;
+  padding: 10px 25px;
   border-radius: 3px;
   font-size: 14px;
   box-sizing: border-box;
-  margin-top: 34px;
+  margin-top: 35px;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
   color: #fff;
   min-width: 150px;
 }
 
-.sidebar .button.secondary {
+.sidebar .button.tiny-spacing {
   margin-top: 15px;
+}
+
+.sidebar .button.small-spacing {
+  margin-top: 25px;
+}
+
+.sidebar .button.medium-spacing {
+  margin-top: 35px;
+}
+
+.sidebar .button.large-spacing {
+  margin-top: 45px;
+}
+
+.sidebar .button.secondary {
   color: inherit;
   border: 1px solid hsla(0,0%,100%,.1);
   background: hsla(0,0%,100%,.1);
@@ -862,10 +880,6 @@ body.transitioning .sidebar {
   margin-right: 7px;
 }
 
-.sidebar .intro-wrapper .button.secondary {
-  margin-top: 34px;
-}
-
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
@@ -875,14 +889,10 @@ body.transitioning .sidebar {
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
-}
-
-.sidebar .learn-wrapper .button.share {
-  margin-top: 42px;
 }
 
 .sidebar-background {
@@ -927,10 +937,17 @@ body.loaded .splash-wrapper {
   bottom: 0;
   background: #313744;
   z-index: 10;
+  transition: .18s var(--ease-function) opacity;
 }
 
 .splash-wrapper.connection::before {
-  content: unset;
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.mobile.expanded .splash-wrapper,
+body.mobile.expanded .splash-wrapper::before {
+  background: #1a1c24;
 }
 
 .spinner-loader {
@@ -982,6 +999,20 @@ body.loaded .splash-wrapper {
   letter-spacing: 0.1px;
 }
 
+.splash-wrapper a {
+  color: #8ab4f8;
+  cursor: default;
+  text-decoration: none;
+}
+
+.splash-wrapper a:active {
+  text-decoration: underline;
+}
+
+body:not(.mobile) .splash-wrapper a:hover {
+  text-decoration: underline;
+}
+
 
 body:not(.platform-mac) .github,
 body:not(.platform-mac) .sidebar .header .title,
@@ -989,7 +1020,8 @@ body:not(.platform-mac) .sidebar .item,
 body:not(.platform-mac) .sidebar .item .push-wrapper,
 body:not(.platform-mac) .sidebar .more,
 body:not(.platform-mac) .roundbutton,
-body:not(.platform-mac) .sidebar .button {
+body:not(.platform-mac) .sidebar .button,
+body:not(.platform-mac) .splash-wrapper a {
   cursor: pointer;
 }
 

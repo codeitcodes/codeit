@@ -220,7 +220,10 @@ function addHTMLItemListeners() {
           }
 
         } else {
-
+          
+          // play push animation
+          playPushAnimation(item.querySelector('.push-wrapper'));
+          
           // push file
           pushFileFromHTML(item);
 
@@ -237,9 +240,6 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-
-  // play push animation
-  playPushAnimation(fileEl.querySelector('.push-wrapper'));
 
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
@@ -522,23 +522,13 @@ function isKeyEventMeta(event) {
 function codeChange() {
 
   // if selected file is not in modifiedFiles
-  // or if it is in modifiedFiles and not eclipsed
+  // or if it is in modifiedFiles and eclipsed
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
     
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
-
-    // if selected file is eclipsed,
-    // change the sha of file element in HTML to new sha
-    if (selectedFile.eclipsed) {
-
-      let selectedEl = fileWrapper.querySelector('.file.selected');
-      setAttr(selectedEl, 'sha', selectedFile.sha);
-
-    }
-
 
     // enable pushing file in HTML
 
@@ -597,12 +587,15 @@ function setupEditor() {
   }
 
 
-  // update line numbers on screen resize
+  // update on screen resize
   window.addEventListener('resize', () => {
 
     // update line numbers
     updateLineNumbersHTML();
-
+    
+    // check codeit scrollbar
+    if (!isMobile) checkScrollbar();
+    
   });
 
 
@@ -638,7 +631,7 @@ function setupEditor() {
       
     }
     
-  }, false);
+  });
   
 }
 
@@ -669,14 +662,19 @@ function updateLineNumbersHTML() {
 }
 
 function setupSidebar() {
+  
+  // if not logged in to Github
+  if (githubToken == null) {
 
-  // if sidebar is open
-  if (getStorage('sidebar') == 'true') {
+    // show intro screen
+    sidebar.classList.add('intro');
 
     // do a silent transition
     body.classList.add('transitioning');
 
+    // show sidebar
     toggleSidebar(true);
+    saveSidebarStateLS();
 
     window.setTimeout(() => {
 
@@ -684,21 +682,43 @@ function setupSidebar() {
 
     }, 0);
 
-  } else {
+  } else { // if logged in to Github
+    
+    // if sidebar is open
+    if (getStorage('sidebar') == 'true') {
 
-    // update bottom floater
-    updateFloat();
+      // do a silent transition
+      body.classList.add('transitioning');
 
+      toggleSidebar(true);
+
+      window.setTimeout(() => {
+
+        body.classList.remove('transitioning');
+
+      }, 0);
+      
+      
+      // render sidebar
+      renderSidebarHTML();
+
+    } else if (isMobile) {
+
+      // update bottom floater
+      updateFloat();
+
+    }
+    
   }
 
 }
 
 function setupCodeitApp() {
-    
+  
   setupEditor();
   setupSidebar();
   
   setTimeoutForEclipsedFiles();
 
 }
-
+  

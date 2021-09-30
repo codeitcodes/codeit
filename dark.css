@@ -86,7 +86,10 @@ cd-el::selection, cd-el *::selection {
   opacity: 1;
 }
 
-.token.property,
+.token.property {
+  color: #35d4c7;
+}
+
 .token.boolean,
 .token.number,
 .token.constant,
@@ -111,12 +114,12 @@ cd-el::selection, cd-el *::selection {
 
 .token.operator,
 .token.entity,
+.language-css .token.function,
 .token.interpolation .token.punctuation {
   color: hsl(286deg 60% 72% / 93%);
 }
 
 .token.atrule,
-.token.selector,
 .token.attr-name,
 .token.keyword {
   color: #e49199;
@@ -124,8 +127,8 @@ cd-el::selection, cd-el *::selection {
 
 .token.function,
 .token.class-name,
-.token.tag {
-  color: #74b4ec;
+.token.tag,
+.token.selector {
   color: #75bfff;
 }
 
@@ -150,6 +153,7 @@ cd-el::selection, cd-el *::selection {
   position: relative;
   padding-left: calc(1.2em + 30px);
   counter-reset: linenumber;
+  white-space: pre !important;
 }
 
 .line-numbers .line-numbers-rows {

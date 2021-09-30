@@ -41,7 +41,7 @@ const body = document.body,
 
 
 // version
-const version = '1.4.1';
+const version = '1.4.3';
 versionEl.innerText = version;
 
 
@@ -104,6 +104,8 @@ const isWindows = navigator.platform.indexOf('Win') > -1;
 
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
+let isOffline = !window.navigator.onLine;
+
 if (isMobile) {
 
   body.classList.add('mobile');
@@ -131,6 +133,9 @@ window.addEventListener('resize', () => {
   isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
 });
+
+window.addEventListener('online', () => { isOffline = false });
+window.addEventListener('offline', () => { isOffline = true });
 
 window.addEventListener('DOMContentLoaded', () => {
   
