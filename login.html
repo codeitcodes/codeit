@@ -1,5 +1,20 @@
+<html style="background: #313744">
 <script>
-var code = window.location.toString().replace(/.+code=/, '');
-window.opener.postMessage(code, window.location);
-window.close();
+
+const code = window.location.toString().replace(/.+code=/, '');
+
+try {
+  
+  window.opener.postMessage(code, window.location);
+  window.close();
+  
+} catch(e) {
+  
+  // if could not post message, redirect to dev version
+  // to try posting the message from there
+  window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
+  
+}
+
 </script>
+</html>
