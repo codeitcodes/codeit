@@ -5,12 +5,13 @@ const code = window.location.toString().replace(/.+code=/, '');
 
 try {
   
+  console.log(window.opener.location.href);
   window.opener.postMessage(code, window.location);
   
 } catch(e) {
   
   // if could not post message, redirect to dev version
-  // to try posting the message from there
+  // and try posting the message from there
   window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
   
 }
