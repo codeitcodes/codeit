@@ -153,7 +153,6 @@ cd-el::selection, cd-el *::selection {
   position: relative;
   padding-left: calc(1.2em + 30px);
   counter-reset: linenumber;
-  white-space: pre !important;
 }
 
 .line-numbers .line-numbers-rows {
