@@ -55,7 +55,7 @@ body cd-el {
   font-size: inherit;
   position: relative;
   box-sizing: border-box;
-  /*white-space: pre;*/ /*KOSTA*/
+  white-space: pre;
   padding-bottom: 50px;
 }
 
