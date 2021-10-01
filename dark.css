@@ -90,13 +90,13 @@ cd-el {
 .token.number,
 .token.constant,
 .token.symbol,
-.token.deleted {
+.token.deleted,
+.language-css .token.string {
   color: #e5b09f;
 }
 
 .token.attr-value,
 .token.string,
-.language-css .token.string,
 .style .token.string,
 .token.char,
 .token.url,
@@ -110,13 +110,13 @@ cd-el {
 
 .token.operator,
 .token.entity,
+.token.atrule,
 .language-css .token.function,
 .token.interpolation .token.punctuation {
   color: hsl(286deg 60% 72% / 93%);
   color: #ce8de2;
 }
 
-.token.atrule,
 .token.attr-name,
 .token.keyword {
   color: #e49199;
