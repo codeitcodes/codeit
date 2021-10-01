@@ -32,10 +32,11 @@ const body = document.body,
       searchClear = searchScreen.querySelector('.clear'),
 
       fileWrapper = sidebar.querySelector('.files'),
-      
+
       versionEl = learnWrapper.querySelector('.version'),
+      learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
-      
+
       logoutButton = learnWrapper.querySelector('.logout');
 
 
@@ -138,13 +139,13 @@ window.addEventListener('online', () => { isOffline = false });
 window.addEventListener('offline', () => { isOffline = true });
 
 window.addEventListener('DOMContentLoaded', () => {
-  
+
   let displayMode = 'browser tab';
-  
+
   if (navigator.standalone) {
     displayMode = 'standalone-ios';
   }
-  
+
   if (window.matchMedia('(display-mode: standalone)').matches) {
     displayMode = 'standalone';
   }
@@ -152,7 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (displayMode == 'browser tab') {
     //window.location.href = '/';
   }
-  
+
 });
 
 

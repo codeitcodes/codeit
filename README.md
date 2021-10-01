@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://codeit.berryscript.com"><img src="/icons/app-favicon.png" height="100" width="100"></a>
+  <a href="https://codeit.codes"><img src="/icons/app-favicon.png" height="100" width="100"></a>
   <br>
   Codeit
 </h1>

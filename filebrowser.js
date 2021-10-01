@@ -71,14 +71,14 @@ async function renderSidebarHTML() {
 
         // if item is a file
         if (item.type == 'file') {
-          
+
           let file = getLatestVersion(item);
-          
+
           // add modified flag to file
           let modified = '';
           if (modifiedFiles[file.sha] &&
               !modifiedFiles[file.sha].eclipsed) modified = ' modified';
-          
+
           out += `
           <div class="item file`+ modified +`" sha="`+ file.sha +`">
             <div class="label">
@@ -220,10 +220,10 @@ function addHTMLItemListeners() {
           }
 
         } else {
-          
+
           // play push animation
           playPushAnimation(item.querySelector('.push-wrapper'));
-          
+
           // push file
           pushFileFromHTML(item);
 
@@ -348,10 +348,10 @@ async function loadFileInHTML(fileEl, fileSha) {
     updateFloat();
 
   } else { // if on desktop
-    
+
     // check codeit scrollbar
     checkScrollbar();
-    
+
   }
 
 }
@@ -394,6 +394,27 @@ sidebarTitle.addEventListener('click', () => {
 
 })
 
+
+// share codeit on click of button
+learnShare.addEventListener('click', () => {
+
+  const shareData = {
+    title: 'Codeit',
+    text: 'Mobile code editor connected to Git. Free and open source.',
+    url: window.location.origin
+  };
+
+  try {
+
+    navigator.share(shareData);
+
+  } catch(err) {
+
+    console.log('[Share API] Could not share.', err);
+
+  }
+  
+})
 
 // close learn page on click of button
 learnClose.addEventListener('click', () => {
@@ -471,38 +492,38 @@ function onEditorScroll() {
 }
 
 function checkScrollbar() {
-  
+
   window.setTimeout(() => {
-    
+
     // if codeit is horizontally scrollable
     if (cd.scrollWidth > cd.clientWidth) {
-    
+
       // move sidebar arrow up to make
       // way for horizontal scrollbar
       github.classList.add('scrollbar');
-      
+
     } else {
-      
+
       github.classList.remove('scrollbar');
-      
+
     }
-    
+
   }, 0);
-  
+
 }
 
 // check for key to see if code has changed
 function hasKeyChangedCode(event) {
-  
+
   return event.key !== 'Meta'
       && event.key !== 'Control'
       && event.key !== 'Alt'
       && !event.key.startsWith('Arrow')
-      && (!isKeyEventMeta(event) || 
+      && (!isKeyEventMeta(event) ||
           (isKeyEventMeta(event) && event.key === 'V') ||
           (isKeyEventMeta(event) && event.key === 'X') ||
           (isKeyEventMeta(event) && event.key === 'Z'));
-  
+
 }
 
 // check for key to see
@@ -526,7 +547,7 @@ function codeChange() {
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
-    
+
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
@@ -558,13 +579,13 @@ function codeChange() {
 function setupEditor() {
 
   // add editor event listeners
-  
+
   cd.addEventListener('keyup', onEditorKeyup);
   cd.addEventListener('click', onEditorClick);
   cd.addEventListener('scroll', onEditorScroll);
-  
+
   if (!isMobile) cd.addEventListener('keydown', checkScrollbar);
-  
+
   // if code in storage
   if (selectedFile.content) {
 
@@ -592,10 +613,10 @@ function setupEditor() {
 
     // update line numbers
     updateLineNumbersHTML();
-    
+
     // check codeit scrollbar
     if (!isMobile) checkScrollbar();
-    
+
   });
 
 
@@ -618,21 +639,21 @@ function setupEditor() {
     e.preventDefault();
 
   });
-  
+
   // disable Ctrl/Cmd+S
   document.addEventListener('keydown', (e) => {
-    
+
     if (e.key === 's' && isKeyEventMeta(e)) {
-      
+
       e.preventDefault();
-      
+
       if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
       else console.log('[Ctrl+S] Always saving. Always saving.');
-      
+
     }
-    
+
   });
-  
+
 }
 
 function updateLineNumbersHTML() {
@@ -662,7 +683,7 @@ function updateLineNumbersHTML() {
 }
 
 function setupSidebar() {
-  
+
   // if not logged in to Github
   if (githubToken == null) {
 
@@ -683,10 +704,10 @@ function setupSidebar() {
     }, 0);
 
   } else { // if logged in to Github
-    
+
     // render sidebar
     renderSidebarHTML();
-    
+
     // if sidebar is open
     if (getStorage('sidebar') == 'true') {
 
@@ -707,17 +728,16 @@ function setupSidebar() {
       updateFloat();
 
     }
-    
+
   }
 
 }
 
 function setupCodeitApp() {
-  
+
   setupEditor();
   setupSidebar();
-  
+
   setTimeoutForEclipsedFiles();
 
 }
-      

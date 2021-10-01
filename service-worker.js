@@ -6,10 +6,10 @@ const CACHE_NAME = 'static-cache-v115';
 // list of files to cache
 const FILES_TO_CACHE = [
 
-  '/src/codeit.js',
-  '/src/prism.js',
-  '/src/codeit-line-numbers.js',
-  '/src/codeit-match-braces.js',
+  '/lib/codeit.js',
+  '/lib/prism.js',
+  '/lib/codeit-line-numbers.js',
+  '/lib/codeit-match-braces.js',
 
   '/full.html',
   '/full.css',
@@ -20,7 +20,7 @@ const FILES_TO_CACHE = [
   '/git/gitapi.js',
   '/git/gitauth.js',
   '/codedrop.js',
-  '/htmlrenderer.js',
+  '/filebrowser.js',
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
@@ -97,4 +97,3 @@ self.addEventListener('fetch', (evt) => {
   );
 
 });
- 
