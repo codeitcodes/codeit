@@ -59,6 +59,7 @@ body cd-el {
   position: relative;
   box-sizing: border-box;
   white-space: pre;
+  word-wrap: normal;
   padding-bottom: 50px;
 }
 
