@@ -684,6 +684,9 @@ function setupSidebar() {
 
   } else { // if logged in to Github
     
+    // render sidebar
+    renderSidebarHTML();
+    
     // if sidebar is open
     if (getStorage('sidebar') == 'true') {
 
@@ -697,10 +700,6 @@ function setupSidebar() {
         body.classList.remove('transitioning');
 
       }, 0);
-      
-      
-      // render sidebar
-      renderSidebarHTML();
 
     } else if (isMobile) {
 
@@ -721,4 +720,4 @@ function setupCodeitApp() {
   setTimeoutForEclipsedFiles();
 
 }
-  
+      
