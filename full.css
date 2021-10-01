@@ -1088,7 +1088,6 @@ body.mobile.expanded .cd-wrapper {
 }
 
 body.mobile cd-el {
-  /*white-space: pre-wrap;*/ /*KOSTA*/
   padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
   -webkit-overflow-scrolling: touch;
 }
