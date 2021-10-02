@@ -290,12 +290,6 @@ body {
   box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08)
 }
 
-.btn--a.btn--primary:hover,
-.btn--a.btn--secondary:hover {
-  box-shadow: 0 4px 10px rgba(50, 50, 93, .226), 0 1px 3px rgba(0, 0, 0, .08);
-  background: #fefefe
-}
-
 .btn--a.btn--plain {
   background: transparent;
   text-decoration: underline
@@ -309,10 +303,6 @@ body {
   backface-visibility: hidden
 }
 
-.btn--b.btn--primary:hover {
-  box-shadow: 0 4px 10px rgba(50, 50, 93, .226), 0 1px 3px rgba(0, 0, 0, .08)
-}
-
 .btn--b.btn--secondary:after {
   content: "";
   position: absolute;
@@ -324,10 +314,6 @@ body {
   color: inherit;
   transition: box-shadow .1s linear;
   box-shadow: inset 0 0 0 0
-}
-
-.btn--b.btn--secondary:hover:after {
-  box-shadow: inset 0 0 0 3px
 }
 
 .btn--b.btn--primary {
@@ -351,16 +337,6 @@ body {
 
 .btn--c.btn--secondary {
   box-shadow: inset 0 0 0 1px, 0 1px 2px rgba(0, 0, 0, .171)
-}
-
-.btn--c.btn--primary:hover,
-.btn--c.btn--secondary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(50, 50, 93, .226), 0 1px 3px rgba(0, 0, 0, .08)
-}
-
-.btn--c.btn--secondary:hover {
-  box-shadow: inset 0 0 0 1px, 0 4px 10px rgba(50, 50, 93, .226), 0 1px 3px rgba(0, 0, 0, .08)
 }
 
 .btn svg:last-child {
@@ -4749,6 +4725,11 @@ body {
   font-family: 'Inter';
   -webkit-user-select: none;
   user-select: none;
+  transition: .2s ease-in-out, 0s opacity;
+}
+
+.ctas .btn:active {
+  opacity: .5;
 }
 
 #features {
@@ -4791,7 +4772,7 @@ body {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background: linear-gradient( 
+  background: linear-gradient(
 0deg, #111111, #11111100);
   z-index: 10;
 }
