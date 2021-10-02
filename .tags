@@ -27,6 +27,7 @@ cd.options.openBrackets	.\lib\codeit.js	/^      openBrackets: ['(', '[', '{'],$/
 cd.options.preserveIdent	.\lib\codeit.js	/^      preserveIdent: true,$/;"	p
 cd.options.tab	.\lib\codeit.js	/^      tab: '  ',$/;"	p
 changeSelectedFile	.\file.js	/^function changeSelectedFile(dir, sha, name, content, lang,$/;"	f
+checkPWA	.\homepage\homepage.js	/^function checkPWA() {$/;"	f
 checkScrollbar	.\filebrowser.js	/^function checkScrollbar() {$/;"	f
 codeChange	.\filebrowser.js	/^function codeChange() {$/;"	f
 createFile	.\file.js	/^function createFile(dir, sha, name, content, lang,$/;"	f

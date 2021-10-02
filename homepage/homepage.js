@@ -39,7 +39,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
 
-}
+});
 
 
 // Register service worker
