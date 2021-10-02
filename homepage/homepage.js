@@ -35,6 +35,12 @@ function installPWA(evt) {
     });
 }
 
+document.querySelectorAll('.btn.install').forEach(button => {
+
+  button.addEventListener('click', installPWA);
+
+}
+
 
 // Register service worker
 if ('serviceWorker' in navigator) {
