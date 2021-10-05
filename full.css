@@ -1024,7 +1024,7 @@ body:not(.mobile) .splash-wrapper a:hover {
 
 
 body:not(.platform-mac) .github,
-body:not(.platform-mac) .sidebar .header .title,
+body:not(.platform-mac) .sidebar .header .titlescreen .title,
 body:not(.platform-mac) .sidebar .item,
 body:not(.platform-mac) .sidebar .item .push-wrapper,
 body:not(.platform-mac) .sidebar .more,
