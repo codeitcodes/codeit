@@ -669,7 +669,7 @@ function updateLineNumbersHTML() {
     }
 
     cd.classList.remove('line-numbers');
-    cd.style.paddingLeft = '';
+    cd.style.setProperty('--gutter-length', '');
 
     return;
 
