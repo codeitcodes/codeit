@@ -148,8 +148,10 @@ cd-el {
 
 .line-numbers {
   position: relative;
-  padding-left: calc(1.2em + 30px);
   counter-reset: linenumber;
+  padding-left: var(--gutter-length);
+  scroll-padding-left: var(--gutter-length);
+  --gutter-length: calc(1.2em + 30px);
 }
 
 .line-numbers .line-numbers-rows {
