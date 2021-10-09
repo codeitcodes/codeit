@@ -227,7 +227,6 @@ template {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-size: 14px;
   line-height: 1.5;
   font-weight: 400;
@@ -267,7 +266,6 @@ body {
   border: none;
   outline: none;
   border-radius: 3px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 1.05em;
   cursor: pointer;
@@ -4562,7 +4560,7 @@ body {
 
 
 body {
-  font-family: 'Inter';
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-size: 14px;
   font-weight: 400;
   --title-scale: 1;
@@ -4654,7 +4652,7 @@ a:not(.btn),
 }
 
 .font-title {
-  font-family: 'Inter';
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 a,
@@ -4724,7 +4722,7 @@ body {
   text-transform: uppercase;
   min-width: 45px;
   height: auto;
-  font-family: 'Inter';
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   -webkit-user-select: none;
   user-select: none;
   transition: .2s ease-in-out, 0s opacity;
