@@ -4650,7 +4650,7 @@ a:not(.btn),
 }
 
 .weight-title-h {
-  font-weight: 800;
+  /* font-weight: 800; */
 }
 
 .font-title {
