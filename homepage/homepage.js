@@ -8,6 +8,7 @@ window.addEventListener('appinstalled', logAppInstalled);
 // Log the installation
 function logAppInstalled(evt) {
   console.log('Codeit installed succesfully.', evt);
+  plausible('Install');
 }
 
 let deferredInstallPrompt = null;
