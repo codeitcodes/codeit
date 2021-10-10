@@ -145,7 +145,7 @@ async function renderSidebarHTML() {
   // hide search screen
   header.classList.remove('searching');
 
-  // if selected file is in directory
+  // if selected file is in current directory
   if (selectedFile.dir == treeLoc.join()) {
 
     let selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
@@ -157,6 +157,9 @@ async function renderSidebarHTML() {
       selectedEl.scrollIntoViewIfNeeded();
 
     }
+    
+    // protect unsaved code
+    protectUnsavedCode();
 
   }
 
@@ -573,6 +576,42 @@ function codeChange() {
 
   // save code in async thread
   asyncThread(saveSelectedFileContent, 30);
+
+}
+
+// protect unsaved code
+// if selected file is in current directory
+// but does not exist in the HTML
+function protectUnsavedCode() {
+
+  // get selected file element in HTML
+  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+
+  // if selected file is not in HTML,
+  // protect unsaved code by clearing codeit
+  if (selectedEl == null) {
+
+    // clear codeit
+
+    // clear codeit contents
+    cd.textContent = '';
+
+    // change codeit lang
+    cd.lang = '';
+
+    // clear codeit history
+    cd.history = [];
+
+    // update line numbers
+    updateLineNumbersHTML();
+
+    // if on mobile, open sidebar
+    if (isMobile) toggleSidebar(true);
+
+    // change selected file to empty file
+    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+
+  }
 
 }
 
