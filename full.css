@@ -91,7 +91,6 @@ body cd-el {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  transition: .18s var(--ease-function);
 }
 
 .bottom-float .sidebar-open {
@@ -137,7 +136,6 @@ body cd-el {
   position: relative;
   box-sizing: border-box;
   height: 100%;
-  transition: .18s var(--ease-function);
 }
 
 .bottom-float .push-wrapper:active {
