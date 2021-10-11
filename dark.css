@@ -146,6 +146,31 @@ cd-el {
   cursor: unset;
 }
 
+.brace-open.brace-hover,
+.brace-close.brace-hover {
+  position: relative;
+}
+
+.brace-open.brace-hover::before,
+.brace-open.brace-hover::after,
+.brace-close.brace-hover::before,
+.brace-close.brace-hover::after {
+  content: '';
+  bottom: -2.5px;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background: #a6c3d4;
+  position: absolute;
+  transform: rotateZ(25deg);
+}
+
+.brace-open.brace-hover::after,
+.brace-close.brace-hover::after {
+  left: 50%;
+  transform: rotateZ(-25deg);
+}
+
 .line-numbers {
   position: relative;
   counter-reset: linenumber;
