@@ -146,12 +146,12 @@ cd-el {
   cursor: unset;
 }
 
-.token.brace.brace-hover {
+.token.brace.brace-active {
   position: relative;
 }
 
-.token.brace.brace-hover::before,
-.token.brace.brace-hover::after {
+.token.brace.brace-active::before,
+.token.brace.brace-active::after {
   content: '';
   bottom: -2.5px;
   left: 0;
@@ -162,7 +162,7 @@ cd-el {
   transform: rotateZ(25deg);
 }
 
-.token.brace.brace-hover::after {
+.token.brace.brace-active::after {
   left: 50%;
   transform: rotateZ(-25deg);
 }
