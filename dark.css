@@ -146,15 +146,12 @@ cd-el {
   cursor: unset;
 }
 
-.brace-open.brace-hover,
-.brace-close.brace-hover {
+.token.brace.brace-hover {
   position: relative;
 }
 
-.brace-open.brace-hover::before,
-.brace-open.brace-hover::after,
-.brace-close.brace-hover::before,
-.brace-close.brace-hover::after {
+.token.brace.brace-hover::before,
+.token.brace.brace-hover::after {
   content: '';
   bottom: -2.5px;
   left: 0;
@@ -165,8 +162,7 @@ cd-el {
   transform: rotateZ(25deg);
 }
 
-.brace-open.brace-hover::after,
-.brace-close.brace-hover::after {
+.token.brace.brace-hover::after {
   left: 50%;
   transform: rotateZ(-25deg);
 }
