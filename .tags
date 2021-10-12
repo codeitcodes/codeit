@@ -27,6 +27,7 @@ cd.options.openBrackets	.\lib\codeit.js	/^      openBrackets: ['(', '[', '{'],$/
 cd.options.preserveIdent	.\lib\codeit.js	/^      preserveIdent: true,$/;"	p
 cd.options.tab	.\lib\codeit.js	/^      tab: '  ',$/;"	p
 changeSelectedFile	.\file.js	/^function changeSelectedFile(dir, sha, name, content, lang,$/;"	f
+checkCaretPosEvent	.\lib\codeit.js	/^    function checkCaretPosEvent() {$/;"	f
 checkPWA	.\homepage\homepage.js	/^function checkPWA() {$/;"	f
 checkScrollbar	.\filebrowser.js	/^function checkScrollbar() {$/;"	f
 codeChange	.\filebrowser.js	/^function codeChange() {$/;"	f
@@ -95,6 +96,7 @@ onFileEclipsedInCache	.\file.js	/^function onFileEclipsedInCache(oldSha, newSha)
 overrideDeleteText	.\lib\codeit.js	/^    function overrideDeleteText(event) {$/;"	f
 pairIdCounter	.\lib\codeit-match-braces.js	/^	var pairIdCounter = 0;$/;"	v
 processFile	.\codedrop.js	/^function processFile(file) {$/;"	f
+protectUnsavedCode	.\filebrowser.js	/^function protectUnsavedCode() {$/;"	f
 recordHistoryAsync	.\lib\codeit.js	/^    function recordHistoryAsync() {$/;"	f
 rematch	.\lib\codeit-match-braces.js	/^	function rematch(code) {$/;"	f
 resizeElements	.\lib\codeit-line-numbers.js	/^	function resizeElements(elements) {$/;"	f
