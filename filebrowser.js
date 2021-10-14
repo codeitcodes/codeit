@@ -353,7 +353,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   } else { // if on desktop
 
     // check codeit scrollbar
-    checkScrollbar();
+    checkScrollbarArrow();
 
   }
 
@@ -451,36 +451,6 @@ function toggleSidebar(open) {
 }
 
 
-// check for key to see if code
-// or caret position have changed
-function onEditorKeyup(event) {
-
-  // if code has changed
-  if (hasKeyChangedCode(event)) {
-
-    // save code to local storage
-    codeChange();
-
-  }
-
-  // if caret position has changed
-  if (hasKeyChangedCaretPos(event)) {
-
-    // save caret pos to local storage
-    saveSelectedFileCaretPos();
-
-  }
-
-}
-
-// when clicked on editor, save new caret position
-function onEditorClick() {
-
-  // save caret pos to local storage
-  saveSelectedFileCaretPos();
-
-}
-
 // when scrolled editor, save new scroll position
 
 let editorScrollTimeout;
@@ -494,7 +464,7 @@ function onEditorScroll() {
 
 }
 
-function checkScrollbar() {
+function checkScrollbarArrow() {
 
   window.setTimeout(() => {
 
@@ -512,28 +482,6 @@ function checkScrollbar() {
     }
 
   }, 0);
-
-}
-
-// check for key to see if code has changed
-function hasKeyChangedCode(event) {
-
-  return event.key !== 'Meta'
-      && event.key !== 'Control'
-      && event.key !== 'Alt'
-      && !event.key.startsWith('Arrow')
-      && (!isKeyEventMeta(event) ||
-          (isKeyEventMeta(event) && event.key === 'V') ||
-          (isKeyEventMeta(event) && event.key === 'X') ||
-          (isKeyEventMeta(event) && event.key === 'Z'));
-
-}
-
-// check for key to see
-// if caret position has changed
-function hasKeyChangedCaretPos(event) {
-
-  return event.key.startsWith('Arrow');
 
 }
 
@@ -618,13 +566,13 @@ function protectUnsavedCode() {
 function setupEditor() {
 
   // add editor event listeners
-
-  cd.addEventListener('keyup', onEditorKeyup);
-  cd.addEventListener('click', onEditorClick);
+  
+  cd.addEventListener('modify', codeChange);
   cd.addEventListener('scroll', onEditorScroll);
-
-  if (!isMobile) cd.addEventListener('keydown', checkScrollbar);
-
+  cd.addEventListener('caretmove', saveSelectedFileCaretPos);
+  
+  if (!isMobile) cd.addEventListener('keydown', checkScrollbarArrow);
+  
   // if code in storage
   if (selectedFile.content) {
 
@@ -654,7 +602,7 @@ function setupEditor() {
     updateLineNumbersHTML();
 
     // check codeit scrollbar
-    if (!isMobile) checkScrollbar();
+    if (!isMobile) checkScrollbarArrow();
 
   });
 
