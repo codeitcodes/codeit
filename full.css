@@ -1150,7 +1150,14 @@ body.mobile.expanded .sidebar-background {
 }
 
 body {
-    tab-size: 2;
+  tab-size: 2;
+  
+  --base-spacing: 7px;
+  --tiny-spacing: calc(--base-spacing * 2);
+  --small-spacing: calc(--base-spacing * 3);
+  --medium-spacing: calc(--base-spacing * 4);
+  --large-spacing: calc(--base-spacing * 5);
+  
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
 }
