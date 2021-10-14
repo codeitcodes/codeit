@@ -326,11 +326,11 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
-  // show file content in codeit
-  cd.textContent = decodeUnicode(selectedFile.content);
-
   // change codeit lang
   cd.lang = selectedFile.lang;
+  
+  // show file content in codeit
+  cd.textContent = decodeUnicode(selectedFile.content);
 
   // set caret pos in codeit
   cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
