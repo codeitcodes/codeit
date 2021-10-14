@@ -325,12 +325,12 @@ async function loadFileInHTML(fileEl, fileSha) {
                        modFile.caretPos, modFile.scrollPos, false);
 
   }
-
-  // change codeit lang
-  cd.lang = selectedFile.lang;
   
   // show file content in codeit
   cd.textContent = decodeUnicode(selectedFile.content);
+  
+  // change codeit lang
+  cd.lang = selectedFile.lang;
 
   // set caret pos in codeit
   cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
