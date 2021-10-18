@@ -164,6 +164,7 @@ cd-el {
   position: absolute;
   transform: rotateZ(25deg);
   transform-origin: bottom;
+  pointer-events: none;
 }
 
 .token.brace.brace-active::after {
