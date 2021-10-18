@@ -148,6 +148,9 @@ cd-el {
 
 .token.brace.brace-active {
   position: relative;
+  background: rgb(166 195 212 / 17%);
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 1px 0 0 rgb(166 195 212 / 17%);
 }
 
 .token.brace.brace-active::before,
@@ -160,6 +163,7 @@ cd-el {
   background: #a6c3d4;
   position: absolute;
   transform: rotateZ(25deg);
+  transform-origin: bottom;
 }
 
 .token.brace.brace-active::after {
