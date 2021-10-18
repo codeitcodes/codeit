@@ -571,7 +571,7 @@ function setupEditor() {
   cd.addEventListener('scroll', onEditorScroll);
   cd.addEventListener('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.addEventListener('keydown', checkScrollbarArrow);
+  if (!isMobile) cd.addEventListener('modify', checkScrollbarArrow);
   
   // if code in storage
   if (selectedFile.content) {
