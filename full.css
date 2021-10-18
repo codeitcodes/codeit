@@ -1079,7 +1079,7 @@ body.mobile.expanded .cd-wrapper {
 }
 
 body.mobile cd-el {
-  padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
+  padding-bottom: calc(56px + 56px + 10.5px + env(safe-area-inset-bottom));
   -webkit-overflow-scrolling: touch;
 }
 
