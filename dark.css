@@ -170,9 +170,9 @@ cd-el {
 .line-numbers {
   position: relative;
   counter-reset: linenumber;
-  padding-left: var(--gutter-length);
-  scroll-padding-left: var(--gutter-length);
-  --gutter-length: calc(1.2em + 30px);
+  padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
+  scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
+  --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
 }
 
 .line-numbers .line-numbers-rows {
