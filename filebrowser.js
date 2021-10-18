@@ -567,11 +567,11 @@ function setupEditor() {
 
   // add editor event listeners
   
-  cd.addEventListener('modify', codeChange);
-  cd.addEventListener('scroll', onEditorScroll);
-  cd.addEventListener('caretmove', saveSelectedFileCaretPos);
+  cd.on('modify', codeChange);
+  cd.on('scroll', onEditorScroll);
+  cd.on('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.addEventListener('modify', checkScrollbarArrow);
+  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
   
   // if code in storage
   if (selectedFile.content) {
