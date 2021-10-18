@@ -45,7 +45,7 @@ function processFile(file) {
 
 }
 
-cd.addEventListener('drop', (ev) => {
+cd.on('drop', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -86,7 +86,7 @@ cd.addEventListener('drop', (ev) => {
 
 })
 
-cd.addEventListener('dragover', (ev) => {
+cd.on('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -101,7 +101,7 @@ cd.addEventListener('dragover', (ev) => {
 
 })
 
-cd.addEventListener('dragleave', (ev) => {
+cd.on('dragleave', (ev) => {
 
   // if not logged into Github
   if (githubToken == null) {
