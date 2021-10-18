@@ -101,14 +101,14 @@ if (isMobile) {
       // hide bottom float
       bottomFloat.classList.add('hidden');
 
-      // if scrolled to end
-      if (st >= cd.scrollHeight) {
+      // if scrolled to bottom of codeit
+      if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
         // set timeout
         window.setTimeout(() => {
 
           // if still on bottom of codeit
-          if (st >= cd.scrollHeight) {
+          if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
             // show bottom float
             bottomFloat.classList.remove('hidden');
