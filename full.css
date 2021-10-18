@@ -138,9 +138,9 @@ body cd-el {
   height: 100%;
 }
 
-.bottom-float .push-wrapper:active {
-  background: #35373e;
+.bottom-float .push-wrapper:not(.checked):active {
   background: #2e3037;
+  background: hsl(0deg 0% 100% / 7.5%);
 }
 
 .push-svg {
@@ -171,9 +171,6 @@ body cd-el {
 
 .push-wrapper.checked {
   pointer-events: none;
-}
-.push-wrapper.checked .push-svg {
-  transition: none;
 }
 .push-wrapper.checked .push-svg #check {
   transform: scale(0);
@@ -713,8 +710,8 @@ body.transitioning .sidebar {
   border-radius: 50%;
 }
 
-.sidebar .item .push-wrapper:active .push-svg {
-  background: rgba(0,0,0,.2) !important;
+.sidebar .item .push-wrapper:not(.checked):active .push-svg {
+  background: rgba(0,0,0,.15) !important;
 }
 
 .sidebar .item .arrow {
@@ -804,7 +801,7 @@ body.transitioning .sidebar {
 }
 
 .roundbutton:active {
-  background: rgba(0,0,0,.2) !important;
+  background: rgba(0,0,0,.15) !important;
 }
 
 .sidebar .button {
@@ -1046,11 +1043,7 @@ body:not(.mobile) .roundbutton:hover {
   background: rgba(0,0,0,.1);
 }
 
-body:not(.mobile) .sidebar .item .push-wrapper .push-svg {
-  transition: .18s var(--ease-function), 0s background;
-}
-
-body:not(.mobile) .sidebar .item .push-wrapper:hover .push-svg {
+body:not(.mobile) .sidebar .item .push-wrapper:not(.checked):hover .push-svg {
   background: rgba(0,0,0,.1);
 }
 
