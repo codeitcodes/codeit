@@ -647,8 +647,8 @@ function updateLineNumbersHTML() {
 
   // if mobile but not in landscape,
   // or if editor isn't in view, return
-  if (isMobile && (!isLandscape || body.classList.contains('expanded'))) {
-
+  if (isMobile && !isLandscape) {
+    
     if (cd.querySelector('.line-numbers-rows')) {
 
       cd.querySelector('.line-numbers-rows').remove();
@@ -659,7 +659,7 @@ function updateLineNumbersHTML() {
     cd.style.setProperty('--gutter-length', '');
 
     return;
-
+    
   }
 
   cd.classList.add('line-numbers');
