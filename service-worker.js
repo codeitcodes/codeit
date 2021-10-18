@@ -1,13 +1,14 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v124';
+const CACHE_NAME = 'static-cache-v125';
 
 // list of files to cache
 const FILES_TO_CACHE = [
-
+  
   '/lib/codeit.js',
   '/lib/prism.js',
+  
   '/lib/codeit-line-numbers.js',
   '/lib/codeit-match-braces.js',
 
