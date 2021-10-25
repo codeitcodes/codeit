@@ -138,24 +138,6 @@ window.addEventListener('resize', () => {
 window.addEventListener('online', () => { isOffline = false });
 window.addEventListener('offline', () => { isOffline = true });
 
-window.addEventListener('DOMContentLoaded', () => {
-
-  let displayMode = 'browser tab';
-
-  if (navigator.standalone) {
-    displayMode = 'standalone-ios';
-  }
-
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    displayMode = 'standalone';
-  }
-
-  if (displayMode == 'browser tab') {
-    //window.location.href = '/';
-  }
-
-});
-
 
 // base64 encode/decode
 
