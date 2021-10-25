@@ -62,7 +62,7 @@ function installPWA(evt) {
     
   } else { // open in the browser
     
-    window.location.href = '/full';
+    window.location.replace(window.location.origin + '/full');
     
   }
   
@@ -91,15 +91,21 @@ function checkPWA() {
   let displayMode = 'browser tab';
 
   if (navigator.standalone) {
+    
     displayMode = 'standalone-ios';
+    
   }
 
   if (window.matchMedia('(display-mode: standalone)').matches) {
+    
     displayMode = 'standalone';
+    
   }
 
   if (displayMode != 'browser tab') {
-    window.location.href = '/full';
+    
+    window.location.replace(window.location.origin + '/full');
+    
   }
 
 };
