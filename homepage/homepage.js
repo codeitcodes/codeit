@@ -15,6 +15,8 @@ function logAppInstalled(evt) {
     button.style.opacity = '0.5';
     button.innerText = 'Installed';
     
+    window.location.replace(window.location.origin + '/full');
+    
   });
   
 }
@@ -111,4 +113,3 @@ function checkPWA() {
 };
 
 checkPWA();
-document.addEventListener('visibilitychange', checkPWA);
