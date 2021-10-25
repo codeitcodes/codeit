@@ -19,17 +19,18 @@ let manifest = {
       "purpose": "any"
     }
   ],
-  "url_handlers": [
-    {
-      "origin": window.location.origin
-    }
-  ],
+  "capture_links": ["new-client"],
   "file_handlers": [
     {
       "action": window.location.origin + "/full/?file=true",
       "accept": {
         "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
       }
+    }
+  ],
+  "url_handlers": [
+    {
+      "origin": window.location.origin
     }
   ],
   "display_override": ["window-controls-overlay"]
