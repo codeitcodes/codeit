@@ -4,12 +4,13 @@
 let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
-  "description": "Mobile code editor connected to Git.",
+  "description": "Mobile code editor connected to Git. Runs on the web, free, and open source.",
   "background_color": "#313744",
   "theme_color": "#313744",
   "display": "standalone",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
+  "display_override": ["window-controls-overlay"],
   "orientation": "any",
   "icons": [
     {
@@ -63,6 +64,7 @@ if (!isMobile) {
   
 } else if (!isSafari) {
   
+  manifest.theme_color = '#0b0d1a';
   manifest.background_color = '#0b0d1a';
   
 }
