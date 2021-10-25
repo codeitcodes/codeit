@@ -19,7 +19,7 @@ let manifest = {
       "purpose": "any"
     }
   ],
-  "capture_links": ["new-client"],
+  "capture_links": "existing_client_event",
   "file_handlers": [
     {
       "action": window.location.origin + "/full/?file=true",
@@ -70,7 +70,6 @@ if (!isMobile) {
   
 } else if (!isSafari) {
   
-  manifest.theme_color = '#0b0d1a';
   manifest.background_color = '#0b0d1a';
   
 }
