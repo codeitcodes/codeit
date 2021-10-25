@@ -112,5 +112,5 @@ function checkPWA() {
 
 };
 
-document.addEventListener('visibilitychange', checkPWA);
+document.addEventListener('visibilitychange', () => { window.setTimeout(checkPWA, 2000) });
 checkPWA();
