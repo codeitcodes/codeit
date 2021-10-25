@@ -516,6 +516,7 @@ body.transitioning .sidebar {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  padding-left: calc(env(titlebar-area-x, 0px) + 20px);
   box-sizing: border-box;
   position: absolute;
   transition: .18s var(--ease-function);
