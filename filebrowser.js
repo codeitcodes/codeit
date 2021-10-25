@@ -402,8 +402,8 @@ sidebarTitle.addEventListener('click', () => {
 learnShare.addEventListener('click', () => {
 
   const shareData = {
-    title: 'Codeit',
-    text: 'Mobile code editor connected to Git. Free and open source.',
+    title: 'Invite a friend via...',
+    text: 'I use Codeit to code on the web.',
     url: window.location.origin
   };
 
@@ -412,9 +412,12 @@ learnShare.addEventListener('click', () => {
     navigator.share(shareData);
 
   } catch(err) {
-
-    console.log('[Share API] Could not share.', err);
-
+    
+    // if could not open share dialog, share on Twitter
+    window.open('https://twitter.com/intent/tweet' +
+                '?text=' + shareData.text +
+                '&url=' + shareData.url, '_blank');
+    
   }
   
 })
