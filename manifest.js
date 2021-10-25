@@ -10,7 +10,6 @@ let manifest = {
   "display": "standalone",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
-  "display_override": ["window-controls-overlay"],
   "orientation": "any",
   "icons": [
     {
@@ -20,6 +19,14 @@ let manifest = {
       "purpose": "any"
     }
   ],
+  "url_handlers": [
+    {
+      "origin": "https://codeit.codes"
+    },
+    {
+      "origin": "https://dev.codeit.codes"
+    }
+  ],
   "file_handlers": [
     {
       "action": window.location.origin + "/full/?file=true",
@@ -27,7 +34,8 @@ let manifest = {
         "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
       }
     }
-  ]
+  ],
+  "display_override": ["window-controls-overlay"]
 };
 
 
