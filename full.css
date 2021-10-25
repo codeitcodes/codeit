@@ -9,10 +9,6 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-body.expanded {
-  background: #1a1c24;
-}
-
 .focus::before {
   position: fixed;
   left: 0;
@@ -1070,6 +1066,10 @@ body.mobile {
   width: 100vw;
   overflow-x: hidden;
   --sidebar-width: 100vw;
+}
+
+body.mobile.expanded {
+  background: #1a1c24;
 }
 
 body.mobile.expanded .cd-wrapper {
