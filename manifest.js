@@ -21,10 +21,7 @@ let manifest = {
   ],
   "url_handlers": [
     {
-      "origin": "https://codeit.codes"
-    },
-    {
-      "origin": "https://dev.codeit.codes"
+      "origin": window.location.origin
     }
   ],
   "file_handlers": [
