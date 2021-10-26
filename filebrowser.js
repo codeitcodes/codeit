@@ -345,9 +345,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
   // clear codeit history
-  // and add the new file
   cd.history = [];
-  cd.recordHistory();
 
   // update line numbers
   updateLineNumbersHTML();
