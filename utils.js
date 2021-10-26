@@ -190,9 +190,16 @@ let setAttr = (element, item, value) => {
 
 
 // asynchronous thread
+
 let asyncThread = (callback, time) => {
 
   window.setTimeout(callback, time);
+
+}
+
+let onNextFrame = (callback) => {
+  
+  window.requestAnimationFrame(callback);
 
 }
 
