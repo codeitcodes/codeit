@@ -613,9 +613,6 @@ function setupEditor() {
     // update line numbers
     updateLineNumbersHTML();
 
-    // save code history
-    cd.recordHistory();
-
   }
 
 
