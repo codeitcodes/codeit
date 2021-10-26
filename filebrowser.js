@@ -16,12 +16,15 @@ github.addEventListener('click', () => {
 // call this function when signed in to github
 // to render sidebar
 async function renderSidebarHTML() {
-
+  
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
     startLoading();
   }
-
+  
+  // hide search screen
+  header.classList.remove('searching');
+  
   // map tree location
   const [user, repo, contents] = treeLoc;
 
@@ -141,9 +144,6 @@ async function renderSidebarHTML() {
 
   // add item event listeners
   addHTMLItemListeners();
-
-  // hide search screen
-  header.classList.remove('searching');
 
   // if selected file is in current directory
   if (selectedFile.dir == treeLoc.join()) {
@@ -291,6 +291,12 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
+
+  // show all files
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  header.classList.remove('searching');
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
