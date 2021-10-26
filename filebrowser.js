@@ -555,10 +555,25 @@ function protectUnsavedCode() {
 
     // update line numbers
     updateLineNumbersHTML();
+    
+    // if on mobile, show sidebar
+    if (isMobile) {
+      
+      // do a silent transition
+      body.classList.add('transitioning');
 
-    // if on mobile, open sidebar
-    if (isMobile) toggleSidebar(true);
+      // show sidebar
+      toggleSidebar(true);
+      saveSidebarStateLS();
 
+      onNextFrame(() => {
+
+        body.classList.remove('transitioning');
+
+      });
+      
+    }
+    
     // change selected file to empty file
     changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
 
@@ -686,12 +701,12 @@ function setupSidebar() {
     // show sidebar
     toggleSidebar(true);
     saveSidebarStateLS();
-
-    window.setTimeout(() => {
+    
+    onNextFrame(() => {
 
       body.classList.remove('transitioning');
 
-    }, 0);
+    });
 
   } else { // if logged in to Github
 
@@ -706,11 +721,11 @@ function setupSidebar() {
 
       toggleSidebar(true);
 
-      window.setTimeout(() => {
+      onNextFrame(() => {
 
         body.classList.remove('transitioning');
 
-      }, 0);
+      });
 
     } else if (isMobile) {
 
