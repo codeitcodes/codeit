@@ -63,14 +63,15 @@ cd-el {
 }
 
 .token.comment,
-.token.important,
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: hsl(218deg 7% 64% / 72%);
 }
 
-.token.punctuation {
+.token.punctuation,
+.token.interpolation,
+.token.important {
   color: #a6c3d4;
 }
 
@@ -127,10 +128,6 @@ cd-el {
 .token.tag,
 .token.selector {
   color: #75bfff;
-}
-
-.token.interpolation {
-  color: #a6c3d4;
 }
 
 .token.important,
