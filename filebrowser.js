@@ -588,14 +588,6 @@ function protectUnsavedCode() {
 }
 
 function setupEditor() {
-
-  // add editor event listeners
-  
-  cd.on('modify', codeChange);
-  cd.on('scroll', onEditorScroll);
-  cd.on('caretmove', saveSelectedFileCaretPos);
-  
-  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
   
   // if code in storage
   if (selectedFile.content) {
@@ -614,8 +606,16 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   }
-
-
+  
+  
+  // add editor event listeners
+  
+  cd.on('modify', codeChange);
+  cd.on('scroll', onEditorScroll);
+  cd.on('caretmove', saveSelectedFileCaretPos);
+  
+  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
+  
   // update on screen resize
   window.addEventListener('resize', () => {
 
@@ -626,8 +626,7 @@ function setupEditor() {
     if (!isMobile) checkScrollbarArrow();
 
   });
-
-
+  
   // update line numbers when finished highlighting
   Prism.hooks.add('complete', function (env) {
 
@@ -639,8 +638,7 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   });
-
-
+  
   // disable context menu
   window.addEventListener('contextmenu', (e) => {
 
