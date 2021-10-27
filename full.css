@@ -499,7 +499,7 @@ body.transitioning .sidebar {
 
 .sidebar .header {
   height: 59px;
-  margin-bottom: 1px;
+  margin-bottom: 11px;
   padding-top: 15px;
   box-shadow: 0 1px 0 0 #f1f1f21c;
   background: #1a1c24;
@@ -626,10 +626,6 @@ body.transitioning .sidebar {
   padding: 15px 20px;
   position: relative;
   scroll-margin: 75px;
-}
-
-.sidebar .item:first-of-type {
-  margin-top: 10px;
 }
 
 .sidebar .item:last-of-type {
