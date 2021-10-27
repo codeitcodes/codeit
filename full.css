@@ -636,7 +636,7 @@ body.transitioning .sidebar {
   background: hsl(227deg 11% 16%);
 }
 
-.sidebar .item:not(.file):active {
+.sidebar .item:active {
   background: hsl(226deg 7% 19%);
 }
 
