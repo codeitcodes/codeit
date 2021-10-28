@@ -641,11 +641,15 @@ function setupEditor() {
   });
   
   // disable context menu
-  window.addEventListener('contextmenu', (e) => {
+  if (!isMobile) {
+  
+    window.addEventListener('contextmenu', (e) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
-  });
+    });
+    
+  }
 
   // disable Ctrl/Cmd+S
   document.addEventListener('keydown', (e) => {
