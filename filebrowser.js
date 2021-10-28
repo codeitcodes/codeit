@@ -306,6 +306,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   // select the new file
 
   fileEl.classList.add('selected');
+  fileEl.scrollIntoViewIfNeeded();
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
