@@ -3,6 +3,7 @@
 html, body {
   margin: 0;
   background: #313744;
+  caret-color: #fff;
   color: #d4d5d7;
   height: 100%;
   overflow: hidden;
@@ -552,6 +553,7 @@ body.transitioning .sidebar {
 
 .sidebar .searchscreen .back {
   color: #828689;
+  transition: .18s var(--ease-function) margin-left;
 }
 
 .sidebar .header.searching .searchscreen .back {
