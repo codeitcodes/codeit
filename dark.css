@@ -47,8 +47,8 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 
 cd-el {
   background: #313744;
-  color: #a6c3d4;
   caret-color: #fff;
+  color: #a6c3d4;
 
   font-family: 'Google Sans Mono', 'Roboto Mono', monospace;
 
