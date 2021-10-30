@@ -65,7 +65,8 @@ body cd-el {
   bottom: calc(45px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100vw - 45px);
+  width: calc(100vw - 45px - env(safe-area-inset-left));
+  max-width: 600px;
   display: none;
   align-items: center;
   justify-content: space-between;
@@ -433,6 +434,7 @@ body.expanded .github .left {
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   z-index: 999;
   padding-right: 1px;
+  padding-left: env(safe-area-inset-left);
   will-change: transform;
 }
 
