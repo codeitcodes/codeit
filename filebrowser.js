@@ -566,8 +566,8 @@ function protectUnsavedCode() {
     // if on mobile, show sidebar
     if (isMobile) {
       
-      // do a silent transition
-      body.classList.add('transitioning');
+      // don't transition
+      body.classList.add('notransition');
 
       // show sidebar
       toggleSidebar(true);
@@ -575,7 +575,7 @@ function protectUnsavedCode() {
 
       onNextFrame(() => {
 
-        body.classList.remove('transitioning');
+        body.classList.remove('notransition');
 
       });
       
@@ -701,8 +701,8 @@ function setupSidebar() {
     // show intro screen
     sidebar.classList.add('intro');
 
-    // do a silent transition
-    body.classList.add('transitioning');
+    // don't transition
+    body.classList.add('notransition');
 
     // show sidebar
     toggleSidebar(true);
@@ -710,7 +710,7 @@ function setupSidebar() {
     
     onNextFrame(() => {
 
-      body.classList.remove('transitioning');
+      body.classList.remove('notransition');
 
     });
 
@@ -722,14 +722,14 @@ function setupSidebar() {
     // if sidebar is open
     if (getStorage('sidebar') == 'true') {
 
-      // do a silent transition
-      body.classList.add('transitioning');
+      // don't transition
+      body.classList.add('notransition');
 
       toggleSidebar(true);
 
       onNextFrame(() => {
 
-        body.classList.remove('transitioning');
+        body.classList.remove('notransition');
 
       });
 
