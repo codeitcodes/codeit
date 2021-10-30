@@ -3,10 +3,10 @@
 html, body {
   margin: 0;
   background: #313744;
-  caret-color: #fff;
   color: #d4d5d7;
   height: 100%;
   overflow: hidden;
+  caret-color: #fff;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -433,6 +433,7 @@ body.expanded .github .left {
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   padding-left: env(safe-area-inset-left);
+  box-sizing: border-box;
   will-change: transform;
   z-index: 999;
 }
