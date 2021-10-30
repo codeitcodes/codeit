@@ -596,9 +596,14 @@ function setupEditor() {
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
     cd.textContent = decodeUnicode(selectedFile.content);
-
-    // set caret pos in code
-    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+    
+    // if sidebar isn't expanded, focus codeit
+    if (!(isMobile && body.classList.contains('expanded'))) {
+      
+      // set caret pos in code
+      cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+      
+    }
 
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
