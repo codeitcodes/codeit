@@ -426,16 +426,15 @@ body.expanded .github .left {
   background: #1a1c24;
   color: #d4d5d7;
   transition: .4s var(--cubic-function);
-  width: var(--sidebar-width);
+  width: calc(var(--sidebar-width) + 1px);
   transform: translateX(-100%);
   overflow-x: hidden;
   overflow-y: overlay;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
-  z-index: 999;
-  padding-right: 1px;
   padding-left: env(safe-area-inset-left);
   will-change: transform;
+  z-index: 999;
 }
 
 /*
