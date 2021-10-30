@@ -410,7 +410,7 @@ learnShare.addEventListener('click', () => {
 
   const shareData = {
     title: 'Invite a friend via...',
-    text: 'I use Codeit to code on the web.',
+    text: 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me!',
     url: window.location.origin
   };
 
@@ -422,7 +422,7 @@ learnShare.addEventListener('click', () => {
     
     // if could not open share dialog, share on Twitter
     window.open('https://twitter.com/intent/tweet' +
-                '?text=' + shareData.text +
+                '?text=' + shareData.text.toLowerCase() +
                 '&url=' + shareData.url, '_blank');
     
   }
