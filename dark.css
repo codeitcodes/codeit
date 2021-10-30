@@ -48,6 +48,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 cd-el {
   background: #313744;
   color: #a6c3d4;
+  caret-color: #fff;
 
   font-family: 'Google Sans Mono', 'Roboto Mono', monospace;
 
@@ -56,10 +57,6 @@ cd-el {
 
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
-}
-
-cd-el {
-  caret-color: #fff;
 }
 
 .token.comment,
