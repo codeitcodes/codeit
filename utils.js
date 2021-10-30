@@ -98,7 +98,7 @@ function load() {
 // device and platform queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
-const isSafari = navigator.standalone ?? false;
+const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
 
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isWindows = navigator.platform.indexOf('Win') > -1;
