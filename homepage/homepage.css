@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('/fonts/fonts.css');
 
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -4726,11 +4725,59 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   -webkit-user-select: none;
   user-select: none;
-  transition: .2s ease-in-out, 0s opacity;
+  transition: 0s, .2s ease-in-out width;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+  width: 79px;
 }
 
 .ctas .btn:active {
   opacity: .5;
+}
+
+.ctas .btn::before {
+  content: 'Get';
+  position: relative;
+  width: 79px;
+  box-sizing: border-box;
+  background: #0b83fe;
+  color: inherit;
+  display: block;
+  border-radius: 28px;
+  transition: .2s ease-in-out;
+  transition-property: width, background, color;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.ctas .btn.loading {
+  background: transparent !important;
+  color: transparent !important;
+  min-width: unset !important;
+  padding: 0;
+  margin-top: 3px;
+  width: 28px;
+  pointer-events: none;
+}
+
+.ctas .btn.loading::before {
+  content: '';
+  height: 28px;
+  width: 28px;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 10%), inset 0 -10px 0 0 #000, inset 0 0 0 2px rgb(255 255 255 / 50%);
+  top: 1px;
+  background: transparent;
+  color: transparent;
+  animation: loader 1s linear infinite;
+  animation-delay: .2s;
+  transition-property: width, background, color, box-shadow;
+}
+
+@keyframes loader {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 #features {
