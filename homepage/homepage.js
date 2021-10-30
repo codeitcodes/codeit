@@ -1,7 +1,7 @@
 
 const isMobile = navigator.userAgent.match('Mobile') || false;
 const isMac = navigator.platform.indexOf('Mac') > -1;
-const isSafari = navigator.standalone || false;
+const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
 
 window.addEventListener('appinstalled', logAppInstalled);
 
@@ -12,10 +12,12 @@ function logAppInstalled(evt) {
   
   document.querySelectorAll('.btn.install').forEach(button => {
     
-    button.style.opacity = '0.5';
-    button.innerText = 'Installed';
+    button.classList.remove('loading');
+    button.classList.add('installed');
     
-    window.location.replace(window.location.origin + '/full');
+    if (!isMobile) {
+      window.location.replace(window.location.origin + '/full');
+    }
     
   });
   
@@ -29,6 +31,12 @@ window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
 function saveBeforeInstallPromptEvent(evt) {
   
   evt.preventDefault();
+  
+  document.querySelectorAll('.btn.install').forEach(button => {
+    
+    button.classList.remove('loading');
+    
+  });
   
   deferredInstallPrompt = evt;
   
@@ -49,8 +57,11 @@ function installPWA(evt) {
           
           console.log('Accepted the install prompt');
           
-          evt.target.style.opacity = '0.5';
-          evt.target.style.pointerEvents = 'none';
+          document.querySelectorAll('.btn.install').forEach(button => {
+    
+            button.classList.add('loading');
+
+          });
           
         } else {
           
@@ -73,6 +84,12 @@ function installPWA(evt) {
 document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
+  
+  if (isSafari) {
+    
+    button.classList.remove('loading');
+    
+  }
 
 });
 
