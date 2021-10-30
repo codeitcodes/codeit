@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 html, body {
-  margin: 0;
   background: #313744;
   color: #d4d5d7;
+  caret-color: #fff;
+  margin: 0;
   height: 100%;
   overflow: hidden;
-  caret-color: #fff;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
