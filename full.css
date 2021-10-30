@@ -41,7 +41,7 @@ body.expanded .cd-wrapper {
   transform: translateX(var(--sidebar-width));
 }
 
-body.transitioning .cd-wrapper {
+body.notransition .cd-wrapper {
   transition: none;
 }
 
@@ -358,7 +358,7 @@ body.expanded .github {
   left: 0;
 }
 
-body.transitioning :is(.github, .github *) {
+body.notransition :is(.github, .github *) {
   transition: none;
 }
 
@@ -457,7 +457,7 @@ body.expanded .sidebar {
   pointer-events: auto;
 }
 
-body.transitioning .sidebar {
+body.notransition .sidebar {
   transition: none;
 }
 
