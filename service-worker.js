@@ -41,7 +41,9 @@ const FILES_TO_CACHE = [
   'https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_R-W-AJi8SJQtQ4Y.woff',
   'https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_QOW-AJi8SJQtQ4Y.woff',
   'https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_SeW-AJi8SJQtQ4Y.woff',
-
+  
+  'https://plausible.io/js/plausible.js',
+  
   '/icons/android-app-512.png',
   '/icons/iphone-app-180.png',
   '/icons/app-favicon.png',
