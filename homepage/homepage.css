@@ -4774,6 +4774,15 @@ body {
   transition-property: width, background, color, box-shadow;
 }
 
+.ctas .btn.installed {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ctas .btn.installed::before {
+  content: 'Installed';
+}
+
 @keyframes loader {
   to {
     transform: rotate(1turn);
