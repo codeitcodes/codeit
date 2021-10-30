@@ -409,8 +409,8 @@ sidebarTitle.addEventListener('click', () => {
 learnShare.addEventListener('click', () => {
 
   const shareData = {
-    title: 'Share Codeit',
-    text: 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me!',
+    title: "Share Codeit",
+    text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me!",
     url: window.location.origin
   };
 
