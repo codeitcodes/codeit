@@ -433,6 +433,7 @@ body.expanded .github .left {
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   padding-left: env(safe-area-inset-left);
+  padding-right: 1px;
   box-sizing: border-box;
   will-change: transform;
   z-index: 999;
