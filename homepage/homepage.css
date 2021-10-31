@@ -4723,9 +4723,12 @@ body {
   user-select: none;
   transition: 0s, .2s ease-in-out width;
   position: relative;
+  width: 79px;
+}
+
+.ctas .btn:not(.installed) {
   padding-left: 0;
   padding-right: 0;
-  width: 79px;
 }
 
 .ctas .btn:active {
