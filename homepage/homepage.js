@@ -15,6 +15,9 @@ function logAppInstalled(evt) {
     button.classList.remove('loading');
     button.classList.add('installed');
     
+    // save installation in local storage
+    localStorage.setItem('installed', 'true');
+    
     if (!isMobile) {
       window.location.replace(window.location.origin + '/full');
     }
@@ -88,6 +91,12 @@ document.querySelectorAll('.btn.install').forEach(button => {
   if (isSafari) {
     
     button.classList.remove('loading');
+    
+  }
+  
+  if (localStorage.getItem('installed')) {
+    
+    button.classList.add('installed');
     
   }
 
