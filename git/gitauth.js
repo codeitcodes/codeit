@@ -47,7 +47,7 @@ window.onload = () => {
     const urlAuth = window.location.toString().replace(/.+auth=/, '');
     
     // if auth token is in the URL
-    if (urlAuth) {
+    if (urlAuth !== window.location.toString()) {
       
       // save token to localStorage
       githubToken = urlAuth;
