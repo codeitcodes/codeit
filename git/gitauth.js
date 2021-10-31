@@ -39,6 +39,7 @@ window.onload = () => {
     
     // add auth token to manifest
     manifest.start_url += '/?auth=' + githubToken;
+    updateManifest();
     
   }
 
@@ -61,7 +62,8 @@ async function getGithubToken(githubCode) {
   
   // add auth token to manifest
   manifest.start_url += '/?auth=' + githubToken;
-
+  updateManifest();
+  
   // render sidebar
   renderSidebarHTML();
 
