@@ -634,7 +634,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .item:last-of-type {
-  margin-bottom: 10px;
+  margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
 .sidebar .item:hover, .sidebar .item.file:active {
