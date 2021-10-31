@@ -33,6 +33,14 @@ window.onload = () => {
     getGithubToken(githubCode);
 
   })
+  
+  // if Github token is in storage
+  if (githubToken != null) {
+    
+    // add auth token to manifest
+    manifest.start_url += '/?auth=' + githubToken;
+    
+  }
 
   loadLS();
 
@@ -50,6 +58,9 @@ async function getGithubToken(githubCode) {
   // save token to localStorage
   githubToken = resp.access_token;
   saveAuthTokenLS(githubToken);
+  
+  // add auth token to manifest
+  manifest.start_url += '/?auth=' + githubToken;
 
   // render sidebar
   renderSidebarHTML();
