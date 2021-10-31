@@ -41,7 +41,7 @@ window.onload = () => {
     manifest.start_url += '/?auth=' + githubToken;
     updateManifest();
     
-  } else if (isSafari && isMobile) { // if auth token is not in storage
+  } else if (isSafari) { // if auth token is not in storage
     
     // get auth token from the URL
     const urlAuth = window.location.toString().replace(/.+auth=/, '');
