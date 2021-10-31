@@ -34,12 +34,26 @@ window.onload = () => {
 
   })
   
-  // if Github token is in storage
+  // if Github auth token is in storage
   if (githubToken != null) {
     
     // add auth token to manifest
     manifest.start_url += '/?auth=' + githubToken;
     updateManifest();
+    
+  } else { // if auth token is not in storage
+    
+    // get auth token from the URL
+    const urlAuth = window.location.toString().replace(/.+auth=/, '');
+    
+    // if auth token is in the URL
+    if (urlAuth) {
+      
+      // save token to localStorage
+      githubToken = urlAuth;
+      saveAuthTokenLS(githubToken);
+      
+    }
     
   }
 
