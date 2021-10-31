@@ -637,7 +637,7 @@ body.notransition .sidebar {
   margin-bottom: 10px;
 }
 
-body:not(.mobile) .sidebar .item:hover, .sidebar .item.file:active {
+.sidebar .item:hover, .sidebar .item.file:active {
   background: hsl(227deg 11% 16%);
 }
 
