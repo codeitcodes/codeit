@@ -76,10 +76,8 @@ if (!isMobile) {
 
 
 
+
+
 // apply dynamic manifest
+updateManifest();
 
-let linkElem = document.createElement('link');
-linkElem.setAttribute('rel', 'manifest');
-linkElem.setAttribute('href', 'data:application/json,' + encodeURIComponent(JSON.stringify(manifest)));
-
-document.head.appendChild(linkElem);
