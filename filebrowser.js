@@ -410,7 +410,7 @@ learnShare.addEventListener('click', () => {
 
   const shareData = {
     title: "Share Codeit",
-    text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me!" + //,
+    text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me!" + window.location.origin//,
     //url: window.location.origin
   };
 
