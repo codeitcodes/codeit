@@ -556,7 +556,7 @@ body.notransition .sidebar {
 
 .sidebar .searchscreen .back {
   color: #828689;
-  transition: .18s var(--ease-function) margin-left;
+  transition: .18s var(--ease-function) margin-right;
 }
 
 .sidebar .header.searching .searchscreen .back {
