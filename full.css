@@ -667,7 +667,8 @@ body.notransition .sidebar {
   box-shadow: 0 0 0 2px #191d24;
 }
 
-.sidebar .file:hover .label::before {
+.sidebar .file:hover .label::before,
+.sidebar .file:active .label::before {
   box-shadow: 0 0 0 2px hsl(227deg 11% 16%);
 }
 
