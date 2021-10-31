@@ -65,7 +65,7 @@ if (!isMobile) {
   }
   
   // change page favicon
-  var link = document.querySelector("link[rel*='icon']");
+  var link = document.querySelector('link[rel*="icon"]');
   link.href = '/icons/app-favicon.png';
   
 } else if (!isSafari) {
@@ -75,7 +75,21 @@ if (!isMobile) {
 }
 
 
-
+function updateManifest() {
+  
+  let linkElem = document.querySelector('link[rel="manifest"]')
+                 || document.createElement('link');
+                
+  linkElem.setAttribute('rel', 'manifest');
+  linkElem.setAttribute('href', 'data:application/json,' + encodeURIComponent(JSON.stringify(manifest)));
+  
+  if (!linkElem.parentElement) {
+    
+    document.head.appendChild(linkElem);
+    
+  }
+  
+}
 
 
 // apply dynamic manifest
