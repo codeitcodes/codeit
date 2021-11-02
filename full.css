@@ -838,22 +838,6 @@ body.notransition .sidebar {
   min-width: 150px;
 }
 
-.sidebar .button.tiny-spacing {
-  margin-top: 15px;
-}
-
-.sidebar .button.small-spacing {
-  margin-top: 25px;
-}
-
-.sidebar .button.medium-spacing {
-  margin-top: 35px;
-}
-
-.sidebar .button.large-spacing {
-  margin-top: 45px;
-}
-
 .sidebar .button.secondary {
   color: inherit;
   border: 1px solid hsla(0,0%,100%,.1);
@@ -885,8 +869,32 @@ body.notransition .sidebar {
   color: hsl(220deg 4% 84%);
 }
 
+.base-spacing-left {
+  margin-left: var(--base-spacing);
+}
+
+.base-spacing-top {
+  margin-top: var(--base-spacing);
+}
+
+.tiny-spacing-top {
+  margin-top: var(--tiny-spacing);
+}
+
+.small-spacing-top {
+  margin-top: var(--small-spacing);
+}
+
+.medium-spacing-top {
+  margin-top: var(--medium-spacing);
+}
+
+.large-spacing-top {
+  margin-top: var(--large-spacing);
+}
+
 .sidebar .button svg {
-  margin-right: 7px;
+  margin-right: var(--base-spacing);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
@@ -1160,10 +1168,10 @@ body {
   tab-size: 2;
   
   --base-spacing: 7px;
-  --tiny-spacing: calc(--base-spacing * 2);
-  --small-spacing: calc(--base-spacing * 4);
-  --medium-spacing: calc(--base-spacing * 5);
-  --large-spacing: calc(--base-spacing * 6);
+  --tiny-spacing: calc(var(--base-spacing) * 2);
+  --small-spacing: calc(var(--base-spacing) * 4);
+  --medium-spacing: calc(var(--base-spacing) * 5);
+  --large-spacing: calc(var(--base-spacing) * 6);
   
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
