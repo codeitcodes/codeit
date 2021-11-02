@@ -699,7 +699,7 @@ function updateLineNumbersHTML() {
 
 function setupSidebar() {
 
-  // if not logged in to Github
+  // if not logged into Github
   if (githubToken == null) {
 
     // show intro screen
@@ -718,7 +718,7 @@ function setupSidebar() {
 
     });
 
-  } else { // if logged in to Github
+  } else { // if logged into Github
 
     // render sidebar
     renderSidebarHTML();
