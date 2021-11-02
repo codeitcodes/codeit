@@ -44,13 +44,14 @@ window.onload = () => {
   } else if (isSafari) { // if auth token is not in storage
     
     // get auth token from the URL
-    const urlAuth = window.location.toString().replace(/.+auth=/, '');
+    const url = new URL(window.location.href);
+    const authToken = url.searchParams.get('auth');
     
     // if auth token is in the URL
-    if (urlAuth.includes('gh')) {
+    if (authToken) {
       
       // save token to localStorage
-      githubToken = urlAuth;
+      githubToken = authToken;
       saveAuthTokenLS(githubToken);
       
       
