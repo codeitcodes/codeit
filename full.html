@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html style="background: #313744" translate="no">
 <head>
-<title>Codeit</title>
+  
+  <title>Codeit</title>
 
-<link rel="stylesheet" href="/full.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
+  <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
-<meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#313744">
 
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#313744">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#313744">
+  <meta name="apple-mobile-web-app-title" content="Codeit">
 
-<meta name="apple-mobile-web-app-status-bar-style" content="#313744">
-<meta name="apple-mobile-web-app-title" content="Codeit">
+  <meta http-equiv="origin-trial" content="At6bIDqQqUBcNVY46zIFOhsfQekTjYXogHK35lCdfrpna6/wqhxQsIh+kfTDRcLVPP0jyfFX5gTbBM4trLnn4g0AAABqeyJvcmlnaW4iOiJodHRwczovL2NvZGVpdC5jb2Rlczo0NDMiLCJmZWF0dXJlIjoiV2ViQXBwVXJsSGFuZGxpbmciLCJleHBpcnkiOjE2NDMxNTUxOTksImlzU3ViZG9tYWluIjp0cnVlfQ==">
 
-<meta http-equiv="origin-trial" content="AiiGcvAhkjg/vkSCJ+GnKYBWEoyL09K/U6IIFmXWJsV8GnCH41lkiXqQ31/Hfqa4fHnzO/XJ219mh1EdIc153gAAAABleyJvcmlnaW4iOiJodHRwczovL2NvZGVpdC5jb2Rlczo0NDMiLCJmZWF0dXJlIjoiRmlsZUhhbmRsaW5nIiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=">
+  <meta charset="utf-8">
+  <meta name="description" content="Mobile code editor connected to Git. Runs on the web, open source, and free.">
+  <meta property="og:title" content="Codeit - Mobile code editor">
+  <meta property="og:description" content="Mobile code editor connected to Git. Runs on the web, open source, and free.">
+  <meta property="og:url" content="https://codeit.codes">
+  <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
+  <meta property="og:type" content="application">
+  <meta property="og:site_name" content="Codeit Editor">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="origin-when-cross-origin">
+  <meta name="keywords" content="web, code, code editor, web editor, web code, code web, editor, javascript, mobile, mobile editor, mobile code, open source, code online">
+  <meta name="next-head-count" content="24">
+  <meta name="robots" content="all">
+  <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
 
-<meta charset="utf-8">
-<meta name="description" content="Mobile code editor connected to Git. Free and open source.">
-<meta property="og:title" content="Codeit - Mobile code editor">
-<meta property="og:description" content="Mobile code editor connected to Git. Free and open source.">
-<meta property="og:url" content="https://codeit.codes">
-<meta property="og:image" content="/images/banner-og.png">
-<meta property="og:type" content="application">
-<meta property="og:site_name" content="Codeit editor">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="referrer" content="origin-when-cross-origin">
-<meta name="keywords" content="web, code, code editor, editor, javascript, mobile, mobile editor">
-<meta name="next-head-count" content="24">
-<meta name="robots" content="all">
+  <link rel="shortcut icon" href="/icons/android-app-512.png">
+  <link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
 
-<link rel="shortcut icon" href="/icons/android-app-512.png">
-<link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
-
-<link rel="apple-touch-startup-image" href="/splashes/apple-splash-2048-2732.jpg">
-
+  <link rel="stylesheet" href="/full.css">
+  
+  <link rel="apple-touch-startup-image" href="https://codeit.codes/splashes/apple-splash-2048-2732.jpg" media="(orientation: portrait) and (orientation: landscape)">
+  
 </head>
 <body ontouchstart="">
 
@@ -146,7 +148,7 @@
           <div class="title">Codeit</div>
           <div class="subtitle version">-.-.-</div>
         </div>
-        <div class="button secondary large-spacing share">Tell a friend</div>
+        <div class="button secondary large-spacing share">Invite friends</div>
         <div class="button teritary tiny-spacing close">Close</div>
       </div>
     </div>
@@ -161,8 +163,6 @@
 
 
   <script src="lib/prism.js" data-manual></script>
-  <script src="lib/codeit-line-numbers.js"></script>
-  <script src="lib/codeit-match-braces.js"></script>
   <script>
   Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/';
   </script>
@@ -171,6 +171,8 @@
   <link rel="stylesheet" href="/dark.css">
 
   <script src="lib/codeit.js"></script>
+  <script src="lib/codeit-line-numbers.js"></script>
+  <script src="lib/codeit-match-braces.js"></script>
 
 
   <script src="utils.js"></script>
@@ -192,7 +194,7 @@
 
   <script>
 
-    // show connection message if not loaded after 700ms
+    // show connection message if not loaded after 800ms
     // (really slow connection)
     window.setTimeout(() => {
 
@@ -202,7 +204,7 @@
 
       }
 
-    }, 700);
+    }, 800);
 
     window.addEventListener('load', () => {
 

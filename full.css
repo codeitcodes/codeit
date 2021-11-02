@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 html, body {
-  margin: 0;
   background: #313744;
   color: #d4d5d7;
+  caret-color: #fff;
+  margin: 0;
   height: 100%;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
-}
-
-body.expanded {
-  background: #1a1c24;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .focus::before {
@@ -44,7 +41,7 @@ body.expanded .cd-wrapper {
   transform: translateX(var(--sidebar-width));
 }
 
-body.transitioning .cd-wrapper {
+body.notransition .cd-wrapper {
   transition: none;
 }
 
@@ -68,7 +65,8 @@ body cd-el {
   bottom: calc(45px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100vw - 45px);
+  width: calc(100vw - 45px - env(safe-area-inset-left));
+  max-width: 600px;
   display: none;
   align-items: center;
   justify-content: space-between;
@@ -91,7 +89,6 @@ body cd-el {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  transition: .18s var(--ease-function);
 }
 
 .bottom-float .sidebar-open {
@@ -137,12 +134,11 @@ body cd-el {
   position: relative;
   box-sizing: border-box;
   height: 100%;
-  transition: .18s var(--ease-function);
 }
 
-.bottom-float .push-wrapper:active {
-  background: #35373e;
+.bottom-float .push-wrapper:not(.checked):active {
   background: #2e3037;
+  background: hsl(0deg 0% 100% / 7.5%);
 }
 
 .push-svg {
@@ -173,9 +169,6 @@ body cd-el {
 
 .push-wrapper.checked {
   pointer-events: none;
-}
-.push-wrapper.checked .push-svg {
-  transition: none;
 }
 .push-wrapper.checked .push-svg #check {
   transform: scale(0);
@@ -365,7 +358,7 @@ body.expanded .github {
   left: 0;
 }
 
-body.transitioning :is(.github, .github *) {
+body.notransition :is(.github, .github *) {
   transition: none;
 }
 
@@ -433,15 +426,17 @@ body.expanded .github .left {
   background: #1a1c24;
   color: #d4d5d7;
   transition: .4s var(--cubic-function);
-  width: var(--sidebar-width);
+  width: calc(var(--sidebar-width) + 1px);
   transform: translateX(-100%);
   overflow-x: hidden;
   overflow-y: overlay;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
-  z-index: 999;
+  padding-left: env(safe-area-inset-left);
   padding-right: 1px;
+  box-sizing: border-box;
   will-change: transform;
+  z-index: 999;
 }
 
 /*
@@ -463,7 +458,7 @@ body.expanded .sidebar {
   pointer-events: auto;
 }
 
-body.transitioning .sidebar {
+body.notransition .sidebar {
   transition: none;
 }
 
@@ -508,7 +503,7 @@ body.transitioning .sidebar {
 
 .sidebar .header {
   height: 59px;
-  margin-bottom: 9px;
+  margin-bottom: 11px;
   padding-top: 15px;
   box-shadow: 0 1px 0 0 #f1f1f21c;
   background: #1a1c24;
@@ -525,6 +520,7 @@ body.transitioning .sidebar {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  padding-left: calc(env(titlebar-area-x, 0px) + 20px);
   box-sizing: border-box;
   position: absolute;
   transition: .18s var(--ease-function);
@@ -560,6 +556,7 @@ body.transitioning .sidebar {
 
 .sidebar .searchscreen .back {
   color: #828689;
+  transition: .18s var(--ease-function) margin-right;
 }
 
 .sidebar .header.searching .searchscreen .back {
@@ -593,11 +590,6 @@ body.transitioning .sidebar {
   color: #fff;
   position: absolute;
   box-sizing: border-box;
-}
-
-.sidebar .header .search:active {
-  background: rgba(0,0,0,.1);
-  transform: scale(0.95);
 }
 
 .sidebar .searchinput {
@@ -641,11 +633,15 @@ body.transitioning .sidebar {
   scroll-margin: 75px;
 }
 
-.sidebar .item:hover {
+.sidebar .item:last-of-type {
+  margin-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+
+.sidebar .item:hover, .sidebar .item.file:active {
   background: hsl(227deg 11% 16%);
 }
 
-.sidebar .item:not(.file):active {
+.sidebar .item:active {
   background: hsl(226deg 7% 19%);
 }
 
@@ -671,7 +667,8 @@ body.transitioning .sidebar {
   box-shadow: 0 0 0 2px #191d24;
 }
 
-.sidebar .file:hover .label::before {
+.sidebar .file:hover .label::before,
+.sidebar .file:active .label::before {
   box-shadow: 0 0 0 2px hsl(227deg 11% 16%);
 }
 
@@ -718,12 +715,10 @@ body.transitioning .sidebar {
 
 .sidebar .item .push-wrapper .push-svg {
   border-radius: 50%;
-  transition: .18s var( --ease-function);
 }
 
-.sidebar .item .push-wrapper:active .push-svg {
-  background: rgba(0,0,0,.1);
-  transform: scale(0.95);
+.sidebar .item .push-wrapper:not(.checked):active .push-svg {
+  background: rgba(0,0,0,.15) !important;
 }
 
 .sidebar .item .arrow {
@@ -810,12 +805,10 @@ body.transitioning .sidebar {
   padding: 7px;
   margin: -7px;
   border-radius: 50%;
-  transition: .18s var(--ease-function);
 }
 
 .roundbutton:active {
-  background: rgba(0,0,0,.1);
-  transform: scale(0.95);
+  background: rgba(0,0,0,.15) !important;
 }
 
 .sidebar .button {
@@ -1024,7 +1017,7 @@ body:not(.mobile) .splash-wrapper a:hover {
 
 
 body:not(.platform-mac) .github,
-body:not(.platform-mac) .sidebar .header .title,
+body:not(.platform-mac) .sidebar .header .titlescreen .title,
 body:not(.platform-mac) .sidebar .item,
 body:not(.platform-mac) .sidebar .item .push-wrapper,
 body:not(.platform-mac) .sidebar .more,
@@ -1057,11 +1050,7 @@ body:not(.mobile) .roundbutton:hover {
   background: rgba(0,0,0,.1);
 }
 
-body:not(.mobile) .sidebar .item .push-wrapper .push-svg {
-  transition: .18s var(--ease-function), 0s background;
-}
-
-body:not(.mobile) .sidebar .item .push-wrapper:hover .push-svg {
+body:not(.mobile) .sidebar .item .push-wrapper:not(.checked):hover .push-svg {
   background: rgba(0,0,0,.1);
 }
 
@@ -1090,6 +1079,10 @@ body.mobile {
   --sidebar-width: 100vw;
 }
 
+body.mobile.expanded {
+  background: #1a1c24;
+}
+
 body.mobile.expanded .cd-wrapper {
   width: 100%;
   height: 100%;
@@ -1097,7 +1090,7 @@ body.mobile.expanded .cd-wrapper {
 }
 
 body.mobile cd-el {
-  padding-bottom: calc(50px + 56px + env(safe-area-inset-bottom));
+  padding-bottom: calc(56px + 56px + 10.5px + env(safe-area-inset-bottom));
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1152,7 +1145,14 @@ body.mobile.expanded .sidebar-background {
 }
 
 body {
-    tab-size: 2;
+  tab-size: 2;
+  
+  --base-spacing: 7px;
+  --tiny-spacing: calc(--base-spacing * 2);
+  --small-spacing: calc(--base-spacing * 4);
+  --medium-spacing: calc(--base-spacing * 5);
+  --large-spacing: calc(--base-spacing * 6);
+  
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
 }

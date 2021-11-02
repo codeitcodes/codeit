@@ -42,7 +42,7 @@ const body = document.body,
 
 
 // version
-const version = '1.4.5';
+const version = '1.5.0';
 versionEl.innerText = version;
 
 
@@ -98,7 +98,7 @@ function load() {
 // device and platform queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
-const isSafari = navigator.standalone ?? false;
+const isSafari = isMobile && navigator.userAgent.toLowerCase().indexOf('safari') != -1;
 
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isWindows = navigator.platform.indexOf('Win') > -1;
@@ -137,24 +137,6 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('online', () => { isOffline = false });
 window.addEventListener('offline', () => { isOffline = true });
-
-window.addEventListener('DOMContentLoaded', () => {
-
-  let displayMode = 'browser tab';
-
-  if (navigator.standalone) {
-    displayMode = 'standalone-ios';
-  }
-
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    displayMode = 'standalone';
-  }
-
-  if (displayMode == 'browser tab') {
-    //window.location.href = '/';
-  }
-
-});
 
 
 // base64 encode/decode
@@ -208,9 +190,16 @@ let setAttr = (element, item, value) => {
 
 
 // asynchronous thread
+
 let asyncThread = (callback, time) => {
 
   window.setTimeout(callback, time);
+
+}
+
+let onNextFrame = (callback) => {
+  
+  window.requestAnimationFrame(callback);
 
 }
 

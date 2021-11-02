@@ -16,12 +16,15 @@ github.addEventListener('click', () => {
 // call this function when signed in to github
 // to render sidebar
 async function renderSidebarHTML() {
-
+  
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
     startLoading();
   }
-
+  
+  // hide search screen
+  header.classList.remove('searching');
+  
   // map tree location
   const [user, repo, contents] = treeLoc;
 
@@ -142,10 +145,7 @@ async function renderSidebarHTML() {
   // add item event listeners
   addHTMLItemListeners();
 
-  // hide search screen
-  header.classList.remove('searching');
-
-  // if selected file is in directory
+  // if selected file is in current directory
   if (selectedFile.dir == treeLoc.join()) {
 
     let selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
@@ -157,6 +157,9 @@ async function renderSidebarHTML() {
       selectedEl.scrollIntoViewIfNeeded();
 
     }
+    
+    // protect unsaved code
+    protectUnsavedCode();
 
   }
 
@@ -288,6 +291,12 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
+
+  // show all files
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  header.classList.remove('searching');
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -297,6 +306,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   // select the new file
 
   fileEl.classList.add('selected');
+  fileEl.scrollIntoViewIfNeeded();
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
@@ -322,10 +332,10 @@ async function loadFileInHTML(fileEl, fileSha) {
                        modFile.caretPos, modFile.scrollPos, false);
 
   }
-
+  
   // show file content in codeit
   cd.textContent = decodeUnicode(selectedFile.content);
-
+  
   // change codeit lang
   cd.lang = selectedFile.lang;
 
@@ -350,7 +360,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   } else { // if on desktop
 
     // check codeit scrollbar
-    checkScrollbar();
+    checkScrollbarArrow();
 
   }
 
@@ -399,9 +409,8 @@ sidebarTitle.addEventListener('click', () => {
 learnShare.addEventListener('click', () => {
 
   const shareData = {
-    title: 'Codeit',
-    text: 'Mobile code editor connected to Git. Free and open source.',
-    url: window.location.origin
+    title: "Share Codeit",
+    text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me! " + window.location.origin
   };
 
   try {
@@ -409,9 +418,12 @@ learnShare.addEventListener('click', () => {
     navigator.share(shareData);
 
   } catch(err) {
-
-    console.log('[Share API] Could not share.', err);
-
+    
+    // if could not open share dialog, share on Twitter
+    window.open('https://twitter.com/intent/tweet' +
+                '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
+                '_blank');
+    
   }
   
 })
@@ -448,36 +460,6 @@ function toggleSidebar(open) {
 }
 
 
-// check for key to see if code
-// or caret position have changed
-function onEditorKeyup(event) {
-
-  // if code has changed
-  if (hasKeyChangedCode(event)) {
-
-    // save code to local storage
-    codeChange();
-
-  }
-
-  // if caret position has changed
-  if (hasKeyChangedCaretPos(event)) {
-
-    // save caret pos to local storage
-    saveSelectedFileCaretPos();
-
-  }
-
-}
-
-// when clicked on editor, save new caret position
-function onEditorClick() {
-
-  // save caret pos to local storage
-  saveSelectedFileCaretPos();
-
-}
-
 // when scrolled editor, save new scroll position
 
 let editorScrollTimeout;
@@ -487,11 +469,11 @@ function onEditorScroll() {
   if (editorScrollTimeout) window.clearTimeout(editorScrollTimeout);
 
   // when stopped scrolling, save scroll pos
-  editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 300);
+  editorScrollTimeout = window.setTimeout(saveSelectedFileScrollPos, 100);
 
 }
 
-function checkScrollbar() {
+function checkScrollbarArrow() {
 
   window.setTimeout(() => {
 
@@ -509,28 +491,6 @@ function checkScrollbar() {
     }
 
   }, 0);
-
-}
-
-// check for key to see if code has changed
-function hasKeyChangedCode(event) {
-
-  return event.key !== 'Meta'
-      && event.key !== 'Control'
-      && event.key !== 'Alt'
-      && !event.key.startsWith('Arrow')
-      && (!isKeyEventMeta(event) ||
-          (isKeyEventMeta(event) && event.key === 'V') ||
-          (isKeyEventMeta(event) && event.key === 'X') ||
-          (isKeyEventMeta(event) && event.key === 'Z'));
-
-}
-
-// check for key to see
-// if caret position has changed
-function hasKeyChangedCaretPos(event) {
-
-  return event.key.startsWith('Arrow');
 
 }
 
@@ -576,25 +536,73 @@ function codeChange() {
 
 }
 
+// protect unsaved code
+// if selected file is in current directory
+// but does not exist in the HTML
+function protectUnsavedCode() {
+
+  // get selected file element in HTML
+  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+
+  // if selected file is not in HTML,
+  // protect unsaved code by clearing codeit
+  if (selectedEl == null) {
+
+    // clear codeit
+
+    // clear codeit contents
+    cd.textContent = '';
+
+    // change codeit lang
+    cd.lang = '';
+
+    // clear codeit history
+    cd.history = [];
+
+    // update line numbers
+    updateLineNumbersHTML();
+    
+    // if on mobile, show sidebar
+    if (isMobile) {
+      
+      // don't transition
+      body.classList.add('notransition');
+
+      // show sidebar
+      toggleSidebar(true);
+      saveSidebarStateLS();
+
+      onNextFrame(() => {
+
+        body.classList.remove('notransition');
+
+      });
+      
+    }
+    
+    // change selected file to empty file
+    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+
+  }
+
+}
+
 function setupEditor() {
-
-  // add editor event listeners
-
-  cd.addEventListener('keyup', onEditorKeyup);
-  cd.addEventListener('click', onEditorClick);
-  cd.addEventListener('scroll', onEditorScroll);
-
-  if (!isMobile) cd.addEventListener('keydown', checkScrollbar);
-
+  
   // if code in storage
   if (selectedFile.content) {
 
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
     cd.textContent = decodeUnicode(selectedFile.content);
-
-    // set caret pos in code
-    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+    
+    // if sidebar isn't expanded, focus codeit
+    if (!(isMobile && body.classList.contains('expanded'))) {
+      
+      // set caret pos in code
+      cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+      
+    }
 
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
@@ -602,12 +610,17 @@ function setupEditor() {
     // update line numbers
     updateLineNumbersHTML();
 
-    // save code history
-    cd.recordHistory();
-
   }
-
-
+  
+  
+  // add editor event listeners
+  
+  cd.on('modify', codeChange);
+  cd.on('scroll', onEditorScroll);
+  cd.on('caretmove', saveSelectedFileCaretPos);
+  
+  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
+  
   // update on screen resize
   window.addEventListener('resize', () => {
 
@@ -615,11 +628,10 @@ function setupEditor() {
     updateLineNumbersHTML();
 
     // check codeit scrollbar
-    if (!isMobile) checkScrollbar();
+    if (!isMobile) checkScrollbarArrow();
 
   });
-
-
+  
   // update line numbers when finished highlighting
   Prism.hooks.add('complete', function (env) {
 
@@ -631,14 +643,17 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   });
-
-
+  
   // disable context menu
-  window.addEventListener('contextmenu', (e) => {
+  if (!isMobile) {
+  
+    window.addEventListener('contextmenu', (e) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
-  });
+    });
+    
+  }
 
   // disable Ctrl/Cmd+S
   document.addEventListener('keydown', (e) => {
@@ -660,8 +675,8 @@ function updateLineNumbersHTML() {
 
   // if mobile but not in landscape,
   // or if editor isn't in view, return
-  if (isMobile && (!isLandscape || body.classList.contains('expanded'))) {
-
+  if (isMobile && !isLandscape) {
+    
     if (cd.querySelector('.line-numbers-rows')) {
 
       cd.querySelector('.line-numbers-rows').remove();
@@ -669,10 +684,10 @@ function updateLineNumbersHTML() {
     }
 
     cd.classList.remove('line-numbers');
-    cd.style.paddingLeft = '';
+    cd.style.setProperty('--gutter-length', '');
 
     return;
-
+    
   }
 
   cd.classList.add('line-numbers');
@@ -684,26 +699,26 @@ function updateLineNumbersHTML() {
 
 function setupSidebar() {
 
-  // if not logged in to Github
+  // if not logged into Github
   if (githubToken == null) {
 
     // show intro screen
     sidebar.classList.add('intro');
 
-    // do a silent transition
-    body.classList.add('transitioning');
+    // don't transition
+    body.classList.add('notransition');
 
     // show sidebar
     toggleSidebar(true);
     saveSidebarStateLS();
+    
+    onNextFrame(() => {
 
-    window.setTimeout(() => {
+      body.classList.remove('notransition');
 
-      body.classList.remove('transitioning');
+    });
 
-    }, 0);
-
-  } else { // if logged in to Github
+  } else { // if logged into Github
 
     // render sidebar
     renderSidebarHTML();
@@ -711,16 +726,16 @@ function setupSidebar() {
     // if sidebar is open
     if (getStorage('sidebar') == 'true') {
 
-      // do a silent transition
-      body.classList.add('transitioning');
+      // don't transition
+      body.classList.add('notransition');
 
       toggleSidebar(true);
 
-      window.setTimeout(() => {
+      onNextFrame(() => {
 
-        body.classList.remove('transitioning');
+        body.classList.remove('notransition');
 
-      }, 0);
+      });
 
     } else if (isMobile) {
 

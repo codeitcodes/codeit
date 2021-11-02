@@ -76,7 +76,7 @@ pushWrapper.addEventListener('click', () => {
     // play push animation
     playPushAnimation(pushWrapper);
     
-    // 
+    // push file
     pushFileFromHTML(selectedEl);
     
   }
@@ -91,9 +91,9 @@ if (isMobile) {
 
   let lastScrollTop = 0;
 
-  cd.addEventListener('scroll', function() {
+  cd.on('scroll', () => {
 
-    var st = cd.scrollTop;
+    let st = cd.scrollTop;
 
     // if scrolled down
     if (st > lastScrollTop) {
@@ -101,14 +101,14 @@ if (isMobile) {
       // hide bottom float
       bottomFloat.classList.add('hidden');
 
-      // if scrolled to end
-      if (st >= cd.scrollHeight) {
+      // if scrolled to bottom of codeit
+      if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
         // set timeout
         window.setTimeout(() => {
 
           // if still on bottom of codeit
-          if (st >= cd.scrollHeight) {
+          if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
             // show bottom float
             bottomFloat.classList.remove('hidden');
@@ -131,7 +131,7 @@ if (isMobile) {
 
     }
 
-    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    lastScrollTop = st <= 0 ? 0 : st; // for mobile or negative scrolling
 
   }, false);
 
