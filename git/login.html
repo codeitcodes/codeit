@@ -9,7 +9,7 @@ try {
   console.log(window.opener.location.href);
   
   // post login token to opening window
-  window.opener.postMessage(code, window.location.href);
+  window.opener.postMessage(code, window.location);
   window.close();
   
 } catch(e) {
