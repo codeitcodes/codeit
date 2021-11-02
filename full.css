@@ -344,7 +344,7 @@ body cd-el {
   transform: translateX(0);
   left: -45px;
   will-change: transform;
-  transition: .18s var(--ease-function), .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
+  transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
   border: 1px solid transparent;
   border-left: 0;
