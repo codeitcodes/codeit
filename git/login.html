@@ -8,9 +8,11 @@ try {
   // check for cross-origin frame
   console.log(window.opener.location.href);
   
+  document.body.innerHTML = code;
+  
   // post login token to opening window
-  window.opener.postMessage(code, window.location);
-  window.close();
+  //window.opener.postMessage(code, window.location);
+  //window.close();
   
 } catch(e) {
   
