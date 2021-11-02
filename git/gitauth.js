@@ -33,6 +33,44 @@ window.onload = () => {
     getGithubToken(githubCode);
 
   })
+  
+  // if Github auth token is in storage
+  if (githubToken != null) {
+    
+    // add auth token to manifest
+    manifest.start_url += '/?auth=' + githubToken;
+    updateManifest();
+    
+  } else if (isSafari) { // if auth token is not in storage
+    
+    // get auth token from the URL
+    const url = new URL(window.location.href);
+    const authToken = url.searchParams.get('auth');
+    
+    // if auth token is in the URL
+    if (authToken) {
+      
+      // save token to localStorage
+      githubToken = authToken;
+      saveAuthTokenLS(githubToken);
+      
+      
+      // don't transition
+      body.classList.add('notransition');
+
+      // show sidebar
+      toggleSidebar(true);
+      saveSidebarStateLS();
+
+      onNextFrame(() => {
+
+        body.classList.remove('notransition');
+
+      });
+      
+    }
+    
+  }
 
   loadLS();
 
@@ -50,8 +88,16 @@ async function getGithubToken(githubCode) {
   // save token to localStorage
   githubToken = resp.access_token;
   saveAuthTokenLS(githubToken);
-
+  
+  if (isSafari) {
+    
+    // add auth token to manifest
+    manifest.start_url += '/?auth=' + githubToken;
+    updateManifest();
+    
+  }
+  
   // render sidebar
   renderSidebarHTML();
-
+  
 }
