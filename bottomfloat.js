@@ -104,18 +104,8 @@ if (isMobile) {
       // if scrolled to bottom of codeit
       if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
-        // set timeout
-        window.setTimeout(() => {
-
-          // if still on bottom of codeit
-          if ((st + cd.offsetHeight) >= cd.scrollHeight) {
-
-            // show bottom float
-            bottomFloat.classList.remove('hidden');
-
-          }
-
-        }, 400);
+        // show bottom float
+        bottomFloat.classList.remove('hidden');
 
       }
 
