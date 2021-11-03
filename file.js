@@ -36,6 +36,7 @@ function saveSelectedFileContent() {
   selectedFile.content = encodeUnicode(cd.textContent);
 
   updateSelectedFileLS();
+  
 
 }
 
