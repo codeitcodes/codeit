@@ -13,3 +13,6 @@
   <a href="https://discord.gg/47RFy3Vfmg"><img src="/icons/social/discordapp.svg" width="26" height="26"></a>
   <a href="https://twitter.com/codeitcodes"><img src="/icons/social/twitter.svg" width="36" height="26"></a>
 </p>
+<h4>Platforms</h4>
+Codeit is supported on Chrome for Android, Windows, macOS and Linux  
+and Safari on iOS.
