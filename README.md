@@ -14,4 +14,4 @@
   <a href="https://twitter.com/codeitcodes"><img src="/icons/social/twitter.svg" width="36" height="26"></a>
 </p>
 <h4>Platforms</h4>
-Codeit is supported on Chrome for Android, Windows, macOS and Linux, as well as Safari on iOS.
+Codeit is built for Chrome for Android, Windows, macOS and Linux, as well as Safari on iOS.
