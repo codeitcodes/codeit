@@ -28,6 +28,24 @@ let manifest = {
       }
     }
   ],
+  "share_target": {
+    "action": window.location.origin + "/full/?file=true",
+    "method": "POST",
+    "enctype": "text/plain",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link",
+      "files": [
+        {
+          "name": "file",
+          "accept": {
+            "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
+          }
+        }
+      ]
+    }
+  },
   "url_handlers": [
     {
       "origin": window.location.origin
