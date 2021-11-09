@@ -47,7 +47,7 @@ function saveBeforeInstallPromptEvent(evt) {
 
 // Event handler for butInstall - Does the PWA installation.
 function installPWA(evt) {
-  
+  /*
   // if able to install codeit
   if (deferredInstallPrompt) {
     
@@ -77,28 +77,28 @@ function installPWA(evt) {
       });
     
   } else { // open in the browser
-    
+    */
     window.location.replace(window.location.origin + '/full');
-    
+    /*
   }
-  
+  */
 }
 
 document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
-  
+  /*
   if (isSafari) {
-    
+    */
     button.classList.remove('loading');
-    
+    /*
   }
   
   if (localStorage.getItem('installed')) {
     
     button.classList.add('installed');
     
-  }
+  }*/
 
 });
 
