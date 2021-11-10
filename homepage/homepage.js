@@ -107,16 +107,16 @@ document.querySelectorAll('.btn.install').forEach(button => {
     
   }
   
-  if (localStorage.getItem('installed')) {
-    
-    button.classList.add('installed');
-    
-  }
-  
   if (checkLocalStorage()) {
     
     button.classList.add('installed');
     button.classList.add('cookies');
+    
+  }
+  
+  if (localStorage.getItem('installed')) {
+    
+    button.classList.add('installed');
     
   }
 
