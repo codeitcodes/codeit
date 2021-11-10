@@ -4786,6 +4786,10 @@ body {
   width: auto;
 }
 
+.ctas .btn.cookies::before {
+  content: 'Enable Cookies';
+}
+
 @keyframes loader {
   to {
     transform: rotate(1turn);
