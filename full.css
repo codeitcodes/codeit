@@ -901,12 +901,12 @@ body.notransition .sidebar {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
-  margin-bottom: 25px;
+  margin-bottom: var(--small-spacing);
 }
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: var(--base-spacing);
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
@@ -1090,6 +1090,14 @@ body:not(.mobile) .sidebar .button.secondary:hover {
 body:not(.mobile) .sidebar .button.teritary:hover {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
+}
+
+.button.tiny-spacing {
+  margin-top: var(--tiny-spacing) !important;
+}
+
+.button.large-spacing {
+  margin-top: var(--large-spacing);
 }
 
 
