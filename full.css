@@ -760,7 +760,7 @@ body.notransition .sidebar {
 .sidebar .intro .picture-wrapper {
   height: 120px;
   width: 120px;
-  margin-bottom: 25px;
+  margin-bottom: var(--small-spacing);
   border-radius: 50%;
   box-sizing: border-box;
   padding: 23px;
@@ -1094,6 +1094,10 @@ body:not(.mobile) .sidebar .button.teritary:hover {
 
 .button.tiny-spacing {
   margin-top: var(--tiny-spacing) !important;
+}
+
+.button.medium-spacing {
+  margin-top: var(--medium-spacing) !important;
 }
 
 .button.large-spacing {
