@@ -107,7 +107,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
     
   }
   
-  if (checkLocalStorage()) {
+  if (!checkLocalStorage()) {
     
     button.classList.add('installed');
     button.classList.add('cookies');
