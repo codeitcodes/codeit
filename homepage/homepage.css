@@ -4787,7 +4787,7 @@ body {
 }
 
 .ctas .btn.cookies::before {
-  content: 'Enable Cookies';
+  content: 'Cookies Disabled';
 }
 
 @keyframes loader {
