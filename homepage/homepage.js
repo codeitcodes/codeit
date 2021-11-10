@@ -112,11 +112,13 @@ document.querySelectorAll('.btn.install').forEach(button => {
     button.classList.add('installed');
     button.classList.add('cookies');
     
-  }
+  } else {
   
-  if (localStorage.getItem('installed')) {
-    
-    button.classList.add('installed');
+    if (localStorage.getItem('installed')) {
+
+      button.classList.add('installed');
+
+    }
     
   }
 
