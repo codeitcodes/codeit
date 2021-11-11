@@ -743,6 +743,17 @@ body.notransition .sidebar {
   margin-right: 7px;
 }
 
+.sidebar .picture-wrapper {
+  background: hsl(228deg 16% 21%);
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-4);
+  box-sizing: border-box;
+}
+
 .sidebar .intro {
   position: absolute;
   width: 100%;
@@ -755,17 +766,6 @@ body.notransition .sidebar {
   box-sizing: border-box;
   padding-right: 10px;
   padding-left: 10px;
-}
-
-.sidebar .intro .picture-wrapper {
-  height: 120px;
-  width: 120px;
-  margin-bottom: var(--spacing-4);
-  border-radius: 50%;
-  box-sizing: border-box;
-  padding: 23px;
-  display: block;
-  background: hsl(228deg 16% 21%);
 }
 
 .sidebar .intro .picture {
@@ -901,7 +901,7 @@ body.notransition .sidebar {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
-  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-3);
 }
 
 .sidebar .learn-wrapper .title {
