@@ -760,7 +760,7 @@ body.notransition .sidebar {
 .sidebar .intro .picture-wrapper {
   height: 120px;
   width: 120px;
-  margin-bottom: var(--small-spacing);
+  margin-bottom: var(--spacing-4);
   border-radius: 50%;
   box-sizing: border-box;
   padding: 23px;
@@ -870,43 +870,43 @@ body.notransition .sidebar {
 }
 
 .base-spacing-left {
-  margin-left: var(--base-spacing);
+  margin-left: var(--spacing-1);
 }
 
 .base-spacing-top {
-  margin-top: var(--base-spacing);
+  margin-top: var(--spacing-1);
 }
 
 .tiny-spacing-top {
-  margin-top: var(--tiny-spacing);
+  margin-top: var(--spacing-2);
 }
 
 .small-spacing-top {
-  margin-top: var(--small-spacing);
+  margin-top: var(--spacing-4);
 }
 
 .medium-spacing-top {
-  margin-top: var(--medium-spacing);
+  margin-top: var(--spacing-5);
 }
 
 .large-spacing-top {
-  margin-top: var(--large-spacing);
+  margin-top: var(--spacing-6);
 }
 
 .sidebar .button svg {
-  margin-right: var(--base-spacing);
+  margin-right: var(--spacing-1);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
-  margin-bottom: var(--small-spacing);
+  margin-bottom: var(--spacing-4);
 }
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: var(--base-spacing);
+  margin-bottom: var(--spacing-1);
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
@@ -1092,18 +1092,6 @@ body:not(.mobile) .sidebar .button.teritary:hover {
   color: hsl(220deg 4% 84%);
 }
 
-.button.tiny-spacing {
-  margin-top: var(--tiny-spacing);
-}
-
-.button.medium-spacing {
-  margin-top: var(--medium-spacing);
-}
-
-.button.large-spacing {
-  margin-top: var(--large-spacing);
-}
-
 
 body.mobile {
   width: 100vw;
@@ -1179,11 +1167,12 @@ body.mobile.expanded .sidebar-background {
 body {
   tab-size: 2;
   
-  --base-spacing: 7px;
-  --tiny-spacing: calc(var(--base-spacing) * 2);
-  --small-spacing: calc(var(--base-spacing) * 4);
-  --medium-spacing: calc(var(--base-spacing) * 5);
-  --large-spacing: calc(var(--base-spacing) * 6);
+  --spacing-1: 7px;
+  --spacing-2: calc(var(--spacing-1) * 2);
+  --spacing-3: calc(var(--spacing-1) * 3);
+  --spacing-4: calc(var(--spacing-1) * 4);
+  --spacing-5: calc(var(--spacing-1) * 5);
+  --spacing-6: calc(var(--spacing-1) * 6);
   
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
