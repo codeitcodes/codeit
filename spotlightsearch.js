@@ -34,13 +34,13 @@ searchBack.addEventListener('click', () => {
 // search when typed in input
 searchInput.addEventListener('input', () => {
   
-  let query = searchInput.innerText.toLowerCase();
+  let query = searchInput.textContent.toLowerCase();
   let files = fileWrapper.querySelectorAll('.item');
   
   // search files
   files.forEach(file => {
     
-    let name = file.querySelector('.name').innerText;
+    let name = file.querySelector('.name').textContent;
     
     if (!name.toLowerCase().includes(query)) {
 

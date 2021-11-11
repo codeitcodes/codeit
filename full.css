@@ -344,7 +344,7 @@ body cd-el {
   transform: translateX(0);
   left: -45px;
   will-change: transform;
-  transition: .18s var(--ease-function), .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
+  transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
   animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
   border: 1px solid transparent;
   border-left: 0;
@@ -760,7 +760,7 @@ body.notransition .sidebar {
 .sidebar .intro .picture-wrapper {
   height: 120px;
   width: 120px;
-  margin-bottom: 25px;
+  margin-bottom: var(--small-spacing);
   border-radius: 50%;
   box-sizing: border-box;
   padding: 23px;
@@ -782,6 +782,18 @@ body.notransition .sidebar {
   font-size: 19px;
   margin-bottom: 20px;
   font-weight: 500;
+}
+
+.sidebar .intro .title sup {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, hsl(240deg 87% 55%), hsl(240deg 86% 55% / 80%));
+  color: #d0d0ed;
+  padding: 3px 7px;
+  border-radius: 10000px;
+  vertical-align: unset;
 }
 
 .sidebar .intro .subtitle {
@@ -826,22 +838,6 @@ body.notransition .sidebar {
   min-width: 150px;
 }
 
-.sidebar .button.tiny-spacing {
-  margin-top: 15px;
-}
-
-.sidebar .button.small-spacing {
-  margin-top: 25px;
-}
-
-.sidebar .button.medium-spacing {
-  margin-top: 35px;
-}
-
-.sidebar .button.large-spacing {
-  margin-top: 45px;
-}
-
 .sidebar .button.secondary {
   color: inherit;
   border: 1px solid hsla(0,0%,100%,.1);
@@ -873,20 +869,44 @@ body.notransition .sidebar {
   color: hsl(220deg 4% 84%);
 }
 
+.base-spacing-left {
+  margin-left: var(--base-spacing);
+}
+
+.base-spacing-top {
+  margin-top: var(--base-spacing);
+}
+
+.tiny-spacing-top {
+  margin-top: var(--tiny-spacing);
+}
+
+.small-spacing-top {
+  margin-top: var(--small-spacing);
+}
+
+.medium-spacing-top {
+  margin-top: var(--medium-spacing);
+}
+
+.large-spacing-top {
+  margin-top: var(--large-spacing);
+}
+
 .sidebar .button svg {
-  margin-right: 7px;
+  margin-right: var(--base-spacing);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
-  margin-bottom: 25px;
+  margin-bottom: var(--small-spacing);
 }
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: var(--base-spacing);
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
@@ -1072,6 +1092,18 @@ body:not(.mobile) .sidebar .button.teritary:hover {
   color: hsl(220deg 4% 84%);
 }
 
+.button.tiny-spacing {
+  margin-top: var(--tiny-spacing) !important;
+}
+
+.button.medium-spacing {
+  margin-top: var(--medium-spacing) !important;
+}
+
+.button.large-spacing {
+  margin-top: var(--large-spacing);
+}
+
 
 body.mobile {
   width: 100vw;
@@ -1148,10 +1180,10 @@ body {
   tab-size: 2;
   
   --base-spacing: 7px;
-  --tiny-spacing: calc(--base-spacing * 2);
-  --small-spacing: calc(--base-spacing * 4);
-  --medium-spacing: calc(--base-spacing * 5);
-  --large-spacing: calc(--base-spacing * 6);
+  --tiny-spacing: calc(var(--base-spacing) * 2);
+  --small-spacing: calc(var(--base-spacing) * 4);
+  --medium-spacing: calc(var(--base-spacing) * 5);
+  --large-spacing: calc(var(--base-spacing) * 6);
   
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);

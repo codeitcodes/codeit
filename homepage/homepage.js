@@ -84,6 +84,19 @@ function installPWA(evt) {
   
 }
 
+function checkLocalStorage() {
+  
+  const test = 'test';
+  try {
+    localStorage.setItem(test, test);
+    localStorage.removeItem(test);
+    return true;
+  } catch(e) {
+    return false;
+  }
+  
+}
+
 document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
@@ -94,9 +107,18 @@ document.querySelectorAll('.btn.install').forEach(button => {
     
   }
   
-  if (localStorage.getItem('installed')) {
+  if (!checkLocalStorage()) {
     
     button.classList.add('installed');
+    button.classList.add('cookies');
+    
+  } else {
+  
+    if (localStorage.getItem('installed')) {
+
+      button.classList.add('installed');
+
+    }
     
   }
 
