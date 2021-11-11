@@ -1093,11 +1093,11 @@ body:not(.mobile) .sidebar .button.teritary:hover {
 }
 
 .button.tiny-spacing {
-  margin-top: var(--tiny-spacing) !important;
+  margin-top: var(--tiny-spacing);
 }
 
 .button.medium-spacing {
-  margin-top: var(--medium-spacing) !important;
+  margin-top: var(--medium-spacing);
 }
 
 .button.large-spacing {
