@@ -831,7 +831,6 @@ body.notransition .sidebar {
   border-radius: 3px;
   font-size: 14px;
   box-sizing: border-box;
-  margin-top: 35px;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
   color: #fff;
@@ -839,7 +838,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .button.secondary {
-  color: inherit;
+  color: #d4d5d7;
   border: 1px solid hsla(0,0%,100%,.1);
   background: hsla(0,0%,100%,.1);
 }
@@ -847,7 +846,6 @@ body.notransition .sidebar {
 .sidebar .button.teritary {
   background: transparent;
   border: 1px solid hsl(228deg 16% 37%);
-  margin-top: 15px;
   color: hsl(220deg 4% 84% / 92%);
 }
 
@@ -867,30 +865,6 @@ body.notransition .sidebar {
 .sidebar .button.teritary:active {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
-}
-
-.base-spacing-left {
-  margin-left: var(--spacing-1);
-}
-
-.base-spacing-top {
-  margin-top: var(--spacing-1);
-}
-
-.tiny-spacing-top {
-  margin-top: var(--spacing-2);
-}
-
-.small-spacing-top {
-  margin-top: var(--spacing-4);
-}
-
-.medium-spacing-top {
-  margin-top: var(--spacing-5);
-}
-
-.large-spacing-top {
-  margin-top: var(--spacing-6);
 }
 
 .sidebar .button svg {
@@ -915,6 +889,30 @@ body.notransition .sidebar {
 .sidebar .learn-wrapper .version {
   user-select: text;
   -webkit-user-select: text;
+}
+
+.base-spacing-left {
+  margin-left: var(--spacing-1);
+}
+
+.base-spacing-top {
+  margin-top: var(--spacing-1);
+}
+
+.tiny-spacing-top {
+  margin-top: var(--spacing-2);
+}
+
+.small-spacing-top {
+  margin-top: var(--spacing-4);
+}
+
+.medium-spacing-top {
+  margin-top: var(--spacing-5);
+}
+
+.large-spacing-top {
+  margin-top: var(--spacing-6);
 }
 
 .sidebar-background {
