@@ -827,14 +827,15 @@ body.notransition .sidebar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 25px;
-  border-radius: 3px;
-  font-size: 14px;
+  border-radius: 8px;
   box-sizing: border-box;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
   color: #fff;
   min-width: 150px;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 7px 14px;
 }
 
 .sidebar .button.secondary {
