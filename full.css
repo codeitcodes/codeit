@@ -574,7 +574,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .header.searching .logo {
-  margin-left: 7px;
+  margin-left: var(--spacing-1);
 }
 
 .sidebar .header .title:hover .logo.overflow {
@@ -677,7 +677,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .item .icon {
-  margin-right: 7px;
+  margin-right: var(--spacing-1);
   color: #828689;
 }
 
@@ -740,7 +740,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .more .icon {
-  margin-right: 7px;
+  margin-right: var(--spacing-1);
 }
 
 .sidebar .picture-wrapper {
@@ -973,8 +973,8 @@ body.mobile.expanded .splash-wrapper::before {
 }
 
 .spinner-loader {
-  width: 7px;
-  height: 50px;
+  width: var(--spacing-1);
+  height: var(--spacing-7);
   background: white;
   border-radius: 3px;
   margin-bottom: 50px;
@@ -1175,6 +1175,7 @@ body {
   --spacing-4: calc(var(--spacing-1) * 4);
   --spacing-5: calc(var(--spacing-1) * 5);
   --spacing-6: calc(var(--spacing-1) * 6);
+  --spacing-7: calc(var(--spacing-1) * 7);
   
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
