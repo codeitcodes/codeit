@@ -823,6 +823,10 @@ body.notransition .sidebar {
   background: rgba(0,0,0,.15) !important;
 }
 
+.roundbuttons .roundbutton {
+  margin-left: 5px;
+}
+
 .sidebar .button {
   display: flex;
   justify-content: center;
