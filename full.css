@@ -977,7 +977,7 @@ body.mobile.expanded .splash-wrapper::before {
   height: var(--spacing-7);
   background: white;
   border-radius: 3px;
-  margin-bottom: 50px;
+  margin-bottom: var(--spacing-7);
   transform-origin: center;
   animation: spinner-rotate 0.5s infinite;
   animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
