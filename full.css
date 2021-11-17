@@ -780,7 +780,7 @@ body.notransition .sidebar {
 .sidebar .intro .title {
   color: #f1f1f2e0;
   font-size: 19px;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-3);
   font-weight: 500;
 }
 
