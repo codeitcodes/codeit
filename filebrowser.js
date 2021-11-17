@@ -412,14 +412,25 @@ learnShare.addEventListener('click', () => {
     title: "Share Codeit",
     text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me! " + window.location.origin
   };
+  
+  if (!isWindows) {
 
-  try {
+    try {
 
-    navigator.share(shareData);
+      navigator.share(shareData);
 
-  } catch(err) {
+    } catch(err) {
+
+      // if could not open share dialog, share on Twitter
+      window.open('https://twitter.com/intent/tweet' +
+                  '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
+                  '_blank');
+
+    }
     
-    // if could not open share dialog, share on Twitter
+  } else {
+    
+    // share on Twitter
     window.open('https://twitter.com/intent/tweet' +
                 '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
                 '_blank');
