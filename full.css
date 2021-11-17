@@ -814,8 +814,8 @@ body.notransition .sidebar {
 }
 
 .roundbutton {
-  padding: 7px;
-  margin: -7px;
+  padding: var(--spacing-1);
+  margin: calc(var(--spacing-1) * -1);
   border-radius: 50%;
 }
 
