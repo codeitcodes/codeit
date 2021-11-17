@@ -743,6 +743,17 @@ body.notransition .sidebar {
   margin-right: 7px;
 }
 
+.sidebar .picture-wrapper {
+  background: hsl(228deg 16% 21%);
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-4);
+  box-sizing: border-box;
+}
+
 .sidebar .intro {
   position: absolute;
   width: 100%;
@@ -755,17 +766,6 @@ body.notransition .sidebar {
   box-sizing: border-box;
   padding-right: 10px;
   padding-left: 10px;
-}
-
-.sidebar .intro .picture-wrapper {
-  height: 120px;
-  width: 120px;
-  margin-bottom: var(--small-spacing);
-  border-radius: 50%;
-  box-sizing: border-box;
-  padding: 23px;
-  display: block;
-  background: hsl(228deg 16% 21%);
 }
 
 .sidebar .intro .picture {
@@ -827,19 +827,19 @@ body.notransition .sidebar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 25px;
-  border-radius: 3px;
-  font-size: 14px;
+  border-radius: 8px;
   box-sizing: border-box;
-  margin-top: 35px;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
   color: #fff;
   min-width: 150px;
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 7px 14px;
 }
 
 .sidebar .button.secondary {
-  color: inherit;
+  color: #d4d5d7;
   border: 1px solid hsla(0,0%,100%,.1);
   background: hsla(0,0%,100%,.1);
 }
@@ -847,7 +847,6 @@ body.notransition .sidebar {
 .sidebar .button.teritary {
   background: transparent;
   border: 1px solid hsl(228deg 16% 37%);
-  margin-top: 15px;
   color: hsl(220deg 4% 84% / 92%);
 }
 
@@ -869,44 +868,20 @@ body.notransition .sidebar {
   color: hsl(220deg 4% 84%);
 }
 
-.base-spacing-left {
-  margin-left: var(--base-spacing);
-}
-
-.base-spacing-top {
-  margin-top: var(--base-spacing);
-}
-
-.tiny-spacing-top {
-  margin-top: var(--tiny-spacing);
-}
-
-.small-spacing-top {
-  margin-top: var(--small-spacing);
-}
-
-.medium-spacing-top {
-  margin-top: var(--medium-spacing);
-}
-
-.large-spacing-top {
-  margin-top: var(--large-spacing);
-}
-
 .sidebar .button svg {
-  margin-right: var(--base-spacing);
+  margin-right: var(--spacing-1);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
   width: 150px;
-  margin-bottom: var(--small-spacing);
+  padding: var(--spacing-3);
 }
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: var(--base-spacing);
+  margin-bottom: var(--spacing-1);
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
@@ -915,6 +890,30 @@ body.notransition .sidebar {
 .sidebar .learn-wrapper .version {
   user-select: text;
   -webkit-user-select: text;
+}
+
+.base-spacing-left {
+  margin-left: var(--spacing-1);
+}
+
+.base-spacing-top {
+  margin-top: var(--spacing-1);
+}
+
+.tiny-spacing-top {
+  margin-top: var(--spacing-2);
+}
+
+.small-spacing-top {
+  margin-top: var(--spacing-4);
+}
+
+.medium-spacing-top {
+  margin-top: var(--spacing-5);
+}
+
+.large-spacing-top {
+  margin-top: var(--spacing-6);
 }
 
 .sidebar-background {
@@ -1092,18 +1091,6 @@ body:not(.mobile) .sidebar .button.teritary:hover {
   color: hsl(220deg 4% 84%);
 }
 
-.button.tiny-spacing {
-  margin-top: var(--tiny-spacing) !important;
-}
-
-.button.medium-spacing {
-  margin-top: var(--medium-spacing) !important;
-}
-
-.button.large-spacing {
-  margin-top: var(--large-spacing);
-}
-
 
 body.mobile {
   width: 100vw;
@@ -1179,11 +1166,12 @@ body.mobile.expanded .sidebar-background {
 body {
   tab-size: 2;
   
-  --base-spacing: 7px;
-  --tiny-spacing: calc(var(--base-spacing) * 2);
-  --small-spacing: calc(var(--base-spacing) * 4);
-  --medium-spacing: calc(var(--base-spacing) * 5);
-  --large-spacing: calc(var(--base-spacing) * 6);
+  --spacing-1: 7px;
+  --spacing-2: calc(var(--spacing-1) * 2);
+  --spacing-3: calc(var(--spacing-1) * 3);
+  --spacing-4: calc(var(--spacing-1) * 4);
+  --spacing-5: calc(var(--spacing-1) * 5);
+  --spacing-6: calc(var(--spacing-1) * 6);
   
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);

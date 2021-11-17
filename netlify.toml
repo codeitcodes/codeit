@@ -5,6 +5,12 @@
     Access-Control-Allow-Origin = "*"
 
 [[redirects]]
+  from = "https://dev.codeit.codes"
+  to = "https://dev.codeit.codes/full"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://codeit.berryscript.com"
   to = "https://codeit.codes"
   status = 301
