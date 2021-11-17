@@ -1090,6 +1090,8 @@ body:not(.mobile) .sidebar .button.secondary:hover {
 body:not(.mobile) .sidebar .button.teritary:hover {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%),
+              0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
 
