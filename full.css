@@ -840,13 +840,12 @@ body.notransition .sidebar {
 
 .sidebar .button.secondary {
   color: #d4d5d7;
-  border: 1px solid hsla(0,0%,100%,.1);
   background: hsla(0,0%,100%,.1);
 }
 
 .sidebar .button.teritary {
   background: transparent;
-  border: 1px solid hsl(228deg 16% 37%);
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%);
   color: hsl(220deg 4% 84% / 92%);
 }
 
@@ -866,6 +865,8 @@ body.notransition .sidebar {
 .sidebar .button.teritary:active {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%),
+              0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
 .sidebar .button svg {
