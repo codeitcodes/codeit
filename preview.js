@@ -4,77 +4,80 @@ document.addEventListener('keydown', (e) => {
 
     e.preventDefault();
     
-    previewWrapper.classList.toggle('visible');
+    if (selectedFile.lang == 'html') {
     
-    
-    if (previewWrapper.classList.contains('visible')) {
-      
-      const frameDocument = preview.contentDocument;
-      
-      frameDocument.documentElement.innerHTML = cd.textContent;
-      
-      // fetch styles
-      frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-        
-        const linkHref = new URL(link.href));
-        const fileName = linkHref.pathname.slice(1);
-        
-        if (linkHref.origin == window.location.origin) {
-          
-          const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
-          let resp;
-          
-          if (!file) {
-          
-            resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
-            
-          } else {
-            
-            resp = file;
-            
+      previewWrapper.classList.toggle('visible');
+
+      if (previewWrapper.classList.contains('visible')) {
+
+        const frameDocument = preview.contentDocument;
+
+        frameDocument.documentElement.innerHTML = cd.textContent;
+
+        // fetch styles
+        frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+
+          const linkHref = new URL(link.href);
+          const fileName = linkHref.pathname.slice(1);
+
+          if (linkHref.origin == window.location.origin) {
+
+            const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
+            let resp;
+
+            if (!file) {
+
+              resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
+
+            } else {
+
+              resp = file;
+
+            }
+
+            link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
+
+            // remove original tag
+            link.remove();
+
           }
-          
-          link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-          
-          // remove original tag
-          link.remove();
-          
-        }
-        
-      });
-      
-      // fetch scripts
-      frameDocument.querySelectorAll('script').forEach(async (script) => {
 
-        const linkHref = new URL(script.src));
-        const fileName = linkHref.pathname.slice(1);
-        
-        if (linkHref.origin == window.location.origin) {
-          
-          const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
-          let resp;
-          
-          if (!file) {
+        });
 
-            resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
-            
-          } else {
-            
-            resp = file;
-            
+        // fetch scripts
+        frameDocument.querySelectorAll('script').forEach(async (script) => {
+
+          const linkHref = new URL(script.src);
+          const fileName = linkHref.pathname.slice(1);
+
+          if (linkHref.origin == window.location.origin) {
+
+            const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
+            let resp;
+
+            if (!file) {
+
+              resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
+
+            } else {
+
+              resp = file;
+
+            }
+
+            addScript(frameDocument, decodeUnicode(resp.content));
+
+            // remove original tag
+            script.remove();
+
           }
-          
-          addScript(frameDocument, decodeUnicode(resp.content));
 
-          // remove original tag
-          script.remove();
-          
-        }
-        
-      })
-      
+        })
+
+      }
+
     }
-
+    
   }
 
 });
