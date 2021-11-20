@@ -786,13 +786,14 @@ body.notransition .sidebar {
 
 .sidebar .intro .title sup {
   margin-left: 6px;
+  margin-right: -16px;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   background: linear-gradient(180deg, hsl(240deg 87% 55%), hsl(240deg 86% 55% / 80%));
   color: #d0d0ed;
   padding: 3px 7px;
-  border-radius: 10000px;
+  border-radius: 30px;
   vertical-align: unset;
 }
 
