@@ -792,6 +792,7 @@ body.notransition .sidebar {
   text-transform: uppercase;
   background: linear-gradient(180deg, hsl(240deg 87% 55%), hsl(240deg 86% 55% / 80%));
   color: #d0d0ed;
+  color: hsl(240deg 87% 92%);
   padding: 3px 7px;
   border-radius: 30px;
   vertical-align: middle;
