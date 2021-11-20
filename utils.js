@@ -39,13 +39,11 @@ const body = document.body,
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
       
-      previewWrapper = document.querySelector('.preview-wrapper'),
-      preview = previewWrapper.querySelector('.preview');
-
+      previewWrapper = document.querySelector('.preview-wrapper');
 
 
 // version
-const version = '1.5.4';
+const version = '1.6.8';
 versionEl.innerText = version;
 
 
