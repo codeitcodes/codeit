@@ -375,7 +375,7 @@ body cd-el {
   background: hsl(228deg 16% 10%);
 }
 
-body.scrollbar-visible .bookmark {
+body.scroll-enabled .bookmark {
   bottom: calc(16px + 5px);
 }
 
