@@ -45,9 +45,7 @@ document.addEventListener('keydown', (e) => {
         });
 
         // fetch scripts
-        frameDocument.querySelectorAll('script').forEach(async (script) => {
-          
-          console.log(script.src);
+        frameDocument.querySelectorAll('script[src]').forEach(async (script) => {
           
           const linkHref = new URL(script.src);
           const fileName = linkHref.pathname.slice(1);
