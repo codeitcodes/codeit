@@ -1,5 +1,10 @@
-document.addEventListener('keydown', (e) => {
 
+document.addEventListener('keydown', handlePreviewKeydown);
+preview.contentDocument.addEventListener('keydown', handlePreviewKeydown);
+
+
+function handlePreviewKeydown(e) {
+  
   if (e.key === 'p' && isKeyEventMeta(e)) {
 
     e.preventDefault();
@@ -79,8 +84,8 @@ document.addEventListener('keydown', (e) => {
     }
     
   }
-
-});
+  
+}
 
 
 function addScript(documentNode, code, src, type) {
