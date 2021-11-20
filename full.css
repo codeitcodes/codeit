@@ -862,10 +862,6 @@ body.notransition .sidebar {
   background: hsla(0,0%,100%,.2);
 }
 
-.sidebar .button.secondary:active {
-  background: hsla(0,0%,100%,.2);
-}
-
 .sidebar .button.teritary:active {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
