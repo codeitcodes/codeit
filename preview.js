@@ -30,7 +30,7 @@ function handlePreviewKeydown(e) {
 
           if (linkHref.origin == window.location.origin) {
 
-            const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
+            const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
             let resp;
 
             if (!file[0]) {
@@ -60,7 +60,7 @@ function handlePreviewKeydown(e) {
 
           if (linkHref.origin == window.location.origin) {
 
-            const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
+            const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
             let resp;
 
             if (!file[0]) {
