@@ -3,7 +3,7 @@
 */
 
 // toggle sidebar on click of bookmark
-github.addEventListener('click', () => {
+sidebarToggle.addEventListener('click', () => {
 
   toggleSidebar(!body.classList.contains('expanded'));
 
@@ -493,11 +493,11 @@ function checkScrollbarArrow() {
 
       // move sidebar arrow up to make
       // way for horizontal scrollbar
-      github.classList.add('scrollbar');
+      body.classList.add('scroll-enabled');
 
     } else {
 
-      github.classList.remove('scrollbar');
+      body.classList.remove('scroll-enabled');
 
     }
 
