@@ -866,7 +866,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .button.teritary:active {
-  background: hsl(228deg 16% 37% / 25%) !important;
+  background: hsl(228deg 16% 37% / 23%) !important;
   color: hsl(220deg 4% 84%);
 }
 
