@@ -15,7 +15,7 @@ document.addEventListener('keydown', (e) => {
         frameDocument.documentElement.innerHTML = cd.textContent;
 
         // fetch styles
-        frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+        frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(await (link) => {
 
           const linkHref = new URL(link.href);
           const fileName = linkHref.pathname.slice(1);
