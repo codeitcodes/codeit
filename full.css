@@ -942,7 +942,7 @@ body.notransition .sidebar {
   z-index: 1000;
 }
 
-.preview-wrapper.expanded {
+.preview-wrapper.visible {
   transform: none;
   pointer-events: auto;
 }
