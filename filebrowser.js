@@ -2,6 +2,13 @@
   github
 */
 
+// show bookmark on hover
+sidebarToggle.addEventListener('mouseover', () => {
+
+  sidebarToggle.classList.add('visible');
+
+})
+
 // toggle sidebar on click of bookmark
 sidebarToggle.addEventListener('click', () => {
 
