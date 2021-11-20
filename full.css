@@ -953,10 +953,6 @@ body.notransition .sidebar {
   background: #fff;
 }
 
-.preview-toggle {
-  z-index: 1001;
-}
-
 .splash-wrapper {
   position: fixed;
   top: 0;
