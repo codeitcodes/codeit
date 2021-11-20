@@ -22,7 +22,7 @@ document.addEventListener('keydown', (e) => {
 
           if (linkHref.origin == window.location.origin) {
 
-            const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
+            const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
             if (!file) {
@@ -52,7 +52,7 @@ document.addEventListener('keydown', (e) => {
 
           if (linkHref.origin == window.location.origin) {
 
-            const file = Object.values(modifiedFiles).filter(file => (file.name == fileName));
+            const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
             if (!file) {
