@@ -25,7 +25,7 @@ document.addEventListener('keydown', (e) => {
             const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
-            if (!file) {
+            if (!file.content) {
 
               resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
 
@@ -55,7 +55,7 @@ document.addEventListener('keydown', (e) => {
             const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
-            if (!file) {
+            if (!file.content) {
 
               resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
 
