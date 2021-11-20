@@ -30,13 +30,13 @@ function handlePreviewKeydown(e) {
             const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
-            if (!file.content) {
+            if (!file[0]) {
 
               resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
 
             } else {
 
-              resp = file;
+              resp = file[0];
 
             }
 
@@ -60,13 +60,13 @@ function handlePreviewKeydown(e) {
             const file = Object.values(modifiedFiles).filter(file => (file.dir == treeLoc.join(',') && file.name == fileName));
             let resp;
 
-            if (!file.content) {
+            if (!file[0]) {
 
               resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
 
             } else {
 
-              resp = file;
+              resp = file[0];
 
             }
 
