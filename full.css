@@ -853,20 +853,21 @@ body.notransition .sidebar {
   color: hsl(220deg 4% 84% / 92%);
 }
 
+/*
 .sidebar .button:active {
   background: hsl(228deg 16% 42%);
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
+*/
 
 .sidebar .button.secondary:active {
-  background: hsla(0,0%,100%,.2);
+  background: hsla(0,0%,100%,.2) !important;
+  color: hsl(220deg 4% 90%);
 }
 
 .sidebar .button.teritary:active {
-  background: hsl(228deg 16% 37% / 12%);
+  background: hsl(228deg 16% 37% / 25%) !important;
   color: hsl(220deg 4% 84%);
-  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%),
-              0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
 .sidebar .button svg {
@@ -1074,20 +1075,20 @@ body:not(.mobile) .sidebar .item .push-wrapper:not(.checked):hover .push-svg {
   background: rgba(0,0,0,.1);
 }
 
+/*
 body:not(.mobile) .sidebar .button:hover {
   background: hsl(228deg 16% 42%);
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
+*/
 
 body:not(.mobile) .sidebar .button.secondary:hover {
   background: hsla(0,0%,100%,.2);
+  background: hsla(0,0%,100%,.17);
 }
 
 body:not(.mobile) .sidebar .button.teritary:hover {
   background: hsl(228deg 16% 37% / 12%);
-  color: hsl(220deg 4% 84%);
-  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%),
-              0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 
 
