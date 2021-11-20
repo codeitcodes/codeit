@@ -38,13 +38,14 @@ const body = document.body,
       learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
-
-      logoutButton = learnWrapper.querySelector('.logout');
+      
+      previewWrapper = document.querySelector('.preview-wrapper'),
+      preview = previewWrapper.querySelector('.preview');
 
 
 
 // version
-const version = '1.5.3';
+const version = '1.5.4';
 versionEl.innerText = version;
 
 
