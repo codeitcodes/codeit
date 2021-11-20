@@ -815,6 +815,10 @@ body.notransition .sidebar {
   background: rgba(0,0,0,.15) !important;
 }
 
+.roundbuttons {
+  display: flex;
+}
+
 .roundbuttons .roundbutton {
   margin-left: 5px;
 }
