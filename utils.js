@@ -8,7 +8,8 @@ const body = document.body,
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
 
-      github = document.querySelector('.github'),
+      sidebarToggle = document.querySelector('.sidebar-toggle'),
+      previewToggle = document.querySelector('.preview-toggle'),
 
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
