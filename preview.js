@@ -4,7 +4,7 @@ document.addEventListener('keydown', (e) => {
 
     e.preventDefault();
     
-    
+    previewWrapper.classList.toggle('visible');
 
   }
 
