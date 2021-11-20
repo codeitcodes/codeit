@@ -331,7 +331,7 @@ body cd-el {
   }
 }
 
-.github {
+.sidebar-toggle {
   display: flex;
   position: fixed;
   bottom: 5px;
@@ -344,77 +344,69 @@ body cd-el {
   transform: translateX(0);
   left: -45px;
   will-change: transform;
-  transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, 0s bottom;
-  animation: show 1.5s var(--ease-function), hide .18s 1.5s var(--ease-function);
+  transition: .18s var(--ease-function),
+              .4s var(--cubic-function) transform,
+              .4s var(--cubic-function) padding, 0s bottom;
   border: 1px solid transparent;
   border-left: 0;
 }
 
-body.expanded .github {
+body.expanded .sidebar-toggle {
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
-  animation: none;
   padding-left: 7.5px;
   transform: translateX(calc(var(--sidebar-width) - 0.5px));
   left: 0;
 }
 
-body.notransition :is(.github, .github *) {
+body.notransition :is(.sidebar-toggle, .sidebar-toggle *) {
   transition: none;
 }
 
-.github::after {
+.sidebar-toggle::after {
   content: '';
   position: absolute;
-  left: 0;
+  left: 45px;
   bottom: 0;
   height: 100vh;
   width: 10px;
   cursor: default;
-  transform: translateX(45px);
-  transition: inherit;
   z-index: -1;
 }
 
-.github:hover {
+.sidebar-toggle.visible {
   left: 0;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
-  animation: none;
 }
 
-body:not(.expanded) .github:hover::after {
+.sidebar-toggle.visible::after {
   pointer-events: none;
 }
 
-body.expanded .github::after {
-  transform: translateX(0);
-  cursor: w-resize;
-}
-
-.github:active {
+.sidebar-toggle:active {
   background: hsl(228deg 16% 10%);
 }
 
-.github.scrollbar {
+.sidebar-toggle.scrollbar {
   bottom: calc(16px + 5px);
 }
 
-.github svg {
+.sidebar-toggle svg {
   opacity: .72;
 }
 
-.github path {
+.sidebar-toggle svg path {
   transition: .4s var(--cubic-function);
 }
 
-.github .left {
+.sidebar-toggle svg .left {
   opacity: 0;
 }
 
-body.expanded .github .right {
+body.expanded .sidebar-toggle svg .right {
   opacity: 0;
 }
 
-body.expanded .github .left {
+body.expanded .sidebar-toggle svg .left {
   opacity: 1;
 }
 
