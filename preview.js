@@ -35,7 +35,7 @@ function handlePreviewKeydown(e) {
 
             if (!file[0]) {
 
-              resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
+              resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
 
             } else {
 
@@ -65,7 +65,7 @@ function handlePreviewKeydown(e) {
 
             if (!file[0]) {
 
-              resp = await git.getFile(treeLoc, linkHref.pathname.slice(1));
+              resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
 
             } else {
 
