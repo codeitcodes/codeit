@@ -32,8 +32,9 @@ const body = document.body,
       searchClear = searchScreen.querySelector('.clear'),
 
       fileWrapper = sidebar.querySelector('.files'),
-
+      
       versionEl = learnWrapper.querySelector('.version'),
+      learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
 
@@ -42,14 +43,18 @@ const body = document.body,
 
 
 // version
-const version = '1.5.0';
+const version = '1.5.3';
 versionEl.innerText = version;
 
 
 // dev build
 let isDev = false;
+
 if (window.location.href.includes('dev')) {
+  
   isDev = true;
+  learnTitle.innerHTML += '<sup>dev</sup>';
+  
 }
 
 
