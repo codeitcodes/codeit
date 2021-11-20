@@ -1087,10 +1087,6 @@ body:not(.mobile) .sidebar .button.secondary:hover {
   background: hsla(0,0%,100%,.2);
 }
 
-body:not(.mobile) .sidebar .button.secondary:hover {
-  background: hsla(0,0%,100%,.2);
-}
-
 body:not(.mobile) .sidebar .button.teritary:hover {
   background: hsl(228deg 16% 37% / 12%);
   color: hsl(220deg 4% 84%);
