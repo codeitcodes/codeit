@@ -460,6 +460,7 @@ function toggleSidebar(open) {
   if (open) {
 
     body.classList.add('expanded');
+    sidebarToggle.classList.add('visible');
 
     if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
@@ -468,6 +469,7 @@ function toggleSidebar(open) {
   } else {
 
     body.classList.remove('expanded');
+    sidebarToggle.classList.remove('visible');
 
     if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = '#313744';
