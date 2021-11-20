@@ -794,7 +794,7 @@ body.notransition .sidebar {
   color: #d0d0ed;
   padding: 3px 7px;
   border-radius: 30px;
-  vertical-align: unset;
+  vertical-align: middle;
 }
 
 .sidebar .intro .subtitle {
