@@ -1,6 +1,5 @@
 
 document.addEventListener('keydown', handlePreviewKeydown);
-preview.contentDocument.addEventListener('keydown', handlePreviewKeydown);
 
 
 function handlePreviewKeydown(e) {
@@ -14,9 +13,13 @@ function handlePreviewKeydown(e) {
       previewWrapper.classList.toggle('visible');
 
       if (previewWrapper.classList.contains('visible')) {
-
+        
+        previewWrapper.querySelector('.preview').outerHTML = '<iframe class="preview" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
+        
+        const preview = previewWrapper.querySelector('.preview');        
         const frameDocument = preview.contentDocument;
 
+        frameDocument.addEventListener('keydown', handlePreviewKeydown);
         frameDocument.documentElement.innerHTML = cd.textContent;
 
         // fetch styles
