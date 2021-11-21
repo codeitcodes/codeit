@@ -117,7 +117,7 @@ function handlePreviewKeydown(e) {
 
 function addScript(documentNode, code, src, type) {
   var script = documentNode.createElement('script');
-  script.type = script.type ?? 'application/javascript';
+  script.type = type ?? 'application/javascript';
   
   if (code) {
     script.appendChild(documentNode.createTextNode(code));
