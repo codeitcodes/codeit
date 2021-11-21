@@ -24,7 +24,7 @@ function handlePreviewKeydown(e) {
         
         // add base url to iframe to prevent breaking relative URLs
         const base = frameDocument.createElement('base');
-        base.href = 'about:blank';
+        base.href = 'https://fetch.codeit.codes/';
         frameDocument.head.appendChild(base);
         
         // fetch styles
@@ -33,7 +33,7 @@ function handlePreviewKeydown(e) {
           const linkHref = new URL(link.href);
           const fileName = linkHref.pathname.slice(1);
 
-          if (linkHref.origin == window.location.origin) {
+          if (linkHref.origin == 'fetch.codeit.codes') {
 
             const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
             let resp;
@@ -66,7 +66,7 @@ function handlePreviewKeydown(e) {
             const linkHref = new URL(script.src);
             const fileName = linkHref.pathname.slice(1);
 
-            if (linkHref.origin == window.location.origin) {
+            if (linkHref.origin == 'fetch.codeit.codes') {
 
               const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
               let resp;
