@@ -78,7 +78,8 @@ function handlePreviewKeydown(e) {
             // remove original tag
             script.remove();
 
-          }
+          }else{
+            console.log('Script is not window origin:',fileName);
 
         })
 
