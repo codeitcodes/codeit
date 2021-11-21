@@ -498,7 +498,7 @@ addButton.addEventListener('click', () => {
   // animate file
   onNextFrame(() => {
 
-    fileEl.classList.remove('hidden');
+    //fileEl.classList.remove('hidden'); //TBD@@ KOSTA
     fileEl.querySelector('.name').focus();
 
   });
