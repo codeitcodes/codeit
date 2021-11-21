@@ -490,7 +490,8 @@ addButton.addEventListener('click', () => {
     // so store the updated file in modifiedFiles object for 1 minute after commit
     onFileEclipsedInCache(false, newSha, selectedFile);
     
-    loadFileInHTML(fileEl, newSha);
+    renderSidebarHTML();
+    loadFileInHTML(fileWrapper.querySelector('.file[sha="'+ newSha +'"]', newSha);
     
   });
   
