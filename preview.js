@@ -21,7 +21,12 @@ function handlePreviewKeydown(e) {
 
         frameDocument.addEventListener('keydown', handlePreviewKeydown);
         frameDocument.documentElement.innerHTML = cd.textContent;
-
+        
+        // add base url to iframe to prevent breaking relative URLs
+        const base = frameDocument.createElement('base');
+        base.href = 'about:blank';
+        frameDocument.head.appendChild(base);
+        
         // fetch styles
         frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(async (link) => {
 
