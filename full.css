@@ -144,6 +144,7 @@ body cd-el {
 .push-svg {
   overflow: visible;
   width: 39.5px;
+  height: 39.5px;
   pointer-events: none;
 }
 
