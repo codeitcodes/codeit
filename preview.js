@@ -111,20 +111,23 @@ function handlePreviewKeydown(e) {
 
 
 function addScript(documentNode, code, src, type) {
-  var script = documentNode.createElement('script');
-  script.type = type ?? 'application/javascript';
+  
+  const script = documentNode.createElement('script');
+  
+  if (type && type != '') script.type = type;
   
   if (code) {
+    
     script.appendChild(documentNode.createTextNode(code));
+    
   } else {
+    
     script.src = src;
     script.defer = true;
     script.async = false;
-  }
-  
-  script.onerror = (e) => {
-    documentNode.defaultView.console.error(e);
+    
   }
   
   documentNode.head.appendChild(script);
+  
 }
