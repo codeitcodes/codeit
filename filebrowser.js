@@ -484,7 +484,7 @@ addButton.addEventListener('click', () => {
     
     // change selected file
     changeSelectedFile(treeLoc.join(), newSha, fileEl.innerText, commit.file.content, getFileLang(fileEl.innerText),
-                       [0, 0], [0, 0], false);
+                       [0, 0], [0, 0], true);
     
     // Git file is eclipsed (not updated) in browser private cache,
     // so store the updated file in modifiedFiles object for 1 minute after commit
