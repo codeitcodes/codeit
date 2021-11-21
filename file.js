@@ -223,7 +223,7 @@ function getLatestVersion(item) {
   
   function followTrail(crumb) {
     
-    if(modifiedFiles[crumb] == 'undefined') //@@
+    if(typeof(modifiedFiles[crumb]) == 'undefined') //@@
       return null;
     
     // if version sha matches its key
