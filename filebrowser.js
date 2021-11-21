@@ -492,17 +492,23 @@ addButton.addEventListener('click', () => {
   });
   
   // add blur event listener
-  fileEl.querySelector('.name').addEventListener('blur', () => {
+  let blurListener = window.addEventListener('click', (e) => {
     
-    // animate file
-    fileEl.classList.add('hidden');
+    window.removeEventListener('click', blurListener);
     
-    window.setTimeout(() => {
+    if (e.target !== fileEl.querySelector('.push-wrapper')) {
       
-      // delete file
-      fileEl.remove();
+      // animate file
+      fileEl.classList.add('hidden');
+
+      window.setTimeout(() => {
+
+        // delete file
+        fileEl.remove();
+
+      }, 180);
       
-    }, 180);
+    }
     
   });
   
