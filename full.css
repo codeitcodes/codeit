@@ -621,13 +621,14 @@ body.notransition .sidebar {
   padding: 15px 20px;
   position: relative;
   scroll-margin: 75px;
+  transition: .18s var(--ease-function) margin;
 }
 
 .sidebar .item:last-of-type {
   margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
-.sidebar .item:hover, .sidebar .item.file:active {
+.sidebar .item:hover, .sidebar .item.file:not(.focused):active {
   background: hsl(227deg 11% 16%);
 }
 
@@ -637,6 +638,15 @@ body.notransition .sidebar {
 
 .sidebar .item.selected {
   background: hsl(226deg 7% 19%);
+}
+
+.sidebar .item.focused {
+  cursor: unset !important;
+}
+
+.sidebar .item.hidden {
+  margin-top: calc(-54px - 11px);
+  margin-bottom: 11px;
 }
 
 .sidebar .item .label {
@@ -676,11 +686,26 @@ body.notransition .sidebar {
 }
 
 .sidebar .item .name {
-  /* width: 130px; */
   max-width: 245px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  transition: .18s .04s var(--ease-function);
+  transition-property: background, box-shadow;
+}
+
+.sidebar .item.focused .name {
+  border-radius: 4px;
+  padding: 4px;
+  margin: -4px;
+  outline: none;
+  background: hsl(220deg 86% 64% / 9%);
+  box-shadow: 0 0 0 2px hsl(220deg 86% 64% / 70%);
+}
+
+.sidebar .item.focused.hidden .name {
+  background: transparent;
+  box-shadow: 0 0 0 2px hsl(220deg 86% 64% / 0%);
 }
 
 .sidebar .item[exists="false"] .name {
@@ -696,6 +721,10 @@ body.notransition .sidebar {
 }
 
 .sidebar .item.modified .push-wrapper {
+  display: flex;
+}
+
+.sidebar .item.focused .push-wrapper {
   display: flex;
 }
 
