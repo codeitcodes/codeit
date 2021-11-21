@@ -31,6 +31,8 @@ const body = document.body,
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
+      
+      addButton = titleScreen.querySelector('.add'),
 
       fileWrapper = sidebar.querySelector('.files'),
       
