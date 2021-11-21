@@ -105,6 +105,7 @@ function addScript(documentNode, code, src, type) {
   
   script.onerror = (e) => {
     console.log('Error loading script:',e);
+    //@@
     documentNode.defaultView.console.error(e);
   }
   
