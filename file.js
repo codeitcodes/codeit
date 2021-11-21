@@ -223,6 +223,9 @@ function getLatestVersion(item) {
   
   function followTrail(crumb) {
     
+    if(modifiedFiles[crumb] == 'undefined') //@@
+      return null;
+    
     // if version sha matches its key
     // (it dosen't point to another version)
     if (modifiedFiles[crumb].sha === crumb) {
@@ -234,7 +237,14 @@ function getLatestVersion(item) {
       
       // version sha points to another version,
       // follow the trail
-      return followTrail(modifiedFiles[crumb].sha);
+      let ret = followTrail(modifiedFiles[crumb].sha);
+      
+      if(ret == null){
+        // No file with this sha was found in modifiedFiles, return the file with latest bread crumb: //@@
+        return modifiedFiles[crumb];
+      }else{
+        return ret;
+      }
       
     }
     
