@@ -491,7 +491,7 @@ addButton.addEventListener('click', () => {
     onFileEclipsedInCache(false, newSha, selectedFile);
     
     renderSidebarHTML();
-    loadFileInHTML(fileWrapper.querySelector('.file[sha="'+ newSha +'"]', newSha);
+    loadFileInHTML(fileWrapper.querySelector('.file[sha="'+ newSha +'"]'), newSha);
     
   });
   
