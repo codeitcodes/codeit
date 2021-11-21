@@ -348,10 +348,10 @@ async function loadFileInHTML(fileEl, fileSha) {
   }
   
   // show file content in codeit
-  cd.innerText = decodeUnicode(selectedFile.content);
+  cd.textContent = decodeUnicode(selectedFile.content);
   
   // change codeit lang
-  //cd.lang = selectedFile.lang; //TBD @@ KOSTA
+  cd.lang = selectedFile.lang;
 
   // set caret pos in codeit
   cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
@@ -498,7 +498,7 @@ addButton.addEventListener('click', () => {
   // animate file
   onNextFrame(() => {
 
-    //fileEl.classList.remove('hidden'); //TBD@@ KOSTA
+    fileEl.classList.remove('hidden');
     fileEl.querySelector('.name').focus();
 
   });
@@ -665,7 +665,7 @@ function protectUnsavedCode() {
     // clear codeit
 
     // clear codeit contents
-    cd.innerText = '';
+    cd.textContent = '';
 
     // change codeit lang
     cd.lang = '';
@@ -708,7 +708,7 @@ function setupEditor() {
 
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
-    cd.innerText = decodeUnicode(selectedFile.content);
+    cd.textContent = decodeUnicode(selectedFile.content);
     
     // if sidebar isn't expanded, focus codeit
     if (!(isMobile && body.classList.contains('expanded'))) {
