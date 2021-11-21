@@ -708,6 +708,12 @@ body.notransition .sidebar {
   box-shadow: 0 0 0 2px hsl(220deg 86% 64% / 0%);
 }
 
+.sidebar .item.focused .name:empty::before {
+  content: 'untitled file';
+  color: #828689;
+  pointer-events: none;
+}
+
 .sidebar .item[exists="false"] .name {
   font-style: italic;
   color: grey;
