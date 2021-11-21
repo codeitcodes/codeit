@@ -73,7 +73,8 @@ function handlePreviewKeydown(e) {
 
             }
 
-            addScript(frameDocument, decodeUnicode(resp.content));
+            //addScript(frameDocument, decodeUnicode(resp.content));
+            addScriptToBody(frameDocument, decodeUnicode(resp.content));
 
             // remove original tag
             script.remove();
