@@ -51,10 +51,10 @@ async function renderSidebarHTML() {
     if (contents != '') {
 
       // show path
-      sidebarLogo.textContent = repo + contents;
+      sidebarLogo.innerText = repo + contents;
 
       // if path is too long, overflow
-      if (sidebarLogo.textContent.length > 25) {
+      if (sidebarLogo.innerText.length > 25) {
 
         sidebarLogo.classList.add('overflow');
 
@@ -63,12 +63,12 @@ async function renderSidebarHTML() {
     } else if (repo != '') {
 
       // show repo name
-      sidebarLogo.textContent = repo;
+      sidebarLogo.innerText = repo;
 
     } else {
 
       // show title
-      sidebarLogo.textContent = 'Repositories';
+      sidebarLogo.innerText = 'Repositories';
 
     }
 
@@ -208,7 +208,7 @@ function addHTMLItemListeners() {
         // if item is a folder
 
         // change location
-        treeLoc[2] += '/' + item.textContent;
+        treeLoc[2] += '/' + item.innerText;
         saveTreeLocLS(treeLoc);
 
         // render sidebar
@@ -265,7 +265,7 @@ async function pushFileFromHTML(fileEl) {
   const fileSelected = fileEl.classList.contains('selected');
 
   // create commit
-  const commitMessage = 'Update ' + fileEl.textContent;
+  const commitMessage = 'Update ' + fileEl.innerText;
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
   let commit = {
@@ -329,10 +329,10 @@ async function loadFileInHTML(fileEl, fileSha) {
     startLoading();
 
     // get file from git
-    const resp = await git.getFile(treeLoc, fileEl.textContent);
+    const resp = await git.getFile(treeLoc, fileEl.innerText);
 
     // change selected file
-    changeSelectedFile(treeLoc.join(), fileSha, fileEl.textContent, resp.content, getFileLang(fileEl.textContent),
+    changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
                        [0, 0], [0, 0], false);
 
     // stop loading
@@ -348,7 +348,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   }
   
   // show file content in codeit
-  cd.textContent = decodeUnicode(selectedFile.content);
+  cd.innerText = decodeUnicode(selectedFile.content);
   
   // change codeit lang
   cd.lang = selectedFile.lang;
@@ -469,9 +469,9 @@ addButton.addEventListener('click', () => {
     fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
 
     // create commit
-    const commitMessage = 'Create ' + fileEl.textContent;
+    const commitMessage = 'Create ' + fileEl.innerText;
     const commitFile = {
-      name: fileEl.textContent,
+      name: fileEl.innerText,
       dir: treeLoc.join(),
       content: ''
     };
@@ -485,7 +485,7 @@ addButton.addEventListener('click', () => {
     const newSha = await git.push(commit);
     
     // change selected file
-    changeSelectedFile(treeLoc.join(), newSha, fileEl.textContent, commit.file.content, getFileLang(fileEl.textContent),
+    changeSelectedFile(treeLoc.join(), newSha, fileEl.innerText, commit.file.content, getFileLang(fileEl.innerText),
                        [0, 0], [0, 0], false);
     
     // Git file is eclipsed (not updated) in browser private cache,
@@ -687,7 +687,7 @@ function protectUnsavedCode() {
     // clear codeit
 
     // clear codeit contents
-    cd.textContent = '';
+    cd.innerText = '';
 
     // change codeit lang
     cd.lang = '';
@@ -730,7 +730,7 @@ function setupEditor() {
 
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
-    cd.textContent = decodeUnicode(selectedFile.content);
+    cd.innerText = decodeUnicode(selectedFile.content);
     
     // if sidebar isn't expanded, focus codeit
     if (!(isMobile && body.classList.contains('expanded'))) {
