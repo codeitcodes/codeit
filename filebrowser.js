@@ -453,25 +453,62 @@ addButton.addEventListener('click', () => {
   // add push button event listener
   const pushWrapper = fileEl.querySelector('.push-wrapper');
   
-  pushWrapper.addEventListener('click', async () => {
+  let pushListener = pushWrapper.addEventListener('click', async () => {
     
     // play push animation
     playPushAnimation(fileEl.querySelector('.push-wrapper'));
+    
+    window.setTimeout(() => {
+      
+      // disable pushing file from HTML
+      fileEl.classList.remove('focused');
 
+      // make file name uneditable
+      fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+      
+      
+      // show file content in codeit
+      cd.textContent = '\n';
+
+      // change codeit lang
+      cd.lang = selectedFile.lang;
+
+      // set caret pos in codeit
+      cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+
+      // set scroll pos in codeit
+      cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
+
+      // clear codeit history
+      cd.history = [];
+
+      // update line numbers
+      updateLineNumbersHTML();
+
+      // if on mobile device
+      if (isMobile) {
+
+        // update bottom float
+        updateFloat();
+
+      } else { // if on desktop
+
+        // check codeit scrollbar
+        checkScrollbarArrow();
+
+      }
+      
+    }, (2 - 0.18) * 1000);
+    
+    
     // push new file
     
-    // disable pushing file from HTML
-    fileEl.classList.remove('focused');
-    
-    // make file name uneditable
-    fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
-
     // create commit
     const commitMessage = 'Create ' + fileEl.innerText;
     const commitFile = {
       name: fileEl.innerText,
       dir: treeLoc.join(),
-      content: '' //content: '\n'
+      content: '\n'
     };
 
     let commit = {
@@ -482,16 +519,54 @@ addButton.addEventListener('click', () => {
     // push file asynchronously
     const newSha = await git.push(commit);
     
+    // update file sha in HTML with new sha from Git
+    setAttr(fileEl, 'sha', newSha);
+    
     // change selected file
-    changeSelectedFile(treeLoc.join(), newSha, fileEl.innerText, commit.file.content, getFileLang(fileEl.innerText),
+    changeSelectedFile(treeLoc.join(), newSha, fileEl.innerText, '\n', getFileLang(fileEl.innerText),
                        [0, 0], [0, 0], true);
     
     // Git file is eclipsed (not updated) in browser private cache,
     // so store the updated file in modifiedFiles object for 1 minute after commit
     onFileEclipsedInCache(false, newSha, selectedFile);
     
-    renderSidebarHTML();
-    loadFileInHTML(fileWrapper.querySelector('.file[sha="'+ newSha +'"]'), newSha);
+    
+    // remove push listener
+    pushWrapper.removeEventListener('click', pushListener);
+    
+    // add file event listener
+    fileEl.addEventListener('click', (e) => {
+      
+      // if not clicked on push button
+      let pushWrapper = fileEl.querySelector('.push-wrapper');
+      let clickedOnPush = (e.target == pushWrapper);
+
+      if (!clickedOnPush) {
+
+        // if file not already selected
+        if (!fileEl.classList.contains('selected')) {
+
+          // load file
+          loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+
+        } else if (isMobile) { // if on mobile device
+
+          // update bottom float
+          updateFloat();
+
+        }
+
+      } else {
+
+        // play push animation
+        playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+        // push file
+        pushFileFromHTML(fileEl);
+
+      }
+      
+    });
     
   });
   
