@@ -494,6 +494,8 @@ addButton.addEventListener('click', () => {
     
   });
   
+  let blurListener;
+  
   // animate file
   onNextFrame(() => {
 
@@ -501,7 +503,7 @@ addButton.addEventListener('click', () => {
     fileEl.querySelector('.name').focus();
     
     // add blur event listener
-    let blurListener = window.addEventListener('click', (e) => {
+    blurListener = window.addEventListener('click', (e) => {
 
       window.removeEventListener('click', blurListener);
 
