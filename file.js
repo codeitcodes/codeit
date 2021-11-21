@@ -104,21 +104,23 @@ function updateModFileScrollPos(sha, scrollPos) {
 // store the updated file under old sha as key
 // and store the updated file under new sha as key
 // in modifiedFiles object for 1 minute after commit
-function onFileEclipsedInCache(oldSha, newSha) {
+function onFileEclipsedInCache(oldSha, newSha, newFile) {
+  
+  // if file element under old sha exists in HTML,
+  // update it to the new sha
+  const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
+  if (fileEl) setAttr(fileEl, 'sha', newSha);
+  
+  
+  let fileToUpdate;
   
   // if old sha exists
   if (oldSha) {
 
-    // if file element under old sha exists in HTML,
-    // update it to the new sha
-    const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
-    if (fileEl) setAttr(fileEl, 'sha', newSha);
-
-
     // store the updated file under old sha as key
 
     // find the eclipsed file
-    let fileToUpdate = modifiedFiles[oldSha];
+    fileToUpdate = modifiedFiles[oldSha];
 
     fileToUpdate.sha = newSha;
     fileToUpdate.caretPos = [0, 0];
@@ -137,6 +139,10 @@ function onFileEclipsedInCache(oldSha, newSha) {
       updateSelectedFileLS();
 
     }
+    
+  } else {
+    
+    fileToUpdate = newFile;
     
   }
   
