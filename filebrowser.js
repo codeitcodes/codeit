@@ -421,12 +421,6 @@ sidebarTitle.addEventListener('click', () => {
 
 // create new file on click of button
 addButton.addEventListener('click', () => {
-  
-  /*// map tree location
-  const [user, repo, contents] = treeLoc;
-  
-  // if navigating in repository
-  if (repo != '') {*/
 
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
@@ -450,22 +444,45 @@ addButton.addEventListener('click', () => {
   // add new file to DOM
   fileWrapper.prepend(fileEl);
   
+  
   // add push button event listener
   const pushWrapper = fileEl.querySelector('.push-wrapper');
   
-  let pushListener = pushWrapper.addEventListener('click', async () => {
+  fileEl.querySelector('.name').addEventListener('keyup', (e) => {
+    
+    if (e.key === 'Enter') {
+      
+      e.preventDefault();
+      pushNewFileInHTML();
+      
+    }
+    
+  });
+  
+  let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
+  
+  
+  // animate file
+  onNextFrame(() => {
+
+    fileEl.classList.remove('hidden');
+    fileEl.querySelector('.name').focus();
+
+  });
+  
+  
+  async function pushNewFileInHTML() {
     
     // play push animation
     playPushAnimation(fileEl.querySelector('.push-wrapper'));
     
-    window.setTimeout(() => {
-      
-      // disable pushing file from HTML
-      fileEl.classList.remove('focused');
+    // disable pushing file from HTML
+    fileEl.classList.remove('focused');
 
-      // make file name uneditable
-      fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
-      
+    // make file name uneditable
+    fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+    
+    window.setTimeout(() => {
       
       // show file content in codeit
       cd.textContent = '\n';
@@ -568,15 +585,7 @@ addButton.addEventListener('click', () => {
       
     });
     
-  });
-  
-  // animate file
-  onNextFrame(() => {
-
-    fileEl.classList.remove('hidden');
-    fileEl.querySelector('.name').focus();
-
-  });
+  }
   
 })
 
