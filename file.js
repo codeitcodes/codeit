@@ -180,14 +180,22 @@ function setTimeoutForEclipsedFiles() {
   
   const eclipsedFiles = Object.values(modifiedFiles).filter(file => file.eclipsed);
   
+  // run on all eclipsed files
   eclipsedFiles.forEach(file => {
     
-    // set 1 minute timeout to remove updated files
+    // set 1 minute timeout to remove eclipsed file
     window.setTimeout(() => {
       
-      // remove the updated file under old sha as key
-      // from modifiedFiles
-      deleteModFile(file.sha);
+      // if not edited eclipsed file
+      // while in timeout (file is still eclipsed)
+      if (modifiedFiles[file.sha] &&
+          modifiedFiles[file.sha].eclipsed) {
+      
+        // remove the eclipsed file
+        // from modifiedFiles
+        deleteModFile(file.sha);
+        
+      }
       
     }, 65 * 1000); // 65s
 
