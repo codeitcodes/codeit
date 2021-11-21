@@ -79,6 +79,9 @@ function handlePreviewKeydown(e) {
             script.remove();
 
           }else{
+            addScript(frameDocument, script.src, script.type);     
+            // delete original
+            script.remove();
             console.log('Script is not window origin:',fileName);
           }
 
