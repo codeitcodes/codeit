@@ -51,10 +51,10 @@ async function renderSidebarHTML() {
     if (contents != '') {
 
       // show path
-      sidebarLogo.innerText = repo + contents;
+      sidebarLogo.textContent = repo + contents;
 
       // if path is too long, overflow
-      if (sidebarLogo.innerText.length > 25) {
+      if (sidebarLogo.textContent.length > 25) {
 
         sidebarLogo.classList.add('overflow');
 
@@ -63,19 +63,22 @@ async function renderSidebarHTML() {
     } else if (repo != '') {
 
       // show repo name
-      sidebarLogo.innerText = repo;
+      sidebarLogo.textContent = repo;
 
     } else {
 
       // show title
-      sidebarLogo.innerText = 'Repositories';
+      sidebarLogo.textContent = 'Repositories';
 
     }
 
 
     // if navigating in repository
     if (repo != '') {
-
+      
+      // show add button
+      addButton.classList.remove('hidden');
+      
       // render files
       resp.forEach(item => {
 
@@ -118,7 +121,10 @@ async function renderSidebarHTML() {
       });
 
     } else { // else, show all repositories
-
+      
+      // hide add button
+      addButton.classList.remove('hidden');
+      
       // render repositories
       resp.forEach(item => {
 
@@ -202,7 +208,7 @@ function addHTMLItemListeners() {
         // if item is a folder
 
         // change location
-        treeLoc[2] += '/' + item.innerText;
+        treeLoc[2] += '/' + item.textContent;
         saveTreeLocLS(treeLoc);
 
         // render sidebar
@@ -259,7 +265,7 @@ async function pushFileFromHTML(fileEl) {
   const fileSelected = fileEl.classList.contains('selected');
 
   // create commit
-  const commitMessage = 'Update ' + fileEl.innerText;
+  const commitMessage = 'Update ' + fileEl.textContent;
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
   let commit = {
@@ -304,6 +310,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   files.forEach(file => { file.style.display = '' });
   
   header.classList.remove('searching');
+  
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -322,10 +329,10 @@ async function loadFileInHTML(fileEl, fileSha) {
     startLoading();
 
     // get file from git
-    const resp = await git.getFile(treeLoc, fileEl.innerText);
+    const resp = await git.getFile(treeLoc, fileEl.textContent);
 
     // change selected file
-    changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
+    changeSelectedFile(treeLoc.join(), fileSha, fileEl.textContent, resp.content, getFileLang(fileEl.textContent),
                        [0, 0], [0, 0], false);
 
     // stop loading
@@ -409,6 +416,104 @@ sidebarTitle.addEventListener('click', () => {
 
   }
 
+})
+
+
+// create new file on click of button
+addButton.addEventListener('click', () => {
+  
+  /*// map tree location
+  const [user, repo, contents] = treeLoc;
+  
+  // if navigating in repository
+  if (repo != '') {*/
+
+  // clear existing selections
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+
+  // create new file
+  const fileEl = document.createElement('div');
+  fileEl.classList = 'item file selected focused hidden';
+
+  fileEl.innerHTML = `
+  <div class="label">
+    `+ fileIcon +`
+    <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
+  </div>
+  <div class="push-wrapper">
+    `+ pushIcon +`
+  </div>
+  `;
+
+  // add new file to DOM
+  fileWrapper.prepend(fileEl);
+  
+  // add push button event listener
+  const pushWrapper = fileEl.querySelector('.push-wrapper');
+  
+  pushWrapper.addEventListener('click', async () => {
+
+    // play push animation
+    playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+    // push new file
+    
+    // disable pushing file from HTML
+    fileEl.classList.remove('focused');
+    
+    // make file name uneditable
+    fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+
+    // create commit
+    const commitMessage = 'Create ' + fileEl.textContent;
+    const commitFile = {
+      name: fileEl.textContent,
+      content: ''
+    };
+
+    let commit = {
+      message: commitMessage,
+      file: commitFile
+    };
+
+    // push file asynchronously
+    const newSha = await git.push(commit);
+    
+    // change selected file
+    changeSelectedFile(treeLoc.join(), newSha, fileEl.textContent, commit.file.content, getFileLang(fileEl.textContent),
+                       [0, 0], [0, 0], false);
+    
+    // Git file is eclipsed (not updated) in browser private cache,
+    // so store the updated file in modifiedFiles object for 1 minute after commit
+    onFileEclipsedInCache(false, newSha);
+    
+  });
+  
+  // add blur event listener
+  fileEl.querySelector('.name').addEventListener('blur', () => {
+    
+    // animate file
+    fileEl.classList.add('hidden');
+    
+    window.setTimeout(() => {
+      
+      // delete file
+      fileEl.remove();
+      
+    }, 180);
+    
+  });
+  
+  // animate file
+  onNextFrame(() => {
+
+    fileEl.classList.remove('hidden');
+    fileEl.querySelector('.name').focus();
+
+  });
+  
 })
 
 
