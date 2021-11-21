@@ -53,35 +53,47 @@ function handlePreviewKeydown(e) {
         });
 
         // fetch scripts
-        frameDocument.querySelectorAll('script[src]').forEach(async (script) => {
+        frameDocument.querySelectorAll('script').forEach(async (script) => {
           
-          const linkHref = new URL(script.src);
-          const fileName = linkHref.pathname.slice(1);
+          // if script is external
+          if (script.src) {
 
-          if (linkHref.origin == window.location.origin) {
+            const linkHref = new URL(script.src);
+            const fileName = linkHref.pathname.slice(1);
 
-            const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-            let resp;
+            if (linkHref.origin == window.location.origin) {
 
-            if (!file[0]) {
+              const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+              let resp;
 
-              resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+              if (!file[0]) {
+
+                resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+              } else {
+
+                resp = file[0];
+
+              }
+
+              addScript(frameDocument, decodeUnicode(resp.content));
+
+              // remove original tag
+              script.remove();
 
             } else {
 
-              resp = file[0];
+              addScript(frameDocument, '', script.src, script.type);
+
+              // delete original
+              script.remove();
 
             }
-
-            addScript(frameDocument, decodeUnicode(resp.content));
-
-            // remove original tag
-            script.remove();
-
+            
           } else {
             
-            addScript(frameDocument, '', script.src, script.type);
-            
+            addScript(frameDocument, script.textContent, '', script.type);
+
             // delete original
             script.remove();
             
