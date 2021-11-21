@@ -454,7 +454,9 @@ addButton.addEventListener('click', () => {
   const pushWrapper = fileEl.querySelector('.push-wrapper');
   
   pushWrapper.addEventListener('click', async () => {
-
+    
+    window.removeEventListener('click', blurListener);
+    
     // play push animation
     playPushAnimation(fileEl.querySelector('.push-wrapper'));
 
