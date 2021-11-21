@@ -33,7 +33,7 @@ function handlePreviewKeydown(e) {
           const linkHref = new URL(link.href);
           const fileName = linkHref.pathname.slice(1);
 
-          if (linkHref.origin == 'fetch.codeit.codes') {
+          if (linkHref.hostname == 'fetch.codeit.codes') {
 
             const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
             let resp;
@@ -66,7 +66,7 @@ function handlePreviewKeydown(e) {
             const linkHref = new URL(script.src);
             const fileName = linkHref.pathname.slice(1);
 
-            if (linkHref.origin == 'fetch.codeit.codes') {
+            if (linkHref.hostname == 'fetch.codeit.codes') {
 
               const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
               let resp;
