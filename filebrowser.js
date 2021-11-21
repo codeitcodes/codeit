@@ -520,10 +520,12 @@ addButton.addEventListener('click', () => {
     
     // push new file
     
+    const fileName = fileEl.innerText.replaceAll('\n', '');
+    
     // create commit
-    const commitMessage = 'Create ' + fileEl.innerText;
+    const commitMessage = 'Create ' + fileName;
     const commitFile = {
-      name: fileEl.innerText,
+      name: fileName,
       dir: treeLoc.join(),
       content: '\n'
     };
@@ -540,7 +542,7 @@ addButton.addEventListener('click', () => {
     setAttr(fileEl, 'sha', newSha);
     
     // change selected file
-    changeSelectedFile(treeLoc.join(), newSha, fileEl.innerText, '\n', getFileLang(fileEl.innerText),
+    changeSelectedFile(treeLoc.join(), newSha, fileName, '\n', getFileLang(fileName),
                        [0, 0], [0, 0], true);
     
     // Git file is eclipsed (not updated) in browser private cache,
