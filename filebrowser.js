@@ -491,32 +491,32 @@ addButton.addEventListener('click', () => {
     
   });
   
-  // add blur event listener
-  let blurListener = window.addEventListener('click', (e) => {
-    
-    window.removeEventListener('click', blurListener);
-    
-    if (e.target !== fileEl.querySelector('.push-wrapper')) {
-      
-      // animate file
-      fileEl.classList.add('hidden');
-
-      window.setTimeout(() => {
-
-        // delete file
-        fileEl.remove();
-
-      }, 180);
-      
-    }
-    
-  });
-  
   // animate file
   onNextFrame(() => {
 
     fileEl.classList.remove('hidden');
     fileEl.querySelector('.name').focus();
+    
+    // add blur event listener
+    let blurListener = window.addEventListener('click', (e) => {
+
+      window.removeEventListener('click', blurListener);
+
+      if (e.target !== fileEl.querySelector('.push-wrapper')) {
+
+        // animate file
+        fileEl.classList.add('hidden');
+
+        window.setTimeout(() => {
+
+          // delete file
+          fileEl.remove();
+
+        }, 180);
+
+      }
+
+    });
 
   });
   
