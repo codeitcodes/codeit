@@ -22,18 +22,13 @@ function handlePreviewKeydown(e) {
         frameDocument.addEventListener('keydown', handlePreviewKeydown);
         frameDocument.documentElement.innerHTML = cd.textContent;
         
-        // add base url to iframe to prevent breaking relative URLs
-        const base = frameDocument.createElement('base');
-        base.href = 'https://fetch.codeit.codes/';
-        frameDocument.head.appendChild(base);
-        
         // fetch styles
         frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(async (link) => {
 
           const linkHref = new URL(link.href);
           const fileName = linkHref.pathname.slice(1);
 
-          if (linkHref.hostname == 'fetch.codeit.codes') {
+          if (linkHref.origin == window.location.origin) {
 
             const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
             let resp;
@@ -66,7 +61,7 @@ function handlePreviewKeydown(e) {
             const linkHref = new URL(script.src);
             const fileName = linkHref.pathname.slice(1);
 
-            if (linkHref.hostname == 'fetch.codeit.codes') {
+            if (linkHref.origin == window.location.origin) {
 
               const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
               let resp;
