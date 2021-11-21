@@ -80,6 +80,7 @@ function handlePreviewKeydown(e) {
 
           }else{
             console.log('Script is not window origin:',fileName);
+          }
 
         })
 
