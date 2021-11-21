@@ -73,20 +73,20 @@ function handlePreviewKeydown(e) {
 
             }
 
-            //addScript(frameDocument, decodeUnicode(resp.content));
-            addScriptToBody(frameDocument, decodeUnicode(resp.content));
+            addScript(frameDocument, decodeUnicode(resp.content));
 
             // remove original tag
             script.remove();
 
-          }else{
-            console.log('Script is not window origin:',fileName,script);
-            addScriptToBody(frameDocument, '',script.src, script.type);     
+          } else {
+            
+            addScript(frameDocument, '', script.src, script.type);
+            
             // delete original
             script.remove();
             
           }
-
+          
         })
 
       }
@@ -111,32 +111,8 @@ function addScript(documentNode, code, src, type) {
   }
   
   script.onerror = (e) => {
-    console.log('Error loading script:',e);
-    //@@
     documentNode.defaultView.console.error(e);
   }
   
   documentNode.head.appendChild(script);
-}
-
-
-function addScriptToBody(documentNode, code, src, type) {
-  var script = documentNode.createElement('script');
-  script.type = script.type ?? 'application/javascript';
-  
-  if (code) {
-    script.appendChild(documentNode.createTextNode(code));
-  } else {
-    script.src = src;
-    script.defer = true;
-    script.async = false;
-  }
-  
-  script.onerror = (e) => {
-    console.log('Error loading script:',e);
-    //@@
-    documentNode.defaultView.console.error(e);
-  }
-  
-  documentNode.body.appendChild(script);
 }
