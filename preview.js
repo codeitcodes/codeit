@@ -79,10 +79,11 @@ function handlePreviewKeydown(e) {
             script.remove();
 
           }else{
+            console.log('Script is not window origin:',fileName,script);
             addScript(frameDocument, '',script.src, script.type);     
             // delete original
             script.remove();
-            console.log('Script is not window origin:',fileName);
+            
           }
 
         })
