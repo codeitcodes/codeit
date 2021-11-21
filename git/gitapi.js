@@ -55,11 +55,24 @@ let git = {
                 '/contents' + treeLoc[2] +
                 '/' + commit.file.name;
 
-    let commitData = {
-      message: commit.message,
-      content: commit.file.content,
-      sha: commit.file.sha
-    };
+    let commitData;
+    
+    if (commit.file.sha) {
+      
+      commitData = {
+        message: commit.message,
+        content: commit.file.content,
+        sha: commit.file.sha
+      };
+      
+    } else {
+      
+      commitData = {
+        message: commit.message,
+        content: commit.file.content
+      };
+      
+    }
 
     // commit file
     var resp = await axios.put(query, githubToken, commitData);
