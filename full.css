@@ -535,7 +535,7 @@ body.notransition .sidebar {
   cursor: unset;
 }
 
-.sidebar .header :is(.search, .clear) {
+.sidebar .header .roundbutton {
   color: #828689;
 }
 
@@ -545,7 +545,6 @@ body.notransition .sidebar {
 }
 
 .sidebar .searchscreen .back {
-  color: #828689;
   transition: .18s var(--ease-function) margin-right;
 }
 
