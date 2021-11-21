@@ -351,7 +351,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   cd.innerText = decodeUnicode(selectedFile.content);
   
   // change codeit lang
-  cd.lang = selectedFile.lang;
+  //cd.lang = selectedFile.lang; //TBD @@ KOSTA
 
   // set caret pos in codeit
   cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
