@@ -470,6 +470,7 @@ addButton.addEventListener('click', () => {
     const commitMessage = 'Create ' + fileEl.textContent;
     const commitFile = {
       name: fileEl.textContent,
+      dir: treeLoc.join(),
       content: ''
     };
 
