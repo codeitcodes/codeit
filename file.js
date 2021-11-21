@@ -106,32 +106,37 @@ function updateModFileScrollPos(sha, scrollPos) {
 // in modifiedFiles object for 1 minute after commit
 function onFileEclipsedInCache(oldSha, newSha) {
   
-  // if file element under old sha exists in HTML,
-  // update it to the new sha
-  const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
-  if (fileEl) setAttr(fileEl, 'sha', newSha);
-  
-  
-  // store the updated file under old sha as key
-  
-  // find the eclipsed file
-  let fileToUpdate = modifiedFiles[oldSha];
+  // if old sha exists
+  if (oldSha) {
 
-  fileToUpdate.sha = newSha;
-  fileToUpdate.caretPos = [0, 0];
-  fileToUpdate.eclipsed = true;
-  
-  // if file to update is selected
-  if (selectedFile.sha === oldSha) {
-    
-    // update its content
-    // to the selected file contents
-    updateModFileContent(oldSha, selectedFile.content);
-    
-    // update selected file sha to the new sha
-    selectedFile.sha = newSha;
-     
-    updateSelectedFileLS();
+    // if file element under old sha exists in HTML,
+    // update it to the new sha
+    const fileEl = fileWrapper.querySelector('.file[sha="' + oldSha + '"]');
+    if (fileEl) setAttr(fileEl, 'sha', newSha);
+
+
+    // store the updated file under old sha as key
+
+    // find the eclipsed file
+    let fileToUpdate = modifiedFiles[oldSha];
+
+    fileToUpdate.sha = newSha;
+    fileToUpdate.caretPos = [0, 0];
+    fileToUpdate.eclipsed = true;
+
+    // if file to update is selected
+    if (selectedFile.sha === oldSha) {
+
+      // update its content
+      // to the selected file contents
+      updateModFileContent(oldSha, selectedFile.content);
+
+      // update selected file sha to the new sha
+      selectedFile.sha = newSha;
+
+      updateSelectedFileLS();
+
+    }
     
   }
   
@@ -147,9 +152,14 @@ function onFileEclipsedInCache(oldSha, newSha) {
   // set 1 minute timeout to remove updated files
   window.setTimeout(() => {
     
-    // remove the updated file under old sha as key
-    // from modifiedFiles
-    deleteModFile(oldSha);
+    // if old sha exists
+    if (oldSha) {
+
+      // remove the updated file under old sha as key
+      // from modifiedFiles
+      deleteModFile(oldSha);
+      
+    }
     
     // if not edited updated file under new sha as key
     // while in timeout (file is still eclipsed)
