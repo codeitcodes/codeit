@@ -123,7 +123,7 @@ async function renderSidebarHTML() {
     } else { // else, show all repositories
       
       // hide add button
-      addButton.classList.remove('hidden');
+      addButton.classList.add('hidden');
       
       // render repositories
       resp.forEach(item => {
