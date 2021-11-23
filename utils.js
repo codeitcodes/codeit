@@ -41,7 +41,7 @@ const body = document.body,
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
       
-      previewWrapper = document.querySelector('.preview-wrapper');
+      liveView = document.querySelector('.live-view');
 
 
 // version
