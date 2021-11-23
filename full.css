@@ -990,7 +990,7 @@ body.notransition .sidebar {
   pointer-events: auto;
 }
 
-.live-view .frame {
+.live-view .live-frame {
   width: 100%;
   height: 100%;
   background: #fff;
