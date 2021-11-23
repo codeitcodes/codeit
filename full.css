@@ -1018,13 +1018,11 @@ body.notransition .sidebar {
 .live-view.loaded::before {
   opacity: 0;
   pointer-events: none;
-  transition: .18s var(--ease-function) opacity;
 }
 
 .live-view.loaded::after {
   opacity: 0;
   pointer-events: none;
-  transition: .18s var(--ease-function) opacity;
 }
 
 @keyframes live-pulse {
