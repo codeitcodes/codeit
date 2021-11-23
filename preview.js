@@ -128,7 +128,7 @@ function addScript(documentNode, code, src, type) {
     //script.defer = true;
     //script.async = false;
     
-    documentNode.head.appendChild(script);
+    documentNode.body.appendChild(script);
     
   }
   
