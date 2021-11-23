@@ -996,7 +996,6 @@ body.notransition .sidebar {
   height: 100%;
   position: fixed;
   background: #1a1c24;
-  transition: .18s var(--ease-function) opacity;
   z-index: 1;
 }
 
@@ -1013,13 +1012,13 @@ body.notransition .sidebar {
   background: hsl(240deg 87% 55%);
   animation: live-pulse 1s var(--cubic-function) infinite;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
-  transition: .18s var(--ease-function) opacity;
   z-index: 1;
 }
 
 .live-view.loaded :is(::before, ::after) {
   opacity: 0;
   pointer-events: none;
+  transition: .18s var(--ease-function) opacity;
 }
 
 @keyframes live-pulse {
