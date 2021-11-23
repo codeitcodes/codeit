@@ -105,6 +105,15 @@ function handlePreviewKeydown(e) {
 
     }
     
+  } else {
+    
+    window.setTimeout(() => {
+      
+      // clear live view
+      liveView.innerHTML = '';
+      
+    }, 400);
+    
   }
   
 }
