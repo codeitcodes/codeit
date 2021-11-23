@@ -123,8 +123,8 @@ function addScript(documentNode, code, src, type) {
   } else {
     
     script.src = src;
-    script.defer = true;
-    script.async = false;
+    //script.defer = true;
+    //script.async = false;
     
   }
   
