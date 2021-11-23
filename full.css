@@ -990,6 +990,48 @@ body.notransition .sidebar {
   pointer-events: auto;
 }
 
+.live-view::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #1a1c24;
+  transition: .18s var(--ease-function) opacity;
+  z-index: 1;
+}
+
+.live-view::after {
+  content: '';
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--spacing-7);
+  height: var(--spacing-7);
+  border-radius: 50%;
+  background: #e06c75;
+  background: hsl(240deg 87% 55%);
+  animation: live-pulse 1s var(--cubic-function) infinite;
+  box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
+  transition: .18s var(--ease-function) opacity;
+  z-index: 1;
+}
+
+.live-view.loaded :is(::before, ::after) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes live-pulse {
+  from {
+      box-shadow: 0 0 0 0 hsl(240deg 87% 55%);
+  }
+
+  to {
+      box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
+  }
+}
+
 .live-view .live-frame {
   width: 100%;
   height: 100%;
