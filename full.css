@@ -1004,34 +1004,36 @@ body.notransition .sidebar {
   position: fixed;
   left: 50%;
   top: 50%;
+  opacity: 0;
   transform: translate(-50%, -50%);
   width: var(--spacing-7);
   height: var(--spacing-7);
   border-radius: 50%;
   background: #e06c75;
   background: hsl(240deg 87% 55%);
-  animation: live-pulse 1s var(--cubic-function) infinite;
+  animation: live-pulse 1s var(--cubic-function) infinite,
+             show-loader .5s var(--ease-function) forwards;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
   z-index: 1;
 }
 
-.live-view.loaded::before {
-  opacity: 0;
-  pointer-events: none;
-}
-
+.live-view.loaded::before,
 .live-view.loaded::after {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 @keyframes live-pulse {
   from {
       box-shadow: 0 0 0 0 hsl(240deg 87% 55%);
   }
-
   to {
       box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
+  }
+}
+
+@keyframes show-loader {
+  to {
+    opacity: 1;
   }
 }
 
