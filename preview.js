@@ -120,14 +120,16 @@ function addScript(documentNode, code, src, type) {
     
     script.appendChild(documentNode.createTextNode(code));
     
+    documentNode.body.appendChild(script);
+    
   } else {
     
     script.src = src;
     //script.defer = true;
     //script.async = false;
     
+    documentNode.head.appendChild(script);
+    
   }
-  
-  documentNode.head.appendChild(script);
   
 }
