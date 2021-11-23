@@ -41,7 +41,7 @@ function toggleLiveView(file) {
       liveView.innerHTML = '';
       
       // show loader
-      liveView.classList.add('loaded');
+      liveView.classList.remove('loaded');
       
     }, 400);
     
