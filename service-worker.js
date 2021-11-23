@@ -22,7 +22,7 @@ const FILES_TO_CACHE = [
   '/git/gitauth.js',
   '/codedrop.js',
   '/filebrowser.js',
-  '/liveview.js',
+  '/live-view.js',
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
