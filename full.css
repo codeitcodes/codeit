@@ -1012,7 +1012,7 @@ body.notransition .sidebar {
   background: #e06c75;
   background: hsl(240deg 87% 55%);
   animation: live-pulse 1s var(--cubic-function) infinite,
-             show-loader .5s var(--ease-function) forwards;
+             show-loader 1s var(--ease-function) forwards;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
   z-index: 1;
 }
