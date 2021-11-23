@@ -1,113 +1,41 @@
 
-document.addEventListener('keydown', handlePreviewKeydown);
+document.addEventListener('keydown', handleMetaP);
 
-
-function handlePreviewKeydown(e) {
+function handleMetaP(e) {
   
+  // detect ctrl/cmd+P
   if (e.key === 'p' && isKeyEventMeta(e)) {
 
     e.preventDefault();
     
-    if (selectedFile.lang == 'html') {
+    toggleLiveView(selectedFile);
     
-      liveView.classList.toggle('visible');
+  }
+  
+}
 
-      if (liveView.classList.contains('visible')) {
-        
-        liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
-        
-        const frame = liveView.querySelector('.live-frame');        
-        const frameDocument = frame.contentDocument;
 
-        frameDocument.addEventListener('keydown', handlePreviewKeydown);
-        frameDocument.documentElement.innerHTML = cd.textContent;
-        
-        // fetch styles
-        frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(async (link) => {
+let liveViewTimeout;
 
-          const linkHref = new URL(link.href);
-          const fileName = linkHref.pathname.slice(1);
-
-          if (linkHref.origin == window.location.origin) {
-
-            const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-            let resp;
-
-            if (!file[0]) {
-
-              resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
-
-            } else {
-
-              resp = file[0];
-
-            }
-
-            link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-
-            // remove original tag
-            link.remove();
-
-          }
-
-        });
-
-        // fetch scripts
-        frameDocument.querySelectorAll('script').forEach(async (script) => {
-          
-          // if script is external
-          if (script.src) {
-
-            const linkHref = new URL(script.src);
-            const fileName = linkHref.pathname.slice(1);
-
-            if (linkHref.origin == window.location.origin) {
-
-              const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-              let resp;
-
-              if (!file[0]) {
-
-                resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
-
-              } else {
-
-                resp = file[0];
-
-              }
-
-              addScript(frameDocument, decodeUnicode(resp.content));
-
-              // remove original tag
-              script.remove();
-
-            } else {
-
-              addScript(frameDocument, '', script.src, script.type);
-
-              // delete original
-              script.remove();
-
-            }
-            
-          } else {
-            
-            addScript(frameDocument, script.textContent, '', script.type);
-
-            // delete original
-            script.remove();
-            
-          }
-          
-        })
-
-      }
-
+// toggle live view for file
+function toggleLiveView(file) {
+  
+  liveView.classList.toggle('visible');
+  
+  window.clearTimeout(liveViewTimeout);
+  
+  // if live view is visible
+  if (liveView.classList.contains('visible')) {
+    
+    if (file.lang == 'html') {
+    
+      renderLiveViewHTML(file);
+    
     }
     
   } else {
     
-    window.setTimeout(() => {
+    liveViewTimeout = window.setTimeout(() => {
       
       // clear live view
       liveView.innerHTML = '';
@@ -116,6 +44,99 @@ function handlePreviewKeydown(e) {
     
   }
   
+}
+
+
+// render live view for HTML files
+function renderLiveViewHTML(file) {
+
+  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
+
+  const frame = liveView.querySelector('.live-frame');        
+  const frameDocument = frame.contentDocument;
+
+  frameDocument.addEventListener('keydown', handleMetaP);
+  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+
+  // fetch styles
+  frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(async (link) => {
+
+    const linkHref = new URL(link.href);
+    const fileName = linkHref.pathname.slice(1);
+
+    if (linkHref.origin == window.location.origin) {
+
+      const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+      let resp;
+
+      if (!file[0]) {
+
+        resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+      } else {
+
+        resp = file[0];
+
+      }
+
+      link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
+
+      // remove original tag
+      link.remove();
+
+    }
+
+  });
+
+  // fetch scripts
+  frameDocument.querySelectorAll('script').forEach(async (script) => {
+
+    // if script is external
+    if (script.src) {
+
+      const linkHref = new URL(script.src);
+      const fileName = linkHref.pathname.slice(1);
+
+      if (linkHref.origin == window.location.origin) {
+
+        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+        let resp;
+
+        if (!file[0]) {
+
+          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+        } else {
+
+          resp = file[0];
+
+        }
+
+        addScript(frameDocument, decodeUnicode(resp.content));
+
+        // remove original tag
+        script.remove();
+
+      } else {
+
+        addScript(frameDocument, '', script.src, script.type);
+
+        // delete original
+        script.remove();
+
+      }
+
+    } else {
+
+      addScript(frameDocument, script.textContent, '', script.type);
+
+      // delete original
+      script.remove();
+
+    }
+
+  })
+
 }
 
 
