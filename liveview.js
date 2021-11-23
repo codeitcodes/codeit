@@ -10,14 +10,14 @@ function handlePreviewKeydown(e) {
     
     if (selectedFile.lang == 'html') {
     
-      previewWrapper.classList.toggle('visible');
+      liveView.classList.toggle('visible');
 
-      if (previewWrapper.classList.contains('visible')) {
+      if (liveView.classList.contains('visible')) {
         
-        previewWrapper.querySelector('.preview').outerHTML = '<iframe class="preview" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
+        liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
         
-        const preview = previewWrapper.querySelector('.preview');        
-        const frameDocument = preview.contentDocument;
+        const frame = liveView.querySelector('.live-frame');        
+        const frameDocument = frame.contentDocument;
 
         frameDocument.addEventListener('keydown', handlePreviewKeydown);
         frameDocument.documentElement.innerHTML = cd.textContent;
