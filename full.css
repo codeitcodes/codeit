@@ -967,7 +967,7 @@ body.notransition .sidebar {
   will-change: transform;
 }
 
-.preview-wrapper {
+.live-view {
   position: fixed;
   top: 0;
   right: 0;
@@ -985,15 +985,21 @@ body.notransition .sidebar {
   z-index: 1000;
 }
 
-.preview-wrapper.visible {
+.live-view.visible {
   transform: none;
   pointer-events: auto;
 }
 
-.preview-wrapper .preview {
+.live-view .frame {
   width: 100%;
   height: 100%;
   background: #fff;
+}
+
+.live-view .console {
+  width: 100%;
+  height: 100%;
+  background: #1a1c24;
 }
 
 .splash-wrapper {
