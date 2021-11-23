@@ -40,6 +40,9 @@ function toggleLiveView(file) {
       // clear live view
       liveView.innerHTML = '';
       
+      // show loader
+      liveView.classList.add('loaded');
+      
     }, 400);
     
   }
@@ -49,44 +52,58 @@ function toggleLiveView(file) {
 
 // render live view for HTML files
 function renderLiveViewHTML(file) {
-
+  
   liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
 
   const frame = liveView.querySelector('.live-frame');        
   const frameDocument = frame.contentDocument;
-
+  
   frameDocument.addEventListener('keydown', handleMetaP);
   frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
-
+  
   // fetch styles
-  frameDocument.querySelectorAll('link[rel="stylesheet"]').forEach(async (link) => {
+  const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
+  
+  if (frameLinks.length > 0) {
+    
+    frameLinks.forEach(async (link) => {
 
-    const linkHref = new URL(link.href);
-    const fileName = linkHref.pathname.slice(1);
+      const linkHref = new URL(link.href);
+      const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == window.location.origin) {
+      if (linkHref.origin == window.location.origin) {
 
-      const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-      let resp;
+        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+        let resp;
 
-      if (!file[0]) {
+        if (!file[0]) {
 
-        resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
 
-      } else {
+        } else {
 
-        resp = file[0];
+          resp = file[0];
+
+        }
+
+        link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
+        
+        // hide loader
+        liveView.classList.add('loaded');
+        
+        // remove original tag
+        link.remove();
 
       }
 
-      link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-
-      // remove original tag
-      link.remove();
-
-    }
-
-  });
+    });
+    
+  } else {
+    
+    // hide loader
+    liveView.classList.add('loaded');
+    
+  }
 
   // fetch scripts
   frameDocument.querySelectorAll('script').forEach(async (script) => {
