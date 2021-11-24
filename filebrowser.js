@@ -531,7 +531,7 @@ addButton.addEventListener('click', () => {
       const commitFile = {
         name: fileName,
         dir: treeLoc.join(),
-        content: str
+        content: btoa(str)
       };
 
       let commit = {
