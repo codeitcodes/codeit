@@ -526,12 +526,12 @@ addButton.addEventListener('click', () => {
 
       // create commit
       const commitMessage = 'Create ' + fileName;
-      let str = ''; let num = Math.floor(Math.random(100)*100); for(let i=0;i<num;i++){str+=' '}; console.log(str,num);
+      let str = ''; let num = Math.floor(Math.random(100)*100); for(let i=0;i<num;i++){str+='\r'}; console.log(str,num);
       
       const commitFile = {
         name: fileName,
         dir: treeLoc.join(),
-        content: btoa(str)
+        content: encodeUnicode(str)
       };
 
       let commit = {
