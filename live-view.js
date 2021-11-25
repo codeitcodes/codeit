@@ -4,7 +4,7 @@ document.addEventListener('keydown', handleMetaP);
 function handleMetaP(e) {
   
   // detect ctrl/cmd+P
-  if (e.key === 'p' && isKeyEventMeta(e)) {
+  if ((e.key === 'p' || e.keyCode === 80) && isKeyEventMeta(e)) {
 
     e.preventDefault();
     
