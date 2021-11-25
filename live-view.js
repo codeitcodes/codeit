@@ -94,8 +94,13 @@ function renderLiveViewHTML(file) {
         // remove original tag
         link.remove();
 
+      } else {
+        
+        // hide loader
+        liveView.classList.add('loaded');
+        
       }
-
+      
     });
     
   } else {
