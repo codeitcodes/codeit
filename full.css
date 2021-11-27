@@ -697,6 +697,8 @@ body.notransition .sidebar {
   padding: 4px;
   margin: -4px;
   outline: none;
+  user-select: none;
+  -webkit-user-select: none;
   background: hsl(220deg 86% 64% / 9%);
   box-shadow: 0 0 0 2px hsl(220deg 86% 64% / 70%);
   transition: .18s .04s var(--ease-function);
