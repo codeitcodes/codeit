@@ -465,11 +465,15 @@ addButton.addEventListener('click', () => {
     let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
 
 
-    // animate file
+    // on next frame
     onNextFrame(() => {
-
+      
+      // animate file
       fileEl.classList.remove('hidden');
+      
+      // focus file
       fileEl.querySelector('.name').focus();
+      fileEl.scrollIntoViewIfNeeded();
 
     });
 
