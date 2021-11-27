@@ -236,7 +236,7 @@ body.mobile .live-view {
   top: 32px;
   transform: translateY(calc(100% - 45px - 56px));
   transition: .4s var(--cubic-function) transform,
-              .4s .18s var(--ease-function) opacity;
+              .4s .18s var(--cubic-function) opacity;
 }
 
 .live-view.visible {
@@ -249,7 +249,7 @@ body.mobile .live-view {
   transform: none;
   pointer-events: auto;
   transition: .4s var(--cubic-function) transform,
-              .4s var(--ease-function) opacity;
+              .4s var(--cubic-function) opacity;
 }
 
 .live-view::before {
@@ -260,6 +260,7 @@ body.mobile .live-view {
   left: 1px;
   position: fixed;
   background: #1a1c24;
+  transition: .4s var(--cubic-function) opacity;
   z-index: 1;
 }
 
@@ -278,13 +279,15 @@ body.mobile .live-view {
   animation: live-pulse 1s var(--cubic-function) infinite,
              show-loader 1.2s var(--ease-function) forwards;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
+  transition: .4s var(--cubic-function) opacity;
   z-index: 1;
 }
 
 .live-view.loaded::before,
 .live-view.loaded::after,
 .live-view:not(.visible)::after {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes live-pulse {
