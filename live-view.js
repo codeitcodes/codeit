@@ -109,7 +109,12 @@ function addBottomSwipeListener() {
   
 }
 
-addBottomSwipeListener();
+if (isMobile) {
+  
+  addBottomSwipeListener();
+  
+}
+
 
 
 document.addEventListener('keydown', handleMetaP);
