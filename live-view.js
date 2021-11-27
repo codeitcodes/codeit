@@ -106,8 +106,10 @@ function addBottomSwipeListener() {
     }
     
   }
+  
+}
 
-
+addBottomSwipeListener();
 
 
 document.addEventListener('keydown', handleMetaP);
