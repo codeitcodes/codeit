@@ -40,11 +40,13 @@ function addBottomSwipeListener() {
     
     initialY = currentY;
     
-    if (click) {
-      // clicked
+    // if clicked and bottom float is expanded
+    if (click && bottomWrapper.classList.contains('expanded')) {
+      
+      // retract bottom float
+      bottomWrapper.classList.remove('expanded');
+      
     }
-    
-    // idle
 
     yOffset = 0;
     active = false;
