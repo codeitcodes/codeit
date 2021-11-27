@@ -549,7 +549,8 @@ addButton.addEventListener('click', () => {
         // has the same name, add a differentiating number
         fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
                     
-          if (fileName === fileElem.querySelector('.name').textContent) {
+          if (fileElem !== fileEl
+              && (fileName === fileElem.querySelector('.name').textContent)) {
             
             // split extension from file name
             fileName = splitFileName(fileName);
