@@ -421,177 +421,187 @@ sidebarTitle.addEventListener('click', () => {
 
 // create new file on click of button
 addButton.addEventListener('click', () => {
-
-  // clear existing selections
-  if (fileWrapper.querySelector('.selected')) {
-    fileWrapper.querySelector('.selected').classList.remove('selected');
-  }
-
-  // create new file
-  const fileEl = document.createElement('div');
-  fileEl.classList = 'item file selected focused hidden';
-
-  fileEl.innerHTML = `
-  <div class="label">
-    `+ fileIcon +`
-    <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
-  </div>
-  <div class="push-wrapper">
-    `+ pushIcon +`
-  </div>
-  `;
-
-  // add new file to DOM
-  fileWrapper.prepend(fileEl);
   
+  // if not already adding a new file
+  if (!fileWrapper.querySelector('.focused')) {
   
-  // add push button event listener
-  const pushWrapper = fileEl.querySelector('.push-wrapper');
-  
-  fileEl.querySelector('.name').addEventListener('keyup', (e) => {
-    
-    if (e.key === 'Enter') {
-      
-      e.preventDefault();
-      pushNewFileInHTML();
-      
+    // clear existing selections
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
     }
-    
-  });
-  
-  let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
-  
-  
-  // animate file
-  onNextFrame(() => {
 
-    fileEl.classList.remove('hidden');
-    fileEl.querySelector('.name').focus();
+    // create new file
+    const fileEl = document.createElement('div');
+    fileEl.classList = 'item file selected focused hidden';
 
-  });
-  
-  
-  async function pushNewFileInHTML() {
-    
-    if (fileEl.classList.contains('focused')) {
+    fileEl.innerHTML = `
+    <div class="label">
+      `+ fileIcon +`
+      <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
+    </div>
+    <div class="push-wrapper">
+      `+ pushIcon +`
+    </div>
+    `;
 
-      // play push animation
-      playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-      // disable pushing file from HTML
-      fileEl.classList.remove('focused');
-
-      // make file name uneditable
-      fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
-
-      window.setTimeout(() => {
-
-        // show file content in codeit
-        cd.textContent = '\n';
-
-        // change codeit lang
-        cd.lang = selectedFile.lang;
-
-        // set caret pos in codeit
-        cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-
-        // set scroll pos in codeit
-        cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
-
-        // clear codeit history
-        cd.history = [];
-
-        // update line numbers
-        updateLineNumbersHTML();
-
-        // if on mobile device
-        if (isMobile) {
-
-          // update bottom float
-          updateFloat();
-
-        } else { // if on desktop
-
-          // check codeit scrollbar
-          checkScrollbarArrow();
-
-        }
-
-      }, (2 - 0.18) * 1000);
+    // add new file to DOM
+    fileWrapper.prepend(fileEl);
 
 
-      // push new file
+    // add push button event listener
+    const pushWrapper = fileEl.querySelector('.push-wrapper');
 
-      const fileName = fileEl.innerText.replaceAll('\n', '');
+    fileEl.querySelector('.name').addEventListener('keyup', (e) => {
 
-      // create commit
-      const commitMessage = 'Create ' + fileName;
-      let str = ''; let num = Math.floor(Math.random(100)*100); for(let i=0;i<num;i++){str+='\r'}; console.log(str,num);
-      
-      const commitFile = {
-        name: fileName,
-        dir: treeLoc.join(),
-        content: encodeUnicode(str)
-      };
+      if (e.key === 'Enter') {
 
-      let commit = {
-        message: commitMessage,
-        file: commitFile
-      };
+        e.preventDefault();
+        pushNewFileInHTML();
 
-      // push file asynchronously
-      const newSha = await git.push(commit);
+      }
 
-      // update file sha in HTML with new sha from Git
-      setAttr(fileEl, 'sha', newSha);
+    });
 
-      // change selected file
-      changeSelectedFile(treeLoc.join(), newSha, fileName, '\n', getFileLang(fileName),
-                         [0, 0], [0, 0], true);
-
-      // Git file is eclipsed (not updated) in browser private cache,
-      // so store the updated file in modifiedFiles object for 1 minute after commit
-      onFileEclipsedInCache(false, newSha, selectedFile);
+    let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
 
 
-      // remove push listener
-      pushWrapper.removeEventListener('click', pushListener);
+    // animate file
+    onNextFrame(() => {
 
-      // add file event listener
-      fileEl.addEventListener('click', (e) => {
+      fileEl.classList.remove('hidden');
+      fileEl.querySelector('.name').focus();
 
-        // if not clicked on push button
-        let pushWrapper = fileEl.querySelector('.push-wrapper');
-        let clickedOnPush = (e.target == pushWrapper);
+    });
 
-        if (!clickedOnPush) {
 
-          // if file not already selected
-          if (!fileEl.classList.contains('selected')) {
+    async function pushNewFileInHTML() {
 
-            // load file
-            loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+      if (fileEl.classList.contains('focused')) {
 
-          } else if (isMobile) { // if on mobile device
+        // play push animation
+        playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+        // disable pushing file from HTML
+        fileEl.classList.remove('focused');
+
+        // make file name uneditable
+        fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+
+        window.setTimeout(() => {
+
+          // show file content in codeit
+          cd.textContent = '\n';
+
+          // change codeit lang
+          cd.lang = selectedFile.lang;
+
+          // set caret pos in codeit
+          cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+
+          // set scroll pos in codeit
+          cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
+
+          // clear codeit history
+          cd.history = [];
+
+          // update line numbers
+          updateLineNumbersHTML();
+
+          // if on mobile device
+          if (isMobile) {
 
             // update bottom float
             updateFloat();
 
+          } else { // if on desktop
+
+            // check codeit scrollbar
+            checkScrollbarArrow();
+
           }
 
-        } else {
+        }, (2 - 0.18) * 1000);
 
-          // play push animation
-          playPushAnimation(fileEl.querySelector('.push-wrapper'));
 
-          // push file
-          pushFileFromHTML(fileEl);
+        // push new file
 
-        }
-      
-      });
-      
+        const fileName = fileEl.innerText.replaceAll('\n', '');
+
+        // create commit
+        const commitMessage = 'Create ' + fileName;
+        let str = ''; let num = Math.floor(Math.random(100)*100); for(let i=0;i<num;i++){str+='\r'}; console.log(str,num);
+
+        const commitFile = {
+          name: fileName,
+          dir: treeLoc.join(),
+          content: encodeUnicode(str)
+        };
+
+        let commit = {
+          message: commitMessage,
+          file: commitFile
+        };
+
+        // push file asynchronously
+        const newSha = await git.push(commit);
+
+        // update file sha in HTML with new sha from Git
+        setAttr(fileEl, 'sha', newSha);
+
+        // change selected file
+        changeSelectedFile(treeLoc.join(), newSha, fileName, '\n', getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+
+        // Git file is eclipsed (not updated) in browser private cache,
+        // so store the updated file in modifiedFiles object for 1 minute after commit
+        onFileEclipsedInCache(false, newSha, selectedFile);
+
+
+        // remove push listener
+        pushWrapper.removeEventListener('click', pushListener);
+
+        // add file event listener
+        fileEl.addEventListener('click', (e) => {
+
+          // if not clicked on push button
+          let pushWrapper = fileEl.querySelector('.push-wrapper');
+          let clickedOnPush = (e.target == pushWrapper);
+
+          if (!clickedOnPush) {
+
+            // if file not already selected
+            if (!fileEl.classList.contains('selected')) {
+
+              // load file
+              loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+
+            } else if (isMobile) { // if on mobile device
+
+              // update bottom float
+              updateFloat();
+
+            }
+
+          } else {
+
+            // play push animation
+            playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+            // push file
+            pushFileFromHTML(fileEl);
+
+          }
+
+        });
+
+      }
+
     }
+    
+  } else {
+    
+    // if already adding a new file, focus it
+    fileWrapper.querySelector('.item.focused .name').focus();
     
   }
   
