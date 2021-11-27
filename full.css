@@ -276,8 +276,7 @@ body.mobile .live-view {
   border-radius: 50%;
   background: #e06c75;
   background: hsl(240deg 87% 55%);
-  animation: live-pulse 1s var(--cubic-function) infinite,
-             show-loader 1.2s var(--ease-function) forwards;
+  animation: live-pulse 1s var(--cubic-function) infinite;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
   transition: .4s var(--cubic-function) opacity;
   z-index: 1;
