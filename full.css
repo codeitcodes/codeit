@@ -233,6 +233,7 @@ body:not(.mobile) .live-view {
 }
 
 body.mobile .live-view {
+  top: 32px;
   transform: translateY(calc(100% - 45px - 56px));
   transition: .4s var(--cubic-function) transform,
               .4s .18s var(--ease-function) opacity;
