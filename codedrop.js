@@ -20,12 +20,12 @@ function getFileLang(src) {
 
 }
 
-function removeFileExtension(src) {
+function splitFileName(src) {
   
   src = src.replaceAll('\n', '');
 
   const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
-  return src.replace(('.' + extension), '');
+  return [src.replace(('.' + extension), ''), '.' + extension];
   
 }
 
