@@ -69,7 +69,8 @@ body cd-el {
   display: none;
   align-items: center;
   justify-content: center;
-  transition: .4s var(--cubic-function) transform;
+  transition: .4s var(--cubic-function);
+  transition-property: transform, height;
   will-change: transform;
   z-index: 1000;
 }
@@ -84,7 +85,8 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded {
   height: calc(100vh - env(safe-area-inset-bottom));
-  transition: .4s .18s var(--cubic-function) transform;
+  transition: .4s .18s var(--cubic-function);
+  transition-property: transform, height;
 }
 
 .bottom-float {
