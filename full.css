@@ -82,9 +82,14 @@ body.notransition .bottom-wrapper {
   transform: translateY(calc(100% + env(safe-area-inset-bottom)));
 }
 
+.bottom-wrapper.expanded {
+  height: calc(100vh - env(safe-area-inset-bottom));
+  transition: .4s .18s var(--cubic-function) transform;
+}
+
 .bottom-float {
   position: relative;
-  bottom: 45px;
+  margin: 45px 0;
   width: calc(100vw - 45px - env(safe-area-inset-left));
   max-width: 600px;
   display: flex;
@@ -166,7 +171,6 @@ body.notransition .bottom-wrapper {
   bottom: env(safe-area-inset-bottom, 0px);
   background: #1a1c24;
   color: #d4d5d7;
-  transition: .4s var(--cubic-function) transform;
   box-shadow: inset 1px 0 0 0 #ffffff3d;
   padding-right: 1px;
   pointer-events: none;
@@ -177,15 +181,27 @@ body.notransition .bottom-wrapper {
 
 body:not(.mobile) .live-view {
   transform: translateX(100%);
+  transition: .4s var(--cubic-function) transform;
 }
 
 body.mobile .live-view {
+  opacity: 0;
   transform: translateY(calc(100% - 146px));
+  transition: .4s var(--cubic-function) transform,
+              .4s .18s var(--ease-function) opacity;
 }
 
-.live-view.visible, .bottom-wrapper.expanded + .live-view {
+.live-view.visible {
   transform: none;
   pointer-events: auto;
+}
+
+.bottom-wrapper.expanded + .live-view {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: .4s .18s var(--cubic-function) transform,
+              .18s var(--ease-function) opacity;
 }
 
 .live-view::before {
@@ -887,6 +903,10 @@ body.notransition .sidebar {
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
   will-change: transform;
+}
+
+.bottom-wrapper.expanded ~ .sidebar-background {
+  opacity: 1;
 }
 
 .splash-wrapper {
