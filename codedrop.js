@@ -20,7 +20,7 @@ function getFileLang(src) {
 
 }
 
-function getFileName(src) {
+function removeFileExtension(src) {
   
   src = src.replaceAll('\n', '');
 
