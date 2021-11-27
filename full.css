@@ -416,7 +416,7 @@ body.expanded .sidebar-toggle svg .left {
   height: 100%;
   background: #1a1c24;
   color: #d4d5d7;
-  transition: .4s var(--cubic-function);
+  transition: .4s var(--cubic-function) transform;
   width: calc(var(--sidebar-width) + 1px);
   transform: translateX(-100%);
   overflow-x: hidden;
