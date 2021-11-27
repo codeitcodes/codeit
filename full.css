@@ -68,6 +68,7 @@ body cd-el {
   height: calc(45px + 56px + 45px);
   display: none;
   justify-content: center;
+  transition: .4s var(--cubic-function) transform;
   will-change: transform;
   z-index: 1000;
 }
