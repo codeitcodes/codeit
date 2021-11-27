@@ -156,12 +156,24 @@ function toggleLiveView(file) {
   if (liveViewToggle) {
     
     if (file.lang == 'html') {
-    
+      
+      window.setTimeout(() => {
+        
+        if (!liveView.classList.contains('loaded')) {
+          
+          liveView.classList.add('loading');
+          
+        }
+        
+      }, 1200);
+      
       renderLiveViewHTML(file);
     
     }
     
   } else {
+    
+    liveView.classList.remove('loading');
     
     if (isMobile) {
       
