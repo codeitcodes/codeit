@@ -32,7 +32,7 @@ function updateFloat() {
 sidebarOpen.addEventListener('click', () => {
   
   // if bottom float isn't expanded
-  if (!liveViewToggle) {
+  if (liveView.children.length == 0) {
     
     toggleSidebar(true);
     saveSidebarStateLS();
