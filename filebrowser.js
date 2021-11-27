@@ -529,18 +529,46 @@ addButton.addEventListener('click', () => {
         }, fileOpenTimeout);
 
 
+        
         // push new file
-
-        const fileName = fileEl.innerText.replaceAll('\n', '');
-
+        
+        
+        // validate file name
+        
+        // get file name
+        let fileName = fileEl.innerText.replaceAll('\n', '');
+        
+        // replace all spaces in name with dashes
+        fileName = fileName.replaceAll(' ', '-');
+        
+        // if another file in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.forEach(file => {
+                    
+          if (fileName === file.innerText) {
+            
+            // split extension from file name
+            fileName = splitFileName(fileName);
+            
+            // add a differentiating number
+            // and reconstruct file name
+            fileName = fileName[0] + '-1' + fileName[1];
+            
+          }
+          
+        });
+        
+        fileEl.innerText = fileName;
+        
+        
         // create commit
         const commitMessage = 'Create ' + fileName;
         
         // pad file with random number of invisible chars
         // to prevent an empty file and fix git sha generation
         let fileContent = '';
-        const numOfChars = Math.floor(Math.random() * 50) + 1;
-        fileContent.padStart(numOfChars, '\r');
+        const numOfChars = Math.floor(Math.random() * 3) + 1;
+        fileContent.padStart(numOfChars, '\n');
         
         const commitFile = {
           name: fileName,
@@ -560,7 +588,7 @@ addButton.addEventListener('click', () => {
         setAttr(fileEl, 'sha', newSha);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, '\n', getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSha, fileName, fileContent, getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
         // Git file is eclipsed (not updated) in browser private cache,
