@@ -962,10 +962,11 @@ body.notransition .sidebar {
   opacity: 0;
   width: 100%;
   height: 100%;
+  display: none;
   background: #090e1152;
   pointer-events: none;
   transform: translateX(0);
-  transition: .4s var(--cubic-function);
+  transition: .4s var(--cubic-function) transform;
   will-change: transform;
 }
 
@@ -1251,6 +1252,10 @@ body.mobile.expanded .bookmark {
 
 body.mobile .sidebar {
   -webkit-overflow-scrolling: touch;
+}
+
+body.mobile .sidebar-background {
+  display: block;
 }
 
 body.mobile.expanded .sidebar-background {
