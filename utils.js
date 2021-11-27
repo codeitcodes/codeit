@@ -3,7 +3,9 @@ const body = document.body,
 
       cd = document.querySelector('cd-el'),
 
-      bottomFloat = document.querySelector('.bottom-float'),
+      bottomWrapper = document.querySelector('.bottom-wrapper'),
+      
+      bottomFloat = bottomWrapper.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
