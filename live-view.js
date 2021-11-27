@@ -163,13 +163,24 @@ function toggleLiveView(file) {
     
   } else {
     
+    if (isMobile) {
+      
+      // show loader
+      liveView.classList.remove('loaded');
+      
+    }
+    
     liveViewTimeout = window.setTimeout(() => {
       
       // clear live view
       liveView.innerHTML = '';
       
-      // show loader
-      liveView.classList.remove('loaded');
+      if (!isMobile) {
+        
+        // show loader
+        liveView.classList.remove('loaded');
+        
+      }
       
     }, 400);
     
