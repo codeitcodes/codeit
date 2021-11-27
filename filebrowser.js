@@ -446,6 +446,10 @@ addButton.addEventListener('click', () => {
 
     // add new file to DOM
     fileWrapper.prepend(fileEl);
+          
+    // focus file
+    fileEl.querySelector('.name').focus();
+    fileEl.scrollIntoViewIfNeeded();
 
 
     // add push button event listener
@@ -470,10 +474,6 @@ addButton.addEventListener('click', () => {
       
       // animate file
       fileEl.classList.remove('hidden');
-      
-      // focus file
-      fileEl.querySelector('.name').focus();
-      fileEl.scrollIntoViewIfNeeded();
 
     });
 
