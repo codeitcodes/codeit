@@ -492,49 +492,11 @@ addButton.addEventListener('click', () => {
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
 
         
-        // if on mobile, wait until push animation
-        // has finished playing before opening the file
-        
-        const fileOpenTimeout = isMobile ? (2 - 0.18) * 1000 : 0;
-        
-        window.setTimeout(() => {
-
-          // show file content in codeit
-          cd.textContent = '\n';
-
-          // change codeit lang
-          cd.lang = selectedFile.lang;
-
-          // set caret pos in codeit
-          cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-
-          // set scroll pos in codeit
-          cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
-
-          // clear codeit history
-          cd.history = [];
-
-          // update line numbers
-          updateLineNumbersHTML();
-
-          // if on mobile device
-          if (isMobile) {
-
-            // update bottom float
-            updateFloat();
-
-          } else { // if on desktop
-
-            // check codeit scrollbar
-            checkScrollbarArrow();
-
-          }
-
-        }, fileOpenTimeout);
-
-
-        
-        // push new file
+        // pad file name with random number of invisible chars
+        // to prevent an empty file and fix git sha generation
+        let fileContent = '';
+        const numOfChars = Math.floor(Math.random() * 50) + 1;
+        fileContent.padStart(numOfChars, ' ');
         
         
         // validate file name
@@ -566,14 +528,38 @@ addButton.addEventListener('click', () => {
         fileEl.querySelector('.name').textContent = fileName;
         
         
+        // change selected file
+        changeSelectedFile(treeLoc.join(), fileContent, fileName, fileContent, getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+        
+        
+        // if on desktop, open file
+        
+        if (!isMobile) {
+
+          // show file content in codeit
+          cd.textContent = fileContent;
+
+          // change codeit lang
+          cd.lang = getFileLang(fileName);
+
+          // set caret pos in codeit
+          cd.setSelection(0, 0);
+
+          // clear codeit history
+          cd.history = [];
+
+          // update line numbers
+          updateLineNumbersHTML();
+
+          // check codeit scrollbar
+          checkScrollbarArrow();
+
+        }
+
+        
         // create commit
         const commitMessage = 'Create ' + fileName;
-        
-        // pad file with random number of invisible chars
-        // to prevent an empty file and fix git sha generation
-        let fileContent = '';
-        const numOfChars = Math.floor(Math.random() * 3) + 1;
-        fileContent.padStart(numOfChars, '\n');
         
         const commitFile = {
           name: fileName,
@@ -598,7 +584,15 @@ addButton.addEventListener('click', () => {
 
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
-        onFileEclipsedInCache(false, newSha, selectedFile);
+        if (modifiedFiles[fileContent]) {
+          
+          onFileEclipsedInCache(fileContent, newSha, selectedFile);
+          
+        } else {
+          
+          onFileEclipsedInCache(false, newSha, selectedFile);
+          
+        }
 
 
         // remove push listener
