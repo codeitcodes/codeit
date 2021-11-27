@@ -73,12 +73,12 @@ body cd-el {
   z-index: 1000;
 }
 
-.bottom-wrapper.hidden {
-  transform: translateY(calc(45px + 56px + 45px + env(safe-area-inset-bottom)));
-}
-
 body.transitioning .bottom-wrapper {
   transition: none;
+}
+
+.bottom-wrapper.hidden {
+  transform: translateY(calc(45px + 56px + 45px + env(safe-area-inset-bottom)));
 }
 
 .bottom-float {
