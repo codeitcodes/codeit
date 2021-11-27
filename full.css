@@ -268,7 +268,6 @@ body.mobile .live-view {
   position: fixed;
   left: 50%;
   top: 50%;
-  opacity: 0;
   transform: translate(-50%, -50%);
   width: var(--spacing-7);
   height: var(--spacing-7);
@@ -282,8 +281,7 @@ body.mobile .live-view {
 }
 
 .live-view.loaded::before,
-.live-view.loaded::after,
-.live-view:not(.visible)::after {
+.live-view.loaded::after {
   opacity: 0;
   pointer-events: none;
 }
