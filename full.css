@@ -77,6 +77,10 @@ body cd-el {
   transform: translateY(calc(45px + 56px + 45px + env(safe-area-inset-bottom)));
 }
 
+body.transitioning .bottom-wrapper {
+  transition: none;
+}
+
 .bottom-float {
   position: relative;
   bottom: 45px;
