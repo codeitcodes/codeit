@@ -60,7 +60,7 @@ body cd-el {
   padding-bottom: 50px;
 }
 
-.bottom-float-wrapper {
+.bottom-wrapper {
   position: fixed;
   bottom: env(safe-area-inset-bottom);
   left: 0;
@@ -72,7 +72,7 @@ body cd-el {
   z-index: 1000;
 }
 
-.bottom-float-wrapper.hidden {
+.bottom-wrapper.hidden {
   transform: translateY(calc(45px + 56px + 45px + env(safe-area-inset-bottom)));
 }
 
@@ -1239,11 +1239,11 @@ body.mobile cd-el {
   -webkit-overflow-scrolling: touch;
 }
 
-body.mobile .bottom-float-wrapper {
+body.mobile .bottom-wrapper {
   display: flex;
 }
 
-body.mobile.expanded .bottom-float-wrapper {
+body.mobile.expanded .bottom-wrapper {
   transform: translateX(calc(50% + 45px));
 }
 
