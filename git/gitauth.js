@@ -25,10 +25,17 @@ window.onload = () => {
     sidebar.classList.remove('intro');
     
     // if on safari, refresh header color
-    document.querySelector('meta[name="theme-color"]').content = '#313744';
-    onNextFrame(() => {
-      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-    });
+    if (isSafari) {
+      
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+      
+      onNextFrame(() => {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+        
+      });
+      
+    }
 
     // start loading
     startLoading();
