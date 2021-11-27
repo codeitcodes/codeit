@@ -966,7 +966,8 @@ body.notransition .sidebar {
   background: #090e1152;
   pointer-events: none;
   transform: translateX(0);
-  transition: .4s var(--cubic-function) transform;
+  transition: .4s var(--cubic-function);
+  transition-property: transform, opacity;
   will-change: transform;
 }
 
