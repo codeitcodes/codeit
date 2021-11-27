@@ -159,7 +159,7 @@ function toggleLiveView(file) {
       
       window.setTimeout(() => {
         
-        if (!liveView.classList.contains('loaded')) {
+        if (liveViewToggle && !liveView.classList.contains('loaded')) {
           
           liveView.classList.add('loading');
           
