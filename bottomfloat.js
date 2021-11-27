@@ -30,17 +30,22 @@ function updateFloat() {
 
 // open sidebar when clicked on button
 sidebarOpen.addEventListener('click', () => {
+  
+  // if bottom float isn't expanded
+  if (!bottomWrapper.classList.contains('expanded')) {
+    
+    toggleSidebar(true);
+    saveSidebarStateLS();
 
-  toggleSidebar(true);
-  saveSidebarStateLS();
+    let selectedEl = fileWrapper.querySelector('.item.selected');
 
-  let selectedEl = fileWrapper.querySelector('.item.selected');
+    if (selectedEl) {
 
-  if (selectedEl) {
+      // scroll to selected file
+      selectedEl.scrollIntoViewIfNeeded();
 
-    // scroll to selected file
-    selectedEl.scrollIntoViewIfNeeded();
-
+    }
+    
   }
 
 })
