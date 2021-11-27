@@ -46,6 +46,8 @@ function addBottomSwipeListener() {
       // retract bottom float
       bottomWrapper.classList.remove('expanded');
       
+      toggleLiveView(selectedFile);
+      
     }
 
     yOffset = 0;
@@ -89,6 +91,8 @@ function addBottomSwipeListener() {
           // expand bottom float
           bottomWrapper.classList.add('expanded');
           
+          toggleLiveView(selectedFile);
+          
         }
         
       } else if (direction == 'down') {
@@ -98,6 +102,8 @@ function addBottomSwipeListener() {
           
           // retract bottom float
           bottomWrapper.classList.remove('expanded');
+          
+          toggleLiveView(selectedFile);
           
         }
         
@@ -128,6 +134,7 @@ function handleMetaP(e) {
 
     e.preventDefault();
     
+    liveView.classList.toggle('visible');
     toggleLiveView(selectedFile);
     
   }
@@ -135,17 +142,18 @@ function handleMetaP(e) {
 }
 
 
+let liveViewToggle;
 let liveViewTimeout;
 
 // toggle live view for file
 function toggleLiveView(file) {
   
-  liveView.classList.toggle('visible');
+  liveViewToggle = !liveViewToggle;
   
   window.clearTimeout(liveViewTimeout);
   
   // if live view is visible
-  if (liveView.classList.contains('visible')) {
+  if (liveViewToggle) {
     
     if (file.lang == 'html') {
     
