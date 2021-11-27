@@ -36,12 +36,14 @@ function addBottomSwipeListener() {
     
   }
 
-  function dragEnd() {
+  function dragEnd(e) {
     
     initialY = currentY;
     
     // if clicked and bottom float is expanded
     if (click && bottomWrapper.classList.contains('expanded')) {
+      
+      e.stopPropagation();
       
       // retract bottom float
       bottomWrapper.classList.remove('expanded');
