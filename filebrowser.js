@@ -540,7 +540,7 @@ addButton.addEventListener('click', () => {
         // validate file name
         
         // get file name
-        let fileName = fileEl.innerText.replaceAll('\n', '');
+        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
         
         // replace all spaces in name with dashes
         fileName = fileName.replaceAll(' ', '-');
@@ -562,7 +562,7 @@ addButton.addEventListener('click', () => {
           
         });
         
-        fileEl.innerText = fileName;
+        fileEl.querySelector('.name').textContent = fileName;
         
         
         // create commit
