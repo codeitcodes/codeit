@@ -281,7 +281,7 @@ body.mobile .live-view {
   z-index: 1;
 }
 
-.live-view.loading::after {
+.live-view:not(.loaded).loading::after {
   opacity: 1;
 }
 
