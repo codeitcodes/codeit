@@ -67,6 +67,7 @@ body cd-el {
   right: 0;
   height: calc(45px + 56px + 45px);
   display: none;
+  align-items: end;
   justify-content: center;
   transition: .4s var(--cubic-function) transform;
   will-change: transform;
