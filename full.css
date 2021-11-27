@@ -72,7 +72,7 @@ body cd-el {
   transition: .4s var(--cubic-function);
   transition-property: transform, height;
   will-change: transform;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 body.notransition .bottom-wrapper {
@@ -224,16 +224,17 @@ body.notransition .bottom-wrapper {
   pointer-events: none;
   box-sizing: border-box;
   will-change: transform;
+  opacity: 0;
   z-index: 1000;
 }
 
 body:not(.mobile) .live-view {
+  opacity: 1;
   transform: translateX(100%);
   transition: .4s var(--cubic-function) transform;
 }
 
 body.mobile .live-view {
-  opacity: 0;
   transform: translateY(calc(100% - 45px - 56px));
   transition: .4s var(--cubic-function) transform,
               .4s .18s var(--ease-function) opacity;
