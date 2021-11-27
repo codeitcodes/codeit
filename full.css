@@ -86,7 +86,7 @@ body.notransition .bottom-wrapper {
 .bottom-wrapper.expanded {
   height: calc(100vh - env(safe-area-inset-bottom));
   transition: .4s .18s var(--cubic-function);
-  transition-property: transform, height;
+  transition-property: height;
 }
 
 .bottom-float {
