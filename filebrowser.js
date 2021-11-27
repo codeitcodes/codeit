@@ -487,6 +487,12 @@ addButton.addEventListener('click', () => {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
 
+        
+        // if on mobile, wait until push animation
+        // has finished playing before opening the file
+        
+        const fileOpenTimeout = isMobile ? (2 - 0.18) * 1000 : 0;
+        
         window.setTimeout(() => {
 
           // show file content in codeit
@@ -520,7 +526,7 @@ addButton.addEventListener('click', () => {
 
           }
 
-        }, (2 - 0.18) * 1000);
+        }, fileOpenTimeout);
 
 
         // push new file
@@ -529,12 +535,17 @@ addButton.addEventListener('click', () => {
 
         // create commit
         const commitMessage = 'Create ' + fileName;
-        let str = ''; let num = Math.floor(Math.random(100)*100); for(let i=0;i<num;i++){str+='\r'}; console.log(str,num);
-
+        
+        // pad file with random number of invisible chars
+        // to prevent an empty file and fix git sha generation
+        let fileContent = '';
+        const numOfChars = Math.floor(Math.random() * 50) + 1;
+        fileContent.padStart(numOfChars, '\r');
+        
         const commitFile = {
           name: fileName,
           dir: treeLoc.join(),
-          content: encodeUnicode(str)
+          content: encodeUnicode(fileContent)
         };
 
         let commit = {
