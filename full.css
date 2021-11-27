@@ -79,7 +79,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.hidden {
-  transform: translateY(calc(45px + 56px + 45px + env(safe-area-inset-bottom)));
+  transform: translateY(calc(100% + env(safe-area-inset-bottom)));
 }
 
 .bottom-float {
