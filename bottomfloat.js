@@ -8,7 +8,7 @@ function updateFloat() {
   saveSidebarStateLS();
 
   // show bottom floater
-  bottomFloat.classList.remove('hidden');
+  bottomWrapper.classList.remove('hidden');
 
   // if selected file is modified, show flag
   if (modifiedFiles[selectedFile.sha] &&
@@ -99,13 +99,13 @@ if (isMobile) {
     if (st > lastScrollTop) {
 
       // hide bottom float
-      bottomFloat.classList.add('hidden');
+      bottomWrapper.classList.add('hidden');
 
       // if scrolled to bottom of codeit
       if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
         // show bottom float
-        bottomFloat.classList.remove('hidden');
+        bottomWrapper.classList.remove('hidden');
 
       }
 
@@ -115,7 +115,7 @@ if (isMobile) {
       if ((lastScrollTop - st) > 20) {
 
         // show bottom float
-        bottomFloat.classList.remove('hidden');
+        bottomWrapper.classList.remove('hidden');
 
       }
 
