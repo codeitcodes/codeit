@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://rsms.me/inter/inter.css');
 
 html, body {
   background: #313744;
@@ -8,6 +8,12 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: 'Inter', system-ui, sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  html, body {
+    font-family: 'Inter var', 'Inter', system-ui, sans-serif;
+  }
 }
 
 .focus::before {
