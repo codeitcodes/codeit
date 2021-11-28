@@ -90,7 +90,11 @@ body.notransition .bottom-wrapper {
 }
 
 body.safari .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 81px + env(safe-area-inset-bottom)));
+  transform: translateY(calc(-100vh + 100% + 81px + env(safe-area-inset-bottom)));
+}
+
+body.safari .bottom-wrapper.expanded {
+  transform: translateY(calc(-100vh + 100% + 81px + env(safe-area-inset-bottom)));
 }
 
 .bottom-float {
