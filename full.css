@@ -89,6 +89,10 @@ body.notransition .bottom-wrapper {
   height: 33px;
 }
 
+body.safari .bottom-wrapper.expanded {
+  transform: translateY(calc(-100vh + 81px + env(safe-area-inset-bottom)));
+}
+
 .bottom-float {
   position: relative;
   margin: 45px 0;
@@ -196,8 +200,8 @@ body.notransition .bottom-wrapper {
 .bottom-wrapper.expanded .bottom-float .push-wrapper {
   width: 0;
   padding: 0;
-  border: 0;
   opacity: 0;
+  margin-right: -1px;
 }
 
 .bottom-float .push-wrapper:not(.checked):active {
@@ -214,8 +218,9 @@ body.notransition .bottom-wrapper {
   position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   left: -1px;
-  bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
   color: #d4d5d7;
   box-shadow: inset 1px 0 0 0 #ffffff3d;
