@@ -109,6 +109,8 @@ function load() {
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
 const isSafari = isMobile && navigator.userAgent.toLowerCase().indexOf('safari') != -1;
 
+const isSafariApp = isSafari && navigator.standalone;
+
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isWindows = navigator.platform.indexOf('Win') > -1;
 
@@ -126,6 +128,12 @@ if (isSafari) {
 
   body.classList.add('safari');
 
+}
+
+if (isSafariApp) {
+  
+  body.classList.add('safari-app');
+  
 }
 
 if (isMac) {
