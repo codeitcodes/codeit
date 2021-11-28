@@ -155,6 +155,10 @@ function toggleLiveView(file) {
   // if live view is visible
   if (liveViewToggle) {
     
+    if (isMobile) {
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+    }
+    
     if (file.lang == 'html') {
       
       window.setTimeout(() => {
@@ -179,6 +183,8 @@ function toggleLiveView(file) {
       
       // show loader
       liveView.classList.remove('loaded');
+      
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
       
     }
     
