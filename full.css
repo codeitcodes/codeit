@@ -171,8 +171,6 @@ body.safari.safari-app .bottom-wrapper.expanded {
   margin-left: calc(50vw - 16px);
   transform: translateX(-50%);
   font-weight: 400;
-  transition: .4s var(--cubic-function),
-              0s font-weight;
 }
 
 .bottom-float .badge {
