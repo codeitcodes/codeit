@@ -93,6 +93,10 @@ body.safari .bottom-wrapper.expanded {
   transform: translateY(calc(-100vh + 100% + 81px + env(safe-area-inset-bottom)));
 }
 
+body.safari:not(.safari-app) .bottom-wrapper.expanded {
+  transition-property: transform, background;
+}
+
 body.safari.safari-app .bottom-wrapper.expanded {
   transform: translateY(calc(-100vh + 81px + env(safe-area-inset-bottom)));
 }
