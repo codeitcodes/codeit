@@ -84,7 +84,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 100%));
+  transform: translateY(calc(-100vh + 100% + env(safe-area-inset-bottom)));
   background: #1a1c24;
   height: 33px;
 }
