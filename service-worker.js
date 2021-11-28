@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v194';
+const CACHE_NAME = 'static-cache-v195';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -32,8 +32,8 @@ const FILES_TO_CACHE = [
   '/fonts/fonts.css',
   '/fonts/googlesansmono.woff2',
 
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-  'https://fonts.gstatic.com/s/inter/v3/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2',
+  'https://rsms.me/inter/inter.css',
+  'https://rsms.me/inter/font-files/Inter-Regular.woff2',
 
   'https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap',
   'https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW-AJi8SJQt.woff',
