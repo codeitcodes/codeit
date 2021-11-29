@@ -494,9 +494,7 @@ addButton.addEventListener('click', () => {
         
         // pad file name with random number of invisible chars
         // to prevent an empty file and fix git sha generation
-        let fileContent = '';
-        const numOfChars = Math.floor(Math.random() * 50) + 1;
-        fileContent.padStart(numOfChars, ' ');
+        const fileContent = 'DQo=\n';
         
         
         // validate file name
@@ -564,7 +562,7 @@ addButton.addEventListener('click', () => {
         const commitFile = {
           name: fileName,
           dir: treeLoc.join(),
-          content: encodeUnicode(fileContent)
+          content: fileContent
         };
 
         let commit = {
