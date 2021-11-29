@@ -521,8 +521,8 @@ addButton.addEventListener('click', () => {
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
 
         
-        // pad file name with random number of invisible chars
-        // to generate different file contents and fix git sha generation
+        // pad file content with random number of invisible chars
+        // to generate unique file content and fix git sha generation
         const randomNum = Math.floor(Math.random() * 100) + 1;
         const fileContent = '\r\n'.padEnd(randomNum, '\r');
         
@@ -557,7 +557,7 @@ addButton.addEventListener('click', () => {
         
         
         // change selected file
-        changeSelectedFile(treeLoc.join(), fileContent, fileName, fileContent, getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), fileContent, fileName, '\r\n', getFileLang(fileName),
                            [0, 0], [0, 0], true);
         
         
@@ -607,7 +607,7 @@ addButton.addEventListener('click', () => {
         setAttr(fileEl, 'sha', newSha);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, fileContent, getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSha, fileName, '\r\n', getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
         // Git file is eclipsed (not updated) in browser private cache,
