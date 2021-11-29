@@ -483,12 +483,13 @@ addButton.addEventListener('click', () => {
     // add push button event listener
     const pushWrapper = fileEl.querySelector('.push-wrapper');
 
-    fileEl.querySelector('.name').addEventListener('keyup', (e) => {
-
+    fileEl.querySelector('.name').addEventListener('keydown', (e) => {
+      
       if (e.key === 'Enter') {
 
         e.preventDefault();
-        pushNewFileInHTML();
+        
+        onNextFrame(pushNewFileInHTML);
 
       }
 
@@ -521,8 +522,9 @@ addButton.addEventListener('click', () => {
 
         
         // pad file name with random number of invisible chars
-        // to prevent an empty file and fix git sha generation
-        const fileContent = 'DQo=\n';
+        // to generate different file contents and fix git sha generation
+        const randomNum = Math.floor(Math.random() * 100) + 1;
+        const fileContent = '\r\n'.padEnd(randomNum, '\r');
         
         
         // validate file name
@@ -555,7 +557,7 @@ addButton.addEventListener('click', () => {
         
         
         // change selected file
-        changeSelectedFile(treeLoc.join(), '00000', fileName, decodeUnicode(fileContent), getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), fileContent, fileName, fileContent, getFileLang(fileName),
                            [0, 0], [0, 0], true);
         
         
@@ -590,7 +592,7 @@ addButton.addEventListener('click', () => {
         const commitFile = {
           name: fileName,
           dir: treeLoc.join(),
-          content: fileContent
+          content: encodeUnicode(fileContent)
         };
 
         let commit = {
@@ -605,7 +607,7 @@ addButton.addEventListener('click', () => {
         setAttr(fileEl, 'sha', newSha);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, decodeUnicode(fileContent), getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSha, fileName, fileContent, getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
         // Git file is eclipsed (not updated) in browser private cache,
