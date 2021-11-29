@@ -555,7 +555,7 @@ addButton.addEventListener('click', () => {
         
         
         // change selected file
-        changeSelectedFile(treeLoc.join(), fileContent, fileName, fileContent, getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), '00000', fileName, decodeUnicode(fileContent), getFileLang(fileName),
                            [0, 0], [0, 0], true);
         
         
@@ -605,7 +605,7 @@ addButton.addEventListener('click', () => {
         setAttr(fileEl, 'sha', newSha);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, fileContent, getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSha, fileName, decodeUnicode(fileContent), getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
         // Git file is eclipsed (not updated) in browser private cache,
