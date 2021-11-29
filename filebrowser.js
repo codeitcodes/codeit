@@ -37,6 +37,8 @@ async function renderSidebarHTML() {
 
   // get items in current tree from git
   const resp = await git.getItems(treeLoc);
+  
+  let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
 
   // save rendered HTML
   let out = '';
@@ -86,6 +88,10 @@ async function renderSidebarHTML() {
         if (item.type == 'file') {
 
           let file = getLatestVersion(item);
+          
+          if (modifiedFiles[file.sha]) {
+            delete modifiedFilesResp[file.sha];
+          }
 
           // add modified flag to file
           let modified = '';
@@ -117,9 +123,31 @@ async function renderSidebarHTML() {
           `;
 
         }
+        
+      });
+        
+
+      // render modified files
+      Object.values(modifiedFilesResp).forEach(item => {
+
+        // add modified flag to file
+        let modified = '';
+        if (!item.eclipsed) modified = ' modified';
+
+        out += `
+        <div class="item file`+ modified +`" sha="`+ item.sha +`">
+          <div class="label">
+            `+ fileIcon +`
+            <a class="name">`+ item.name +`</a>
+          </div>
+          <div class="push-wrapper">
+            `+ pushIcon +`
+          </div>
+        </div>
+        `;
 
       });
-
+      
     } else { // else, show all repositories
       
       // hide add button
