@@ -1,4 +1,25 @@
 
+// change pushing state
+function changePushingState(to) {
+  
+  if (to === true) {
+    
+    window.addEventListener('beforeunload', beforeUnloadListener, {capture: true});
+    
+  } else {
+    
+    window.removeEventListener('beforeunload', beforeUnloadListener, {capture: true});
+    
+  }
+  
+}
+
+const beforeUnloadListener = (event) => {
+  event.preventDefault();
+  return event.returnValue = 'Are you sure you want to exit?';
+};
+
+
 let git = {
   
   // get file
@@ -11,7 +32,7 @@ let git = {
     query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ fileName;
     
     // get the query
-    var resp = await axios.get(query, githubToken);
+    const resp = await axios.get(query, githubToken);
     
     return resp;
     
@@ -73,10 +94,16 @@ let git = {
       };
       
     }
-
+    
+    // change pushing state
+    changePushingState(true);
+    
     // commit file
-    var resp = await axios.put(query, githubToken, commitData);
-
+    const resp = await axios.put(query, githubToken, commitData);
+    
+    // change pushing state
+    changePushingState(false);
+    
     return resp.content.sha;
 
   },
