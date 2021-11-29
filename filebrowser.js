@@ -557,7 +557,7 @@ addButton.addEventListener('click', () => {
         
         
         // change selected file
-        changeSelectedFile(treeLoc.join(), fileContent, fileName, '\r\n', getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), fileContent, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
         
         
@@ -566,7 +566,7 @@ addButton.addEventListener('click', () => {
         if (!isMobile) {
 
           // show file content in codeit
-          cd.textContent = fileContent;
+          cd.textContent = '\r\n';
 
           // change codeit lang
           cd.lang = getFileLang(fileName);
@@ -607,7 +607,7 @@ addButton.addEventListener('click', () => {
         setAttr(fileEl, 'sha', newSha);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, '\r\n', getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSha, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
         // Git file is eclipsed (not updated) in browser private cache,
