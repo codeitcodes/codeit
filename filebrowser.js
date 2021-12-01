@@ -519,6 +519,7 @@ addButton.addEventListener('click', () => {
 
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+        fileEl.querySelector('.name').blur();
 
         
         // pad file content with random number of invisible chars
