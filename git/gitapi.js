@@ -15,8 +15,10 @@ function changePushingState(to) {
 }
 
 const beforeUnloadListener = (event) => {
+  
   event.preventDefault();
   return event.returnValue = 'Are you sure you want to exit?';
+  
 };
 
 
@@ -38,7 +40,6 @@ let git = {
     
   },
   
-  // get items
   // get items in tree
   'getItems': async (treeLoc) => {
     
@@ -65,16 +66,15 @@ let git = {
   },
   
   // push file
-  // function pushes file to git
   'push': async (commit) => {
     
-    const treeLoc = commit.file.dir.split(',');
+    // map file location in tree
+    const [user, repo, contents] = commit.file.dir.split(',');
     
-    let query = 'https://api.github.com/repos/' +
-                treeLoc[0] +
-                '/' + treeLoc[1] +
-                '/contents' + treeLoc[2] +
-                '/' + commit.file.name;
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo +
+                  '/contents' + contents +
+                  '/' + commit.file.name;
 
     let commitData;
     
@@ -98,7 +98,7 @@ let git = {
     // change pushing state
     changePushingState(true);
     
-    // commit file
+    // put the query
     const resp = await axios.put(query, githubToken, commitData);
     
     // change pushing state
@@ -108,10 +108,73 @@ let git = {
 
   },
 
-  // create repo (indev)
-  // function creates a new repository
-  createRepo: async (repo) => {
-
+  // create repository
+  createRepo: async (repoName) => {
+    
+    const query = 'https://api.github.com/user/repos';
+    
+    const repoData = {
+      name: repoName,
+      private: true,
+      has_wiki: false,
+      auto_init: true
+    };
+    
+    // post the query
+    const resp = await axios.post(query, githubToken, repoData);
+    
+    return resp.full_name;
+    
+  },
+  
+  // fork repository
+  createFork: async (treeLoc) => {
+    
+    // map tree location
+    const [user, repo] = treeLoc;
+    
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo + '/forks';
+    
+    // post the query
+    const resp = await axios.post(query, githubToken);
+    
+    return resp.full_name;
+    
+  },
+  
+  // invite user to repository
+  inviteUser: async (treeLoc, username) => {
+    
+    // map tree location
+    const [user, repo] = treeLoc;
+    
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo +
+                  '/collaborators/' + username;
+    
+    // put the query
+    const resp = await axios.put(query, githubToken);
+    
+    return resp.node_id;
+    
+  },
+  
+  // invite user to repository
+  getInvites: async (treeLoc, username) => {
+    
+    // map tree location
+    const [user, repo] = treeLoc;
+    
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo +
+                  '/collaborators/' + username;
+    
+    // put the query
+    const resp = await axios.put(query, githubToken);
+    
+    return resp.node_id;
+    
   }
 
 };
