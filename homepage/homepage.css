@@ -4869,7 +4869,6 @@ ctas .btn.installed::before {
   bottom: 0;
   background-image: url('/images/background-main.png');
   background-size: 610px;
-  will-change: transform;
 }
 
 #hero .hero-background::before {
