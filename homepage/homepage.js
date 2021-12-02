@@ -174,7 +174,10 @@ const featurePoints = document.querySelectorAll('#features .ftPoint');
 const startPointAnimation = screenHeight / 4;
 const pointStaggerInterval = 34 + (7 * 5);
 
-window.addEventListener('scroll', () => {
+
+window.addEventListener('scroll', checkScrollAnimations);
+
+function checkScrollAnimations() {
   
   // window scroll position
   const scrolled = window.scrollY || window.pageYOffset;
@@ -197,4 +200,4 @@ window.addEventListener('scroll', () => {
     
   });
   
-});
+}
