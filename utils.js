@@ -214,12 +214,7 @@ let onNextFrame = (callback) => {
 
 
 // share API
-let initShare = (title, text) => {
-  
-  const shareData = {
-    title: title,
-    text: text
-  };
+let initShare = (shareData) => {
   
   try {
 
