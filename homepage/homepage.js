@@ -172,8 +172,6 @@ const heroBackground = document.querySelector('#hero .hero-background');
 const featurePoints = document.querySelectorAll('#features .ftPoint');
 
 const startPointAnimation = screenHeight / 4;
-const pointStaggerInterval = 34 + (7 * 5) + (7 * 5);
-
 
 function checkScrollAnimations() {
   
@@ -188,7 +186,8 @@ function checkScrollAnimations() {
   // add staggered feature points animation
   featurePoints.forEach((point, index) => {
     
-    const pointAnimation = startPointAnimation + (pointStaggerInterval * index);
+    const pointStaggerInterval = (point.clientHeight * 2) + (7 * 5);
+    const pointAnimation = startPointAnimation + pointStaggerInterval;
     
     if (scrolled >= pointAnimation) {
       point.classList.add('visible');
