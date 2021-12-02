@@ -4672,6 +4672,7 @@ a:not(.btn):hover {
 
 #logoWrapper .logo {
   width: 64px;
+  height: 64px;
   border-radius: 22.5%;
   border: .5px solid rgba(255,255,255,.1);
 }
