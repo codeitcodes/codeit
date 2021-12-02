@@ -14,7 +14,7 @@ window.onload = () => {
 
   loginButton.addEventListener('click', () => {
 
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,write:org,user', 'Login with Github', 'height=575,width=575');
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,write:org', 'Login with Github', 'height=575,width=575');
 
   })
 
