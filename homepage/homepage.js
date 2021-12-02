@@ -166,14 +166,35 @@ checkPWA();
 
 // add scroll event listeners
 
+const screenHeight = window.innerHeight;
+
 const heroBackground = document.querySelector('#hero .hero-background');
+const featurePoints = document.querySelectorAll('#features .ftPoint');
+
+const startPointAnimation = screenHeight / 4;
+const pointStaggerInterval = 34 + (7 * 5);
 
 window.addEventListener('scroll', () => {
   
   // window scroll position
   const scrolled = window.scrollY || window.pageYOffset;
   
+  
   // add parallax on hero background
   heroBackground.style.top = + (scrolled * 0.2) + 'px';
+  
+  
+  // add staggered feature points animation
+  featurePoints.forEach((point, index) => {
+    
+    const pointAnimation = startPointAnimation + (pointStaggerInterval * index);
+    
+    if (scrolled >= pointAnimation) {
+      point.classList.add('visible');
+    } else {
+      point.classList.remove('visible');
+    }
+    
+  });
   
 });
