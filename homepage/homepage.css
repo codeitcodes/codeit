@@ -4803,8 +4803,15 @@ body {
 }
 
 #features .ftPoint {
-  margin-top: 34px;
   margin-top: var(--spacing-5);
+  opacity: 0;
+  transform: translateY(13px);
+  transition: .4s var(--cubic-function);
+}
+
+#features .ftPoint.visible {
+  transform: none;
+  opacity: 1;
 }
 
 #features .ftPoint .iconWrapper {
