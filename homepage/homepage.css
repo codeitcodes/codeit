@@ -4853,7 +4853,17 @@ body {
   font-weight: inherit;
 }
 
-#hero::before {
+#hero .hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/images/background-main.png');
+  background-size: 610px;
+}
+
+#hero .hero-background::before {
   content: '';
   left: 0;
   top: 0;
