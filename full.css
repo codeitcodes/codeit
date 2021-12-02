@@ -218,6 +218,40 @@ body.notransition .bottom-wrapper {
   left: 12px;
 }
 
+.live-buttons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(45px);
+  height: 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .18s var(--ease-function);
+  transition-property: opacity, transform;
+}
+
+.live-buttons .live-button {
+  color: #828689;
+  width: 48px;
+  height: 18px;
+  padding: 6px 0;
+}
+
+.live-buttons .live-button.close {
+  height: 20px;
+}
+
+.bottom-wrapper.expanded .live-buttons {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: .14s;
+  transform: none;
+}
+
 .live-view {
   position: fixed;
   top: 0;
