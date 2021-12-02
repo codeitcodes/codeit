@@ -36,17 +36,37 @@ function addBottomSwipeListener() {
     
   }
 
-  function dragEnd() {
+  function dragEnd(e) {
     
     initialY = currentY;
     
+    const clickedOnShare = (e.target ===
+                            bottomWrapper.querySelector('.live-button.share'));
+    
     // if clicked and bottom float is expanded
     if (click && bottomWrapper.classList.contains('expanded')) {
-            
-      // retract bottom float
-      bottomWrapper.classList.remove('expanded');
       
-      toggleLiveView(selectedFile);
+      // if did not click on share button
+      if (!clickedOnShare) {
+        
+        // retract bottom float
+        bottomWrapper.classList.remove('expanded');
+
+        toggleLiveView(selectedFile);
+        
+      } else {
+        
+        // if clicked on share button,
+        // share live view URL
+        
+        const shareData = {
+          title: 'Share live view',
+          content: window.location.origin
+        }
+        
+        initShare(shareData);
+        
+      }
       
     }
 
