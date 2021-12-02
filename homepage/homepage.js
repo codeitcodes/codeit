@@ -175,8 +175,6 @@ const startPointAnimation = screenHeight / 4;
 const pointStaggerInterval = 34 + (7 * 5);
 
 
-window.addEventListener('scroll', checkScrollAnimations);
-
 function checkScrollAnimations() {
   
   // window scroll position
@@ -201,3 +199,7 @@ function checkScrollAnimations() {
   });
   
 }
+
+
+window.addEventListener('scroll', checkScrollAnimations);
+checkScrollAnimations();
