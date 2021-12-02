@@ -239,7 +239,7 @@ body.safari.safari-app .bottom-wrapper.expanded {
   background: #1a1c24;
   color: #d4d5d7;
   box-shadow: inset 1px 0 0 0 #ffffff3d;
-  padding-right: 1px;
+  padding-left: 1px;
   pointer-events: none;
   box-sizing: border-box;
   will-change: transform;
