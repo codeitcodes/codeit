@@ -162,3 +162,18 @@ function checkPWA() {
 
 document.addEventListener('visibilitychange', () => { window.setTimeout(checkPWA, 2000) });
 checkPWA();
+
+
+// add scroll event listeners
+
+const heroBackground = document.querySelector('#hero .hero-background');
+
+window.addEventListener('scroll', () => {
+  
+  // window scroll position
+  const scrolled = window.scrollY || window.pageYOffset;
+  
+  // add parallax on hero background
+  heroBackground.style.top = - (scrolled * 0.2) + 'px';
+  
+});
