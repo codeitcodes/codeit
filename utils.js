@@ -214,15 +214,7 @@ let onNextFrame = (callback) => {
 
 
 // share API
-let initShare = (shareData) => {
-  
-  try {
-
-    navigator.share(shareData);
-
-  } catch(e) {}
-  
-}
+let initShare = navigator.share;
 
 
 // HTTP Request
