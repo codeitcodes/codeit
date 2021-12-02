@@ -105,6 +105,12 @@ function addBottomSwipeListener() {
           
           toggleLiveView(selectedFile);
           
+        } else if (swiped && !bottomWrapper.classList.contains('expanded')) {
+          
+          // if swiped down and bottom float isn't expanded
+          // hide bottom float
+          bottomWrapper.classList.add('hidden');
+          
         }
         
       }
