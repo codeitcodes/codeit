@@ -181,7 +181,7 @@ function checkScrollAnimations() {
   
   
   // add parallax on hero background
-  heroBackground.style.top = + (scrolled * 0.2) + 'px';
+  heroBackground.style.transform = 'translateY(' + (scrolled * 0.2) + 'px)';
   
   
   // add staggered feature points animation
