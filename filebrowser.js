@@ -691,7 +691,7 @@ learnShare.addEventListener('click', () => {
 
     try {
 
-      navigator.share(shareData);
+      initShare(shareData);
 
     } catch(err) {
 
