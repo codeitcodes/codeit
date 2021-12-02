@@ -245,6 +245,18 @@ body.notransition .bottom-wrapper {
   height: 20px;
 }
 
+.live-buttons .live-button.share path.ios {
+  opacity: 0;
+}
+
+body.safari .live-buttons .live-button.share path {
+  opacity: 0;
+}
+
+body.safari .live-buttons .live-button.share path.ios {
+  opacity: 1;
+}
+
 .bottom-wrapper.expanded .live-buttons {
   opacity: 1;
   pointer-events: auto;
