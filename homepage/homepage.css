@@ -4807,7 +4807,7 @@ body {
 #features .ftPoint {
   margin-top: var(--spacing-5);
   opacity: 0;
-  transform: translateY(13px);
+  transform: translateY(15px);
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
   will-change: transform;
