@@ -343,7 +343,6 @@ body.mobile .live-view {
   position: fixed;
   bottom: 5px;
   left: 0;
-  z-index: 1000;
   background: #1a1c24;
   color: #d4d5d7;
   border-radius: 0 500px 500px 0;
@@ -356,6 +355,7 @@ body.mobile .live-view {
               .4s var(--cubic-function) padding, 0s bottom;
   border: 1px solid transparent;
   border-left: 0;
+  z-index: 999;
 }
 
 .bookmark::after {
@@ -433,7 +433,7 @@ body.expanded .sidebar-toggle svg .left {
   padding-right: 1px;
   box-sizing: border-box;
   will-change: transform;
-  z-index: 999;
+  z-index: 998;
 }
 
 /*
