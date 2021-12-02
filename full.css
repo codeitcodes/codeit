@@ -261,7 +261,7 @@ body.mobile .live-view {
 }
 
 .live-view.visible {
-  transform: none;
+  transform: none !important;
   pointer-events: auto;
 }
 
