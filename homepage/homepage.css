@@ -4673,9 +4673,6 @@ a:not(.btn):hover {
 }
 
 #hero {
-  background-image: url('//dev.codeit.codes/images/background-main.png');
-  background-size: 610px;
-  background-attachment: fixed;
   height: calc(100vh - env(safe-area-inset-bottom));
 }
 
@@ -4872,6 +4869,7 @@ ctas .btn.installed::before {
   bottom: 0;
   background-image: url('/images/background-main.png');
   background-size: 610px;
+  will-change: transform;
 }
 
 #hero .hero-background::before {
