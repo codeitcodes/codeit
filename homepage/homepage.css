@@ -4783,9 +4783,10 @@ body {
   pointer-events: none;
 }
 
-.ctas .btn.installed::before {
+ctas .btn.installed::before {
   content: 'Installed';
   width: auto;
+  transition: none;
 }
 
 .ctas .btn.cookies::before {
