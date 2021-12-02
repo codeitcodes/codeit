@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Courier+Prime&display=swap');
 
+#hero {
+  background-image: url('//dev.codeit.codes/images/background-main.png');
+  background-size: 610px;
+  background-attachment: fixed;
+  height: calc(100vh - env(safe-area-inset-bottom));
+}
+
+body {
+  background: #010101;
+}
+
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
   line-height: 1.15;
@@ -4687,18 +4698,6 @@ a:not(.btn):hover {
   align-items: flex-end!important;
   -webkit-mask-image: linear-gradient(180deg, #00000000, #000 50px);
   padding-bottom: var(--spacing-6);
-}
-
-#hero {
-  background-image: url('//dev.codeit.codes/images/background-main.png');
-  background-size: 610px;
-  background-attachment: fixed;
-  height: 100vh;
-  height: calc(100vh - env(safe-area-inset-bottom));
-}
-
-body {
-  background: #010101;
 }
 
 #hero .pdxParent--smartphones::after {
