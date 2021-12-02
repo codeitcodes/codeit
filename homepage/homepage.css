@@ -4858,6 +4858,39 @@ body {
   font-weight: inherit;
 }
 
+#hero::before {
+  content: '';
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(0,0,0,0.35);
+}
+
+#hero #logoWrapper {
+  margin-bottom: var(--spacing-3);
+}
+
+#footer .wr {
+  padding-left: max(var(--spacing-3),env(safe-area-inset-left));
+  padding-right: max(var(--spacing-3),env(safe-area-inset-right));
+}
+
+#features .font-title {
+  margin-bottom: var(--spacing-1);
+}
+
+#footer {
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+  background: #1b2126;
+}
+
+#hero .hero__title {
+  margin-bottom: var(--spacing-2);
+}
+
 body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
