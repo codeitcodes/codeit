@@ -168,7 +168,6 @@ checkPWA();
 
 const screenHeight = window.innerHeight;
 
-const heroBackground = document.querySelector('#hero .hero-background');
 const featurePoints = document.querySelectorAll('#features .ftPoint');
 
 const startPointAnimation = screenHeight / 3;
@@ -177,12 +176,7 @@ const pointStaggerInterval = 34 + (7 * 5);
 function checkScrollAnimations() {
   
   // window scroll position
-  const scrolled = window.scrollY || window.pageYOffset;
-  
-  
-  // add parallax on hero background
-  heroBackground.style.transform = 'translateY(' + (scrolled * 0.2) + 'px)';
-  
+  const scrolled = window.scrollY || window.pageYOffset;  
   
   // add staggered feature points animation
   featurePoints.forEach((point, index) => {
