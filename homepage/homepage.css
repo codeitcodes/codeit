@@ -4693,6 +4693,7 @@ a:not(.btn):hover {
   background-image: url('//dev.codeit.codes/images/background-main.png');
   background-size: 610px;
   background-attachment: fixed;
+  height: 100vh;
   height: calc(100vh - env(safe-area-inset-bottom));
 }
 
