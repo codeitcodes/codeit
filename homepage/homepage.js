@@ -172,7 +172,7 @@ const heroBackground = document.querySelector('#hero .hero-background');
 const featurePoints = document.querySelectorAll('#features .ftPoint');
 
 const startPointAnimation = screenHeight / 3;
-const pointStaggerInterval = 34 + (7 * 5 * 2);
+const pointStaggerInterval = 34 + (7 * 5);
 
 function checkScrollAnimations() {
   
