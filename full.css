@@ -68,7 +68,7 @@ body cd-el {
 
 .bottom-wrapper {
   position: fixed;
-  bottom: env(safe-area-inset-bottom);
+  top: env(safe-area-inset-top, 0px);
   left: 0;
   right: 0;
   height: calc(45px + 56px + 45px);
@@ -77,6 +77,7 @@ body cd-el {
   justify-content: center;
   transition: .4s var(--cubic-function);
   transition-property: transform, height, background;
+  transform: translateY(calc(100vh - 100% - env(safe-area-inset-bottom)));
   will-change: transform;
   z-index: 1001;
 }
@@ -86,25 +87,13 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.hidden {
-  transform: translateY(calc(100% + env(safe-area-inset-bottom)));
+  transform: translateY(100vh);
 }
 
 .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 100% + env(safe-area-inset-bottom)));
+  transform: translateY(0);
   background: #1a1c24;
   height: 33px;
-}
-
-body.safari .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 100% + 81px + env(safe-area-inset-bottom)));
-}
-
-body.safari:not(.safari-app) .bottom-wrapper.expanded {
-  transition-property: transform, background;
-}
-
-body.safari.safari-app .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 81px + env(safe-area-inset-bottom)));
 }
 
 .bottom-float {
@@ -128,7 +117,7 @@ body.safari.safari-app .bottom-wrapper.expanded {
   border-radius: 0;
   box-shadow: 0 0 0 rgb(0 0 0 / 17%), 0 0 0 rgb(0 0 0 / 29%), inset 0 -1px 0 0 rgb(255 255 255 / 10%);
   height: 32px;
-  padding-top: 1px;
+  padding-bottom: 1px;
   pointer-events: none;
 }
 
@@ -1352,7 +1341,7 @@ body.mobile .bottom-wrapper {
 }
 
 body.mobile.expanded .bottom-wrapper {
-  transform: translateX(100%);
+  transform: translateX(100%) translateY(calc(100vh - 100% - env(safe-area-inset-bottom)));
 }
 
 body.mobile .bookmark {
