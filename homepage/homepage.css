@@ -4809,6 +4809,8 @@ body {
   opacity: 0;
   transform: translateY(13px);
   transition: .4s var(--cubic-function);
+  transition-property: transform, opacity;
+  will-change: transform;
 }
 
 #features .ftPoint.visible {
