@@ -171,8 +171,6 @@ const screenHeight = window.innerHeight;
 const heroBackground = document.querySelector('#hero .hero-background');
 const featurePoints = document.querySelectorAll('#features .ftPoint');
 
-const startPointAnimation = screenHeight / 4;
-
 function checkScrollAnimations() {
   
   // window scroll position
@@ -184,9 +182,12 @@ function checkScrollAnimations() {
   
   
   // add staggered feature points animation
-  featurePoints.forEach((point, index) => {
+  
+  let startPointAnimation = screenHeight / 4;
+  
+  featurePoints.forEach(point => {
     
-    const pointStaggerInterval = (point.clientHeight * 2) + (7 * 5);
+    const pointStaggerInterval = point.clientHeight + (7 * 5 * 2);
     const pointAnimation = startPointAnimation + pointStaggerInterval;
     
     if (scrolled >= pointAnimation) {
@@ -194,6 +195,8 @@ function checkScrollAnimations() {
     } else {
       point.classList.remove('visible');
     }
+    
+    startPointAnimation += pointStaggerInterval;
     
   });
   
