@@ -129,22 +129,26 @@ async function renderSidebarHTML() {
 
       // render modified files
       Object.values(modifiedFilesResp).forEach(item => {
+        
+        if (item.dir == treeLoc.join()) {
+          
+          // add modified flag to file
+          let modified = '';
+          if (!item.eclipsed) modified = ' modified';
 
-        // add modified flag to file
-        let modified = '';
-        if (!item.eclipsed) modified = ' modified';
-
-        out += `
-        <div class="item file`+ modified +`" sha="`+ item.sha +`">
-          <div class="label">
-            `+ fileIcon +`
-            <a class="name">`+ item.name +`</a>
+          out += `
+          <div class="item file`+ modified +`" sha="`+ item.sha +`">
+            <div class="label">
+              `+ fileIcon +`
+              <a class="name">`+ item.name +`</a>
+            </div>
+            <div class="push-wrapper">
+              `+ pushIcon +`
+            </div>
           </div>
-          <div class="push-wrapper">
-            `+ pushIcon +`
-          </div>
-        </div>
-        `;
+          `;
+          
+        }
 
       });
       
