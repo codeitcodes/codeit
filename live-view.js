@@ -105,7 +105,7 @@ function addBottomSwipeListener() {
           
           toggleLiveView(selectedFile);
           
-        } else if (swiped && liveWrapper.innerHTML == '') {
+        } else if (swiped && liveView.innerHTML == '') {
           
           // if swiped down and bottom float isn't expanded
           // hide bottom float
