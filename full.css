@@ -73,11 +73,10 @@ body cd-el {
   right: 0;
   height: calc(45px + 56px + 45px);
   display: none;
-  align-items: center;
   justify-content: center;
   transition: .4s var(--cubic-function);
   transition-property: transform, height, background;
-  transform: translateY(calc(100vh - 100% - env(safe-area-inset-bottom)));
+  transform: translateY(calc(100vh - (45px + 56px + 45px) - env(safe-area-inset-bottom)));
   will-change: transform;
   z-index: 1001;
 }
@@ -116,6 +115,7 @@ body.notransition .bottom-wrapper {
   width: 100%;
   border-radius: 0;
   box-shadow: 0 0 0 rgb(0 0 0 / 17%), 0 0 0 rgb(0 0 0 / 29%), inset 0 -1px 0 0 rgb(255 255 255 / 10%);
+  margin: 0;
   height: 32px;
   padding-bottom: 1px;
   pointer-events: none;
@@ -166,6 +166,7 @@ body.notransition .bottom-wrapper {
   font-size: 14px;
   margin-left: calc(50vw - 16px);
   transform: translateX(-50%);
+  transform: translateX(calc(-64.3px / 2));
   font-weight: 400;
 }
 
