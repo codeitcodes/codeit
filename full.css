@@ -199,7 +199,6 @@ body.notransition .bottom-wrapper {
   position: relative;
   box-sizing: border-box;
   height: 100%;
-  transition: .4s var(--cubic-function);
 }
 
 .bottom-wrapper.expanded .bottom-float .push-wrapper {
