@@ -693,7 +693,7 @@ learnShare.addEventListener('click', () => {
 
       navigator.share(shareData);
 
-    } catch(err) {
+    } catch(e) {
 
       // if could not open share dialog, share on Twitter
       window.open('https://twitter.com/intent/tweet' +
