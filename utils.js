@@ -47,7 +47,7 @@ const body = document.body,
 
 
 // version
-const version = '1.7.2';
+const version = '1.7.4';
 versionEl.innerText = version;
 
 
@@ -214,7 +214,7 @@ let onNextFrame = (callback) => {
 
 
 // share API
-let initShare = navigator.share;
+navigator.share.bind(initShare);
 
 
 // HTTP Request
