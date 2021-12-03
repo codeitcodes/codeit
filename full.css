@@ -242,6 +242,10 @@ body.notransition .bottom-wrapper {
   padding: 6px 0;
 }
 
+.live-buttons .live-button:active {
+  opacity: .5;
+}
+
 .live-buttons .live-button.close {
   height: 20px;
 }
