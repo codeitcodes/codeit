@@ -64,7 +64,9 @@ function addBottomSwipeListener() {
           content: window.location.origin
         }
         
-        initShare(shareData);
+        if (initShare) {
+          initShare(shareData);
+        }
         
       }
       
