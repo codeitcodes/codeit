@@ -125,7 +125,7 @@ body.notransition .bottom-wrapper {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  transition: .4s var(--cubic-function);
+  transition: .4s var(--cubic-function), 0s background;
 }
 
 .bottom-float .sidebar-open {
@@ -144,6 +144,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper .bottom-float .menu {
   transition: .4s var(--cubic-function);
+  transition-property: opacity, margin-left;
 }
 
 .bottom-wrapper.expanded .bottom-float .menu {
