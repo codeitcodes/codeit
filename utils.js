@@ -213,10 +213,6 @@ let onNextFrame = (callback) => {
 }
 
 
-// share API
-navigator.share.bind(initShare);
-
-
 // HTTP Request
 let axios = {
   'get': (url, token) => {
