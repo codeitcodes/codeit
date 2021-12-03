@@ -65,7 +65,7 @@ function addBottomSwipeListener() {
         }
         
         if (initShare) {
-          initShare(shareData);
+          navigator.share(shareData);
         } else {
           console.info('[Share API] Couldn\'t share.');
         }
