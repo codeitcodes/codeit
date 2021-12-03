@@ -228,11 +228,11 @@ body.notransition .bottom-wrapper {
   align-items: center;
   justify-content: space-between;
   transform: translateY(45px);
+  will-change: transform;
   height: 32px;
   opacity: 0;
   pointer-events: none;
-  transition: .18s var(--ease-function);
-  transition-property: opacity, transform;
+  transition: .4s var(--cubic-function) transform, .18s var(--ease-function) opacity;
 }
 
 .live-buttons .live-button {
@@ -269,7 +269,7 @@ body.safari .live-buttons .live-button.share path.ios {
 .bottom-wrapper.expanded .live-buttons {
   opacity: 1;
   pointer-events: auto;
-  transition-delay: .14s;
+  transition: .4s var(--cubic-function) transform, .18s .14s var(--ease-function) opacity;
   transform: none;
 }
 
@@ -288,6 +288,7 @@ body.safari .live-buttons .live-button.share path.ios {
   box-sizing: border-box;
   will-change: transform;
   transition: none;
+  display: none;
   opacity: 0;
   z-index: 1000;
 }
@@ -296,6 +297,7 @@ body:not(.mobile) .live-view {
   opacity: 1;
   transform: translateX(100%);
   transition: .4s var(--cubic-function) transform;
+  display: block;
 }
 
 body.mobile .live-view {
@@ -303,6 +305,7 @@ body.mobile .live-view {
   transform: translateY(calc(100% - 56px));
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
+  display: block;
 }
 
 .live-view.visible {
