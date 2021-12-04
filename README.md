@@ -15,5 +15,7 @@
 </p>
 <h4>Platforms</h4>
 Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.
+<h4>Codeit can keep a secret</h4>
+Codeit dosen't collect data. Your data stays between you and your Git hosting provider. <3
 <h4>Special Thanks</h4>
 Codeit's logo was created by <a href="https://twitter.com/sandorqi">@sandorqi</a>.
