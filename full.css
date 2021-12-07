@@ -202,11 +202,12 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded .bottom-float .push-wrapper {
-  width: 0;
   padding: 0;
+  width: calc(73.3px - 24px);
   opacity: 0;
   border-radius: 0;
   margin-right: -1px;
+  border-color: transparent;
 }
 
 .bottom-float .push-wrapper:not(.checked):active {
@@ -227,12 +228,13 @@ body.notransition .bottom-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform: translateY(45px);
+  transform: translateY(calc(45px + 11.5px));
   will-change: transform;
   height: 32px;
+  padding: 0 24px;
   opacity: 0;
   pointer-events: none;
-  transition: .4s var(--cubic-function) transform, .18s var(--ease-function) opacity;
+  transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, .18s var(--ease-function) opacity;
 }
 
 .live-buttons .live-button {
@@ -269,8 +271,9 @@ body.safari .live-buttons .live-button.share path.ios {
 .bottom-wrapper.expanded .live-buttons {
   opacity: 1;
   pointer-events: auto;
-  transition: .4s var(--cubic-function) transform, .18s .14s var(--ease-function) opacity;
+  transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, .18s .14s var(--ease-function) opacity;
   transform: none;
+  padding: 0;
 }
 
 .live-view {
