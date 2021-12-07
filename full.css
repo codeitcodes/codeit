@@ -180,7 +180,8 @@ body.notransition .bottom-wrapper {
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d25;
   display: none;
-  transition: .4s var(--cubic-function) opacity;
+  transition: .4s var(--cubic-function);
+  transition-property: opacity, bottom, left;
 }
 
 .bottom-float.modified .badge {
@@ -189,6 +190,8 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded .bottom-float .badge {
   opacity: 0;
+  left: 8px;
+  bottom: 6px;
 }
 
 .bottom-float .push-wrapper {
