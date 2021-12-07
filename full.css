@@ -333,7 +333,7 @@ body.mobile .live-view {
   left: 1px;
   position: fixed;
   background: #1a1c24;
-  transition: .4s var(--cubic-function) opacity;
+  transition: .18s var(--ease-function) opacity;
   z-index: 1;
 }
 
@@ -351,7 +351,7 @@ body.mobile .live-view {
   background: hsl(240deg 87% 55%);
   animation: live-pulse 1s var(--cubic-function) infinite;
   box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
-  transition: .4s var(--cubic-function) opacity;
+  transition: .18s var(--ease-function) opacity;
   z-index: 1;
 }
 
@@ -363,6 +363,11 @@ body.mobile .live-view {
 .live-view.loaded::after {
   opacity: 0;
   pointer-events: none;
+}
+
+body.mobile .live-view.loaded::before,
+body.mobile .live-view.loaded::after {
+  transition-delay: .18s;
 }
 
 @keyframes live-pulse {
