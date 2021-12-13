@@ -106,6 +106,8 @@ body.notransition .bottom-wrapper {
   background: #1a1c24;
   color: #d4d5d7;
   box-shadow: 0 1px 2px rgb(0 0 0 / 17%), 0 6px 8px rgb(0 0 0 / 29%);
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
   height: 56px;
   transition: .4s var(--cubic-function);
 }
@@ -113,9 +115,10 @@ body.notransition .bottom-wrapper {
 .bottom-wrapper.expanded .bottom-float {
   width: 100%;
   border-radius: 0;
-  box-shadow: 0 0 0 rgb(0 0 0 / 17%), 0 0 0 rgb(0 0 0 / 29%), inset 0 -1px 0 0 rgb(255 255 255 / 10%);
+  box-shadow: none;
+  border-color: rgb(255 255 255 / 10%);
   margin: 0;
-  height: 32px;
+  height: 33px;
   padding-bottom: 1px;
   pointer-events: none;
 }
@@ -306,7 +309,7 @@ body:not(.mobile) .live-view {
 }
 
 body.mobile .live-view {
-  top: 32px;
+  top: 33px;
   transform: translateY(calc(100% - 56px));
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
