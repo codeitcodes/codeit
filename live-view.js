@@ -74,6 +74,7 @@ function addBottomSwipeListener() {
           } catch(e) {
 
             copy(shareData.content);
+            alert('Copied link to clipboard.');
 
           }
           
