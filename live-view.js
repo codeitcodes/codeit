@@ -60,8 +60,7 @@ async function setupLiveView() {
                          modFile.caretPos, modFile.scrollPos, false);
 
     }
-
-        
+    
     // open live view
     toggleLiveView(selectedFile);
     
