@@ -30,6 +30,10 @@ async function setupLiveView() {
       // expand bottom float
       bottomWrapper.classList.add('expanded');
       
+    } else {
+      
+      liveView.classList.toggle('visible');
+      
     }
     
     // open live view
