@@ -29,12 +29,12 @@ window.onload = async () => {
     
     treeLoc = urlQuery.split('+')[0].split(',');
     
+    const fileName = urlQuery.split('+')[1].split(',')[0];
+    const fileSha = urlQuery.split('+')[1].split(',')[1];
+    
     // change selected file
     changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
                        [0, 0], [0, 0], false);
-    
-    const fileName = urlQuery.split('+')[1].split(',')[0];
-    const fileSha = urlQuery.split('+')[1].split(',')[1];
     
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
