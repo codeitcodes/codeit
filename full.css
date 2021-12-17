@@ -442,7 +442,7 @@ body.notransition :is(.sidebar-toggle, .sidebar-toggle *) {
   transition: none;
 }
 
-.sidebar-toggle svg {
+.bookmark svg {
   opacity: .72;
 }
 
@@ -459,6 +459,26 @@ body.expanded .sidebar-toggle svg .right {
 }
 
 body.expanded .sidebar-toggle svg .left {
+  opacity: 1;
+}
+
+.preview-toggle {
+  right: 0;
+  left: auto;
+  border-radius: 500px 0 0 500px;
+  z-index: 1000;
+}
+
+.preview-toggle svg path {
+  opacity: 0;
+  transition: .4s var(--cubic-function);
+}
+
+.live-view.visible ~ .preview-toggle svg .right {
+  opacity: 1;
+}
+
+.live-view:not(.visible) ~ .preview-toggle svg .left {
   opacity: 1;
 }
 
