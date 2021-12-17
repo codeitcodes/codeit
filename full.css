@@ -284,7 +284,7 @@ body.safari .live-buttons .live-button.share path.ios {
   bottom: 0;
   left: -1px;
   top: 33px;
-  transform: translateY(calc(100% - 56px));
+  transform: translateY(calc(100% - 28px - 45px - env(safe-area-inset-bottom, 0px)));
   padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
   color: #d4d5d7;
@@ -295,6 +295,8 @@ body.safari .live-buttons .live-button.share path.ios {
   will-change: transform;
   transition: none;
   opacity: 0;
+  transition: .4s var(--cubic-function);
+  transition-property: transform, opacity;
   z-index: 1000;
 }
 
@@ -302,11 +304,6 @@ body:not(.mobile) .live-view {
   opacity: 1;
   transform: translateX(100%);
   transition: .4s var(--cubic-function) transform;
-}
-
-body.mobile .live-view {
-  transition: .4s var(--cubic-function);
-  transition-property: transform, opacity;
 }
 
 .live-view.visible {
