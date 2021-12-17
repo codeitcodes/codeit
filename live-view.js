@@ -9,8 +9,17 @@ async function setupLiveView() {
   
   if (urlQuery) {
     
-    toggleSidebar(false);
-    saveSidebarStateLS();
+    if (isMobile) {
+      
+      toggleSidebar(false);
+      saveSidebarStateLS();
+      
+    } else {
+      
+      toggleSidebar(true);
+      saveSidebarStateLS();
+      
+    }
     
     treeLoc = urlQuery.split('+')[0].split(',');
     saveTreeLocLS(treeLoc);
