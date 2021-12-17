@@ -32,7 +32,8 @@ async function setupLiveView() {
       
     } else {
       
-      liveView.classList.toggle('visible');
+      // show live view
+      liveView.classList.add('visible');
       
     }
     
@@ -251,6 +252,7 @@ function addBottomSwipeListener() {
   
 }
 
+
 if (isMobile) {
   
   addBottomSwipeListener();
@@ -268,22 +270,30 @@ if (isMobile) {
     
   });
   
-}
-
-
-
-document.addEventListener('keydown', handleMetaP);
-
-function handleMetaP(e) {
+} else {
   
-  // detect ctrl/cmd+P
-  if ((e.key === 'p' || e.keyCode === 80) && isKeyEventMeta(e)) {
-
-    e.preventDefault();
+  previewToggle.addEventListener('click', () => {
     
+    // toggle live view
     liveView.classList.toggle('visible');
     toggleLiveView(selectedFile);
     
+  });
+  
+  document.addEventListener('keydown', handleMetaP);
+
+  function handleMetaP(e) {
+
+    // detect ctrl/cmd+P
+    if ((e.key === 'p' || e.keyCode === 80) && isKeyEventMeta(e)) {
+
+      e.preventDefault();
+
+      liveView.classList.toggle('visible');
+      toggleLiveView(selectedFile);
+
+    }
+
   }
   
 }
