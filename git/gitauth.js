@@ -36,30 +36,18 @@ window.onload = async () => {
     changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
                        [0, 0], [0, 0], false);
     
-    // if file is not modified; fetch from Git
-    if (!modifiedFiles[fileSha]) {
+    // start loading
+    startLoading();
 
-      // start loading
-      startLoading();
+    // get file from git
+    const resp = await git.getFile(treeLoc, fileName);
 
-      // get file from git
-      const resp = await git.getFile(treeLoc, fileName);
+    // change selected file
+    changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
+                       [0, 0], [0, 0], false);
 
-      // change selected file
-      changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
-                         [0, 0], [0, 0], false);
-
-      // stop loading
-      stopLoading();
-
-    } else { // else, load file from modifiedFiles object
-
-      const modFile = modifiedFiles[fileSha];
-
-      changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
-                         modFile.caretPos, modFile.scrollPos, false);
-
-    }
+    // stop loading
+    stopLoading();
     
     // expand bottom float
     bottomWrapper.classList.add('expanded');
