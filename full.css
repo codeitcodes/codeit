@@ -470,7 +470,7 @@ body.expanded .sidebar-toggle svg .left {
 .sidebar {
   position: fixed;
   top: 0;
-  left: calc(var(--sidebar-width) * -1);
+  left: calc((var(--sidebar-width) + 1px) * -1);
   height: 100%;
   background: #1a1c24;
   color: #d4d5d7;
