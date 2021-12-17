@@ -35,7 +35,9 @@ const body = document.body,
       searchClear = searchScreen.querySelector('.clear'),
       
       addButton = titleScreen.querySelector('.add'),
-
+      
+      sidebarBackground = document.querySelector('.sidebar-background'),
+      
       fileWrapper = sidebar.querySelector('.files'),
       
       versionEl = learnWrapper.querySelector('.version'),
