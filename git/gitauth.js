@@ -9,7 +9,7 @@ let githubToken, treeLoc;
 
 window.onload = () => {
 
-  githubToken = getStorage('token');
+  githubToken = (getStorage('token') === 'undefined') ? undefined : getStorage('token');
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
 
   loginButton.addEventListener('click', () => {
