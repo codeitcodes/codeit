@@ -145,6 +145,17 @@ if (isMobile) {
   
   addBottomSwipeListener();
   
+  sidebarBackground.addEventListener('click', () => {
+    
+    if (bottomWrapper.classList.contains('expanded')) {
+      
+      // retract bottom float
+      bottomWrapper.classList.remove('expanded');
+      
+    }
+    
+  });
+  
 }
 
 
