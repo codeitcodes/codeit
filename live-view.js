@@ -36,9 +36,6 @@ async function setupLiveView() {
       
     }
     
-    // open live view
-    toggleLiveView(selectedFile);
-    
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
 
@@ -64,6 +61,10 @@ async function setupLiveView() {
 
     }
 
+        
+    // open live view
+    toggleLiveView(selectedFile);
+    
     // show file content in codeit
     cd.textContent = decodeUnicode(selectedFile.content);
 
