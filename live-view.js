@@ -1,6 +1,6 @@
 
 // setup live view
-function setupLiveView() {
+async function setupLiveView() {
   
   const url = new URL(window.location.href);
   const urlQuery = url.searchParams.get('q');
