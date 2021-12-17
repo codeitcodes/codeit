@@ -86,7 +86,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.hidden {
-  transform: translateY(100vh);
+  transform: translateY(calc(100% + env(safe-area-inset-bottom, 0px)));
 }
 
 .bottom-wrapper.expanded {
@@ -1403,7 +1403,7 @@ body.mobile .bottom-wrapper {
 }
 
 body.mobile.expanded .bottom-wrapper {
-  transform: translateX(100%) translateY(calc(100vh - 100% - env(safe-area-inset-bottom)));
+  transform: translateX(100%) translateY(calc(100% + env(safe-area-inset-bottom, 0px)));
 }
 
 body.mobile .bookmark {
