@@ -363,17 +363,12 @@ body.mobile .live-view {
   pointer-events: none;
 }
 
-body.mobile .live-view.loaded::before,
-body.mobile .live-view.loaded::after {
-  transition-delay: .18s;
-}
-
 @keyframes live-pulse {
   from {
-      box-shadow: 0 0 0 0 hsl(240deg 87% 55%);
+    box-shadow: 0 0 0 0 hsl(240deg 87% 55%);
   }
   to {
-      box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
+    box-shadow: 0 0 0 15px hsl(240deg 87% 55% / 0%);
   }
 }
 
