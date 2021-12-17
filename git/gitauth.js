@@ -13,11 +13,11 @@ window.onload = () => {
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
   
   const url = new URL(window.location.href);
-  const treeQuery = url.searchParams.get('tree');
+  const urlQuery = url.searchParams.get('q');
   
-  if (treeQuery) {
+  if (urlQuery) {
     
-    treeLoc = treeQuery.split(',');
+    treeLoc = urlQuery.split(',');
     
   }
   
