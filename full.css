@@ -470,13 +470,13 @@ body.expanded .sidebar-toggle svg .left {
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: calc(var(--sidebar-width) * -1);
   height: 100%;
   background: #1a1c24;
   color: #d4d5d7;
   transition: .4s var(--cubic-function) transform;
   width: calc(var(--sidebar-width) + 1px);
-  transform: translateX(-100%);
+  transform: none;
   overflow-x: hidden;
   overflow-y: overlay;
   pointer-events: none;
@@ -503,7 +503,7 @@ body.expanded .sidebar-toggle svg .left {
 */
 
 body.expanded .sidebar {
-  transform: none;
+  transform: translateX(100%);
   pointer-events: auto;
 }
 
