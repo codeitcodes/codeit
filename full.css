@@ -503,7 +503,7 @@ body.expanded .sidebar-toggle svg .left {
 */
 
 body.expanded .sidebar {
-  transform: translateX(100%);
+  transform: translateX(calc(100% - 1px));  
   pointer-events: auto;
 }
 
