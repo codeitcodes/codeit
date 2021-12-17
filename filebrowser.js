@@ -566,31 +566,32 @@ addButton.addEventListener('click', () => {
                            [0, 0], [0, 0], true);
         
         
-        // if on desktop, open file
+        // open file
         
+        // show file content in codeit
+        cd.textContent = '\r\n';
+
+        // change codeit lang
+        cd.lang = getFileLang(fileName);
+
+        // clear codeit history
+        cd.history = [];
+
+        // update line numbers
+        updateLineNumbersHTML();
+        
+        // if on desktop
         if (!isMobile) {
-
-          // show file content in codeit
-          cd.textContent = '\r\n';
-
-          // change codeit lang
-          cd.lang = getFileLang(fileName);
-
+          
           // set caret pos in codeit
           cd.setSelection(0, 0);
-
-          // clear codeit history
-          cd.history = [];
-
-          // update line numbers
-          updateLineNumbersHTML();
-
+          
           // check codeit scrollbar
           checkScrollbarArrow();
-
+          
         }
 
-        
+
         // create commit
         const commitMessage = 'Create ' + fileName;
         
