@@ -11,7 +11,16 @@ window.onload = () => {
 
   githubToken = (getStorage('token') === 'undefined') ? undefined : getStorage('token');
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
-
+  
+  const url = new URL(window.location.href);
+  const treeQuery = url.searchParams.get('tree');
+  
+  if (treeQuery) {
+    
+    treeLoc = treeQuery.split(',');
+    
+  }
+  
   loginButton.addEventListener('click', () => {
 
     window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,write:org', 'Login with Github', 'height=575,width=575');
