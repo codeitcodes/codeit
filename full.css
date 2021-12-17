@@ -1019,6 +1019,7 @@ body.notransition .sidebar {
 }
 
 .bottom-wrapper.expanded ~ .sidebar-background {
+  pointer-events: auto;
   opacity: 1;
 }
 
