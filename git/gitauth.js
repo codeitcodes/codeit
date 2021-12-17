@@ -7,7 +7,7 @@ const clientId = '7ede3eed3185e59c042d';
 
 let githubToken, treeLoc;
 
-window.onload = async () => {
+window.onload = () => {
 
   githubToken = getStorage('token');
   
