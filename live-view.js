@@ -159,7 +159,7 @@ function addBottomSwipeListener() {
         const shareData = {
           title: 'Share live view',
           content: 'Open ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit: ' +
-                   window.location.origin + '/?q=' + encodeURIComponent(treeLoc.join(',') + '+' + selectedFile.name + ',' + selectedFile.sha)
+                   window.location.origin + '/full?q=' + encodeURIComponent(treeLoc.join(',') + '+' + selectedFile.name + ',' + selectedFile.sha)
         }
         
         if (isMobile) {
