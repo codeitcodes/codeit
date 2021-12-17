@@ -73,7 +73,8 @@ function startLoading() {
   loader.style.opacity = 1;
 
   window.setTimeout(load, 0);
-
+  
+  if (loadInterval) window.clearInterval(loadInterval);
   loadInterval = window.setInterval(load, 400);
 
 }
@@ -81,6 +82,7 @@ function startLoading() {
 function stopLoading() {
 
   window.clearInterval(loadInterval);
+  loadInterval = false;
 
   loader.style.width = '100%';
   loader.style.opacity = 0;
@@ -93,7 +95,7 @@ function load() {
 
   loadPercent += 10;
 
-  if (loadPercent != 100) {
+  if (loadPercent >= 100) {
 
     loader.style.transition = '';
     loader.style.width = loadPercent + '%';
