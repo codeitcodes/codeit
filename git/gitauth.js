@@ -9,7 +9,7 @@ let githubToken, treeLoc;
 
 window.onload = () => {
 
-  githubToken = (getStorage('token') === 'undefined') ? undefined : getStorage('token');
+  githubToken = (getStorage('token') == 'undefined') ? false : getStorage('token');
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
   
   const url = new URL(window.location.href);
