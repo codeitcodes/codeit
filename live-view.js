@@ -1,4 +1,95 @@
 
+// setup live view
+function setupLiveView() {
+  
+  const url = new URL(window.location.href);
+  const urlQuery = url.searchParams.get('q');
+  
+  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  
+  if (urlQuery) {
+    
+    toggleSidebar(false);
+    saveSidebarStateLS();
+    
+    treeLoc = urlQuery.split('+')[0].split(',');
+    
+    const fileName = urlQuery.split('+')[1].split(',')[0];
+    const fileSha = urlQuery.split('+')[1].split(',')[1];
+    
+    // change selected file
+    changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
+                       [0, 0], [0, 0], false);
+    
+    // if on mobile device
+    if (isMobile) {
+
+      // update bottom float
+      updateFloat();
+      
+      // expand bottom float
+      bottomWrapper.classList.add('expanded');
+      
+    }
+    
+    // open live view
+    toggleLiveView(selectedFile);
+    
+    // if file is not modified; fetch from Git
+    if (!modifiedFiles[fileSha]) {
+
+      // start loading
+      startLoading();
+
+      // get file from git
+      const resp = await git.getFile(treeLoc, fileEl.innerText);
+
+      // change selected file
+      changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
+                         [0, 0], [0, 0], false);
+
+      // stop loading
+      stopLoading();
+
+    } else { // else, load file from modifiedFiles object
+
+      const modFile = modifiedFiles[fileSha];
+
+      changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
+                         modFile.caretPos, modFile.scrollPos, false);
+
+    }
+
+    // show file content in codeit
+    cd.textContent = decodeUnicode(selectedFile.content);
+
+    // change codeit lang
+    cd.lang = selectedFile.lang;
+
+    // set caret pos in codeit
+    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+
+    // set scroll pos in codeit
+    cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
+
+    // clear codeit history
+    cd.history = [];
+
+    // update line numbers
+    updateLineNumbersHTML();
+
+    // if on desktop
+    if (!isMobile) {
+
+      // check codeit scrollbar
+      checkScrollbarArrow();
+
+    }
+    
+  }
+  
+}
+
 // open live view when swiped up on bottom float
 function addBottomSwipeListener() {
   
