@@ -90,7 +90,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded {
-  transform: translateY(0);
+  transform: translateY(calc(-100vh + 100% - env(safe-area-inset-top, 0px)));
   height: 33px;
 }
 
@@ -167,7 +167,6 @@ body.notransition .bottom-wrapper {
   font-size: 14px;
   margin-left: calc(50vw - 16px);
   transform: translateX(-50%);
-  transform: translateX(calc(-64.3px / 2));
   font-weight: 400;
 }
 
