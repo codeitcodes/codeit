@@ -603,11 +603,6 @@ body.notransition .sidebar {
   color: #828689;
 }
 
-.sidebar .header .back {
-  color: currentColor;
-  z-index: 1;
-}
-
 .sidebar .searchscreen .back {
   transition: .18s var(--ease-function) margin-right;
 }
