@@ -104,7 +104,7 @@ function updateModFileScrollPos(sha, scrollPos) {
 // store the updated file under old sha as key
 // and store the updated file under new sha as key
 // in modifiedFiles object for 1 minute after commit
-function onFileEclipsedInCache(oldSha, newSha) {
+function onFileEclipsedInCache(oldSha, newSha, newFile) {
   
   // if file element under old sha exists in HTML,
   // update it to the new sha
@@ -112,26 +112,37 @@ function onFileEclipsedInCache(oldSha, newSha) {
   if (fileEl) setAttr(fileEl, 'sha', newSha);
   
   
-  // store the updated file under old sha as key
+  let fileToUpdate;
   
-  // find the eclipsed file
-  let fileToUpdate = modifiedFiles[oldSha];
+  // if old sha exists
+  if (oldSha) {
 
-  fileToUpdate.sha = newSha;
-  fileToUpdate.caretPos = [0, 0];
-  fileToUpdate.eclipsed = true;
-  
-  // if file to update is selected
-  if (selectedFile.sha === oldSha) {
+    // store the updated file under old sha as key
+
+    // find the eclipsed file
+    fileToUpdate = modifiedFiles[oldSha];
+
+    fileToUpdate.sha = newSha;
+    fileToUpdate.caretPos = [0, 0];
+    fileToUpdate.eclipsed = true;
+
+    // if file to update is selected
+    if (selectedFile.sha === oldSha) {
+
+      // update its content
+      // to the selected file contents
+      updateModFileContent(oldSha, selectedFile.content);
+
+      // update selected file sha to the new sha
+      selectedFile.sha = newSha;
+
+      updateSelectedFileLS();
+
+    }
     
-    // update its content
-    // to the selected file contents
-    updateModFileContent(oldSha, selectedFile.content);
+  } else {
     
-    // update selected file sha to the new sha
-    selectedFile.sha = newSha;
-     
-    updateSelectedFileLS();
+    fileToUpdate = newFile;
     
   }
   
@@ -147,9 +158,14 @@ function onFileEclipsedInCache(oldSha, newSha) {
   // set 1 minute timeout to remove updated files
   window.setTimeout(() => {
     
-    // remove the updated file under old sha as key
-    // from modifiedFiles
-    deleteModFile(oldSha);
+    // if old sha exists
+    if (oldSha) {
+
+      // remove the updated file under old sha as key
+      // from modifiedFiles
+      deleteModFile(oldSha);
+      
+    }
     
     // if not edited updated file under new sha as key
     // while in timeout (file is still eclipsed)
@@ -170,14 +186,22 @@ function setTimeoutForEclipsedFiles() {
   
   const eclipsedFiles = Object.values(modifiedFiles).filter(file => file.eclipsed);
   
+  // run on all eclipsed files
   eclipsedFiles.forEach(file => {
     
-    // set 1 minute timeout to remove updated files
+    // set 1 minute timeout to remove eclipsed file
     window.setTimeout(() => {
       
-      // remove the updated file under old sha as key
-      // from modifiedFiles
-      deleteModFile(file.sha);
+      // if not edited eclipsed file
+      // while in timeout (file is still eclipsed)
+      if (modifiedFiles[file.sha] &&
+          modifiedFiles[file.sha].eclipsed) {
+      
+        // remove the eclipsed file
+        // from modifiedFiles
+        deleteModFile(file.sha);
+        
+      }
       
     }, 65 * 1000); // 65s
 
@@ -199,6 +223,9 @@ function getLatestVersion(item) {
   
   function followTrail(crumb) {
     
+    if(typeof(modifiedFiles[crumb]) == 'undefined') //@@
+      return null;
+    
     // if version sha matches its key
     // (it dosen't point to another version)
     if (modifiedFiles[crumb].sha === crumb) {
@@ -210,7 +237,14 @@ function getLatestVersion(item) {
       
       // version sha points to another version,
       // follow the trail
-      return followTrail(modifiedFiles[crumb].sha);
+      let ret = followTrail(modifiedFiles[crumb].sha);
+      
+      if(ret == null){
+        // No file with this sha was found in modifiedFiles, return the file with latest bread crumb: //@@
+        return modifiedFiles[crumb];
+      }else{
+        return ret;
+      }
       
     }
     

@@ -8,7 +8,7 @@ function updateFloat() {
   saveSidebarStateLS();
 
   // show bottom floater
-  bottomFloat.classList.remove('hidden');
+  bottomWrapper.classList.remove('hidden');
 
   // if selected file is modified, show flag
   if (modifiedFiles[selectedFile.sha] &&
@@ -30,17 +30,22 @@ function updateFloat() {
 
 // open sidebar when clicked on button
 sidebarOpen.addEventListener('click', () => {
+  
+  // if bottom float isn't expanded
+  if (liveView.children.length == 0) {
+    
+    toggleSidebar(true);
+    saveSidebarStateLS();
 
-  toggleSidebar(true);
-  saveSidebarStateLS();
+    let selectedEl = fileWrapper.querySelector('.item.selected');
 
-  let selectedEl = fileWrapper.querySelector('.item.selected');
+    if (selectedEl) {
 
-  if (selectedEl) {
+      // scroll to selected file
+      selectedEl.scrollIntoViewIfNeeded();
 
-    // scroll to selected file
-    selectedEl.scrollIntoViewIfNeeded();
-
+    }
+    
   }
 
 })
@@ -99,13 +104,13 @@ if (isMobile) {
     if (st > lastScrollTop) {
 
       // hide bottom float
-      bottomFloat.classList.add('hidden');
+      bottomWrapper.classList.add('hidden');
 
       // if scrolled to bottom of codeit
       if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
         // show bottom float
-        bottomFloat.classList.remove('hidden');
+        bottomWrapper.classList.remove('hidden');
 
       }
 
@@ -115,7 +120,7 @@ if (isMobile) {
       if ((lastScrollTop - st) > 20) {
 
         // show bottom float
-        bottomFloat.classList.remove('hidden');
+        bottomWrapper.classList.remove('hidden');
 
       }
 

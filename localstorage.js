@@ -27,6 +27,8 @@ function loadLS() {
     
   }
   
+  setupLiveView();
+
   setupCodeitApp();
   
 }

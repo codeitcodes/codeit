@@ -2,8 +2,15 @@
   github
 */
 
+// show bookmark on hover
+sidebarToggle.addEventListener('mouseover', () => {
+
+  sidebarToggle.classList.add('visible');
+
+})
+
 // toggle sidebar on click of bookmark
-github.addEventListener('click', () => {
+sidebarToggle.addEventListener('click', () => {
 
   toggleSidebar(!body.classList.contains('expanded'));
 
@@ -30,6 +37,8 @@ async function renderSidebarHTML() {
 
   // get items in current tree from git
   const resp = await git.getItems(treeLoc);
+  
+  let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
 
   // save rendered HTML
   let out = '';
@@ -68,7 +77,10 @@ async function renderSidebarHTML() {
 
     // if navigating in repository
     if (repo != '') {
-
+      
+      // show add button
+      addButton.classList.remove('hidden');
+      
       // render files
       resp.forEach(item => {
 
@@ -76,6 +88,10 @@ async function renderSidebarHTML() {
         if (item.type == 'file') {
 
           let file = getLatestVersion(item);
+          
+          if (modifiedFiles[file.sha]) {
+            delete modifiedFilesResp[file.sha];
+          }
 
           // add modified flag to file
           let modified = '';
@@ -107,11 +123,40 @@ async function renderSidebarHTML() {
           `;
 
         }
+        
+      });
+        
+
+      // render modified files
+      Object.values(modifiedFilesResp).forEach(item => {
+        
+        if (item.dir == treeLoc.join()) {
+          
+          // add modified flag to file
+          let modified = '';
+          if (!item.eclipsed) modified = ' modified';
+
+          out += `
+          <div class="item file`+ modified +`" sha="`+ item.sha +`">
+            <div class="label">
+              `+ fileIcon +`
+              <a class="name">`+ item.name +`</a>
+            </div>
+            <div class="push-wrapper">
+              `+ pushIcon +`
+            </div>
+          </div>
+          `;
+          
+        }
 
       });
-
+      
     } else { // else, show all repositories
-
+      
+      // hide add button
+      addButton.classList.add('hidden');
+      
       // render repositories
       resp.forEach(item => {
 
@@ -297,6 +342,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   files.forEach(file => { file.style.display = '' });
   
   header.classList.remove('searching');
+  
   // clear existing selections
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -405,6 +451,235 @@ sidebarTitle.addEventListener('click', () => {
 })
 
 
+// create new file on click of button
+addButton.addEventListener('click', () => {
+  
+  // if not already adding a new file
+  if (!fileWrapper.querySelector('.focused')) {
+  
+    // clear existing selections
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
+    }
+
+    // create new file
+    const fileEl = document.createElement('div');
+    fileEl.classList = 'item file selected focused hidden';
+
+    fileEl.innerHTML = `
+    <div class="label">
+      `+ fileIcon +`
+      <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
+    </div>
+    <div class="push-wrapper">
+      `+ pushIcon +`
+    </div>
+    `;
+
+    // add new file to DOM
+    fileWrapper.prepend(fileEl);
+          
+    // focus file
+    fileEl.querySelector('.name').focus();
+    fileEl.scrollIntoViewIfNeeded();
+
+
+    // add push button event listener
+    const pushWrapper = fileEl.querySelector('.push-wrapper');
+
+    fileEl.querySelector('.name').addEventListener('keydown', (e) => {
+      
+      if (e.key === 'Enter') {
+
+        e.preventDefault();
+        
+        onNextFrame(pushNewFileInHTML);
+
+      }
+
+    });
+
+    let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
+
+
+    // on next frame
+    onNextFrame(() => {
+      
+      // animate file
+      fileEl.classList.remove('hidden');
+
+    });
+
+
+    async function pushNewFileInHTML() {
+
+      if (fileEl.classList.contains('focused')) {
+
+        // play push animation
+        playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+        // disable pushing file from HTML
+        fileEl.classList.remove('focused');
+
+        // make file name uneditable
+        fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
+        fileEl.querySelector('.name').blur();
+
+        
+        // pad file content with random number of invisible chars
+        // to generate unique file content and fix git sha generation
+        const randomNum = Math.floor(Math.random() * 100) + 1;
+        const fileContent = '\r\n'.padEnd(randomNum, '\r');
+        
+        
+        // validate file name
+        
+        // get file name
+        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
+        
+        // replace all spaces in name with dashes
+        fileName = fileName.replaceAll(' ', '-');
+        
+        // if another file in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+                    
+          if (fileElem !== fileEl
+              && (fileName === fileElem.querySelector('.name').textContent)) {
+            
+            // split extension from file name
+            fileName = splitFileName(fileName);
+            
+            // add a differentiating number
+            // and reconstruct file name
+            fileName = fileName[0] + '-1' + fileName[1];
+            
+          }
+          
+        });
+        
+        fileEl.querySelector('.name').textContent = fileName;
+        
+        
+        // change selected file
+        changeSelectedFile(treeLoc.join(), fileContent, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+        
+        
+        // open file
+        
+        // show file content in codeit
+        cd.textContent = '\r\n';
+
+        // change codeit lang
+        cd.lang = getFileLang(fileName);
+
+        // clear codeit history
+        cd.history = [];
+
+        // update line numbers
+        updateLineNumbersHTML();
+        
+        // if on desktop
+        if (!isMobile) {
+          
+          // set caret pos in codeit
+          cd.setSelection(0, 0);
+          
+          // check codeit scrollbar
+          checkScrollbarArrow();
+          
+        }
+
+
+        // create commit
+        const commitMessage = 'Create ' + fileName;
+        
+        const commitFile = {
+          name: fileName,
+          dir: treeLoc.join(),
+          content: encodeUnicode(fileContent)
+        };
+
+        let commit = {
+          message: commitMessage,
+          file: commitFile
+        };
+
+        // push file asynchronously
+        const newSha = await git.push(commit);
+
+        // update file sha in HTML with new sha from Git
+        setAttr(fileEl, 'sha', newSha);
+
+        // change selected file
+        changeSelectedFile(treeLoc.join(), newSha, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+
+        // Git file is eclipsed (not updated) in browser private cache,
+        // so store the updated file in modifiedFiles object for 1 minute after commit
+        if (modifiedFiles[fileContent]) {
+          
+          onFileEclipsedInCache(fileContent, newSha, selectedFile);
+          
+        } else {
+          
+          onFileEclipsedInCache(false, newSha, selectedFile);
+          
+        }
+
+
+        // remove push listener
+        pushWrapper.removeEventListener('click', pushListener);
+
+        // add file event listener
+        fileEl.addEventListener('click', (e) => {
+
+          // if not clicked on push button
+          let pushWrapper = fileEl.querySelector('.push-wrapper');
+          let clickedOnPush = (e.target == pushWrapper);
+
+          if (!clickedOnPush) {
+
+            // if file not already selected
+            if (!fileEl.classList.contains('selected')) {
+
+              // load file
+              loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+
+            } else if (isMobile) { // if on mobile device
+
+              // update bottom float
+              updateFloat();
+
+            }
+
+          } else {
+
+            // play push animation
+            playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+            // push file
+            pushFileFromHTML(fileEl);
+
+          }
+
+        });
+
+      }
+
+    }
+    
+  } else {
+    
+    // if already adding a new file, focus it
+    fileWrapper.querySelector('.item.focused .name').focus();
+    
+  }
+  
+})
+
+
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
 
@@ -412,14 +687,25 @@ learnShare.addEventListener('click', () => {
     title: "Share Codeit",
     text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me! " + window.location.origin
   };
+  
+  if (!isWindows) {
 
-  try {
+    try {
 
-    navigator.share(shareData);
+      navigator.share(shareData);
 
-  } catch(err) {
+    } catch(e) {
+
+      // if could not open share dialog, share on Twitter
+      window.open('https://twitter.com/intent/tweet' +
+                  '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
+                  '_blank');
+
+    }
     
-    // if could not open share dialog, share on Twitter
+  } else {
+    
+    // share on Twitter
     window.open('https://twitter.com/intent/tweet' +
                 '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
                 '_blank');
@@ -442,6 +728,7 @@ function toggleSidebar(open) {
   if (open) {
 
     body.classList.add('expanded');
+    sidebarToggle.classList.add('visible');
 
     if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
@@ -450,6 +737,7 @@ function toggleSidebar(open) {
   } else {
 
     body.classList.remove('expanded');
+    sidebarToggle.classList.remove('visible');
 
     if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = '#313744';
@@ -482,11 +770,11 @@ function checkScrollbarArrow() {
 
       // move sidebar arrow up to make
       // way for horizontal scrollbar
-      github.classList.add('scrollbar');
+      body.classList.add('scroll-enabled');
 
     } else {
 
-      github.classList.remove('scrollbar');
+      body.classList.remove('scroll-enabled');
 
     }
 
@@ -658,7 +946,7 @@ function setupEditor() {
   // disable Ctrl/Cmd+S
   document.addEventListener('keydown', (e) => {
 
-    if (e.key === 's' && isKeyEventMeta(e)) {
+    if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
 

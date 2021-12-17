@@ -3,12 +3,15 @@ const body = document.body,
 
       cd = document.querySelector('cd-el'),
 
-      bottomFloat = document.querySelector('.bottom-float'),
+      bottomWrapper = document.querySelector('.bottom-wrapper'),
+      
+      bottomFloat = bottomWrapper.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
 
-      github = document.querySelector('.github'),
+      sidebarToggle = document.querySelector('.sidebar-toggle'),
+      previewToggle = document.querySelector('.preview-toggle'),
 
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
@@ -30,26 +33,34 @@ const body = document.body,
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
-
+      
+      addButton = titleScreen.querySelector('.add'),
+      
+      sidebarBackground = document.querySelector('.sidebar-background'),
+      
       fileWrapper = sidebar.querySelector('.files'),
-
+      
       versionEl = learnWrapper.querySelector('.version'),
+      learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
-
-      logoutButton = learnWrapper.querySelector('.logout');
-
+      
+      liveView = document.querySelector('.live-view');
 
 
 // version
-const version = '1.5.0';
+const version = '1.8.0';
 versionEl.innerText = version;
 
 
 // dev build
 let isDev = false;
+
 if (window.location.href.includes('dev')) {
+  
   isDev = true;
+  learnTitle.innerHTML += '<sup>dev</sup>';
+  
 }
 
 
@@ -64,7 +75,8 @@ function startLoading() {
   loader.style.opacity = 1;
 
   window.setTimeout(load, 0);
-
+  
+  if (loadInterval) window.clearInterval(loadInterval);
   loadInterval = window.setInterval(load, 400);
 
 }
@@ -72,6 +84,7 @@ function startLoading() {
 function stopLoading() {
 
   window.clearInterval(loadInterval);
+  loadInterval = false;
 
   loader.style.width = '100%';
   loader.style.opacity = 0;
@@ -84,7 +97,7 @@ function load() {
 
   loadPercent += 10;
 
-  if (loadPercent != 100) {
+  if (loadPercent <= 100) {
 
     loader.style.transition = '';
     loader.style.width = loadPercent + '%';
@@ -201,6 +214,18 @@ let onNextFrame = (callback) => {
   
   window.requestAnimationFrame(callback);
 
+}
+
+
+// copy
+let copy = (text) => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textArea);
 }
 
 

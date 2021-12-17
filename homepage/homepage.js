@@ -162,3 +162,37 @@ function checkPWA() {
 
 document.addEventListener('visibilitychange', () => { window.setTimeout(checkPWA, 2000) });
 checkPWA();
+
+
+// add scroll event listeners
+
+const screenHeight = window.innerHeight;
+
+const featurePoints = document.querySelectorAll('#features .ftPoint');
+
+const startPointAnimation = screenHeight / 3;
+const pointStaggerInterval = 34 + (7 * 5);
+
+function checkScrollAnimations() {
+  
+  // window scroll position
+  const scrolled = window.scrollY || window.pageYOffset;  
+  
+  // add staggered feature points animation
+  featurePoints.forEach((point, index) => {
+    
+    const pointAnimation = startPointAnimation + (pointStaggerInterval * index);
+    
+    if (scrolled >= pointAnimation) {
+      point.classList.add('visible');
+    } else {
+      point.classList.remove('visible');
+    }
+    
+  });
+  
+}
+
+
+window.addEventListener('scroll', checkScrollAnimations);
+checkScrollAnimations();

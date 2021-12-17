@@ -10,11 +10,16 @@ let githubToken, treeLoc;
 window.onload = () => {
 
   githubToken = getStorage('token');
+  
+  if (githubToken == 'undefined') {
+    githubToken = null;
+  }
+  
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
-
+  
   loginButton.addEventListener('click', () => {
 
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo', 'Login with Github', 'height=575,width=575');
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,write:org', 'Login with Github', 'height=575,width=575');
 
   })
 
@@ -23,6 +28,19 @@ window.onload = () => {
 
     // hide intro screen
     sidebar.classList.remove('intro');
+    
+    // if on safari, refresh header color
+    if (isSafari) {
+      
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+      
+      onNextFrame(() => {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+        
+      });
+      
+    }
 
     // start loading
     startLoading();
@@ -55,3 +73,4 @@ async function getGithubToken(githubCode) {
   renderSidebarHTML();
 
 }
+

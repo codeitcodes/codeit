@@ -15,10 +15,20 @@ function getFileLang(src) {
   
   src = src.replaceAll('\n', '');
 
-  var extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
+  const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
   return EXTENSIONS[extension] || extension;
 
 }
+
+function splitFileName(src) {
+  
+  src = src.replaceAll('\n', '');
+
+  const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
+  return [src.replace(('.' + extension), ''), '.' + extension];
+  
+}
+
 
 function processFile(file) {
 
