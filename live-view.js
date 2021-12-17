@@ -13,6 +13,7 @@ async function setupLiveView() {
     saveSidebarStateLS();
     
     treeLoc = urlQuery.split('+')[0].split(',');
+    saveTreeLocLS(treeLoc);
     
     const fileName = urlQuery.split('+')[1].split(',')[0];
     const fileSha = urlQuery.split('+')[1].split(',')[1];
