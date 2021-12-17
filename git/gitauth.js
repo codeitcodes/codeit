@@ -20,6 +20,8 @@ window.onload = async () => {
   const url = new URL(window.location.href);
   const urlQuery = url.searchParams.get('q');
   
+  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  
   if (urlQuery) {
     
     toggleSidebar(false);
