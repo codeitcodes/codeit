@@ -283,6 +283,8 @@ body.safari .live-buttons .live-button.share path.ios {
   right: 0;
   bottom: 0;
   left: -1px;
+  top: 33px;
+  transform: translateY(calc(100% - 56px));
   padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
   color: #d4d5d7;
@@ -292,7 +294,6 @@ body.safari .live-buttons .live-button.share path.ios {
   box-sizing: border-box;
   will-change: transform;
   transition: none;
-  display: none;
   opacity: 0;
   z-index: 1000;
 }
@@ -301,15 +302,11 @@ body:not(.mobile) .live-view {
   opacity: 1;
   transform: translateX(100%);
   transition: .4s var(--cubic-function) transform;
-  display: block;
 }
 
 body.mobile .live-view {
-  top: 33px;
-  transform: translateY(calc(100% - 56px));
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
-  display: block;
 }
 
 .live-view.visible {
