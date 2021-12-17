@@ -161,7 +161,7 @@ function addBottomSwipeListener() {
                    window.location.origin + '/?q=' + encodeURIComponent(treeLoc.join(',') + '+' + selectedFile.name + ',' + selectedFile.sha)
         }
         
-        if (!isMobile) {
+        if (isMobile) {
           
           try {
 
