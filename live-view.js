@@ -152,6 +152,8 @@ if (isMobile) {
       // retract bottom float
       bottomWrapper.classList.remove('expanded');
       
+      toggleLiveView(selectedFile);
+      
     }
     
   });
