@@ -19,5 +19,6 @@ Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safa
 Your data stays between you and your Git hosting provider. <3
 <h4>Supports 270+ languages</h4>
 HTML, CSS, JavaScript, Python, C, C++, C#, Ruby, Java, Brainfuck and more.
+<hr>
 <h4>Special Thanks</h4>
 Codeit's logo was created by <a href="https://twitter.com/sandorqi">@sandorqi</a>.
