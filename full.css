@@ -94,6 +94,16 @@ body.notransition .bottom-wrapper {
   height: 33px;
 }
 
+body.safari .bottom-wrapper.expanded.fromtop {
+  top: env(safe-area-inset-top, 0px);
+  bottom: auto;
+  transform: none;
+}
+
+.bottom-wrapper.notransition, .bottom-wrapper.notransition * {
+  transition: none;
+}
+
 .bottom-float {
   position: relative;
   margin: 45px 0;
@@ -307,15 +317,15 @@ body:not(.mobile) .live-view {
   transition: .4s var(--cubic-function) transform;
 }
 
-.live-view.visible {
-  transform: none !important;
-  pointer-events: auto;
-}
-
+.live-view.visible,
 .bottom-wrapper.expanded + .live-view {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+
+.bottom-wrapper.notransition + .live-view {
+  transition: none;
 }
 
 .live-view::before {
