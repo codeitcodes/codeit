@@ -320,7 +320,7 @@ body:not(.mobile) .live-view {
 .live-view.visible,
 .bottom-wrapper.expanded + .live-view {
   opacity: 1;
-  transform: none;
+  transform: none !important;
   pointer-events: auto;
 }
 
