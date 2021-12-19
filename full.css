@@ -94,7 +94,7 @@ body.notransition .bottom-wrapper {
   height: 33px;
 }
 
-body.safari .bottom-wrapper.expanded.fromtop {
+.bottom-wrapper.expanded.fromtop {
   top: env(safe-area-inset-top, 0px);
   bottom: auto;
   transform: none;
