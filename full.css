@@ -12,7 +12,7 @@ html, body {
 
 @supports (font-variation-settings: normal) {
   html, body {
-    font-family: 'Inter var', 'Inter', system-ui, sans-serif;
+    font-family: 'Inter var', system-ui, sans-serif;
   }
 }
 
