@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v219';
+const CACHE_NAME = 'static-cache-v220';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -31,8 +31,8 @@ const FILES_TO_CACHE = [
 
   '/fonts/fonts.css',
   
-  '/fonts/Sans-Mono/SansMono-Regular.woff2',
-  '/fonts/Sans-Mono/SansMono-Bold.woff2',
+  '/fonts/Mono-Sans/MonoSans-Regular.woff2',
+  '/fonts/Mono-Sans/MonoSans-Bold.woff2',
   
   '/fonts/Inter/Inter.var.woff2',
   '/fonts/Inter/Inter-Regular.woff2',
