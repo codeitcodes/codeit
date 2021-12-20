@@ -298,10 +298,19 @@ function addBottomSwipeListener() {
           if (isSafari) {
 
             bottomWrapper.classList.remove('fromtop');
+            bottomWrapper.classList.add('notransition');
 
-            // retract bottom float
             onNextFrame(() => {
-              bottomWrapper.classList.remove('expanded');
+
+              bottomWrapper.classList.remove('notransition');
+
+              onNextFrame(() => {
+
+                // retract bottom float
+                bottomWrapper.classList.remove('expanded');
+
+              });
+
             });
 
           } else {
