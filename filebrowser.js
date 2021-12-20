@@ -34,11 +34,13 @@ async function renderSidebarHTML() {
   
   // map tree location
   const [user, repo, contents] = treeLoc;
-
+  
+  let resp;
+  
   // get items in current tree from git
   try {
     
-    const resp = await git.getItems(treeLoc);
+    resp = await git.getItems(treeLoc);
     
   } catch(e) {
     
