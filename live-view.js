@@ -166,11 +166,21 @@ function addBottomSwipeListener() {
       // if did not click on share button
       if (!clickedOnShare) {
         
-        // retract bottom float
-        bottomWrapper.classList.remove('expanded');
-        
         // fix bottom float on safari
-        if (isSafari) bottomWrapper.classList.remove('fromtop');
+        if (isSafari) {
+          
+          // retract bottom float
+          bottomWrapper.classList.remove('expanded');
+          bottomWrapper.classList.remove('fromtop');
+          
+        } else {
+          
+          // retract bottom float
+          onNextFrame(() => {
+            bottomWrapper.classList.remove('expanded');
+          });
+          
+        }
 
         toggleLiveView(selectedFile);
         
@@ -275,7 +285,20 @@ function addBottomSwipeListener() {
           bottomWrapper.classList.remove('expanded');
           
           // fix bottom float on safari
-          if (isSafari) bottomWrapper.classList.remove('fromtop');
+          if (isSafari) {
+
+            // retract bottom float
+            bottomWrapper.classList.remove('expanded');
+            bottomWrapper.classList.remove('fromtop');
+
+          } else {
+
+            // retract bottom float
+            onNextFrame(() => {
+              bottomWrapper.classList.remove('expanded');
+            });
+
+          }
           
           toggleLiveView(selectedFile);
           
