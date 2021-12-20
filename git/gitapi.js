@@ -59,7 +59,14 @@ let git = {
     }
 
     // get the query
-    const resp = await axios.get(query, githubToken);
+    
+    let resp;
+    
+    try {
+      
+      resp = await axios.get(query, githubToken);
+      
+    } catch(e) {}
     
     return resp;
     
