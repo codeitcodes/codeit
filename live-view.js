@@ -169,16 +169,17 @@ function addBottomSwipeListener() {
         // fix bottom float on safari
         if (isSafari) {
           
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
           bottomWrapper.classList.remove('fromtop');
-          
-        } else {
           
           // retract bottom float
           onNextFrame(() => {
             bottomWrapper.classList.remove('expanded');
           });
+          
+        } else {
+          
+          // retract bottom float
+          bottomWrapper.classList.remove('expanded');
           
         }
 
@@ -287,16 +288,17 @@ function addBottomSwipeListener() {
           // fix bottom float on safari
           if (isSafari) {
 
-            // retract bottom float
-            bottomWrapper.classList.remove('expanded');
             bottomWrapper.classList.remove('fromtop');
-
-          } else {
 
             // retract bottom float
             onNextFrame(() => {
               bottomWrapper.classList.remove('expanded');
             });
+
+          } else {
+
+            // retract bottom float
+            bottomWrapper.classList.remove('expanded');
 
           }
           
