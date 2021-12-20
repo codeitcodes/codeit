@@ -66,7 +66,11 @@ let git = {
       
       resp = await axios.get(query, githubToken);
       
-    } catch(e) {}
+    } catch(e) {
+      
+      console.log('error');
+      
+    }
     
     return resp;
     
