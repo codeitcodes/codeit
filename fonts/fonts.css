@@ -1,9 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 @font-face {
-  font-family: 'Google Sans Mono';
-  src: url('googlesansmono.woff2') format('woff2');
-  font-weight: normal;
+  font-family: 'Inter';
   font-style: normal;
+  font-weight: 100 900;
   font-display: swap;
+  src: url('Inter-roman.var.woff2') format('woff2');
+  font-named-instance: 'Regular';
+}
+
+@font-face {
+  font-family: 'Google Sans Mono';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('googlesansmono.woff2') format('woff2');
+}
+
+
+@font-face {
+  font-family: 'Inter Traditional';
+  font-style:  normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("inter-traditional/Inter-Light.woff2?v=3.19") format("woff2");
+}
+
+@font-face {
+  font-family: 'Inter Traditional';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("inter-traditional/Inter-Regular.woff2?v=3.19") format("woff2");
+}
+
+@font-face {
+  font-family: 'Inter Traditional';
+  font-style:  normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("inter-traditional/Inter-Medium.woff2?v=3.19") format("woff2");
+}
+
+@font-face {
+  font-family: 'Inter Traditional';
+  font-style:  normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("inter-traditional/Inter-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'Inter Traditional';
+  font-style:  normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("inter-traditional/Inter-Bold.woff2?v=3.19") format("woff2");
 }
