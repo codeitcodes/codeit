@@ -230,78 +230,108 @@ let copy = (text) => {
 
 
 // HTTP Request
-let axios = {
-  'get': (url, token) => {
+let axios = { 
+  
+  'get': (url, auth) => {
+    
     return new Promise((resolve, reject) => {
-      try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
-          }
-        };
 
-        xmlhttp.open('GET', url, true);
+      const xmlhttp = new XMLHttpRequest();
 
-        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+      xmlhttp.onload = () => {
+        resolve(JSON.parse(xmlhttp.responseText));
+      };
 
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.onerror = (e) => {
+        reject(e);
+      };
+
+      xmlhttp.open('GET', url, true);
+
+      if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
+
+      xmlhttp.send();
+        
     });
+  
   },
-  'post': (url, data, token) => {
+  
+  'post': (url, data, auth) => {
+    
     return new Promise((resolve, reject) => {
-      try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
-            resolve(JSON.parse(this.responseText));
-          }
-        };
 
-        xmlhttp.open('POST', url, true);
+      const xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.setRequestHeader('Accept', 'application/json');
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        xmlhttp.send(JSON.stringify(data));
-      } catch(e) { reject(e) }
+      xmlhttp.onload = () => {
+        resolve(JSON.parse(xmlhttp.responseText));
+      };
+
+      xmlhttp.onerror = (e) => {
+        reject(e);
+      };
+
+      xmlhttp.open('POST', url, true);
+
+      if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
+      
+      data = data ? JSON.stringify(data) : '';
+      
+      xmlhttp.send(data);
+        
     });
+  
   },
-  'put': (url, token, data) => {
+  
+  'put': (url, data, auth) => {
+    
     return new Promise((resolve, reject) => {
-      try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
-            resolve(JSON.parse(this.responseText));
-          }
-        };
 
-        xmlhttp.open('PUT', url, true);
+      const xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+      xmlhttp.onload = () => {
+        resolve(JSON.parse(xmlhttp.responseText));
+      };
 
-        xmlhttp.send(JSON.stringify(data));
-      } catch(e) { reject(e) }
+      xmlhttp.onerror = (e) => {
+        reject(e);
+      };
+
+      xmlhttp.open('PUT', url, true);
+
+      if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
+      
+      data = data ? JSON.stringify(data) : '';
+      
+      xmlhttp.send(data);
+        
     });
+  
   },
-  'delete': (url, token) => {
+  
+  'delete': (url, auth) => {
+    
     return new Promise((resolve, reject) => {
-      try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
-          }
-        };
 
-        xmlhttp.open('DELETE', url, true);
+      const xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.onload = () => {
+        resolve(JSON.parse(xmlhttp.responseText));
+      };
+
+      xmlhttp.onerror = (e) => {
+        reject(e);
+      };
+
+      xmlhttp.open('DELETE', url, true);
+
+      if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
+
+      xmlhttp.send();
+      
     });
+  
   }
+  
 };
 
 
