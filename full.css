@@ -98,6 +98,7 @@ body.notransition .bottom-wrapper {
   top: env(safe-area-inset-top, 0px);
   bottom: auto;
   transform: none;
+  transition: none;
 }
 
 .bottom-wrapper.notransition, .bottom-wrapper.notransition * {
