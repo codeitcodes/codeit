@@ -32,7 +32,6 @@ const FILES_TO_CACHE = [
   '/fonts/fonts.css',
   
   '/fonts/Sans-Mono/SansMono-Regular.woff2',
-  '/fonts/Sans-Mono/SansMono-Italic.woff2',
   '/fonts/Sans-Mono/SansMono-Bold.woff2',
   
   '/fonts/Inter/Inter.var.woff2',
