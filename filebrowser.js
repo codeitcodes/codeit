@@ -44,6 +44,8 @@ async function renderSidebarHTML() {
     
   } catch(e) {
     
+    console.log('error');
+    
     // if failed to get items,
     // delete auth token and show login screen
     
