@@ -50,6 +50,8 @@ async function renderSidebarHTML() {
     
     sidebar.classList.add('intro');
     
+    return;
+    
   }
   
   let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
