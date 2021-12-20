@@ -249,9 +249,15 @@ function addBottomSwipeListener() {
           
           // fix bottom float on safari
           // when finished transitioning
-          window.setTimeout(() => {
-            bottomWrapper.classList.add('fromtop');
-          }, 400);
+          if (isSafari) {
+            
+            window.setTimeout(() => {
+              
+              bottomWrapper.classList.add('fromtop');
+              
+            }, 400);
+            
+          }
           
           toggleLiveView(selectedFile);
           
