@@ -124,11 +124,6 @@ cd-el {
   color: #75bfff;
 }
 
-.token.important,
-.token.bold {
-  font-weight: 400;
-}
-
 .token.italic {
   font-style: normal;
 }
