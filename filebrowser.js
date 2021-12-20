@@ -36,7 +36,21 @@ async function renderSidebarHTML() {
   const [user, repo, contents] = treeLoc;
 
   // get items in current tree from git
-  const resp = await git.getItems(treeLoc);
+  try {
+    
+    const resp = await git.getItems(treeLoc);
+    
+  } catch(e) {
+    
+    // if failed to get items,
+    // delete token and show login screen
+    
+    githubToken = '';
+    saveAuthTokenLS();
+    
+    sidebar.classList.add('intro');
+    
+  }
   
   let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
 
