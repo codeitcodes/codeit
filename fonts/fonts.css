@@ -23,42 +23,10 @@
 
 @font-face {
   font-family: 'Mono Sans';
-  font-style: italic;
-  font-weight: normal;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-Italic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-SemiBold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
   font-style: normal;
   font-weight: bold;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
-  font-style: italic;
-  font-weight: bold;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-BoldItalic.woff2') format('woff2');
 }
 
 
@@ -74,26 +42,10 @@
 
 @font-face {
   font-family: 'Roboto Mono';
-  font-style: italic;
-  font-weight: normal;
-  font-display: swap;
-  src: url('Roboto-Mono/RobotoMono-Italic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto Mono';
   font-style: bold;
   font-weight: normal;
   font-display: swap;
   src: url('Roboto-Mono/RobotoMono-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto Mono';
-  font-style: bold;
-  font-weight: italic;
-  font-display: swap;
-  src: url('Roboto-Mono/RobotoMono-BoldItalic.woff2') format('woff2');
 }
 
 @font-face {
