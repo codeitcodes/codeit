@@ -45,6 +45,9 @@ async function renderSidebarHTML() {
     // if failed to get items,
     // delete auth token and show login screen
     
+    // stop loading
+    stopLoading();
+    
     githubToken = '';
     saveAuthTokenLS();
     
