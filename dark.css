@@ -3,9 +3,6 @@
  * Colors based on Base16 Ocean Dark
  */
 
-@import url('/fonts/fonts.css');
-
-
 body:not(.mobile) ::-webkit-scrollbar {
   width: 16px;
   height: 16px;
