@@ -38,6 +38,7 @@ const FILES_TO_CACHE = [
   '/fonts/Inter/Inter-Regular.woff2',
   
   '/fonts/Roboto-Mono/RobotoMono-Regular.woff2',
+  '/fonts/Roboto-Mono/RobotoMono-Bold.woff2',
   
   'https://plausible.io/js/plausible.js',
   
