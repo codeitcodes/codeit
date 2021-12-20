@@ -44,7 +44,22 @@ async function renderSidebarHTML() {
     
   } catch(e) {
     
-    console.log('error');
+    // if failed to get items,
+    // delete auth token and show login screen
+    
+    // stop loading
+    stopLoading();
+    
+    githubToken = '';
+    saveAuthTokenLS();
+    
+    sidebar.classList.add('intro');
+    
+    return;
+    
+  }
+  
+  if (resp.message == 'Bad credentials') {
     
     // if failed to get items,
     // delete auth token and show login screen
@@ -67,7 +82,7 @@ async function renderSidebarHTML() {
   let out = '';
 
   // if response
-  if (resp != '') {
+  if (resp) {
 
     // show title
 
