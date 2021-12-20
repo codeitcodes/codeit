@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url('fonts/fonts.css');
 
 html, body {
   background: #313744;
@@ -10,9 +10,9 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-@supports (font-variation-settings: normal) {
+@supports not (font-variation-settings: normal) {
   html, body {
-    font-family: 'Inter var', system-ui, sans-serif;
+    font-family: 'Inter Traditional', system-ui, sans-serif;
   }
 }
 
