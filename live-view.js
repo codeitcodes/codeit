@@ -168,6 +168,9 @@ function addBottomSwipeListener() {
         
         // retract bottom float
         bottomWrapper.classList.remove('expanded');
+        
+        // fix bottom float on safari
+        if (isSafari) bottomWrapper.classList.remove('fromtop');
 
         toggleLiveView(selectedFile);
         
