@@ -243,6 +243,7 @@ let axios = {
       };
 
       xmlhttp.onerror = (e) => {
+        console.log('error');
         reject(e);
       };
 
