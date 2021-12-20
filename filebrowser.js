@@ -67,7 +67,7 @@ async function renderSidebarHTML() {
   let out = '';
 
   // if response
-  if (resp) {
+  if (resp != '') {
 
     // show title
 
