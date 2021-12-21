@@ -67,3 +67,10 @@ function saveAuthTokenLS(authToken) {
   setStorage('token', authToken);
 
 }
+
+function logOutLS() {
+  
+  setStorage('token', '');
+  setStorage('user', '');
+  
+}
