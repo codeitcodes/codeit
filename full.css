@@ -101,8 +101,12 @@ body.notransition .bottom-wrapper {
   transition: none;
 }
 
+.bottom-wrapper.expanded.fromtop * {
+  transition: none !important;
+}
+
 .bottom-wrapper.notransition, .bottom-wrapper.notransition * {
-  transition: none;
+  transition: none !important;
 }
 
 .bottom-float {
