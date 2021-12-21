@@ -69,7 +69,7 @@ function saveGitTokenLS(gitToken) {
 }
 
 
-function logOutLS() {
+function logOutFromGitLS() {
   
   gitToken = '';
   loggedUser = '';
