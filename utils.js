@@ -249,6 +249,7 @@ let axios = {
 
       xmlhttp.open('GET', url, true);
 
+      xmlhttp.setRequestHeader('Accept', 'application/json');
       if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
 
       xmlhttp.send();
@@ -264,7 +265,7 @@ let axios = {
       const xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onload = () => {
-        resolve(xmlhttp.responseText);
+        resolve(JSON.parse(xmlhttp.responseText));
       };
 
       xmlhttp.onerror = (e) => {
@@ -272,7 +273,8 @@ let axios = {
       };
 
       xmlhttp.open('POST', url, true);
-
+      
+      xmlhttp.setRequestHeader('Accept', 'application/json');
       if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
       
       data = data ? JSON.stringify(data) : '';
@@ -298,7 +300,8 @@ let axios = {
       };
 
       xmlhttp.open('PUT', url, true);
-
+      
+      xmlhttp.setRequestHeader('Accept', 'application/json');
       if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
       
       data = data ? JSON.stringify(data) : '';
@@ -325,6 +328,7 @@ let axios = {
 
       xmlhttp.open('DELETE', url, true);
 
+      xmlhttp.setRequestHeader('Accept', 'application/json');
       if (auth) xmlhttp.setRequestHeader('Authorization', 'token ' + auth);
 
       xmlhttp.send();
