@@ -264,7 +264,7 @@ let axios = {
       const xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onload = () => {
-        resolve(JSON.parse(xmlhttp.responseText));
+        resolve(xmlhttp.responseText);
       };
 
       xmlhttp.onerror = (e) => {
@@ -290,7 +290,7 @@ let axios = {
       const xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onload = () => {
-        resolve(JSON.parse(xmlhttp.responseText));
+        resolve(xmlhttp.responseText);
       };
 
       xmlhttp.onerror = (e) => {
