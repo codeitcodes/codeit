@@ -69,12 +69,14 @@ if (window.location.href.includes('dev')) {
 let loadInterval;
 
 function startLoading() {
-
+      
+  sidebar.classList.add('loading');
+  
   loader.style.width = '0%';
   loader.style.transition = 'none';
   loader.style.opacity = 1;
 
-  window.setTimeout(load, 0);
+  onNextFrame(load);
   
   if (loadInterval) window.clearInterval(loadInterval);
   loadInterval = window.setInterval(load, 400);
@@ -82,7 +84,9 @@ function startLoading() {
 }
 
 function stopLoading() {
-
+  
+  sidebar.classList.remove('loading');
+  
   window.clearInterval(loadInterval);
   loadInterval = false;
 
