@@ -32,8 +32,25 @@ async function renderSidebarHTML() {
   // hide search screen
   header.classList.remove('searching');
   
+  
   // map tree location
   const [user, repo, contents] = treeLoc;
+  
+  
+  // if not logged into Github
+  // and navigated to main Repositories page
+  if (githubToken == '' && user === '') {
+    
+    // stop loading
+    stopLoading();
+    
+    // show login screen
+    sidebar.classList.add('intro');
+    
+    return;
+    
+  }
+  
   
   let resp;
   
@@ -76,6 +93,7 @@ async function renderSidebarHTML() {
     return;
     
   }
+  
   
   let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
 
@@ -1027,7 +1045,8 @@ function updateLineNumbersHTML() {
 function setupSidebar() {
 
   // if not logged into Github
-  if (githubToken == '' && (treeLoc && treeLoc.length > 1 && treeLoc[0] !== '')) {
+  // and navigated to main Repositories page
+  if (githubToken == '' && treeLoc[0] === '') {
 
     // show intro screen
     sidebar.classList.add('intro');
