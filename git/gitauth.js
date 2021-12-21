@@ -69,9 +69,9 @@ async function getGithubToken(gitCode) {
                                '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
                                '&code=' + gitCode);
   
-  // save token to localStorage
+  // save git token to localStorage
   gitToken = resp.access_token;
-  saveAuthTokenLS(gitToken);
+  saveGitTokenLS(gitToken);
   
   
   // get logged user
