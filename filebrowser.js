@@ -120,8 +120,8 @@ async function renderSidebarHTML() {
 
     } else if (repo != '') {
       
-      // if navigating in other users' repos
-      if (user != 'barhatsor') {
+      // if repo is owned by another user
+      if (user != authUser.login) {
         
         // show username and repo name
         sidebarLogo.innerText = user + '/' + repo;
@@ -225,10 +225,21 @@ async function renderSidebarHTML() {
       
       // render repositories
       resp.forEach(item => {
-
-        // if user does not have admin permissions in repo,
-        // show admin name in title ([admin]/[repo])
-        let fullName = item.permissions.admin ? item.name : item.full_name;
+        
+        let fullName;
+        
+        // if repo is owned by another user
+        if (item.full_name.split[0] != authUser.login) {
+        
+          // show username and repo name
+          fullName = item.full_name;
+          
+        } else {
+          
+          // show repo name
+          fullName = item.name;
+          
+        }
 
         out += `
         <div class="item repo" fullname="`+ item.full_name +`">
