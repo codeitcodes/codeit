@@ -229,7 +229,7 @@ async function renderSidebarHTML() {
         let fullName;
         
         // if repo is owned by another user
-        if (item.full_name.split[0] != loggedUser.login) {
+        if (item.full_name.split('/')[0] != loggedUser.login) {
         
           // show username and repo name
           fullName = item.full_name;
