@@ -19,7 +19,7 @@ window.onload = () => {
   
   loginButton.addEventListener('click', () => {
 
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,write:org', 'Login with Github', 'height=575,width=575');
+    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
 
   })
 
@@ -59,18 +59,24 @@ window.onload = () => {
 async function getGithubToken(githubCode) {
 
   // post through CORS proxy to Github with clientId, clientSecret and code
-  var resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
-                              'https://github.com/login/oauth/access_token?' +
-                              'client_id=' + clientId +
-                              '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
-                              '&code=' + githubCode);
-
+  const resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
+                               'https://github.com/login/oauth/access_token?' +
+                               'client_id=' + clientId +
+                               '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
+                               '&code=' + githubCode);
+  
   // save token to localStorage
   githubToken = resp.access_token;
   saveAuthTokenLS(githubToken);
-
+  
   // render sidebar
   renderSidebarHTML();
+  
+  
+  // get username
+  const user = await axios.get('https://api.github.com/user', githubToken);
+  
+  // save username
+  setStorage('user', JSON.stringify(user));
 
 }
-
