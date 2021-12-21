@@ -107,15 +107,18 @@ async function renderSidebarHTML() {
     sidebarLogo.classList.remove('overflow');
 
     if (contents != '') {
-
-      // show path
-      sidebarLogo.innerText = repo + contents;
-
-      // if path is too long, overflow
-      if (sidebarLogo.innerText.length > 25) {
-
-        sidebarLogo.classList.add('overflow');
-
+      
+      // if repo is owned by another user
+      if (user != loggedUser.login) {
+        
+        // show username, repo name and path
+        sidebarLogo.innerText = user + '/' + repo + contents;
+        
+      } else {
+        
+        // show repo name and path
+        sidebarLogo.innerText = repo + contents;
+        
       }
 
     } else if (repo != '') {
