@@ -654,10 +654,6 @@ body.notransition .sidebar {
   max-width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
-.sidebar .header .logo.notransition {
-  transition: none;
-}
-
 .sidebar .header .title::before,
 .sidebar .header .title::after {
   content: '';
@@ -684,6 +680,11 @@ body.notransition .sidebar {
 
 .sidebar .header .title.scrolled-end::after {
   opacity: 0;
+}
+
+.sidebar .header .title.notransition::before,
+.sidebar .header .title.notransition::after {
+  transition: none;
 }
 
 /*
