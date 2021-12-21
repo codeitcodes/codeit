@@ -107,9 +107,7 @@ async function renderSidebarHTML() {
     let titleAnimation;
     
     if (contents != '') {
-      
-      titleAnimation = 'smooth';
-      
+            
       // if repo is owned by another user
       if (user != loggedUser.login) {
         
@@ -122,6 +120,9 @@ async function renderSidebarHTML() {
         sidebarLogo.innerText = repo + contents;
         
       }
+      
+      // animate title
+      if (sidebarTitle.children[0].scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
       
