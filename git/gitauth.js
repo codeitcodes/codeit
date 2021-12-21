@@ -12,7 +12,7 @@ window.onload = () => {
   githubToken = getStorage('token');
   
   if (githubToken == 'undefined') {
-    githubToken = null;
+    githubToken = '';
   }
   
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
