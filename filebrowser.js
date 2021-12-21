@@ -119,9 +119,19 @@ async function renderSidebarHTML() {
       }
 
     } else if (repo != '') {
-
-      // show repo name
-      sidebarLogo.innerText = repo;
+      
+      // if navigating in other users' repos
+      if (user != 'barhatsor') {
+        
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repo;
+        
+      } else {
+        
+        // show repo name
+        sidebarLogo.innerText = repo;
+        
+      }
 
     } else {
 
