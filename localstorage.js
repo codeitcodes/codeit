@@ -62,15 +62,19 @@ function saveSidebarStateLS() {
 
 }
 
-function saveAuthTokenLS(authToken) {
+function saveGitTokenLS(gitToken) {
 
-  setStorage('token', authToken);
+  setStorage('gitToken', gitToken);
 
 }
 
+
 function logOutLS() {
   
-  setStorage('token', '');
-  setStorage('user', '');
+  gitToken = '';
+  loggedUser = '';
+  
+  setStorage('gitToken', '');
+  setStorage('loggedUser', '');
   
 }
