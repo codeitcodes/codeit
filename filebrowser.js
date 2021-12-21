@@ -148,9 +148,9 @@ async function renderSidebarHTML() {
     
     // scroll to end of title
     
-    sidebarTitle.classList.add('notransition');
+    sidebarTitle.children[0].classList.add('notransition');
     onNextFrame(() => {
-      sidebarTitle.classList.remove('notransition');
+      sidebarTitle.children[0].classList.remove('notransition');
     });
     
     sidebarTitle.children[0].scrollTo({
