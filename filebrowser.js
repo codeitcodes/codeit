@@ -527,6 +527,39 @@ sidebarTitle.addEventListener('click', () => {
 })
 
 
+// show gradients on edges of sidebar title
+// when scrolling long titles
+
+sidebarTitle.children[0].addEventListener('scroll', () => {
+  
+  if (sidebarTitle.children[0].scrollLeft > 0) {
+    
+    sidebarTitle.classList.add('scrolled-start');
+    
+  } else {
+    
+    sidebarTitle.classList.remove('scrolled-start');
+    
+  }
+  
+})
+
+sidebarTitle.children[0].addEventListener('scroll', () => {
+  
+  if ((sidebarTitle.children[0].offsetWidth + sidebarTitle.children[0].scrollLeft)
+      == sidebarTitle.children[0].scrollWidth) {
+    
+    sidebarTitle.classList.add('scrolled-end');
+    
+  } else {
+    
+    sidebarTitle.classList.remove('scrolled-end');
+    
+  }
+  
+})
+
+
 // create new file on click of button
 addButton.addEventListener('click', () => {
   
