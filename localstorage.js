@@ -27,8 +27,6 @@ function loadLS() {
     
   }
   
-  authUser = JSON.parse(getStorage('authUser'));
-  
   setupLiveView();
   setupCodeitApp();
   
