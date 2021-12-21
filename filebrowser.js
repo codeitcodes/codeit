@@ -108,16 +108,16 @@ async function renderSidebarHTML() {
     
     if (contents != '') {
             
-      // if repo is owned by another user
-      if (loggedUser && user != loggedUser.login) {
-        
-        // show username, repo name and path
-        sidebarLogo.innerText = user + '/' + repo + contents;
-        
-      } else {
+      // if repo is owned by logged user
+      if (loggedUser && user == loggedUser.login) {
         
         // show repo name and path
         sidebarLogo.innerText = repo + contents;
+        
+      } else {
+        
+        // show username, repo name and path
+        sidebarLogo.innerText = user + '/' + repo + contents;
         
       }
       
@@ -126,16 +126,16 @@ async function renderSidebarHTML() {
 
     } else if (repo != '') {
       
-      // if repo is owned by another user
-      if (loggedUser && user != loggedUser.login) {
-        
-        // show username and repo name
-        sidebarLogo.innerText = user + '/' + repo;
-        
-      } else {
+      // if repo is owned by logged user
+      if (loggedUser && user == loggedUser.login) {
         
         // show repo name
         sidebarLogo.innerText = repo;
+        
+      } else {
+        
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repo;
         
       }
 
@@ -251,16 +251,16 @@ async function renderSidebarHTML() {
         
         let fullName;
         
-        // if repo is owned by another user
-        if (loggedUser && item.full_name.split('/')[0] != loggedUser.login) {
-        
-          // show username and repo name
-          fullName = item.full_name;
-          
-        } else {
+        // if repo is owned by logged user
+        if (loggedUser && item.full_name.split('/')[0] == loggedUser.login) {
           
           // show repo name
           fullName = item.name;
+          
+        } else {
+          
+          // show username and repo name
+          fullName = item.full_name;
           
         }
 
