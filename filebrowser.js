@@ -542,10 +542,6 @@ sidebarTitle.children[0].addEventListener('scroll', () => {
     
   }
   
-})
-
-sidebarTitle.children[0].addEventListener('scroll', () => {
-  
   if ((sidebarTitle.children[0].offsetWidth + sidebarTitle.children[0].scrollLeft)
       == sidebarTitle.children[0].scrollWidth) {
     
