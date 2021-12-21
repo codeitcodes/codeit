@@ -166,6 +166,9 @@ function addBottomSwipeListener() {
       // if did not click on share button
       if (!clickedOnShare) {
         
+        e.preventDefault();
+        e.stopPropagation();
+        
         // fix bottom float on safari
         if (isSafari) {
           
@@ -291,9 +294,6 @@ function addBottomSwipeListener() {
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')) {
           
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
-          
           // fix bottom float on safari
           if (isSafari) {
 
@@ -312,7 +312,7 @@ function addBottomSwipeListener() {
               });
 
             });
-
+            
           } else {
 
             // retract bottom float
