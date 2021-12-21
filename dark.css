@@ -3,9 +3,6 @@
  * Colors based on Base16 Ocean Dark
  */
 
-@import url('/fonts/fonts.css');
-
-
 body:not(.mobile) ::-webkit-scrollbar {
   width: 16px;
   height: 16px;
@@ -50,7 +47,7 @@ cd-el {
   color: #a6c3d4;
   caret-color: #fff;
 
-  font-family: 'Google Sans Mono', 'Roboto Mono', monospace;
+  font-family: 'Mono Sans', 'Roboto Mono', monospace;
 
   font-size: 14px;
   line-height: 1.5;
@@ -125,11 +122,6 @@ cd-el {
 .token.tag,
 .token.selector {
   color: #75bfff;
-}
-
-.token.important,
-.token.bold {
-  font-weight: 400;
 }
 
 .token.italic {

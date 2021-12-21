@@ -89,45 +89,58 @@ pushWrapper.addEventListener('click', () => {
 })
 
 
-// if on mobile device
+// if on mobile
 if (isMobile) {
 
-  // show bottom float when scrolled up
+  cd.on('scroll', checkBottomFloat, false);
 
-  let lastScrollTop = 0;
+}
 
-  cd.on('scroll', () => {
 
-    let st = cd.scrollTop;
+// show bottom float when scrolled up
 
-    // if scrolled down
-    if (st > lastScrollTop) {
+let lastScrollTop = 0;
 
-      // hide bottom float
-      bottomWrapper.classList.add('hidden');
+function checkBottomFloat() {
 
-      // if scrolled to bottom of codeit
-      if ((st + cd.offsetHeight) >= cd.scrollHeight) {
+  let st = cd.scrollTop;
 
-        // show bottom float
-        bottomWrapper.classList.remove('hidden');
+  // if scrolled down
+  if (st > lastScrollTop) {
 
-      }
+    // hide bottom float
+    bottomWrapper.classList.add('hidden');
 
-    } else { // if scrolled up
+    // if scrolled to bottom of codeit
+    if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
-      // if passed threshold
-      if ((lastScrollTop - st) > 20) {
+      // set timeout
+      window.setTimeout(() => {
 
-        // show bottom float
-        bottomWrapper.classList.remove('hidden');
+        // if still on bottom of codeit
+        if ((st + cd.offsetHeight) >= cd.scrollHeight) {
 
-      }
+          // show bottom float
+          bottomFloat.classList.remove('hidden');
+
+        }
+
+      }, 400);
 
     }
 
-    lastScrollTop = st <= 0 ? 0 : st; // for mobile or negative scrolling
+  } else { // if scrolled up
 
-  }, false);
+    // if passed threshold
+    if ((lastScrollTop - st) > 20) {
+
+      // show bottom float
+      bottomWrapper.classList.remove('hidden');
+
+    }
+
+  }
+
+  lastScrollTop = st <= 0 ? 0 : st; // for mobile or negative scrolling
 
 }

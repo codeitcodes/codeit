@@ -5,9 +5,9 @@ async function setupLiveView() {
   const url = new URL(window.location.href);
   const urlQuery = url.searchParams.get('q');
   
-  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
-  
   if (urlQuery) {
+
+    window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
     
     if (isMobile) {
       
@@ -37,8 +37,19 @@ async function setupLiveView() {
       // update bottom float
       updateFloat();
       
+      // don't transition bottom float
+      bottomWrapper.classList.add('notransition');
+      
       // expand bottom float
       bottomWrapper.classList.add('expanded');
+      
+      // fix bottom float on safari
+      if (isSafari) bottomWrapper.classList.add('fromtop');
+      
+      // restore transition on next frame
+      onNextFrame(() => {
+        bottomWrapper.classList.remove('notransition');
+      });
       
     } else {
       
@@ -155,8 +166,34 @@ function addBottomSwipeListener() {
       // if did not click on share button
       if (!clickedOnShare) {
         
-        // retract bottom float
-        bottomWrapper.classList.remove('expanded');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // fix bottom float on safari
+        if (isSafari) {
+          
+          bottomWrapper.classList.remove('fromtop');
+          bottomWrapper.classList.add('notransition');
+          
+          onNextFrame(() => {
+            
+            bottomWrapper.classList.remove('notransition');
+            
+            onNextFrame(() => {
+              
+              // retract bottom float
+              bottomWrapper.classList.remove('expanded');
+              
+            });
+            
+          });
+          
+        } else {
+          
+          // retract bottom float
+          bottomWrapper.classList.remove('expanded');
+          
+        }
 
         toggleLiveView(selectedFile);
         
@@ -236,6 +273,18 @@ function addBottomSwipeListener() {
           // expand bottom float
           bottomWrapper.classList.add('expanded');
           
+          // fix bottom float on safari
+          // when finished transitioning
+          if (isSafari) {
+            
+            window.setTimeout(() => {
+              
+              bottomWrapper.classList.add('fromtop');
+              
+            }, 400);
+            
+          }
+          
           toggleLiveView(selectedFile);
           
         }
@@ -245,8 +294,31 @@ function addBottomSwipeListener() {
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')) {
           
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
+          // fix bottom float on safari
+          if (isSafari) {
+
+            bottomWrapper.classList.remove('fromtop');
+            bottomWrapper.classList.add('notransition');
+
+            onNextFrame(() => {
+
+              bottomWrapper.classList.remove('notransition');
+
+              onNextFrame(() => {
+
+                // retract bottom float
+                bottomWrapper.classList.remove('expanded');
+
+              });
+
+            });
+            
+          } else {
+
+            // retract bottom float
+            bottomWrapper.classList.remove('expanded');
+
+          }
           
           toggleLiveView(selectedFile);
           
@@ -266,20 +338,7 @@ function addBottomSwipeListener() {
 if (isMobile) {
   
   addBottomSwipeListener();
-  
-  sidebarBackground.addEventListener('click', () => {
-    
-    if (bottomWrapper.classList.contains('expanded')) {
-      
-      // retract bottom float
-      bottomWrapper.classList.remove('expanded');
-      
-      toggleLiveView(selectedFile);
-      
-    }
-    
-  });
-  
+
 } else {
   
   previewToggle.addEventListener('click', () => {

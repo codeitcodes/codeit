@@ -20,7 +20,7 @@ sidebarToggle.addEventListener('click', () => {
 
 
 // render sidebar
-// call this function when signed in to github
+// call this function when signed in to git
 // to render sidebar
 async function renderSidebarHTML() {
   
@@ -32,11 +32,67 @@ async function renderSidebarHTML() {
   // hide search screen
   header.classList.remove('searching');
   
+  
   // map tree location
   const [user, repo, contents] = treeLoc;
-
+  
+  
+  // if not logged into git
+  // and navigated to Repositories page
+  if (gitToken == '' && repo == '') {
+    
+    // stop loading
+    stopLoading();
+    
+    // show login screen
+    sidebar.classList.add('intro');
+    
+    return;
+    
+  }
+  
+  
+  let resp;
+  
   // get items in current tree from git
-  const resp = await git.getItems(treeLoc);
+  try {
+    
+    resp = await git.getItems(treeLoc);
+    
+  } catch(e) {
+    
+    // if failed to get items,
+    // delete auth token and show login screen
+    
+    // stop loading
+    stopLoading();
+    
+    // log out from git
+    logOutFromGitLS();
+    
+    sidebar.classList.add('intro');
+    
+    return;
+    
+  }
+  
+  if (resp.message == 'Bad credentials') {
+    
+    // if failed to get items,
+    // delete auth token and show login screen
+    
+    // stop loading
+    stopLoading();
+    
+    // log out from git
+    logOutFromGitLS();
+    
+    sidebar.classList.add('intro');
+    
+    return;
+    
+  }
+  
   
   let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
 
@@ -48,24 +104,40 @@ async function renderSidebarHTML() {
 
     // show title
 
-    sidebarLogo.classList.remove('overflow');
-
+    let titleAnimation;
+    
     if (contents != '') {
-
-      // show path
-      sidebarLogo.innerText = repo + contents;
-
-      // if path is too long, overflow
-      if (sidebarLogo.innerText.length > 25) {
-
-        sidebarLogo.classList.add('overflow');
-
+            
+      // if repo is owned by another user
+      if (user != loggedUser.login) {
+        
+        // show username, repo name and path
+        sidebarLogo.innerText = user + '/' + repo + contents;
+        
+      } else {
+        
+        // show repo name and path
+        sidebarLogo.innerText = repo + contents;
+        
       }
+      
+      // animate title
+      if (sidebarTitle.children[0].scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
-
-      // show repo name
-      sidebarLogo.innerText = repo;
+      
+      // if repo is owned by another user
+      if (user != loggedUser.login) {
+        
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repo;
+        
+      } else {
+        
+        // show repo name
+        sidebarLogo.innerText = repo;
+        
+      }
 
     } else {
 
@@ -73,6 +145,23 @@ async function renderSidebarHTML() {
       sidebarLogo.innerText = 'Repositories';
 
     }
+    
+    // scroll to end of title
+    
+    if (!titleAnimation) {
+      
+      sidebarTitle.classList.add('notransition');
+      
+      window.setTimeout(() => {
+        sidebarTitle.classList.remove('notransition');
+      }, 180);
+      
+    }
+    
+    sidebarTitle.children[0].scrollTo({
+      left: sidebarTitle.children[0].scrollWidth - sidebarTitle.children[0].offsetLeft,
+      behavior: titleAnimation
+    });
 
 
     // if navigating in repository
@@ -159,10 +248,21 @@ async function renderSidebarHTML() {
       
       // render repositories
       resp.forEach(item => {
-
-        // if user does not have admin permissions in repo,
-        // show admin name in title ([admin]/[repo])
-        let fullName = item.permissions.admin ? item.name : item.full_name;
+        
+        let fullName;
+        
+        // if repo is owned by another user
+        if (item.full_name.split('/')[0] != loggedUser.login) {
+        
+          // show username and repo name
+          fullName = item.full_name;
+          
+        } else {
+          
+          // show repo name
+          fullName = item.name;
+          
+        }
 
         out += `
         <div class="item repo" fullname="`+ item.full_name +`">
@@ -240,7 +340,7 @@ function addHTMLItemListeners() {
         // if item is a folder
 
         // change location
-        treeLoc[2] += '/' + item.innerText;
+        treeLoc[2] += '/' + item.innerText.replaceAll('\n', '');
         saveTreeLocLS(treeLoc);
 
         // render sidebar
@@ -318,6 +418,22 @@ async function pushFileFromHTML(fileEl) {
 // load file in sidebar and codeit
 async function loadFileInHTML(fileEl, fileSha) {
 
+  // clear existing selections in HTML
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+  
+  // select the new file in HTML
+  fileEl.classList.add('selected');
+  fileEl.scrollIntoViewIfNeeded();
+  
+  // show all files in HTML
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  header.classList.remove('searching');
+  
+  
   // if previous file selection exists
   if (selectedFile.sha) {
 
@@ -335,24 +451,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     }
 
   }
-
-
-  // show all files
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
   
-  header.classList.remove('searching');
-  
-  // clear existing selections
-  if (fileWrapper.querySelector('.selected')) {
-    fileWrapper.querySelector('.selected').classList.remove('selected');
-  }
-
-
-  // select the new file
-
-  fileEl.classList.add('selected');
-  fileEl.scrollIntoViewIfNeeded();
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
@@ -448,6 +547,35 @@ sidebarTitle.addEventListener('click', () => {
 
   }
 
+})
+
+
+// show gradients on edges of sidebar title
+// when scrolling long titles
+
+sidebarTitle.children[0].addEventListener('scroll', () => {
+  
+  if (sidebarTitle.children[0].scrollLeft > 0) {
+    
+    sidebarTitle.classList.add('scrolled-start');
+    
+  } else {
+    
+    sidebarTitle.classList.remove('scrolled-start');
+    
+  }
+  
+  if ((sidebarTitle.children[0].offsetWidth + sidebarTitle.children[0].scrollLeft)
+      >= sidebarTitle.children[0].scrollWidth) {
+    
+    sidebarTitle.classList.add('scrolled-end');
+    
+  } else {
+    
+    sidebarTitle.classList.remove('scrolled-end');
+    
+  }
+  
 })
 
 
@@ -891,7 +1019,10 @@ function setupEditor() {
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
       
     }
-
+    
+    // prevent bottom float disappearing on mobile
+    if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
+    
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -987,8 +1118,9 @@ function updateLineNumbersHTML() {
 
 function setupSidebar() {
 
-  // if not logged into Github
-  if (githubToken == null) {
+  // if not logged into git
+  // and navigated to Repositories page
+  if (gitToken == '' && treeLoc[1] == '') {
 
     // show intro screen
     sidebar.classList.add('intro');
@@ -1006,7 +1138,7 @@ function setupSidebar() {
 
     });
 
-  } else { // if logged into Github
+  } else { // if logged into git
 
     // render sidebar
     renderSidebarHTML();

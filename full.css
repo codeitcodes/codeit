@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url('fonts/fonts.css');
 
 html, body {
   background: #313744;
@@ -10,9 +10,9 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-@supports (font-variation-settings: normal) {
+@supports not (font-variation-settings: normal) {
   html, body {
-    font-family: 'Inter var', 'Inter', system-ui, sans-serif;
+    font-family: 'Inter Traditional', system-ui, sans-serif;
   }
 }
 
@@ -92,6 +92,21 @@ body.notransition .bottom-wrapper {
 .bottom-wrapper.expanded {
   transform: translateY(calc(-100vh + 100% - env(safe-area-inset-top, 0px)));
   height: 33px;
+}
+
+.bottom-wrapper.expanded.fromtop {
+  top: env(safe-area-inset-top, 0px);
+  bottom: auto;
+  transform: none;
+  transition: none;
+}
+
+.bottom-wrapper.expanded.fromtop * {
+  transition: none !important;
+}
+
+.bottom-wrapper.notransition, .bottom-wrapper.notransition * {
+  transition: none !important;
 }
 
 .bottom-float {
@@ -307,15 +322,15 @@ body:not(.mobile) .live-view {
   transition: .4s var(--cubic-function) transform;
 }
 
-.live-view.visible {
+.live-view.visible,
+.bottom-wrapper.expanded + .live-view {
+  opacity: 1;
   transform: none !important;
   pointer-events: auto;
 }
 
-.bottom-wrapper.expanded + .live-view {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
+.bottom-wrapper.notransition + .live-view {
+  transition: none;
 }
 
 .live-view::before {
@@ -468,6 +483,7 @@ body.expanded .sidebar-toggle svg .left {
   right: 0;
   left: auto;
   border-radius: 500px 0 0 500px;
+  box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   z-index: 1000;
 }
 
@@ -605,6 +621,8 @@ body.notransition .sidebar {
 .sidebar .header .title {
   display: flex;
   align-items: center;
+  position: relative;
+  flex: 1;
 }
 
 .sidebar .searchscreen .title {
@@ -624,19 +642,55 @@ body.notransition .sidebar {
 }
 
 .sidebar .header .logo {
+  padding: 7px 0;
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: calc(var(--sidebar-width) - 115px);
-  transition: .18s var(--ease-function) margin-left;
+  max-width: calc(var(--sidebar-width) - 140px);
+  overflow-x: overlay;
+  transition: .18s var(--ease-function);
+  transition-property: margin-left, max-width;
 }
 
 .sidebar .header.searching .logo {
   margin-left: var(--spacing-1);
+  max-width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
+.sidebar .header .title::before,
+.sidebar .header .title::after {
+  content: '';
+  position: absolute;
+  right: -0.6px;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(270deg, #1a1c24, #1a1c2400);
+  transition: .18s var(--ease-function) opacity;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sidebar .header .title::before {
+  right: auto;
+  background: linear-gradient(90deg, #1a1c24, #1a1c2400);
+  transition: .18s var(--ease-function);
+  left: -0.6px;
+  opacity: 0;
+}
+
+.sidebar .header .title.scrolled-start::before {
+  opacity: 1;
+}
+
+.sidebar .header .title.scrolled-end::after {
+  opacity: 0;
+}
+
+.sidebar .header .title.notransition::before,
+.sidebar .header .title.notransition::after {
+  transition: none;
+}
+
+/*
 .sidebar .header .title:hover .logo.overflow {
   background: hsl(218deg 18% 23%);
   padding: 9px;
@@ -651,6 +705,7 @@ body.notransition .sidebar {
   position: absolute;
   box-sizing: border-box;
 }
+*/
 
 .sidebar .searchinput {
   width: calc(var(--sidebar-width) - 103px);
@@ -1359,6 +1414,30 @@ body:not(.mobile) .sidebar::-webkit-scrollbar-corner,
 body:not(.mobile) .sidebar::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar {
+  height: 10px;
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb {
+  background-color: rgb(130 134 137 / 50%);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(130 134 137 / 65%);
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:active {
+  background-color: rgb(130 134 137 / 50%);
 }
 
 body:not(.mobile) .roundbutton {
