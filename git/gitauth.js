@@ -2,7 +2,7 @@
   github
 */
 
-// Github login
+// git login
 const clientId = '7ede3eed3185e59c042d';
 
 let gitToken, treeLoc, authUser;
@@ -24,7 +24,7 @@ window.onload = async () => {
 
   })
 
-  // if redirected from Github auth
+  // if redirected from git auth
   window.addEventListener('message', (event) => {
 
     // hide intro screen
@@ -48,8 +48,8 @@ window.onload = async () => {
 
     const gitCode = event.data;
 
-    // get Git token
-    getGitToken(gitCode);
+    // get git token from Github
+    getGithubToken(gitCode);
 
   })
   
@@ -75,7 +75,7 @@ window.onload = async () => {
 
 async function getGithubToken(gitCode) {
 
-  // post through CORS proxy to Git with clientId, clientSecret and code
+  // post through CORS proxy to git with clientId, clientSecret and code
   const resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
                                'https://github.com/login/oauth/access_token?' +
                                'client_id=' + clientId +
