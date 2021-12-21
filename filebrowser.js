@@ -20,7 +20,7 @@ sidebarToggle.addEventListener('click', () => {
 
 
 // render sidebar
-// call this function when signed in to github
+// call this function when signed in to git
 // to render sidebar
 async function renderSidebarHTML() {
   
@@ -37,9 +37,9 @@ async function renderSidebarHTML() {
   const [user, repo, contents] = treeLoc;
   
   
-  // if not logged into Github
+  // if not logged into git
   // and navigated to Repositories page
-  if (githubToken == '' && repo == '') {
+  if (gitToken == '' && repo == '') {
     
     // stop loading
     stopLoading();
@@ -67,8 +67,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    githubToken = '';
-    saveAuthTokenLS(githubToken);
+    gitToken = '';
+    saveAuthTokenLS(gitToken);
     
     sidebar.classList.add('intro');
     
@@ -84,8 +84,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    githubToken = '';
-    saveAuthTokenLS(githubToken);
+    gitToken = '';
+    saveAuthTokenLS(gitToken);
     
     sidebar.classList.add('intro');
     
@@ -1067,9 +1067,9 @@ function updateLineNumbersHTML() {
 
 function setupSidebar() {
 
-  // if not logged into Github
+  // if not logged into git
   // and navigated to Repositories page
-  if (githubToken == '' && treeLoc[1] == '') {
+  if (gitToken == '' && treeLoc[1] == '') {
 
     // show intro screen
     sidebar.classList.add('intro');
@@ -1087,7 +1087,7 @@ function setupSidebar() {
 
     });
 
-  } else { // if logged into Github
+  } else { // if logged into git
 
     // render sidebar
     renderSidebarHTML();
