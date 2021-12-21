@@ -1026,7 +1026,8 @@ function updateLineNumbersHTML() {
 function setupSidebar() {
 
   // if not logged into Github
-  if (githubToken == null) {
+  if (githubToken == null || githubToken == ''
+      && !(treeLoc && treeLoc.length > 1 && treeLoc[0] !== '')) {
 
     // show intro screen
     sidebar.classList.add('intro');
