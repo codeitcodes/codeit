@@ -643,15 +643,15 @@ body.notransition .sidebar {
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-  width: calc(var(--sidebar-width) - 140px);
+  max-width: calc(var(--sidebar-width) - 140px);
   overflow-x: overlay;
   transition: .18s var(--ease-function);
-  transition-property: margin, width;
+  transition-property: margin-left, max-width;
 }
 
 .sidebar .header.searching .logo {
   margin-left: var(--spacing-1);
-  width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
+  max-width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
 .sidebar .header .logo.notransition {
