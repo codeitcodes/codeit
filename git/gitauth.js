@@ -9,7 +9,7 @@ let githubToken, treeLoc;
 
 window.onload = () => {
 
-  githubToken = getStorage('token');
+  githubToken = getStorage('token') ?? '';
   
   if (githubToken == 'undefined') {
     githubToken = '';
