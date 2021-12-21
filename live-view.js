@@ -5,9 +5,9 @@ async function setupLiveView() {
   const url = new URL(window.location.href);
   const urlQuery = url.searchParams.get('q');
   
-  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
-  
   if (urlQuery) {
+
+    window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
     
     if (isMobile) {
       
@@ -338,20 +338,7 @@ function addBottomSwipeListener() {
 if (isMobile) {
   
   addBottomSwipeListener();
-  
-  sidebarBackground.addEventListener('click', () => {
-    
-    if (bottomWrapper.classList.contains('expanded')) {
-      
-      // retract bottom float
-      //bottomWrapper.classList.remove('expanded');
-      
-      //toggleLiveView(selectedFile);
-      
-    }
-    
-  });
-  
+
 } else {
   
   previewToggle.addEventListener('click', () => {
