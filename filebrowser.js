@@ -38,8 +38,8 @@ async function renderSidebarHTML() {
   
   
   // if not logged into Github
-  // and navigated to main Repositories page
-  if (githubToken == '' && user === '') {
+  // and navigated to Repositories page
+  if (githubToken == '' && repo == '') {
     
     // stop loading
     stopLoading();
@@ -1045,8 +1045,8 @@ function updateLineNumbersHTML() {
 function setupSidebar() {
 
   // if not logged into Github
-  // and navigated to main Repositories page
-  if (githubToken == '' && treeLoc[0] === '') {
+  // and navigated to Repositories page
+  if (githubToken == '' && treeLoc[1] == '') {
 
     // show intro screen
     sidebar.classList.add('intro');
