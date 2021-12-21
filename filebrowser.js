@@ -395,14 +395,14 @@ async function pushFileFromHTML(fileEl) {
 // load file in sidebar and codeit
 async function loadFileInHTML(fileEl, fileSha) {
 
-  // select the new file in HTML
-  fileEl.classList.add('selected');
-  fileEl.scrollIntoViewIfNeeded();
-  
   // clear existing selections in HTML
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
+  
+  // select the new file in HTML
+  fileEl.classList.add('selected');
+  fileEl.scrollIntoViewIfNeeded();
   
   // show all files in HTML
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
