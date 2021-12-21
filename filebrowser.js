@@ -395,6 +395,22 @@ async function pushFileFromHTML(fileEl) {
 // load file in sidebar and codeit
 async function loadFileInHTML(fileEl, fileSha) {
 
+  // select the new file in HTML
+  fileEl.classList.add('selected');
+  fileEl.scrollIntoViewIfNeeded();
+  
+  // clear existing selections in HTML
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+  
+  // show all files in HTML
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => { file.style.display = '' });
+  
+  header.classList.remove('searching');
+  
+  
   // if previous file selection exists
   if (selectedFile.sha) {
 
@@ -412,24 +428,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     }
 
   }
-
-
-  // show all files
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
   
-  header.classList.remove('searching');
-  
-  // clear existing selections
-  if (fileWrapper.querySelector('.selected')) {
-    fileWrapper.querySelector('.selected').classList.remove('selected');
-  }
-
-
-  // select the new file
-
-  fileEl.classList.add('selected');
-  fileEl.scrollIntoViewIfNeeded();
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
