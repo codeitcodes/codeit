@@ -104,9 +104,11 @@ async function renderSidebarHTML() {
 
     // show title
 
-    sidebarLogo.classList.remove('overflow');
-
+    let titleAnimation;
+    
     if (contents != '') {
+      
+      titleAnimation = 'smooth';
       
       // if repo is owned by another user
       if (user != loggedUser.login) {
@@ -152,7 +154,7 @@ async function renderSidebarHTML() {
     
     sidebarTitle.children[0].scrollTo({
       left: sidebarTitle.children[0].scrollWidth - sidebarTitle.children[0].offsetLeft,
-      behavior: 'smooth'
+      behavior: titleAnimation
     });
 
 
