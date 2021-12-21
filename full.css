@@ -654,6 +654,10 @@ body.notransition .sidebar {
   width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
+.sidebar .header .logo.notransition {
+  transition: none;
+}
+
 .sidebar .header .title::before,
 .sidebar .header .title::after {
   content: '';
