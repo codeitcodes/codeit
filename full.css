@@ -622,6 +622,7 @@ body.notransition .sidebar {
   display: flex;
   align-items: center;
   position: relative;
+  flex: 1;
 }
 
 .sidebar .searchscreen .title {
