@@ -148,7 +148,7 @@ async function renderSidebarHTML() {
     
     // scroll to end of title
     
-    if (titleAnimation == '') {
+    if (!titleAnimation) {
       
       sidebarTitle.classList.add('notransition');
       
