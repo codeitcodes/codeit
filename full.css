@@ -666,6 +666,7 @@ body.notransition .sidebar {
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
   transition: .18s var(--ease-function) opacity;
   pointer-events: none;
+  z-index: 1;
 }
 
 .sidebar .header .title::before {
