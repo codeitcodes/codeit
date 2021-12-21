@@ -950,7 +950,7 @@ function setupEditor() {
     }
     
     // prevent bottom float disappearing on mobile
-    if (isMobile) lastScrollTop = selectedFile.scrollPos[0];
+    if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
     
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
