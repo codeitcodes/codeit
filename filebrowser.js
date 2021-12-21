@@ -51,7 +51,7 @@ async function renderSidebarHTML() {
     stopLoading();
     
     githubToken = '';
-    saveAuthTokenLS();
+    saveAuthTokenLS(githubToken);
     
     sidebar.classList.add('intro');
     
@@ -68,7 +68,7 @@ async function renderSidebarHTML() {
     stopLoading();
     
     githubToken = '';
-    saveAuthTokenLS();
+    saveAuthTokenLS(githubToken);
     
     sidebar.classList.add('intro');
     
