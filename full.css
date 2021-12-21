@@ -642,6 +642,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .header .logo {
+  padding: 7px 0;
   font-weight: 600;
   color: rgba(241,241,242,0.92);
   max-width: calc(var(--sidebar-width) - 140px);
@@ -1428,6 +1429,14 @@ body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb {
   border-left: 0;
   border-right: 0;
   border-radius: 0;
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(130 134 137 / 70%);
+}
+
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:active {
+  background-color: rgb(130 134 137 / 50%);
 }
 
 body:not(.mobile) .roundbutton {
