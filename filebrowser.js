@@ -67,8 +67,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    gitToken = '';
-    saveAuthTokenLS(gitToken);
+    // log out from git
+    logOutFromGitLS();
     
     sidebar.classList.add('intro');
     
@@ -84,8 +84,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    gitToken = '';
-    saveAuthTokenLS(gitToken);
+    // log out from git
+    logOutFromGitLS();
     
     sidebar.classList.add('intro');
     
