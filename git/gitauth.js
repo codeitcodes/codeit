@@ -5,17 +5,18 @@
 // Github login
 const clientId = '7ede3eed3185e59c042d';
 
-let githubToken, treeLoc;
+let gitToken, treeLoc, authUser;
 
-window.onload = () => {
+window.onload = async () => {
 
-  githubToken = getStorage('token') ?? '';
+  gitToken = getStorage('token') ?? '';
   
-  if (githubToken == 'undefined') {
-    githubToken = '';
+  if (gitToken == 'undefined') {
+    gitToken = '';
   }
   
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
+  
   
   loginButton.addEventListener('click', () => {
 
@@ -45,38 +46,54 @@ window.onload = () => {
     // start loading
     startLoading();
 
-    const githubCode = event.data;
+    const gitCode = event.data;
 
-    // get Github token
-    getGithubToken(githubCode);
+    // get Git token
+    getGitToken(gitCode);
 
   })
+  
+  
+  // get logged user from local storage
+  loggedUser = JSON.parse(getStorage('loggedUser'));
+  
+  // if logged in but didn't fetch user yet
+  if (gitToken && !loggedUser) {
+    
+    // fetch logged user
+    loggedUser = await axios.get('https://api.github.com/user', gitToken);
 
+    // save logged user in local storage
+    setStorage('loggedUser', JSON.stringify(loggedUser));
+    
+  }
+  
+  
   loadLS();
 
 }
 
-async function getGithubToken(githubCode) {
+async function getGithubToken(gitCode) {
 
-  // post through CORS proxy to Github with clientId, clientSecret and code
+  // post through CORS proxy to Git with clientId, clientSecret and code
   const resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
                                'https://github.com/login/oauth/access_token?' +
                                'client_id=' + clientId +
                                '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
-                               '&code=' + githubCode);
+                               '&code=' + gitCode);
   
   // save token to localStorage
-  githubToken = resp.access_token;
-  saveAuthTokenLS(githubToken);
+  gitToken = resp.access_token;
+  saveAuthTokenLS(gitToken);
   
   // render sidebar
   renderSidebarHTML();
   
   
-  // get authenticated user
-  authUser = await axios.get('https://api.github.com/user', githubToken);
+  // get logged user
+  loggedUser = await axios.get('https://api.github.com/user', gitToken);
   
-  // save user in local storage
-  setStorage('authUser', JSON.stringify(authUser));
+  // save logged user in local storage
+  setStorage('loggedUser', JSON.stringify(loggedUser));
 
 }
