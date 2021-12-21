@@ -73,10 +73,10 @@ async function getGithubToken(githubCode) {
   renderSidebarHTML();
   
   
-  // get username
-  const user = await axios.get('https://api.github.com/user', githubToken);
+  // get authenticated user
+  authUser = await axios.get('https://api.github.com/user', githubToken);
   
-  // save username
-  setStorage('user', JSON.stringify(user));
+  // save user in local storage
+  setStorage('authUser', JSON.stringify(authUser));
 
 }
