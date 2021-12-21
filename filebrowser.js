@@ -142,6 +142,12 @@ async function renderSidebarHTML() {
       sidebarLogo.innerText = 'Repositories';
 
     }
+    
+    // scroll to end of title
+    sidebarTitle.children[0].scrollTo({
+      left: sidebarTitle.children[0].scrollWidth - sidebarTitle.children[0].offsetLeft,
+      behavior: 'smooth'
+    });
 
 
     // if navigating in repository
