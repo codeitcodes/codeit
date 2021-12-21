@@ -340,7 +340,7 @@ function addHTMLItemListeners() {
         // if item is a folder
 
         // change location
-        treeLoc[2] += '/' + item.innerText;
+        treeLoc[2] += '/' + item.innerText.replaceAll('\n', '');
         saveTreeLocLS(treeLoc);
 
         // render sidebar
