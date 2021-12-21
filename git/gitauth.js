@@ -17,6 +17,8 @@ window.onload = async () => {
   
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
   
+  loggedUser = JSON.parse(getStorage('loggedUser'));
+  
   
   loginButton.addEventListener('click', () => {
 
@@ -54,21 +56,6 @@ window.onload = async () => {
   })
   
   
-  // get logged user from local storage
-  loggedUser = JSON.parse(getStorage('loggedUser'));
-  
-  // if logged in but didn't fetch user yet
-  if (gitToken && !loggedUser) {
-    
-    // fetch logged user
-    loggedUser = await axios.get('https://api.github.com/user', gitToken);
-
-    // save logged user in local storage
-    setStorage('loggedUser', JSON.stringify(loggedUser));
-    
-  }
-  
-  
   loadLS();
 
 }
@@ -86,14 +73,15 @@ async function getGithubToken(gitCode) {
   gitToken = resp.access_token;
   saveAuthTokenLS(gitToken);
   
-  // render sidebar
-  renderSidebarHTML();
-  
   
   // get logged user
   loggedUser = await axios.get('https://api.github.com/user', gitToken);
   
   // save logged user in local storage
   setStorage('loggedUser', JSON.stringify(loggedUser));
+  
+  
+  // render sidebar
+  renderSidebarHTML();
 
 }
