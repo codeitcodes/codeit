@@ -57,7 +57,6 @@ async function renderSidebarHTML() {
   // get items in current tree from git
   try {
     
-    console.log(githubToken);
     resp = await git.getItems(treeLoc);
     
   } catch(e) {
