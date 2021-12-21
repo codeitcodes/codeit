@@ -621,6 +621,7 @@ body.notransition .sidebar {
 .sidebar .header .title {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .sidebar .searchscreen .title {
@@ -642,17 +643,46 @@ body.notransition .sidebar {
 .sidebar .header .logo {
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: calc(var(--sidebar-width) - 115px);
-  transition: .18s var(--ease-function) margin-left;
+  width: calc(var(--sidebar-width) - 140px);
+  overflow-x: overlay;
+  transition: .18s var(--ease-function);
+  transition-property: margin, width;
 }
 
 .sidebar .header.searching .logo {
   margin-left: var(--spacing-1);
+  width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
+.sidebar .header .title::before,
+.sidebar .header .title::after {
+  content: '';
+  position: absolute;
+  right: -0.6px;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(270deg, #1a1c24, transparent);
+  transition: .18s var(--ease-function) opacity;
+  pointer-events: none;
+}
+
+.sidebar .header .title::before {
+  right: auto;
+  background: linear-gradient(90deg, #1a1c24, transparent);
+  transition: .18s var(--ease-function);
+  left: -0.6px;
+  opacity: 0;
+}
+
+.sidebar .header .title.scrolled-start::before {
+  opacity: 1;
+}
+
+.sidebar .header .title.scrolled-end::after {
+  opacity: 0;
+}
+
+/*
 .sidebar .header .title:hover .logo.overflow {
   background: hsl(218deg 18% 23%);
   padding: 9px;
@@ -667,6 +697,7 @@ body.notransition .sidebar {
   position: absolute;
   box-sizing: border-box;
 }
+*/
 
 .sidebar .searchinput {
   width: calc(var(--sidebar-width) - 103px);
