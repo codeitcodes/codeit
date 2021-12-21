@@ -149,9 +149,9 @@ async function renderSidebarHTML() {
     // scroll to end of title
     
     sidebarTitle.classList.add('notransition');
-    onNextFrame(() => {
+    window.setTimeout(() => {
       sidebarTitle.classList.remove('notransition');
-    });
+    }, 180);
     
     sidebarTitle.children[0].scrollTo({
       left: sidebarTitle.children[0].scrollWidth - sidebarTitle.children[0].offsetLeft,
