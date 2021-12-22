@@ -647,6 +647,7 @@ body.notransition .sidebar {
   color: rgba(241,241,242,0.92);
   max-width: calc(var(--sidebar-width) - 140px);
   overflow-x: overlay;
+  white-space: nowrap;
   transition: .18s var(--ease-function);
   transition-property: margin-left, max-width;
 }
