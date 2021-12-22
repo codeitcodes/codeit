@@ -297,8 +297,8 @@ let axios = {
 
       const xmlhttp = new XMLHttpRequest();
 
-      xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState == 4 && (xmlhttp.status == 201 || xmlhttp.status == 200)) {
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
           resolve(JSON.parse(xmlhttp.responseText));
         }
       };
