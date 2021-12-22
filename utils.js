@@ -268,8 +268,10 @@ let axios = {
 
       const xmlhttp = new XMLHttpRequest();
 
-      xmlhttp.onload = () => {
-        resolve(JSON.parse(xmlhttp.responseText));
+      xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState == 4 && (xmlhttp.status == 201 || xmlhttp.status == 200)) {
+          resolve(JSON.parse(xmlhttp.responseText));
+        }
       };
 
       xmlhttp.onerror = (e) => {
@@ -295,8 +297,10 @@ let axios = {
 
       const xmlhttp = new XMLHttpRequest();
 
-      xmlhttp.onload = () => {
-        resolve(xmlhttp.responseText);
+      xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState == 4 && (xmlhttp.status == 201 || xmlhttp.status == 200)) {
+          resolve(JSON.parse(xmlhttp.responseText));
+        }
       };
 
       xmlhttp.onerror = (e) => {
