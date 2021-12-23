@@ -24,6 +24,22 @@ const beforeUnloadListener = (event) => {
 
 let git = {
   
+  // get big file
+  'getBigFile': async (treeLoc, sha) => {
+    
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
+    
+    query += '/repos/'+ user +'/'+ repo +'/git/blobs/'+ sha;
+    
+    // get the query
+    const resp = await axios.get(query, gitToken);
+    
+    return resp;
+    
+  },
+  
   // get file
   'getFile': async (treeLoc, fileName) => {
     
