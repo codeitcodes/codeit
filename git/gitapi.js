@@ -24,8 +24,8 @@ const beforeUnloadListener = (event) => {
 
 let git = {
   
-  // get big file
-  'getBigFile': async (treeLoc, sha) => {
+  // get blob
+  'getBlob': async (treeLoc, sha) => {
     
     // map tree location
     let query = 'https://api.github.com';
