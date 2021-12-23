@@ -995,7 +995,7 @@ body.notransition .sidebar {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 15px;
   box-sizing: border-box;
   min-height: 40px;
   background: hsl(228deg 16% 37%);
@@ -1003,12 +1003,31 @@ body.notransition .sidebar {
   min-width: 150px;
   white-space: nowrap;
   font-size: 14px;
+  font-size: 16px;
   padding: 7px 14px;
+  height: 48px;
+  height: 50px;
+  width: 80vw;
+  font-weight: 500;
+  transition: .18s var(--ease-function);
+  transition-property: background, color;
+}
+
+body .sidebar .button:active {
+  transition: none;
 }
 
 .sidebar .button.secondary {
   color: #d4d5d7;
   background: hsla(0,0%,100%,.1);
+  color: rgba(241, 241, 242, 0.92);
+  background: #0b83fe;
+  color: #fff;
+}
+
+body .sidebar .button.secondary:active {
+  color: rgba(255,255,255,0.25);
+  background: rgb(11 131 254 / 50%);
 }
 
 .sidebar .button.teritary {
@@ -1025,7 +1044,7 @@ body.notransition .sidebar {
 */
 
 .sidebar .button.secondary:active {
-  background: hsla(0,0%,100%,.2) !important;
+  /* background: hsla(0,0%,100%,.2) !important; */
   color: hsl(220deg 4% 90%);
 }
 
