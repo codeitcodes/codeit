@@ -545,17 +545,24 @@ function renderLiveViewHTML(file) {
   // fetch music
   frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
-    // if audio is external
-    if (audio.src) {
+    // if audio is an mp3 file
+    if (audio.src.endsWith('.mp3')) {
 
       const linkHref = new URL(audio.src);
       const fileName = linkHref.pathname.slice(1);
 
       if (linkHref.origin == window.location.origin) {
         
-        const resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
-
-        audio.src = 'data:text/plain;base64,' + resp;
+        // if audio file is in current directory
+        if (!(linkHref.pathname.slice(1).includes('/'))) {
+          
+          const resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          
+          //fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+          
+          audio.src = 'data:text/plain;base64,' + resp.content;
+          
+        }
 
       }
 
