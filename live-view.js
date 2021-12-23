@@ -541,6 +541,27 @@ function renderLiveViewHTML(file) {
     }
 
   })
+  
+  // fetch music
+  frameDocument.querySelectorAll('audio').forEach(async (audio) => {
+
+    // if audio is external
+    if (audio.src) {
+
+      const linkHref = new URL(audio.src);
+      const fileName = linkHref.pathname.slice(1);
+
+      if (linkHref.origin == window.location.origin) {
+        
+        const resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+        audio.src = 'data:text/plain;base64,' + resp;
+
+      }
+
+    }
+
+  })
 
 }
 
