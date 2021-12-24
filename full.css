@@ -144,8 +144,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-float .sidebar-open {
-  width: 100%;
-  overflow: hidden;
+  flex: 1;
   border-radius: 20px 0 0 20px;
 }
 
@@ -212,7 +211,7 @@ body.notransition .bottom-wrapper {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 5%);
   border-radius: 0 20px 20px 0;
-  width: 73.3px;
+  width: 65px;
   position: relative;
   box-sizing: border-box;
   height: 100%;
@@ -220,7 +219,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded .bottom-float .push-wrapper {
   padding: 0;
-  width: calc(73.3px - 24px);
+  width: calc(65px - 24px);
   opacity: 0;
   border-radius: 0;
   margin-right: -1px;
@@ -234,7 +233,12 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .push-wrapper .push-svg {
   position: absolute;
-  left: 12px;
+  left: 12.5px;
+  transition: .4s var(--cubic-function) left;
+}
+
+.bottom-wrapper.expanded .bottom-float .push-svg {
+  left: 0;
 }
 
 .live-buttons {
