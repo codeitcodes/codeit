@@ -186,7 +186,7 @@ body.notransition .bottom-wrapper {
   left: 35px;
   width: 8px;
   height: 8px;
-  background: #568af2;
+  background: var(--rosemary-lighter);
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d25;
   display: none;
@@ -591,6 +591,7 @@ body.notransition .sidebar {
   border-radius: 6px;
   pointer-events: none;
   background: #568af2;
+  background: var(--rosemary-lighter);
   transition: width .4s ease, opacity .4s linear;
   z-index: 1000;
 }
@@ -800,7 +801,7 @@ body.notransition .sidebar {
   left: 15px;
   width: 8px;
   height: 8px;
-  background: #568af2;
+  background: var(--rosemary-lighter);
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d24;
 }
@@ -1560,6 +1561,7 @@ body {
   
   --rosemary-blue: hsl(223deg 88% 52%);
   --rosemary-light: hsl(223deg 85% 54%);
+  --rosemary-lighter: hsl(223deg 86% 64%);
   --rosemary-white: hsl(240deg 87% 92%);
   --rosemary-dark: hsl(223deg 88% 52%);
   
