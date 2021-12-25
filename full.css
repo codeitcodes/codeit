@@ -909,13 +909,14 @@ body.notransition .sidebar {
 }
 
 .sidebar .picture-wrapper {
-  background: hsl(228deg 16% 21%);
+  background: hsl(228deg 38% 21%);
+  color: rgba(241,241,242,0.8);
   height: 120px;
   width: 120px;
   overflow: hidden;
   border-radius: 50%;
-  margin-bottom: var(--spacing-4);
-  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-5);
+  padding: var(--spacing-5);
   box-sizing: border-box;
 }
 
@@ -927,7 +928,7 @@ body.notransition .sidebar {
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  box-shadow: inset 0 -5px 0 0 #f1f1f21c;
+  box-shadow: inset 0 -5px 0 0 hsl(223deg 28% 22%);
   box-sizing: border-box;
   padding-right: 10px;
   padding-left: 10px;
@@ -944,9 +945,10 @@ body.notransition .sidebar {
 
 .sidebar .intro .title {
   color: #f1f1f2e0;
-  font-size: 19px;
-  margin-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
   font-weight: 500;
+  font-size: 21px;
+  letter-spacing: -.002em;
 }
 
 .sidebar .intro .title sup {
@@ -964,9 +966,9 @@ body.notransition .sidebar {
 }
 
 .sidebar .intro .subtitle {
-  color: #a6a8aa;
-  font-size: 14px;
-  line-height: 20px;
+  color: #b3b3b3;
+  font-size: 15px;
+  line-height: 23px;
   letter-spacing: 0.2px;
 }
 
@@ -1009,16 +1011,10 @@ body.notransition .sidebar {
   border-radius: 15px;
   box-sizing: border-box;
   min-height: 40px;
-  background: hsl(228deg 16% 37%);
-  color: #fff;
-  min-width: 150px;
   white-space: nowrap;
-  font-size: 14px;
   font-size: 16px;
-  padding: 7px 14px;
-  height: 48px;
+  padding: 7px 84px;
   height: 50px;
-  width: 80vw;
   font-weight: 500;
   transition: .18s var(--ease-function);
   transition-property: background, color;
@@ -1066,6 +1062,10 @@ body .sidebar .button.secondary:active {
 
 .sidebar .button svg {
   margin-right: var(--spacing-1);
+}
+
+.sidebar .intro-wrapper .button {
+  margin-top: calc(var(--spacing-1) * 9);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
