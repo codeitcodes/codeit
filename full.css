@@ -91,7 +91,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded {
   transform: translateY(calc(-100vh + 100% - env(safe-area-inset-top, 0px)));
-  height: 33px;
+  height: 44px;
 }
 
 .bottom-wrapper.expanded.fromtop {
@@ -129,10 +129,9 @@ body.notransition .bottom-wrapper {
   width: 100%;
   max-width: 100%;
   border-radius: 0;
-  box-shadow: 0 0 0 rgb(0 0 0 / 17%), 0 0 0 rgb(0 0 0 / 29%), inset 0 -1px 0 0 rgb(255 255 255 / 10%);
+  box-shadow: 0 0 0 rgb(0 0 0 / 17%), 0 0 0 rgb(0 0 0 / 29%), inset 0 -1px 0 0 rgb(255 255 255 / 16%);
   margin: 0;
-  height: 32px;
-  padding-bottom: 1px;
+  height: 44px;
   pointer-events: none;
 }
 
@@ -149,7 +148,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded .bottom-float .sidebar-open {
-  padding: 8px 16px;
+  padding: 11px 16px;
 }
 
 .bottom-float .sidebar-open:active {
@@ -177,10 +176,8 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded .bottom-float .logo {
-  font-size: 14px;
   margin-left: calc(50vw - 16px);
   transform: translateX(-50%);
-  font-weight: 400;
 }
 
 .bottom-float .badge {
@@ -207,9 +204,30 @@ body.notransition .bottom-wrapper {
   bottom: 6px;
 }
 
+.bottom-float .menu-buttons {
+  display: flex;
+  height: 100%;
+}
+
+.bottom-float .live-open {
+  background: hsl(0deg 0% 100% / 3%);
+  color: rgba(241,241,242,0.8);
+  width: 65px;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-wrapper.expanded .bottom-float .live-open {
+  width: 0;
+  opacity: 0;
+}
+
 .bottom-float .push-wrapper {
   background: hsl(0deg 0% 100% / 5%);
-  border-left: 1px solid hsl(0deg 0% 100% / 5%);
+  border-left: 1px solid hsl(0deg 0% 100% / 3%);
   border-radius: 0 20px 20px 0;
   width: 65px;
   position: relative;
@@ -233,7 +251,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .push-wrapper .push-svg {
   position: absolute;
-  left: 12.5px;
+  left: 11.5px;
   transition: .4s var(--cubic-function) left;
 }
 
@@ -251,7 +269,7 @@ body.notransition .bottom-wrapper {
   justify-content: space-between;
   transform: translateY(calc(45px + 11.5px));
   will-change: transform;
-  height: 32px;
+  height: 44px;
   padding: 0 24px;
   opacity: 0;
   pointer-events: none;
@@ -260,9 +278,8 @@ body.notransition .bottom-wrapper {
 
 .live-buttons .live-button {
   color: #828689;
-  width: 48px;
-  height: 18px;
-  padding: 6px 0;
+  padding: 7px;
+  margin: -7px;
 }
 
 .live-buttons .live-button:active {
@@ -271,10 +288,6 @@ body.notransition .bottom-wrapper {
 
 .live-buttons .live-button path {
   pointer-events: none;
-}
-
-.live-buttons .live-button.close {
-  height: 20px;
 }
 
 .live-buttons .live-button.share path.ios {
@@ -294,7 +307,7 @@ body.safari .live-buttons .live-button.share path.ios {
   pointer-events: auto;
   transition: .4s var(--cubic-function) transform, .4s var(--cubic-function) padding, .18s .14s var(--ease-function) opacity;
   transform: none;
-  padding: 0;
+  padding: 0 18px;
 }
 
 .live-view {
@@ -303,7 +316,7 @@ body.safari .live-buttons .live-button.share path.ios {
   right: 0;
   bottom: 0;
   left: -1px;
-  top: 33px;
+  top: 44px;
   transform: translateY(calc(100% - 28px - 45px - env(safe-area-inset-bottom, 0px)));
   padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
