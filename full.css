@@ -957,8 +957,7 @@ body.notransition .sidebar {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  background: linear-gradient(180deg, hsl(240deg 87% 55%), hsl(240deg 86% 55% / 80%));
-  color: #d0d0ed;
+  background: linear-gradient(180deg, hsl(223deg 88% 52%), hsl(240deg 86% 55%));
   color: hsl(240deg 87% 92%);
   padding: 3px 7px;
   border-radius: 30px;
@@ -1015,6 +1014,7 @@ body.notransition .sidebar {
   font-size: 16px;
   padding: 7px 84px;
   height: 50px;
+  width: 233px;
   font-weight: 500;
   transition: .18s var(--ease-function);
   transition-property: background, color;
@@ -1500,6 +1500,7 @@ body:not(.mobile) .sidebar .button.secondary:hover {
 
 body:not(.mobile) .sidebar .button.teritary:hover {
   background: hsl(228deg 16% 37% / 12%);
+  transition: none;
 }
 
 
@@ -1559,7 +1560,8 @@ body {
   
   --rosemary-blue: hsl(223deg 88% 52%);
   --rosemary-light: hsl(223deg 85% 54%);
-  --rosemary-hint: hsl(223deg 28% 22%);
+  --rosemary-white: hsl(240deg 87% 92%);
+  --rosemary-dark: hsl(223deg 88% 52%);
   
   --sea-blue-hint: #313744;
   
