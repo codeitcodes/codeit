@@ -1025,16 +1025,13 @@ body .sidebar .button:active {
 }
 
 .sidebar .button.secondary {
-  color: #d4d5d7;
-  background: hsla(0,0%,100%,.1);
-  color: rgba(241, 241, 242, 0.92);
-  background: #0b83fe;
+  background: hsl(223deg 88% 52%);
   color: #fff;
 }
 
 body .sidebar .button.secondary:active {
   color: rgba(255,255,255,0.25);
-  background: rgb(11 131 254 / 50%);
+  background: hsla(223deg 88% 52% / 50%) !important;
 }
 
 .sidebar .button.teritary {
@@ -1497,8 +1494,8 @@ body:not(.mobile) .sidebar .button:hover {
 */
 
 body:not(.mobile) .sidebar .button.secondary:hover {
-  background: hsla(0,0%,100%,.2);
-  background: hsla(0,0%,100%,.17);
+  background: hsl(223deg 85% 54%);
+  transition: none;
 }
 
 body:not(.mobile) .sidebar .button.teritary:hover {
