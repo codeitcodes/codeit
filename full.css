@@ -327,16 +327,21 @@ body.safari .live-buttons .live-button.share path.ios {
   will-change: transform;
   transition: none;
   opacity: 0;
-  transition: .4s var(--cubic-function);
-  transition-property: transform, opacity;
   z-index: 1000;
 }
 
 body:not(.mobile) .live-view {
-  top: 0;
   opacity: 1;
   transform: translateX(100%);
-  transition: .4s var(--cubic-function) transform;
+}
+
+body.loaded .live-view {
+  transition: .4s var(--cubic-function);
+  transition-property: transform, opacity;
+}
+
+body.loaded:not(.mobile) .live-view {
+  transition-property: transform;
 }
 
 .live-view.visible,
@@ -346,6 +351,7 @@ body:not(.mobile) .live-view {
   pointer-events: auto;
 }
 
+.live-view.notransition,
 .bottom-wrapper.notransition + .live-view {
   transition: none;
 }
