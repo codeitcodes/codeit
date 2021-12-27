@@ -77,7 +77,8 @@ cd-el {
   opacity: 1;
 }
 
-.token.property {
+.token.property,
+.language-css .token.variable {
   color: #35d4c7;
 }
 
