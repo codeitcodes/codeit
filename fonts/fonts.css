@@ -24,66 +24,7 @@
 @font-face {
   font-family: 'Mono Sans';
   font-style: normal;
-  font-weight: 700;
+  font-weight: bold;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
-}
-
-
-/* Fallback */
-
-@font-face {
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: normal;
-  font-display: swap;
-  src: url('Roboto-Mono/RobotoMono-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto Mono';
-  font-style: bold;
-  font-weight: normal;
-  font-display: swap;
-  src: url('Roboto-Mono/RobotoMono-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter Traditional';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('inter-traditional/Inter-Light.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter Traditional';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('inter-traditional/Inter-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter Traditional';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('inter-traditional/Inter-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter Traditional';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('inter-traditional/Inter-SemiBold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter Traditional';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('inter-traditional/Inter-Bold.woff2') format('woff2');
 }
