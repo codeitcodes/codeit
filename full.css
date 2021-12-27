@@ -1205,16 +1205,16 @@ body.mobile.expanded .splash-wrapper::before {
   transform: scale(1);
   fill: rgb(23, 191, 99);
   transition: .18s var(--ease-function), 0s fill;
-  animation: pre-bobble 0.2s,
-             expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-             bobble 0.55s 0.3s var(--cubic-function);
+  animation: push-pre-bobble 0.2s,
+             push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+             push-bobble 0.55s 0.3s var(--cubic-function);
 }
 .push-wrapper.checked .push-svg #push {
   fill: transparent;
   transform: scale(0);
 }
 .push-wrapper.checked .push-svg #circle {
-  animation: circle .25s forwards ease-in-out;
+  animation: push-circle .25s forwards ease-in-out;
 }
 .push-wrapper.checked .push-svg #grp1 {
   opacity: 1;
@@ -1339,13 +1339,30 @@ body.mobile.expanded .splash-wrapper::before {
   transition: 0.2s opacity 0.2s;
 }
 
-@keyframes pre-bobble {
+@keyframes push-circle {
+  from {
+    transform: scale(0) translateY(-0.05px);
+    stroke-width: 2px;
+  }
+  50% {
+    transform: scale(4.8) translateY(-0.05px);
+    stroke-width: 2.1px;
+    transform-origin: 20.91px 20.9px;
+  }
+  to {
+    transform: scale(15) translateY(-0.05px);
+    stroke-width: 0;
+    transform-origin: 20.821px 20.821px;
+  }
+}
+
+@keyframes push-pre-bobble {
   from, to {
     transform: scale(0);
   }
 }
 
-@keyframes expand {
+@keyframes push-expand {
   from {
     transform: scale(0.2);
   }
@@ -1354,7 +1371,7 @@ body.mobile.expanded .splash-wrapper::before {
   }
 }
 
-@keyframes bobble {
+@keyframes push-bobble {
   from {
     transform: scale(1.05);
   }
