@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v258';
+const CACHE_NAME = 'static-cache-v259';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -11,6 +11,7 @@ const FILES_TO_CACHE = [
   
   '/lib/codeit-line-numbers.js',
   '/lib/codeit-match-braces.js',
+  '/lib/codeit-inline-color.js',
 
   '/full.html',
   '/full.css',
@@ -27,7 +28,7 @@ const FILES_TO_CACHE = [
   '/localstorage.js',
   '/bottomfloat.js',
 
-  '/dark.css',
+  '/dark-theme.css',
 
   '/fonts/fonts.css',
   
