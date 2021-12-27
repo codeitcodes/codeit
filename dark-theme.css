@@ -137,6 +137,10 @@ cd-el {
   color: inherit;
 }
 
+.token.string .token.url-link {
+  text-decoration: none;
+}
+
 
 .token.brace.brace-active {
   position: relative;
