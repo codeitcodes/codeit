@@ -16,7 +16,7 @@
 @font-face {
   font-family: 'Mono Sans';
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
 }
