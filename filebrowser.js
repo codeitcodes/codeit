@@ -5,7 +5,11 @@
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
 
-  sidebarToggle.classList.add('visible');
+  if (!body.classList.contains('expanded')) {
+    
+    sidebarToggle.classList.add('visible');
+    
+  }
 
 })
 
