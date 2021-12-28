@@ -220,10 +220,10 @@ span.inline-color-wrapper {
    * SVG-inlining explained:
    * https://stackoverflow.com/a/21626701/7595472
    */
-  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0iI2NjYyIgZD0iTTAgMGgxdjFIMHpNMSAxaDF2MUgxeiIvPjwvc3ZnPg==');
-
-  height: 1.333ch;
-  width: 1.333ch;
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0iI2NjYyIgZD0iTTAgMGgxdjFIMHpNMSAxaDF2MUgxeiIvPjwvc3ZnPg==);
+  
+  height: 12px;
+  width: 12px;
   margin-left: 2px;
   margin-right: 4px;
   display: inline-block;
@@ -242,11 +242,22 @@ span.inline-color {
   width: 100%;
   height: 100%;
   display: inline-block;
-  border: 1px solid rgba(128, 128, 128, 0.6);
   box-sizing: border-box;
+  border-radius: 50%;
+  position: relative;
+}
+
+span.inline-color::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  box-shadow: 0 0 0 1px hsl(221deg 9% 50%), inset 0 0 0 1px #313744;
+  left: 0;
+  top: 0;
   border-radius: 50%;
 }
 
-span.inline-color-wrapper:hover span.inline-color {
-  border-color: rgba(64, 64, 64, 0.8);
+span.inline-color-wrapper:hover span.inline-color::after {
+  box-shadow: 0 0 0 1px hsl(221deg 12% 67%), inset 0 0 0 1px #313744;
 }
