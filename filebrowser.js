@@ -915,7 +915,16 @@ function codeChange() {
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
-
+    
+    // if selected file is in modifiedFiles and eclipsed
+    if ((modifiedFiles[selectedFile.sha] &&
+        modifiedFiles[selectedFile.sha].eclipsed)) {
+      
+      // file cannot be both eclipsed and modified
+      selectedFile.eclipsed = false;
+      
+    }
+    
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
