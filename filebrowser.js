@@ -927,25 +927,22 @@ function codeChange() {
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
-    // enable pushing file in HTML
+  }
+  
+  // enable pushing file in HTML
 
-    const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
 
-    // if selected file element exists in HTML
-    if (selectedEl) {
+  // if selected file element exists in HTML
+  if (selectedEl) {
 
-      // enable pushing file
-      selectedEl.classList.add('modified');
+    // enable pushing file
+    selectedEl.classList.add('modified');
 
-      // enable pushing from bottom float
-      bottomFloat.classList.add('modified');
-
-    }
+    // enable pushing from bottom float
+    bottomFloat.classList.add('modified');
 
   }
-
-  // update line numbers
-  updateLineNumbersHTML();
 
   // save code in async thread
   asyncThread(saveSelectedFileContent, 30);
@@ -958,47 +955,75 @@ function codeChange() {
 function protectUnsavedCode() {
 
   // get selected file element in HTML
-  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
-
-  // if selected file is not in HTML,
-  // protect unsaved code by clearing codeit
-  if (selectedEl == null) {
-
-    // clear codeit
-
-    // clear codeit contents
-    cd.textContent = '';
-
-    // change codeit lang
-    cd.lang = '';
-
-    // clear codeit history
-    cd.history = [];
-
-    // update line numbers
-    updateLineNumbersHTML();
+  // by sha
+  let selectedElSha = fileWrapper.querySelectorAll('.file[sha="'+ selectedFile.sha +'"]');
+  let selectedElName;
+  
+  // if selected file element does not exist
+  if (selectedElSha == null) {
     
-    // if on mobile, show sidebar
-    if (isMobile) {
-      
-      // don't transition
-      body.classList.add('notransition');
-
-      // show sidebar
-      toggleSidebar(true);
-      saveSidebarStateLS();
-
-      onNextFrame(() => {
-
-        body.classList.remove('notransition');
-
-      });
-      
+    // get selected file element in HTML
+    // by name
+    selectedElName = fileWrapper.querySelectorAll('.item.file')
+                     .filter(file => file.querySelector('.name').textContent == selectedFile.name);
+    
+    if (selectedElName.length > 0) {
+      selectedElName = selectedElName[0];
+    } else {
+      selectedElName = null;
     }
     
-    // change selected file to empty file
-    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+  }
+  
+  // if the selected file's sha changed
+  if (selectedElSha === null) {
+    
+    // if new version of selected file exists
+    if (selectedElName !== null) {
+      
+      // load file
+      loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
+      
+    } else {
+      
+      // if the selected file was deleted,
+      // protect unsaved code by clearing codeit
 
+      // clear codeit contents
+      cd.textContent = '';
+
+      // change codeit lang
+      cd.lang = '';
+
+      // clear codeit history
+      cd.history = [];
+
+      // update line numbers
+      updateLineNumbersHTML();
+
+      // if on mobile, show sidebar
+      if (isMobile) {
+
+        // don't transition
+        body.classList.add('notransition');
+
+        // show sidebar
+        toggleSidebar(true);
+        saveSidebarStateLS();
+
+        onNextFrame(() => {
+
+          body.classList.remove('notransition');
+
+        });
+
+      }
+
+      // change selected file to empty file
+      changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+
+    }
+    
   }
 
 }
@@ -1028,6 +1053,9 @@ function setupEditor() {
 
     // update line numbers
     updateLineNumbersHTML();
+    
+    // check scrollbar arrow
+    if (!isMobile) checkScrollbarArrow();
 
   }
   
@@ -1038,28 +1066,13 @@ function setupEditor() {
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
+  if (!isMobile) cd.on('modify', checkScrollbarArrow);
   
   // update on screen resize
   window.addEventListener('resize', () => {
 
-    // update line numbers
-    updateLineNumbersHTML();
-
     // check codeit scrollbar
     if (!isMobile) checkScrollbarArrow();
-
-  });
-  
-  // update line numbers when finished highlighting
-  Prism.hooks.add('complete', function (env) {
-
-    if (!env.code) {
-      return;
-    }
-
-    // update line numbers
-    updateLineNumbersHTML();
 
   });
   
@@ -1109,6 +1122,8 @@ function updateLineNumbersHTML() {
   }
 
   cd.classList.add('line-numbers');
+  
+  Prism.plugins.lineNumbers.update();
 
 }
 
