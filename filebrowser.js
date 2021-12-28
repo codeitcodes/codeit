@@ -1098,12 +1098,11 @@ function updateLineNumbersHTML() {
     
     if (cd.querySelector('.line-numbers-rows')) {
 
-      cd.querySelector('.line-numbers-rows').remove();
+      cd.querySelector('.line-numbers-rows').textContent = '';
 
     }
 
     cd.classList.remove('line-numbers');
-    cd.style.setProperty('--gutter-length', '');
 
     return;
     
