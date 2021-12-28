@@ -193,8 +193,8 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded .bottom-float .badge {
   opacity: 0;
-  left: 8px;
-  bottom: 6px;
+  left: 7px;
+  bottom: 10px;
 }
 
 .bottom-float .menu-buttons {
