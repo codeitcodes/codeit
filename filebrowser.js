@@ -1123,7 +1123,7 @@ function updateLineNumbersHTML() {
 
   cd.classList.add('line-numbers');
   
-  Prism.plugins.lineNumbers.update();
+  Prism.plugins.lineNumbers.update(cd);
 
 }
 
