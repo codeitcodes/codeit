@@ -85,6 +85,7 @@ cd-el {
 
 .token.boolean,
 .token.number,
+.token.unit,
 .token.constant,
 .token.symbol,
 .token.deleted,
