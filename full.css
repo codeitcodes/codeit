@@ -160,7 +160,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .logo {
   margin-left: 10px;
-  max-width: 100%;
+  max-width: calc(100vw - 184px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
