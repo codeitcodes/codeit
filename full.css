@@ -1561,7 +1561,8 @@ body.mobile .bottom-wrapper {
 }
 
 body.mobile.expanded .bottom-wrapper {
-  transform: translateX(100%) translateY(calc(100% + env(safe-area-inset-bottom, 0px)));
+  transform: translateX(var(--sidebar-width))
+             translateY(calc(100% + env(safe-area-inset-bottom, 0px)));
 }
 
 body.mobile .bookmark {
@@ -1583,7 +1584,6 @@ body.mobile .sidebar-background {
 body.mobile.expanded .sidebar-background {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(100%);
 }
 
 
