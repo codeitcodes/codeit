@@ -502,11 +502,6 @@ async function loadFileInHTML(fileEl, fileSha) {
     // update bottom float
     updateFloat();
 
-  } else { // if on desktop
-
-    // check codeit scrollbar
-    checkScrollbarArrow();
-
   }
 
 }
@@ -714,9 +709,6 @@ addButton.addEventListener('click', () => {
           // set caret pos in codeit
           cd.setSelection(0, 0);
           
-          // check codeit scrollbar
-          checkScrollbarArrow();
-          
         }
 
 
@@ -889,24 +881,20 @@ function onEditorScroll() {
 
 }
 
-function checkScrollbarArrow() {
+function updateScrollbarArrow() {
 
-  window.setTimeout(() => {
+  // if codeit is horizontally scrollable
+  if (cd.scrollWidth > cd.clientWidth) {
 
-    // if codeit is horizontally scrollable
-    if (cd.scrollWidth > cd.clientWidth) {
+    // move sidebar arrow up to make
+    // way for horizontal scrollbar
+    body.classList.add('scroll-enabled');
 
-      // move sidebar arrow up to make
-      // way for horizontal scrollbar
-      body.classList.add('scroll-enabled');
+  } else {
 
-    } else {
+    body.classList.remove('scroll-enabled');
 
-      body.classList.remove('scroll-enabled');
-
-    }
-
-  }, 0);
+  }
 
 }
 
@@ -1049,9 +1037,6 @@ function setupEditor() {
 
     // update line numbers
     updateLineNumbersHTML();
-    
-    // check scrollbar arrow
-    if (!isMobile) checkScrollbarArrow();
 
   }
   
@@ -1062,13 +1047,13 @@ function setupEditor() {
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.on('modify', checkScrollbarArrow);
+  if (!isMobile) cd.on('modify', updateScrollbarArrow);
   
   // update on screen resize
   window.addEventListener('resize', () => {
 
     // check codeit scrollbar
-    if (!isMobile) checkScrollbarArrow();
+    if (!isMobile) updateScrollbarArrow();
 
   });
   
@@ -1121,7 +1106,13 @@ function updateLineNumbersHTML() {
   
   Prism.plugins.lineNumbers.update(cd);
   
-  if (!isMobile) updateLiveViewArrow();
+  
+  if (!isMobile) {
+    
+    updateScrollbarArrow();
+    updateLiveViewArrow();
+    
+  }
 
 }
 
