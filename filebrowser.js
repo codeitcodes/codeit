@@ -967,11 +967,7 @@ function protectUnsavedCode() {
     selectedElName = fileWrapper.querySelectorAll('.item.file')
                      .filter(file => file.querySelector('.name').textContent == selectedFile.name);
     
-    if (selectedElName.length > 0) {
-      selectedElName = selectedElName[0];
-    } else {
-      selectedElName = null;
-    }
+    selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
     
   }
   
