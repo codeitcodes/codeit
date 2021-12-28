@@ -850,7 +850,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .item.modified .name {
-  max-width: calc(var(--sidebar-width) - 51px - 20px - 24px - 10px);
+  max-width: calc(var(--sidebar-width) - 51px - 20px - 24px - 20px);
 }
 
 .sidebar .item.focused .name {
