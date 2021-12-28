@@ -203,7 +203,7 @@ cd-el {
 }
 
 .line-numbers .line-numbers-rows::before {
-  content: var(--line-numbers);
+  content: attr(line-numbers);
 }
 
 
