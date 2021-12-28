@@ -133,7 +133,7 @@ cd-el {
   cursor: unset;
 }
 
-.token.url-link {
+.token a {
   color: inherit;
 }
 
