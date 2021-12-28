@@ -564,11 +564,20 @@ function renderLiveViewHTML(file) {
         // if audio file is in current directory
         if (!(linkHref.pathname.slice(1).includes('/'))) {
           
-          const resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          // get file element for its SHA
+          let fileEl = fileWrapper.querySelectorAll('.item.file')
+                       .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
           
-          //fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+          fileEl = (fileEl.length > 0) ? fileEl[0] : null;
           
-          audio.src = 'data:text/plain;base64,' + resp.content;
+          // if audio file exists
+          if (fileEl !== null) {
+            
+            const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+            
+            audio.src = 'data:audio/mpeg;base64,' + resp.content;
+            
+          }
           
         }
 
