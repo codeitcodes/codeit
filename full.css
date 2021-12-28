@@ -843,14 +843,10 @@ body.notransition .sidebar {
 }
 
 .sidebar .item .name {
-  max-width: calc(var(--sidebar-width) - 51px - 20px);
+  max-width: calc(var(--sidebar-width) - 51px - 20px - 24px - 20px);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.sidebar .item.modified .name {
-  max-width: calc(var(--sidebar-width) - 51px - 20px - 24px - 20px);
 }
 
 .sidebar .item.focused .name {
