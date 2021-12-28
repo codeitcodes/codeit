@@ -342,6 +342,20 @@ function addBottomSwipeListener() {
   
 }
 
+function updateLiveViewArrow() {
+  
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg') {
+    
+    previewToggle.classList.add('visible');
+    
+  } else {
+    
+    previewToggle.classList.remove('visible');
+    
+  }
+  
+}
+
 
 if (isMobile) {
   
@@ -393,7 +407,7 @@ function toggleLiveView(file) {
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     }
     
-    if (file.lang == 'html') {
+    if (file.lang == 'html' || file.lang == 'svg') {
       
       window.setTimeout(() => {
         
