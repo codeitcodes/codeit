@@ -1121,7 +1121,7 @@ function updateLineNumbersHTML() {
   
   Prism.plugins.lineNumbers.update(cd);
   
-  updateLiveViewArrow();
+  if (!isMobile) updateLiveViewArrow();
 
 }
 
