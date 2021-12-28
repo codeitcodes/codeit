@@ -141,6 +141,10 @@ cd-el {
   text-decoration: none;
 }
 
+.language-css .token.string .token.url-link {
+  text-decoration: underline;
+}
+
 
 .token.brace.brace-active {
   position: relative;
