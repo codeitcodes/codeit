@@ -61,7 +61,7 @@ cd-el {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: hsl(218deg 7% 64% / 72%);
+  color: hsl(218deg 7% 64% / 72%) !important;
 }
 
 .token.punctuation,
@@ -103,7 +103,7 @@ cd-el {
 .token.template-string,
 .token.regex,
 .token.variable {
-  color: #c1ffd5cc;
+  color: #c1ffd5cc !important;
 }
 
 .token.operator,
