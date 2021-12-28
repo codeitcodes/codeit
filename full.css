@@ -9,12 +9,6 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-@supports not (font-variation-settings: normal) {
-  html, body {
-    font-family: 'Inter Traditional', system-ui, sans-serif;
-  }
-}
-
 .focus::before {
   position: fixed;
   left: 0;
@@ -502,6 +496,10 @@ body.expanded .sidebar-toggle svg .left {
   border-radius: 500px 0 0 500px;
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   z-index: 1000;
+}
+
+.preview-toggle.hidden {
+  display: none;
 }
 
 .preview-toggle svg path {
