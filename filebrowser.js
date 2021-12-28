@@ -1050,12 +1050,20 @@ function setupEditor() {
   if (!isMobile) cd.on('modify', updateScrollbarArrow);
   
   // update on screen resize
+  
+  let lastWidth = undefined;
+  
   window.addEventListener('resize', () => {
-
-    // check codeit scrollbar
-    if (!isMobile) updateScrollbarArrow();
-
-  });
+    
+    if (lastWidth === window.innerWidth) {
+      return;
+    }
+    
+    lastWidth = window.innerWidth;
+    
+    updateLineNumbersHTML();
+    
+  }
   
   // disable context menu
   if (!isMobile) {
