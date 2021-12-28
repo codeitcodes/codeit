@@ -1063,7 +1063,7 @@ function setupEditor() {
     
     updateLineNumbersHTML();
     
-  }
+  });
   
   // disable context menu
   if (!isMobile) {
