@@ -56,7 +56,7 @@ body cd-el {
   box-sizing: border-box;
   white-space: pre;
   word-wrap: normal;
-  padding-bottom: 50px;
+  padding-bottom: calc(21px + 10.5px);
 }
 
 .bottom-wrapper {
@@ -553,6 +553,10 @@ body.expanded .sidebar-toggle svg .left {
 body.expanded .sidebar {
   transform: translateX(calc(100% - 1px));  
   pointer-events: auto;
+}
+
+body.mobile.expanded .sidebar {
+  transform: translateX(100%);  
 }
 
 body.notransition .sidebar {
