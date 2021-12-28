@@ -226,6 +226,11 @@ body.notransition .bottom-wrapper {
   position: relative;
   box-sizing: border-box;
   height: 100%;
+  display: none;
+}
+
+.bottom-float.modified .push-wrapper {
+  display: flex;
 }
 
 .bottom-wrapper.expanded .bottom-float .push-wrapper {
