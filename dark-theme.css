@@ -57,10 +57,11 @@ cd-el {
 }
 
 .token.comment,
+.token.comment *,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: hsl(218deg 7% 64% / 72%) !important;
+  color: hsl(218deg 7% 64% / 72%);
 }
 
 .token.punctuation,
@@ -93,6 +94,7 @@ cd-el {
 
 .token.attr-value,
 .token.string,
+.token.string *,
 .style .token.string,
 .token.char,
 .token.url,
@@ -101,7 +103,7 @@ cd-el {
 .token.template-string,
 .token.regex,
 .token.variable {
-  color: #c1ffd5cc !important;
+  color: #c1ffd5cc;
 }
 
 .token.operator,
