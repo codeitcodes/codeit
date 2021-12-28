@@ -325,6 +325,7 @@ body.safari .live-buttons .live-button.share path.ios {
 }
 
 body:not(.mobile) .live-view {
+  top: 0;
   opacity: 1;
   transform: translateX(100%);
 }
