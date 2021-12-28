@@ -460,7 +460,7 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle {
-  left: -45px;
+  left: -50px;
   will-change: transform;
   transition: .18s var(--ease-function),
               .4s var(--cubic-function) transform,
