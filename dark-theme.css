@@ -178,7 +178,6 @@ cd-el {
 
 .line-numbers {
   position: relative;
-  counter-reset: linenumber;
   padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
@@ -194,24 +193,13 @@ cd-el {
   pointer-events: none;
   line-height: inherit;
   font-size: inherit;
-}
-
-.line-numbers-rows > span {
-  display: block;
-  counter-increment: linenumber;
-}
-
-.line-numbers-rows > span:before {
-  content: counter(linenumber);
   color: #636d83;
   display: block;
   text-align: right;
   padding-right: 13.5px;
   padding-left: calc(13.5px + env(safe-area-inset-left));
-  white-space: nowrap;
   min-width: 1.2em;
-  line-height: inherit;
-  font-size: inherit;
+  white-space: pre;
 }
 
 
