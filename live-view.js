@@ -579,7 +579,7 @@ function renderLiveViewHTML(file) {
         if (!(linkHref.pathname.slice(1).includes('/'))) {
           
           // get file element for its SHA
-          let fileEl = fileWrapper.querySelectorAll('.item.file')
+          let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
                        .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
           
           fileEl = (fileEl.length > 0) ? fileEl[0] : null;
