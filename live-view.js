@@ -464,14 +464,22 @@ function renderLiveViewHTML(file) {
   
   liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
 
-  const frame = liveView.querySelector('.live-frame');        
+  const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
   
-  frameDocument.addEventListener('keydown', handleMetaP);
-  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+  // create a document fragment
+  // for HTML manipulation
+  const fragment = document.createDocumentFragment();
+  
+  // place file contents in fragment
+  fragment.innerHTML = decodeUnicode(file.content);
+  
+  // add ctrl/cmd+P event listener
+  if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
+  
   
   // fetch styles
-  const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
+  const frameLinks = fragment.querySelectorAll('link[rel="stylesheet"]');
   
   if (frameLinks.length > 0) {
     
@@ -520,7 +528,7 @@ function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  frameDocument.querySelectorAll('script').forEach(async (script) => {
+  fragment.querySelectorAll('script').forEach(async (script) => {
 
     // if script is external
     if (script.src) {
@@ -569,7 +577,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch images
-  frameDocument.querySelectorAll('img').forEach(async (image) => {
+  fragment.querySelectorAll('img').forEach(async (image) => {
 
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
@@ -628,7 +636,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch videos
-  frameDocument.querySelectorAll('video').forEach(async (video) => {
+  fragment.querySelectorAll('video').forEach(async (video) => {
 
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
@@ -673,7 +681,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch audio
-  frameDocument.querySelectorAll('audio').forEach(async (audio) => {
+  fragment.querySelectorAll('audio').forEach(async (audio) => {
 
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
@@ -706,6 +714,10 @@ function renderLiveViewHTML(file) {
     }
 
   })
+  
+  
+  // place fragment contents in iframe
+  frameDocument.documentElement.innerHTML = fragment.innerHTML;
 
 }
 
