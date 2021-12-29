@@ -477,52 +477,35 @@ async function renderLiveViewHTML(file) {
   
   // fetch styles
   const frameLinks = fragmentDocument.querySelectorAll('link[rel="stylesheet"]');
-  
-  if (frameLinks.length > 0) {
-    
-    await asyncForEach(frameLinks, async (link) => {
 
-      const linkHref = new URL(link.href);
-      const fileName = linkHref.pathname.slice(1);
+  await asyncForEach(frameLinks, async (link) => {
 
-      if (linkHref.origin == window.location.origin) {
+    const linkHref = new URL(link.href);
+    const fileName = linkHref.pathname.slice(1);
 
-        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-        let resp;
+    if (linkHref.origin == window.location.origin) {
 
-        if (!file[0]) {
+      const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+      let resp;
 
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+      if (!file[0]) {
 
-        } else {
-
-          resp = file[0];
-
-        }
-
-        link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-        
-        // hide loader
-        liveView.classList.add('loaded');
-        
-        // remove original tag
-        link.remove();
+        resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
 
       } else {
-        
-        // hide loader
-        liveView.classList.add('loaded');
-        
+
+        resp = file[0];
+
       }
-      
-    });
-    
-  } else {
-    
-    // hide loader
-    liveView.classList.add('loaded');
-    
-  }
+
+      link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
+
+      // remove original tag
+      link.remove();
+
+    }
+
+  });
 
   // fetch scripts
   await asyncForEach(fragmentDocument.querySelectorAll('script'), async (script) => {
@@ -721,6 +704,9 @@ async function renderLiveViewHTML(file) {
   
   // add ctrl/cmd+P event listener
   if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
+  
+  // hide loader
+  liveView.classList.add('loaded');
 
 }
 
