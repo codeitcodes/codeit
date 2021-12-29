@@ -224,14 +224,14 @@ function addBottomSwipeListener() {
 
           } catch(e) {
 
-            copy(shareData.content);
+            copy(shareData.text);
             alert('Copied link to clipboard.');
 
           }
           
         } else {
           
-          copy(shareData.content);
+          copy(shareData.text);
           alert('Copied link to clipboard.');
 
         }
