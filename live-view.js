@@ -472,8 +472,6 @@ async function renderLiveViewHTML(file) {
   
   const fragmentDocument = fragment.querySelector('html');
   
-  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
-  
   
   // fetch styles
   const frameLinks = fragmentDocument.querySelectorAll('link[rel="stylesheet"]');
@@ -695,6 +693,8 @@ async function renderLiveViewHTML(file) {
 
   })
   
+  
+  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
   
   const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
