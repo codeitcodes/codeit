@@ -56,8 +56,8 @@ body cd-el {
   box-sizing: border-box;
   white-space: pre;
   word-wrap: normal;
-  padding-bottom: calc(21px + 10.5px);
-  scroll-padding-bottom: calc(21px + 10.5px);
+  padding-bottom: calc(41px + 10.5px);
+  scroll-padding-bottom: calc(41px + 10.5px);
 }
 
 .bottom-wrapper {
