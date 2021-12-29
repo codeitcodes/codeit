@@ -845,7 +845,7 @@ body.notransition .sidebar {
 }
 
 .sidebar.animating-file .item:not(.out-of-view) {
-  transform: translateY(calc(-54px));
+  transform: translateY(calc(-54px - 11px));
   transition: none;
 }
 
