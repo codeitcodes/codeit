@@ -576,15 +576,43 @@ function renderLiveViewHTML(file) {
 
     if (linkHref.origin == window.location.origin) {
 
-      // if image is in or below current directory
-      if (!(linkHref.pathname.slice(1).includes('./'))) {
+      // if image is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if image file exists
+        if (fileEl !== null) {
+          
+          // fetch image
+          
+          let fileName = linkHref.pathname.split('/');
+          fileName = fileName[fileName.length-1];
+          
+          // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+          let mimeType = 'image/' + fileName.split('.')[1];
+
+          if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          video.src = 'data:' + mimeType + ';base64,' + resp.content;
+          
+        }
+        
+      } else if (!(linkHref.pathname.slice(1).includes('./'))) { // if image is below current directory
         
         // fetch image
         
         let fileName = linkHref.pathname.split('/');
         fileName = fileName[fileName.length-1];
         
-        // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+        // get MIME type
         let mimeType = 'image/' + fileName.split('.')[1];
         
         if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
