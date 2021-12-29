@@ -622,7 +622,7 @@ addButton.addEventListener('click', () => {
 
     // create new file
     const fileEl = document.createElement('div');
-    fileEl.classList = 'item file selected focused hidden';
+    fileEl.classList = 'item file selected focused';
 
     fileEl.innerHTML = `
     <div class="label">
@@ -636,6 +636,13 @@ addButton.addEventListener('click', () => {
 
     // add new file to DOM
     fileWrapper.prepend(fileEl);
+    
+    // add stagger animation to files
+    sidebar.classList.add('animating-file');
+    fileWrapper.querySelectorAll('.item').forEach((item, i) => {
+      item.style.transitionDelay = 0.02 * i + 's';
+    });
+    
           
     // focus file
     fileEl.querySelector('.name').focus();
@@ -660,12 +667,11 @@ addButton.addEventListener('click', () => {
     let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
 
 
-    // on next frame
+    // animate new file
     onNextFrame(() => {
       
-      // animate file
-      fileEl.classList.remove('hidden');
-
+      sidebar.classList.remove('animating-file');
+      
     });
 
 
