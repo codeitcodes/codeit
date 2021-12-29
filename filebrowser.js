@@ -249,7 +249,7 @@ async function renderSidebarHTML() {
       modifiedFilesTemp.forEach(file => {
         
         // if file dosen't already exist
-        if (!modFileNames[file.name) {
+        if (!modFileNames[file.name]) {
           
           modFileNames[file.name] = true;
 
