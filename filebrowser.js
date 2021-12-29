@@ -193,7 +193,7 @@ async function renderSidebarHTML() {
             // if modified file has matching SHA or name
             if (modFile.sha === file.sha || modFile.name === file.name) {
               
-              console.log(modFile.name);
+              console.log('[modifiedFilesTemp] Removed ', modFile.name);
               
               // remove modified file from temporary array
               modifiedFilesTemp.splice(index, 1);
@@ -241,7 +241,9 @@ async function renderSidebarHTML() {
 
       // render modified files from temporary array
       modifiedFilesTemp.forEach(file => {
-
+        
+        console.log('[modfiedFilesTemp] Rendering', file.name);
+        
         // add modified flag to file
         let modified = '';
         if (!file.eclipsed) modified = ' modified';
