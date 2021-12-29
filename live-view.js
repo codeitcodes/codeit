@@ -462,11 +462,6 @@ function toggleLiveView(file) {
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
   
-  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
-
-  const frame = liveView.querySelector('.live-frame');
-  const frameDocument = frame.contentDocument;
-  
   // create a document fragment
   // for HTML manipulation
   const fragment = document.createDocumentFragment();
@@ -477,8 +472,7 @@ async function renderLiveViewHTML(file) {
   
   const fragmentDocument = fragment.querySelector('html');
   
-  // add ctrl/cmd+P event listener
-  if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
+  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
   
   
   // fetch styles
@@ -719,8 +713,14 @@ async function renderLiveViewHTML(file) {
   })
   
   
+  const frame = liveView.querySelector('.live-frame');
+  const frameDocument = frame.contentDocument;
+  
   // place fragment contents in iframe
   frameDocument.documentElement.innerHTML = fragmentDocument.outerHTML;
+  
+  // add ctrl/cmd+P event listener
+  if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
 
 }
 
