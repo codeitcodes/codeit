@@ -460,53 +460,67 @@ function toggleLiveView(file) {
 
 
 // render live view for HTML files
-async function renderLiveViewHTML(file) {
+function renderLiveViewHTML(file) {
   
-  // create a document fragment
-  // for HTML manipulation
-  const fragment = document.createDocumentFragment();
+  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
+
+  const frame = liveView.querySelector('.live-frame');        
+  const frameDocument = frame.contentDocument;
   
-  // place file contents in fragment
-  fragment.appendChild(document.createElement('html'));
-  fragment.querySelector('html').innerHTML = decodeUnicode(file.content);
-  
-  const fragmentDocument = fragment.querySelector('html');
-  
+  frameDocument.addEventListener('keydown', handleMetaP);
+  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
   
   // fetch styles
-  const frameLinks = fragmentDocument.querySelectorAll('link[rel="stylesheet"]');
+  const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
+  
+  if (frameLinks.length > 0) {
+    
+    frameLinks.forEach(async (link) => {
 
-  await asyncForEach(frameLinks, async (link) => {
+      const linkHref = new URL(link.href);
+      const fileName = linkHref.pathname.slice(1);
 
-    const linkHref = new URL(link.href);
-    const fileName = linkHref.pathname.slice(1);
+      if (linkHref.origin == window.location.origin) {
 
-    if (linkHref.origin == window.location.origin) {
+        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+        let resp;
 
-      const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-      let resp;
+        if (!file[0]) {
 
-      if (!file[0]) {
+          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
 
-        resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+        } else {
+
+          resp = file[0];
+
+        }
+
+        link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
+        
+        // hide loader
+        liveView.classList.add('loaded');
+        
+        // remove original tag
+        link.remove();
 
       } else {
-
-        resp = file[0];
-
+        
+        // hide loader
+        liveView.classList.add('loaded');
+        
       }
-
-      link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-
-      // remove original tag
-      link.remove();
-
-    }
-
-  });
+      
+    });
+    
+  } else {
+    
+    // hide loader
+    liveView.classList.add('loaded');
+    
+  }
 
   // fetch scripts
-  await asyncForEach(fragmentDocument.querySelectorAll('script'), async (script) => {
+  frameDocument.querySelectorAll('script').forEach(async (script) => {
 
     // if script is external
     if (script.src) {
@@ -555,7 +569,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch images
-  await asyncForEach(fragmentDocument.querySelectorAll('img'), async (image) => {
+  frameDocument.querySelectorAll('img').forEach(async (image) => {
 
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
@@ -614,7 +628,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch videos
-  await asyncForEach(fragmentDocument.querySelectorAll('video'), async (video) => {
+  frameDocument.querySelectorAll('video').forEach(async (video) => {
 
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
@@ -659,7 +673,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch audio
-  await asyncForEach(fragmentDocument.querySelectorAll('audio'), async (audio) => {
+  frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
@@ -692,21 +706,6 @@ async function renderLiveViewHTML(file) {
     }
 
   })
-  
-  
-  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
-  
-  const frame = liveView.querySelector('.live-frame');
-  const frameDocument = frame.contentDocument;
-  
-  // place fragment contents in iframe
-  frameDocument.documentElement.innerHTML = fragmentDocument.outerHTML;
-  
-  // add ctrl/cmd+P event listener
-  if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
-  
-  // hide loader
-  liveView.classList.add('loaded');
 
 }
 
