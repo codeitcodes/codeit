@@ -460,7 +460,7 @@ function toggleLiveView(file) {
 
 
 // render live view for HTML files
-function renderLiveViewHTML(file) {
+async function renderLiveViewHTML(file) {
   
   liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
 
@@ -486,7 +486,7 @@ function renderLiveViewHTML(file) {
   
   if (frameLinks.length > 0) {
     
-    frameLinks.forEach(async (link) => {
+    asyncForEach(frameLinks, async (link) => {
 
       const linkHref = new URL(link.href);
       const fileName = linkHref.pathname.slice(1);
@@ -531,7 +531,7 @@ function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  fragmentDocument.querySelectorAll('script').forEach(async (script) => {
+  asyncForEach(fragmentDocument.querySelectorAll('script'), async (script) => {
 
     // if script is external
     if (script.src) {
@@ -580,7 +580,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch images
-  fragmentDocument.querySelectorAll('img').forEach(async (image) => {
+  asyncForEach(fragmentDocument.querySelectorAll('img'), async (image) => {
 
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
@@ -639,7 +639,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch videos
-  fragmentDocument.querySelectorAll('video').forEach(async (video) => {
+  asyncForEach(fragmentDocument.querySelectorAll('video'), async (video) => {
 
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
@@ -684,7 +684,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch audio
-  fragmentDocument.querySelectorAll('audio').forEach(async (audio) => {
+  asyncForEach(fragmentDocument.querySelectorAll('audio'), async (audio) => {
 
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
@@ -745,4 +745,11 @@ function addScript(documentNode, code, src, type) {
   
   documentNode.head.appendChild(script);
   
+}
+
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
 }
