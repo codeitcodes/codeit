@@ -195,7 +195,7 @@ async function renderSidebarHTML() {
             // if modified file has matching SHA or name
             if (modFile.sha === file.sha || modFile.name === file.name) {
               
-              console.log('[modifiedFilesTemp] Removed ', modFile.name);
+              console.log('[modifiedFilesTemp] Removed ', modFile.name, modifiedFilesTemp, i, modifiedFilesTemp[i-1]);
               
               // remove modified file from temporary array
               modifiedFilesTemp.splice(i, 1);
