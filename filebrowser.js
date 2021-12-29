@@ -974,7 +974,7 @@ function protectUnsavedCode() {
   let selectedElName;
   
   // if the selected file's sha changed
-  if (selectedElSha.length > 0) {
+  if (selectedElSha.length == 0) {
     
     // get selected file element in HTML
     // by name
