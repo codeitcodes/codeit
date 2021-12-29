@@ -200,6 +200,9 @@ async function renderSidebarHTML() {
               // remove modified file from temporary array
               modifiedFilesTemp.splice(i, 1);
               
+              // reset index
+              i--;
+              
             }
             
           }
