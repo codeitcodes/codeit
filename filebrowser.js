@@ -184,7 +184,7 @@ async function renderSidebarHTML() {
 
         // if item is a file
         if (item.type == 'file') {
-                    
+          
           let file = getLatestVersion(item);
           
           // search for matching modified files
@@ -248,10 +248,15 @@ async function renderSidebarHTML() {
       
       modifiedFilesTemp.forEach(file => {
         
-        // if file dosen't already exist
+        // if file isn't already in HTML
         if (!modFileNames[file.name]) {
           
+          // add file to HTML
+          
           modFileNames[file.name] = true;
+          
+          // get the file's latest version
+          file = getLatestVersion(file);
 
           // add modified flag to file
           let modified = '';
