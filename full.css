@@ -543,6 +543,10 @@ body.expanded .sidebar-toggle svg .left {
   transition-delay: .22s;
 }
 
+.live-view.visible ~ .live-toggle:active {
+  background: #1a1c24;
+}
+
 .live-view.visible ~ .live-toggle svg:hover {
   opacity: 1;
 }
