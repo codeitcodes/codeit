@@ -98,8 +98,13 @@ async function renderSidebarHTML() {
   }
   
   
-  let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
+  // create temporary modified files array
+  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
 
+  // get all modified files in directory
+  modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+  
+  
   // save rendered HTML
   let out = '';
 
@@ -182,10 +187,20 @@ async function renderSidebarHTML() {
 
           let file = getLatestVersion(item);
           
-          if (modifiedFiles[file.sha]) {
-            delete modifiedFilesResp[file.sha];
-          }
-
+          // search for matching modified files
+          modifiedFilesTemp.forEach((modFile, index) => {
+            
+            // if modified file has matching SHA or name
+            if (modFile.sha === file.sha || modFile.name === file.name) {
+              
+              // remove modified file from temporary array
+              modifiedFilesTemp.splice(index, 1);
+              
+            }
+            
+          });
+          
+          
           // add modified flag to file
           let modified = '';
           if (modifiedFiles[file.sha] &&
@@ -220,28 +235,24 @@ async function renderSidebarHTML() {
       });
         
 
-      // render modified files
-      Object.values(modifiedFilesResp).forEach(item => {
-        
-        if (item.dir == treeLoc.join()) {
-          
-          // add modified flag to file
-          let modified = '';
-          if (!item.eclipsed) modified = ' modified';
+      // render modified files from temporary array
+      modifiedFilesTemp.forEach(item => {
 
-          out += `
-          <div class="item file`+ modified +`" sha="`+ item.sha +`">
-            <div class="label">
-              `+ fileIcon +`
-              <a class="name">`+ item.name +`</a>
-            </div>
-            <div class="push-wrapper">
-              `+ pushIcon +`
-            </div>
+        // add modified flag to file
+        let modified = '';
+        if (!item.eclipsed) modified = ' modified';
+
+        out += `
+        <div class="item file`+ modified +`" sha="`+ item.sha +`">
+          <div class="label">
+            `+ fileIcon +`
+            <a class="name">`+ item.name +`</a>
           </div>
-          `;
-          
-        }
+          <div class="push-wrapper">
+            `+ pushIcon +`
+          </div>
+        </div>
+        `;
 
       });
       
