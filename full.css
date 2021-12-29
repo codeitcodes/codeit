@@ -229,7 +229,8 @@ body.notransition .bottom-wrapper {
   display: none;
 }
 
-.bottom-float.modified .push-wrapper {
+.bottom-float.modified .push-wrapper,
+.bottom-float .push-wrapper.checked {
   display: flex;
 }
 
