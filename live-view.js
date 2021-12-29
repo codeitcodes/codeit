@@ -601,7 +601,7 @@ function renderLiveViewHTML(file) {
           // get file as blob with SHA (up to 100MB)
           const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
 
-          video.src = 'data:' + mimeType + ';base64,' + resp.content;
+          image.src = 'data:' + mimeType + ';base64,' + resp.content;
           
         }
         
