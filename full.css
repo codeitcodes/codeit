@@ -506,7 +506,7 @@ body.expanded .sidebar-toggle svg .left {
   opacity: 1;
 }
 
-.preview-toggle {
+.live-toggle {
   right: 0;
   left: auto;
   border-radius: 500px 0 0 500px;
@@ -515,20 +515,20 @@ body.expanded .sidebar-toggle svg .left {
   z-index: 1000;
 }
 
-.preview-toggle.visible {
+.live-toggle.visible {
   display: flex;
 }
 
-.preview-toggle svg path {
+.live-toggle svg path {
   opacity: 0;
   transition: .4s var(--cubic-function);
 }
 
-.live-view.visible ~ .preview-toggle svg .right {
+.live-view.visible ~ .live-toggle svg .right {
   opacity: 1;
 }
 
-.live-view:not(.visible) ~ .preview-toggle svg .left {
+.live-view:not(.visible) ~ .live-toggle svg .left {
   opacity: 1;
 }
 
