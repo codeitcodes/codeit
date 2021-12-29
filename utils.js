@@ -11,7 +11,7 @@ const body = document.body,
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
 
       sidebarToggle = document.querySelector('.sidebar-toggle'),
-      previewToggle = document.querySelector('.preview-toggle'),
+      liveViewToggle = document.querySelector('.live-toggle'),
 
       sidebar = document.querySelector('.sidebar'),
       introWrapper = sidebar.querySelector('.intro-wrapper'),
