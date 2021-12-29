@@ -638,9 +638,34 @@ addButton.addEventListener('click', () => {
     fileWrapper.prepend(fileEl);
     
     // add stagger animation to files
+    
     sidebar.classList.add('animating-file');
-    fileWrapper.querySelectorAll('.item').forEach((item, i) => {
-      item.style.transitionDelay = 0.02 * i + 's';
+    
+    let staggerIndex = fileWrapper.querySelectorAll('.item').length - 1;
+    fileWrapper.querySelectorAll('.item').forEach(item => {
+      
+      const rect = item.getBoundingClientRect();
+      const elemTop = rect.top;
+      const elemBottom = rect.bottom;
+
+      const isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+      
+      // if file is in viewport
+      if (isVisible) {
+        
+        // add stagger animation
+        item.classList.remove('out-of-view');
+        item.style.transitionDelay = 0.02 * staggerIndex + 's';
+        
+        staggerIndex--;
+        
+      } else {
+        
+        // disable animation
+        item.classList.add('out-of-view');
+        
+      }
+      
     });
     
           
