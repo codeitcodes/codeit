@@ -49,7 +49,7 @@ const body = document.body,
 
 
 // version
-const version = '1.8.9';
+const version = '1.9.0';
 versionEl.innerText = version;
 
 
@@ -79,7 +79,7 @@ function startLoading() {
   onNextFrame(load);
   
   if (loadInterval) window.clearInterval(loadInterval);
-  loadInterval = window.setInterval(load, 400);
+  loadInterval = window.setInterval(load, 180);
 
 }
 
@@ -99,7 +99,7 @@ function load() {
 
   let loadPercent = Number(loader.style.width.replace('%',''));
 
-  loadPercent += 10;
+  loadPercent += 5;
 
   if (loadPercent < 100) {
 
