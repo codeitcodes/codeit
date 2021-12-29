@@ -1069,11 +1069,11 @@ function setupEditor() {
   
   // add editor event listeners
   
-  cd.on('modify', codeChange);
+  cd.on('type', codeChange);
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.on('modify', updateScrollbarArrow);
+  if (!isMobile) cd.on('type', updateScrollbarArrow);
   
   // update on screen resize
   
