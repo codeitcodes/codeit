@@ -218,7 +218,7 @@ async function renderSidebarHTML() {
           </div>
           `;
           
-          if (file.name === 'audiotest.html') console.log('[audiotest.html] Rendered latest version. Original:', item, 'Latest version:', file);
+          if (file.name === 'anothertest.js') console.log('[anothertest.js] Rendered latest version. Original:', item, 'Latest version:', file);
 
         } else { // if item is a folder
 
