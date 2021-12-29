@@ -118,7 +118,7 @@ function checkBottomFloat() {
       window.setTimeout(() => {
 
         // if still on bottom of codeit
-        if ((cd.scrollTop + cd.offsetHeight) >= cd.scrollHeight) {
+        if ((cd.scrollHeight - cd.offsetHeight) >= cd.scrollHeight) {
 
           // show bottom float
           bottomFloat.classList.remove('hidden');
