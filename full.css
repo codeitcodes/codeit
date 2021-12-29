@@ -844,7 +844,7 @@ body.notransition .sidebar {
   cursor: unset !important;
 }
 
-.sidebar.animating-file .item {
+.sidebar.animating-file .item:not(.out-of-view) {
   transform: translateY(calc(-54px));
   transition: none;
 }
