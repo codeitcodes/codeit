@@ -223,8 +223,6 @@ async function renderSidebarHTML() {
           </div>
           `;
           
-          if (file.name === 'anothertest.js') console.log('[anothertest.js] Rendered latest version. Original:', item, 'Latest version:', file);
-
         } else { // if item is a folder
 
           out += `
