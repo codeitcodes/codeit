@@ -184,9 +184,7 @@ async function renderSidebarHTML() {
 
         // if item is a file
         if (item.type == 'file') {
-          
-          if (item.name === 'audiotest.html') console.log('[audiotest.html] Rendered Github response version');
-          
+                    
           let file = getLatestVersion(item);
           
           // search for matching modified files
@@ -220,7 +218,7 @@ async function renderSidebarHTML() {
           </div>
           `;
           
-          if (file.name === 'audiotest.html') console.log('[audiotest.html] Rendered latest version');
+          if (file.name === 'audiotest.html') console.log('[audiotest.html] Rendered latest version. Original:', item, 'Latest version:', file);
 
         } else { // if item is a folder
 
