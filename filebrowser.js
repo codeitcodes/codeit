@@ -973,8 +973,8 @@ function protectUnsavedCode() {
   let selectedElSha = fileWrapper.querySelectorAll('.file[sha="'+ selectedFile.sha +'"]');
   let selectedElName;
   
-  // if selected file element does not exist
-  if (selectedElSha == null) {
+  // if the selected file's sha changed
+  if (selectedElSha.length > 0) {
     
     // get selected file element in HTML
     // by name
@@ -982,11 +982,6 @@ function protectUnsavedCode() {
                      .filter(file => file.querySelector('.name').textContent == selectedFile.name);
     
     selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
-    
-  }
-  
-  // if the selected file's sha changed
-  if (selectedElSha === null) {
     
     // if new version of selected file exists
     if (selectedElName !== null) {
