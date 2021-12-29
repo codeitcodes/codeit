@@ -568,35 +568,109 @@ function renderLiveViewHTML(file) {
 
   })
   
-  // fetch music
+  // fetch images
+  frameDocument.querySelectorAll('img').forEach(async (image) => {
+
+    const linkHref = new URL(image.src);
+    const fileName = linkHref.pathname.slice(1);
+
+    if (linkHref.origin == window.location.origin) {
+
+      // if image is in or below current directory
+      if (!(linkHref.pathname.slice(1).includes('./'))) {
+        
+        // fetch image
+        
+        let fileName = linkHref.pathname.split('/');
+        fileName = fileName[fileName.length-1];
+        
+        // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+        let mimeType = 'image/' + fileName.split('.')[1];
+        
+        if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+        
+        const resp = await git.getFile(selectedFile.dir.split(','), fileName);
+        
+        image.src = 'data:' + mimeType + ';base64,' + resp.content;
+
+      }
+
+    }
+
+  })
+  
+  // fetch videos
+  frameDocument.querySelectorAll('video').forEach(async (video) => {
+
+    const linkHref = new URL(video.src);
+    const fileName = linkHref.pathname.slice(1);
+
+    if (linkHref.origin == window.location.origin) {
+
+      // if video is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if video file exists
+        if (fileEl !== null) {
+          
+          // fetch video
+          
+          let fileName = linkHref.pathname.split('/');
+          fileName = fileName[fileName.length-1];
+          
+          // get MIME type
+          let mimeType = 'video/' + fileName.split('.')[1];
+          
+          if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
+          if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
+          if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
+          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          video.src = 'data:' + mimeType + ';base64,' + resp.content;
+
+        }
+
+      }
+
+    }
+
+  })
+  
+  // fetch audio
   frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
-    // if audio is an mp3 file
-    if (audio.src.endsWith('.mp3')) {
+    const linkHref = new URL(audio.src);
+    const fileName = linkHref.pathname.slice(1);
 
-      const linkHref = new URL(audio.src);
-      const fileName = linkHref.pathname.slice(1);
+    if (linkHref.origin == window.location.origin) {
 
-      if (linkHref.origin == window.location.origin) {
-        
-        // if audio file is in current directory
-        if (!(linkHref.pathname.slice(1).includes('/'))) {
+      // if audio file is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if audio file exists
+        if (fileEl !== null) {
           
-          // get file element for its SHA
-          let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                       .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+          // fetch audio
           
-          fileEl = (fileEl.length > 0) ? fileEl[0] : null;
-          
-          // if audio file exists
-          if (fileEl !== null) {
-            
-            const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
-            
-            audio.src = 'data:audio/mpeg;base64,' + resp.content;
-            
-          }
-          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          audio.src = 'data:audio/mpeg;base64,' + resp.content;
+
         }
 
       }
