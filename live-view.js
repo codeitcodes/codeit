@@ -278,6 +278,8 @@ function addBottomSwipeListener() {
         // if swiped up and bottom float isn't expanded
         if (swiped && !bottomWrapper.classList.contains('expanded')) {
           
+          swiped = false;
+          
           // expand bottom float
           bottomWrapper.classList.add('expanded');
           
@@ -301,6 +303,8 @@ function addBottomSwipeListener() {
         
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')) {
+          
+          swiped = false;
           
           // fix bottom float on safari
           if (isSafari) {
