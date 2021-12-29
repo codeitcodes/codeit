@@ -392,7 +392,7 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-
+  //@@
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
@@ -965,7 +965,7 @@ function protectUnsavedCode() {
     
     // get selected file element in HTML
     // by name
-    selectedElName = fileWrapper.querySelectorAll('.item.file')
+    selectedElName = Array.from(fileWrapper.querySelectorAll('.item.file'))
                      .filter(file => file.querySelector('.name').textContent == selectedFile.name);
     
     selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
