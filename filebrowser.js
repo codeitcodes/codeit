@@ -217,6 +217,8 @@ async function renderSidebarHTML() {
             </div>
           </div>
           `;
+          
+          if (file.name === 'audiotest.html') console.log('a');
 
         } else { // if item is a folder
 
@@ -236,23 +238,25 @@ async function renderSidebarHTML() {
         
 
       // render modified files from temporary array
-      modifiedFilesTemp.forEach(item => {
+      modifiedFilesTemp.forEach(file => {
 
         // add modified flag to file
         let modified = '';
-        if (!item.eclipsed) modified = ' modified';
+        if (!file.eclipsed) modified = ' modified';
 
         out += `
-        <div class="item file`+ modified +`" sha="`+ item.sha +`">
+        <div class="item file`+ modified +`" sha="`+ file.sha +`">
           <div class="label">
             `+ fileIcon +`
-            <a class="name">`+ item.name +`</a>
+            <a class="name">`+ file.name +`</a>
           </div>
           <div class="push-wrapper">
             `+ pushIcon +`
           </div>
         </div>
         `;
+        
+        if (file.name === 'audiotest.html') console.log('b');
 
       });
       
