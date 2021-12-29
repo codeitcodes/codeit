@@ -188,7 +188,9 @@ async function renderSidebarHTML() {
           let file = getLatestVersion(item);
           
           // search for matching modified files
-          modifiedFilesTemp.forEach((modFile, index) => {
+          for (let i = 0; i < modifiedFilesTemp.length; i++) {
+            
+            let modFile = modifiedFilesTemp[i];
             
             // if modified file has matching SHA or name
             if (modFile.sha === file.sha || modFile.name === file.name) {
@@ -196,7 +198,7 @@ async function renderSidebarHTML() {
               console.log('[modifiedFilesTemp] Removed ', modFile.name);
               
               // remove modified file from temporary array
-              modifiedFilesTemp.splice(index, 1);
+              modifiedFilesTemp.splice(i, 1);
               
             }
             
