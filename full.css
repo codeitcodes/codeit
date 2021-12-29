@@ -845,8 +845,12 @@ body.notransition .sidebar {
 }
 
 .sidebar.animating-file .item:not(.out-of-view) {
-  transform: translateY(calc(-54px - 11px));
+  transform: translateY(-54px);
   transition: none;
+}
+
+.sidebar.animating-file .item.focused {
+  transition-property: transform, background;
 }
 
 .sidebar .item .label {
