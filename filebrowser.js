@@ -194,9 +194,7 @@ async function renderSidebarHTML() {
             
             // if modified file has matching SHA or name
             if (modFile.sha === file.sha || modFile.name === file.name) {
-              
-              console.log('[modifiedFilesTemp] Removed ', modFile.name, modifiedFilesTemp, i, modifiedFilesTemp[i-1]);
-              
+                            
               // remove modified file from temporary array
               modifiedFilesTemp.splice(i, 1);
               
@@ -245,25 +243,33 @@ async function renderSidebarHTML() {
         
 
       // render modified files from temporary array
+      
+      let modFileNames = {};
+      
       modifiedFilesTemp.forEach(file => {
         
-        console.log('[modfiedFilesTemp] Rendering', file.name);
-        
-        // add modified flag to file
-        let modified = '';
-        if (!file.eclipsed) modified = ' modified';
+        // if file dosen't already exist
+        if (!modFileNames[file.name) {
+          
+          modFileNames[file.name] = true;
 
-        out += `
-        <div class="item file`+ modified +`" sha="`+ file.sha +`">
-          <div class="label">
-            `+ fileIcon +`
-            <a class="name">`+ file.name +`</a>
+          // add modified flag to file
+          let modified = '';
+          if (!file.eclipsed) modified = ' modified';
+
+          out += `
+          <div class="item file`+ modified +`" sha="`+ file.sha +`">
+            <div class="label">
+              `+ fileIcon +`
+              <a class="name">`+ file.name +`</a>
+            </div>
+            <div class="push-wrapper">
+              `+ pushIcon +`
+            </div>
           </div>
-          <div class="push-wrapper">
-            `+ pushIcon +`
-          </div>
-        </div>
-        `;
+          `;
+          
+        }
         
       });
       
