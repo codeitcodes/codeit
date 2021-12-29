@@ -202,7 +202,7 @@ async function renderSidebarHTML() {
               
             }
             
-          });
+          }
           
           
           // add modified flag to file
