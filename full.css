@@ -466,8 +466,19 @@ body.scroll-enabled .bookmark {
   bottom: calc(16px + 5px);
 }
 
+.bookmark .buttons {
+  display: flex;
+  align-items: center;
+  grid-gap: 15px;
+  padding-left: 10px;
+}
+
 .bookmark svg {
   opacity: .72;
+  padding: 10px;
+  margin: -10px;
+  display: block;
+  transition: .18s var(--ease-function) opacity;
 }
 
 .sidebar-toggle {
@@ -511,6 +522,11 @@ body.expanded .sidebar-toggle svg .left {
   left: auto;
   border-radius: 500px 0 0 500px;
   display: none;
+  width: 48px;
+  overflow: hidden;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  transition-property: width, box-shadow;
   z-index: 1000;
 }
 
@@ -518,20 +534,34 @@ body.expanded .sidebar-toggle svg .left {
   display: flex;
 }
 
-.live-toggle svg path {
-  opacity: 0;
-  transition: .4s var(--cubic-function);
-}
-
 .live-view.visible ~ .live-toggle {
   box-shadow: 2px 5px 6px 0px rgb(0 0 0 / 9%);
 }
 
-.live-view.visible ~ .live-toggle svg .right {
+.live-view.visible ~ .live-toggle:hover {
+  width: 136px;
+  transition-delay: .22s;
+}
+
+.live-view.visible ~ .live-toggle svg:hover {
   opacity: 1;
 }
 
-.live-view:not(.visible) ~ .live-toggle svg .left {
+.live-view.visible ~ .live-toggle svg:active {
+  opacity: .5;
+  transition: none;
+}
+
+.live-toggle .arrow path {
+  opacity: 0;
+  transition: .4s var(--cubic-function);
+}
+
+.live-view.visible ~ .live-toggle .arrow .right {
+  opacity: 1;
+}
+
+.live-view:not(.visible) ~ .live-toggle .arrow .left {
   opacity: 1;
 }
 
