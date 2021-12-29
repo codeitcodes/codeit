@@ -452,6 +452,7 @@ body.loaded:not(.mobile) .live-view {
 
 .bookmark.visible {
   box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
+  box-shadow: 2px 5px 6px 0px rgb(0 0 0 / 9%);
 }
 
 .bookmark.visible::after {
@@ -510,7 +511,6 @@ body.expanded .sidebar-toggle svg .left {
   right: 0;
   left: auto;
   border-radius: 500px 0 0 500px;
-  box-shadow: 1px 2px 6px 0px rgb(0 0 0 / 5%);
   display: none;
   z-index: 1000;
 }
