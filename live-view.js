@@ -486,7 +486,7 @@ async function renderLiveViewHTML(file) {
   
   if (frameLinks.length > 0) {
     
-    asyncForEach(frameLinks, async (link) => {
+    await asyncForEach(frameLinks, async (link) => {
 
       const linkHref = new URL(link.href);
       const fileName = linkHref.pathname.slice(1);
@@ -531,7 +531,7 @@ async function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  asyncForEach(fragmentDocument.querySelectorAll('script'), async (script) => {
+  await asyncForEach(fragmentDocument.querySelectorAll('script'), async (script) => {
 
     // if script is external
     if (script.src) {
@@ -580,7 +580,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch images
-  asyncForEach(fragmentDocument.querySelectorAll('img'), async (image) => {
+  await asyncForEach(fragmentDocument.querySelectorAll('img'), async (image) => {
 
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
@@ -639,7 +639,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch videos
-  asyncForEach(fragmentDocument.querySelectorAll('video'), async (video) => {
+  await asyncForEach(fragmentDocument.querySelectorAll('video'), async (video) => {
 
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
@@ -684,7 +684,7 @@ async function renderLiveViewHTML(file) {
   })
   
   // fetch audio
-  asyncForEach(fragmentDocument.querySelectorAll('audio'), async (audio) => {
+  await asyncForEach(fragmentDocument.querySelectorAll('audio'), async (audio) => {
 
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
