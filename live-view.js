@@ -350,11 +350,11 @@ function updateLiveViewArrow() {
   
   if (selectedFile.lang == 'html' || selectedFile.lang == 'svg') {
     
-    liveViewToggle.classList.add('visible');
+    liveToggle.classList.add('visible');
     
   } else {
     
-    liveViewToggle.classList.remove('visible');
+    liveToggle.classList.remove('visible');
     
   }
   
@@ -367,7 +367,7 @@ if (isMobile) {
 
 } else {
   
-  liveViewToggle.addEventListener('click', () => {
+  liveToggle.addEventListener('click', () => {
     
     // toggle live view
     liveView.classList.toggle('visible');
