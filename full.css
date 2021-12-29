@@ -141,6 +141,10 @@ body.notransition .bottom-wrapper {
   border-radius: 20px;
 }
 
+.bottom-float.modified .sidebar-open {
+  border-radius: 20px 0 0 20px;
+}
+
 .bottom-wrapper.expanded .bottom-float .sidebar-open {
   padding: 11px 16px;
 }
