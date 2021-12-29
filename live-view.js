@@ -472,14 +472,17 @@ function renderLiveViewHTML(file) {
   const fragment = document.createDocumentFragment();
   
   // place file contents in fragment
-  fragment.innerHTML = decodeUnicode(file.content);
+  fragment.appendChild(document.createElement('html'));
+  fragment.querySelector('html').innerHTML = decodeUnicode(file.content);
+  
+  const fragmentDocument = fragment.querySelector('html');
   
   // add ctrl/cmd+P event listener
   if (!isMobile) frameDocument.addEventListener('keydown', handleMetaP);
   
   
   // fetch styles
-  const frameLinks = fragment.querySelectorAll('link[rel="stylesheet"]');
+  const frameLinks = fragmentDocument.querySelectorAll('link[rel="stylesheet"]');
   
   if (frameLinks.length > 0) {
     
@@ -528,7 +531,7 @@ function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  fragment.querySelectorAll('script').forEach(async (script) => {
+  fragmentDocument.querySelectorAll('script').forEach(async (script) => {
 
     // if script is external
     if (script.src) {
@@ -577,7 +580,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch images
-  fragment.querySelectorAll('img').forEach(async (image) => {
+  fragmentDocument.querySelectorAll('img').forEach(async (image) => {
 
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
@@ -636,7 +639,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch videos
-  fragment.querySelectorAll('video').forEach(async (video) => {
+  fragmentDocument.querySelectorAll('video').forEach(async (video) => {
 
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
@@ -681,7 +684,7 @@ function renderLiveViewHTML(file) {
   })
   
   // fetch audio
-  fragment.querySelectorAll('audio').forEach(async (audio) => {
+  fragmentDocument.querySelectorAll('audio').forEach(async (audio) => {
 
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
@@ -717,7 +720,7 @@ function renderLiveViewHTML(file) {
   
   
   // place fragment contents in iframe
-  frameDocument.documentElement.innerHTML = fragment.innerHTML;
+  frameDocument.documentElement.innerHTML = fragmentDocument.outerHTML;
 
 }
 
