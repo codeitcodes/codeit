@@ -821,7 +821,7 @@ body.notransition .sidebar {
   padding: 15px 20px;
   position: relative;
   scroll-margin: 75px;
-  transition: .18s var(--ease-function) margin;
+  transition: .4s var(--cubic-function) transform;
 }
 
 .sidebar .item:last-of-type {
@@ -844,9 +844,9 @@ body.notransition .sidebar {
   cursor: unset !important;
 }
 
-.sidebar .item.hidden {
-  margin-top: calc(-54px - 11px);
-  margin-bottom: 11px;
+.sidebar.animating-file .item {
+  transform: translateY(calc(-54px));
+  transition: none;
 }
 
 .sidebar .item .label {
