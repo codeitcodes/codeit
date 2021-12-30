@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v260';
+const CACHE_NAME = 'static-cache-v261';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -37,9 +37,6 @@ const FILES_TO_CACHE = [
   '/fonts/Mono-Sans/MonoSans-Bold.woff2',
   
   '/fonts/Inter/Inter.var.woff2',
-  '/fonts/Inter/Inter-Regular.woff2',
-  
-  '/fonts/Roboto-Mono/RobotoMono-Regular.woff2',
   
   'https://plausible.io/js/plausible.js',
   
