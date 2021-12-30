@@ -16,7 +16,7 @@
 <h4>Cross-platform</h4>
 Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.
 <h4>Private</h4>
-Your data stays between you and your Git hosting provider. <3
+Your code stays on your device.
 <h4>Supports 270+ languages</h4>
 HTML, CSS, JavaScript, Python, C, C++, C#, Ruby, Java, Brainfuck and more.
 <hr>
