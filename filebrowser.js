@@ -622,7 +622,7 @@ addButton.addEventListener('click', () => {
 
     // create new file
     const fileEl = document.createElement('div');
-    fileEl.classList = 'item file selected focused';
+    fileEl.classList = 'item file selected focused hidden';
 
     fileEl.innerHTML = `
     <div class="label">
@@ -636,38 +636,6 @@ addButton.addEventListener('click', () => {
 
     // add new file to DOM
     fileWrapper.prepend(fileEl);
-    
-    // add stagger animation to files
-    
-    sidebar.classList.add('animating-file');
-    
-    let staggerIndex = fileWrapper.querySelectorAll('.item').length - 1;
-    fileWrapper.querySelectorAll('.item').forEach(item => {
-      
-      const rect = item.getBoundingClientRect();
-      const elemTop = rect.top;
-      const elemBottom = rect.bottom;
-
-      const isVisible = elemTop < window.innerHeight && elemBottom >= 0;
-      
-      // if file is in viewport
-      if (isVisible) {
-        
-        // add stagger animation
-        item.classList.remove('out-of-view');
-        item.style.transitionDelay = 0.02 * staggerIndex + 's';
-        
-        staggerIndex--;
-        
-      } else {
-        
-        // disable animation
-        item.classList.add('out-of-view');
-        
-      }
-      
-    });
-    
           
     // focus file
     fileEl.querySelector('.name').focus();
@@ -692,11 +660,12 @@ addButton.addEventListener('click', () => {
     let pushListener = pushWrapper.addEventListener('click', pushNewFileInHTML);
 
 
-    // animate new file
+    // on next frame
     onNextFrame(() => {
       
-      sidebar.classList.remove('animating-file');
-      
+      // animate file
+      fileEl.classList.remove('hidden');
+
     });
 
 
