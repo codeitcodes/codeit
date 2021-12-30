@@ -159,6 +159,7 @@ window.addEventListener('offline', () => { isOffline = true });
 // base64 encode/decode
 
 let encodeUnicode = (str) => {
+  
   // first we use encodeURIComponent to get percent-encoded UTF-8,
   // then we convert the percent encodings into raw bytes which
   // can be fed into btoa
@@ -166,13 +167,44 @@ let encodeUnicode = (str) => {
       function toSolidBytes(match, p1) {
           return String.fromCharCode('0x' + p1);
   }));
+  
 }
 
 let decodeUnicode = (str) => {
+  
   // going backwards: from bytestream, to percent-encoding, to original string
   return decodeURIComponent(atob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
+  
+}
+
+
+// split file name
+let splitFileName = (src) => {
+  
+  src = src.replaceAll('\n', '');
+
+  const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
+  return [src.replace(('.' + extension), ''), extension];
+  
+}
+
+
+// MIME types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+
+const mimetypes = {
+  png: 'image/png',
+  jpeg: 'image/jpeg'
+};
+
+let getMimeType = (src) => {
+  
+  // get file extension
+  const extension = splitFileName(src)[1].slice(1);
+  
+  return mimetypes[extension];
+  
 }
 
 
