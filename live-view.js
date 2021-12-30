@@ -53,8 +53,16 @@ async function setupLiveView() {
       
     } else {
       
+      // don't transition live view
+      liveView.classList.add('notransition');
+      
       // show live view
       liveView.classList.add('visible');
+      
+      // restore transition on next frame
+      onNextFrame(() => {
+        liveView.classList.remove('notransition');
+      });
       
     }
     
@@ -204,7 +212,7 @@ function addBottomSwipeListener() {
         
         const shareData = {
           title: 'Share live view',
-          text: 'Open ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit: ' +
+          text: 'Run ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit: ' +
                 window.location.origin + '/full?q=' + encodeURIComponent(treeLoc.join(',') + '+' + selectedFile.name + ',' + selectedFile.sha) + '&l=true'
         }
         
@@ -216,14 +224,14 @@ function addBottomSwipeListener() {
 
           } catch(e) {
 
-            copy(shareData.content);
+            copy(shareData.text);
             alert('Copied link to clipboard.');
 
           }
           
         } else {
           
-          copy(shareData.content);
+          copy(shareData.text);
           alert('Copied link to clipboard.');
 
         }
@@ -270,6 +278,8 @@ function addBottomSwipeListener() {
         // if swiped up and bottom float isn't expanded
         if (swiped && !bottomWrapper.classList.contains('expanded')) {
           
+          swiped = false;
+          
           // expand bottom float
           bottomWrapper.classList.add('expanded');
           
@@ -293,6 +303,8 @@ function addBottomSwipeListener() {
         
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')) {
+          
+          swiped = false;
           
           // fix bottom float on safari
           if (isSafari) {
@@ -334,6 +346,20 @@ function addBottomSwipeListener() {
   
 }
 
+function updateLiveViewArrow() {
+  
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg') {
+    
+    liveToggle.classList.add('visible');
+    
+  } else {
+    
+    liveToggle.classList.remove('visible');
+    
+  }
+  
+}
+
 
 if (isMobile) {
   
@@ -341,7 +367,7 @@ if (isMobile) {
 
 } else {
   
-  previewToggle.addEventListener('click', () => {
+  liveToggle.addEventListener('click', () => {
     
     // toggle live view
     liveView.classList.toggle('visible');
@@ -385,7 +411,7 @@ function toggleLiveView(file) {
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     }
     
-    if (file.lang == 'html') {
+    if (file.lang == 'html' || file.lang == 'svg') {
       
       window.setTimeout(() => {
         
@@ -436,7 +462,7 @@ function toggleLiveView(file) {
 // render live view for HTML files
 function renderLiveViewHTML(file) {
   
-  liveView.innerHTML = '<iframe class="live-frame" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
   const frame = liveView.querySelector('.live-frame');        
   const frameDocument = frame.contentDocument;
@@ -542,26 +568,137 @@ function renderLiveViewHTML(file) {
 
   })
   
-  // fetch music
+  // fetch images
+  frameDocument.querySelectorAll('img').forEach(async (image) => {
+
+    const linkHref = new URL(image.src);
+    const fileName = linkHref.pathname.slice(1);
+
+    if (linkHref.origin == window.location.origin) {
+
+      // if image is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if image file exists
+        if (fileEl !== null) {
+          
+          // fetch image
+          
+          let fileName = linkHref.pathname.split('/');
+          fileName = fileName[fileName.length-1];
+          
+          // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+          let mimeType = 'image/' + fileName.split('.')[1];
+
+          if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          image.src = 'data:' + mimeType + ';base64,' + resp.content;
+          
+        }
+        
+      } else if (!(linkHref.pathname.slice(1).includes('./'))) { // if image is below current directory
+        
+        // fetch image
+        
+        let fileName = linkHref.pathname.split('/');
+        fileName = fileName[fileName.length-1];
+        
+        // get MIME type
+        let mimeType = 'image/' + fileName.split('.')[1];
+        
+        if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+        
+        const resp = await git.getFile(selectedFile.dir.split(','), fileName);
+        
+        image.src = 'data:' + mimeType + ';base64,' + resp.content;
+
+      }
+
+    }
+
+  })
+  
+  // fetch videos
+  frameDocument.querySelectorAll('video').forEach(async (video) => {
+
+    const linkHref = new URL(video.src);
+    const fileName = linkHref.pathname.slice(1);
+
+    if (linkHref.origin == window.location.origin) {
+
+      // if video is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if video file exists
+        if (fileEl !== null) {
+          
+          // fetch video
+          
+          let fileName = linkHref.pathname.split('/');
+          fileName = fileName[fileName.length-1];
+          
+          // get MIME type
+          let mimeType = 'video/' + fileName.split('.')[1];
+          
+          if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
+          if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
+          if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
+          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          video.src = 'data:' + mimeType + ';base64,' + resp.content;
+
+        }
+
+      }
+
+    }
+
+  })
+  
+  // fetch audio
   frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
-    // if audio is an mp3 file
-    if (audio.src.endsWith('.mp3')) {
+    const linkHref = new URL(audio.src);
+    const fileName = linkHref.pathname.slice(1);
 
-      const linkHref = new URL(audio.src);
-      const fileName = linkHref.pathname.slice(1);
+    if (linkHref.origin == window.location.origin) {
 
-      if (linkHref.origin == window.location.origin) {
-        
-        // if audio file is in current directory
-        if (!(linkHref.pathname.slice(1).includes('/'))) {
+      // if audio file is in current directory
+      if (!(linkHref.pathname.slice(1).includes('/'))) {
+
+        // fetch file element for its SHA
+        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+
+        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
+
+        // if audio file exists
+        if (fileEl !== null) {
           
-          const resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          // fetch audio
           
-          //fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
-          
-          audio.src = 'data:text/plain;base64,' + resp.content;
-          
+          // get file as blob with SHA (up to 100MB)
+          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+
+          audio.src = 'data:audio/mpeg;base64,' + resp.content;
+
         }
 
       }
@@ -593,4 +730,11 @@ function addScript(documentNode, code, src, type) {
   
   documentNode.head.appendChild(script);
   
+}
+
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
 }

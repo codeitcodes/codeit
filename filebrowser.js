@@ -5,7 +5,11 @@
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
 
-  sidebarToggle.classList.add('visible');
+  if (!body.classList.contains('expanded')) {
+    
+    sidebarToggle.classList.add('visible');
+    
+  }
 
 })
 
@@ -94,8 +98,13 @@ async function renderSidebarHTML() {
   }
   
   
-  let modifiedFilesResp = JSON.parse(JSON.stringify(modifiedFiles));
+  // create temporary modified files array
+  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
 
+  // get all modified files in directory
+  modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+  
+  
   // save rendered HTML
   let out = '';
 
@@ -175,13 +184,28 @@ async function renderSidebarHTML() {
 
         // if item is a file
         if (item.type == 'file') {
-
+          
           let file = getLatestVersion(item);
           
-          if (modifiedFiles[file.sha]) {
-            delete modifiedFilesResp[file.sha];
+          // search for matching modified files
+          for (let i = 0; i < modifiedFilesTemp.length; i++) {
+            
+            let modFile = modifiedFilesTemp[i];
+            
+            // if modified file has matching SHA or name
+            if (modFile.sha === file.sha || modFile.name === file.name) {
+                            
+              // remove modified file from temporary array
+              modifiedFilesTemp.splice(i, 1);
+              
+              // reset index
+              i--;
+              
+            }
+            
           }
-
+          
+          
           // add modified flag to file
           let modified = '';
           if (modifiedFiles[file.sha] &&
@@ -198,7 +222,7 @@ async function renderSidebarHTML() {
             </div>
           </div>
           `;
-
+          
         } else { // if item is a folder
 
           out += `
@@ -216,20 +240,31 @@ async function renderSidebarHTML() {
       });
         
 
-      // render modified files
-      Object.values(modifiedFilesResp).forEach(item => {
+      // render modified files from temporary array
+      
+      let modFileNames = {};
+      
+      modifiedFilesTemp.forEach(file => {
         
-        if (item.dir == treeLoc.join()) {
+        // if file isn't already in HTML
+        if (!modFileNames[file.name]) {
           
+          // add file to HTML
+          
+          modFileNames[file.name] = true;
+          
+          // get the file's latest version
+          file = getLatestVersion(file);
+
           // add modified flag to file
           let modified = '';
-          if (!item.eclipsed) modified = ' modified';
+          if (!file.eclipsed) modified = ' modified';
 
           out += `
-          <div class="item file`+ modified +`" sha="`+ item.sha +`">
+          <div class="item file`+ modified +`" sha="`+ file.sha +`">
             <div class="label">
               `+ fileIcon +`
-              <a class="name">`+ item.name +`</a>
+              <a class="name">`+ file.name +`</a>
             </div>
             <div class="push-wrapper">
               `+ pushIcon +`
@@ -238,7 +273,7 @@ async function renderSidebarHTML() {
           `;
           
         }
-
+        
       });
       
     } else { // else, show all repositories
@@ -388,7 +423,7 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-
+  //@@
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
@@ -501,11 +536,6 @@ async function loadFileInHTML(fileEl, fileSha) {
 
     // update bottom float
     updateFloat();
-
-  } else { // if on desktop
-
-    // check codeit scrollbar
-    checkScrollbarArrow();
 
   }
 
@@ -680,7 +710,7 @@ addButton.addEventListener('click', () => {
             
             // add a differentiating number
             // and reconstruct file name
-            fileName = fileName[0] + '-1' + fileName[1];
+            fileName = fileName[0] + '-1.' + fileName[1];
             
           }
           
@@ -713,9 +743,6 @@ addButton.addEventListener('click', () => {
           
           // set caret pos in codeit
           cd.setSelection(0, 0);
-          
-          // check codeit scrollbar
-          checkScrollbarArrow();
           
         }
 
@@ -889,24 +916,20 @@ function onEditorScroll() {
 
 }
 
-function checkScrollbarArrow() {
+function updateScrollbarArrow() {
 
-  window.setTimeout(() => {
+  // if codeit is horizontally scrollable
+  if (cd.scrollWidth > cd.clientWidth) {
 
-    // if codeit is horizontally scrollable
-    if (cd.scrollWidth > cd.clientWidth) {
+    // move sidebar arrow up to make
+    // way for horizontal scrollbar
+    body.classList.add('scroll-enabled');
 
-      // move sidebar arrow up to make
-      // way for horizontal scrollbar
-      body.classList.add('scroll-enabled');
+  } else {
 
-    } else {
+    body.classList.remove('scroll-enabled');
 
-      body.classList.remove('scroll-enabled');
-
-    }
-
-  }, 0);
+  }
 
 }
 
@@ -923,29 +946,35 @@ function codeChange() {
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
-
+    
+    // if selected file is in modifiedFiles and eclipsed
+    if ((modifiedFiles[selectedFile.sha] &&
+        modifiedFiles[selectedFile.sha].eclipsed)) {
+      
+      // file cannot be both eclipsed and modified
+      selectedFile.eclipsed = false;
+      
+    }
+    
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
-    // enable pushing file in HTML
+  }
+  
+  // enable pushing file in HTML
 
-    const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
 
-    // if selected file element exists in HTML
-    if (selectedEl) {
+  // if selected file element exists in HTML
+  if (selectedEl) {
 
-      // enable pushing file
-      selectedEl.classList.add('modified');
+    // enable pushing file
+    selectedEl.classList.add('modified');
 
-      // enable pushing from bottom float
-      bottomFloat.classList.add('modified');
-
-    }
+    // enable pushing from bottom float
+    bottomFloat.classList.add('modified');
 
   }
-
-  // update line numbers
-  updateLineNumbersHTML();
 
   // save code in async thread
   asyncThread(saveSelectedFileContent, 30);
@@ -958,47 +987,66 @@ function codeChange() {
 function protectUnsavedCode() {
 
   // get selected file element in HTML
-  const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
-
-  // if selected file is not in HTML,
-  // protect unsaved code by clearing codeit
-  if (selectedEl == null) {
-
-    // clear codeit
-
-    // clear codeit contents
-    cd.textContent = '';
-
-    // change codeit lang
-    cd.lang = '';
-
-    // clear codeit history
-    cd.history = [];
-
-    // update line numbers
-    updateLineNumbersHTML();
+  // by sha
+  let selectedElSha = fileWrapper.querySelectorAll('.file[sha="'+ selectedFile.sha +'"]');
+  let selectedElName;
+  
+  // if the selected file's sha changed
+  if (selectedElSha.length == 0) {
     
-    // if on mobile, show sidebar
-    if (isMobile) {
+    // get selected file element in HTML
+    // by name
+    selectedElName = Array.from(fileWrapper.querySelectorAll('.item.file'))
+                     .filter(file => file.querySelector('.name').textContent == selectedFile.name);
+    
+    selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
+    
+    // if new version of selected file exists
+    if (selectedElName !== null) {
       
-      // don't transition
-      body.classList.add('notransition');
-
-      // show sidebar
-      toggleSidebar(true);
-      saveSidebarStateLS();
-
-      onNextFrame(() => {
-
-        body.classList.remove('notransition');
-
-      });
+      // load file
+      loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
       
+    } else {
+      
+      // if the selected file was deleted,
+      // protect unsaved code by clearing codeit
+
+      // clear codeit contents
+      cd.textContent = '';
+
+      // change codeit lang
+      cd.lang = '';
+
+      // clear codeit history
+      cd.history = [];
+
+      // update line numbers
+      updateLineNumbersHTML();
+
+      // if on mobile, show sidebar
+      if (isMobile) {
+
+        // don't transition
+        body.classList.add('notransition');
+
+        // show sidebar
+        toggleSidebar(true);
+        saveSidebarStateLS();
+
+        onNextFrame(() => {
+
+          body.classList.remove('notransition');
+
+        });
+
+      }
+
+      // change selected file to empty file
+      changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+
     }
     
-    // change selected file to empty file
-    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
-
   }
 
 }
@@ -1034,33 +1082,26 @@ function setupEditor() {
   
   // add editor event listeners
   
-  cd.on('modify', codeChange);
+  cd.on('type', codeChange);
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
   
-  if (!isMobile) cd.on('modify scroll', checkScrollbarArrow);
+  if (!isMobile) cd.on('type', updateScrollbarArrow);
   
   // update on screen resize
-  window.addEventListener('resize', () => {
-
-    // update line numbers
-    updateLineNumbersHTML();
-
-    // check codeit scrollbar
-    if (!isMobile) checkScrollbarArrow();
-
-  });
   
-  // update line numbers when finished highlighting
-  Prism.hooks.add('complete', function (env) {
-
-    if (!env.code) {
+  let lastWidth = undefined;
+  
+  window.addEventListener('resize', () => {
+    
+    if (lastWidth === window.innerWidth) {
       return;
     }
-
-    // update line numbers
+    
+    lastWidth = window.innerWidth;
+    
     updateLineNumbersHTML();
-
+    
   });
   
   // disable context menu
@@ -1098,21 +1139,27 @@ function updateLineNumbersHTML() {
     
     if (cd.querySelector('.line-numbers-rows')) {
 
-      cd.querySelector('.line-numbers-rows').remove();
+      cd.querySelector('.line-numbers-rows').textContent = '';
 
     }
 
     cd.classList.remove('line-numbers');
-    cd.style.setProperty('--gutter-length', '');
 
     return;
     
   }
 
   cd.classList.add('line-numbers');
-
-  // update line numbers
-  Prism.plugins.lineNumbers.resize(cd);
+  
+  Prism.plugins.lineNumbers.update(cd);
+  
+  
+  if (!isMobile) {
+    
+    updateScrollbarArrow();
+    updateLiveViewArrow();
+    
+  }
 
 }
 

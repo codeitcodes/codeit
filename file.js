@@ -121,9 +121,14 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
 
     // find the eclipsed file
     fileToUpdate = modifiedFiles[oldSha];
-
+    
+    // update old file to new sha
     fileToUpdate.sha = newSha;
+    
+    // update old file caret pos
     fileToUpdate.caretPos = [0, 0];
+    
+    // set old file to eclipsed mode
     fileToUpdate.eclipsed = true;
 
     // if file to update is selected
@@ -131,10 +136,13 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
 
       // update its content
       // to the selected file contents
-      updateModFileContent(oldSha, selectedFile.content);
+      fileToUpdate.content = selectedFile.content;
 
-      // update selected file sha to the new sha
+      // update selected file to new sha
       selectedFile.sha = newSha;
+      
+      // set selected file to eclipsed mode
+      selectedFile.eclipsed = true;
 
       updateSelectedFileLS();
 
@@ -223,28 +231,27 @@ function getLatestVersion(item) {
   
   function followTrail(crumb) {
     
-    if(typeof(modifiedFiles[crumb]) == 'undefined') //@@
-      return null;
-    
-    // if version sha matches its key
-    // (it dosen't point to another version)
-    if (modifiedFiles[crumb].sha === crumb) {
-      
-      // reached the most recent version
-      return modifiedFiles[crumb];
+    if (modifiedFiles[crumb]) {
+
+      // if version sha matches its key
+      // (it dosen't point to another version)
+      if (modifiedFiles[crumb].sha === crumb) {
+
+        // reached the most recent version
+        return modifiedFiles[crumb];
+
+      } else {
+
+        // version sha points to another version,
+        // follow the trail
+        return followTrail(modifiedFiles[crumb].sha);
+
+      }
       
     } else {
       
-      // version sha points to another version,
-      // follow the trail
-      let ret = followTrail(modifiedFiles[crumb].sha);
-      
-      if(ret == null){
-        // No file with this sha was found in modifiedFiles, return the file with latest bread crumb: //@@
-        return modifiedFiles[crumb];
-      }else{
-        return ret;
-      }
+      console.log(item, crumb);
+      return;
       
     }
     
@@ -262,4 +269,4 @@ function getLatestVersion(item) {
     
   }
   
-}  
+}

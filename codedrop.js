@@ -20,15 +20,6 @@ function getFileLang(src) {
 
 }
 
-function splitFileName(src) {
-  
-  src = src.replaceAll('\n', '');
-
-  const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
-  return [src.replace(('.' + extension), ''), '.' + extension];
-  
-}
-
 
 function processFile(file) {
 

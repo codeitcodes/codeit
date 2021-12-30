@@ -121,7 +121,7 @@ function checkBottomFloat() {
         if ((cd.scrollTop + cd.offsetHeight) >= cd.scrollHeight) {
 
           // show bottom float
-          bottomFloat.classList.remove('hidden');
+          bottomWrapper.classList.remove('hidden');
 
         }
 
