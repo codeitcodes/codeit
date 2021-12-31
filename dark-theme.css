@@ -98,6 +98,7 @@ cd-el {
 .token.inserted,
 .token.template-string,
 .token.regex,
+.token.string-property,
 .token.variable {
   color: #c1ffd5cc;
 }
