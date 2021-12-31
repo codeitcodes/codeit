@@ -47,7 +47,7 @@ cd-el {
   color: #a6c3d4;
   caret-color: #fff;
 
-  font-family: 'Mono Sans', 'Roboto Mono', monospace;
+  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
 
   font-size: 14px;
   line-height: 1.5;
