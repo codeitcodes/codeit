@@ -190,9 +190,8 @@ cd-el {
 }
 
 .line-numbers .line-numbers-rows {
-  position: absolute;
+  position: sticky;
   cursor: default;
-  top: 10.5px;
   left: 0;
   user-select: none;
   -webkit-user-select: none;
@@ -200,12 +199,17 @@ cd-el {
   line-height: inherit;
   font-size: inherit;
   color: #636d83;
+  background: #313744;
   display: block;
   text-align: right;
-  padding-right: 13.5px;
-  padding-left: calc(13.5px + env(safe-area-inset-left));
   min-width: 1.2em;
   white-space: pre;
+  float: left;
+  z-index: 1;
+  margin-right: -100%;
+  transform: translateX(-100%);
+  padding-left: 13.5px;
+  padding-right: 13.5px;
 }
 
 .line-numbers .line-numbers-rows::before {
