@@ -23,8 +23,9 @@ let manifest = {
   "file_handlers": [
     {
       "action": window.location.origin + "/full/?file=true",
+      "name": "Codeit file",
       "accept": {
-        "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
+        "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
       }
     }
   ],
