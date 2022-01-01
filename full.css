@@ -697,6 +697,8 @@ body.notransition .sidebar {
   align-items: center;
   position: relative;
   padding: 12px 0;
+  padding-left: 18px;
+  margin-left: -18px;
   flex: 1;
 }
 
