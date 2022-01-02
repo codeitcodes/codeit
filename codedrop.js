@@ -52,7 +52,7 @@ cd.on('drop', (ev) => {
   ev.preventDefault();
 
   // if not logged into git
-  if (gitToken == null) {
+  if (gitToken == '') {
 
     // remove drop indication
     document.body.classList.remove('focus');
@@ -93,7 +93,7 @@ cd.on('dragover', (ev) => {
   ev.preventDefault();
 
   // if not logged into git
-  if (gitToken == null) {
+  if (gitToken == '') {
 
     // show drop indication
     document.body.classList.add('focus');
@@ -105,7 +105,7 @@ cd.on('dragover', (ev) => {
 cd.on('dragleave', (ev) => {
 
   // if not logged into git
-  if (gitToken == null) {
+  if (gitToken == '') {
 
     // remove drop indication
     document.body.classList.remove('focus');
@@ -119,7 +119,7 @@ if ('launchQueue' in window) {
   launchQueue.setConsumer(async (launchParams) => {
 
     // if not logged into git
-    if (gitToken == null) {
+    if (gitToken == '') {
 
       // nothing to do when the queue is empty
       if (!launchParams.files.length) {
