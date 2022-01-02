@@ -710,6 +710,10 @@ body.notransition .sidebar {
   transition: .18s var(--ease-function) opacity;
 }
 
+body:not(.mobile) .sidebar .header .title:hover {
+  color: rgb(241,241,242);
+}
+
 .sidebar .searchscreen .title {
   cursor: unset;
 }
