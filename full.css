@@ -904,7 +904,7 @@ body.notransition .sidebar {
   user-select: text;
   -webkit-user-select: text;
   background: hsl(220deg 86% 64% / 9%);
-  box-shadow: 0 0 0 2px hsl(220deg 86% 64% / 70%);
+  box-shadow: 0 0 0 1.5px hsl(223deg 85% 66% / 70%), 0 0 0 4px hsl(223deg 86% 66% / 30%);
   transition: .18s .04s var(--ease-function);
   transition-property: background, box-shadow;
 }
