@@ -702,6 +702,14 @@ body.notransition .sidebar {
   flex: 1;
 }
 
+.sidebar .header .title:active {
+  opacity: .5;
+}
+
+.sidebar .header .title:active:not(:hover) {
+  transition: .18s var(--ease-function) opacity;
+}
+
 .sidebar .searchscreen .title {
   cursor: unset;
 }
@@ -1082,12 +1090,11 @@ body.notransition .sidebar {
   height: 50px;
   width: 233px;
   font-weight: 500;
-  transition: .18s var(--ease-function);
-  transition-property: background, color;
 }
 
-body .sidebar .button:active {
-  transition: none;
+body .sidebar .button:active:not(:hover) {
+  transition: .18s var(--ease-function);
+  transition-property: background, color;
 }
 
 .sidebar .button.secondary {
