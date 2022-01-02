@@ -35,6 +35,19 @@ let manifest = {
       ]
     }
   ],
+  "share_target": {
+    "action": "/full?file=true",
+    "method": "GET",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [
+        {
+          "name": "file",
+          "accept": ["text/plain", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+        }
+      ]
+    }
+  },
   "url_handlers": [
     {
       "origin": window.location.origin
