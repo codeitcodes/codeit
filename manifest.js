@@ -22,13 +22,19 @@ let manifest = {
   "capture_links": "existing_client_event",
   "file_handlers": [
     {
-      "action": window.location.origin + "/full/?file=true",
-      "name": "Codeit file",
+      "action": window.location.origin + "/full?f=true",
       "accept": {
         "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
-      }
+      },
+      "icons": [
+        {
+          "src": window.location.origin + "/icons/file.png",
+          "sizes": "256x256",
+          "type": "image/png"
+        }
+      ]
     }
-  ],
+  ]
   "url_handlers": [
     {
       "origin": window.location.origin
