@@ -462,7 +462,7 @@ function toggleLiveView(file) {
 // render live view for HTML files
 function renderLiveViewHTML(file) {
   
-  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; autoplay; camera; ch-device-memory; ch-downlink; ch-dpr; ch-ect; ch-prefers-color-scheme; ch-rtt; ch-ua; ch-ua-arch; ch-ua-bitness; ch-ua-full-version; ch-ua-mobile; ch-ua-model; ch-ua-platform; ch-ua-platform-version; ch-viewport-width; ch-width; clipboard-read; clipboard-write; cross-origin-isolated; display-capture; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; hid; idle-detection; magnetometer; microphone; midi; otp-credentials; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; sync-xhr; usb; xr-spatial-tracking" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
   const frame = liveView.querySelector('.live-frame');        
   const frameDocument = frame.contentDocument;
