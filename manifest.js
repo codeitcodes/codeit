@@ -22,7 +22,7 @@ let manifest = {
   "capture_links": "existing_client_event",
   "file_handlers": [
     {
-      "action": window.location.origin + "/full?f=true",
+      "action": window.location.origin + "/full?file=true",
       "accept": {
         "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
       },
