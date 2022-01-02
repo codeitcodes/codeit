@@ -24,7 +24,7 @@ let manifest = {
     {
       "action": window.location.origin + "/full?file=true",
       "accept": {
-        "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+        "text/*": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
       },
       "icons": [
         {
@@ -43,7 +43,7 @@ let manifest = {
       "files": [
         {
           "name": "file",
-          "accept": ["text/plain", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+          "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
         }
       ]
     }
