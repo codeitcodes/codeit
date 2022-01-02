@@ -38,7 +38,7 @@ let manifest = {
   "share_target": {
     "action": window.location.origin + "/full?file=true",
     "method": "GET",
-    "enctype": "multipart/form-data",
+    "enctype": "application/x-www-form-urlencoded",
     "params": {
       "files": [
         {
