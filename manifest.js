@@ -34,7 +34,7 @@ let manifest = {
         }
       ]
     }
-  ]
+  ],
   "url_handlers": [
     {
       "origin": window.location.origin
