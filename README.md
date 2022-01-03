@@ -24,5 +24,3 @@
   <li><b>Cross-platform.</b> Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.</li>
 </ul>
 <hr>
-<h4>Special Thanks</h4>
-Codeit's logo was created by <a href="https://twitter.com/sandorqi">@sandorqi</a>.
