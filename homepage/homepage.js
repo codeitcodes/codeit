@@ -48,33 +48,42 @@ function saveBeforeInstallPromptEvent(evt) {
 // Event handler for butInstall - Does the PWA installation.
 function installPWA(evt) {
   
-  // if able to install codeit
-  if (deferredInstallPrompt) {
-    
-    deferredInstallPrompt.prompt();
-    
-    // Log user response to prompt.
-    deferredInstallPrompt.userChoice
-      .then((choice) => {
-        if (choice.outcome === 'accepted') {
-          
-          console.log('Accepted the install prompt');
-          
-          document.querySelectorAll('.btn.install').forEach(button => {
-    
-            button.classList.add('loading');
+  // if codeit isn't already installed
+  if (!localStorage.getItem('installed')) {
 
-          });
-          
-        } else {
-          
-          console.log('Dismissed the install prompt');
-          
-        }
-      
-        deferredInstallPrompt = null;
-      
-      });
+    // if able to install codeit
+    if (deferredInstallPrompt) {
+
+      deferredInstallPrompt.prompt();
+
+      // Log user response to prompt.
+      deferredInstallPrompt.userChoice
+        .then((choice) => {
+          if (choice.outcome === 'accepted') {
+
+            console.log('Accepted the install prompt');
+
+            document.querySelectorAll('.btn.install').forEach(button => {
+
+              button.classList.add('loading');
+
+            });
+
+          } else {
+
+            console.log('Dismissed the install prompt');
+
+          }
+
+          deferredInstallPrompt = null;
+
+        });
+
+    } else { // open in the browser
+
+      window.location.replace(window.location.origin + '/full');
+
+    }
     
   } else { // open in the browser
     
@@ -118,8 +127,6 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
       button.classList.add('installed');
       
-      window.location.replace(window.location.origin + '/full');
-
     }
     
   }
