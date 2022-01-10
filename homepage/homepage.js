@@ -117,6 +117,8 @@ document.querySelectorAll('.btn.install').forEach(button => {
     if (localStorage.getItem('installed')) {
 
       button.classList.add('installed');
+      
+      window.location.replace(window.location.origin + '/full');
 
     }
     
