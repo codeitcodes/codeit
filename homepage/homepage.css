@@ -4777,13 +4777,16 @@ body {
 
 .ctas .btn.installed {
   width: auto;
-  opacity: 0.5;
-  pointer-events: none;
 }
 
 .ctas .btn.installed::before {
-  content: 'Installed';
+  content: 'Open';
   width: auto;
+}
+
+.ctas .btn.cookies {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .ctas .btn.cookies::before {
