@@ -1107,7 +1107,7 @@ body .sidebar .button:active:not(:hover) {
   color: #fff;
 }
 
-body .sidebar .button.secondary:active {
+.sidebar .button.secondary:active {
   color: rgba(255,255,255,0.25);
   background: hsla(223deg 88% 52% / 50%) !important;
 }
@@ -1118,21 +1118,10 @@ body .sidebar .button.secondary:active {
   color: hsl(220deg 4% 84% / 92%);
 }
 
-/*
-.sidebar .button:active {
-  background: hsl(228deg 16% 42%);
-  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
-}
-*/
-
-.sidebar .button.secondary:active {
-  /* background: hsla(0,0%,100%,.2) !important; */
-  color: hsl(220deg 4% 90%);
-}
-
 .sidebar .button.teritary:active {
-  background: hsl(228deg 16% 37% / 23%) !important;
-  color: hsl(220deg 4% 84%);
+  background: hsl(228deg 16% 37% / 6%) !important;
+  color: hsl(220deg 4% 84% / 25%);
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37% / 50%);
 }
 
 .sidebar .button svg {
