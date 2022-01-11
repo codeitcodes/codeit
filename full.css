@@ -929,9 +929,12 @@ body.notransition .sidebar {
   pointer-events: none;
 }
 
-.sidebar .item[exists="false"] .name {
-  font-style: italic;
-  color: grey;
+.sidebar .repo.focused .name:empty::before {
+  content: 'untitled repo';
+}
+
+.sidebar .repo.focused .arrow {
+  display: none;
 }
 
 .sidebar .item .push-wrapper {
