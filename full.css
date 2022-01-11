@@ -760,7 +760,7 @@ body.notransition .sidebar {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
   transition: .18s var(--ease-function);
-  left: 24px;
+  left: 42px;
   opacity: 0;
 }
 
