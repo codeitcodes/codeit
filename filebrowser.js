@@ -131,7 +131,7 @@ async function renderSidebarHTML() {
       }
       
       // animate title
-      if (sidebarTitle.children[0].scrollLeft > 0) titleAnimation = 'smooth';
+      if (sidebarTitle.children[1].scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
       
@@ -167,8 +167,8 @@ async function renderSidebarHTML() {
       
     }
     
-    sidebarTitle.children[0].scrollTo({
-      left: sidebarTitle.children[0].scrollWidth - sidebarTitle.children[0].offsetLeft,
+    sidebarTitle.children[1].scrollTo({
+      left: sidebarTitle.children[1].scrollWidth - sidebarTitle.children[1].offsetLeft,
       behavior: titleAnimation
     });
 
@@ -583,9 +583,9 @@ sidebarTitle.addEventListener('click', () => {
 // show gradients on edges of sidebar title
 // when scrolling long titles
 
-sidebarTitle.children[0].addEventListener('scroll', () => {
+sidebarTitle.children[1].addEventListener('scroll', () => {
   
-  if (sidebarTitle.children[0].scrollLeft > 0) {
+  if (sidebarTitle.children[1].scrollLeft > 0) {
     
     sidebarTitle.classList.add('scrolled-start');
     
@@ -595,8 +595,8 @@ sidebarTitle.children[0].addEventListener('scroll', () => {
     
   }
   
-  if ((sidebarTitle.children[0].offsetWidth + sidebarTitle.children[0].scrollLeft)
-      >= sidebarTitle.children[0].scrollWidth) {
+  if ((sidebarTitle.children[1].offsetWidth + sidebarTitle.children[1].scrollLeft)
+      >= sidebarTitle.children[1].scrollWidth) {
     
     sidebarTitle.classList.add('scrolled-end');
     
