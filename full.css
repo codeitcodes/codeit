@@ -702,16 +702,12 @@ body.notransition .sidebar {
   flex: 1;
 }
 
-.sidebar .header .title:active {
+.sidebar .header .titlescreen .title:active {
   opacity: .5;
 }
 
-.sidebar .header .title:active:not(:hover) {
+.sidebar .header .titlescreen .title:active:not(:hover) {
   transition: .18s var(--ease-function) opacity;
-}
-
-body:not(.mobile) .sidebar .header .title:hover {
-  color: rgb(241,241,242);
 }
 
 .sidebar .searchscreen .title {
