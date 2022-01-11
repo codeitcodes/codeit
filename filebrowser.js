@@ -423,7 +423,7 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-  //@@
+  
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
@@ -609,12 +609,13 @@ sidebarTitle.children[1].addEventListener('scroll', () => {
 })
 
 
-// create new file on click of button
+// create new file or repo
+// on click of button
 addButton.addEventListener('click', () => {
   
-  // if not already adding a new file
+  // if not already adding new file/repo
   if (!fileWrapper.querySelector('.focused')) {
-  
+    
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
