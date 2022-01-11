@@ -653,7 +653,7 @@ body.notransition .sidebar {
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transition: width .4s ease, opacity .4s linear;
+  transition: width .4s var(--cubic-function), opacity .4s linear;
   z-index: 1000;
 }
 
