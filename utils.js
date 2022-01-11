@@ -197,6 +197,8 @@ let splitFileName = (src) => {
 // MIME types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
 const mimetypes = {
+  avi: 'video/x-msvideo',
+  bin: 'application/octet-stream',
   png: 'image/png',
   jpeg: 'image/jpeg'
 };
