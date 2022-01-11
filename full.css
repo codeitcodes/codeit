@@ -742,8 +742,8 @@ body.notransition .sidebar {
   max-width: calc(var(--sidebar-width) - 140px - var(--spacing-1));
 }
 
-.sidebar .header .title::before,
-.sidebar .header .title::after {
+.sidebar .header .titlescreen .title::before,
+.sidebar .header .titlescreen .title::after {
   content: '';
   position: absolute;
   right: -0.6px;
@@ -756,7 +756,7 @@ body.notransition .sidebar {
   z-index: 1;
 }
 
-.sidebar .header .title::before {
+.sidebar .header .titlescreen .title::before {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
   transition: .18s var(--ease-function);
@@ -764,16 +764,16 @@ body.notransition .sidebar {
   opacity: 0;
 }
 
-.sidebar .header .title.scrolled-start::before {
+.sidebar .header .titlescreen .title.scrolled-start::before {
   opacity: 1;
 }
 
-.sidebar .header .title.scrolled-end::after {
+.sidebar .header .titlescreen .title.scrolled-end::after {
   opacity: 0;
 }
 
-.sidebar .header .title.notransition::before,
-.sidebar .header .title.notransition::after {
+.sidebar .header .titlescreen .title.notransition::before,
+.sidebar .header .titlescreen .title.notransition::after {
   transition: none;
 }
 
