@@ -42,6 +42,67 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 }
 
 
+.cd-wrapper .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: hsl(218deg 23% 35%);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+  /* box-shadow: 0 4px 4px rgba(0,0,0,0.16); */
+  color: #a6c3d4;
+  padding: 6px;
+  left: 121.984375px;
+  top: 12.5px;
+  border-radius: 5px;
+  font-weight: 600;
+  max-width: 190px;
+  max-height: calc(30px * 3);
+  overflow: overlay;
+  margin-top: 20px;
+  border-top-left-radius: 0;
+  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  line-height: 1.5;
+  /* pointer-events: none; */
+}
+
+.cd-wrapper .menu .icon {
+  padding: 3px 6px;
+  border-radius: 2.5px;
+  cursor: pointer;
+  padding-right: 28px;
+}
+
+.cd-wrapper .menu .icon.active {
+  color: #f9f9f9;
+  background: hsl(218deg 27% 50%);
+}
+
+
+.cd-wrapper .menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cd-wrapper .menu::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+
+.cd-wrapper .menu::-webkit-scrollbar-thumb {
+  background-color: hsl(218deg 25% 58%);
+  border-width: 2px;
+  border-top-width: 6px;
+  border-bottom-width: 6px;
+}
+
+.cd-wrapper .menu::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(218deg 25% 58%);
+}
+
+.cd-wrapper .menu::-webkit-scrollbar-thumb:active {
+  background-color: rgb(130 134 137 / 50%);
+}
+
+
 cd-el {
   background: #313744;
   color: #a6c3d4;
