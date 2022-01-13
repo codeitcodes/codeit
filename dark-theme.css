@@ -47,8 +47,8 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   top: 0;
   left: 0;
   background: hsl(218deg 23% 35%);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
-  /* box-shadow: 0 4px 4px rgba(0,0,0,0.16); */
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  /* box-shadow: 0 4px 4px rgb(0 0 0 / 16%); */
   color: #a6c3d4;
   padding: 6px;
   left: 121.984375px;
@@ -56,8 +56,9 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   border-radius: 5px;
   font-weight: 600;
   max-width: 190px;
-  max-height: calc(30px * 3);
-  overflow: overlay;
+  /* max-width: 290px; */
+  max-height: calc(30px * 3 + 11px);
+  overflow-y: overlay;
   margin-top: 20px;
   border-top-left-radius: 0;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
@@ -69,7 +70,18 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   padding: 3px 6px;
   border-radius: 2.5px;
   cursor: pointer;
-  padding-right: 28px;
+  overflow-x: overlay;
+  position: relative;
+  white-space: nowrap;
+  /* -webkit-mask-image: linear-gradient(90deg, transparent 0px, black 6px, black calc(100% - 6px), transparent 100%); */
+}
+
+.cd-wrapper .menu .icon:hover {
+  background: hsl(218deg 27% 50% / 32%);
+}
+
+.cd-wrapper .menu .icon:active {
+  background: hsl(218deg 27% 50% / 72%);
 }
 
 .cd-wrapper .menu .icon.active {
@@ -77,29 +89,39 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   background: hsl(218deg 27% 50%);
 }
 
-
-.cd-wrapper .menu::-webkit-scrollbar {
-  width: 6px;
+.cd-wrapper .menu .icon.active:hover {
+  background: hsl(218deg 27% 53%);
 }
 
-.cd-wrapper .menu::-webkit-scrollbar-track {
+.cd-wrapper .menu .icon.active:active {
+  background: hsl(218deg 27% 53% / 72%);
+}
+
+.cd-wrapper .menu::-webkit-scrollbar {
+  width: 0;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar {
+  height: 10px;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
 }
 
-.cd-wrapper .menu::-webkit-scrollbar-thumb {
-  background-color: hsl(218deg 25% 58%);
-  border-width: 2px;
-  border-top-width: 6px;
-  border-bottom-width: 6px;
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb {
+  background-color: rgb(249 249 249 / 15%);
+  border-right-width: 6px;
+  border-left-width: 6px;
 }
 
-.cd-wrapper .menu::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(218deg 25% 58%);
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(249 249 249 / 27%);
 }
 
-.cd-wrapper .menu::-webkit-scrollbar-thumb:active {
-  background-color: rgb(130 134 137 / 50%);
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb:active {
+  background-color: rgb(249 249 249 / 17%);
 }
 
 
