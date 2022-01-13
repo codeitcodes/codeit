@@ -48,7 +48,6 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   left: 0;
   background: hsl(218deg 23% 35%);
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  /* box-shadow: 0 4px 4px rgb(0 0 0 / 16%); */
   color: #a6c3d4;
   padding: 6px;
   left: 121.984375px;
@@ -56,14 +55,15 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   border-radius: 5px;
   font-weight: 600;
   max-width: 190px;
+  max-height: calc(30px * 3 + 4px + 17px);
   /* max-width: 290px; */
-  max-height: calc(30px * 3 + 11px);
+  /* max-height: 113px; */
+  min-width: 85px;
   overflow-y: overlay;
   margin-top: 20px;
   border-top-left-radius: 0;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
   line-height: 1.5;
-  /* pointer-events: none; */
 }
 
 .cd-wrapper .menu .icon {
