@@ -24,6 +24,22 @@
 @font-face {
   font-family: 'Mono Sans';
   font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('Mono-Sans/MonoSans-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mono Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('Mono-Sans/MonoSans-Semibold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mono Sans';
+  font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
