@@ -486,8 +486,10 @@ function renderLiveViewHTML(file) {
         let resp;
 
         if (!file[0]) {
-
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          
+          try {
+            resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          } catch(e) { resp = ''; }
 
         } else {
 
