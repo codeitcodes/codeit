@@ -734,7 +734,7 @@ function addScript(documentNode, code, src, type) {
   } else {
     
     script.src = src;
-    script.defer = true;
+    script.defer = false;
     script.async = false;
     
   }
