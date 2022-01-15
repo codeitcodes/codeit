@@ -678,7 +678,7 @@ async function fetchLiveViewScripts(frameDocument) {
       const linkHref = new URL(script.src);
       const fileName = linkHref.pathname.slice(1);
 
-      if (linkHref.origin == window.location.origin) {
+      if (/*linkHref.origin == window.location.origin*/ true) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
