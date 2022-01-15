@@ -678,7 +678,7 @@ async function fetchLiveViewScripts(frameDocument) {
       const linkHref = new URL(script.src);
       const fileName = linkHref.pathname.slice(1);
 
-      if (/*linkHref.origin == window.location.origin*/ true) {
+      if (linkHref.origin == window.location.origin) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
@@ -693,15 +693,17 @@ async function fetchLiveViewScripts(frameDocument) {
 
         }
 
-        addScript(frameDocument, decodeUnicode(resp.content));
+        addScript(frameDocument, decodeUnicode(resp.content), '', script.type);
 
         // remove original tag
         script.remove();
 
       } else {
 
-        addScript(frameDocument, '', script.src, script.type);
-
+        let resp = await axios.get(script.src);
+        
+        addScript(frameDocument, resp, '', script.type);
+        
         // delete original
         script.remove();
 
@@ -734,7 +736,7 @@ function addScript(documentNode, code, src, type) {
   } else {
     
     script.src = src;
-    script.defer = false;
+    script.defer = true;
     script.async = false;
     
   }
