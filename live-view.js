@@ -700,7 +700,7 @@ async function fetchLiveViewScripts(frameDocument) {
 
       } else {
 
-        addScript(frameDocument, false, script.src, script.type);
+        await addScript(frameDocument, false, script.src, script.type);
         
         // delete original
         script.remove();
@@ -723,23 +723,30 @@ async function fetchLiveViewScripts(frameDocument) {
 
 function addScript(documentNode, code, src, type) {
   
-  const script = documentNode.createElement('script');
-  
-  if (type && type != '') script.type = type;
-  
-  if (code) {
+  return new Promise((resolve) => {
     
-    script.appendChild(documentNode.createTextNode(code));
+    const script = documentNode.createElement('script');
+
+    if (type && type != '') script.type = type;
+
+    if (code) {
+
+      script.appendChild(documentNode.createTextNode(code));
+
+    } else {
+
+      script.src = src;
+      script.defer = true;
+      script.async = false;
+      
+      script.onload = resolve;
+      script.onerror = resolve;
+
+    }
+
+    documentNode.head.appendChild(script);
     
-  } else {
-    
-    script.src = src;
-    script.defer = true;
-    script.async = false;
-    
-  }
-  
-  documentNode.head.appendChild(script);
+  });
   
 }
 
