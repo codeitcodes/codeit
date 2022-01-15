@@ -693,7 +693,7 @@ async function fetchLiveViewScripts(frameDocument) {
 
         }
 
-        addScript(frameDocument, decodeUnicode(resp.content), '', script.type);
+        addScript(frameDocument, decodeUnicode(resp.content), false, script.type);
 
         // remove original tag
         script.remove();
