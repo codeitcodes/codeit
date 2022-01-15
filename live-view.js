@@ -520,53 +520,7 @@ function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  frameDocument.querySelectorAll('script').forEach(async (script) => {
-
-    // if script is external
-    if (script.src) {
-
-      const linkHref = new URL(script.src);
-      const fileName = linkHref.pathname.slice(1);
-
-      if (linkHref.origin == window.location.origin) {
-
-        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-        let resp;
-
-        if (!file[0]) {
-
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
-
-        } else {
-
-          resp = file[0];
-
-        }
-
-        addScript(frameDocument, decodeUnicode(resp.content));
-
-        // remove original tag
-        script.remove();
-
-      } else {
-
-        addScript(frameDocument, '', script.src, script.type);
-
-        // delete original
-        script.remove();
-
-      }
-
-    } else {
-
-      addScript(frameDocument, script.textContent, '', script.type);
-
-      // delete original
-      script.remove();
-
-    }
-
-  })
+  fetchLiveViewScripts(frameDocument);
   
   // fetch images
   frameDocument.querySelectorAll('img').forEach(async (image) => {
@@ -707,6 +661,60 @@ function renderLiveViewHTML(file) {
 
   })
 
+}
+
+
+async function fetchLiveViewScripts(frameDocument) {
+  
+  // fetch scripts
+  await asyncForEach(frameDocument.querySelectorAll('script'), async (script) => {
+    
+    // if script is external
+    if (script.src) {
+
+      const linkHref = new URL(script.src);
+      const fileName = linkHref.pathname.slice(1);
+
+      if (linkHref.origin == window.location.origin) {
+
+        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+        let resp;
+
+        if (!file[0]) {
+
+          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+        } else {
+
+          resp = file[0];
+
+        }
+
+        addScript(frameDocument, decodeUnicode(resp.content));
+
+        // remove original tag
+        script.remove();
+
+      } else {
+
+        addScript(frameDocument, '', script.src, script.type);
+
+        // delete original
+        script.remove();
+
+      }
+
+    } else {
+
+      addScript(frameDocument, script.textContent, '', script.type);
+
+      // delete original
+      script.remove();
+
+    }
+
+  });
+  
 }
 
 
