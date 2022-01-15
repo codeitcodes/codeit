@@ -64,6 +64,11 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   border-top-left-radius: 0;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
   line-height: 1.5;
+  display: none;
+}
+
+.cd-wrapper .menu.visible {
+  display: block;
 }
 
 .cd-wrapper .menu .icon {
