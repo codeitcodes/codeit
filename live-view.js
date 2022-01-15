@@ -468,7 +468,10 @@ function renderLiveViewHTML(file) {
   const frameDocument = frame.contentDocument;
   
   frameDocument.addEventListener('keydown', handleMetaP);
-  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+  
+  try {
+    frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+  } catch(e) {}
   
   // fetch styles
   const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
