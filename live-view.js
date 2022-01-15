@@ -700,9 +700,7 @@ async function fetchLiveViewScripts(frameDocument) {
 
       } else {
 
-        let resp = await axios.get(script.src);
-        
-        addScript(frameDocument, resp, '', script.type);
+        addScript(frameDocument, false, script.src, script.type);
         
         // delete original
         script.remove();
@@ -711,7 +709,7 @@ async function fetchLiveViewScripts(frameDocument) {
 
     } else {
 
-      addScript(frameDocument, script.textContent, '', script.type);
+      addScript(frameDocument, script.textContent, false, script.type);
 
       // delete original
       script.remove();
