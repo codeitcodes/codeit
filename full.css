@@ -754,6 +754,11 @@ body.notransition .sidebar {
   grid-gap: 1.5px;
   letter-spacing: 0.02px;
   transition: .18s var(--bounce-function) opacity;
+  display: none;
+}
+
+.sidebar .header .title .branch.visible {
+  display: block;
 }
 
 .sidebar .header .title .branch a {
