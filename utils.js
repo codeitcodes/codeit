@@ -26,18 +26,24 @@ const body = document.body,
       loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
 
-      titleScreen = header.querySelector('.titlescreen'),
+      titleScreen = header.querySelector('.title-screen'),
+      optionsScreen = header.querySelector('.options-screen'),
       searchScreen = header.querySelector('.searchscreen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
+      sidebarBranch = sidebarTitle.querySelector('.branch'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
-
+      
+      sidebarPlusButton = titleScreen.querySelector('.plus'),
+      
+      repoAdminButton = optionsScreen.querySelector('.admin-button'),
+      repoBranchButton = optionsScreen.querySelector('.branch-button'),
+      repoShareButton = optionsScreen.querySelector('.branch-button'),
+      
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.searchinput'),
       searchClear = searchScreen.querySelector('.clear'),
-      
-      addButton = titleScreen.querySelector('.add'),
       
       sidebarBackground = document.querySelector('.sidebar-background'),
       
@@ -52,7 +58,7 @@ const body = document.body,
 
 
 // version
-const version = '1.9.0';
+const version = '1.9.1';
 versionEl.innerText = version;
 
 
