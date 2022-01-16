@@ -50,6 +50,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   color: #a6c3d4;
   padding: 6px;
+  scroll-padding: 6px;
   left: 121.984375px;
   top: 12.5px;
   border-radius: 5px;
