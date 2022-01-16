@@ -54,7 +54,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   left: 121.984375px;
   top: 12.5px;
   border-radius: 5px;
-  font-weight: 600;
+  font-weight: 500;
   max-width: 190px;
   max-height: calc(30px * 3 + 4px + 17px);
   /* max-width: 290px; */
