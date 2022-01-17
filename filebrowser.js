@@ -332,7 +332,7 @@ async function renderSidebarHTML(repoObj) {
 
 
         out += `
-        <div class="item repo" obj="`+ JSON.stringify(repoObj) +`">
+        <div class="item repo" obj="`+ encodeURI(JSON.stringify(repoObj)) +`">
           <div class="label">
             `+ repoIcon +`
             <a class="name">`+ fullName +`</a>
@@ -393,7 +393,7 @@ function addHTMLItemListeners() {
       if (item.classList.contains('repo')) {
 
         // get repo obj
-        const repoObj = JSON.parse(getAttr(item, 'obj'));
+        const repoObj = decodeURI(JSON.parse(getAttr(item, 'obj')));
 
         // change location
         treeLoc[0] = repoObj.ownerName;
