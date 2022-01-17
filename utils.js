@@ -34,7 +34,7 @@ const body = document.body,
       sidebarBranch = sidebarTitle.querySelector('.branch'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
 
-      optionsButton = titleScreen.querySelector('.plus'),
+      optionsButton = header.querySelector('.options'),
 
       cloneOrAddButton = optionsScreen.querySelector('.clone-or-add'),
       repoBranchButton = optionsScreen.querySelector('.branch-button'),

@@ -772,7 +772,7 @@ body.notransition .sidebar {
   opacity: 0;
 }
 
-.sidebar .header .roundbutton.plus {
+.sidebar .header .roundbutton.options {
   margin: 0;
   margin-right: calc(20px - var(--spacing-1));
   position: absolute;
@@ -780,12 +780,12 @@ body.notransition .sidebar {
   z-index: 1;
 }
 
-.sidebar .header .roundbutton.plus path {
+.sidebar .header .roundbutton.options path {
   transform-origin: center;
   transition: .18s var(--bounce-function);
 }
 
-.sidebar .header .roundbutton.plus.open path {
+.sidebar .header .roundbutton.options.open path {
   transform: rotate(-45deg);
   opacity: .9;
 }
@@ -799,7 +799,7 @@ body.notransition .sidebar {
 
 .sidebar .header .title-screen > * {
   transform: translateY(40px);
-  transition: .18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: .18s var(--bounce-function);
   transition-property: transform, opacity;
   will-change: transform;
 }
@@ -847,7 +847,7 @@ body.notransition .sidebar {
 
 .sidebar .header .options-screen .roundbutton {
   transform: translateY(-40px);
-  transition: .18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: .18s var(--bounce-function);
   transition-property: transform, opacity;
   will-change: transform;
 }
@@ -1182,7 +1182,7 @@ body.notransition .sidebar {
 
 .roundbutton:active path {
   opacity: .5 !important;
-  transition: .18s cubic-bezier(0.18, 0.89, 0.32, 1.28), 0s opacity !important;
+  transition: .18s var(--bounce-function), 0s opacity !important;
 }
 
 .roundbutton.hidden {
@@ -1792,6 +1792,7 @@ body {
 
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
+  --bounce-function: var(--bounce-function);
 
 
   tab-size: 2;
