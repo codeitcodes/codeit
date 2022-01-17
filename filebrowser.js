@@ -6,9 +6,9 @@
 sidebarToggle.addEventListener('mouseover', () => {
 
   if (!body.classList.contains('expanded')) {
-    
+
     sidebarToggle.classList.add('visible');
-    
+
   }
 
 })
@@ -24,87 +24,89 @@ sidebarToggle.addEventListener('click', () => {
 
 
 // render sidebar
-// call this function when signed in to git
-// to render sidebar
-async function renderSidebarHTML() {
-  
+// call this function when logged in to git
+// to render sidebar (repoObj is optional)
+async function renderSidebarHTML(repoObj) {
+
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
     startLoading();
   }
-  
-  // hide search screen
+
+  // hide header screens
+  titleScreen.classList.add('visible');
+  optionsScreen.classList.remove('visible');
   header.classList.remove('searching');
-  
-  
+
+
   // map tree location
   const [user, repo, contents] = treeLoc;
-  
-  
+
+
   // if not logged into git
   // and navigated to Repositories page
   if (gitToken == '' && repo == '') {
-    
+
     // stop loading
     stopLoading();
-    
+
     // show login screen
     sidebar.classList.add('intro');
-    
+
     return;
-    
+
   }
-  
-  
+
+
   let resp;
-  
+
   // get items in current tree from git
   try {
-    
+
     resp = await git.getItems(treeLoc);
-    
+
   } catch(e) {
-    
+
     // if failed to get items,
     // delete auth token and show login screen
-    
+
     // stop loading
     stopLoading();
-    
+
     // log out from git
     logOutFromGitLS();
-    
+
     sidebar.classList.add('intro');
-    
+
     return;
-    
+
   }
-  
+
   if (resp.message == 'Bad credentials') {
-    
+
     // if failed to get items,
     // delete auth token and show login screen
-    
+
     // stop loading
     stopLoading();
-    
+
     // log out from git
     logOutFromGitLS();
-    
+
     sidebar.classList.add('intro');
-    
+
     return;
-    
+
   }
-  
-  
+
+
   // create temporary modified files array
   let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
 
   // get all modified files in directory
   modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
-  
-  
+
+
   // save rendered HTML
   let out = '';
 
@@ -114,38 +116,38 @@ async function renderSidebarHTML() {
     // show title
 
     let titleAnimation;
-    
+
     if (contents != '') {
-            
+
       // if repo is owned by logged user
       if (loggedUser && user == loggedUser.login) {
-        
+
         // show repo name and path
         sidebarLogo.innerText = repo + contents;
-        
+
       } else {
-        
+
         // show username, repo name and path
         sidebarLogo.innerText = user + '/' + repo + contents;
-        
+
       }
-      
+
       // animate title
       if (sidebarTitle.children[1].scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
-      
+
       // if repo is owned by logged user
       if (loggedUser && user == loggedUser.login) {
-        
+
         // show repo name
         sidebarLogo.innerText = repo;
-        
+
       } else {
-        
+
         // show username and repo name
         sidebarLogo.innerText = user + '/' + repo;
-        
+
       }
 
     } else {
@@ -154,19 +156,19 @@ async function renderSidebarHTML() {
       sidebarLogo.innerText = 'Repositories';
 
     }
-    
+
     // scroll to end of title
-    
+
     if (!titleAnimation) {
-      
+
       sidebarTitle.classList.add('notransition');
-      
+
       window.setTimeout(() => {
         sidebarTitle.classList.remove('notransition');
       }, 180);
-      
+
     }
-    
+
     sidebarTitle.children[1].scrollTo({
       left: sidebarTitle.children[1].scrollWidth - sidebarTitle.children[1].offsetLeft,
       behavior: titleAnimation
@@ -175,37 +177,51 @@ async function renderSidebarHTML() {
 
     // if navigating in repository
     if (repo != '') {
-      
-      // show add button
-      addButton.classList.remove('hidden');
-      
+
+      // change header options
+
+      optionsScreen.classList.remove('out-of-repo');
+
+      // if logged user has push access in repo
+      if (repoObj && repoObj.permissions.push) {
+
+        // change header options
+        optionsScreen.classList.add('push-access');
+
+      } else {
+
+
+        optionsScreen.classList.remove('push-access');
+
+      }
+
       // render files
       resp.forEach(item => {
 
         // if item is a file
         if (item.type == 'file') {
-          
+
           let file = getLatestVersion(item);
-          
+
           // search for matching modified files
           for (let i = 0; i < modifiedFilesTemp.length; i++) {
-            
+
             let modFile = modifiedFilesTemp[i];
-            
+
             // if modified file has matching SHA or name
             if (modFile.sha === file.sha || modFile.name === file.name) {
-                            
+
               // remove modified file from temporary array
               modifiedFilesTemp.splice(i, 1);
-              
+
               // reset index
               i--;
-              
+
             }
-            
+
           }
-          
-          
+
+
           // add modified flag to file
           let modified = '';
           if (modifiedFiles[file.sha] &&
@@ -222,7 +238,7 @@ async function renderSidebarHTML() {
             </div>
           </div>
           `;
-          
+
         } else { // if item is a folder
 
           out += `
@@ -236,23 +252,23 @@ async function renderSidebarHTML() {
           `;
 
         }
-        
+
       });
-        
+
 
       // render modified files from temporary array
-      
+
       let modFileNames = {};
-      
+
       modifiedFilesTemp.forEach(file => {
-        
+
         // if file isn't already in HTML
         if (!modFileNames[file.name]) {
-          
+
           // add file to HTML
-          
+
           modFileNames[file.name] = true;
-          
+
           // get the file's latest version
           file = getLatestVersion(file);
 
@@ -271,36 +287,52 @@ async function renderSidebarHTML() {
             </div>
           </div>
           `;
-          
-        }
-        
-      });
-      
-    } else { // else, show all repositories
-      
-      // hide add button
-      addButton.classList.add('hidden');
-      
-      // render repositories
-      resp.forEach(item => {
-        
-        let fullName;
-        
-        // if repo is owned by logged user
-        if (loggedUser && item.full_name.split('/')[0] == loggedUser.login) {
-          
-          // show repo name
-          fullName = item.name;
-          
-        } else {
-          
-          // show username and repo name
-          fullName = item.full_name;
-          
+
         }
 
+      });
+
+    } else { // else, show all repositories
+
+      // change header options
+      optionsScreen.classList.add('out-of-repo');
+      optionsScreen.classList.remove('push-access');
+
+      // render repositories
+      resp.forEach(item => {
+
+        let fullName;
+
+        // if repo is owned by logged user
+        if (loggedUser && item.full_name.split('/')[0] == loggedUser.login) {
+
+          // show repo name
+          fullName = item.name;
+
+        } else {
+
+          // show username and repo name
+          fullName = item.full_name;
+
+        }
+
+
+        // create repo obj
+        const repoObj = {
+          fullName: item.full_name,
+          ownerName: item.owner.login,
+          repoName: item.name,
+          private: item.private,
+          permissions: {
+            admin: item.permissions.admin,
+            push: item.permissions.push
+          },
+          allowForking: item.allow_forking
+        };
+
+
         out += `
-        <div class="item repo" fullname="`+ item.full_name +`">
+        <div class="item repo" obj="`+ JSON.stringify(repoObj) +`">
           <div class="label">
             `+ repoIcon +`
             <a class="name">`+ fullName +`</a>
@@ -337,7 +369,7 @@ async function renderSidebarHTML() {
       selectedEl.scrollIntoViewIfNeeded();
 
     }
-    
+
     // protect unsaved code
     protectUnsavedCode();
 
@@ -360,15 +392,16 @@ function addHTMLItemListeners() {
       // if item is a repository
       if (item.classList.contains('repo')) {
 
-        // change location
-        let itemLoc = getAttr(item, 'fullname').split('/');
+        // get repo obj
+        const repoObj = JSON.parse(getAttr(item, 'obj'));
 
-        treeLoc[0] = itemLoc[0],
-        treeLoc[1] = itemLoc[1];
+        // change location
+        treeLoc[0] = repoObj.ownerName;
+        treeLoc[1] = repoObj.repoName;
         saveTreeLocLS(treeLoc);
 
         // render sidebar
-        renderSidebarHTML();
+        renderSidebarHTML(repoObj);
 
       } else if (item.classList.contains('folder')) {
 
@@ -423,7 +456,7 @@ function addHTMLItemListeners() {
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl) {
-  
+
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
@@ -457,18 +490,18 @@ async function loadFileInHTML(fileEl, fileSha) {
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
-  
+
   // select the new file in HTML
   fileEl.classList.add('selected');
   fileEl.scrollIntoViewIfNeeded();
-  
+
   // show all files in HTML
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
   files.forEach(file => { file.style.display = '' });
-  
+
   header.classList.remove('searching');
-  
-  
+
+
   // if previous file selection exists
   if (selectedFile.sha) {
 
@@ -486,7 +519,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     }
 
   }
-  
+
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
@@ -512,10 +545,10 @@ async function loadFileInHTML(fileEl, fileSha) {
                        modFile.caretPos, modFile.scrollPos, false);
 
   }
-  
+
   // show file content in codeit
   cd.textContent = decodeUnicode(selectedFile.content);
-  
+
   // change codeit lang
   cd.lang = selectedFile.lang;
 
@@ -584,38 +617,38 @@ sidebarTitle.addEventListener('click', () => {
 // when scrolling long titles
 
 sidebarTitle.children[1].addEventListener('scroll', () => {
-  
+
   if (sidebarTitle.children[1].scrollLeft > 0) {
-    
+
     sidebarTitle.classList.add('scrolled-start');
-    
+
   } else {
-    
+
     sidebarTitle.classList.remove('scrolled-start');
-    
+
   }
-  
+
   if ((sidebarTitle.children[1].offsetWidth + sidebarTitle.children[1].scrollLeft)
       >= sidebarTitle.children[1].scrollWidth) {
-    
+
     sidebarTitle.classList.add('scrolled-end');
-    
+
   } else {
-    
+
     sidebarTitle.classList.remove('scrolled-end');
-    
+
   }
-  
+
 })
 
 
 // create new file or repo
 // on click of button
 addButton.addEventListener('click', () => {
-  
+
   // if not already adding new file/repo
   if (!fileWrapper.querySelector('.focused')) {
-    
+
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -637,7 +670,7 @@ addButton.addEventListener('click', () => {
 
     // add new file to DOM
     fileWrapper.prepend(fileEl);
-          
+
     // focus file
     fileEl.querySelector('.name').focus();
     fileEl.scrollIntoViewIfNeeded();
@@ -647,11 +680,11 @@ addButton.addEventListener('click', () => {
     const pushWrapper = fileEl.querySelector('.push-wrapper');
 
     fileEl.querySelector('.name').addEventListener('keydown', (e) => {
-      
+
       if (e.key === 'Enter') {
 
         e.preventDefault();
-        
+
         onNextFrame(pushNewFileInHTML);
 
       }
@@ -663,7 +696,7 @@ addButton.addEventListener('click', () => {
 
     // on next frame
     onNextFrame(() => {
-      
+
       // animate file
       fileEl.classList.remove('hidden');
 
@@ -684,49 +717,49 @@ addButton.addEventListener('click', () => {
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
 
-        
+
         // pad file content with random number of invisible chars
         // to generate unique file content and fix git sha generation
         const randomNum = Math.floor(Math.random() * 100) + 1;
         const fileContent = '\r\n'.padEnd(randomNum, '\r');
-        
-        
+
+
         // validate file name
-        
+
         // get file name
         let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
-        
+
         // replace all spaces in name with dashes
         fileName = fileName.replaceAll(' ', '-');
-        
+
         // if another file in the current directory
         // has the same name, add a differentiating number
         fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
-                    
+
           if (fileElem !== fileEl
               && (fileName === fileElem.querySelector('.name').textContent)) {
-            
+
             // split extension from file name
             fileName = splitFileName(fileName);
-            
+
             // add a differentiating number
             // and reconstruct file name
             fileName = fileName[0] + '-1.' + fileName[1];
-            
+
           }
-          
+
         });
-        
+
         fileEl.querySelector('.name').textContent = fileName;
-        
-        
+
+
         // change selected file
         changeSelectedFile(treeLoc.join(), fileContent, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
-        
-        
+
+
         // open file
-        
+
         // show file content in codeit
         cd.textContent = '\r\n';
 
@@ -738,19 +771,19 @@ addButton.addEventListener('click', () => {
 
         // update line numbers
         updateLineNumbersHTML();
-        
+
         // if on desktop
         if (!isMobile) {
-          
+
           // set caret pos in codeit
           cd.setSelection(0, 0);
-          
+
         }
 
 
         // create commit
         const commitMessage = 'Create ' + fileName;
-        
+
         const commitFile = {
           name: fileName,
           dir: treeLoc.join(),
@@ -775,13 +808,13 @@ addButton.addEventListener('click', () => {
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
         if (modifiedFiles[fileContent]) {
-          
+
           onFileEclipsedInCache(fileContent, newSha, selectedFile);
-          
+
         } else {
-          
+
           onFileEclipsedInCache(false, newSha, selectedFile);
-          
+
         }
 
 
@@ -825,14 +858,14 @@ addButton.addEventListener('click', () => {
       }
 
     }
-    
+
   } else {
-    
+
     // if already adding a new file, focus it
     fileWrapper.querySelector('.item.focused .name').focus();
-    
+
   }
-  
+
 })
 
 
@@ -843,7 +876,7 @@ learnShare.addEventListener('click', () => {
     title: "Share Codeit",
     text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me! " + window.location.origin
   };
-  
+
   if (!isWindows) {
 
     try {
@@ -858,16 +891,16 @@ learnShare.addEventListener('click', () => {
                   '_blank');
 
     }
-    
+
   } else {
-    
+
     // share on Twitter
     window.open('https://twitter.com/intent/tweet' +
                 '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
                 '_blank');
-    
+
   }
-  
+
 })
 
 // close learn page on click of button
@@ -947,21 +980,21 @@ function codeChange() {
   if (!modifiedFiles[selectedFile.sha] ||
       (modifiedFiles[selectedFile.sha] &&
        modifiedFiles[selectedFile.sha].eclipsed)) {
-    
+
     // if selected file is in modifiedFiles and eclipsed
     if ((modifiedFiles[selectedFile.sha] &&
         modifiedFiles[selectedFile.sha].eclipsed)) {
-      
+
       // file cannot be both eclipsed and modified
       selectedFile.eclipsed = false;
-      
+
     }
-    
+
     // add selected file to modifiedFiles
     addSelectedFileToModFiles();
 
   }
-  
+
   // enable pushing file in HTML
 
   const selectedEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
@@ -991,25 +1024,25 @@ function protectUnsavedCode() {
   // by sha
   let selectedElSha = fileWrapper.querySelectorAll('.file[sha="'+ selectedFile.sha +'"]');
   let selectedElName;
-  
+
   // if the selected file's sha changed
   if (selectedElSha.length == 0) {
-    
+
     // get selected file element in HTML
     // by name
     selectedElName = Array.from(fileWrapper.querySelectorAll('.item.file'))
                      .filter(file => file.querySelector('.name').textContent == selectedFile.name);
-    
+
     selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
-    
+
     // if new version of selected file exists
     if (selectedElName !== null) {
-      
+
       // load file
       loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
-      
+
     } else {
-      
+
       // if the selected file was deleted,
       // protect unsaved code by clearing codeit
 
@@ -1047,31 +1080,31 @@ function protectUnsavedCode() {
       changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
 
     }
-    
+
   }
 
 }
 
 function setupEditor() {
-  
+
   // if code in storage
   if (selectedFile.content) {
 
     // set codeit to code
     cd.lang = selectedFile.lang || 'plain';
     cd.textContent = decodeUnicode(selectedFile.content);
-    
+
     // if sidebar isn't expanded, focus codeit
     if (!(isMobile && body.classList.contains('expanded'))) {
-      
+
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-      
+
     }
-    
+
     // prevent bottom float disappearing on mobile
     if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
-    
+
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -1079,41 +1112,41 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   }
-  
-  
+
+
   // add editor event listeners
-  
+
   cd.on('type', codeChange);
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
-  
+
   if (!isMobile) cd.on('type', updateScrollbarArrow);
-  
+
   // update on screen resize
-  
+
   let lastWidth = undefined;
-  
+
   window.addEventListener('resize', () => {
-    
+
     if (lastWidth === window.innerWidth) {
       return;
     }
-    
+
     lastWidth = window.innerWidth;
-    
+
     updateLineNumbersHTML();
-    
+
   });
-  
+
   // disable context menu
   if (!isMobile) {
-  
+
     window.addEventListener('contextmenu', (e) => {
 
       e.preventDefault();
 
     });
-    
+
   }
 
   // disable Ctrl/Cmd+S
@@ -1137,7 +1170,7 @@ function updateLineNumbersHTML() {
   // if mobile but not in landscape,
   // or if editor isn't in view, return
   if (isMobile && !isLandscape) {
-    
+
     if (cd.querySelector('.line-numbers-rows')) {
 
       cd.querySelector('.line-numbers-rows').textContent = '';
@@ -1147,19 +1180,19 @@ function updateLineNumbersHTML() {
     cd.classList.remove('line-numbers');
 
     return;
-    
+
   }
 
   cd.classList.add('line-numbers');
-  
+
   Prism.plugins.lineNumbers.update(cd);
-  
-  
+
+
   if (!isMobile) {
-    
+
     updateScrollbarArrow();
     updateLiveViewArrow();
-    
+
   }
 
 }
@@ -1179,7 +1212,7 @@ function setupSidebar() {
     // show sidebar
     toggleSidebar(true);
     saveSidebarStateLS();
-    
+
     onNextFrame(() => {
 
       body.classList.remove('notransition');
