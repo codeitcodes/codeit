@@ -644,7 +644,7 @@ sidebarTitle.children[1].addEventListener('scroll', () => {
 
 // create new file or repo
 // on click of button
-repoAdminButton.addEventListener('click', () => {
+repoCloneOrAddButton.addEventListener('click', () => {
 
   // if not already adding new file/repo
   if (!fileWrapper.querySelector('.focused')) {
