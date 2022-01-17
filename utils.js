@@ -28,7 +28,7 @@ const body = document.body,
 
       titleScreen = header.querySelector('.title-screen'),
       optionsScreen = header.querySelector('.options-screen'),
-      searchScreen = header.querySelector('.searchscreen'),
+      searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarBranch = sidebarTitle.querySelector('.branch'),
@@ -42,7 +42,7 @@ const body = document.body,
       
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
-      searchInput = searchScreen.querySelector('.searchinput'),
+      searchInput = searchScreen.querySelector('.search-input'),
       searchClear = searchScreen.querySelector('.clear'),
       
       sidebarBackground = document.querySelector('.sidebar-background'),
