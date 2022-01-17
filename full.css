@@ -878,38 +878,19 @@ body.notransition .sidebar {
 }
 
 
-.sidebar .header .searchscreen .title {
+.sidebar .header .search-screen .title {
   cursor: unset;
 }
 
-.sidebar .header .searchscreen .back {
+.sidebar .header .search-screen .back {
   transition: .18s var(--ease-function) margin-right;
 }
 
-.sidebar .header .searchscreen .back {
+.sidebar .header .search-screen .back {
   margin-right: 0;
 }
 
-
-/*
-.sidebar .header .title:hover .logo.overflow {
-  background: hsl(218deg 18% 23%);
-  padding: 9px;
-  padding-left: 32px;
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 15%), 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  left: calc(44px - 26px);
-  max-width: calc(235px + 26px);
-  color: #fff;
-  position: absolute;
-  box-sizing: border-box;
-}
-*/
-
-
-.sidebar .header .search-screen .searchinput {
+.sidebar .header .search-screen .search-input {
   width: calc(var(--sidebar-width) - 103px);
   white-space: nowrap;
   line-height: 20px;
@@ -923,7 +904,7 @@ body.notransition .sidebar {
   overflow: hidden;
 }
 
-.sidebar .header .search-screen .searchinput:empty::before {
+.sidebar .header .search-screen .search-input:empty::before {
   content: 'Search...';
   color: rgba(241,241,242,0.43);
   pointer-events: none;
