@@ -393,7 +393,7 @@ function addHTMLItemListeners() {
       if (item.classList.contains('repo')) {
 
         // get repo obj
-        const repoObj = decodeURI(JSON.parse(getAttr(item, 'obj')));
+        const repoObj = JSON.parse(decodeURI(getAttr(item, 'obj')));
 
         // change location
         treeLoc[0] = repoObj.ownerName;
