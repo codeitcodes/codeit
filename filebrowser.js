@@ -642,9 +642,20 @@ sidebarTitle.children[1].addEventListener('scroll', () => {
 })
 
 
-// create new file or repo
+// show options on click of button
+optionsButton.addEventListener('click', () => {
+
+  optionsButton.classList.toggle('open');
+
+  titleScreen.classList.toggle('visible');
+  optionsScreen.classList.toggle('visible');
+
+})
+
+
+// clone repo or create new file
 // on click of button
-repoCloneOrAddButton.addEventListener('click', () => {
+cloneOrAddButton.addEventListener('click', () => {
 
   // if not already adding new file/repo
   if (!fileWrapper.querySelector('.focused')) {
