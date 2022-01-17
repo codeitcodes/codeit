@@ -1792,7 +1792,7 @@ body {
 
   --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
   --cubic-function: cubic-bezier(0.4, 0, 0.25, 1);
-  --bounce-function: var(--bounce-function);
+  --bounce-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
 
   tab-size: 2;
