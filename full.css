@@ -1072,6 +1072,11 @@ body.notransition .sidebar {
   background: rgba(0,0,0,.15) !important;
 }
 
+.sidebar .item .push-wrapper:not(.checked):active .push-svg #push {
+  opacity: .5;
+  transition: .18s var(--ease-function), 0s opacity;
+}
+
 .sidebar .item .arrow {
   color: #828689;
 }
@@ -1366,6 +1371,7 @@ body.mobile.expanded .splash-wrapper::before {
 }
 .push-svg #push {
   fill: rgba(241,241,242,0.8);
+  fill: #828689;
 }
 .push-svg #check {
   fill: transparent;
@@ -1568,7 +1574,7 @@ body.mobile.expanded .splash-wrapper::before {
   transform-origin: center;
   animation: spinner-rotate 0.5s infinite;
   animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
-}@@
+}
 
 @keyframes spinner-rotate {
   to {
