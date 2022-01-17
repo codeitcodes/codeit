@@ -4,12 +4,12 @@ const body = document.body,
       cd = document.querySelector('cd-el'),
 
       bottomWrapper = document.querySelector('.bottom-wrapper'),
-      
+
       bottomFloat = bottomWrapper.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
-      
+
       liveButtonShare = bottomWrapper.querySelector('.live-button.share'),
       liveButtonArrow = bottomWrapper.querySelector('.live-button.arrow'),
 
@@ -33,27 +33,27 @@ const body = document.body,
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarBranch = sidebarTitle.querySelector('.branch'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
-      
+
       sidebarPlusButton = titleScreen.querySelector('.plus'),
-      
-      repoAdminButton = optionsScreen.querySelector('.admin-button'),
+
+      repoCloneOrAddButton = optionsScreen.querySelector('.clone-or-add'),
       repoBranchButton = optionsScreen.querySelector('.branch-button'),
       repoShareButton = optionsScreen.querySelector('.branch-button'),
-      
+
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
       searchInput = searchScreen.querySelector('.search-input'),
       searchClear = searchScreen.querySelector('.clear'),
-      
+
       sidebarBackground = document.querySelector('.sidebar-background'),
-      
+
       fileWrapper = sidebar.querySelector('.files'),
-      
+
       versionEl = learnWrapper.querySelector('.version'),
       learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
-      
+
       liveView = document.querySelector('.live-view');
 
 
@@ -66,10 +66,10 @@ versionEl.innerText = version;
 let isDev = false;
 
 if (window.location.href.includes('dev')) {
-  
+
   isDev = true;
   learnTitle.innerHTML += '<sup>dev</sup>';
-  
+
 }
 
 
@@ -78,24 +78,24 @@ if (window.location.href.includes('dev')) {
 let loadInterval;
 
 function startLoading() {
-      
+
   sidebar.classList.add('loading');
-  
+
   loader.style.width = '0%';
   loader.style.transition = 'none';
   loader.style.opacity = 1;
 
   onNextFrame(load);
-  
+
   if (loadInterval) window.clearInterval(loadInterval);
   loadInterval = window.setInterval(load, 180);
 
 }
 
 function stopLoading() {
-  
+
   sidebar.classList.remove('loading');
-  
+
   window.clearInterval(loadInterval);
   loadInterval = false;
 
@@ -168,7 +168,7 @@ window.addEventListener('offline', () => { isOffline = true });
 // base64 encode/decode
 
 let encodeUnicode = (str) => {
-  
+
   // first we use encodeURIComponent to get percent-encoded UTF-8,
   // then we convert the percent encodings into raw bytes which
   // can be fed into btoa
@@ -176,27 +176,27 @@ let encodeUnicode = (str) => {
       function toSolidBytes(match, p1) {
           return String.fromCharCode('0x' + p1);
   }));
-  
+
 }
 
 let decodeUnicode = (str) => {
-  
+
   // going backwards: from bytestream, to percent-encoding, to original string
   return decodeURIComponent(atob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-  
+
 }
 
 
 // split file name
 let splitFileName = (src) => {
-  
+
   src = src.replaceAll('\n', '');
 
   const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
   return [src.replace(('.' + extension), ''), extension];
-  
+
 }
 
 
@@ -210,12 +210,12 @@ const mimetypes = {
 };
 
 let getMimeType = (src) => {
-  
+
   // get file extension
   const extension = splitFileName(src)[1].slice(1);
-  
+
   return mimetypes[extension];
-  
+
 }
 
 
@@ -258,7 +258,7 @@ let asyncThread = (callback, time) => {
 }
 
 let onNextFrame = (callback) => {
-  
+
   window.requestAnimationFrame(callback);
 
 }
