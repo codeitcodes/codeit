@@ -57,12 +57,13 @@ const body = document.body,
       liveView = document.querySelector('.live-view');
 
 
+
 // version
 const version = '1.9.3';
 versionEl.innerText = version;
 
 let logVersion = () => {
-  console.log('%ccodeit ' + version, 'font-style: italic; color: gray');
+  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
 }
 
 
