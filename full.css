@@ -719,7 +719,6 @@ body.notransition .sidebar {
   padding: 12px 0;
   padding-left: 18px;
   margin-left: -18px;
-  cursor: pointer;
   flex: 1;
 }
 
@@ -1178,7 +1177,6 @@ body.notransition .sidebar {
   border-radius: 50%;
   overflow: visible;
   color: #828689;
-  cursor: pointer;
 }
 
 .roundbutton:active {
