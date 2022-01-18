@@ -1233,13 +1233,13 @@ body .sidebar .button:active:not(:hover) {
 
 .sidebar .button.teritary {
   background: transparent;
-  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%);
   color: hsl(220deg 4% 84% / 92%);
+  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%);
 }
 
 .sidebar .button.teritary:active {
-  background: hsl(228deg 16% 37% / 6%) !important;
   color: hsl(220deg 4% 84% / 25%);
+  background: transparent !important;
   box-shadow: inset 0 0 0 1px hsl(228deg 16% 37% / 50%);
 }
 
