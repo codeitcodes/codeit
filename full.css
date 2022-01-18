@@ -745,9 +745,9 @@ body.notransition .sidebar {
 .sidebar .header .logo::after {
   content: '';
   position: absolute;
-  right: 0;
-  width: 30px;
-  height: 100%;
+  right: 14px;
+  width: 28px;
+  height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
   transition: .18s var(--ease-function) opacity;
   pointer-events: none;
@@ -757,8 +757,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::before {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
-  transition: .18s var(--ease-function);
-  left: 24px;
+  left: 42px;
   opacity: 0;
 }
 
