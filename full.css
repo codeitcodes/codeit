@@ -1433,17 +1433,17 @@ body.mobile.expanded .cube-loader::after {
 }
 
 .cube-loader::before {
-  width: 50px;
-  height: 50px;
+  width: 50%;
+  height: 50%;
   margin-top: 0;
   margin-left: 0;
   animation: 1.5s tile1 cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
 .cube-loader::after {
-  height: 50px;
+  height: 50%;
   width: 0;
-  margin-top: -50px;
+  margin-top: -50%;
   animation: 1.5s tile2 cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
@@ -1453,21 +1453,21 @@ body.mobile.expanded .cube-loader::after {
     margin-left: 0;
   }
   25% {
-    margin-top: 50px;
+    margin-top: 50%;
     margin-left: 0;
   }
   50% {
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: 50%;
+    margin-left: 50%;
   }
   75% {
     margin-top: 0;
-    margin-left: 50px;
-    width: 50px;
+    margin-left: 50%;
+    width: 50%;
   }
   100% {
     margin-top: 0;
-    margin-left: 100px;
+    margin-left: 100%;
     width: 0;
   }
 }
@@ -1477,7 +1477,7 @@ body.mobile.expanded .cube-loader::after {
     width: 0;
   }
   100% {
-    width: 50px;
+    width: 50%;
   }
 }
 
