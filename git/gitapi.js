@@ -48,7 +48,7 @@ let git = {
     const [user, repo, contents] = treeLoc;
 
     // get repository branch
-    const [repoName, branch] = repo.split(':');
+    let [repoName, branch] = repo.split(':');
 
     if (branch) branch = '?ref='+ branch;
     else branch = '';
@@ -76,7 +76,7 @@ let git = {
     if (repo != '') {
 
       // get repository branch
-      const [repoName, branch] = repo.split(':');
+      let [repoName, branch] = repo.split(':');
 
       if (branch) branch = '?ref='+ branch;
       else branch = '';
@@ -121,7 +121,7 @@ let git = {
     const [user, repo, contents] = commit.file.dir.split(',');
 
     // get repository branch
-    const [repoName, branch] = repo.split(':');
+    let [repoName, branch] = repo.split(':');
 
     if (branch) branch = '?branch='+ branch;
     else branch = '';
