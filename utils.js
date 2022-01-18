@@ -59,12 +59,14 @@ const body = document.body,
 
 
 // version
-const version = '1.9.3';
+const version = '1.9.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
-  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
+  console.log('%ccodeit ' + version, 'font-style: italic; color: gray');
 }
+
+logVersion();
 
 
 
