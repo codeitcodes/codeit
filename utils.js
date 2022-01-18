@@ -296,6 +296,9 @@ let axios = {
             resolve(JSON.parse(this.responseText));
           }
         };
+        xmlhttp.onerror = function () {
+          resolve(JSON.parse(this.responseText));
+        };
         xmlhttp.open('GET', url, true);
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
