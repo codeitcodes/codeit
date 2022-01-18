@@ -15,7 +15,7 @@ function createLink(linkData) {
   if (linkData.dir) {
 
     link += '?dir=' +
-            encodeURIComponent(
+            encodeURI(
               linkData.dir.join(',')
             );
 
@@ -23,7 +23,7 @@ function createLink(linkData) {
     if (linkData.file) {
 
       link += '&file=' +
-              encodeURIComponent(
+              encodeURI(
                 linkData.file.name + ',' +
                 linkData.file.sha
               );
