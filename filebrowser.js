@@ -36,6 +36,7 @@ async function renderSidebarHTML() {
   // hide header screens
   titleScreen.classList.add('visible');
   optionsScreen.classList.remove('visible');
+  optionsButton.classList.remove('open');
   header.classList.remove('searching');
 
 
