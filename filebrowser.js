@@ -113,16 +113,18 @@ async function renderSidebarHTML() {
 
     if (contents != '') {
 
+      const repoName = repo.split(':')[0];
+
       // if repo is owned by logged user
       if (loggedUser && user == loggedUser.login) {
 
         // show repo name and path
-        sidebarLogo.innerText = repo + contents;
+        sidebarLogo.innerText = repoName + contents;
 
       } else {
 
         // show username, repo name and path
-        sidebarLogo.innerText = user + '/' + repo + contents;
+        sidebarLogo.innerText = user + '/' + repoName + contents;
 
       }
 
@@ -131,16 +133,18 @@ async function renderSidebarHTML() {
 
     } else if (repo != '') {
 
+      const repoName = repo.split(':')[0];
+
       // if repo is owned by logged user
       if (loggedUser && user == loggedUser.login) {
 
         // show repo name
-        sidebarLogo.innerText = repo;
+        sidebarLogo.innerText = repoName;
 
       } else {
 
         // show username and repo name
-        sidebarLogo.innerText = user + '/' + repo;
+        sidebarLogo.innerText = user + '/' + repoName;
 
       }
 
@@ -172,8 +176,22 @@ async function renderSidebarHTML() {
     // if navigating in repository
     if (repo != '') {
 
+      // get repository branch
+      let [repoName, branch] = repo.split(':');
+
+      // if branch exists
+      if (branch) {
+
+        // show branch
+        sidebarBranch.innerText = branch;
+        sidebarBranch.classList.add('visible');
+
+      }
+
+
       // change header options
       optionsScreen.classList.remove('out-of-repo');
+
 
       // render files
       resp.forEach(item => {
