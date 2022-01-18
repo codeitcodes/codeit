@@ -1245,11 +1245,13 @@ body.notransition .sidebar {
   color: #828689;
 }
 
-.roundbutton:active {
+.roundbutton:active,
+.roundbutton.active {
   background: rgba(0,0,0,.15) !important;
 }
 
-.roundbutton:active path {
+.roundbutton:active path,
+.roundbutton.active path {
   opacity: .5 !important;
   transition: .18s var(--bounce-function), 0s opacity !important;
 }
@@ -1335,6 +1337,78 @@ body .sidebar .button:active:not(:hover) {
   user-select: text;
   -webkit-user-select: text;
 }
+
+
+.menu.branch-menu {
+  position: fixed;
+  background: var(--midnight-blue-deep);
+  color: #dcddde;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  scroll-padding: 7px;
+  border-radius: 11.5px;
+  line-height: 1.5;
+  margin-top: 2px;
+  transform: translateY(-7px);
+  top: 64px;
+  left: 222px;
+  /* right: 20px; */
+  padding: 2px;
+  min-width: 170px;
+  min-width: 135px;
+  max-width: 375px;
+  max-height: calc(100vh - 80px - 20px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: .18s var(--bounce-function);
+  /* transition: 0s .18s, .18s var(--ease-function) opacity; */
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.menu.branch-menu.visible {
+  transform: none;
+  padding: 7px;
+  opacity: 1;
+  pointer-events: auto;
+  transition: .18s var(--bounce-function);
+}
+
+.menu.branch-menu .icon {
+  padding: 10px 15px;
+  border-radius: 5.75px;
+  display: flex;
+  align-items: center;
+  grid-gap: 7px;
+}
+
+.menu.branch-menu .icon.selected {
+  color: #059669;
+}
+
+.menu.branch-menu .icon:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.menu.branch-menu .icon:active {
+  background: rgba(255,255,255,0.1);
+}
+
+.menu.branch-menu .icon a {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 16px - 7px);
+}
+
+.menu.branch-menu .icon:not(.selected) .branch-icon {
+  opacity: 0;
+}
+
+.menu.branch-menu .icon:active .branch-icon {
+  opacity: 1;
+}
+
 
 .base-spacing-left {
   margin-left: var(--spacing-1);
@@ -1441,7 +1515,7 @@ body.mobile.expanded .splash-wrapper::before {
 }
 
 .splash-wrapper .loading-subtitle a {
-  color: var(--rosemary-lightness-supreme);
+  color: var(--rosemary-lightness-deluxe);
   cursor: default;
   text-decoration: none;
 }
@@ -1906,10 +1980,11 @@ body {
   --rosemary-blue: hsl(223deg 88% 52%);
   --rosemary-light: hsl(223deg 85% 54%);
   --rosemary-lighter: hsl(223deg 86% 64%);
-  --rosemary-lightness-supreme: hsl(223deg 86% 73%);
+  --rosemary-lightness-deluxe: hsl(223deg 86% 73%);
 
   --sea-blue-hint: #313744;
 
+  --midnight-blue-deep: hsl(228deg 14% 7%);
   --midnight-blue: #1a1c24;
   --midnight-light: hsl(227deg 11% 16%);
   --midnight-lighter: hsl(226deg 7% 19%);
