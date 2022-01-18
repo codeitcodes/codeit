@@ -17,7 +17,8 @@ window.onload = async () => {
 
   treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
 
-  loggedUser = if (getStorage('loggedUser')) JSON.parse(getStorage('loggedUser')) : false;
+  if (getStorage('loggedUser')) loggedUser = JSON.parse(getStorage('loggedUser'))
+  else loggedUser = false;
 
 
   loginButton.addEventListener('click', () => {
