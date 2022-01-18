@@ -690,6 +690,7 @@ body.notransition .sidebar {
   top: auto;
   bottom: 0;
   background: linear-gradient(0deg, #1a1c24, #1a1c2400);
+  z-index: 2;
 }
 
 .sidebar .header .screen {
@@ -795,6 +796,10 @@ body.notransition .sidebar {
 .sidebar .header .title-screen {
   opacity: 1;
   overflow: hidden;
+}
+
+.sidebar .header .title-screen {
+  z-index: 1;
 }
 
 .sidebar .header .title-screen > * {
