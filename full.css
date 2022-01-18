@@ -1416,8 +1416,8 @@ body:not(.mobile) .splash-wrapper a:hover {
 .cube-loader {
   background: #fff;
   background: rgba(241,241,242,0.92);
-  height: 10rem;
-  width: 10rem;
+  height: 100px;
+  width: 100px;
 }
 
 .cube-loader::before,
@@ -1433,51 +1433,51 @@ body.mobile.expanded .cube-loader::after {
 }
 
 .cube-loader::before {
-  width: 5rem;
-  height: 5rem;
-  margin-top: -160px;
-  margin-left: 0px;
+  width: 50px;
+  height: 50px;
+  margin-top: 0;
+  margin-left: 0;
   animation: 1.5s tile1 cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
 .cube-loader::after {
-  height: 5rem;
-  width: 0rem;
-  margin-top: -80px;
+  height: 50px;
+  width: 0;
+  margin-top: -100px;
   animation: 1.5s tile2 cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
 @keyframes tile1 {
   0% {
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: 0;
+    margin-left: 0;
   }
   25% {
-    margin-top: 80px;
-    margin-left: 0px;
+    margin-top: 50px;
+    margin-left: 0;
   }
   50% {
-    margin-top: 80px;
-    margin-left: 80px;
+    margin-top: 50px;
+    margin-left: 50px;
   }
   75% {
-    margin-top: 0px;
-    margin-left: 80px;
-    width: 5rem;
+    margin-top: 0;
+    margin-left: 50px;
+    width: 50px;
   }
   100% {
-    margin-top: 0px;
-    margin-left: 160px;
-    width: 0rem;
+    margin-top: 0;
+    margin-left: 100px;
+    width: 0;
   }
 }
 
 @keyframes tile2 {
   75% {
-    width: 0rem;
+    width: 0;
   }
   100% {
-    width: 5rem;
+    width: 50px;
   }
 }
 
