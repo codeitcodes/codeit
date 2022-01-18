@@ -27,7 +27,7 @@ window.onload = async () => {
   if (linkData.dir) {
 
     treeLoc = linkData.dir;
-    saveTreeLocLS();
+    saveTreeLocLS(treeLoc);
 
   } else {
 
