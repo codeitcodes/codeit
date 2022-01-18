@@ -63,7 +63,9 @@ const version = '1.9.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
-  console.log('%cCodeit ' + version, 'font-style: italic; color: rgb(154 160 166)');
+  (() => {
+    console.log('%cCodeit ' + version, 'font-style: italic; color: rgb(154 160 166)');
+  })();
 }
 
 logVersion();
