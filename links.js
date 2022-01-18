@@ -15,14 +15,18 @@ function createLink(linkData) {
   if (linkData.dir) {
 
     link += '?dir=' +
-            linkData.dir.join(',');
+            encodeURIComponent(
+              linkData.dir.join(',')
+            );
 
 
     if (linkData.file) {
 
       link += '&file=' +
-              linkData.file.name + ',' +
-              linkData.file.sha;
+              encodeURIComponent(
+                linkData.file.name + ',' +
+                linkData.file.sha
+              );
 
 
       if (linkData.openLive) {
@@ -35,7 +39,7 @@ function createLink(linkData) {
 
   }
 
-  return base + encodeURIComponent(link);
+  return base + link;
 
 }
 
