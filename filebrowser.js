@@ -639,12 +639,16 @@ optionsButton.addEventListener('click', () => {
 })
 
 
-// clone repo or create new file
+// create new file
 // on click of button
-cloneOrAddButton.addEventListener('click', () => {
+addFileButton.addEventListener('click', () => {
 
-  // if not already adding new file/repo
+  // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
+
+    // hide header options
+    optionsScreen.classList.remove('visible');
+    titleScreen.classList.add('visible');
 
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
