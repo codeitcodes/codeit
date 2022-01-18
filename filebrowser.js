@@ -292,8 +292,13 @@ async function renderSidebarHTML() {
 
     } else { // else, show all repositories
 
+      // hide branch
+      sidebarBranch.classList.remove('visible');
+
+
       // change header options
       optionsScreen.classList.add('out-of-repo');
+      
 
       // render repositories
       resp.forEach(item => {
