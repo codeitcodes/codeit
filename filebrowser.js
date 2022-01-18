@@ -895,10 +895,12 @@ repoShareButton.addEventListener('click', () => {
 
   if (isMobile) {
 
+    const shareTitle = treeLoc[2] ? 'Share folder' : 'Share repository';
+
     try {
 
       navigator.share({
-        title: 'Share repository',
+        title: shareTitle,
         text: link
       });
 
