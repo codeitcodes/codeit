@@ -371,13 +371,30 @@ if (isMobile) {
 
 } else {
 
-  liveToggle.addEventListener('click', () => {
+  liveToggle.querySelector('.arrow').addEventListener('click', () => {
 
     // toggle live view
     liveView.classList.toggle('visible');
     toggleLiveView(selectedFile);
 
   });
+
+  liveToggle.querySelector('.share').addEventListener('click', () => {
+
+    // if clicked on share button,
+    // share live view link
+
+    const link = createLink({
+      dir: treeLoc,
+      file: selectedFile,
+      openLive: true
+    });
+
+    copy(link);
+    alert('Copied link to clipboard.');
+
+  });
+  
 
   document.addEventListener('keydown', handleMetaP);
 
@@ -466,7 +483,7 @@ function toggleLiveView(file) {
 // render live view for HTML files
 function renderLiveViewHTML(file) {
 
-  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; autoplay; camera; ch-device-memory; ch-downlink; ch-dpr; ch-ect; ch-prefers-color-scheme; ch-rtt; ch-ua; ch-ua-arch; ch-ua-bitness; ch-ua-full-version; ch-ua-mobile; ch-ua-model; ch-ua-platform; ch-ua-platform-version; ch-viewport-width; ch-width; clipboard-read; clipboard-write; cross-origin-isolated; display-capture; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; hid; idle-detection; magnetometer; microphone; midi; otp-credentials; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; sync-xhr; usb; xr-spatial-tracking" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
   const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
@@ -491,7 +508,9 @@ function renderLiveViewHTML(file) {
 
         if (!file[0]) {
 
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          try {
+            resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          } catch(e) { resp = ''; }
 
         } else {
 
@@ -524,53 +543,7 @@ function renderLiveViewHTML(file) {
   }
 
   // fetch scripts
-  frameDocument.querySelectorAll('script').forEach(async (script) => {
-
-    // if script is external
-    if (script.src) {
-
-      const linkHref = new URL(script.src);
-      const fileName = linkHref.pathname.slice(1);
-
-      if (linkHref.origin == window.location.origin) {
-
-        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-        let resp;
-
-        if (!file[0]) {
-
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
-
-        } else {
-
-          resp = file[0];
-
-        }
-
-        addScript(frameDocument, decodeUnicode(resp.content));
-
-        // remove original tag
-        script.remove();
-
-      } else {
-
-        addScript(frameDocument, '', script.src, script.type);
-
-        // delete original
-        script.remove();
-
-      }
-
-    } else {
-
-      addScript(frameDocument, script.textContent, '', script.type);
-
-      // delete original
-      script.remove();
-
-    }
-
-  })
+  fetchLiveViewScripts(frameDocument);
 
   // fetch images
   frameDocument.querySelectorAll('img').forEach(async (image) => {
@@ -714,25 +687,86 @@ function renderLiveViewHTML(file) {
 }
 
 
+async function fetchLiveViewScripts(frameDocument) {
+
+  // fetch scripts
+  await asyncForEach(frameDocument.querySelectorAll('script'), async (script) => {
+
+    // if script is external
+    if (script.src) {
+
+      const linkHref = new URL(script.src);
+      const fileName = linkHref.pathname.slice(1);
+
+      if (linkHref.origin == window.location.origin) {
+
+        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
+        let resp;
+
+        if (!file[0]) {
+
+          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+
+        } else {
+
+          resp = file[0];
+
+        }
+
+        addScript(frameDocument, decodeUnicode(resp.content), false, script.type);
+
+        // remove original tag
+        script.remove();
+
+      } else {
+
+        await addScript(frameDocument, false, script.src, script.type);
+
+        // delete original
+        script.remove();
+
+      }
+
+    } else {
+
+      addScript(frameDocument, script.textContent, false, script.type);
+
+      // delete original
+      script.remove();
+
+    }
+
+  });
+
+}
+
+
 function addScript(documentNode, code, src, type) {
 
-  const script = documentNode.createElement('script');
+  return new Promise((resolve) => {
 
-  if (type && type != '') script.type = type;
+    const script = documentNode.createElement('script');
 
-  if (code) {
+    if (type && type != '') script.type = type;
 
-    script.appendChild(documentNode.createTextNode(code));
+    if (code) {
 
-  } else {
+      script.appendChild(documentNode.createTextNode(code));
 
-    script.src = src;
-    script.defer = true;
-    script.async = false;
+    } else {
 
-  }
+      script.src = src;
+      script.defer = true;
+      script.async = false;
 
-  documentNode.head.appendChild(script);
+      script.onload = resolve;
+      script.onerror = resolve;
+
+    }
+
+    documentNode.head.appendChild(script);
+
+  });
 
 }
 
