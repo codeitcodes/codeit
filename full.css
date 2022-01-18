@@ -893,6 +893,10 @@ body.notransition .sidebar {
 }
 
 
+.sidebar .header .search-screen {
+  width: 100%;
+}
+
 .sidebar .header .search-screen .title {
   cursor: unset;
 }
@@ -932,6 +936,18 @@ body.notransition .sidebar {
 }
 
 .sidebar .header .search-screen .clear.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.sidebar .header.searching .roundbutton.options,
+.sidebar .header.searching .title-screen {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar .header.searching .search-screen {
   opacity: 1;
   pointer-events: auto;
 }
