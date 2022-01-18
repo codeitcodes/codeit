@@ -61,43 +61,43 @@ async function renderSidebarHTML() {
   let resp;
 
   // get items in current tree from git
-  try {
+  //try {
 
     resp = await git.getItems(treeLoc);
 
-  } catch(e) {
+  //} catch(e) {
 
     // if failed to get items,
     // delete auth token and show login screen
 
     // stop loading
-    stopLoading();
+  //  stopLoading();
 
     // log out from git
-    logOutFromGitLS();
+  //  logOutFromGitLS();
 
-    sidebar.classList.add('intro');
+  //  sidebar.classList.add('intro');
 
-    return;
+  //  return;
 
-  }
+  //}
 
-  if (resp.message == 'Bad credentials') {
+  //if (resp.message == 'Bad credentials') {
 
     // if failed to get items,
     // delete auth token and show login screen
 
     // stop loading
-    stopLoading();
+  //  stopLoading();
 
     // log out from git
-    logOutFromGitLS();
+  //  logOutFromGitLS();
 
-    sidebar.classList.add('intro');
+  //  sidebar.classList.add('intro');
 
-    return;
+  //  return;
 
-  }
+  //}
 
 
   // create temporary modified files array
