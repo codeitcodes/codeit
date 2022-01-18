@@ -25,8 +25,8 @@ sidebarToggle.addEventListener('click', () => {
 
 // render sidebar
 // call this function when logged in to git
-// to render sidebar (repoObj is optional)
-async function renderSidebarHTML(repoObj) {
+// to render sidebar
+async function renderSidebarHTML() {
 
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
@@ -179,21 +179,7 @@ async function renderSidebarHTML(repoObj) {
     if (repo != '') {
 
       // change header options
-
       optionsScreen.classList.remove('out-of-repo');
-
-      // if logged user has push access in repo
-      if (repoObj && repoObj.permissions.push) {
-
-        // change header options
-        optionsScreen.classList.add('push-access');
-
-      } else {
-
-
-        optionsScreen.classList.remove('push-access');
-
-      }
 
       // render files
       resp.forEach(item => {
@@ -296,7 +282,6 @@ async function renderSidebarHTML(repoObj) {
 
       // change header options
       optionsScreen.classList.add('out-of-repo');
-      optionsScreen.classList.remove('push-access');
 
       // render repositories
       resp.forEach(item => {
@@ -317,6 +302,7 @@ async function renderSidebarHTML(repoObj) {
         }
 
 
+        /*
         // create repo obj
         const repoObj = {
           fullName: item.full_name,
@@ -329,10 +315,11 @@ async function renderSidebarHTML(repoObj) {
           },
           allowForking: item.allow_forking
         };
+        */
 
 
         out += `
-        <div class="item repo" obj="`+ encodeURI(JSON.stringify(repoObj)) +`">
+        <div class="item repo" fullname="`+ item.full_name +`">
           <div class="label">
             `+ repoIcon +`
             <a class="name">`+ fullName +`</a>
@@ -392,16 +379,15 @@ function addHTMLItemListeners() {
       // if item is a repository
       if (item.classList.contains('repo')) {
 
-        // get repo obj
-        const repoObj = JSON.parse(decodeURI(getAttr(item, 'obj')));
-
         // change location
-        treeLoc[0] = repoObj.ownerName;
-        treeLoc[1] = repoObj.repoName;
+        let itemLoc = getAttr(item, 'fullname').split('/');
+
+        treeLoc[0] = itemLoc[0],
+        treeLoc[1] = itemLoc[1];
         saveTreeLocLS(treeLoc);
 
         // render sidebar
-        renderSidebarHTML(repoObj);
+        renderSidebarHTML();
 
       } else if (item.classList.contains('folder')) {
 
