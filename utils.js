@@ -294,6 +294,8 @@ let axios = {
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
+          } else {
+            resolve(JSON.parse(this.responseText));
           }
         };
         xmlhttp.onerror = function () {
