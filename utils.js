@@ -294,12 +294,14 @@ let axios = {
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
-          } else {
+          } else if (this.responseText) {
             resolve(JSON.parse(this.responseText));
           }
         };
         xmlhttp.onerror = function () {
-          resolve(JSON.parse(this.responseText));
+          if (this.responseText) {
+            resolve(JSON.parse(this.responseText));
+          }
         };
         xmlhttp.open('GET', url, true);
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
