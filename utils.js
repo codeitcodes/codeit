@@ -58,7 +58,7 @@ const body = document.body,
 
 
 // version
-const version = '1.9.1';
+const version = '1.9.2';
 versionEl.innerText = version;
 
 

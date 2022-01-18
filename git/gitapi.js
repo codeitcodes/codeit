@@ -47,7 +47,16 @@ let git = {
     let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
 
-    query += '/repos/'+ user +'/'+ repo +'/contents/'+ contents +'/'+ fileName;
+    // get repository branch
+    [repo, branch] = repo.split(':');
+
+    if (branch) branch = '?ref='+ branch;
+    else branch = '';
+
+    query += '/repos/' + user + '/' + repo +
+             '/contents/' + contents
+             + '/' + fileName +
+             branch;
 
     // get the query
     const resp = await axios.get(query, gitToken);
@@ -66,7 +75,15 @@ let git = {
     // if navigating in repository
     if (repo != '') {
 
-      query += '/repos/'+ user +'/'+ repo +'/contents'+ contents;
+      // get repository branch
+      [repo, branch] = repo.split(':');
+
+      if (branch) branch = '?ref='+ branch;
+      else branch = '';
+
+      query += '/repos/' + user + '/' + repo +
+               '/contents' + contents +
+               branch;
 
     } else { // else, show all repositories
 
@@ -103,10 +120,17 @@ let git = {
     // map file location in tree
     const [user, repo, contents] = commit.file.dir.split(',');
 
+    // get repository branch
+    [repo, branch] = repo.split(':');
+
+    if (branch) branch = '?branch='+ branch;
+    else branch = '';
+
     const query = 'https://api.github.com/repos' +
                   '/' + user + '/' + repo +
                   '/contents' + contents +
-                  '/' + commit.file.name;
+                  '/' + commit.file.name +
+                  branch;
 
     let commitData;
 
