@@ -394,7 +394,7 @@ if (isMobile) {
     alert('Copied link to clipboard.');
 
   });
-  
+
 
   document.addEventListener('keydown', handleMetaP);
 
@@ -594,7 +594,12 @@ function renderLiveViewHTML(file) {
 
         if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
 
-        const resp = await git.getFile(selectedFile.dir.split(','), fileName);
+        const fileDir = linkHref.pathname.replaceAll(fileName, '');
+
+        const tree = selectedFile.dir.split(',');
+        tree[2] = tree[2] + fileDir.slice(1);
+
+        const resp = await git.getFile(tree, fileName);
 
         image.src = 'data:' + mimeType + ';base64,' + resp.content;
 
