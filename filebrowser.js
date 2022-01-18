@@ -649,6 +649,7 @@ addFileButton.addEventListener('click', () => {
     // hide header options
     optionsScreen.classList.remove('visible');
     titleScreen.classList.add('visible');
+    optionsButton.classList.remove('open');
 
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
