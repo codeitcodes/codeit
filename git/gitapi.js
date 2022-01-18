@@ -48,12 +48,12 @@ let git = {
     const [user, repo, contents] = treeLoc;
 
     // get repository branch
-    [repo, branch] = repo.split(':');
+    const [repoName, branch] = repo.split(':');
 
     if (branch) branch = '?ref='+ branch;
     else branch = '';
 
-    query += '/repos/' + user + '/' + repo +
+    query += '/repos/' + user + '/' + repoName +
              '/contents/' + contents
              + '/' + fileName +
              branch;
@@ -76,12 +76,12 @@ let git = {
     if (repo != '') {
 
       // get repository branch
-      [repo, branch] = repo.split(':');
+      const [repoName, branch] = repo.split(':');
 
       if (branch) branch = '?ref='+ branch;
       else branch = '';
 
-      query += '/repos/' + user + '/' + repo +
+      query += '/repos/' + user + '/' + repoName +
                '/contents' + contents +
                branch;
 
@@ -121,13 +121,13 @@ let git = {
     const [user, repo, contents] = commit.file.dir.split(',');
 
     // get repository branch
-    [repo, branch] = repo.split(':');
+    const [repoName, branch] = repo.split(':');
 
     if (branch) branch = '?branch='+ branch;
     else branch = '';
 
     const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo +
+                  '/' + user + '/' + repoName +
                   '/contents' + contents +
                   '/' + commit.file.name +
                   branch;
