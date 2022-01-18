@@ -183,7 +183,7 @@ async function renderSidebarHTML() {
       if (branch) {
 
         // show branch
-        sidebarBranch.children[0].innerText = branch;
+        sidebarBranch.children[1].innerText = branch;
         sidebarBranch.classList.add('visible');
 
       }
