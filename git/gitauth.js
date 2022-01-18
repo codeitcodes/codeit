@@ -5,7 +5,7 @@
 // git login
 const clientId = '7ede3eed3185e59c042d';
 
-let gitToken, treeLoc, authUser;
+let gitToken, treeLoc, linkData, authUser;
 
 window.onload = async () => {
 
@@ -15,7 +15,26 @@ window.onload = async () => {
     gitToken = '';
   }
 
-  treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
+
+  // decode URL
+  linkData = decodeLink(window.location.href);
+
+  // clear URL
+  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+
+
+  // if treeLoc is in local storage
+  if (linkData.dir) {
+
+    treeLoc = linkData.dir;
+    saveTreeLocLS();
+
+  } else {
+
+    treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
+
+  }
+
 
   if (getStorage('loggedUser')) loggedUser = JSON.parse(getStorage('loggedUser'))
   else loggedUser = false;
@@ -26,6 +45,7 @@ window.onload = async () => {
     window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
 
   })
+
 
   // if redirected from git auth
   window.addEventListener('message', (event) => {

@@ -2,13 +2,8 @@
 // setup live view
 async function setupLiveView() {
 
-  // decode URL
-  const linkData = decodeLink(window.location.href);
-
   // if URL has a live view flag
   if (linkData.openLive) {
-
-    window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
 
     if (isMobile) {
 
@@ -21,9 +16,6 @@ async function setupLiveView() {
       saveSidebarStateLS();
 
     }
-
-    treeLoc = linkData.dir;
-    saveTreeLocLS(treeLoc);
 
     const fileName = linkData.file.name;
     const fileSha = linkData.file.sha;
