@@ -211,6 +211,7 @@ function addBottomSwipeListener() {
         // if clicked on share button,
         // share live view link
 
+        // create a link
         const link = createLink({
           dir: treeLoc,
           file: selectedFile,

@@ -298,7 +298,7 @@ async function renderSidebarHTML() {
 
       // change header options
       optionsScreen.classList.add('out-of-repo');
-      
+
 
       // render repositories
       resp.forEach(item => {
@@ -658,7 +658,7 @@ optionsButton.addEventListener('click', () => {
 
 // create new file
 // on click of button
-addFileButton.addEventListener('click', () => {
+newFileButton.addEventListener('click', () => {
 
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
@@ -883,25 +883,58 @@ addFileButton.addEventListener('click', () => {
 })
 
 
+// if clicked on share button,
+// share repository link
+repoShareButton.addEventListener('click', () => {
+
+  // create a link
+  const link = createLink({
+    dir: treeLoc
+  });
+
+  if (isMobile) {
+
+    try {
+
+      navigator.share({
+        title: 'Share repository',
+        text: link
+      });
+
+    } catch(e) {
+
+      copy(link);
+      alert('Copied link to clipboard.');
+
+    }
+
+  } else {
+
+    copy(link);
+    alert('Copied link to clipboard.');
+
+  }
+
+});
+
+
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
-
-  const shareData = {
-    title: "Share Codeit",
-    text: "Hey, I'm using Codeit to code. It's a mobile code editor connected to Git. Join me! " + window.location.origin
-  };
 
   if (!isWindows) {
 
     try {
 
-      navigator.share(shareData);
+      navigator.share({
+        title: 'Share Codeit',
+        text: 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin
+      });
 
     } catch(e) {
 
       // if could not open share dialog, share on Twitter
       window.open('https://twitter.com/intent/tweet' +
-                  '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
+                  '?text=' + encodeURIComponent(shareData.text),
                   '_blank');
 
     }
