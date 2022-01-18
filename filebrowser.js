@@ -646,11 +646,6 @@ addFileButton.addEventListener('click', () => {
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
 
-    // hide header options
-    optionsScreen.classList.remove('visible');
-    titleScreen.classList.add('visible');
-    optionsButton.classList.remove('open');
-
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
