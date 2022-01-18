@@ -1426,12 +1426,16 @@ body:not(.mobile) .splash-wrapper a:hover {
   background: rgba(241,241,242,0.92);
   height: calc(var(--spacing-1) * 14);
   width: calc(var(--spacing-1) * 14);
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
 }
 
 .cube-loader::before,
 .cube-loader::after {
-  background: #313744;
   display: block;
+  background: #313744;
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
   content: '';
 }
 
