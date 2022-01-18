@@ -129,7 +129,7 @@ async function renderSidebarHTML() {
       }
 
       // animate title
-      if (sidebarTitle.children[1].scrollLeft > 0) titleAnimation = 'smooth';
+      if (sidebarLogo.scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
 
@@ -159,16 +159,16 @@ async function renderSidebarHTML() {
 
     if (!titleAnimation) {
 
-      sidebarTitle.classList.add('notransition');
+      sidebarLogo.classList.add('notransition');
 
       window.setTimeout(() => {
-        sidebarTitle.classList.remove('notransition');
+        sidebarLogo.classList.remove('notransition');
       }, 180);
 
     }
 
     sidebarTitle.children[1].scrollTo({
-      left: sidebarTitle.children[1].scrollWidth - sidebarTitle.children[1].offsetLeft,
+      left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
       behavior: titleAnimation
     });
 
@@ -614,26 +614,26 @@ sidebarTitle.addEventListener('click', () => {
 // show gradients on edges of sidebar title
 // when scrolling long titles
 
-sidebarTitle.children[1].addEventListener('scroll', () => {
+sidebarLogo.addEventListener('scroll', () => {
 
-  if (sidebarTitle.children[1].scrollLeft > 0) {
+  if (sidebarLogo.scrollLeft > 0) {
 
-    sidebarTitle.classList.add('scrolled-start');
+    sidebarLogo.classList.add('scrolled-start');
 
   } else {
 
-    sidebarTitle.classList.remove('scrolled-start');
+    sidebarLogo.classList.remove('scrolled-start');
 
   }
 
-  if ((sidebarTitle.children[1].offsetWidth + sidebarTitle.children[1].scrollLeft)
-      >= sidebarTitle.children[1].scrollWidth) {
+  if ((sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
+      >= sidebarLogo.scrollWidth) {
 
-    sidebarTitle.classList.add('scrolled-end');
+    sidebarLogo.classList.add('scrolled-end');
 
   } else {
 
-    sidebarTitle.classList.remove('scrolled-end');
+    sidebarLogo.classList.remove('scrolled-end');
 
   }
 

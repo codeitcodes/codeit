@@ -741,6 +741,40 @@ body.notransition .sidebar {
   white-space: nowrap;
 }
 
+.sidebar .header .logo::before,
+.sidebar .header .logo::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(270deg, #1a1c24, #1a1c2400);
+  transition: .18s var(--ease-function) opacity;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sidebar .header .logo::before {
+  right: auto;
+  background: linear-gradient(90deg, #1a1c24, #1a1c2400);
+  transition: .18s var(--ease-function);
+  left: 24px;
+  opacity: 0;
+}
+
+.sidebar .header .logo.scrolled-start::before {
+  opacity: 1;
+}
+
+.sidebar .header .logo.scrolled-end::after {
+  opacity: 0;
+}
+
+.sidebar .header .logo.notransition::before,
+.sidebar .header .logo.notransition::after {
+  transition: none;
+}
+
 .sidebar .header .title .branch {
   font-size: 14px;
   position: absolute;
