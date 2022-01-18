@@ -80,6 +80,25 @@ async function renderSidebarHTML() {
 
   }
 
+  if (resp.message == 'Not Found') {
+
+    // if couldn't find repository, show not found screen
+
+    // stop loading
+    stopLoading();
+
+    alert('Couldn\'t find that repo. Need to sign in?');
+
+    repo = '';
+    contents = '';
+    saveTreeLocLS(treeLoc);
+
+    renderSidebarHTML();
+
+    return;
+
+  }
+
   if (resp.message == 'Bad credentials') {
 
     // if failed to get items,
