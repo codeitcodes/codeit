@@ -749,16 +749,15 @@ body.notransition .sidebar {
   margin-top: 2px;
   color: #15b881;
   color: #059669;
-  display: flex;
+  display: none;
   align-items: center;
   grid-gap: 1.5px;
   letter-spacing: 0.02px;
   transition: .18s var(--bounce-function) opacity;
-  display: none;
 }
 
 .sidebar .header .title .branch.visible {
-  display: block;
+  display: flex;
 }
 
 .sidebar .header .title .branch a {
