@@ -587,7 +587,7 @@ function renderLiveViewHTML(file) {
         // fetch image
 
         let fileName = linkHref.pathname.split('/');
-        fileName = fileName[fileName.length-1].slice(1);
+        fileName = fileName[fileName.length-1];
 
         // get MIME type
         let mimeType = 'image/' + fileName.split('.')[1];
@@ -597,7 +597,7 @@ function renderLiveViewHTML(file) {
         const fileDir = linkHref.pathname.replaceAll(fileName, '');
 
         const tree = selectedFile.dir.split(',');
-        tree[2] = tree[2] + fileDir.slice(1);
+        tree[2] = tree[2] + fileDir.slice(1, -1);
 
         const resp = await git.getFile(tree, fileName);
 
