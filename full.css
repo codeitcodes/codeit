@@ -1347,7 +1347,7 @@ body.loaded .splash-wrapper {
   transition: .18s var(--ease-function) opacity;
 }
 
-.splash-wrapper.connection::before {
+.splash-wrapper.loader::before {
   opacity: 0;
   pointer-events: none;
 }
@@ -1355,6 +1355,14 @@ body.loaded .splash-wrapper {
 body.mobile.expanded .splash-wrapper,
 body.mobile.expanded .splash-wrapper::before {
   background: #1a1c24;
+}
+
+.loading-subtitle {
+  display: none;
+}
+
+.splash-wrapper.connection .loading-subtitle {
+  display: block;
 }
 
 .push-svg {

@@ -202,7 +202,7 @@
 
   <div class="sidebar-background"></div>
 
-  <div class="splash-wrapper" style="display: none">
+  <div class="splash-wrapper">
     <div class="spinner-loader"></div>
     <div class="loading-subtitle">Slow connection? <a href="https://github.com/codeitcodes/codeit/issues/new/choose" target="_blank">Tell us!</a></div>
   </div>
@@ -246,17 +246,30 @@
 
   <script>
 
-    // show connection message if not loaded after 800ms
+    // show loader if not loaded after 800ms
     // (really slow connection)
     window.setTimeout(() => {
 
       if (!body.classList.contains('loaded')) {
 
-        document.querySelector('.splash-wrapper').classList.add('connection');
+        document.querySelector('.splash-wrapper').classList.add('loader');
 
       }
 
     }, 800);
+
+    // show connection message if not loaded after 5s
+    // (extremely slow connection to offline)
+    window.setTimeout(() => {
+
+      if (!body.classList.contains('loaded')) {
+
+        document.querySelector('.splash-wrapper').classList.add('loader');
+
+      }
+
+    }, 5000);
+
 
     window.addEventListener('load', () => {
 
