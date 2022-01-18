@@ -739,6 +739,8 @@ body.notransition .sidebar {
   max-width: calc(var(--sidebar-width) - 140px);
   overflow-x: overlay;
   white-space: nowrap;
+  transition: .18s var(--ease-function);
+  transition-property: padding-left, max-width;
 }
 
 .sidebar .header .logo::before,
@@ -786,7 +788,8 @@ body.notransition .sidebar {
   align-items: center;
   grid-gap: 1.5px;
   letter-spacing: 0.02px;
-  transition: .18s var(--bounce-function) opacity;
+  transition: .18s var(--bounce-function) opacity,
+              .18s var(--ease-function) padding-left;
 }
 
 .sidebar .header .title .branch.visible {
@@ -809,7 +812,7 @@ body.notransition .sidebar {
   margin-right: calc(20px - var(--spacing-1));
   position: absolute;
   right: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .sidebar .header .roundbutton.options .icon {
@@ -938,10 +941,6 @@ body.notransition .sidebar {
   transition: .18s var(--ease-function) margin-right;
 }
 
-.sidebar .header .search-screen .back {
-  margin-right: 0;
-}
-
 .sidebar .header .search-screen .search-input {
   width: calc(var(--sidebar-width) - 103px);
   white-space: nowrap;
@@ -980,9 +979,22 @@ body.notransition .sidebar {
   pointer-events: none;
 }
 
+.sidebar .header.searching .logo {
+  padding-left: 7px;
+  max-width: calc(var(--sidebar-width) - 147px);
+}
+
+.sidebar .header.searching .title .branch {
+  padding-left: 7px;
+}
+
 .sidebar .header.searching .search-screen {
   opacity: 1;
   pointer-events: auto;
+}
+
+.sidebar .header.searching .search-screen .back {
+  margin-right: 0;
 }
 
 
