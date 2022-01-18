@@ -61,6 +61,11 @@ const body = document.body,
 const version = '1.9.3';
 versionEl.innerText = version;
 
+let logVersion = () => {
+  console.log('%ccodeit ' + version, 'font-style: italic; color: gray');
+}
+
+
 
 // dev build
 let isDev = false;

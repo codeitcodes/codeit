@@ -483,13 +483,20 @@ function toggleLiveView(file) {
 // render live view for HTML files
 function renderLiveViewHTML(file) {
 
+  // clear console
+  console.clear();
+  logVersion();
+
+
   liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
   const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
 
+
   frameDocument.addEventListener('keydown', handleMetaP);
   frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+
 
   // fetch styles
   const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
