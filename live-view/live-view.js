@@ -586,7 +586,7 @@ function renderLiveViewHTML(file) {
 
         // fetch image
 
-        let fileName = linkHref.pathname.split('/');
+        let fileName = linkHref.pathname.split('/').slice(1);
         fileName = fileName[fileName.length-1];
 
         // get MIME type
