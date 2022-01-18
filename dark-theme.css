@@ -87,7 +87,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 }
 
 .cd-wrapper .menu .icon:active {
-  background: hsl(218deg 27% 53% / 72%);
+  background: hsl(218deg 27% 53% / 72%) !important;
 }
 
 .cd-wrapper .menu .icon.active {

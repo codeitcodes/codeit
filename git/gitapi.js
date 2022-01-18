@@ -105,7 +105,9 @@ let git = {
     let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
 
-    query += '/repos/'+ user +'/'+ repo +'/branches';
+    const [repoName] = repo.split(':');
+
+    query += '/repos/'+ user +'/'+ repoName +'/branches';
 
     // get the query
     const resp = await axios.get(query, gitToken);
