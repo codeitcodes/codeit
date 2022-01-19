@@ -1377,6 +1377,7 @@ body .sidebar .button:active:not(:hover) {
 .menu.branch-menu .icon {
   padding: 6px 12px;
   padding: 4.5px 12px;
+  padding: 8px 12px;
   padding: 7px 14px;
   padding: 7px 10px;
   padding: 10px 15px;
