@@ -676,6 +676,16 @@ optionsButton.addEventListener('click', () => {
 })
 
 
+// if clicked on branch button,
+// toggle branch menu
+repoBranchButton.addEventListener('click', () => {
+  
+  repoBranchButton.classList.toggle('active');
+  branchMenu.classList.toggle('visible');
+  
+})
+
+
 // create new file
 // on click of button
 newFileButton.addEventListener('click', () => {
