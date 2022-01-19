@@ -53,6 +53,8 @@ const body = document.body,
       learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
+      
+      branchMenu = document.querySelector('.menu.branch-menu'),
 
       liveView = document.querySelector('.live-view');
 
@@ -63,7 +65,7 @@ const version = '1.9.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
-  console.log('%cCodeit ' + version, 'font-style: italic; color: rgb(154 160 166)');
+  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
 }
 
 logVersion();
