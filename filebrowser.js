@@ -74,7 +74,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Something funky happened and we couldn\'t sign you in... try again?');
+    alert('Something snazzy happened and we couldn\'t sign you in... try again?');
 
     sidebar.classList.add('intro');
 
@@ -109,7 +109,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Something funky happened and we couldn\'t sign you in... try again?');
+    alert('Something snazzy happened and we couldn\'t sign you in... try again?');
 
     sidebar.classList.add('intro');
 
