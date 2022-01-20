@@ -653,7 +653,7 @@ body.notransition .sidebar {
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transition: width .4s var(--cubic-function), opacity .4s linear;
+  transition: width .4s ease, opacity .4s linear;
   z-index: 1000;
 }
 
@@ -1086,7 +1086,7 @@ body.notransition .sidebar {
   user-select: text;
   -webkit-user-select: text;
   background: hsl(220deg 86% 64% / 9%);
-  box-shadow: 0 0 0 1.5px hsl(223deg 85% 66% / 70%), 0 0 0 4px hsl(223deg 86% 66% / 30%);
+  box-shadow: 0 0 0 2px hsl(223deg 85% 66% / 70%);
   transition: .18s .04s var(--ease-function);
   transition-property: background, box-shadow;
 }
@@ -1098,7 +1098,7 @@ body.notransition .sidebar {
 
 .sidebar .item.focused .name:empty::before {
   content: 'untitled file';
-  color: #828689;
+  color: gray;
   pointer-events: none;
 }
 
