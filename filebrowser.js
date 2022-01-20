@@ -609,7 +609,7 @@ async function renderBranchMenuHTML() {
   
   
   // show loading message
-  branchMenu.innerHTML = '<div class="icon">Loading...</div>';
+  branchMenu.innerHTML = '<div class="icon"><a>Loading...</a></div>';
   
   // get branches for repository
   const resp = await git.getBranches(treeLoc);
@@ -624,11 +624,11 @@ async function renderBranchMenuHTML() {
     // show selected branch
     if (branch.name === selectedBranch) {
       
-      out += '<div class="icon selected">'+ branchIcon + branch.name +'</div>';
+      out += '<div class="icon selected">'+ branchIcon + '<a>' + branch.name +'</a></div>';
       
     } else {
       
-      out += '<div class="icon">'+ branchIcon + branch.name +'</div>';
+      out += '<div class="icon">'+ branchIcon + '<a>' + branch.name +'</a></div>';
       
     }
     
