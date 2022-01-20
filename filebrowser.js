@@ -140,7 +140,7 @@ async function renderSidebarHTML() {
       const repoName = repo.split(':')[0];
 
       // if repo is owned by logged user
-      if (loggedUser && user == loggedUser.login) {
+      if (user === loggedUser) {
 
         // show repo name and path
         sidebarLogo.innerText = repoName + contents;
@@ -160,7 +160,7 @@ async function renderSidebarHTML() {
       const repoName = repo.split(':')[0];
 
       // if repo is owned by logged user
-      if (loggedUser && user == loggedUser.login) {
+      if (user === loggedUser) {
 
         // show repo name
         sidebarLogo.innerText = repoName;
@@ -333,7 +333,7 @@ async function renderSidebarHTML() {
         let fullName;
 
         // if repo is owned by logged user
-        if (loggedUser && item.full_name.split('/')[0] == loggedUser.login) {
+        if (item.full_name.split('/')[0] === loggedUser) {
 
           // show repo name
           fullName = item.name;
