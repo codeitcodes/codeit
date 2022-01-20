@@ -665,6 +665,7 @@ async function renderBranchMenuHTML() {
         
         // change location
         selectedBranch = branch.querySelector('a').textContent;
+        repo = repoName + ':' + selectedBranch;
         saveTreeLocLS(treeLoc);
         
         // render sidebar
