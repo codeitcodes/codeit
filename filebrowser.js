@@ -608,6 +608,9 @@ async function renderBranchMenuHTML() {
   }
   
   
+  // show loading message
+  branchMenu.innerHTML = '<div class="icon">Loading...</div>';
+  
   // get branches for repository
   const resp = await git.getBranches(treeLoc);
   
