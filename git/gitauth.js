@@ -36,8 +36,24 @@ window.onload = async () => {
   }
 
 
-  if (getStorage('loggedUser')) loggedUser = getStorage('loggedUser');
-  else loggedUser = false;
+  if (getStorage('loggedUser')) {
+    
+    loggedUser = getStorage('loggedUser');
+    
+    try {
+      
+      loggedUser = JSON.parse(loggedUser);
+
+      // save logged user in local storage
+      setStorage('loggedUser', loggedUser.login);
+      
+    } catch(e) {}
+    
+  } else {
+    
+    loggedUser = false;
+    
+  }
 
 
   loginButton.addEventListener('click', () => {
