@@ -97,6 +97,25 @@ let git = {
     return resp;
 
   },
+  
+  // get repository
+  'getRepo': async (treeLoc) => {
+
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
+    
+    // get repository branch
+    const [repoName, branch] = repo.split(':');
+    
+    query += '/repos/' + user + '/' + repoName;
+    
+    // get the query
+    const resp = await axios.get(query, gitToken);
+
+    return resp;
+    
+  },
 
   // list branches for repository
   'getBranches': async (treeLoc) => {
@@ -215,6 +234,50 @@ let git = {
     const resp = await axios.put(query, gitToken);
 
     return resp.node_id;
+
+  },
+  
+  // create new branch
+  'createBranch': async (treeLoc, baseBranchName, newBranchName) => {
+
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo, contents] = treeLoc;
+    
+    const [repoName] = repo.split(':');
+        
+    query += '/repos/'+ user +'/'+ repoName +'/git/refs';
+
+    // get the query
+    const refs = await axios.get(query + '/heads', gitToken);
+
+    // find base branch
+    // to branch from
+    let baseBranch = refs.filter(ref => ref.ref.endsWith(baseBranchName));
+    
+    // if base branch exists
+    if (baseBranch) {
+      
+      // get SHA to branch from
+      const shaToBranchFrom = baseBranch[0].object.sha;
+      
+      
+      // create new branch
+      const branchData = {
+        ref: 'refs/heads/' + newBranchName,
+        sha: shaToBranchFrom
+      };
+      
+      // post the query
+      const resp = await axios.post(query, branchData, gitToken);
+      
+      return resp;
+      
+    } else {
+      
+      return false;
+      
+    }
 
   }
 
