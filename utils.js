@@ -346,6 +346,32 @@ let axios = {
       } catch(e) { reject(e) }
     });
   },
+  'patch': (url, token) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(JSON.parse(this.responseText));
+          } else if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.open('PATCH', url, true);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  },
   'delete': (url, token) => {
     return new Promise((resolve, reject) => {
       try {
@@ -353,10 +379,21 @@ let axios = {
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
+          } else if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
           }
         };
         xmlhttp.open('DELETE', url, true);
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
