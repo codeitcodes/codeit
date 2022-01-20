@@ -1405,10 +1405,11 @@ body .sidebar .button:active:not(:hover) {
 
 .menu.branch-menu .icon:not(.selected) .branch-icon {
   opacity: 0;
+  color: #828689;
 }
 
-.menu.branch-menu .icon:active .branch-icon {
-  /* opacity: 1; */
+.menu.branch-menu .icon:not(.selected):hover .branch-icon {
+  opacity: .5;
 }
 
 
