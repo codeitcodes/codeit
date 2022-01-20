@@ -199,18 +199,6 @@ async function renderSidebarHTML() {
 
     // if navigating in repository
     if (repo != '') {
-
-      // get repository branch
-      let [repoName, branch] = repo.split(':');
-
-      // if branch exists
-      if (branch) {
-
-        // show branch
-        sidebarBranch.children[1].innerText = branch;
-        sidebarBranch.classList.add('visible');
-
-      }
       
       // render branch menu
       renderBranchMenuHTML();
@@ -349,21 +337,15 @@ async function renderSidebarHTML() {
         /*
         // create repo obj
         const repoObj = {
-          fullName: item.full_name,
-          ownerName: item.owner.login,
-          repoName: item.name,
-          private: item.private,
-          permissions: {
-            admin: item.permissions.admin,
-            push: item.permissions.push
-          },
-          allowForking: item.allow_forking
+          name: item.fullname,
+          defaultBranch: item.default_branch,
+          pushAccess: ((item.permissions.admin || item.permissions.push) ? true : false),
         };
         */
 
 
         out += `
-        <div class="item repo" fullname="`+ item.full_name +`">
+        <div class="item repo" fullname="`+ item.full_name +`" defaultbranch="`+ item.default_branch +`">
           <div class="label">
             `+ repoIcon +`
             <a class="name">`+ fullName +`</a>
@@ -425,9 +407,10 @@ function addHTMLItemListeners() {
 
         // change location
         let itemLoc = getAttr(item, 'fullname').split('/');
-
+        let defaultBranch = getAttr(item, 'defaultbranch');
+        
         treeLoc[0] = itemLoc[0],
-        treeLoc[1] = itemLoc[1];
+        treeLoc[1] = itemLoc[1] +':'+ defaultBranch;
         saveTreeLocLS(treeLoc);
 
         // render sidebar
@@ -615,6 +598,16 @@ async function renderBranchMenuHTML() {
   let [repoName, selectedBranch] = repo.split(':');
   
   
+  // if selected branch exists
+  if (selectedBranch) {
+
+    // show branch
+    sidebarBranch.children[1].innerText = selectedBranch;
+    sidebarBranch.classList.add('visible');
+
+  }
+  
+  
   // get branches for repository
   const resp = await git.getBranches(treeLoc);
   
@@ -660,7 +653,9 @@ async function renderBranchMenuHTML() {
       if (!branch.classList.contains('selected')) {
         
         // clear previous selection
-        branchMenu.querySelector('.icon.selected').classList.remove('selected');
+        if (branchMenu.querySelector('.icon.selected')) {
+          branchMenu.querySelector('.icon.selected').classList.remove('selected');
+        }
         
         // select branch
         branch.classList.add('selected');
