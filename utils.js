@@ -37,7 +37,7 @@ const body = document.body,
       optionsButton = header.querySelector('.options'),
 
       newFileButton = optionsScreen.querySelector('.new-file'),
-      repoBranchButton = optionsScreen.querySelector('.branch'),
+      branchButton = optionsScreen.querySelector('.branch'),
       repoShareButton = optionsScreen.querySelector('.share'),
 
       searchButton = titleScreen.querySelector('.search'),
