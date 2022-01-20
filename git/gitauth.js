@@ -36,7 +36,7 @@ window.onload = async () => {
   }
 
 
-  if (getStorage('loggedUser')) loggedUser = JSON.parse(getStorage('loggedUser'))
+  if (getStorage('loggedUser')) loggedUser = getStorage('loggedUser');
   else loggedUser = false;
 
 
