@@ -24,12 +24,12 @@ const beforeUnloadListener = (event) => {
 
 let git = {
 
-  // get blob
+  // get a blob
   'getBlob': async (treeLoc, sha) => {
 
     // map tree location
     let query = 'https://api.github.com';
-    const [user, repo, contents] = treeLoc;
+    const [user, repo] = treeLoc;
 
     query += '/repos/'+ user +'/'+ repo +'/git/blobs/'+ sha;
 
@@ -40,7 +40,7 @@ let git = {
 
   },
 
-  // get file
+  // get a file
   'getFile': async (treeLoc, fileName) => {
 
     // map tree location
@@ -98,12 +98,12 @@ let git = {
 
   },
   
-  // get repository
+  // get a repository
   'getRepo': async (treeLoc) => {
 
     // map tree location
     let query = 'https://api.github.com';
-    const [user, repo, contents] = treeLoc;
+    const [user, repo] = treeLoc;
     
     // get repository branch
     const [repoName, branch] = repo.split(':');
@@ -122,7 +122,7 @@ let git = {
 
     // map tree location
     let query = 'https://api.github.com';
-    const [user, repo, contents] = treeLoc;
+    const [user, repo] = treeLoc;
 
     const [repoName] = repo.split(':');
 
@@ -135,7 +135,7 @@ let git = {
 
   },
 
-  // push file
+  // push a file
   'push': async (commit) => {
 
     // map file location in tree
@@ -185,7 +185,7 @@ let git = {
 
   },
 
-  // create repository
+  // create a repository
   'createRepo': async (repoName) => {
 
     const query = 'https://api.github.com/user/repos';
@@ -203,46 +203,13 @@ let git = {
     return resp.full_name;
 
   },
-
-  // fork repository
-  'createFork': async (treeLoc) => {
-
-    // map tree location
-    const [user, repo] = treeLoc;
-
-    const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo + '/forks';
-
-    // post the query
-    const resp = await axios.post(query, gitToken);
-
-    return resp.full_name;
-
-  },
-
-  // invite user to repository
-  'inviteUser': async (treeLoc, username) => {
-
-    // map tree location
-    const [user, repo] = treeLoc;
-
-    const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo +
-                  '/collaborators/' + username;
-
-    // put the query
-    const resp = await axios.put(query, gitToken);
-
-    return resp.node_id;
-
-  },
   
-  // create new branch
+  // create a branch
   'createBranch': async (treeLoc, baseBranchName, newBranchName) => {
 
     // map tree location
     let query = 'https://api.github.com';
-    const [user, repo, contents] = treeLoc;
+    const [user, repo] = treeLoc;
     
     const [repoName] = repo.split(':');
         
@@ -272,6 +239,77 @@ let git = {
       const resp = await axios.post(query, branchData, gitToken);
       
       return resp;
+      
+    } else {
+      
+      return false;
+      
+    }
+
+  },
+  
+  // fork a repository
+  'forkRepo': async (treeLoc) => {
+
+    // map tree location
+    const [user, repo] = treeLoc;
+
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo + '/forks';
+
+    // post the query
+    const resp = await axios.post(query, gitToken);
+
+    return resp.full_name;
+    
+    // change treeLoc to fork dir, change all the repo's modified files' dir to the fork's dir, and push modified files in dir. 
+
+  },
+  
+  // invite a user to a repository
+  'sendInviteToRepo': async (treeLoc, usernameToInvite) => {
+
+    // map tree location
+    const [user, repo] = treeLoc;
+
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repo +
+                  '/collaborators/' + usernameToInvite;
+
+    // put the query
+    const resp = await axios.put(query, gitToken);
+
+    return resp.node_id;
+
+  },
+  
+  'acceptInviteToRepo': async (treeLoc) => {
+
+    // map tree location
+    const [user, repo] = treeLoc;
+    
+    let query = 'https://api.github.com/user' +
+                '/repository_invitations';
+
+    // get the query
+    const invites = await axios.get(query, gitToken);
+
+    // find repo invite
+    let repoInvite = invites.filter(invite =>
+                                      invite.repository.full_name ===
+                                      (user + '/' + repo)
+                                   );
+    
+    // if invite exists
+    if (repoInvite) {
+      
+      // accept invite
+      query += '/' + repoInvite.node_id;
+      
+      // patch the query
+      const resp = await axios.patch(query, gitToken);
+      
+      return true;
       
     } else {
       
