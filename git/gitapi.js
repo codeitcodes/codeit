@@ -98,6 +98,50 @@ let git = {
 
   },
   
+  'getRepoPushAccess': async (treeLoc, loggedUser) => {
+    
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo] = treeLoc;
+    
+    const [repoName] = repo.split(':');
+    
+    query += '/repos/' + user + '/' + repoName + '/collaborators/' + loggedUser + '/permission';
+    
+    // get the query
+    const resp = await axios.get(query, gitToken);
+    
+    if (resp.message &&
+        resp.message === 'Must have push access to view collaborator permission.') {
+      
+      return false;
+      
+    } else {
+      
+      return true;
+      
+    }
+    
+  },
+  
+  // list branches for repository
+  'getBranches': async (treeLoc) => {
+
+    // map tree location
+    let query = 'https://api.github.com';
+    const [user, repo] = treeLoc;
+
+    const [repoName] = repo.split(':');
+
+    query += '/repos/'+ user +'/'+ repoName +'/branches';
+
+    // get the query
+    const resp = await axios.get(query, gitToken);
+
+    return resp;
+
+  },
+  
   // get a repository
   'getRepo': async (treeLoc) => {
 
@@ -115,24 +159,6 @@ let git = {
 
     return resp;
     
-  },
-
-  // list branches for repository
-  'getBranches': async (treeLoc) => {
-
-    // map tree location
-    let query = 'https://api.github.com';
-    const [user, repo] = treeLoc;
-
-    const [repoName] = repo.split(':');
-
-    query += '/repos/'+ user +'/'+ repoName +'/branches';
-
-    // get the query
-    const resp = await axios.get(query, gitToken);
-
-    return resp;
-
   },
 
   // push a file
