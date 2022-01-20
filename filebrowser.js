@@ -383,10 +383,10 @@ async function renderSidebarHTML() {
 
     }
 
-    // protect unsaved code
-    protectUnsavedCode();
-
   }
+  
+  // protect unsaved code
+  protectUnsavedCode();
 
 }
 
@@ -1202,64 +1202,83 @@ function codeChange() {
 // but does not exist in the HTML
 function protectUnsavedCode() {
 
-  // get selected file element in HTML
-  // by sha
-  let selectedElSha = fileWrapper.querySelectorAll('.file[sha="'+ selectedFile.sha +'"]');
-  let selectedElName;
-
-  // if the selected file's sha changed
-  if (selectedElSha.length == 0) {
+  const [user, repo, contents] = treeLoc;
+  const [selUser, selRepo, selContents] = selectedFile.dir.split(',');
+  
+  if (user === selUser &&
+      repo.split(':')[0] === selRepo.split(':')[0] &&
+      contents === selContents) {
 
     // get selected file element in HTML
-    // by name
-    selectedElName = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == selectedFile.name);
+    // by sha
+    let selectedElSha = fileWrapper.querySelector('.file.selected');
+    let selectedElName;
 
-    selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
+    // if the selected file's sha changed
+    if (!selectedElSha) {
 
-    // if new version of selected file exists
-    if (selectedElName !== null) {
+      // get selected file element in HTML
+      // by name
+      selectedElName = Array.from(fileWrapper.querySelectorAll('.file'))
+                       .filter(file => file.querySelector('.name').textContent == selectedFile.name);
 
-      // load file
-      loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
+      selectedElName = (selectedElName.length > 0) ? selectedElName[0] : null;
 
-    } else {
+      // if new version of selected file exists
+      if (selectedElName !== null) {
 
-      // if the selected file was deleted,
-      // protect unsaved code by clearing codeit
+        // load file
+        loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
 
-      // clear codeit contents
-      cd.textContent = '';
+      } else {
 
-      // change codeit lang
-      cd.lang = '';
+        // if the selected file was deleted,
+        // protect unsaved code by clearing codeit
 
-      // clear codeit history
-      cd.history = [];
+        // clear codeit contents
+        cd.textContent = '';
 
-      // update line numbers
-      updateLineNumbersHTML();
+        // change codeit lang
+        cd.lang = '';
 
-      // if on mobile, show sidebar
-      if (isMobile) {
+        // clear codeit history
+        cd.history = [];
 
-        // don't transition
-        body.classList.add('notransition');
+        // update line numbers
+        updateLineNumbersHTML();
 
-        // show sidebar
-        toggleSidebar(true);
-        saveSidebarStateLS();
+        // if on mobile, show sidebar
+        if (isMobile) {
 
-        onNextFrame(() => {
+          // don't transition
+          body.classList.add('notransition');
 
-          body.classList.remove('notransition');
+          // show sidebar
+          toggleSidebar(true);
+          saveSidebarStateLS();
 
-        });
+          onNextFrame(() => {
+
+            body.classList.remove('notransition');
+
+          });
+
+        }
+
+        // change selected file to empty file
+        changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
 
       }
-
-      // change selected file to empty file
-      changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+      
+    } else {
+  
+      // if selected file isn't loaded
+      if (selectedFile.sha !=== getAttr(selectedElSha, 'sha')) {
+        
+        // load file
+        loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
+        
+      }
 
     }
 
