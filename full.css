@@ -1368,7 +1368,7 @@ body .sidebar .button:active:not(:hover) {
 
 .menu.branch-menu.visible {
   transform: none;
-  padding: 7px;
+  padding: var(--spacing-1);
   opacity: 1;
   pointer-events: auto;
   transition: .18s var(--bounce-function);
@@ -1376,8 +1376,8 @@ body .sidebar .button:active:not(:hover) {
 
 .menu.branch-menu .icon {
   padding: 10px 15px;
-  padding: 8px 14px;
   padding: 8px 13px;
+  padding: 8px 14px;
   border-radius: 5.75px;
   display: flex;
   align-items: center;
