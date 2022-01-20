@@ -624,11 +624,11 @@ async function renderBranchMenuHTML() {
     // show selected branch
     if (branch.name === selectedBranch) {
       
-      out += '<div class="icon selected">'+ branch.name +'</div>';
+      out += '<div class="icon selected">'+ branchIcon + branch.name +'</div>';
       
     } else {
       
-      out += '<div class="icon">'+ branch.name +'</div>';
+      out += '<div class="icon">'+ branchIcon + branch.name +'</div>';
       
     }
     
