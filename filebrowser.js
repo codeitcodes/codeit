@@ -74,7 +74,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Something snazzy happened and we couldn\'t sign you in... try again?');
+    alert('Your login expired. Want to login again?');
 
     sidebar.classList.add('intro');
 
@@ -88,8 +88,8 @@ async function renderSidebarHTML() {
 
     // stop loading
     stopLoading();
-
-    alert('Couldn\'t find that repo. Need to sign in?');
+    
+    alert('Couldn\'t find that repo. Need to log in?');
 
     repo = '';
     contents = '';
@@ -109,7 +109,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Something snazzy happened and we couldn\'t sign you in... try again?');
+    alert('Your login expired. Want to login again?');
 
     sidebar.classList.add('intro');
 
