@@ -74,7 +74,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Your login expired. Want to login again?');
+    alert('Whoops, your Github login expired. Log in again?');
 
     sidebar.classList.add('intro');
 
@@ -89,8 +89,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Couldn\'t find that repo. Need to log in?');
-
+    alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
+    
     repo = '';
     contents = '';
     saveTreeLocLS(treeLoc);
@@ -109,7 +109,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Your login expired. Want to login again?');
+    alert('Whoops, your Github login expired. Log in again?');
 
     sidebar.classList.add('intro');
 
@@ -211,6 +211,9 @@ async function renderSidebarHTML() {
         sidebarBranch.classList.add('visible');
 
       }
+      
+      // render branch menu
+      renderBranchMenuHTML();
 
 
       // change header options
@@ -375,7 +378,7 @@ async function renderSidebarHTML() {
 
   }
 
-  // add rendered HTML to dom
+  // add rendered HTML to DOM
   fileWrapper.innerHTML = out;
   sidebar.scrollTo(0, 0);
 
@@ -602,6 +605,82 @@ async function loadFileInHTML(fileEl, fileSha) {
 }
 
 
+// render branch menu
+async function renderBranchMenuHTML() {
+  
+  // map tree location
+  let [user, repo, contents] = treeLoc;
+  
+  // get repository branch
+  let [repoName, selectedBranch] = repo.split(':');
+  
+  
+  // get branches for repository
+  const resp = await git.getBranches(treeLoc);
+  
+  
+  // save rendered HTML
+  let out = '';
+  
+  // run on all branches
+  resp.forEach(branch => {
+    
+    // show selected branch
+    if (branch.name === selectedBranch) {
+      
+      out += '<div class="icon selected">'+ branch.name +'</div>';
+      
+    } else {
+      
+      out += '<div class="icon">'+ branch.name +'</div>';
+      
+    }
+    
+  });
+  
+  // add rendered HTML to DOM
+  branchMenu.innerHTML = out;
+  
+  
+  // add branch event listeners
+  
+  let branches = branchMenu.querySelectorAll('.icon');
+
+  // run on all branches
+  branches.forEach(branch => {
+
+    // select branch on click
+    branch.addEventListener('click', () => {
+      
+      // hide branch menu
+      branchMenu.classList.remove('visible');
+      branchButton.classList.remove('active');
+      
+      // if branch isn't already selected
+      if (!branch.classList.contains('selected')) {
+        
+        // clear previous selection
+        branchMenu.querySelector('.icon.selected').classList.remove('selected');
+        
+        // select branch
+        branch.classList.add('selected');
+        
+        // change location
+        selectedBranch = branch.querySelector('a').textContent;
+        saveTreeLocLS(treeLoc);
+        
+        // render sidebar
+        renderSidebarHTML();
+        
+      }
+      
+    });
+    
+  });
+  
+}
+
+
 // traverse backwards in tree when clicked on button
 sidebarTitle.addEventListener('click', () => {
 
@@ -682,10 +761,31 @@ optionsButton.addEventListener('click', () => {
 
 // if clicked on branch button,
 // toggle branch menu
-repoBranchButton.addEventListener('click', () => {
+branchButton.addEventListener('click', () => {
   
-  repoBranchButton.classList.toggle('active');
   branchMenu.classList.toggle('visible');
+  branchButton.classList.toggle('active');
+  
+})
+
+// hide branch menu when clicked anywhere else
+document.addEventListener('click', (e) => {
+  
+  // if branch menu is visible
+  if (branchMenu.classList.contains('visible')) {
+    
+    const notClickedOnMenu = (e.target != branchMenu && e.target != branchButton);
+    const notClickedOnMenuChild = (e.target.parentElement != branchMenu);
+    
+    if (notClickedOnMenu && notClickedOnMenuChild) {
+      
+      // hide branch menu
+      branchMenu.classList.remove('visible');
+      branchButton.classList.remove('active');
+
+    }
+    
+  }
   
 })
 
