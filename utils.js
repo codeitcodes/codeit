@@ -297,12 +297,16 @@ let axios = {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
           } else if (this.responseText) {
-            resolve(JSON.parse(this.responseText));
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
           }
         };
         xmlhttp.onerror = function () {
           if (this.responseText) {
-            resolve(JSON.parse(this.responseText));
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
           }
         };
         xmlhttp.open('GET', url, true);
