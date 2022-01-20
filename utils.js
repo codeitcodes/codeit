@@ -54,7 +54,7 @@ const body = document.body,
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
       
-      branchMenu = document.querySelector('.menu.branch-menu'),
+      branchMenu = document.querySelector('.branch-menu'),
 
       liveView = document.querySelector('.live-view');
 
