@@ -736,7 +736,7 @@ body.notransition .sidebar {
   padding: 7px 0;
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-  max-width: calc(var(--sidebar-width) - 140px);
+  max-width: calc(var(--sidebar-width) - 140px - 16px - 9px - 9px);
   overflow-x: overlay;
   white-space: nowrap;
   transition: .18s var(--ease-function);
@@ -964,7 +964,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
 
 .sidebar .header.searching .logo {
   padding-left: 7px;
-  max-width: calc(var(--sidebar-width) - 147px);
+  max-width: calc(var(--sidebar-width) - 147px - 16px - 9px - 9px);
 }
 
 .sidebar .header.searching .title .branch {
