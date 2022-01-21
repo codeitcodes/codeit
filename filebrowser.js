@@ -718,28 +718,36 @@ async function renderBranchMenuHTML(renderAll) {
     out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
 
   }
-
+  
+  let index = 0;
+  
   // run on all branches
-  branchResp.forEach((branch, index) => {
+  branchResp.forEach(branch => {
     
     if (branch.name !== selectedBranch) {
 
       // if not clicked on show more button,
       // render only 2 branches
-      if (!renderAll && index > 0) {
+      if (!renderAll && index > 1) {
 
         return;
 
       }
 
       out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
-
+      
+    } else if (index === 0) {
+      
+      index--;
+      
     }
+    
+    index++;
 
   });
   
   // render show more button
-  if (!renderAll) {
+  if (!renderAll && branchResp.length > 2) {
     
     out += '<div class="icon">' + arrowDownIcon + '<a>see more...</a></div>';
     
