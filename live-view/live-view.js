@@ -509,7 +509,7 @@ function renderLiveViewHTML(file) {
       const linkHref = new URL(link.href);
       const fileName = linkHref.pathname.slice(1);
 
-      if (linkHref.origin == liveFetchURL) {
+      if (linkHref.href.startsWith(liveFetchURL)) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
@@ -559,7 +559,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == liveFetchURL) {
+    if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if image is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -623,7 +623,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == liveFetchURL) {
+    if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if video is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -668,7 +668,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == liveFetchURL) {
+    if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if audio file is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -711,7 +711,7 @@ async function fetchLiveViewScripts(frameDocument) {
       const linkHref = new URL(script.src);
       const fileName = linkHref.pathname.slice(1);
 
-      if (linkHref.origin == liveFetchURL) {
+      if (linkHref.href.startsWith(liveFetchURL)) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
