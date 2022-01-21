@@ -1905,7 +1905,7 @@ body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:active {
 }
 
 body:not(.mobile) .roundbutton {
-  transition: .18s var(--ease-function), 0s background;
+  transition: .18s var(--ease-function), 0s background, 0s padding, 0s color;
 }
 
 body:not(.mobile) .roundbutton:hover {
