@@ -31,8 +31,8 @@ const body = document.body,
       searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
-      sidebarBranch = sidebarTitle.querySelector('.branch'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
+      sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
       optionsButton = header.querySelector('.options'),
 
