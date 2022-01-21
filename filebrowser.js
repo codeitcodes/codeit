@@ -429,47 +429,123 @@ function addHTMLItemListeners() {
         renderSidebarHTML();
 
       } else { // if item is a file
-
-        // if not clicked on push button
-        let pushWrapper = item.querySelector('.push-wrapper');
-        let clickedOnPush = (e.target == pushWrapper);
-
-        if (!clickedOnPush) {
-
-          // if file not already selected
-          if (!item.classList.contains('selected')) {
-
-            // load file
-            loadFileInHTML(item, getAttr(item, 'sha'));
-
-          } else if (isMobile) { // if on mobile device
-
-            // update bottom float
-            updateFloat();
-
-          }
-
-        } else {
-
-          // play push animation
-          playPushAnimation(item.querySelector('.push-wrapper'));
-
-          // push file
-          pushFileFromHTML(item);
-
-        }
+        
+        clickedOnFileHTML(item, e);
 
       }
 
     })
+    
+    // if item is a file
+    if (item.classList.contains('file')
+        && item.querySelector('.push-wrapper')) {
+
+      item.querySelector('.push-wrapper')
+        .addEventListener('contextmenu', () => {
+
+        let commitMessage;
+
+        // get selected branch
+        let selBranch = treeLoc[1].split(':')[1];
+
+        // open push screen
+        commitMessage = prompt('Push '+ item.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
+                               'Type a push description...');
+
+        // if canceled push, return
+        if (!commitMessage) return;
+
+        // if not specified message
+        if (commitMessage === 'Type a push description...') {
+
+          // show default message
+          commitMessage = 'Update ' + item.innerText;
+
+        }
+
+
+        // play push animation
+        playPushAnimation(item.querySelector('.push-wrapper'));
+
+        // push file
+        pushFileFromHTML(item, commitMessage);
+
+      })
+      
+    }
 
   })
 
 }
 
 
+// when clicked on file in HTML
+function clickedOnFileHTML(fileEl, event) {
+  
+  // if not clicked on push button
+  let pushWrapper = fileEl.querySelector('.push-wrapper');
+  let clickedOnPush = (event.target == pushWrapper);
+
+  if (!clickedOnPush) {
+
+    // if file not already selected
+    if (!fileEl.classList.contains('selected')) {
+
+      // load file
+      loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+
+    } else if (isMobile) { // if on mobile device
+
+      // update bottom float
+      updateFloat();
+
+    }
+
+  } else {
+    
+    let commitMessage;
+    
+    // if ctrl/meta-clicked on push button
+    if (isKeyEventMeta(event)) {
+      
+      // get selected branch
+      let selBranch = treeLoc[1].split(':')[1];
+      
+      // open push screen
+      commitMessage = prompt('Push '+ fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
+                             'Type a push description...');
+      
+      // if canceled push, return
+      if (!commitMessage) return;
+      
+      // if not specified message
+      if (commitMessage === 'Type a push description...') {
+        
+        // show default message
+        commitMessage = 'Update ' + fileEl.innerText;
+        
+      }
+      
+    } else {
+      
+      commitMessage = 'Update ' + fileEl.innerText;
+      
+    }
+      
+    
+    // play push animation
+    playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+    // push file
+    pushFileFromHTML(fileEl, commitMessage);
+
+  }
+  
+}
+
+
 // push file to Git from HTML element
-async function pushFileFromHTML(fileEl) {
+async function pushFileFromHTML(fileEl, commitMessage) {
 
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
@@ -479,7 +555,6 @@ async function pushFileFromHTML(fileEl) {
   const fileSelected = fileEl.classList.contains('selected');
 
   // create commit
-  const commitMessage = 'Update ' + fileEl.innerText;
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
   let commit = {
@@ -1005,39 +1080,45 @@ newFileButton.addEventListener('click', () => {
         // remove push listener
         pushWrapper.removeEventListener('click', pushListener);
 
-        // add file event listener
+        // add file event listeners
+        
         fileEl.addEventListener('click', (e) => {
+          
+          clickedOnFileHTML(fileEl, e);
 
-          // if not clicked on push button
-          let pushWrapper = fileEl.querySelector('.push-wrapper');
-          let clickedOnPush = (e.target == pushWrapper);
+        })
+        
+        fileEl.querySelector('.push-wrapper')
+          .addEventListener('contextmenu', () => {
+          
+          let commitMessage;
 
-          if (!clickedOnPush) {
+          // get selected branch
+          let selBranch = treeLoc[1].split(':')[1];
 
-            // if file not already selected
-            if (!fileEl.classList.contains('selected')) {
+          // open push screen
+          commitMessage = prompt('Push '+ fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
+                                 'Type a push description...');
 
-              // load file
-              loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+          // if canceled push, return
+          if (!commitMessage) return;
 
-            } else if (isMobile) { // if on mobile device
+          // if not specified message
+          if (commitMessage === 'Type a push description...') {
 
-              // update bottom float
-              updateFloat();
-
-            }
-
-          } else {
-
-            // play push animation
-            playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-            // push file
-            pushFileFromHTML(fileEl);
+            // show default message
+            commitMessage = 'Update ' + fileEl.innerText;
 
           }
 
-        });
+
+          // play push animation
+          playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+          // push file
+          pushFileFromHTML(fileEl, commitMessage);
+          
+        })
 
       }
 
