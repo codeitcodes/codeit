@@ -1346,7 +1346,7 @@ body .sidebar .button:active:not(:hover) {
   scroll-padding: 7px;
   border-radius: 11.5px;
   line-height: 1.5;
-  margin-top: 2px;
+  margin-top: 4.5px;
   transform: translateY(-7px);
   top: 64px;
   left: 222px;
