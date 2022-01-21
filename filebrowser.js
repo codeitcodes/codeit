@@ -654,6 +654,7 @@ async function renderBranchMenuHTML() {
 
         // hide branch menu
         branchMenu.classList.remove('visible');
+        sidebarBranch.classList.remove('active');
         branchButton.classList.remove('active');
 
         // if branch isn't already selected
@@ -687,8 +688,14 @@ async function renderBranchMenuHTML() {
 
 
 // traverse backwards in tree when clicked on button
-sidebarTitle.addEventListener('click', () => {
-
+sidebarTitle.addEventListener('click', (e) => {
+  
+  // if clicked on branch menu, return
+  if (e.target == sidebarBranch) {
+    return;
+  }
+  
+  
   // map tree location
   const [user, repo, contents] = treeLoc;
 
@@ -765,11 +772,30 @@ optionsButton.addEventListener('click', () => {
 
 
 // if clicked on branch button,
-// toggle branch menu
+// show branch menu
+sidebarBranch.addEventListener('click', () => {
+  
+  if (!branchMenu.classList.contains('active')) {
+
+    branchMenu.classList.add('visible');
+    sidebarBranch.classList.add('active');
+    branchButton.classList.add('active');
+    
+  }
+  
+})
+
+// if clicked on branch button,
+// show branch menu
 branchButton.addEventListener('click', () => {
   
-  branchMenu.classList.toggle('visible');
-  branchButton.classList.toggle('active');
+  if (!branchMenu.classList.contains('active')) {
+
+    branchMenu.classList.add('visible');
+    sidebarBranch.classList.add('active');
+    branchButton.classList.add('active');
+    
+  }
   
 })
 
@@ -779,7 +805,7 @@ document.addEventListener('click', (e) => {
   // if branch menu is visible
   if (branchMenu.classList.contains('visible')) {
     
-    const notClickedOnMenu = (e.target != branchMenu && e.target != branchButton);
+    const notClickedOnMenu = (e.target != branchMenu);
     const notClickedOnMenuChild = (e.target.parentElement != branchMenu);
     
     if (notClickedOnMenu && notClickedOnMenuChild) {
