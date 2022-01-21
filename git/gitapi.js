@@ -30,8 +30,14 @@ let git = {
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
+    
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
 
-    query += '/repos/'+ user +'/'+ repo +'/git/blobs/'+ sha;
+    if (branch) branch = '?ref='+ branch;
+    else branch = '';
+
+    query += '/repos/'+ user +'/'+ repoName +'/git/blobs/'+ sha + branch;
 
     // get the query
     const resp = await axios.get(query, gitToken);
