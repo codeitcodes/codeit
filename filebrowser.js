@@ -505,8 +505,8 @@ function clickedOnFileHTML(fileEl, event) {
     
     let commitMessage;
     
-    // if ctrl/meta-clicked on push button
-    if (isKeyEventMeta(event)) {
+    // if ctrl/meta/shift-clicked on push button
+    if (isKeyEventMeta(event) || event.shiftKey) {
       
       // get selected branch
       let selBranch = treeLoc[1].split(':')[1];
