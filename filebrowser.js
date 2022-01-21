@@ -780,7 +780,7 @@ optionsButton.addEventListener('click', () => {
 // show branch menu
 sidebarBranch.addEventListener('click', () => {
   
-  if (!branchMenu.classList.contains('active')) {
+  if (!branchMenu.classList.contains('visible')) {
 
     branchMenu.classList.add('visible');
     sidebarBranch.classList.add('active');
@@ -794,7 +794,7 @@ sidebarBranch.addEventListener('click', () => {
 // show branch menu
 branchButton.addEventListener('click', () => {
   
-  if (!branchMenu.classList.contains('active')) {
+  if (!branchMenu.classList.contains('visible')) {
 
     branchMenu.classList.add('visible');
     sidebarBranch.classList.add('active');
