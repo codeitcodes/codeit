@@ -36,8 +36,6 @@ const FILES_TO_CACHE = [
   '/fonts/fonts.css',
 
   '/fonts/Mono-Sans/MonoSans-Regular.woff2',
-  '/fonts/Mono-Sans/MonoSans-Medium.woff2',
-  '/fonts/Mono-Sans/MonoSans-Semibold.woff2',
   '/fonts/Mono-Sans/MonoSans-Bold.woff2',
 
   '/fonts/Inter/Inter.var.woff2',
