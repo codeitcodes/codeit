@@ -512,7 +512,7 @@ function clickedOnFileHTML(fileEl, event) {
       let selBranch = treeLoc[1].split(':')[1];
       
       // open push screen
-      commitMessage = prompt('Push '+ fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
+      commitMessage = prompt('Push ' + fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
                              'Type a push description...');
       
       // if canceled push, return
@@ -703,16 +703,18 @@ async function renderBranchMenuHTML() {
 
     // save rendered HTML
     let out = '';
-
+    
+    // render selected branch
+    if (selectedBranch) {
+      
+      out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
+      
+    }
+    
     // run on all branches
     resp.forEach(branch => {
 
-      // show selected branch
-      if (branch.name === selectedBranch) {
-
-        out += '<div class="icon selected">' + branchIcon + '<a>' + branch.name +'</a></div>';
-
-      } else {
+      if (branch.name !== selectedBranch) {
 
         out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
 
