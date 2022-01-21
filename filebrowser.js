@@ -905,8 +905,7 @@ document.addEventListener('click', (e) => {
   if (branchMenu.classList.contains('visible')) {
     
     const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch && e.target != branchButton);
-    const notClickedOnMenuChild = (e.target.parentElement != branchMenu
-                                   && e.target.parentElement.parentElement != branchMenu);
+    const notClickedOnMenuChild = (!e.path.includes(branchMenu));
     
     if (notClickedOnMenu && notClickedOnMenuChild) {
       
