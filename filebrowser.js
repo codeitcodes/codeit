@@ -537,9 +537,11 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
-
-    // start loading
-    startLoading();
+    
+    // if not already loading, start loading
+    if (loader.style.opacity != '1') {
+      startLoading();
+    }
 
     // get file from git
     const resp = await git.getFile(treeLoc, fileEl.innerText);
