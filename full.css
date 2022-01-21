@@ -1139,7 +1139,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .item .push-wrapper:not(.checked):active .push-svg #push {
   opacity: .5;
-  transition: .18s var(--ease-function), 0s opacity;
 }
 
 .sidebar .item .arrow {
@@ -1646,7 +1645,7 @@ body.mobile.expanded .cube-loader::after {
 .push-svg #push, .push-svg #check {
   fill: transparent;
   transform-origin: 75% 75%;
-  transition: .18s var(--ease-function);
+  transition: .18s var(--ease-function), 0s opacity;
 }
 .push-svg #push {
   fill: rgba(241,241,242,0.8);
