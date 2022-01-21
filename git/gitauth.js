@@ -113,9 +113,10 @@ async function getGithubToken(gitCode) {
 
   // get logged user
   loggedUser = await axios.get('https://api.github.com/user', gitToken);
-
+  loggedUser = loggedUser.login;
+  
   // save logged user in local storage
-  setStorage('loggedUser', loggedUser.login);
+  setStorage('loggedUser', loggedUser);
 
 
   // render sidebar
