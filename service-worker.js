@@ -30,6 +30,7 @@ const FILES_TO_CACHE = [
   '/bottomfloat.js',
 
   '/live-view/live-view.js',
+  '/live-view/fetch-resp',
 
   '/dark-theme.css',
 
