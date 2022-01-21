@@ -507,7 +507,7 @@ function renderLiveViewHTML(file) {
     frameLinks.forEach(async (link) => {
 
       const linkHref = new URL(link.href);
-      const fileName = linkHref.pathname.slice(1);
+      const fileName = linkHref.pathname.replace('/live-fetch/','');
 
       if (linkHref.href.startsWith(liveFetchURL)) {
 
@@ -517,7 +517,7 @@ function renderLiveViewHTML(file) {
         if (!file[0]) {
 
           try {
-            resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+            resp = await git.getFile(selectedFile.dir.split(','), fileName);
           } catch(e) { resp = ''; }
 
         } else {
@@ -557,16 +557,16 @@ function renderLiveViewHTML(file) {
   frameDocument.querySelectorAll('img').forEach(async (image) => {
 
     const linkHref = new URL(image.src);
-    const fileName = linkHref.pathname.slice(1);
+    const fileName = linkHref.pathname.replace('/live-fetch/','');
 
     if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if image is in current directory
-      if (!(linkHref.pathname.slice(1).includes('/'))) {
+      if (!fileName.includes('/')) {
 
         // fetch file element for its SHA
         let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+                     .filter(file => file.querySelector('.name').textContent == fileName);
 
         fileEl = (fileEl.length > 0) ? fileEl[0] : null;
 
@@ -590,7 +590,7 @@ function renderLiveViewHTML(file) {
 
         }
 
-      } else if (!(linkHref.pathname.slice(1).includes('./'))) { // if image is below current directory
+      } else if (!fileName.includes('./')) { // if image is below current directory
 
         // fetch image
 
@@ -621,16 +621,16 @@ function renderLiveViewHTML(file) {
   frameDocument.querySelectorAll('video').forEach(async (video) => {
 
     const linkHref = new URL(video.src);
-    const fileName = linkHref.pathname.slice(1);
+    const fileName = linkHref.pathname.replace('/live-fetch/','');
 
     if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if video is in current directory
-      if (!(linkHref.pathname.slice(1).includes('/'))) {
+      if (!fileName.includes('/')) {
 
         // fetch file element for its SHA
         let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+                     .filter(file => file.querySelector('.name').textContent == fileName);
 
         fileEl = (fileEl.length > 0) ? fileEl[0] : null;
 
@@ -666,16 +666,16 @@ function renderLiveViewHTML(file) {
   frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
     const linkHref = new URL(audio.src);
-    const fileName = linkHref.pathname.slice(1);
+    const fileName = linkHref.pathname.replace('/live-fetch/','');
 
     if (linkHref.href.startsWith(liveFetchURL)) {
 
       // if audio file is in current directory
-      if (!(linkHref.pathname.slice(1).includes('/'))) {
+      if (!fileName.includes('/')) {
 
         // fetch file element for its SHA
         let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == linkHref.pathname.slice(1));
+                     .filter(file => file.querySelector('.name').textContent == fileName);
 
         fileEl = (fileEl.length > 0) ? fileEl[0] : null;
 
@@ -709,7 +709,7 @@ async function fetchLiveViewScripts(frameDocument) {
     if (script.src) {
 
       const linkHref = new URL(script.src);
-      const fileName = linkHref.pathname.slice(1);
+      const fileName = linkHref.pathname.replace('/live-fetch/','');
 
       if (linkHref.href.startsWith(liveFetchURL)) {
 
@@ -718,7 +718,7 @@ async function fetchLiveViewScripts(frameDocument) {
 
         if (!file[0]) {
 
-          resp = await git.getFile(selectedFile.dir.split(','), linkHref.pathname.slice(1));
+          resp = await git.getFile(selectedFile.dir.split(','), fileName);
 
         } else {
 
