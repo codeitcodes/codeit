@@ -780,6 +780,9 @@ optionsButton.addEventListener('click', () => {
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
   
+  // move branch menu to icon
+  moveElToEl(branchMenu, sidebarBranch);
+  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
   branchButton.classList.toggle('active');
@@ -789,6 +792,9 @@ sidebarBranch.addEventListener('click', () => {
 // if clicked on branch button,
 // toggle branch menu
 branchButton.addEventListener('click', () => {
+  
+  // move branch menu to button
+  moveElToEl(branchMenu, branchButton);
   
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
