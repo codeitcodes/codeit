@@ -892,6 +892,7 @@ document.addEventListener('click', (e) => {
       
       // hide branch menu
       branchMenu.classList.remove('visible');
+      sidebarBranch.classList.remove('active');
       branchButton.classList.remove('active');
 
     }
