@@ -288,6 +288,19 @@ let onNextFrame = (callback) => {
 }
 
 
+// add event listeners
+
+Element.prototype.on = (events, callback, passive) => {
+
+  events.split(' ').forEach(evt => {
+
+    this.addEventListener(evt, callback, passive);
+
+  });
+
+}
+
+
 // copy
 let copy = (text) => {
   const textArea = document.createElement("textarea");
