@@ -449,7 +449,7 @@ function addHTMLItemListeners() {
         let selBranch = treeLoc[1].split(':')[1];
 
         // open push screen
-        commitMessage = prompt('Push '+ item.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
+        commitMessage = prompt('Push \''+ item.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '?'),
                                'Type a push description...');
 
         // if canceled push, return
