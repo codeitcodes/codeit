@@ -170,7 +170,7 @@ let git = {
     // get repository branch
     let [repoName, branch] = repo.split(':');
 
-    if (branch) branch = '?branch='+ branch;
+    if (branch) branch = '?ref='+ branch;
     else branch = '';
 
     const query = 'https://api.github.com/repos' +
