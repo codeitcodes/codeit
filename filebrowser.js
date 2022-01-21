@@ -667,7 +667,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
 
 // render branch menu
-async function renderBranchMenuHTML(branchResp) {
+async function renderBranchMenuHTML(branchResp, renderAll) {
   
   // map tree location
   let [user, repo, contents] = treeLoc;
@@ -723,6 +723,13 @@ async function renderBranchMenuHTML(branchResp) {
     }
 
   });
+  
+  // render show more button
+  if (!renderAll) {
+    
+    out += '<div class="icon">' + arrowDownIcon + '<a>see more...</a></div>';
+    
+  }
 
   // add rendered HTML to DOM
   branchMenu.innerHTML = out;
@@ -737,27 +744,34 @@ async function renderBranchMenuHTML(branchResp) {
 
     // select branch on click
     branch.addEventListener('click', () => {
+      
+      // if not clicked on show more button
+      if (!branch.querySelector('.arrow-icon')) {
 
-      // hide branch menu
-      branchMenu.classList.remove('visible');
-      sidebarBranch.classList.remove('active');
-      branchButton.classList.remove('active');
+        // hide branch menu
+        branchMenu.classList.remove('visible');
+        sidebarBranch.classList.remove('active');
+        branchButton.classList.remove('active');
 
-      // if branch isn't already selected
-      if (!branch.classList.contains('selected')) {
+        // if branch isn't already selected
+        if (!branch.classList.contains('selected')) {
 
-        // change location
-        selectedBranch = branch.querySelector('a').textContent;
-        treeLoc[1] = repoName + ':' + selectedBranch;
-        saveTreeLocLS(treeLoc);
-        
-        // render sidebar
-        renderSidebarHTML();
-        
-        // render branch menu
-        renderBranchMenuHTML();
+            // change location
+            selectedBranch = branch.querySelector('a').textContent;
+            treeLoc[1] = repoName + ':' + selectedBranch;
+            saveTreeLocLS(treeLoc);
 
-      }
+            // render sidebar
+            renderSidebarHTML();
+
+          }
+
+        } else { // if clicked on show more button
+          
+          // render branch menu
+          renderBranchMenuHTML(branchResp, true);
+          
+        }
 
     });
 
