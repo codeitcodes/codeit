@@ -736,7 +736,7 @@ body.notransition .sidebar {
   padding: 7px 0;
   font-weight: 600;
   color: rgba(241,241,242,0.92);
-  max-width: calc(var(--sidebar-width) - 140px - 16px - 9px - 9px);
+  max-width: calc(var(--sidebar-width) - 140px - 16px - 7px - 7px);
   overflow-x: overlay;
   white-space: nowrap;
   transition: .18s var(--ease-function);
@@ -747,7 +747,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::after {
   content: '';
   position: absolute;
-  right: 14px;
+  right: 44px;
   width: 28px;
   height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
@@ -777,7 +777,7 @@ body.notransition .sidebar {
 }
 
 .sidebar .header .title .branch-icon {
-  padding: 9px;
+  padding: 5px;
   opacity: .5;
   color: #828689;
 }
