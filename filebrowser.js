@@ -204,7 +204,7 @@ async function renderSidebarHTML() {
       sidebarBranch.classList.add('visible');
       
       // render branch menu
-      renderBranchMenuHTML();
+      window.setTimeout(renderBranchMenuHTML, 180);
 
       // change header options
       optionsScreen.classList.remove('out-of-repo');
@@ -722,15 +722,15 @@ async function renderBranchMenuHTML(renderAll) {
   // run on all branches
   branchResp.forEach((branch, index) => {
     
-    // if not clicked on show more button,
-    // render only 2 branches
-    if (!renderAll && index > 1) {
-      
-      return;
-      
-    }
-    
     if (branch.name !== selectedBranch) {
+
+      // if not clicked on show more button,
+      // render only 2 branches
+      if (!renderAll && index > 1) {
+
+        return;
+
+      }
 
       out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
 
@@ -783,7 +783,7 @@ async function renderBranchMenuHTML(renderAll) {
       } else { // if clicked on show more button
 
         // render branch menu
-        renderBranchMenuHTML(branchResp, true);
+        renderBranchMenuHTML(true);
 
       }
 
