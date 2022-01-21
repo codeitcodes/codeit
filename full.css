@@ -1846,6 +1846,11 @@ body.mobile.expanded .cube-loader::after {
 }
 
 
+svg path {
+  pointer-events: none;
+}
+
+
 body:not(.platform-mac) .bookmark,
 body:not(.platform-mac) .sidebar .header .titlescreen .title,
 body:not(.platform-mac) .sidebar .item,
