@@ -1273,7 +1273,7 @@ function protectUnsavedCode() {
     } else {
   
       // if selected file isn't loaded
-      if (selectedFile.sha !=== getAttr(selectedElSha, 'sha')) {
+      if (selectedFile.sha !== getAttr(selectedElSha, 'sha')) {
         
         // load file
         loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
