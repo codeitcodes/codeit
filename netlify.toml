@@ -5,10 +5,17 @@
     Access-Control-Allow-Origin = "*"
 
 [[redirects]]
+  from = "/live-fetch/*"
+  to = "/live-view/fetch-resp"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://dev.codeit.codes"
   to = "https://dev.codeit.codes/full"
   status = 301
   force = true
+
 
 [[redirects]]
   from = "https://codeit.berryscript.com"
