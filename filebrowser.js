@@ -698,7 +698,7 @@ async function renderBranchMenuHTML(branchResp) {
     
     
     // get branches for repository
-    const resp = await git.getBranches(treeLoc);
+    branchResp = await git.getBranches(treeLoc);
     
   }
     
@@ -714,7 +714,7 @@ async function renderBranchMenuHTML(branchResp) {
   }
 
   // run on all branches
-  (resp ? resp : branchResp).forEach(branch => {
+  branchResp.forEach(branch => {
 
     if (branch.name !== selectedBranch) {
 
