@@ -667,7 +667,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
 
 // render branch menu
-async function renderBranchMenuHTML() {
+async function renderBranchMenuHTML(branchResp) {
   
   // map tree location
   let [user, repo, contents] = treeLoc;
@@ -714,7 +714,7 @@ async function renderBranchMenuHTML() {
   }
 
   // run on all branches
-  resp.forEach(branch => {
+  (resp ? resp : branchResp).forEach(branch => {
 
     if (branch.name !== selectedBranch) {
 
