@@ -888,6 +888,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   will-change: transform;
 }
 
+.sidebar .header .options-screen:not(.visible) .roundbutton {
+  background: transparent !important;
+}
+
 .sidebar .header .options-screen.visible .roundbutton {
   transform: none;
 }
