@@ -667,13 +667,16 @@ async function loadFileInHTML(fileEl, fileSha) {
 
 
 // render branch menu
-async function renderBranchMenuHTML(branchResp, renderAll) {
+async function renderBranchMenuHTML(renderAll) {
   
   // map tree location
   let [user, repo, contents] = treeLoc;
 
   // get repository branch
   let [repoName, selectedBranch] = repo.split(':');
+  
+  // get repository branches
+  let branchResp = JSON.parse(getAttr(branchMenu, 'resp'));
   
   
   // if branch menu isn't already rendered
@@ -699,6 +702,9 @@ async function renderBranchMenuHTML(branchResp, renderAll) {
     
     // get branches for repository
     branchResp = await git.getBranches(treeLoc);
+    
+    // save resp in HTML
+    setAttr(branchMenu, 'resp', JSON.stringify(branchResp));
     
   }
     
@@ -764,22 +770,22 @@ async function renderBranchMenuHTML(branchResp, renderAll) {
         // if branch isn't already selected
         if (!branch.classList.contains('selected')) {
 
-            // change location
-            selectedBranch = branch.querySelector('a').textContent;
-            treeLoc[1] = repoName + ':' + selectedBranch;
-            saveTreeLocLS(treeLoc);
+          // change location
+          selectedBranch = branch.querySelector('a').textContent;
+          treeLoc[1] = repoName + ':' + selectedBranch;
+          saveTreeLocLS(treeLoc);
 
-            // render sidebar
-            renderSidebarHTML();
+          // render sidebar
+          renderSidebarHTML();
 
-          }
-
-        } else { // if clicked on show more button
-          
-          // render branch menu
-          renderBranchMenuHTML(branchResp, true);
-          
         }
+
+      } else { // if clicked on show more button
+
+        // render branch menu
+        renderBranchMenuHTML(branchResp, true);
+
+      }
 
     });
 
