@@ -216,7 +216,7 @@ cd-el {
 .token.string,
 .token.string *,
 .token.attr-value,
-.token.attr-value *,
+.token.attr-value *:not(.attr-equals),
 .style .token.string {
   color: #c1ffd5cc !important;
 }
