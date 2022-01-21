@@ -200,9 +200,11 @@ async function renderSidebarHTML() {
     // if navigating in repository
     if (repo != '') {
       
+      // show branch button
+      sidebarBranch.classList.add('visible');
+      
       // render branch menu
       renderBranchMenuHTML();
-
 
       // change header options
       optionsScreen.classList.remove('out-of-repo');
@@ -307,6 +309,9 @@ async function renderSidebarHTML() {
 
     } else { // else, show all repositories
 
+      // hide branch button
+      sidebarBranch.classList.remove('visible');
+      
       // change header options
       optionsScreen.classList.add('out-of-repo');
 
