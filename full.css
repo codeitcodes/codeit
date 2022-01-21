@@ -1339,9 +1339,9 @@ body .sidebar .button:active:not(:hover) {
 }
 
 
-.menu.branch-menu {
+.branch-menu {
   position: fixed;
-  background: var(--midnight-blue-deep);
+  background: var(--deep-midnight-blue);
   color: #dcddde;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   scroll-padding: 7px;
@@ -1361,20 +1361,19 @@ body .sidebar .button:active:not(:hover) {
   pointer-events: none;
   will-change: transform;
   transition: .18s var(--bounce-function);
-  /* transition: 0s .18s, .18s var(--ease-function) opacity; */
+  transition-property: transform, padding, opacity;
   overflow-y: auto;
   z-index: 1000;
 }
 
-.menu.branch-menu.visible {
+.branch-menu.visible {
   transform: none;
   padding: var(--spacing-1);
   opacity: 1;
   pointer-events: auto;
-  transition: .18s var(--bounce-function);
 }
 
-.menu.branch-menu .icon {
+.branch-menu .icon {
   padding: 10px 15px;
   padding: 8px 13px;
   padding: 8px 14px;
@@ -1384,31 +1383,31 @@ body .sidebar .button:active:not(:hover) {
   grid-gap: 7px;
 }
 
-.menu.branch-menu .icon.selected {
+.branch-menu .icon.selected {
   color: #059669;
 }
 
-.menu.branch-menu .icon:hover {
+.branch-menu .icon:hover {
   background: rgba(255,255,255,0.05);
 }
 
-.menu.branch-menu .icon:active {
+.branch-menu .icon:active {
   background: rgba(255,255,255,0.1);
 }
 
-.menu.branch-menu .icon a {
+.branch-menu .icon a {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: calc(100% - 16px - 7px);
 }
 
-.menu.branch-menu .icon:not(.selected) .branch-icon {
+.branch-menu .icon:not(.selected) .branch-icon {
   color: #828689;
   opacity: .5;
 }
 
-.menu.branch-menu .icon .arrow-icon {
+.branch-menu .icon .arrow-icon {
   color: #828689;
   opacity: .5;
   transform: scale(1.35) translateX(-0.1px);
@@ -1989,7 +1988,7 @@ body {
 
   --sea-blue-hint: #313744;
 
-  --midnight-blue-deep: hsl(228deg 14% 7%);
+  --deep-midnight-blue: hsl(228deg 14% 7%);
   --midnight-blue: #1a1c24;
   --midnight-light: hsl(227deg 11% 16%);
   --midnight-lighter: hsl(226deg 7% 19%);
