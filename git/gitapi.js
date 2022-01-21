@@ -170,14 +170,10 @@ let git = {
     // get repository branch
     let [repoName, branch] = repo.split(':');
 
-    if (branch) branch = '?ref='+ branch;
-    else branch = '';
-
     const query = 'https://api.github.com/repos' +
                   '/' + user + '/' + repoName +
                   '/contents' + contents +
-                  '/' + commit.file.name +
-                  branch;
+                  '/' + commit.file.name;
 
     let commitData;
 
@@ -186,14 +182,16 @@ let git = {
       commitData = {
         message: commit.message,
         content: commit.file.content,
-        sha: commit.file.sha
+        sha: commit.file.sha,
+        branch: branch
       };
 
     } else {
 
       commitData = {
         message: commit.message,
-        content: commit.file.content
+        content: commit.file.content,
+        branch: branch
       };
 
     }
