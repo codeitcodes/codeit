@@ -450,13 +450,13 @@ function addHTMLItemListeners() {
 
         // open push screen
         commitMessage = prompt('Push \''+ item.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                               'Type a push description...');
+                               'Type push description...');
 
         // if canceled push, return
         if (!commitMessage) return;
 
         // if not specified message
-        if (commitMessage === 'Type a push description...') {
+        if (commitMessage === 'Type push description...') {
 
           // show default message
           commitMessage = 'Update ' + item.innerText;
