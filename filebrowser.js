@@ -728,7 +728,7 @@ async function renderBranchMenuHTML(renderAll) {
 
       // if not clicked on show more button,
       // render only 2 branches
-      if (!renderAll && index > 1) {
+      if (!renderAll && index > 0) {
 
         return;
 
@@ -738,7 +738,7 @@ async function renderBranchMenuHTML(renderAll) {
       
     } else if (index === 0) {
       
-      index--;
+      index -= 2;
       
     }
     
