@@ -893,6 +893,8 @@ sidebarBranch.addEventListener('click', () => {
   // move branch menu to icon
   moveElToEl(branchMenu, sidebarBranch);
   
+  branchMenu.classList.add('top-margin');
+  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
   branchButton.classList.toggle('active');
@@ -905,6 +907,8 @@ branchButton.addEventListener('click', () => {
   
   // move branch menu to button
   moveElToEl(branchMenu, branchButton);
+  
+  branchMenu.classList.remove('top-margin');
   
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
