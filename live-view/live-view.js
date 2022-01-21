@@ -473,6 +473,8 @@ function toggleLiveView(file) {
 }
 
 
+const liveFetchURL = window.location.origin + '/live-fetch/';
+
 // render live view for HTML files
 function renderLiveViewHTML(file) {
 
@@ -485,6 +487,11 @@ function renderLiveViewHTML(file) {
 
   const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
+  
+  
+  const baseEl = frameDocument.createElement('base');
+  baseEl.href = liveFetchURL;
+  frameDocument.appendChild(baseEl);
 
 
   frameDocument.addEventListener('keydown', handleMetaP);
@@ -501,7 +508,7 @@ function renderLiveViewHTML(file) {
       const linkHref = new URL(link.href);
       const fileName = linkHref.pathname.slice(1);
 
-      if (linkHref.origin == window.location.origin) {
+      if (linkHref.origin == liveFetchURL) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
@@ -551,7 +558,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(image.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == window.location.origin) {
+    if (linkHref.origin == liveFetchURL) {
 
       // if image is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -615,7 +622,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(video.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == window.location.origin) {
+    if (linkHref.origin == liveFetchURL) {
 
       // if video is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -660,7 +667,7 @@ function renderLiveViewHTML(file) {
     const linkHref = new URL(audio.src);
     const fileName = linkHref.pathname.slice(1);
 
-    if (linkHref.origin == window.location.origin) {
+    if (linkHref.origin == liveFetchURL) {
 
       // if audio file is in current directory
       if (!(linkHref.pathname.slice(1).includes('/'))) {
@@ -703,7 +710,7 @@ async function fetchLiveViewScripts(frameDocument) {
       const linkHref = new URL(script.src);
       const fileName = linkHref.pathname.slice(1);
 
-      if (linkHref.origin == window.location.origin) {
+      if (linkHref.origin == liveFetchURL) {
 
         const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
         let resp;
