@@ -307,14 +307,10 @@ async function renderSidebarHTML() {
 
     } else { // else, show all repositories
 
-      // hide branch
-      sidebarBranch.classList.remove('visible');
-
-
       // change header options
       optionsScreen.classList.add('out-of-repo');
 
-
+      
       // render repositories
       resp.forEach(item => {
 
@@ -591,91 +587,101 @@ async function loadFileInHTML(fileEl, fileSha) {
 // render branch menu
 async function renderBranchMenuHTML() {
   
-  // map tree location
-  let [user, repo, contents] = treeLoc;
-  
-  // get repository branch
-  let [repoName, selectedBranch] = repo.split(':');
-  
-  
-  // if selected branch exists
-  if (selectedBranch) {
-
-    // show branch
-    sidebarBranch.children[1].innerText = selectedBranch;
-    sidebarBranch.classList.add('visible');
-
-  }
-  
-  
-  // show loading message
-  branchMenu.innerHTML = '<div class="icon"><a>Loading...</a></div>';
-  
-  // get branches for repository
-  const resp = await git.getBranches(treeLoc);
-  
-  
-  // save rendered HTML
-  let out = '';
-  
-  // run on all branches
-  resp.forEach(branch => {
+  // if branch menu isn't already rendered
+  if (getAttr(branchMenu, 'tree') !== treeLoc.join()) {
     
-    // show selected branch
-    if (branch.name === selectedBranch) {
-      
-      out += '<div class="icon selected">'+ branchIcon + '<a>' + branch.name +'</a></div>';
-      
+    setAttr(branchMenu, 'tree', treeLoc.join());
+    
+    
+    // map tree location
+    let [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, selectedBranch] = repo.split(':');
+
+
+    // if selected branch exists
+    if (selectedBranch && branchMenu.innerHTML == '') {
+
+      // show branch
+      branchMenu.innerHTML = `<div class="icon selected">` + branchIcon + `<a>` + selectedBranch + `</a></div>
+                              <div class="icon">` + `<a>See more</a></div>`;
+
     } else {
-      
-      out += '<div class="icon">'+ branchIcon + '<a>' + branch.name +'</a></div>';
-      
+
+      // show loading message
+      branchMenu.innerHTML = '<div class="icon"><a>Loading...</a></div>';
+
     }
     
-  });
-  
-  // add rendered HTML to DOM
-  branchMenu.innerHTML = out;
-  
-  
-  // add branch event listeners
-  
-  let branches = branchMenu.querySelectorAll('.icon');
+    
+    // get branches for repository
+    const resp = await git.getBranches(treeLoc);
+    
 
-  // run on all branches
-  branches.forEach(branch => {
+    // save rendered HTML
+    let out = '';
 
-    // select branch on click
-    branch.addEventListener('click', () => {
-      
-      // hide branch menu
-      branchMenu.classList.remove('visible');
-      branchButton.classList.remove('active');
-      
-      // if branch isn't already selected
-      if (!branch.classList.contains('selected')) {
-        
-        // clear previous selection
-        if (branchMenu.querySelector('.icon.selected')) {
-          branchMenu.querySelector('.icon.selected').classList.remove('selected');
-        }
-        
-        // select branch
-        branch.classList.add('selected');
-        
-        // change location
-        selectedBranch = branch.querySelector('a').textContent;
-        treeLoc[1] = repoName + ':' + selectedBranch;
-        saveTreeLocLS(treeLoc);
-        
-        // render sidebar
-        renderSidebarHTML();
-        
+    // run on all branches
+    resp.forEach(branch => {
+
+      // show selected branch
+      if (branch.name === selectedBranch) {
+
+        out += '<div class="icon selected">' + branchIcon + '<a>' + branch.name +'</a></div>';
+
+      } else {
+
+        out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
+
       }
-      
+
+    });
+
+    // add rendered HTML to DOM
+    branchMenu.innerHTML = out;
+
+
+    // add branch event listeners
+
+    let branches = branchMenu.querySelectorAll('.icon');
+
+    // run on all branches
+    branches.forEach(branch => {
+
+      // select branch on click
+      branch.addEventListener('click', () => {
+
+        // hide branch menu
+        branchMenu.classList.remove('visible');
+        branchButton.classList.remove('active');
+
+        // if branch isn't already selected
+        if (!branch.classList.contains('selected')) {
+
+          // clear previous selection
+          if (branchMenu.querySelector('.icon.selected')) {
+            branchMenu.querySelector('.icon.selected').classList.remove('selected');
+          }
+
+          // select branch
+          branch.classList.add('selected');
+
+          // change location
+          selectedBranch = branch.querySelector('a').textContent;
+          treeLoc[1] = repoName + ':' + selectedBranch;
+          saveTreeLocLS(treeLoc);
+
+          // render sidebar
+          renderSidebarHTML();
+
+        }
+
+      });
+
     });
     
-  });
+  }
   
 }
 
