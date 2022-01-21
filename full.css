@@ -795,8 +795,12 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
   opacity: 1;
 }
 
+body:not(.mobile) .sidebar .header .title .branch-icon:active {
+  opacity: 0.5;
+}
+
 .sidebar .header .title .branch-icon.active {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .sidebar .header .roundbutton.options {
