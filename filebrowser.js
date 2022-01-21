@@ -776,31 +776,23 @@ optionsButton.addEventListener('click', () => {
 })
 
 
-// if clicked on branch button,
-// show branch menu
+// if clicked on branch icon,
+// toggle branch menu
 sidebarBranch.addEventListener('click', () => {
   
-  if (!branchMenu.classList.contains('visible')) {
-
-    branchMenu.classList.add('visible');
-    sidebarBranch.classList.add('active');
-    branchButton.classList.add('active');
-    
-  }
+  branchMenu.classList.toggle('visible');
+  sidebarBranch.classList.toggle('active');
+  branchButton.classList.toggle('active');
   
 })
 
 // if clicked on branch button,
-// show branch menu
+// toggle branch menu
 branchButton.addEventListener('click', () => {
   
-  if (!branchMenu.classList.contains('visible')) {
-
-    branchMenu.classList.add('visible');
-    sidebarBranch.classList.add('active');
-    branchButton.classList.add('active');
-    
-  }
+  branchMenu.classList.toggle('visible');
+  sidebarBranch.classList.toggle('active');
+  branchButton.classList.toggle('active');
   
 })
 
@@ -810,7 +802,7 @@ document.addEventListener('click', (e) => {
   // if branch menu is visible
   if (branchMenu.classList.contains('visible')) {
     
-    const notClickedOnMenu = (e.target != branchMenu);
+    const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch && e.target != branchButton);
     const notClickedOnMenuChild = (e.target.parentElement != branchMenu);
     
     if (notClickedOnMenu && notClickedOnMenuChild) {
