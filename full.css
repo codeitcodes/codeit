@@ -780,13 +780,22 @@ body.notransition .sidebar {
   padding: 5px;
   opacity: .5;
   color: #828689;
+  display: none;
+}
+
+.sidebar .header .title .branch-icon.visible {
+  display: block;
 }
 
 body:not(.mobile) .sidebar .header .title .branch-icon:hover {
-  opacity: 1;
+  opacity: 0.72;
 }
 
 .sidebar .header .title .branch-icon:active {
+  opacity: 1;
+}
+
+.sidebar .header .title .branch-icon.active {
   opacity: 1;
 }
 
