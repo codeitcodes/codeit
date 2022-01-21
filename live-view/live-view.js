@@ -487,17 +487,18 @@ function renderLiveViewHTML(file) {
 
   const frame = liveView.querySelector('.live-frame');
   const frameDocument = frame.contentDocument;
+
+  frameDocument.addEventListener('keydown', handleMetaP);
   
+  
+  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
+
   
   const baseEl = frameDocument.createElement('base');
   baseEl.href = liveFetchURL;
   frameDocument.head.appendChild(baseEl);
-
-
-  frameDocument.addEventListener('keydown', handleMetaP);
-  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
-
-
+  
+  
   // fetch styles
   const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
 
