@@ -250,10 +250,11 @@ let moveElToEl = (origin, dest) => {
   
   const rect = dest.getBoundingClientRect(),
         left = rect.left,
-        top = rect.top;
+        top = rect.top,
+        height = dest.clientHeight;
   
   origin.style.left = left + 'px';
-  origin.style.top = top + 'px';
+  origin.style.top = top + height + 'px';
 
 }
 
