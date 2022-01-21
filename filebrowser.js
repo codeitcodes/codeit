@@ -592,18 +592,18 @@ async function loadFileInHTML(fileEl, fileSha) {
 // render branch menu
 async function renderBranchMenuHTML() {
   
+  // map tree location
+  let [user, repo, contents] = treeLoc;
+
+  // get repository branch
+  let [repoName, selectedBranch] = repo.split(':');
+  
+  
   // if branch menu isn't already rendered
-  if (getAttr(branchMenu, 'tree') !== treeLoc.join()) {
+  if (getAttr(branchMenu, 'tree') !== [user, repoName, contents].join()) {
     
-    setAttr(branchMenu, 'tree', treeLoc.join());
+    setAttr(branchMenu, 'tree', [user, repoName, contents].join());
     
-    
-    // map tree location
-    let [user, repo, contents] = treeLoc;
-
-    // get repository branch
-    let [repoName, selectedBranch] = repo.split(':');
-
 
     // if selected branch exists
     if (selectedBranch && branchMenu.innerHTML == '') {
