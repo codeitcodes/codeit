@@ -244,7 +244,21 @@ let setStorage = (item, value) => {
 }
 
 
-// Attributes
+// move element to element (when origin element has 'position: fixed')
+
+let moveElToEl = (origin, dest) => {
+  
+  const rect = dest.getBoundingClientRect(),
+        left = rect.left,
+        top = rect.top;
+  
+  origin.style.left = left + 'px';
+  origin.style.top = top + 'px';
+
+}
+
+
+// attributes
 
 let getAttr = (element, item) => {
 
