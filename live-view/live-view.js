@@ -491,7 +491,7 @@ function renderLiveViewHTML(file) {
   
   const baseEl = frameDocument.createElement('base');
   baseEl.href = liveFetchURL;
-  frameDocument.appendChild(baseEl);
+  frameDocument.head.appendChild(baseEl);
 
 
   frameDocument.addEventListener('keydown', handleMetaP);
