@@ -738,7 +738,7 @@ async function renderBranchMenuHTML(renderAll) {
       
     } else if (index === 0) {
       
-      index -= 2;
+      index--;
       
     }
     
