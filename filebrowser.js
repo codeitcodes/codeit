@@ -700,73 +700,68 @@ async function renderBranchMenuHTML() {
     // get branches for repository
     const resp = await git.getBranches(treeLoc);
     
-
-    // save rendered HTML
-    let out = '';
+  }
     
-    // render selected branch
-    if (selectedBranch) {
-      
-      out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
-      
+
+  // save rendered HTML
+  let out = '';
+
+  // render selected branch
+  if (selectedBranch) {
+
+    out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
+
+  }
+
+  // run on all branches
+  resp.forEach(branch => {
+
+    if (branch.name !== selectedBranch) {
+
+      out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
+
     }
-    
-    // run on all branches
-    resp.forEach(branch => {
 
-      if (branch.name !== selectedBranch) {
+  });
 
-        out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
+  // add rendered HTML to DOM
+  branchMenu.innerHTML = out;
+
+
+  // add branch event listeners
+
+  let branches = branchMenu.querySelectorAll('.icon');
+
+  // run on all branches
+  branches.forEach(branch => {
+
+    // select branch on click
+    branch.addEventListener('click', () => {
+
+      // hide branch menu
+      branchMenu.classList.remove('visible');
+      sidebarBranch.classList.remove('active');
+      branchButton.classList.remove('active');
+
+      // if branch isn't already selected
+      if (!branch.classList.contains('selected')) {
+
+        // change location
+        selectedBranch = branch.querySelector('a').textContent;
+        treeLoc[1] = repoName + ':' + selectedBranch;
+        saveTreeLocLS(treeLoc);
+        
+        // render sidebar
+        renderSidebarHTML();
+        
+        // render branch menu
+        renderBranchMenuHTML();
 
       }
 
     });
 
-    // add rendered HTML to DOM
-    branchMenu.innerHTML = out;
-
-
-    // add branch event listeners
-
-    let branches = branchMenu.querySelectorAll('.icon');
-
-    // run on all branches
-    branches.forEach(branch => {
-
-      // select branch on click
-      branch.addEventListener('click', () => {
-
-        // hide branch menu
-        branchMenu.classList.remove('visible');
-        sidebarBranch.classList.remove('active');
-        branchButton.classList.remove('active');
-
-        // if branch isn't already selected
-        if (!branch.classList.contains('selected')) {
-
-          // clear previous selection
-          if (branchMenu.querySelector('.icon.selected')) {
-            branchMenu.querySelector('.icon.selected').classList.remove('selected');
-          }
-
-          // select branch
-          branch.classList.add('selected');
-
-          // change location
-          selectedBranch = branch.querySelector('a').textContent;
-          treeLoc[1] = repoName + ':' + selectedBranch;
-          saveTreeLocLS(treeLoc);
-
-          // render sidebar
-          renderSidebarHTML();
-
-        }
-
-      });
-
-    });
-    
-  }
+  });
   
 }
 
