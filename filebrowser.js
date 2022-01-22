@@ -510,20 +510,20 @@ function clickedOnFileHTML(fileEl, event) {
       
       // get selected branch
       let selBranch = treeLoc[1].split(':')[1];
-      
+
       // open push screen
-      commitMessage = prompt('Push ' + fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
-                             'Type a push description...');
-      
+      commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+                             'Type push description...');
+
       // if canceled push, return
       if (!commitMessage) return;
-      
+
       // if not specified message
-      if (commitMessage === 'Type a push description...') {
-        
+      if (commitMessage === 'Type push description...') {
+
         // show default message
         commitMessage = 'Update ' + fileEl.innerText;
-        
+
       }
       
     } else {
