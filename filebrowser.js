@@ -1579,15 +1579,24 @@ function setupEditor() {
 
   }
 
-  // disable Ctrl/Cmd+S
+  
   document.addEventListener('keydown', (e) => {
 
+    // disable Ctrl/Cmd+S
     if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
 
       if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
       else console.log('[Ctrl+S] Always saving. Always saving.');
+
+    }
+    
+    
+    // add beautifier on Ctrl/Cmd+B
+    if ((e.key === 'b' || e.keyCode === 66) && isKeyEventMeta(e)) {
+    
+      alert(window.getSelection().toString());
 
     }
 
