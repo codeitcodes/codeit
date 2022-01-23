@@ -820,9 +820,20 @@ async function renderBranchMenuHTML(renderAll) {
 
       } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
         
-        const newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
-        
+        let newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
+
         if (newBranchName) {
+          
+          // replace all special chars in name with dashes
+        
+          const specialChars = validateString(newBranchName);
+
+          if (specialChars) {
+
+            specialChars.forEach(char => { newBranchName = newBranchName.replaceAll(char, '-') });
+
+          }
+          
           
           // hide branch menu
           branchMenu.classList.remove('visible');
@@ -1080,9 +1091,17 @@ newFileButton.addEventListener('click', () => {
         // get file name
         let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
 
-        // replace all spaces in name with dashes
-        fileName = fileName.replaceAll(' ', '-');
-
+        // replace all special chars in name with dashes
+        
+        const specialChars = validateString(fileName);
+        
+        if (specialChars) {
+          
+          specialChars.forEach(char => { fileName = fileName.replaceAll(char, '-') });
+          
+        }
+        
+        
         // if another file in the current directory
         // has the same name, add a differentiating number
         fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
