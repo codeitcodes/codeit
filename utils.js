@@ -284,7 +284,7 @@ let validateString = (string) => {
   
   const stringArr = string.split('').filter(char => !acceptableChars.includes(char));
   
-  return (stringArr ?? false);
+  return (stringArr.length > 0 ? stringArr : false);
   
 }
 
