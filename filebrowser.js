@@ -746,10 +746,13 @@ async function renderBranchMenuHTML(renderAll) {
 
   });
   
+  // render new branch button
+  out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
+  
   // render show more button
   if (!renderAll && branchResp.length > 2) {
     
-    out += '<div class="icon">' + arrowDownIcon + '<a>see more</a></div>';
+    out += '<div class="icon see-more">' + arrowDownIcon + '<a>see more</a></div>';
     
   }
 
@@ -765,10 +768,11 @@ async function renderBranchMenuHTML(renderAll) {
   branches.forEach(branch => {
 
     // select branch on click
-    branch.addEventListener('click', () => {
+    branch.addEventListener('click', async () => {
       
-      // if not clicked on show more button
-      if (!branch.querySelector('.arrow-icon')) {
+      // if clicked on branch, not a special button
+      if (!branch.classList.contains('new-branch')
+          && !branch.classList.contains('see-more')) {
 
         // hide branch menu
         branchMenu.classList.remove('visible');
@@ -788,11 +792,32 @@ async function renderBranchMenuHTML(renderAll) {
 
         }
 
-      } else { // if clicked on show more button
+      } else if (branch.classList.contains('see-more')) { // if clicked on show more button
 
         // render branch menu
         renderBranchMenuHTML(true);
 
+      } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
+        
+        const newBranchName = prompt('Create branch from \'' + selectedBranch + '\'.', 'new branch');
+        
+        if (newBranchName) {
+          
+          // start loading
+          startLoading();
+          
+          // create branch
+          await git.createBranch(treeLoc, selectedBranch, newBranchName);
+          
+          // change location
+          treeLoc[1] = repoName + ':' + newBranchName;
+          saveTreeLocLS(treeLoc);
+
+          // render sidebar
+          renderSidebarHTML();
+          
+        }
+        
       }
 
     });
