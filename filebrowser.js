@@ -803,6 +803,11 @@ async function renderBranchMenuHTML(renderAll) {
         
         if (newBranchName) {
           
+          // hide branch menu
+          branchMenu.classList.remove('visible');
+          sidebarBranch.classList.remove('active');
+          branchButton.classList.remove('active');
+          
           // start loading
           startLoading();
           
