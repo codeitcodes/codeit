@@ -13,16 +13,37 @@
   <a href="https://discord.gg/47RFy3Vfmg"><img src="/icons/social/discordapp.svg" width="26" height="26"></a>
   <a href="https://twitter.com/codeitcodes"><img src="/icons/social/twitter.svg" width="36" height="26"></a>
 </p>
+
 <h2>Features</h2>
+
 <ul>
-  <li><b>Uses blazing-fast web APIs.</b> <a href="https://github.com/codeitcodes/codeit/blob/main/about.md">See the technical specs.</a></li>
-  <li><b>Framework-free.</b> Only library is PrismJS, for syntax highlighting.</li>
-  <li><b>PWA support.</b> Weighs 70% less than regular apps, can be installed and works offline.</li>
-  <li><b>Autosaving.</b> Autosaving down to the character helps you pick up right where you left off. Code, scroll, caret positions and location in Git repos.</li>
-  <li><b>Supports 275 lanugages.</b> Most common languages are preloaded by default, with uncommon languages loaded dynamically.</li>
-  <li><b>Private.</b> Your code stays on your device.</li>
-  <li><b>Cross-platform.</b> Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.</li>
+
+  <li><b>Live view.</b> Run HTML, JS, CSS and Python projects with the click of a button.</li>
+  
+  <li><b>Share.</b> Share unique links to repos, live views, branches and files.</li>
+  
+  <li><b>Private.</b> Codeit dosen't collect data. Your code stays on your device.</li>
+  
+  <li>PWA support. <b>Weighs 70% less</b> than regular apps, can be installed and <b>works offline.</b></li>
+  
+  <li><b>Autosaving</b> down to the character helps you pick up right where you left off. Code, scroll and caret positions, and location in your repos.</li>
+  
+  <li>Codeit is built for Chrome on <b>Android, Windows, macOS and Linux</b>, as well as <b>Safari on iOS.</b></li>
+
 </ul>
+<h2>Technical</h2>
+
+<li>Supports 275 lanugages.</li>
+
+<li>Uses blazing-fast Web APIs.</li>
+
+<li>Framework-free.</li>
+
+<h2>Security</h2>
+
+Your code stays on your device. Anyone can verify the open-source code deploys to the Codeit site by <a href="https://app.netlify.com/sites/codeitcodes/deploys?filter=main">scrolling the deploy log.</a></li>
+
 <hr>
+
 <h4>Special Thanks</h4>
 Codeit's logo was created by <a href="https://twitter.com/sandorqi">@sandorqi</a>.
