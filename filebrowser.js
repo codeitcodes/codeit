@@ -715,7 +715,7 @@ async function renderBranchMenuHTML(renderAll) {
     } else {
 
       // show loading message
-      branchMenu.innerHTML = '<div class="icon"><a>Loading...</a></div>';
+      branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
 
     }
     
