@@ -101,7 +101,7 @@ async function renderSidebarHTML() {
 
   }
   
-  if (resp.message.startsWith('No commit found')) {
+  if (resp.message && resp.message.startsWith('No commit found')) {
     
     // if couldn't find branch, show not found screen
     
