@@ -274,6 +274,21 @@ let setAttr = (element, item, value) => {
 }
 
 
+// validate string
+let validateString = (string) => {
+
+  const acceptableChars = 'abcdefghijklmnopqrstuvwxyz' +
+                          'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+                          '0123456789' +
+                          '-_.';
+  
+  const stringArr = string.split('').filter(char => !acceptableChars.includes(char));
+  
+  return (stringArr.length === 0);
+  
+}
+
+
 // asynchronous thread
 
 let asyncThread = (callback, time) => {
