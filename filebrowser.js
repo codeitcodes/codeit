@@ -82,7 +82,8 @@ async function renderSidebarHTML() {
 
   }
 
-  if (resp.message == 'Not Found') {
+  if (resp.message == 'Not Found'
+      || resp.message.startsWith('No commit found')) {
 
     // if couldn't find repository, show not found screen
 
