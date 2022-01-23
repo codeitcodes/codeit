@@ -747,8 +747,8 @@ async function renderBranchMenuHTML(renderAll) {
     if (branch.name !== selectedBranch) {
 
       // if not clicked on show more button,
-      // render only 2 branches
-      if (!renderAll && index > 0) {
+      // render only the selected branch
+      if (!renderAll) {
 
         return;
 
