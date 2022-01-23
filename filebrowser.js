@@ -82,8 +82,7 @@ async function renderSidebarHTML() {
 
   }
 
-  if (resp.message == 'Not Found'
-      || resp.message.startsWith('No commit found')) {
+  if (resp.message == 'Not Found') {
 
     // if couldn't find repository, show not found screen
 
@@ -92,14 +91,34 @@ async function renderSidebarHTML() {
     
     alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
     
-    repo = '';
-    contents = '';
+    treeLoc[1] = '';
+    treeLoc[2] = '';
     saveTreeLocLS(treeLoc);
 
     renderSidebarHTML();
 
     return;
 
+  }
+  
+  if (resp.message.startsWith('No commit found')) {
+    
+    // if couldn't find branch, show not found screen
+
+    // stop loading
+    stopLoading();
+    
+    alert('Hmm... we can\'t find that branch.');
+    
+    const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+    
+    treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
+    saveTreeLocLS(treeLoc);
+
+    renderSidebarHTML();
+
+    return;
+    
   }
 
   if (resp.message == 'Bad credentials') {
