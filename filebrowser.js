@@ -819,7 +819,7 @@ async function renderBranchMenuHTML(renderAll) {
 
       } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
         
-        const newBranchName = prompt('Create branch from \'' + selectedBranch + '\'.', 'new branch');
+        const newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
         
         if (newBranchName) {
           
