@@ -835,8 +835,8 @@ async function renderBranchMenuHTML(renderAll) {
           // create branch
           await git.createBranch(treeLoc, selectedBranch, newBranchName);
           
-          // clear resp from HTML
-          setAttr(branchMenu, 'resp', '');
+          // clear tree from HTML
+          setAttr(branchMenu, 'tree', '');
           
           // change location
           treeLoc[1] = repoName + ':' + newBranchName;
