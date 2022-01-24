@@ -757,7 +757,7 @@ async function fetchLiveViewScripts(frameDocument) {
         script.remove();
 
       } else {
-
+        
         await addScript(frameDocument, false, script.src, script.type);
 
         // delete original
@@ -767,7 +767,19 @@ async function fetchLiveViewScripts(frameDocument) {
 
     } else {
 
-      addScript(frameDocument, script.textContent, false, script.type);
+      let scriptContent = script.textContent;
+      
+      // if script is a module
+      if (script.type === 'module') {
+        
+        const filePath = file.dir.split(',')[2];
+        
+        // get all imports in module
+        scriptContent = await getImportsInModule(scriptContent, filePath);
+
+      }
+      
+      addScript(frameDocument, scriptContent, false, script.type);
 
       // delete original
       script.remove();
