@@ -418,8 +418,8 @@ if (isMobile) {
 
   function handleMetaP(e) {
 
-    // detect ctrl/cmd+P
-    if ((e.key === 'p' || e.keyCode === 80) && isKeyEventMeta(e)) {
+    // detect ctrl/cmd+R
+    if ((e.key === 'r' || e.keyCode === 82) && isKeyEventMeta(e)) {
 
       e.preventDefault();
 
