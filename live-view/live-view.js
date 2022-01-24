@@ -2,8 +2,8 @@
 // setup live view
 async function setupLiveView() {
 
-  // if URL has a live view flag
-  if (linkData.openLive) {
+  // if URL has a file
+  if (linkData.file) {
 
     if (isMobile) {
 
@@ -23,41 +23,48 @@ async function setupLiveView() {
     // change selected file
     changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
                        [0, 0], [0, 0], false);
+    
+    
+    // if URL has a live view flag
+    if (linkData.openLive) {
 
-    // if on mobile device
-    if (isMobile) {
+      // if on mobile device
+      if (isMobile) {
 
-      // update bottom float
-      updateFloat();
+        // update bottom float
+        updateFloat();
 
-      // don't transition bottom float
-      bottomWrapper.classList.add('notransition');
+        // don't transition bottom float
+        bottomWrapper.classList.add('notransition');
 
-      // expand bottom float
-      bottomWrapper.classList.add('expanded');
+        // expand bottom float
+        bottomWrapper.classList.add('expanded');
 
-      // fix bottom float on safari
-      if (isSafari) bottomWrapper.classList.add('fromtop');
+        // fix bottom float on safari
+        if (isSafari) bottomWrapper.classList.add('fromtop');
 
-      // restore transition on next frame
-      onNextFrame(() => {
-        bottomWrapper.classList.remove('notransition');
-      });
+        // restore transition on next frame
+        onNextFrame(() => {
+          bottomWrapper.classList.remove('notransition');
+        });
 
-    } else {
+      } else {
 
-      // don't transition live view
-      liveView.classList.add('notransition');
+        // don't transition live view
+        liveView.classList.add('notransition');
 
-      // show live view
-      liveView.classList.add('visible');
+        // show live view
+        liveView.classList.add('visible');
 
-      // restore transition on next frame
-      onNextFrame(() => {
-        liveView.classList.remove('notransition');
-      });
+        // restore transition on next frame
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        });
 
+      }
+      
     }
+    
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
@@ -83,10 +90,17 @@ async function setupLiveView() {
                          modFile.caretPos, modFile.scrollPos, false);
 
     }
+    
+    
+    // if URL has a live view flag
+    if (linkData.openLive) {
+      
+      // open live view
+      toggleLiveView(selectedFile);
+      
+    }
 
-    // open live view
-    toggleLiveView(selectedFile);
-
+    
     // show file content in codeit
     cd.textContent = decodeUnicode(selectedFile.content);
     
