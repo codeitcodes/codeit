@@ -519,9 +519,20 @@ function renderLiveViewHTML(file) {
   frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
 
   
+  // add <base> element
+  
   const baseEl = frameDocument.createElement('base');
   baseEl.href = liveFetchURL;
-  frameDocument.head.appendChild(baseEl);
+  
+  if (frameDocument.head.children[0]) {
+    
+    frameDocument.head.insertBefore(baseEl, frameDocument.head.children[0]);
+    
+  } else {
+    
+    frameDocument.head.appendChild(baseEl);
+    
+  }
   
   
   // fetch styles
