@@ -1617,6 +1617,8 @@ function setupEditor() {
     // beautify on Ctrl/Cmd+D
     if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
       
+      e.preventDefault();
+      
       // if codeit is active
       if (document.activeElement === cd) {
         
@@ -1646,7 +1648,7 @@ function setupEditor() {
             cd.insert(beautifiedText);
             
             // dispatch type event (simulate typing)
-            //cd.dispatchTypeEvent();
+            cd.dispatchTypeEvent();
             
           }
 
