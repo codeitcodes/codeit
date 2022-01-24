@@ -1441,12 +1441,14 @@ function protectUnsavedCode() {
 
   // map tree location
   const [user, repo, contents] = treeLoc;
+  const [repoName, branch] = repo.split(':');
   
   // map selected file location
   const [selUser, selRepo, selContents] = selectedFile.dir.split(',');
-  
+  const [selRepoName, selBranch] = selRepo.split(':');
+
   if (user === selUser &&
-      repo === selRepo &&
+      repoName === selRepoName &&
       contents === selContents) {
 
     // get selected file element in HTML
