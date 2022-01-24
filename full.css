@@ -1338,7 +1338,7 @@ body .sidebar .button:active:not(:hover) {
 }
 
 
-.branch-menu {
+.menu {
   position: fixed;
   background: var(--deep-midnight-blue);
   color: #dcddde;
@@ -1365,18 +1365,18 @@ body .sidebar .button:active:not(:hover) {
   z-index: 1000;
 }
 
-.branch-menu.top-margin {
+.menu.top-margin {
   margin-top: 2px;
 }
 
-.branch-menu.visible {
+.menu.visible {
   transform: none;
   padding: var(--spacing-1);
   opacity: 1;
   pointer-events: auto;
 }
 
-.branch-menu .icon {
+.menu .icon {
   padding: 10px 15px;
   padding: 8px 13px;
   padding: 8px 14px;
@@ -1386,31 +1386,31 @@ body .sidebar .button:active:not(:hover) {
   grid-gap: 7px;
 }
 
-.branch-menu .icon.selected {
+.menu .icon.selected {
   color: #059669;
 }
 
-.branch-menu .icon:hover {
+.menu .icon:hover {
   background: rgba(255,255,255,0.05);
 }
 
-.branch-menu .icon:active {
+.menu .icon:active {
   background: rgba(255,255,255,0.1);
 }
 
-.branch-menu .icon a {
+.menu .icon a {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: calc(100% - 16px - 7px);
 }
 
-.branch-menu .icon:not(.selected) .branch-icon {
+.menu .icon:not(.selected) .branch-icon {
   color: #828689;
   opacity: .5;
 }
 
-.branch-menu .icon .bigger-icon {
+.menu .icon .bigger-icon {
   color: #828689;
   opacity: .5;
   transform: scale(1.35) translateX(-0.1px);
