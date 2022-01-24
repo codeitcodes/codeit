@@ -153,7 +153,7 @@ const moduleImporter = {};
       relPath = relPath.join('/');
 
       // get all imports in script
-      importedScript = await getImports(decodeUnicode(importedScript), relPath);
+      importedScript = await moduleImporter.getImports(decodeUnicode(importedScript), relPath);
 
       importedScript = 'data:text/javascript;base64,' +
         encodeURIComponent(encodeUnicode(importedScript));
