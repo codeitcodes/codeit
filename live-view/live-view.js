@@ -89,17 +89,6 @@ async function setupLiveView() {
 
     // show file content in codeit
     cd.textContent = decodeUnicode(selectedFile.content);
-
-    // change tab character
-    if (cd.textContent.includes('\t')) {
-
-      cd.options.tab = '\t';
-
-    } else {
-
-      cd.options.tab = '  ';
-
-    }
     
     // change codeit lang
     cd.lang = selectedFile.lang;
