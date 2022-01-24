@@ -659,6 +659,17 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   // show file content in codeit
   cd.textContent = decodeUnicode(selectedFile.content);
+  
+  // change tab character
+  if (cd.textContent.includes('\t')) {
+    
+    cd.options.tab = '\t';
+    
+  } else {
+    
+    cd.options.tab = '  ';
+    
+  }
 
   // change codeit lang
   cd.lang = selectedFile.lang;
@@ -1640,6 +1651,7 @@ function setupEditor() {
           if (beautifyLang) {
 
             // beautify
+            beautifierOptions.indent_char = cd.options.tab[0];
             const beautifiedText = beautifyLang(selText, beautifierOptions);
 
             // replace selection contents
