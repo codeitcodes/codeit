@@ -1578,7 +1578,28 @@ function setupEditor() {
     });
 
   }
-
+  
+  
+  const beautifierPrefs = {
+    "indent_size": "2",
+    "indent_char": " ",
+    "max_preserve_newlines": "5",
+    "preserve_newlines": true,
+    "keep_array_indentation": false,
+    "break_chained_methods": false,
+    "indent_scripts": "normal",
+    "brace_style": "collapse",
+    "space_before_conditional": true,
+    "unescape_strings": false,
+    "jslint_happy": false,
+    "end_with_newline": false,
+    "wrap_line_length": "0",
+    "indent_inner_html": false,
+    "comma_first": false,
+    "e4x": false,
+    "indent_empty_lines": false
+  };
+  
   
   document.addEventListener('keydown', (e) => {
 
@@ -1593,10 +1614,45 @@ function setupEditor() {
     }
     
     
-    // add beautifier on Ctrl/Cmd+B
-    if ((e.key === 'b' || e.keyCode === 66) && isKeyEventMeta(e)) {
-    
-      alert(window.getSelection().toString());
+    // beautify on Ctrl/Cmd+D
+    if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
+      
+      // if codeit is active
+      if (document.activeElement === cd) {
+        
+        const selText = window.getSelection().toString();
+        
+        // if selection exists
+        if (selText !== '') {
+
+          const cursor = cd.dropper.cursor();
+
+          // get selection language
+          let selLang = Prism.util.getLanguage(cursor.getParent());
+          if (selLang == 'javascript') selLang = 'js';
+
+          // find syntax for language
+          const beautifyLang = beautifier[selLang];
+
+          // if syntax exists
+          if (beautifyLang) {
+
+            // beautify
+            const beautifiedText = beautifyLang(selText, beautifierPrefs);
+
+            // replace selection contents
+            // with beautified text
+            cd.deleteCurrentSelection();
+            cd.insert(beautifiedText);
+            
+            // dispatch type event (simulate typing)
+            //cd.dispatchTypeEvent();
+            
+          }
+
+        }
+        
+      }
 
     }
 
