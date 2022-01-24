@@ -153,12 +153,12 @@ body.notransition .bottom-wrapper {
   background: hsl(228deg 16% 10%);
 }
 
-.bottom-wrapper .bottom-float .menu {
+.bottom-wrapper .bottom-float .menu-icon {
   transition: .4s var(--cubic-function);
   transition-property: opacity, margin-left;
 }
 
-.bottom-wrapper.expanded .bottom-float .menu {
+.bottom-wrapper.expanded .bottom-float .menu-icon {
   opacity: 0;
   margin-left: -24px;
 }
