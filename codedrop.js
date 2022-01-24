@@ -30,6 +30,17 @@ function processFile(file) {
     cd.textContent = event.target.result;
     cd.lang = getFileLang(file.name);
     cd.focus();
+    
+    // change tab character
+    if (cd.textContent.includes('\t')) {
+
+      cd.options.tab = '\t';
+
+    } else {
+
+      cd.options.tab = '  ';
+
+    }
 
     cd.history = [];
 
