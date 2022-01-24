@@ -774,15 +774,15 @@ async function renderBranchMenuHTML(renderAll) {
 
   });
   
-  // render new branch button
-  out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
-  
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
     out += '<div class="icon see-more">' + arrowDownIcon + '<a>see more</a></div>';
     
   }
+  
+  // render new branch button
+  out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
   
 
   // add rendered HTML to DOM
