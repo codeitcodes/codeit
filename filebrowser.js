@@ -738,7 +738,7 @@ async function renderBranchMenuHTML(renderAll) {
     const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch);
     
     out += '<div class="icon selected" ' +
-            'sha="' + selBranchObj[0].commit.sha + '>' +
+            'sha="' + selBranchObj[0].commit.sha + '">' +
       
               branchIcon + '<a>' + selectedBranch +'</a>' +
       
