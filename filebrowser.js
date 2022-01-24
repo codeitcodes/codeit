@@ -731,20 +731,13 @@ async function renderBranchMenuHTML(renderAll) {
 
   // save rendered HTML
   let out = '';
-
+  
+  
   // render selected branch
-  if (selectedBranch) {
-    
-    const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch);
-    
-    out += '<div class="icon selected" ' +
-            'sha="' + selBranchObj[0].commit.sha + '">' +
-      
-              branchIcon + '<a>' + selectedBranch +'</a>' +
-      
-           '</div>';
-
-  }
+  
+  const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch)[0];
+  
+  out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
   
   
   // if clicked on show more button,
@@ -844,7 +837,7 @@ async function renderBranchMenuHTML(renderAll) {
           startLoading();
           
           // get origin branch SHA
-          const shaToBranchFrom = getAttr(selectedBranch, 'sha');
+          const shaToBranchFrom = selBranchObj.commit.sha;
           
           // create branch
           await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
