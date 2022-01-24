@@ -724,7 +724,7 @@ async function renderBranchMenuHTML(renderAll) {
     });
     
     // save resp in HTML
-    setAttr(branchMenu, 'resp', JSON.stringify(branchResp));
+    setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
     
   }
     
