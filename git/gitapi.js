@@ -235,7 +235,7 @@ let git = {
   },
   
   // create a branch
-  'createBranch': async (treeLoc, baseBranchName, newBranchName) => {
+  'createBranch': async (treeLoc, shaToBranchFrom, newBranchName) => {
 
     // map tree location
     let query = 'https://api.github.com';
@@ -245,36 +245,16 @@ let git = {
         
     query += '/repos/'+ user +'/'+ repoName +'/git/refs';
 
-    // get the query
-    const refs = await axios.get(query + '/heads', gitToken);
+    // create new branch
+    const branchData = {
+      ref: 'refs/heads/' + newBranchName,
+      sha: shaToBranchFrom
+    };
 
-    // find base branch
-    // to branch from
-    let baseBranch = refs.filter(ref => ref.ref.endsWith(baseBranchName));
-    
-    // if base branch exists
-    if (baseBranch) {
-      
-      // get SHA to branch from
-      const shaToBranchFrom = baseBranch[0].object.sha;
-      
-      
-      // create new branch
-      const branchData = {
-        ref: 'refs/heads/' + newBranchName,
-        sha: shaToBranchFrom
-      };
-      
-      // post the query
-      const resp = await axios.post(query, branchData, gitToken);
-      
-      return resp;
-      
-    } else {
-      
-      return false;
-      
-    }
+    // post the query
+    const resp = await axios.post(query, branchData, gitToken);
+
+    return resp;
 
   },
   
