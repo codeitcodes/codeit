@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v278';
+const CACHE_NAME = 'static-cache-v279';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -32,6 +32,8 @@ const FILES_TO_CACHE = [
   '/live-view/live-view.js',
   '/live-view/fetch-resp',
 
+  '/live-view/extensions/beautifier.min.js',
+  
   '/dark-theme.css',
 
   '/fonts/fonts.css',
