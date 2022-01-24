@@ -524,7 +524,7 @@ function renderLiveViewHTML(file) {
   const baseEl = frameDocument.createElement('base');
   baseEl.href = liveFetchURL;
   
-  if (frameDocument.head.children[0]) {
+  if (frameDocument.head.children.length > 0) {
     
     frameDocument.head.insertBefore(baseEl, frameDocument.head.children[0]);
     
