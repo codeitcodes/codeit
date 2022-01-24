@@ -41,29 +41,8 @@ async function renderSidebarHTML() {
 
 
   // map tree location
-  let [user, repo, contents] = treeLoc;
+  const [user, repo, contents] = treeLoc;
   const [repoName, branch] = repo.split(':');
-  
-  
-  // map selected file location
-  const [selUser, selRepo, selContents] = selectedFile.dir.split(',');
-  const [selRepoName, selBranch] = selRepo.split(':');
-  
-  
-  // if selected file is in the same treeLoc,
-  // but not on the same branch
-  if (user === selUser
-      && repoName === selRepoName
-      && contents === selContents
-      && branch !== selBranch) {
-    
-    // navigate to branch
-    repo = repoName + ':' + selBranch;
-    treeLoc[1] = repoName + ':' + selBranch;
-    
-    saveTreeLocLS(treeLoc);
-    
-  }
 
 
   // if not logged into git
@@ -1460,11 +1439,14 @@ function codeChange() {
 // but does not exist in the HTML
 function protectUnsavedCode() {
 
+  // map tree location
   const [user, repo, contents] = treeLoc;
+  
+  // map selected file location
   const [selUser, selRepo, selContents] = selectedFile.dir.split(',');
   
   if (user === selUser &&
-      repo.split(':')[0] === selRepo.split(':')[0] &&
+      repo === selRepo &&
       contents === selContents) {
 
     // get selected file element in HTML
