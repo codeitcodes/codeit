@@ -1629,9 +1629,10 @@ function setupEditor() {
         if (selText !== '') {
 
           const cursor = cd.dropper.cursor();
+          const cursorEl = cursor.startContainer === cd ? cd : cursor.getParent();
 
           // get selection language
-          let selLang = Prism.util.getLanguage(cursor.getParent());
+          let selLang = Prism.util.getLanguage(cursorEl);
           if (selLang == 'javascript') selLang = 'js';
 
           // find syntax for language
