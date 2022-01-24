@@ -712,21 +712,8 @@ async function renderBranchMenuHTML(renderAll) {
     
     setAttr(branchMenu, 'tree', [user, repoName, contents].join());
     
-
-    // if selected branch exists
-    if (selectedBranch && branchMenu.innerHTML == '') {
-
-      // show branch
-      branchMenu.innerHTML = `<div class="icon selected">` + branchIcon + `<a>` + selectedBranch + `</a></div>
-                              <div class="icon">` + `<a>See more</a></div>`;
-
-    } else {
-
-      // show loading message
-      branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
-
-    }
-    
+    // show loading message
+    branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
     
     // get branches for repository
     branchResp = await git.getBranches(treeLoc);
@@ -777,7 +764,7 @@ async function renderBranchMenuHTML(renderAll) {
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
-    out += '<div class="icon see-more">' + arrowDownIcon + '<a>see more</a></div>';
+    out += '<div class="icon see-more">' + moreIcon + '<a>see more</a></div>';
     
   }
   
