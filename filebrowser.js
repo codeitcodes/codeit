@@ -718,6 +718,11 @@ async function renderBranchMenuHTML(renderAll) {
     // get branches for repository
     branchResp = await git.getBranches(treeLoc);
     
+    // clean resp and save only relevant fields
+    let cleanedResp = branchResp.map(branch => {
+      return { name: branch.name, commit: { sha: branch.commit.sha }};
+    });
+    
     // save resp in HTML
     setAttr(branchMenu, 'resp', JSON.stringify(branchResp));
     
@@ -729,37 +734,37 @@ async function renderBranchMenuHTML(renderAll) {
 
   // render selected branch
   if (selectedBranch) {
-
-    out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
+    
+    const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch);
+    
+    out += '<div class="icon selected" ' +
+            'sha="' + selBranchObj[0].commit.sha + '>' +
+      
+              branchIcon + '<a>' + selectedBranch +'</a>' +
+      
+           '</div>';
 
   }
   
-  let index = 0;
   
-  // run on all branches
-  branchResp.forEach(branch => {
-    
-    if (branch.name !== selectedBranch) {
+  // if clicked on show more button,
+  // render all branches
+  if (renderAll) {
 
-      // if not clicked on show more button,
-      // render only selected branch
-      if (!renderAll) {
+    // run on all branches
+    branchResp.forEach(branch => {
+      
+      // don't render selected branch twice
+      if (branch.name !== selectedBranch) {
 
-        return;
+        out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
 
       }
 
-      out += '<div class="icon">' + branchIcon + '<a>' + branch.name +'</a></div>';
-      
-    } else if (index === 0) {
-      
-      index--;
-      
-    }
+    });
     
-    index++;
-
-  });
+  }
+  
   
   // render show more button
   if (!renderAll && branchResp.length > 1) {
@@ -838,8 +843,11 @@ async function renderBranchMenuHTML(renderAll) {
           // start loading
           startLoading();
           
+          // get origin branch SHA
+          const shaToBranchFrom = getAttr(selectedBranch, 'sha');
+          
           // create branch
-          await git.createBranch(treeLoc, selectedBranch, newBranchName);
+          await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
           
           // clear tree from HTML
           setAttr(branchMenu, 'tree', '');
