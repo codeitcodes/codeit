@@ -775,7 +775,7 @@ async function fetchLiveViewScripts(frameDocument) {
         const filePath = file.dir.split(',')[2];
         
         // get all imports in module
-        scriptContent = await getImportsInModule(scriptContent, filePath);
+        scriptContent = await moduleImporter.getImports(scriptContent, filePath);
 
       }
       
