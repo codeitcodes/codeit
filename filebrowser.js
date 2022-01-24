@@ -41,7 +41,29 @@ async function renderSidebarHTML() {
 
 
   // map tree location
-  const [user, repo, contents] = treeLoc;
+  let [user, repo, contents] = treeLoc;
+  const [repoName, branch] = repo.split(':');
+  
+  
+  // map selected file location
+  const [selUser, selRepo, selContents] = selectedFile.dir.split(',');
+  const [selRepoName, selBranch] = selRepo.split(':');
+  
+  
+  // if selected file is in the same treeLoc,
+  // but not on the same branch
+  if (user === selUser
+      && repoName === selRepoName
+      && contents === selContents
+      && branch !== selBranch) {
+    
+    // navigate to branch
+    repo = repoName + ':' + selBranch;
+    treeLoc[1] = repoName + ':' + selBranch;
+    
+    saveTreeLocLS(treeLoc);
+    
+  }
 
 
   // if not logged into git
@@ -157,8 +179,6 @@ async function renderSidebarHTML() {
 
     if (contents != '') {
 
-      const repoName = repo.split(':')[0];
-
       // if repo is owned by logged user
       if (user === loggedUser) {
 
@@ -176,8 +196,6 @@ async function renderSidebarHTML() {
       if (sidebarLogo.scrollLeft > 0) titleAnimation = 'smooth';
 
     } else if (repo != '') {
-
-      const repoName = repo.split(':')[0];
 
       // if repo is owned by logged user
       if (user === loggedUser) {
