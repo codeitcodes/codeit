@@ -982,11 +982,11 @@ branchButton.addEventListener('click', () => {
 
 if (!isMobile) {
   
-  document.addEventListener('click', checkBranchMenu);
+  document.addEventListener('mousedown', checkBranchMenu);
   
 } else {
   
-  document.addEventListener('touchdown', checkBranchMenu);
+  document.addEventListener('touchstart', checkBranchMenu);
   
 }
 
