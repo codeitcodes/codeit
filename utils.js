@@ -332,13 +332,16 @@ Element.prototype.on = (events, callback, passive) => {
 
 // copy
 let copy = (text) => {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textArea);
+  navigator.clipboard.writeText(text);
+}
+
+// paste
+let paste = async (text) => {
+  
+  const text = await navigator.clipboard.readText();
+  
+  return text;
+  
 }
 
 
