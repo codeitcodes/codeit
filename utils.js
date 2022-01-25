@@ -336,7 +336,7 @@ let copy = (text) => {
 }
 
 // paste
-let paste = async (text) => {
+let paste = async () => {
   
   const text = await navigator.clipboard.readText();
   
