@@ -978,7 +978,10 @@ branchButton.addEventListener('click', () => {
 })
 
 // hide branch menu when clicked anywhere else
-document.addEventListener('click', (e) => {
+document.addEventListener('click', checkBranchMenu);
+document.addEventListener('touchdown', checkBranchMenu);
+
+function checkBranchMenu(e) {
   
   // if branch menu is visible
   if (branchMenu.classList.contains('visible')) {
@@ -999,7 +1002,7 @@ document.addEventListener('click', (e) => {
     
   }
   
-})
+}
 
 
 // create new file
