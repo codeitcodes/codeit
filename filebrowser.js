@@ -977,9 +977,18 @@ branchButton.addEventListener('click', () => {
   
 })
 
+
 // hide branch menu when clicked anywhere else
-document.addEventListener('click', checkBranchMenu);
-document.addEventListener('touchdown', checkBranchMenu);
+
+if (!isMobile) {
+  
+  document.addEventListener('click', checkBranchMenu);
+  
+} else {
+  
+  document.addEventListener('touchdown', checkBranchMenu);
+  
+}
 
 function checkBranchMenu(e) {
   
