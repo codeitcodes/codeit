@@ -1652,7 +1652,7 @@ body.mobile.expanded .cube-loader::after {
   transition: .18s var(--ease-function), 0s opacity;
 }
 .push-svg #push {
-  fill: rgb(212 213 215 / 72%);
+  fill: rgba(241,241,242,0.63);
 }
 .push-svg #check {
   fill: transparent;
