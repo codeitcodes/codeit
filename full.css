@@ -1378,7 +1378,8 @@ body .sidebar .button:active:not(:hover) {
   border-radius: 5.75px;
   display: flex;
   align-items: center;
-  grid-gap: 7px;
+  grid-gap: 9.5px;
+  grid-gap: 8.75px;
 }
 
 .menu .icon.selected {
@@ -1409,6 +1410,16 @@ body .sidebar .button:active:not(:hover) {
   color: #828689;
   opacity: .5;
   transform: scale(1.35) translateX(-0.1px);
+}
+
+
+.context-menu {
+  margin-top: -4px;
+  margin-left: -2px;
+}
+
+.context-menu .icon .bigger-icon {
+  opacity: 1;
 }
 
 
