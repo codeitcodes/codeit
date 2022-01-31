@@ -484,9 +484,9 @@ body.scroll-enabled .bookmark {
 .sidebar-toggle {
   left: -50px;
   will-change: transform;
-  transition: .18s var(--ease-function),
+  transition: .18s var(--ease-function) left,
               .4s var(--cubic-function) transform,
-              .4s var(--cubic-function) padding, 0s bottom;
+              .4s var(--cubic-function) padding;
 }
 
 .sidebar-toggle.visible {
