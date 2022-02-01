@@ -362,6 +362,13 @@ body.loaded:not(.mobile) .live-view {
   transition: none;
 }
 
+.live-view.file-open {
+  width: calc(100% - var(--sidebar-width));
+  left: auto;
+  box-shadow: none;
+  padding-left: 0;
+}
+
 .live-view::before {
   content: '';
   top: 0;
