@@ -10,9 +10,6 @@ const body = document.body,
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
 
-      liveButtonShare = bottomWrapper.querySelector('.live-button.share'),
-      liveButtonArrow = bottomWrapper.querySelector('.live-button.arrow'),
-
       sidebarToggle = document.querySelector('.sidebar-toggle'),
       liveToggle = document.querySelector('.live-toggle'),
 
