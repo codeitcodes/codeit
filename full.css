@@ -570,6 +570,10 @@ body.expanded .sidebar-toggle svg .left {
   opacity: 1;
 }
 
+.live-toggle.file-open svg:not(.share, .download) {
+  display: none;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
