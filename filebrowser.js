@@ -730,7 +730,7 @@ function loadBinaryFileHTML(file) {
 
     if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
 
-    liveView.innerHTML = '<img src="data:' + mimeType + ';base64,' + file.content + "'></img>';
+    liveView.innerHTML = '<img src="data:' + mimeType + ';base64,' + file.content + '"></img>';
     
   }
   
