@@ -464,6 +464,20 @@ function toggleLiveView(file) {
 
       renderLiveViewHTML(file);
 
+    } else if (file.lang == 'py') {
+      
+      window.setTimeout(() => {
+
+        if (liveViewToggle && !liveView.classList.contains('loaded')) {
+
+          liveView.classList.add('loading');
+
+        }
+
+      }, 1200);
+
+      renderLiveViewPython(file);
+      
     }
 
   } else {
@@ -830,6 +844,55 @@ function addScript(documentNode, code, src, type) {
   });
 
 }
+
+
+
+// render live view for Python files
+async function renderLiveViewPython(file) {
+
+  // clear console
+  console.clear();
+  logVersion();
+
+
+  liveView.innerHTML = '<div class="console"></div>';
+  
+  const console = liveView.querySelector('.console');
+  
+  
+  addToOutput('Initializing Python...');
+  
+  // load Pyodide
+  let Pyodide = await loadPyodide({
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
+  });
+
+  console.innerHTML = '';
+  
+  
+  function addToOutput(output) {
+    
+    console.innerHTML += '<div class="message">' + output + '</div>';
+    
+  }
+  
+  
+  // run file
+  
+  try {
+    
+    let output = Pyodide.runPython(decodeUnicode(file.content));
+    
+    addToOutput(output);
+    
+  } catch (err) {
+    
+    addToOutput(err);
+    
+  }
+  
+}
+
 
 
 async function asyncForEach(array, callback) {
