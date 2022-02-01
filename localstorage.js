@@ -11,7 +11,7 @@ function loadLS() {
   } else {
 
     // load empty file
-    changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+    changeSelectedFile(',,', '', '', '', '', [0, 0], [0, 0], false);
 
   }
 
