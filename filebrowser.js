@@ -655,7 +655,18 @@ async function loadFileInHTML(fileEl, fileSha) {
   }
 
   // show file content in codeit
-  cd.textContent = decodeUnicode(selectedFile.content);
+  try {
+    
+    cd.textContent = decodeUnicode(selectedFile.content);
+    
+  } catch(e) { // if file is binary
+    
+    // load binary file
+    loadBinaryFileHTML(selectedFile);
+    
+    return;
+    
+  }
   
   // change tab character
   if (cd.textContent.includes('\t')) {
@@ -691,6 +702,38 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
+}
+
+
+// load binary file in sidebar and live view
+function loadBinaryFileHTML(file) {
+
+  liveView.classList.add('file-open', 'expanded', 'notransition');
+  liveToggle.classList.add('file-open');
+  
+  // if on mobile device
+  if (isMobile) {
+
+    // update bottom float
+    bottomFloat.classList.add('file-open');
+    updateFloat();
+
+  }
+  
+  
+  const fileType = getFileType(file.name);
+  
+  if (fileType === 'image') {
+    
+    // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+    let mimeType = 'image/' + file.name.split('.')[1];
+
+    if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+
+    liveView.innerHTML = '<img src="data:' + mimeType + ';base64,' + file.content + "'></img>';
+    
+  }
+  
 }
 
 
