@@ -1294,21 +1294,23 @@ repoShareButton.addEventListener('click', () => {
 
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
-
+  
+  const shareText = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  
   if (!isWindows) {
 
     try {
 
       navigator.share({
         title: 'Share Codeit',
-        text: 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin
+        text: shareText
       });
 
     } catch(e) {
 
       // if could not open share dialog, share on Twitter
       window.open('https://twitter.com/intent/tweet' +
-                  '?text=' + encodeURIComponent(shareData.text),
+                  '?text=' + encodeURIComponent(shareText),
                   '_blank');
 
     }
@@ -1317,7 +1319,7 @@ learnShare.addEventListener('click', () => {
 
     // share on Twitter
     window.open('https://twitter.com/intent/tweet' +
-                '?text=' + encodeURIComponent(shareData.text.toLowerCase()),
+                '?text=' + encodeURIComponent(shareText),
                 '_blank');
 
   }
