@@ -87,6 +87,21 @@ function decodeLink(url) {
       }
 
     }
+    
+    
+    
+    // legacy link type
+    if (link.get('q')) {
+      
+      linkData.dir = link.get('q').split('+')[0].split(',');
+      
+      const [name, sha] = link.get('q').split('+')[1].split(',');
+      
+      linkData.file = {name, sha};
+      
+      linkData.openLive = true;
+      
+    }
 
   }
 
@@ -95,4 +110,4 @@ function decodeLink(url) {
 }
 
 
-// 'Run ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit: ' +
+// 'Run ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit.'
