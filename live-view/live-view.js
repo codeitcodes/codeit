@@ -465,7 +465,7 @@ function toggleLiveView(file) {
 
       renderLiveViewHTML(file);
 
-    } else if (file.lang == 'py') {
+    } else if (file.lang == 'python') {
       
       window.setTimeout(() => {
 
