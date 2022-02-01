@@ -58,8 +58,8 @@
     const titleEl1 = document.createElement('meta');
     const titleEl2 = document.createElement('meta');
     
-    titleEl1.property = 'og:title';
-    titleEl2.property = 'twitter:title';
+    titleEl1.setAttribute('property', 'og:title');
+    titleEl2.setAttribute('property', 'twitter:title');
     
     titleEl1.content = openGraphTitle;
     titleEl2.content = openGraphTitle;
