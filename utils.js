@@ -221,7 +221,7 @@ const binaryFileTypes = {
 let getFileType = (src) => {
 
   // get file extension
-  const extension = splitFileName(src)[1].slice(1);
+  const extension = splitFileName(src)[1];
   
   let type = 'binary';
   
