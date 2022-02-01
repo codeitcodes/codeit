@@ -1277,15 +1277,17 @@ repoShareButton.addEventListener('click', () => {
 
     } catch(e) {
 
-      copy(link);
-      alert('Copied link to clipboard.');
+      copy(link).then(() => {
+        alert('Copied link to clipboard.');
+      });
 
     }
 
   } else {
 
-    copy(link);
-    alert('Copied link to clipboard.');
+    copy(link).then(() => {
+      alert('Copied link to clipboard.');
+    });
 
   }
 
@@ -1308,19 +1310,21 @@ learnShare.addEventListener('click', () => {
 
     } catch(e) {
 
-      // if could not open share dialog, share on Twitter
-      window.open('https://twitter.com/intent/tweet' +
-                  '?text=' + encodeURIComponent(shareText),
-                  '_blank');
+      // if couldn't open share dialog
+      // copy text to clipboard
+      copy(shareText).then(() => {
+        alert('Copied text to clipboard.');
+      });
 
     }
 
   } else {
 
-    // share on Twitter
-    window.open('https://twitter.com/intent/tweet' +
-                '?text=' + encodeURIComponent(shareText),
-                '_blank');
+    // if couldn't open share dialog
+    // copy text to clipboard
+    copy(shareText).then(() => {
+      alert('Copied text to clipboard.');
+    });
 
   }
 
