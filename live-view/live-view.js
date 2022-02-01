@@ -102,7 +102,18 @@ async function setupLiveView() {
 
     
     // show file content in codeit
-    cd.textContent = decodeUnicode(selectedFile.content);
+    try {
+      
+      cd.textContent = decodeUnicode(selectedFile.content);
+      
+    } catch(e) { // if file is binary
+
+      // load binary file
+      loadBinaryFileHTML(selectedFile);
+
+      return;
+
+    }
     
     // change tab character
     if (cd.textContent.includes('\t')) {
