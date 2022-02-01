@@ -103,10 +103,15 @@ async function setupLiveView() {
     
     // show file content in codeit
     try {
-      
+
       cd.textContent = decodeUnicode(selectedFile.content);
-      
+
+      // change codeit lang
+      cd.lang = selectedFile.lang;
+
     } catch(e) { // if file is binary
+
+      cd.textContent = '';
 
       // load binary file
       loadBinaryFileHTML(selectedFile);
@@ -126,9 +131,6 @@ async function setupLiveView() {
 
     }
     
-    // change codeit lang
-    cd.lang = selectedFile.lang;
-
     // set caret pos in codeit
     cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
 
