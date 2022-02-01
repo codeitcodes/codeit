@@ -21,8 +21,22 @@ window.onload = async () => {
 
   // clear URL
   window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  
+  
+  // update open graph titles
+  if (linkData.openLive) {
 
+    document.head.querySelector('meta[property="og:title"').content = 
+      'Run ' + linkData.dir[0] + '/' + linkData.dir[1] + ' with Codeit.';
 
+  } else if (linkData.dir) {
+
+    document.head.querySelector('meta[property="og:title"').content = 
+      'Open ' + linkData.dir[0] + '/' + linkData.dir[1] + ' with Codeit.';
+
+  }
+  
+  
   // if treeLoc is in local storage
   if (linkData.dir) {
 
