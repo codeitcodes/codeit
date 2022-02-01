@@ -421,6 +421,9 @@ body.loaded:not(.mobile) .live-view {
 }
 
 .live-view.file-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: calc(100% - var(--sidebar-width));
   left: auto;
   box-shadow: none;
