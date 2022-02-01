@@ -864,7 +864,7 @@ async function renderLiveViewPython(file) {
   const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
   
   
-  await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
+  //await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
   
   
   function addToOutput(output) {
@@ -883,7 +883,7 @@ async function renderLiveViewPython(file) {
   addToOutput('Initializing Python...');
   
   // load pyodide in python frame
-  pythonFrame.pyodide = await pythonFrame.loadPyodide({
+  pythonFrame.pyodide = await loadPyodide({
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
 
