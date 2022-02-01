@@ -856,9 +856,10 @@ async function renderLiveViewPython(file) {
   logVersion();
 
 
-  liveView.innerHTML = '<div class="console"></div>';
+  liveView.innerHTML = '<iframe class="python-frame"></iframe> <div class="console"></div>';
   
   const consoleEl = liveView.querySelector('.console');
+  const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
   
   
   function addToOutput(output) {
@@ -877,7 +878,7 @@ async function renderLiveViewPython(file) {
   addToOutput('Initializing Python...');
   
   // load Pyodide
-  let Pyodide = await loadPyodide({
+  pythonFrame.pyodide = await loadPyodide({
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
 
@@ -888,7 +889,7 @@ async function renderLiveViewPython(file) {
   
   try {
     
-    let output = Pyodide.runPython(decodeUnicode(file.content));
+    let output = pythonFrame.pyodide.runPython(decodeUnicode(file.content));
     
     addToOutput(output);
     
