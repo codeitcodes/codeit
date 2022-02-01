@@ -370,8 +370,7 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg'
-      || selectedFile.lang == 'python') {
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg') {
 
     liveToggle.classList.add('visible');
 
