@@ -659,7 +659,12 @@ async function loadFileInHTML(fileEl, fileSha) {
     
     cd.textContent = decodeUnicode(selectedFile.content);
     
+    // change codeit lang
+    cd.lang = selectedFile.lang;
+    
   } catch(e) { // if file is binary
+    
+    cd.textContent = '';
     
     // load binary file
     loadBinaryFileHTML(selectedFile);
@@ -678,9 +683,6 @@ async function loadFileInHTML(fileEl, fileSha) {
     cd.options.tab = '  ';
     
   }
-
-  // change codeit lang
-  cd.lang = selectedFile.lang;
 
   // set caret pos in codeit
   cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
@@ -1589,17 +1591,23 @@ function setupEditor() {
   // if code in storage
   if (selectedFile.content) {
 
-    // set codeit to code
+    // show file content in codeit
     try {
-      
-      cd.lang = selectedFile.lang || 'plain';
+
       cd.textContent = decodeUnicode(selectedFile.content);
-      
+
+      // change codeit lang
+      cd.lang = selectedFile.lang;
+
     } catch(e) { // if file is binary
-      
+
+      cd.textContent = '';
+
       // load binary file
       loadBinaryFileHTML(selectedFile);
-      
+
+      return;
+
     }
       
     // if sidebar isn't expanded, focus codeit
