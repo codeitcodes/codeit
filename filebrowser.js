@@ -1585,9 +1585,18 @@ function setupEditor() {
   if (selectedFile.content) {
 
     // set codeit to code
-    cd.lang = selectedFile.lang || 'plain';
-    cd.textContent = decodeUnicode(selectedFile.content);
-
+    try {
+      
+      cd.lang = selectedFile.lang || 'plain';
+      cd.textContent = decodeUnicode(selectedFile.content);
+      
+    } catch(e) { // if file is binary
+      
+      // render binary file
+      renderBinaryFileHTML(selectedFile);
+      
+    }
+      
     // if sidebar isn't expanded, focus codeit
     if (!(isMobile && body.classList.contains('expanded'))) {
 
