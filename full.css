@@ -223,6 +223,18 @@ body.notransition .bottom-wrapper {
   opacity: 0;
 }
 
+.bottom-float .download {
+  background: hsl(0deg 0% 100% / 5%);
+  border-left: 1px solid hsl(0deg 0% 100% / 3%);
+  border-radius: 0 20px 20px 0;
+  width: 65px;
+  box-sizing: border-box;
+  justify-content: center;
+  height: 100%;
+  display: none;
+  color: rgb(212 213 215 / 72%);
+}
+
 .bottom-float .push-wrapper {
   background: hsl(0deg 0% 100% / 5%);
   border-left: 1px solid hsl(0deg 0% 100% / 3%);
