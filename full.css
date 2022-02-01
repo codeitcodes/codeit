@@ -576,7 +576,8 @@ body.expanded .sidebar-toggle svg .left {
   z-index: 1000;
 }
 
-.live-toggle.visible {
+.live-toggle.visible,
+.live-toggle.file-open {
   display: flex;
 }
 
