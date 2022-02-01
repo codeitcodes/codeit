@@ -856,7 +856,8 @@ async function renderLiveViewPython(file) {
   logVersion();
 
 
-  liveView.innerHTML = '<iframe name="Python Context" class="python-frame"></iframe> <div class="console"></div>';
+  liveView.innerHTML = '<iframe name="Python Context" class="python-frame" style="display: none"></iframe>'
+                       + '<div class="console"></div>';
   
   liveView.classList.add('loaded');
   
@@ -864,12 +865,22 @@ async function renderLiveViewPython(file) {
   const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
   
   
-  //await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
+  await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
+  
+  pythonFrame.console = {
+    log: (str) => {
+      addToOutput(str);
+    }
+  };
   
   
   function addToOutput(output) {
     
-    consoleEl.innerHTML += '<div class="message">' + output + '</div>';
+    if (output) {
+      
+      consoleEl.innerHTML += '<div class="message">' + output + '</div>';
+      
+    }
     
   }
   
@@ -883,7 +894,7 @@ async function renderLiveViewPython(file) {
   addToOutput('Initializing Python...');
   
   // load pyodide in python frame
-  pythonFrame.pyodide = await loadPyodide({
+  pythonFrame.pyodide = await pythonFrame.loadPyodide({
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
 
