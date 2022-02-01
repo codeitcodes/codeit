@@ -500,6 +500,10 @@ body.scroll-enabled .bookmark {
   left: -1px;
 }
 
+.live-toggle.file-open + .sidebar-toggle {
+  display: none;
+}
+
 body.expanded .sidebar-toggle {
   transform: translateX(calc(var(--sidebar-width) - 1px));
 }
