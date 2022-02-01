@@ -94,6 +94,7 @@ function decodeLink(url) {
     if (link.get('q')) {
       
       linkData.dir = link.get('q').split('+')[0].split(',');
+      linkData.dir[1] = linkData.dir[1] + ':main';
       
       const [name, sha] = link.get('q').split('+')[1].split(',');
       
