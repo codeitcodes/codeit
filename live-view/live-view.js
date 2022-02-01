@@ -901,7 +901,7 @@ async function renderLiveViewPython(file) {
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
 
-  clearOutput();
+  //clearOutput();
   
   
   // run file
@@ -910,7 +910,7 @@ async function renderLiveViewPython(file) {
     
     let output = pythonFrame.pyodide.runPython(decodeUnicode(file.content));
     
-    addToOutput(output);
+    //addToOutput(output);
     
   } catch (err) {
     
