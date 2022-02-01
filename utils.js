@@ -207,21 +207,36 @@ let splitFileName = (src) => {
 }
 
 
-// MIME types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+// binary file types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
-const mimetypes = {
-  avi: 'video/x-msvideo',
-  bin: 'application/octet-stream',
-  png: 'image/png',
-  jpeg: 'image/jpeg'
+const binaryFileTypes = {
+  'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp'],
+  'video': ['mp4', 'mpeg', 'ogv', 'ts', 'webm'],
+  'audio': ['avi', 'mp3', 'oga', 'ogg', 'opus', 'wav', 'weba'],
+  'font': ['woff', 'woff2', 'ttf', 'otf'],
+  'midi': ['midi'],
+  'pdf': ['pdf']
 };
 
-let getMimeType = (src) => {
+let getFileType = (src) => {
 
   // get file extension
   const extension = splitFileName(src)[1].slice(1);
-
-  return mimetypes[extension];
+  
+  let type = 'binary';
+  
+  Object.entries(binaryFileTypes).forEach(types => {
+    
+    if (types[1].includes(extension)) {
+      
+      type = types[0];
+      return type;
+      
+    }
+  
+  }
+  
+  return type;
 
 }
 
