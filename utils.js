@@ -234,7 +234,7 @@ let getFileType = (src) => {
       
     }
   
-  }
+  });
   
   return type;
 
