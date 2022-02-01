@@ -27,12 +27,12 @@ window.onload = async () => {
   if (linkData.openLive) {
 
     document.head.querySelector('meta[property="og:title"').content = 
-      'Run ' + linkData.dir[0] + '/' + linkData.dir[1] + ' with Codeit.';
+      'Run ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
 
   } else if (linkData.dir) {
 
     document.head.querySelector('meta[property="og:title"').content = 
-      'Open ' + linkData.dir[0] + '/' + linkData.dir[1] + ' with Codeit.';
+      'Open ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
 
   }
   
