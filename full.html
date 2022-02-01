@@ -17,7 +17,7 @@
   <meta charset="utf-8">
   <meta name="description" content="Mobile code editor connected to Git. Runs on the web, open source, and free. Supports JavaScript,HTML,CSS,Python,React,Bootstrap,how to.Easy to use,simple.">
   
-  <meta property="og:title" content="Codeit - Mobile code editor">
+  <meta property="og:title" content="">
   <meta property="og:description" content="Mobile code editor connected to Git. Runs on the web, open source, and free. Supports JavaScript,HTML,CSS,Python,React,Bootstrap,how to.Easy to use,simple.">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://dev.codeit.codes/images/banner-og.png">
@@ -28,7 +28,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:domain" content="codeit.codes">
   <meta property="twitter:url" content="https://codeit.codes">
-  <meta name="twitter:title" content="Codeit - Mobile code editor">
+  <meta name="twitter:title" content="">
   <meta name="twitter:description" content="Mobile code editor connected to Git. Runs on the web, open source, and free. Supports JavaScript,HTML,CSS,Python,React,Bootstrap,how to.Easy to use,simple.">
   <meta name="twitter:image" content="https://dev.codeit.codes/images/banner-og.png">
   
@@ -44,19 +44,27 @@
   // update open graph titles
   if (linkData.openLive) {
 
-    document.head.querySelector('meta[property="og:title"').content = 
+    document.head.querySelector('meta[property="og:title"]').content = 
       'Run ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
     
-    document.head.querySelector('meta[property="twitter:title"').content = 
+    document.head.querySelector('meta[property="twitter:title"]').content = 
       'Run ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
     
   } else if (linkData.dir) {
 
-    document.head.querySelector('meta[property="og:title"').content = 
+    document.head.querySelector('meta[property="og:title"]').content = 
       'Open ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
     
-    document.head.querySelector('meta[property="twitter:title"').content = 
+    document.head.querySelector('meta[property="twitter:title"]').content = 
       'Open ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
+    
+  } else {
+    
+    document.head.querySelector('meta[property="og:title"]').content = 
+      'Codeit - Mobile code editor';
+    
+    document.head.querySelector('meta[property="twitter:title"]').content = 
+      'Codeit - Mobile code editor';
     
   }
   </script>
