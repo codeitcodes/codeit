@@ -328,8 +328,8 @@ Element.prototype.on = (events, callback, passive) => {
 
 
 // copy
-let copy = (text) => {
-  navigator.clipboard.writeText(text);
+let copy = async (text) => {
+  await navigator.clipboard.writeText(text);
 }
 
 // paste
