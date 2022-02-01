@@ -1592,8 +1592,8 @@ function setupEditor() {
       
     } catch(e) { // if file is binary
       
-      // render binary file
-      renderBinaryFileHTML(selectedFile);
+      // load binary file
+      loadBinaryFileHTML(selectedFile);
       
     }
       
