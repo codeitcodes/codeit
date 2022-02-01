@@ -862,7 +862,7 @@ async function renderLiveViewPython(file) {
   const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
   
   
-  pythonFrame.document.body.innerHTML = '<script src="live-view/extensions/pyodide.min.js"></script>';
+  addScript(pythonFrame, false, 'live-view/extensions/pyodide.min.js');
   
   
   function addToOutput(output) {
