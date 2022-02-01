@@ -871,6 +871,7 @@ async function renderLiveViewPython(file) {
   pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
   pythonFrame.console.logs = [];
   pythonFrame.console.log = function() {
+    pythonFrame.console.logs = [];
     pythonFrame.console.logs.push(Array.from(arguments));
     pythonFrame.console.logs.forEach(msg => addToOutput(msg));
     pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
