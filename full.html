@@ -57,17 +57,11 @@
 
     }
 
-    const titleEl1 = document.createElement('meta');
-    const titleEl2 = document.createElement('meta');
-    
-    titleEl1.setAttribute('property', 'og:title');
-    titleEl2.setAttribute('property', 'twitter:title');
+    const titleEl1 = document.head.querySelector('meta[property="og:title"]');
+    const titleEl2 = document.head.querySelector('meta[property="twitter:title"]');
     
     titleEl1.content = openGraphTitle;
     titleEl2.content = openGraphTitle;
-    
-    document.head.appendChild(titleEl1);
-    document.head.appendChild(titleEl2);
     
   })();
   </script>
