@@ -858,7 +858,20 @@ async function renderLiveViewPython(file) {
 
   liveView.innerHTML = '<div class="console"></div>';
   
-  const console = liveView.querySelector('.console');
+  const consoleEl = liveView.querySelector('.console');
+  
+  
+  function addToOutput(output) {
+    
+    consoleEl.innerHTML += '<div class="message">' + output + '</div>';
+    
+  }
+  
+  function clearOutput() {
+    
+    consoleEl.innerHTML = '';
+    
+  }
   
   
   addToOutput('Initializing Python...');
@@ -868,14 +881,7 @@ async function renderLiveViewPython(file) {
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
 
-  console.innerHTML = '';
-  
-  
-  function addToOutput(output) {
-    
-    console.innerHTML += '<div class="message">' + output + '</div>';
-    
-  }
+  clearOutput();
   
   
   // run file
