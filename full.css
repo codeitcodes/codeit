@@ -428,6 +428,7 @@ body.mobile .live-view.file-open {
 .live-view * {
   width: 100%;
   max-width: max-content;
+  background: hsl(0, 0%, 90%);
 }
 
 .live-view .live-frame {
