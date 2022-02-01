@@ -246,15 +246,17 @@ function addBottomSwipeListener() {
 
           } catch(e) {
 
-            copy(link);
-            alert('Copied link to clipboard.');
+            copy(link).then(() => {
+              alert('Copied link to clipboard.');
+            });
 
           }
 
         } else {
 
-          copy(link);
-          alert('Copied link to clipboard.');
+          copy(link).then(() => {
+            alert('Copied link to clipboard.');
+          });
 
         }
 
@@ -408,8 +410,9 @@ if (isMobile) {
       openLive: true
     });
 
-    copy(link);
-    alert('Copied link to clipboard.');
+    copy(link).then(() => {
+      alert('Copied link to clipboard.');
+    });
 
   });
 
