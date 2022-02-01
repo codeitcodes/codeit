@@ -540,6 +540,7 @@ body.expanded .sidebar-toggle svg .left {
 
 .live-view.visible ~ .live-toggle:hover {
   width: 136px;
+  width: 97px;
   transition-delay: .22s;
 }
 
