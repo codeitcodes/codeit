@@ -867,18 +867,21 @@ async function renderLiveViewPython(file) {
   
   await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
   
-  pythonFrame.console = {
-    log: (str) => {
-      addToOutput(str);
-    }
-  };
+  
+  pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
+  pythonFrame.console.logs = [];
+  pythonFrame.console.log = function() {
+    pythonFrame.console.logs.push(Array.from(arguments));
+    pythonFrame.console.logs.forEach(msg => addToOutput(msg));
+    pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
+  }
   
   
-  function addToOutput(output) {
+  function addToOutput(msg) {
     
-    if (output) {
+    if (msg) {
       
-      consoleEl.innerHTML += '<div class="message">' + output + '</div>';
+      consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
       
     }
     
