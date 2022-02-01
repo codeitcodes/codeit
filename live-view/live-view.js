@@ -858,6 +858,8 @@ async function renderLiveViewPython(file) {
 
   liveView.innerHTML = '<iframe name="Python Context" class="python-frame"></iframe> <div class="console"></div>';
   
+  liveView.classList.remove('loading');
+  
   const consoleEl = liveView.querySelector('.console');
   const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
   
