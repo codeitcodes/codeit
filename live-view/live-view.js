@@ -114,7 +114,7 @@ async function setupLiveView() {
       cd.textContent = '';
 
       // load binary file
-      loadBinaryFileHTML(selectedFile);
+      loadBinaryFileHTML(selectedFile, true);
 
       return;
 
