@@ -619,30 +619,53 @@ function renderLiveViewHTML(file) {
   // fetch scripts
   fetchLiveViewScripts(frameDocument);
 
+  
+  // if not navigating in current tree,
+  // fetch current tree
+  
+  let fileTree = {};
+  
+  if (file.dir !== treeLoc.join(',')) {
+    
+    fileTree = await git.getItems(file.dir.split(','));
+    
+  } else {
+    
+    const files = fileWrapper.querySelectorAll('.item.file');
+    
+    // parse file elements and save relevant fields
+    files.forEach(fileEl => {
+      
+      const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
+      
+      fileTree[fileName] = { sha: getAttr(fileEl, 'sha') };
+      
+    });
+    
+  }
+  
+  
   // fetch images
   frameDocument.querySelectorAll('img').forEach(async (image) => {
 
     const linkHref = new URL(image.src);
-    const fileName = linkHref.pathname.replace('/live-fetch/','');
-
+    const fileDir = linkHref.pathname.replace('/live-fetch/','');
+    const splitDir = fileDir.split('/');
+    
     if (linkHref.href.startsWith(liveFetchURL)) {
-
+      
       // if image is in current directory
-      if (!fileName.includes('/')) {
+      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
-        // fetch file element for its SHA
-        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == fileName);
+        // find file by name
+        const fileObj = fileTree[fileName];
 
-        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
-
-        // if image file exists
-        if (fileEl !== null) {
+        // if file exists
+        if (fileObj) {
 
           // fetch image
 
-          let fileName = linkHref.pathname.split('/');
-          fileName = fileName[fileName.length-1];
+          let fileName = splitDir[splitDir.length-1];
 
           // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
           let mimeType = 'image/' + fileName.split('.')[1];
@@ -650,27 +673,26 @@ function renderLiveViewHTML(file) {
           if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
 
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
 
           image.src = 'data:' + mimeType + ';base64,' + resp.content;
 
         }
 
-      } else if (!fileName.includes('./')) { // if image is below current directory
+      } else if (!fileDir.includes('./')) { // if image is below current directory
 
         // fetch image
 
-        let fileName = linkHref.pathname.split('/');
-        fileName = fileName[fileName.length-1];
+        let fileName = fileDir[fileDir.length-1];
 
         // get MIME type
         let mimeType = 'image/' + fileName.split('.')[1];
 
         if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
 
-        const fileDir = linkHref.pathname.replaceAll(fileName, '');
+        const fileTree = linkHref.pathname.replaceAll(fileName, '');
 
-        const tree = selectedFile.dir.split(',');
+        let tree = selectedFile.dir.split(',');
         tree[2] = tree[2] + fileDir.slice(1, -1);
 
         const resp = await git.getFile(tree, fileName);
@@ -687,40 +709,59 @@ function renderLiveViewHTML(file) {
   frameDocument.querySelectorAll('video').forEach(async (video) => {
 
     const linkHref = new URL(video.src);
-    const fileName = linkHref.pathname.replace('/live-fetch/','');
-
+    const fileDir = linkHref.pathname.replace('/live-fetch/','');
+    const splitDir = fileDir.split('/');
+    
     if (linkHref.href.startsWith(liveFetchURL)) {
-
+      
       // if video is in current directory
-      if (!fileName.includes('/')) {
+      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
-        // fetch file element for its SHA
-        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == fileName);
+        // find file by name
+        const fileObj = fileTree[fileName];
 
-        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
-
-        // if video file exists
-        if (fileEl !== null) {
+        // if file exists
+        if (fileObj) {
 
           // fetch video
 
-          let fileName = linkHref.pathname.split('/');
-          fileName = fileName[fileName.length-1];
+          let fileName = splitDir[splitDir.length-1];
 
           // get MIME type
           let mimeType = 'video/' + fileName.split('.')[1];
-
+          
           if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
           if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
           if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
-
+          
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
 
           video.src = 'data:' + mimeType + ';base64,' + resp.content;
 
         }
+
+      } else if (!fileDir.includes('./')) { // if image is below current directory
+
+        // fetch video
+
+        let fileName = fileDir[fileDir.length-1];
+
+        // get MIME type
+        let mimeType = 'video/' + fileName.split('.')[1];
+
+        if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
+        if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
+        if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
+        
+        const fileTree = linkHref.pathname.replaceAll(fileName, '');
+
+        let tree = selectedFile.dir.split(',');
+        tree[2] = tree[2] + fileDir.slice(1, -1);
+
+        const resp = await git.getFile(tree, fileName);
+
+        video.src = 'data:' + mimeType + ';base64,' + resp.content;
 
       }
 
@@ -732,30 +773,45 @@ function renderLiveViewHTML(file) {
   frameDocument.querySelectorAll('audio').forEach(async (audio) => {
 
     const linkHref = new URL(audio.src);
-    const fileName = linkHref.pathname.replace('/live-fetch/','');
-
+    const fileDir = linkHref.pathname.replace('/live-fetch/','');
+    const splitDir = fileDir.split('/');
+    
     if (linkHref.href.startsWith(liveFetchURL)) {
+      
+      // if audio is in current directory
+      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
-      // if audio file is in current directory
-      if (!fileName.includes('/')) {
+        // find file by name
+        const fileObj = fileTree[fileName];
 
-        // fetch file element for its SHA
-        let fileEl = Array.from(fileWrapper.querySelectorAll('.item.file'))
-                     .filter(file => file.querySelector('.name').textContent == fileName);
-
-        fileEl = (fileEl.length > 0) ? fileEl[0] : null;
-
-        // if audio file exists
-        if (fileEl !== null) {
+        // if file exists
+        if (fileObj) {
 
           // fetch audio
 
+          let fileName = splitDir[splitDir.length-1];
+
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), getAttr(fileEl, 'sha'));
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
 
           audio.src = 'data:audio/mpeg;base64,' + resp.content;
 
         }
+
+      } else if (!fileDir.includes('./')) { // if audio is below current directory
+
+        // fetch audio
+
+        let fileName = fileDir[fileDir.length-1];
+
+        const fileTree = linkHref.pathname.replaceAll(fileName, '');
+
+        let tree = selectedFile.dir.split(',');
+        tree[2] = tree[2] + fileDir.slice(1, -1);
+
+        const resp = await git.getFile(tree, fileName);
+
+        audio.src = 'data:audio/mpeg;base64,' + resp.content;
 
       }
 
