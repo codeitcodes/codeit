@@ -1459,6 +1459,10 @@ body .sidebar .button:active:not(:hover) {
   max-width: calc(100% - 16px - 7px);
 }
 
+body.mobile .menu .icon a {
+  max-width: calc(100vw - 16px - 7px - 147px - 11px);
+}
+
 .menu .icon:not(.selected) .branch-icon {
   color: #828689;
   opacity: .5;
