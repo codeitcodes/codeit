@@ -435,8 +435,8 @@ body.mobile .live-view.file-open {
   top: 0;
 }
 
-body.mobile:not(.notransition) .live-view.file-open.notransition {
-  transition: .4s var(--cubic-function) transform !important;
+body.mobile .live-view.file-open {
+  transition: .4s var(--cubic-function) transform;
 }
 
 body.mobile.expanded .live-view.file-open {
