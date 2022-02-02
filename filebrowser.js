@@ -652,7 +652,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     }
 
     // get file from git
-    const resp = await git.getFile(treeLoc, fileEl.innerText);
+    const resp = await git.getBlob(treeLoc, fileSha);
 
     // change selected file
     changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
