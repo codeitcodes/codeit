@@ -435,6 +435,14 @@ body.mobile .live-view.file-open {
   top: 0;
 }
 
+body.mobile .live-view.file-open.notransition {
+  transition: .4s var(--cubic-function) transform !important;
+}
+
+body.mobile.expanded .live-view.file-open {
+  transform: translateX(100%) !important;
+}
+
 .live-view.file-open::before,
 .live-view.file-open::after {
   display: none;
