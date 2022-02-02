@@ -748,12 +748,7 @@ function loadBinaryFileHTML(file, toggled) {
       onNextFrame(() => {
         
         liveView.classList.remove('notransition');
-        
-        onNextFrame(() => {
-          
-          liveView.classList.add('file-open');
-          
-        });
+        liveView.classList.add('file-open');
         
       });
 
@@ -770,17 +765,24 @@ function loadBinaryFileHTML(file, toggled) {
     
   } else {
     
-    onNextFrame(() => {
-      
-      liveView.classList.add('file-open');
+    if (isMobile) {
       
       onNextFrame(() => {
-        liveView.classList.remove('notransition');
+      
+        liveView.classList.add('file-open');
+
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        });
+
       });
       
-    });
-    
-    if (!isMobile) liveToggle.classList.add('file-open');
+    } else {
+      
+      liveView.classList.add('file-open');
+      liveToggle.classList.add('file-open');
+      
+    }
     
   }
   
