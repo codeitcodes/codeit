@@ -32,7 +32,7 @@ function updateFloat() {
 sidebarOpen.addEventListener('click', () => {
   
   // if bottom float isn't expanded
-  if (liveView.children.length == 0) {
+  if (liveView.children.length == 0 || liveView.classList.contains('file-open')) {
     
     toggleSidebar(true);
     saveSidebarStateLS();
