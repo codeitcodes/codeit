@@ -1633,9 +1633,13 @@ function setupEditor() {
     } catch(e) { // if file is binary
 
       cd.textContent = '';
-
-      // load binary file
-      loadBinaryFileHTML(selectedFile);
+      
+      if (!body.classList.contains('expanded')) {
+        
+        // load binary file
+        loadBinaryFileHTML(selectedFile);
+        
+      }
 
     }
       
