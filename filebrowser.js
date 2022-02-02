@@ -713,7 +713,8 @@ async function loadFileInHTML(fileEl, fileSha) {
   updateLineNumbersHTML();
   
   
-  liveView.classList.remove('notransition', 'file-open', 'visible');
+  liveView.classList.add('notransition');
+  liveView.classList.remove('file-open');
   
   onNextFrame(() => {
     liveView.classList.remove('notransition');
