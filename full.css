@@ -425,12 +425,15 @@ body.loaded:not(.mobile) .live-view {
   align-items: center;
   justify-content: center;
   width: calc(100% - var(--sidebar-width));
-  left: 0;
+  left: auto;
   box-shadow: none;
   padding-left: 0;
 }
 
 body.mobile .live-view.file-open {
+  width: 100%;
+  top: 0;
+  left: 0;
   transition: .4s var(--cubic-function) left;
 }
 
