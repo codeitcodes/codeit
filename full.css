@@ -820,6 +820,10 @@ body.notransition .sidebar {
   left: 42px;
 }
 
+.sidebar .header .logo::after {
+  opacity: 1;
+}
+
 .sidebar .header .logo.scrolled-start::before {
   opacity: 1;
 }
