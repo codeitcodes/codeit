@@ -743,20 +743,22 @@ function loadBinaryFileHTML(file, toggled) {
   // if sidebar is open and on mobile device
   if (toggled && isMobile) {
     
-    liveView.classList.add('file-open');
+    liveView.classList.add('notransition', 'file-open');
     
-    // update bottom float
-    bottomFloat.classList.add('file-open');
-    updateFloat();
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+      updateFloat();
+    })
     
   } else {
     
     liveView.classList.add('notransition');
     liveView.classList.add('file-open');
-    liveToggle.classList.add('file-open');
+    
+    if (!isMobile)liveToggle.classList.add('file-open');
     
     onNextFrame(() => {
-      liveView.classList.add('notransition');
+      liveView.classList.remove('notransition');
     });
     
   }
