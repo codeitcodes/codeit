@@ -683,7 +683,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     cd.textContent = '';
     
     // load binary file
-    loadBinaryFileHTML(selectedFile);
+    loadBinaryFileHTML(selectedFile, true);
     
     return;
     
@@ -736,25 +736,34 @@ async function loadFileInHTML(fileEl, fileSha) {
 
 
 // load binary file in sidebar and live view
-function loadBinaryFileHTML(file) {
+function loadBinaryFileHTML(file, toggled) {
 
   liveView.classList.add('visible', 'notransition');
   
-  // if on mobile device
-  if (isMobile) {
-    
-    onNextFrame(() => {
-      liveView.classList.add('file-open');
-    });
-    
-    // update bottom float
-    bottomFloat.classList.add('file-open');
-    updateFloat();
+  if (!toggled) {
 
+    // if on mobile device
+    if (isMobile) {
+
+      onNextFrame(() => {
+        liveView.classList.add('file-open');
+      });
+
+      // update bottom float
+      bottomFloat.classList.add('file-open');
+      updateFloat();
+
+    } else {
+
+      liveView.classList.add('file-open');
+      liveToggle.classList.add('file-open');
+
+    }
+    
   } else {
     
     liveView.classList.add('file-open');
-    liveToggle.classList.add('file-open');
+    if (!isMobile) liveToggle.classList.add('file-open');
     
   }
   
@@ -1634,13 +1643,8 @@ function setupEditor() {
 
       cd.textContent = '';
       
-      // if sidebar is closed
-      if (getStorage('sidebar') != 'true') {
-        
-        // load binary file
-        loadBinaryFileHTML(selectedFile);
-        
-      }
+      // load binary file
+      loadBinaryFileHTML(selectedFile, false);
 
     }
       
