@@ -770,7 +770,7 @@ async function renderBranchMenuHTML(renderAll) {
     
     // clean resp and save only relevant fields
     let cleanedResp = branchResp.map(branch => {
-      return { name: branch.name, commit: { sha: branch.commit.sha }};
+      return { name, commit.sha };
     });
     
     // save resp in HTML
