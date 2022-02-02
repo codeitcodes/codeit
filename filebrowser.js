@@ -746,7 +746,15 @@ function loadBinaryFileHTML(file, toggled) {
     if (isMobile) {
       
       onNextFrame(() => {
-        liveView.classList.add('file-open');
+        
+        liveView.classList.remove('notransition');
+        
+        onNextFrame(() => {
+          
+          liveView.classList.add('file-open');
+          
+        });
+        
       });
 
       // update bottom float
@@ -763,7 +771,13 @@ function loadBinaryFileHTML(file, toggled) {
   } else {
     
     onNextFrame(() => {
+      
       liveView.classList.add('file-open');
+      
+      onNextFrame(() => {
+        liveView.classList.remove('notransition');
+      });
+      
     });
     
     if (!isMobile) liveToggle.classList.add('file-open');
