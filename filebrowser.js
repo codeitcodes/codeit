@@ -740,7 +740,7 @@ function loadBinaryFileHTML(file, toggled) {
 
   liveView.classList.add('visible', 'notransition');
   
-  if (!toggled) {
+  if (toggled) {
 
     // if on mobile device
     if (isMobile) {
