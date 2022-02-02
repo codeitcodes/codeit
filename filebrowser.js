@@ -738,7 +738,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 // load binary file in sidebar and live view
 function loadBinaryFileHTML(file, toggled) {
 
-  liveView.classList.add('notransition');
+  liveView.classList.add('notransition', 'visible');
   
   if (toggled) {
 
@@ -746,7 +746,7 @@ function loadBinaryFileHTML(file, toggled) {
     if (isMobile) {
       
       onNextFrame(() => {
-        liveView.classList.add('visible', 'file-open');
+        liveView.classList.add('file-open');
       });
 
       // update bottom float
@@ -763,7 +763,7 @@ function loadBinaryFileHTML(file, toggled) {
   } else {
     
     onNextFrame(() => {
-      liveView.classList.add('visible', 'file-open');
+      liveView.classList.add('file-open');
     });
     
     if (!isMobile) liveToggle.classList.add('file-open');
