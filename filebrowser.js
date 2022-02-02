@@ -762,7 +762,10 @@ function loadBinaryFileHTML(file, toggled) {
     
   } else {
     
-    liveView.classList.add('file-open');
+    onNextFrame(() => {
+      liveView.classList.add('visible', 'file-open');
+    });
+    
     if (!isMobile) liveToggle.classList.add('file-open');
     
   }
