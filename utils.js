@@ -207,36 +207,44 @@ let splitFileName = (src) => {
 }
 
 
-// binary file types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+// file types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
-const binaryFileTypes = {
+const fileTypes = {
   'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp'],
   'video': ['mp4', 'mpeg', 'ogv', 'ts', 'webm'],
   'audio': ['avi', 'mp3', 'oga', 'ogg', 'opus', 'wav', 'weba'],
   'font': ['woff', 'woff2', 'ttf', 'otf'],
+  'html': ['html', 'htm'],
+  'css': ['css', 'scss'],
+  'javascript': ['js', 'mjs', 'jsx'],
+  'json': ['json'],
+  'python': ['python'],
+  'markdown': ['md'],
   'midi': ['midi'],
   'pdf': ['pdf']
 };
 
-let getFileType = (src) => {
-
+let getFileType = (fileName) => {
+  
   // get file extension
-  const extension = splitFileName(src)[1];
+  const extension = splitFileName(fileName)[1];
   
-  let type = 'binary';
+  let fileType = 'other';
   
-  Object.entries(binaryFileTypes).forEach(types => {
+  if (fileName === 'README') return 'markdown';
+  
+  Object.entries(fileTypes).forEach(type => {
     
-    if (types[1].includes(extension)) {
+    if (type[1].includes(extension)) {
       
-      type = types[0];
-      return type;
+      fileType = type[0];
+      return fileType;
       
     }
   
   });
   
-  return type;
+  return fileType;
 
 }
 
