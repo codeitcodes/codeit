@@ -425,6 +425,8 @@ body.loaded:not(.mobile) .live-view {
   align-items: center;
   justify-content: center;
   width: calc(100% - var(--sidebar-width));
+  transform: none !important;
+  pointer-events: auto;
   left: auto;
   box-shadow: none;
   padding-left: 0;
@@ -435,7 +437,6 @@ body.mobile .live-view.file-open {
   top: 0;
   left: 0;
   opacity: 1;
-  transform: none;
   transition: .4s var(--cubic-function) left;
 }
 
