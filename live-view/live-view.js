@@ -531,7 +531,7 @@ function toggleLiveView(file) {
 const liveFetchURL = window.location.origin + '/live-fetch/';
 
 // render live view for HTML files
-function renderLiveViewHTML(file) {
+async function renderLiveViewHTML(file) {
 
   // clear console
   console.clear();
