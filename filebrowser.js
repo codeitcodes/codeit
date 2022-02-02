@@ -748,7 +748,7 @@ function loadBinaryFileHTML(file, toggled) {
     
     // update bottom float
     bottomFloat.classList.add('file-open');
-    updateFloat();
+    onNextFrame(updateFloat);
     
   } else {
     
