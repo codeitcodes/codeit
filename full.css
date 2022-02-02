@@ -842,6 +842,7 @@ body.notransition .sidebar {
   opacity: .5;
   color: #828689;
   display: none;
+  z-index: 1;
 }
 
 .sidebar .header .title .branch-icon.visible {
