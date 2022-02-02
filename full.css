@@ -1408,12 +1408,12 @@ body .sidebar .button:active:not(:hover) {
   min-width: 170px;
   min-width: 135px;
   max-width: 375px;
-  max-height: calc(100vh - 80px - 20px);
-  opacity: 0;
+  max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
   will-change: transform;
-  transition: .18s var(--bounce-function);
-  transition-property: transform, padding, opacity;
+  transition: .3s var(--bounce-function);
+  transition-property: transform, padding, clip-path;
+  clip-path: circle(0% at 15% 0);
   overflow-y: auto;
   z-index: 1000;
 }
@@ -1425,8 +1425,8 @@ body .sidebar .button:active:not(:hover) {
 .menu.visible {
   transform: none;
   padding: var(--spacing-1);
-  opacity: 1;
   pointer-events: auto;
+  clip-path: circle(145% at 15% 0);
 }
 
 .menu .icon {
