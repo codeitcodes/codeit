@@ -745,9 +745,9 @@ function loadBinaryFileHTML(file, toggled) {
     // if on mobile device
     if (isMobile) {
 
-      onNextFrame(() => {
+      window.setTimeout(() => {
         liveView.classList.add('file-open');
-      });
+      }, 400);
 
       // update bottom float
       bottomFloat.classList.add('file-open');
