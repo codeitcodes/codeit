@@ -678,6 +678,14 @@ async function loadFileInHTML(fileEl, fileSha) {
     // change codeit lang
     cd.lang = selectedFile.lang;
     
+    
+    liveView.classList.add('notransition');
+    liveView.classList.remove('file-open');
+
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
+    
   } catch(e) { // if file is binary
     
     cd.textContent = '';
@@ -711,14 +719,6 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   // update line numbers
   updateLineNumbersHTML();
-  
-  
-  liveView.classList.add('notransition');
-  liveView.classList.remove('file-open');
-  
-  onNextFrame(() => {
-    liveView.classList.remove('notransition');
-  });
   
   // if on mobile device
   if (isMobile) {
