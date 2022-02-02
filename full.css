@@ -1416,7 +1416,7 @@ body .sidebar .button:active:not(:hover) {
   max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
   will-change: transform;
-  transition: .3s var(--bounce-function);
+  transition: .27s var(--bounce-function);
   transition-property: transform, padding, clip-path;
   clip-path: circle(0% at 15% 0);
   overflow-y: auto;
