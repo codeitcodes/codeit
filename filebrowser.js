@@ -678,14 +678,6 @@ async function loadFileInHTML(fileEl, fileSha) {
     // change codeit lang
     cd.lang = selectedFile.lang;
     
-    
-    liveView.classList.add('notransition');
-    liveView.classList.remove('file-open');
-
-    onNextFrame(() => {
-      liveView.classList.remove('notransition');
-    });
-    
   } catch(e) { // if file is binary
     
     cd.textContent = '';
@@ -720,6 +712,15 @@ async function loadFileInHTML(fileEl, fileSha) {
   // update line numbers
   updateLineNumbersHTML();
   
+  
+  liveView.classList.add('notransition');
+  liveView.classList.remove('file-open');
+
+  onNextFrame(() => {
+    liveView.classList.remove('notransition');
+  });
+  
+  
   // if on mobile device
   if (isMobile) {
 
@@ -739,6 +740,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 // load binary file in sidebar and live view
 function loadBinaryFileHTML(file, toggled) {
 
+  liveView.classList.remove('notransition');
   liveView.classList.add('file-open');
   
   // if sidebar is open and on mobile device
