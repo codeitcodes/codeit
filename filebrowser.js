@@ -15,7 +15,6 @@ sidebarToggle.addEventListener('mouseover', () => {
 
 // toggle sidebar on click of bookmark
 sidebarToggle.addEventListener('click', () => {
-  console.log('a');
 
   toggleSidebar(!body.classList.contains('expanded'));
 
@@ -1422,6 +1421,7 @@ learnClose.addEventListener('click', () => {
 
 // toggle the sidebar
 function toggleSidebar(open) {
+  console.log('a');
 
   if (open) {
 
