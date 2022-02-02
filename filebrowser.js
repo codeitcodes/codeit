@@ -714,7 +714,6 @@ async function loadFileInHTML(fileEl, fileSha) {
   
   
   liveView.classList.remove('file-open', 'visible');
-  liveToggle.classList.remove('file-open');
   
   onNextFrame(() => {
     liveView.classList.remove('notransition');
@@ -727,6 +726,10 @@ async function loadFileInHTML(fileEl, fileSha) {
     bottomFloat.classList.remove('file-open');
     updateFloat();
 
+  } else {
+    
+    liveToggle.classList.remove('file-open');
+    
   }
 
 }
@@ -736,7 +739,6 @@ async function loadFileInHTML(fileEl, fileSha) {
 function loadBinaryFileHTML(file) {
 
   liveView.classList.add('file-open', 'visible', 'notransition');
-  liveToggle.classList.add('file-open');
   
   // if on mobile device
   if (isMobile) {
@@ -745,6 +747,10 @@ function loadBinaryFileHTML(file) {
     bottomFloat.classList.add('file-open');
     updateFloat();
 
+  } else {
+    
+    liveToggle.classList.add('file-open');
+    
   }
   
   
