@@ -376,7 +376,7 @@ body.loaded:not(.mobile) .live-view {
 
 .live-view.notransition,
 .bottom-wrapper.notransition + .live-view {
-  transition: .4s var(--cubic-function) left !important;
+  transition: none !important;
 }
 
 .live-view::before {
