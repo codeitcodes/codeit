@@ -618,6 +618,10 @@ body.expanded .sidebar-toggle svg .left {
   opacity: 1;
 }
 
+.live-toggle:not(.file-open) svg.download {
+  display: none;
+}
+
 .live-toggle.file-open svg:not(.share, .download) {
   display: none;
 }
