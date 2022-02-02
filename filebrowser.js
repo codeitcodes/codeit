@@ -258,11 +258,19 @@ async function renderSidebarHTML() {
           let modified = '';
           if (modifiedFiles[file.sha] &&
               !modifiedFiles[file.sha].eclipsed) modified = ' modified';
-
+          
+          // add icon to file
+          const fileType = getFileType(file.name);
+          let fileIconHTML = fileIcon;
+          
+          if (fileType === 'image') fileIconHTML = imageIcon;
+          if (fileType === 'video') fileIconHTML = videoIcon;
+          if (fileType === 'audio') fileIconHTML = audioIcon;
+          
           out += `
           <div class="item file`+ modified +`" sha="`+ file.sha +`">
             <div class="label">
-              `+ fileIcon +`
+              `+ fileIconHTML +`
               <a class="name">`+ file.name +`</a>
             </div>
             <div class="push-wrapper">
@@ -308,10 +316,18 @@ async function renderSidebarHTML() {
           let modified = '';
           if (!file.eclipsed) modified = ' modified';
 
+          // add icon to file
+          const fileType = getFileType(file.name);
+          let fileIconHTML = fileIcon;
+          
+          if (fileType === 'image') fileIconHTML = imageIcon;
+          if (fileType === 'video') fileIconHTML = videoIcon;
+          if (fileType === 'audio') fileIconHTML = audioIcon;
+          
           out += `
           <div class="item file`+ modified +`" sha="`+ file.sha +`">
             <div class="label">
-              `+ fileIcon +`
+              `+ fileIconHTML +`
               <a class="name">`+ file.name +`</a>
             </div>
             <div class="push-wrapper">
