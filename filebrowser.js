@@ -720,7 +720,6 @@ async function loadFileInHTML(fileEl, fileSha) {
     liveView.classList.remove('notransition');
   });
   
-  
   // if on mobile device
   if (isMobile) {
 
@@ -746,8 +745,13 @@ function loadBinaryFileHTML(file, toggled) {
     liveView.classList.add('notransition', 'file-open');
     
     onNextFrame(() => {
+      
       liveView.classList.remove('notransition');
+      
+      // update bottom float
+      bottomFloat.classList.add('file-open');
       updateFloat();
+      
     })
     
   } else {
