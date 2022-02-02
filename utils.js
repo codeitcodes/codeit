@@ -210,7 +210,7 @@ let splitFileName = (src) => {
 // file types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
 const fileTypes = {
-  'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp'],
+  'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp', 'svg'],
   'video': ['mp4', 'mpeg', 'ogv', 'ts', 'webm'],
   'audio': ['avi', 'mp3', 'oga', 'ogg', 'opus', 'wav', 'weba'],
   'font': ['woff', 'woff2', 'ttf', 'otf'],
