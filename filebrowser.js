@@ -713,8 +713,12 @@ async function loadFileInHTML(fileEl, fileSha) {
   updateLineNumbersHTML();
   
   
-  liveView.classList.remove('file-open', 'visible', 'notransition');
+  liveView.classList.remove('file-open', 'visible');
   liveToggle.classList.remove('file-open');
+  
+  onNextFrame(() => {
+    liveView.classList.remove('notransition');
+  });
   
   // if on mobile device
   if (isMobile) {
