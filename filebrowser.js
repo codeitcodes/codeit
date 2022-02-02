@@ -1421,7 +1421,6 @@ learnClose.addEventListener('click', () => {
 
 // toggle the sidebar
 function toggleSidebar(open) {
-  console.log('a');
 
   if (open) {
 
