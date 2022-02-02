@@ -738,16 +738,16 @@ async function loadFileInHTML(fileEl, fileSha) {
 // load binary file in sidebar and live view
 function loadBinaryFileHTML(file, toggled) {
 
-  liveView.classList.add('visible', 'notransition');
+  liveView.classList.add('notransition');
   
   if (toggled) {
 
     // if on mobile device
     if (isMobile) {
-
-      window.setTimeout(() => {
-        liveView.classList.add('file-open');
-      }, 400);
+      
+      onNextFrame(() => {
+        liveView.classList.add('visible', 'file-open');
+      });
 
       // update bottom float
       bottomFloat.classList.add('file-open');
