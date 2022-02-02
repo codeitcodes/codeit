@@ -743,19 +743,11 @@ function loadBinaryFileHTML(file, toggled) {
   // if sidebar is open and on mobile device
   if (toggled && isMobile) {
     
-    liveView.classList.add('notransition');
-
-    onNextFrame(() => {
-      
-      liveView.classList.add('file-open');
-      liveView.classList.remove('notransition');
-      
-      // update bottom float
-      onNextFrame(updateFloat);
-      
-    });
+    liveView.classList.add('file-open');
     
+    // update bottom float
     bottomFloat.classList.add('file-open');
+    updateFloat();
     
   } else {
     
