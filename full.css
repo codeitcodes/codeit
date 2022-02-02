@@ -458,6 +458,7 @@ body.mobile .live-view.file-open {
 .live-view .live-frame {
   height: 100%;
   background: #fff;
+  max-width: unset;
 }
 
 .live-view .console {
