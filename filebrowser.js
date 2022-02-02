@@ -1634,7 +1634,8 @@ function setupEditor() {
 
       cd.textContent = '';
       
-      if (!body.classList.contains('expanded')) {
+      // if sidebar is closed
+      if (getStorage('sidebar') != 'true') {
         
         // load binary file
         loadBinaryFileHTML(selectedFile);
@@ -1643,8 +1644,8 @@ function setupEditor() {
 
     }
       
-    // if sidebar isn't expanded, focus codeit
-    if (!(isMobile && body.classList.contains('expanded'))) {
+    // if sidebar is closed, focus codeit
+    if (!isMobile || (isMobile && getStorage('sidebar') != 'true')) {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
