@@ -5,7 +5,7 @@
 // git login
 const clientId = '7ede3eed3185e59c042d';
 
-let gitToken, treeLoc, authUser;
+let gitToken, treeLoc, linkData, authUser;
 
 window.onload = async () => {
 
@@ -14,6 +14,14 @@ window.onload = async () => {
   if (gitToken == 'undefined') {
     gitToken = '';
   }
+
+
+  // decode URL
+  linkData = decodeLink(window.location.href);
+
+  // clear URL
+  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+
 
   // if treeLoc is in local storage
   if (linkData.dir) {
