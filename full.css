@@ -376,7 +376,7 @@ body.loaded:not(.mobile) .live-view {
 
 .live-view.notransition,
 .bottom-wrapper.notransition + .live-view {
-  transition: none !important;
+  transition: none;
 }
 
 .live-view::before {
@@ -425,22 +425,17 @@ body.loaded:not(.mobile) .live-view {
   align-items: center;
   justify-content: center;
   width: calc(100% - var(--sidebar-width));
-  left: auto;
+  left: 0;
   box-shadow: none;
   padding-left: 0;
 }
 
 body.mobile .live-view.file-open {
-  width: 100%;
-  top: 0;
-}
-
-body.mobile .live-view.file-open {
-  transition: .4s var(--cubic-function) transform;
+  transition: .4s var(--cubic-function) left;
 }
 
 body.mobile.expanded .live-view.file-open {
-  transform: translateX(100%) !important;
+  left: 100%;
 }
 
 .live-view.file-open::before,
