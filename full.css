@@ -441,6 +441,10 @@ body.mobile.expanded .live-view.file-open {
   left: 100%;
 }
 
+body.notransition .live-view.file-open {
+  transition: none;
+}
+
 .live-view.file-open::before,
 .live-view.file-open::after {
   display: none;
