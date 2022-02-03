@@ -674,7 +674,7 @@ async function renderLiveViewHTML(file) {
           if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
 
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
 
           image.src = 'data:' + mimeType + ';base64,' + resp.content;
 
@@ -734,7 +734,7 @@ async function renderLiveViewHTML(file) {
           if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
           
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
 
           video.src = 'data:' + mimeType + ';base64,' + resp.content;
 
@@ -789,7 +789,7 @@ async function renderLiveViewHTML(file) {
           // fetch audio
 
           // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
+          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
 
           audio.src = 'data:audio/mpeg;base64,' + resp.content;
 
