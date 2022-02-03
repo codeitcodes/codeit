@@ -1494,7 +1494,6 @@ body.mobile .menu .icon a {
 
 .menu .icon .bigger-icon {
   color: #828689;
-  opacity: .5;
   transform: scale(1.35) translateX(-0.1px);
 }
 
