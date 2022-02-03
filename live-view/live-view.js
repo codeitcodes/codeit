@@ -385,7 +385,8 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg') {
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg'
+      || selectedFile.lang == 'python') {
 
     liveToggle.classList.add('visible');
 
@@ -657,6 +658,8 @@ async function renderLiveViewHTML(file) {
       // if image is in current directory
       if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
+        const fileName = splitDir[splitDir.length-1];
+        
         // find file by name
         const fileObj = fileTree[fileName];
 
@@ -664,8 +667,6 @@ async function renderLiveViewHTML(file) {
         if (fileObj) {
 
           // fetch image
-
-          let fileName = splitDir[splitDir.length-1];
 
           // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
           let mimeType = 'image/' + fileName.split('.')[1];
@@ -682,8 +683,6 @@ async function renderLiveViewHTML(file) {
       } else if (!fileDir.includes('./')) { // if image is below current directory
 
         // fetch image
-
-        let fileName = fileDir[fileDir.length-1];
 
         // get MIME type
         let mimeType = 'image/' + fileName.split('.')[1];
@@ -717,6 +716,8 @@ async function renderLiveViewHTML(file) {
       // if video is in current directory
       if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
+        const fileName = splitDir[splitDir.length-1];
+        
         // find file by name
         const fileObj = fileTree[fileName];
 
@@ -724,8 +725,6 @@ async function renderLiveViewHTML(file) {
         if (fileObj) {
 
           // fetch video
-
-          let fileName = splitDir[splitDir.length-1];
 
           // get MIME type
           let mimeType = 'video/' + fileName.split('.')[1];
@@ -744,8 +743,6 @@ async function renderLiveViewHTML(file) {
       } else if (!fileDir.includes('./')) { // if image is below current directory
 
         // fetch video
-
-        let fileName = fileDir[fileDir.length-1];
 
         // get MIME type
         let mimeType = 'video/' + fileName.split('.')[1];
@@ -781,6 +778,8 @@ async function renderLiveViewHTML(file) {
       // if audio is in current directory
       if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
 
+        const fileName = splitDir[splitDir.length-1];
+        
         // find file by name
         const fileObj = fileTree[fileName];
 
@@ -788,8 +787,6 @@ async function renderLiveViewHTML(file) {
         if (fileObj) {
 
           // fetch audio
-
-          let fileName = splitDir[splitDir.length-1];
 
           // get file as blob with SHA (up to 100MB)
           const resp = await git.getBlob(selectedFile.dir.split(','), fileEl.sha);
@@ -801,8 +798,6 @@ async function renderLiveViewHTML(file) {
       } else if (!fileDir.includes('./')) { // if audio is below current directory
 
         // fetch audio
-
-        let fileName = fileDir[fileDir.length-1];
 
         const fileTree = linkHref.pathname.replaceAll(fileName, '');
 
@@ -939,6 +934,51 @@ async function renderLiveViewPython(file) {
   await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
   
   
+  function logMessage(msg, options) {
+    
+    if (msg) {
+      
+      if (options && options.color) {
+        
+        if (options.color === 'gray') {
+          
+          consoleEl.innerHTML += '<div class="message" style="color:gray;font-style:italic">'+msg+'<br></div>';
+        
+        } else if (options.color === 'purplepink') {
+          
+          consoleEl.innerHTML += '<div class="message" style="color:hsl(302,100%,72.5%)">'+msg+'<br></div>';
+          
+        }
+          
+      } else {
+        
+        consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
+      
+      }
+       
+    }
+    
+  }
+  
+  function clearOutput() {
+    
+    consoleEl.innerHTML = '';
+    logMessage('Console was cleared', { color: 'gray' });
+    
+  }
+  
+  
+  logMessage('Loading Python...', { color: 'gray' });
+  
+  // load pyodide in python frame
+  pythonFrame.pyodide = await pythonFrame.loadPyodide({
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
+  });
+  
+  logMessage('Loaded!', { color: 'gray' });
+  
+  
+  // override logs in python context
   pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
   pythonFrame.console.logs = [];
   pythonFrame.console.log = function() {
@@ -947,33 +987,6 @@ async function renderLiveViewPython(file) {
     pythonFrame.console.logs.forEach(msg => addToOutput(msg));
     pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
   }
-  
-  
-  function addToOutput(msg) {
-    
-    if (msg) {
-      
-      consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
-      
-    }
-    
-  }
-  
-  function clearOutput() {
-    
-    consoleEl.innerHTML = '';
-    
-  }
-  
-  
-  addToOutput('Initializing Python...');
-  
-  // load pyodide in python frame
-  pythonFrame.pyodide = await pythonFrame.loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
-  });
-
-  //clearOutput();
   
   
   // run file
@@ -986,7 +999,7 @@ async function renderLiveViewPython(file) {
     
   } catch (err) {
     
-    addToOutput(err);
+    logMessage(err, { color: 'purplepink' });
     
   }
   
