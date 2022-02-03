@@ -1615,7 +1615,6 @@ body.mobile.expanded .splash-wrapper::before {
 
 .splash-wrapper .loading-subtitle a {
   color: var(--rosemary-lightness-deluxe);
-  cursor: default;
   text-decoration: none;
 }
 
@@ -1943,18 +1942,6 @@ body.mobile.expanded .cube-loader::after {
 
 svg path {
   pointer-events: none;
-}
-
-
-body:not(.platform-mac) .bookmark,
-body:not(.platform-mac) .sidebar .header .titlescreen .title,
-body:not(.platform-mac) .sidebar .item,
-body:not(.platform-mac) .sidebar .item .push-wrapper,
-body:not(.platform-mac) .sidebar .more,
-body:not(.platform-mac) .roundbutton,
-body:not(.platform-mac) .sidebar .button,
-body:not(.platform-mac) .splash-wrapper a {
-  cursor: pointer;
 }
 
 
