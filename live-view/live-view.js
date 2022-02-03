@@ -385,7 +385,7 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'svg'
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup'
       || selectedFile.lang == 'python') {
 
     liveToggle.classList.add('visible');
@@ -467,7 +467,7 @@ function toggleLiveView(file) {
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     }
 
-    if (file.lang == 'html' || file.lang == 'svg') {
+    if (file.lang == 'html' || file.lang == 'markup') {
 
       window.setTimeout(() => {
 
