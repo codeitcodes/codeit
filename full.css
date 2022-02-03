@@ -1434,8 +1434,7 @@ body .sidebar .button:active:not(:hover) {
   max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
   will-change: transform;
-  transition: .18s var(--bounce-function);
-  transition-property: transform, padding, opacity;
+  transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
   overflow-y: auto;
   z-index: 1000;
@@ -1450,6 +1449,7 @@ body .sidebar .button:active:not(:hover) {
   padding: var(--spacing-1);
   pointer-events: auto;
   opacity: 1;
+  transition: .18s var(--bounce-function);
 }
 
 .menu .icon {
