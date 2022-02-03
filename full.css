@@ -1450,6 +1450,7 @@ body .sidebar .button:active:not(:hover) {
   pointer-events: auto;
   opacity: 1;
   transition: .18s var(--bounce-function);
+  transition-property: transform, padding, opacity;
 }
 
 .menu .icon {
