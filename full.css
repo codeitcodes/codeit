@@ -1434,9 +1434,9 @@ body .sidebar .button:active:not(:hover) {
   max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
   will-change: transform;
-  transition: .27s var(--bounce-function);
-  transition-property: transform, padding, clip-path;
-  clip-path: circle(0% at 15% 0);
+  transition: .18s var(--bounce-function);
+  transition-property: transform, padding, opacity;
+  opacity: 0;
   overflow-y: auto;
   z-index: 1000;
 }
@@ -1449,7 +1449,7 @@ body .sidebar .button:active:not(:hover) {
   transform: none;
   padding: var(--spacing-1);
   pointer-events: auto;
-  clip-path: circle(145% at 15% 0);
+  opacity: 1;
 }
 
 .menu .icon {
@@ -1464,7 +1464,8 @@ body .sidebar .button:active:not(:hover) {
 }
 
 .menu .icon.selected {
-  color: #059669;
+  color: hsl(164deg 91% 33%);
+  font-weight: 500;
 }
 
 .menu .icon:hover {
