@@ -721,7 +721,15 @@ async function loadFileInHTML(fileEl, fileSha) {
   // show file content in codeit
   try {
     
-    cd.textContent = decodeUnicode(selectedFile.content);
+    const fileContent = decodeUnicode(selectedFile.content);
+    
+    // compare current code with new code
+    if (hashCode(cd.textContent) !== hashCode(fileContent)) {
+      
+      // if the code is different, swap it
+      cd.textContent = fileContent;
+      
+    }
     
     // change codeit lang
     cd.lang = selectedFile.lang;
@@ -1847,14 +1855,20 @@ function setupEditor() {
             // beautify
             beautifierOptions.indent_char = cd.options.tab[0];
             const beautifiedText = beautifyLang(selText, beautifierOptions);
-
-            // replace selection contents
-            // with beautified text
-            cd.deleteCurrentSelection();
-            cd.insert(beautifiedText);
             
-            // dispatch type event (simulate typing)
-            cd.dispatchTypeEvent();
+            // compare current code with new code
+            // if the code is different, swap it
+            if (hashCode(selText) !== hashCode(beautifiedText)) {
+
+              // replace selection contents
+              // with beautified text
+              cd.deleteCurrentSelection();
+              cd.insert(beautifiedText);
+
+              // dispatch type event (simulate typing)
+              cd.dispatchTypeEvent();
+              
+            }
             
           }
 
