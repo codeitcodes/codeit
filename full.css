@@ -462,7 +462,7 @@ body.notransition .live-view.file-open {
   }
 }
 
-.live-view * {
+.live-view img {
   width: 100%;
   max-width: max-content;
   background: hsl(0, 0%, 90%);
@@ -477,6 +477,26 @@ body.notransition .live-view.file-open {
 .live-view .console {
   height: 100%;
   background: #1a1c24;
+}
+
+.live-view .prompt {
+  text-align: center;
+}
+
+.live-view .prompt .title {
+  letter-spacing: -.004em;
+  color: #f1f1f2e0;
+  margin-bottom: calc(7px / 2 * 3);
+  font-weight: 500;
+  font-size: 21px;
+  letter-spacing: -.002em;
+}
+
+.live-view .prompt .desc {
+  color: #b3b3b3;
+  font-size: 15px;
+  line-height: 23px;
+  letter-spacing: 0.2px;
 }
 
 .bookmark {
