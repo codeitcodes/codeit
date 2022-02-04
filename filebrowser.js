@@ -661,25 +661,22 @@ async function loadFileInHTML(fileEl, fileSha) {
     const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
 
     // get file from git
+    let resp = await git.getFile(treeLoc, fileName);
     
-    let resp;
     
-    try {
-      
-      resp = await git.getFile(treeLoc, fileName);
-      
-    } catch(e) {
+    // if file is over 1MB
+    if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
       
       // show file size prompt
       
       liveView.classList.add('file-open', 'notransition');
       liveView.innerHTML = '<div class="prompt"><div class="title">Your files are too powerful</div><div class="desc">Max file size 1MB please</div></div>';
-      
+
       resp = { content: fileSizeText };
-      
+
       // if on mobile device
       if (isMobile) {
-        
+
         onNextFrame(() => {
 
           liveView.classList.remove('notransition');
@@ -689,18 +686,19 @@ async function loadFileInHTML(fileEl, fileSha) {
           updateFloat();
 
         })
-        
+
       } else {
-        
+
         liveToggle.classList.add('file-open');
-        
+
         onNextFrame(() => {
           liveView.classList.remove('notransition');
         })
-        
+
       }
       
     }
+    
 
     // change selected file
     changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
