@@ -763,7 +763,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   updateLineNumbersHTML();
   
   
-  if (resp.content !== fileSizeText) {
+  if (selectedFile.content !== fileSizeText) {
 
     liveView.classList.add('notransition');
     liveView.classList.remove('file-open');
