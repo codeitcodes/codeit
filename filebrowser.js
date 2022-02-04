@@ -728,7 +728,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     
   } catch(e) { // if file is binary
     
-    if (resp.content !== fileSizeText) {
+    if (selectedFile.content !== fileSizeText) {
       
       cd.textContent = '';
 
