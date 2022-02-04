@@ -494,10 +494,9 @@ body.notransition .live-view.file-open {
 }
 
 .live-view .prompt .desc {
-  color: #b3b3b3;
-  font-size: 15px;
-  line-height: 23px;
-  letter-spacing: 0.2px;
+  color: #d7d7d7;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 .bookmark {
