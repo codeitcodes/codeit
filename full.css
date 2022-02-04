@@ -484,6 +484,12 @@ body.notransition .live-view.file-open {
   text-align: center;
 }
 
+.live-view .prompt .file-svg {
+  margin-bottom: calc(7px / 2 * 9);
+  -webkit-filter: drop-shadow(0 0 48px hsl(223deg 85% 58% / 50%));
+  filter: drop-shadow(0 0 48px hsl(223deg 85% 58% / 50%));
+}
+
 .live-view .prompt .title {
   letter-spacing: -.004em;
   color: #f1f1f2e0;
