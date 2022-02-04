@@ -9,6 +9,7 @@ const body = document.body,
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
+      floatDownload = bottomFloat.querySelector('.download'),
 
       sidebarToggle = document.querySelector('.sidebar-toggle'),
       liveToggle = document.querySelector('.live-toggle'),
