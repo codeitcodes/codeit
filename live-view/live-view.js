@@ -73,7 +73,7 @@ async function setupLiveView() {
       startLoading();
 
       // get file from git
-      const resp = await git.getBlob(treeLoc, fileSha);
+      const resp = await git.getFile(treeLoc, fileName);
 
       // change selected file
       changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
