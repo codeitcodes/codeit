@@ -650,12 +650,14 @@ async function loadFileInHTML(fileEl, fileSha) {
     if (loader.style.opacity != '1') {
       startLoading();
     }
+    
+    const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
 
     // get file from git
-    const resp = await git.getBlob(treeLoc, fileSha);
+    const resp = await git.getFile(treeLoc, fileName);
 
     // change selected file
-    changeSelectedFile(treeLoc.join(), fileSha, fileEl.innerText, resp.content, getFileLang(fileEl.innerText),
+    changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
                        [0, 0], [0, 0], false);
 
     // stop loading
