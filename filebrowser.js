@@ -736,7 +736,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     
   } catch(e) { // if file is binary
     
-    if (selectedFile.content !== fileSizeText) {
+    if (hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
       
       cd.textContent = '';
 
@@ -773,7 +773,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   updateLineNumbersHTML();
   
   
-  if (selectedFile.content !== fileSizeText) {
+  if (hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
 
     liveView.classList.add('notransition');
     liveView.classList.remove('file-open');
@@ -839,7 +839,7 @@ function loadBinaryFileHTML(file, toggled) {
 
   const fileType = getFileType(file.name);
 
-  if (file.content !== fileSizeText) {
+  if (hashCode(file.content) !== hashCode(fileSizeText)) {
     
     if (fileType === 'image') {
 
