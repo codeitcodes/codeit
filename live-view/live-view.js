@@ -456,11 +456,11 @@ if (isMobile) {
 async function downloadSelFile() {
   
   // if selected file is already fetched
-  if (selectedFile.contents &&
-      hashCode(selectedFile.contents) !== hashCode(fileSizeText)) {
+  if (selectedFile.content &&
+      hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
 
     // download selected file
-    downloadFile(selectedFile.contents, selectedFile.name);
+    downloadFile(selectedFile.content, selectedFile.name);
 
   } else {
 
@@ -468,7 +468,7 @@ async function downloadSelFile() {
     const resp = git.getBlob(treeLoc, selectedFile.sha);
 
     // download selected file
-    downloadFile(resp.contents, selectedFile.name);
+    downloadFile(resp.content, selectedFile.name);
 
   }
   
