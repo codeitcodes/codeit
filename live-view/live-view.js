@@ -412,6 +412,8 @@ if (isMobile) {
     toggleLiveView(selectedFile);
 
   });
+  
+  liveToggle.querySelector('.download').addEventListener('click', downloadSelFile);
 
   liveToggle.querySelector('.share').addEventListener('click', () => {
 
@@ -447,6 +449,42 @@ if (isMobile) {
 
   }
 
+}
+
+
+// download selected file
+async function downloadSelFile() {
+  
+  // if selected file is already fetched
+  if (selectedFile.contents &&
+      hashCode(selectedFile.contents) !== hashCode(fileSizeText)) {
+
+    // download selected file
+    downloadFile(selectedFile.contents, selectedFile.name);
+
+  } else {
+
+    // fetch selected file
+    const resp = git.getBlob(treeLoc, selectedFile.sha);
+
+    // download selected file
+    downloadFile(resp.contents, selectedFile.name);
+
+  }
+  
+}
+
+function downloadFile(file, name) {
+  
+  const a = document.createElement('a');
+  
+  a.href = 'data:application/octet-stream;base64,' + file;
+  a.target = '_blank';
+  a.download = name;
+  
+  a.click();
+  a.remove();
+  
 }
 
 
