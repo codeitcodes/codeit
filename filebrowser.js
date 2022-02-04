@@ -582,7 +582,7 @@ function clickedOnFileHTML(fileEl, event) {
 }
 
 
-const fileSizeText = '<your files are too powerful, max file size 1MB please>';
+const fileSizeText = '<this file is too big to view>';
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl, commitMessage) {
