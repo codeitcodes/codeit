@@ -582,6 +582,8 @@ function clickedOnFileHTML(fileEl, event) {
 }
 
 
+const fileSizeText = '<your files are too powerful, max file size 1MB please>';
+
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl, commitMessage) {
 
@@ -659,7 +661,46 @@ async function loadFileInHTML(fileEl, fileSha) {
     const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
 
     // get file from git
-    const resp = await git.getFile(treeLoc, fileName);
+    
+    let resp;
+    
+    try {
+      
+      resp = await git.getFile(treeLoc, fileName);
+      
+    } catch(e) {
+      
+      // show file size prompt
+      
+      liveView.classList.add('file-open', 'notransition');
+      liveView.innerHTML = '<div class="prompt"><div class="title">Your files are too powerful</div><div class="desc">Max file size 1MB please</div></div>';
+      
+      resp = { content: fileSizeText };
+      
+      // if on mobile device
+      if (isMobile) {
+        
+        onNextFrame(() => {
+
+          liveView.classList.remove('notransition');
+
+          // update bottom float
+          bottomFloat.classList.add('file-open');
+          updateFloat();
+
+        })
+        
+      } else {
+        
+        liveToggle.classList.add('file-open');
+        
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        })
+        
+      }
+      
+    }
 
     // change selected file
     changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
@@ -720,23 +761,26 @@ async function loadFileInHTML(fileEl, fileSha) {
   updateLineNumbersHTML();
   
   
-  liveView.classList.add('notransition');
-  liveView.classList.remove('file-open');
+  if (resp.content !== fileSizeText) {
 
-  onNextFrame(() => {
-    liveView.classList.remove('notransition');
-  });
-  
-  // if on mobile device
-  if (isMobile) {
+    liveView.classList.add('notransition');
+    liveView.classList.remove('file-open');
 
-    // update bottom float
-    bottomFloat.classList.remove('file-open');
-    updateFloat();
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
 
-  } else {
-    
-    liveToggle.classList.remove('file-open');
+    // if on mobile device
+    if (isMobile) {
+
+      // update bottom float
+      bottomFloat.classList.remove('file-open');
+
+    } else {
+
+      liveToggle.classList.remove('file-open');
+
+    }
     
   }
 
@@ -766,7 +810,7 @@ function loadBinaryFileHTML(file, toggled) {
     liveView.classList.add('notransition');
     liveView.classList.add('file-open');
     
-    if (!isMobile)liveToggle.classList.add('file-open');
+    if (!isMobile) liveToggle.classList.add('file-open');
     
     onNextFrame(() => {
       liveView.classList.remove('notransition');
