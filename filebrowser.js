@@ -419,8 +419,13 @@ async function renderSidebarHTML() {
 
   }
   
-  // protect unsaved code
-  protectUnsavedCode();
+  // if selected file exists
+  if (selectedFile.sha !== '') {
+    
+    // protect unsaved code
+    protectUnsavedCode();
+    
+  }
 
 }
 
