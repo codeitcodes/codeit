@@ -728,12 +728,16 @@ async function loadFileInHTML(fileEl, fileSha) {
     
   } catch(e) { // if file is binary
     
-    cd.textContent = '';
-    
-    // load binary file
-    loadBinaryFileHTML(selectedFile, true);
-    
-    return;
+    if (resp.content !== fileSizeText) {
+      
+      cd.textContent = '';
+
+      // load binary file
+      loadBinaryFileHTML(selectedFile, true);
+
+      return;
+      
+    }
     
   }
   
