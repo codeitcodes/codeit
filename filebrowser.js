@@ -821,17 +821,26 @@ function loadBinaryFileHTML(file, toggled) {
   }
   
   
-  const fileType = getFileType(file.name);
-  
-  if (fileType === 'image') {
-    
-    // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
-    let mimeType = 'image/' + file.name.split('.')[1];
+  if (file.content !== fileSizeText) {
 
-    if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+    const fileType = getFileType(file.name);
 
-    liveView.innerHTML = '<img src="data:' + mimeType + ';base64,' + file.content + '" draggable="false"></img>';
+    if (fileType === 'image') {
+
+      // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+      let mimeType = 'image/' + file.name.split('.')[1];
+
+      if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
+
+      liveView.innerHTML = '<img src="data:' + mimeType + ';base64,' + file.content + '" draggable="false"></img>';
+
+    }
     
+  } else {
+    
+    // show file size prompt
+    liveView.innerHTML = '<div class="prompt"><div class="title">Your files are too powerful</div><div class="desc">Max file size 1MB please</div></div>';
+
   }
   
 }
