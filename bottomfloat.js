@@ -89,6 +89,10 @@ pushWrapper.addEventListener('click', () => {
 })
 
 
+// download selected file on click of button
+floatDownload.addEventListener('click', downloadSelFile);
+
+
 // if on mobile
 if (isMobile) {
 
