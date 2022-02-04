@@ -1827,6 +1827,7 @@ function setupEditor() {
           // get selection language
           let selLang = Prism.util.getLanguage(cursorEl);
           if (selLang == 'javascript') selLang = 'js';
+          if (selLang == 'markup') selLang = 'html';
 
           // find syntax for language
           const beautifyLang = beautifier[selLang];
