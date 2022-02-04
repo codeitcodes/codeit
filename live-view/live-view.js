@@ -465,7 +465,7 @@ async function downloadSelFile() {
   } else {
 
     // fetch selected file
-    const resp = git.getBlob(treeLoc, selectedFile.sha);
+    const resp = await git.getBlob(treeLoc, selectedFile.sha);
 
     // download selected file
     downloadFile(resp.content, selectedFile.name);
