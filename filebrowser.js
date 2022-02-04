@@ -670,7 +670,7 @@ async function loadFileInHTML(fileEl, fileSha) {
       // show file size prompt
       
       liveView.classList.add('file-open', 'notransition');
-      liveView.innerHTML = '<div class="prompt"><div class="title">Your files are too powerful</div><div class="desc">Max file size 1MB please</div></div>';
+      liveView.innerHTML = '<div class="prompt"><div class="title">Your files are too powerful</div><div class="desc">Max file size 1MB please<br>You can download it below</div></div>';
 
       resp = { content: fileSizeText };
 
