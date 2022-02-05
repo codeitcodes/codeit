@@ -1083,7 +1083,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .header.searching .logo {
   padding-left: 7px;
-  max-width: calc(var(--sidebar-width) - 147px - 16px - 9px - 9px);
+  max-width: calc(var(--sidebar-width) - 140px - 16px - 7px - 7px - 7px);
 }
 
 .sidebar .header.searching .title .branch {
