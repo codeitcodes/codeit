@@ -1265,8 +1265,13 @@ newFileButton.addEventListener('click', () => {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
+        
+        // hide header screens
+        titleScreen.classList.add('visible');
+        optionsScreen.classList.remove('visible');
+        optionsButton.classList.remove('open');
 
-
+        
         // pad file content with random number of invisible chars
         // to generate unique file content and fix git sha generation
         const randomNum = Math.floor(Math.random() * 100) + 1;
