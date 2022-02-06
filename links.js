@@ -109,6 +109,3 @@ function decodeLink(url) {
   return linkData;
 
 }
-
-
-// 'Run ' + treeLoc[0] + '/' + treeLoc[1] + ' with Codeit.'
