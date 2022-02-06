@@ -40,40 +40,6 @@
   <meta name="robots" content="all">
   <script nonce>if (top != window) { top.location.href = 'https://codeit.codes/' }</script>
   <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
-
-  <script>
-  
-  // decode URL
-  const linkData = decodeLink(window.location.href);
-
-  // clear URL
-  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
-
-
-  (() => {
-
-    let openGraphTitle = 'Codeit - Mobile code editor';
-
-    // update open graph title
-    if (linkData.openLive) {
-
-      openGraphTitle = 'Run ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
-
-    } else if (linkData.dir) {
-
-      openGraphTitle = 'Open ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
-
-    }
-
-    const titleEl1 = document.head.querySelector('meta[property="og:title"]');
-    const titleEl2 = document.head.querySelector('meta[property="twitter:title"]');
-
-    titleEl1.content = openGraphTitle;
-    titleEl2.content = openGraphTitle;
-
-  })();
-    
-  </script>
   
   <link rel="shortcut icon" href="/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
