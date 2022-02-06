@@ -11,14 +11,14 @@
   force = true
   
 [[redirects]]
-  from = "https://cde.run/*"
-  to = "https://codeit.codes/full/*"
+  from = "https://cde.run"
+  to = "https://codeit.codes/full"
   status = 301
   force = true
 
 [[redirects]]
-  from = "https://dev.cde.run/*"
-  to = "https://dev.codeit.codes/full/*"
+  from = "https://dev.cde.run"
+  to = "https://dev.codeit.codes/full"
   status = 301
   force = true
 
