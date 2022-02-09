@@ -139,11 +139,11 @@ async function renderSidebarHTML() {
   }
 
 
-  // create temporary modified files array
-  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
-  
   // legacy modified file dir
-  modifiedFilesTemp.forEach(modFile => {
+  
+  let modFilesChanged = false;
+  
+  Object.values(modifiedFiles).forEach(modFile => {
 
     // map modified file location
     let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
@@ -157,10 +157,18 @@ async function renderSidebarHTML() {
       // append default branch to file
       fileRepo = fileRepo + ':' + repoBranch;
       modFile.dir = [fileUser, fileRepo, fileDir].join();
+      
+      modFilesChanged = true;
 
     }
 
   });
+  
+  if (modFilesChanged) updateModFilesLS();
+  
+  
+  // create temporary modified files array
+  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
 
   // get all modified files in directory
   modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
