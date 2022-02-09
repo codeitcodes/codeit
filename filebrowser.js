@@ -155,7 +155,7 @@ async function renderSidebarHTML() {
         && fileRepo === repoName) {
 
       // append default branch to file
-      fileRepo = fileRepo + ':' + repoBranch;
+      fileRepo = fileRepo + ':' + branch;
       modFile.dir = [fileUser, fileRepo, fileDir].join();
       
       modFilesChanged = true;
