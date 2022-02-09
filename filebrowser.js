@@ -101,28 +101,6 @@ async function renderSidebarHTML() {
   // create temporary modified files array
   let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
   
-  // legacy modified file dir
-  modifiedFilesTemp.forEach(modFile => {
-    
-    // map modified file location
-    let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
-
-    const [repoName, repoBranch] = repo.split(':');
-    
-    // if modified file dosen't have a branch
-    // and is in current repo
-    if (!fileRepo.includes(':')
-        && fileUser === user
-        && fileRepo === repoName) {
-      
-      // append default branch to file
-      fileRepo = fileRepo + ':' + repoBranch;
-      modFile.dir = [fileUser, fileRepo, fileDir].join();
-      
-    }
-
-  });
-  
   // get all modified files in directory
   modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
   
