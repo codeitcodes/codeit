@@ -1475,36 +1475,75 @@ newFileButton.addEventListener('click', () => {
 // share repository link
 repoShareButton.addEventListener('click', () => {
 
-  // create a link
-  const link = createLink({
-    dir: treeLoc
-  });
+  if (treeLoc[1] !== '') {
 
-  if (isMobile) {
+    // create a link
+    const link = createLink({
+      dir: treeLoc
+    });
 
-    const shareTitle = treeLoc[2] ? 'Share folder' : 'Share repository';
+    if (isMobile) {
 
-    try {
+      const shareTitle = treeLoc[2] ? 'Share folder' : 'Share repository';
 
-      navigator.share({
-        title: shareTitle,
-        text: link
-      });
+      try {
 
-    } catch(e) {
+        navigator.share({
+          title: shareTitle,
+          text: link
+        });
+
+      } catch(e) {
+
+        copy(link).then(() => {
+          alert('Copied link to clipboard.');
+        });
+
+      }
+
+    } else {
 
       copy(link).then(() => {
         alert('Copied link to clipboard.');
       });
 
     }
-
+    
   } else {
+    
+    // share codeit
+    
+    const shareText = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  
+    if (isMobile) {
 
-    copy(link).then(() => {
-      alert('Copied link to clipboard.');
-    });
+      try {
 
+        navigator.share({
+          title: 'Share Codeit',
+          text: shareText
+        });
+
+      } catch(e) {
+
+        // if couldn't open share dialog
+        // copy text to clipboard
+        copy(shareText).then(() => {
+          alert('Copied text to clipboard.');
+        });
+
+      }
+
+    } else {
+
+      // if couldn't open share dialog
+      // copy text to clipboard
+      copy(shareText).then(() => {
+        alert('Copied text to clipboard.');
+      });
+
+    }
+  
   }
 
 });
