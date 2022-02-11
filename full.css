@@ -1018,6 +1018,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
+.sidebar .header .options-screen .clone-repo {
+  display: none;
+}
+
 .sidebar .header .options-screen .global-search {
   display: none;
 }
