@@ -116,12 +116,9 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
   
-  if (isSafari || !isMobile) {
+  if (isSafari) {
     
     button.classList.remove('loading');
-    
-    // save installation in local storage
-    localStorage.setItem('installed', 'true');
     
   }
   
