@@ -1340,7 +1340,7 @@ newFileButton.addEventListener('click', () => {
 
             // add a differentiating number
             // and reconstruct file name
-            fileName = fileName[0] + '-1.' + fileName[1];
+            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
 
           }
 
