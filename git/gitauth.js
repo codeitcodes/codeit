@@ -34,7 +34,7 @@ window.onload = async () => {
     treeLoc = getStorage('tree') ? getStorage('tree').split(',') : ['', '', ''];
     
     // if repo dosen't have a branch (legacy treeLoc)
-    if (!treeLoc[1].includes(':')) {
+    if (treeLoc[1] && !treeLoc[1].includes(':')) {
       
       // add default branch to repo
       treeLoc[1] += ':main';
