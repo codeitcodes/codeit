@@ -192,7 +192,7 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
 
 function setTimeoutForEclipsedFiles() {
   
-  const eclipsedFiles = Object.values(modifiedFiles).filter(file => file.eclipsed);
+  const eclipsedFiles = Object.entries(modifiedFiles).filter(file => file[1].eclipsed);
   
   // run on all eclipsed files
   eclipsedFiles.forEach(file => {
@@ -202,12 +202,12 @@ function setTimeoutForEclipsedFiles() {
       
       // if not edited eclipsed file
       // while in timeout (file is still eclipsed)
-      if (modifiedFiles[file.sha] &&
-          modifiedFiles[file.sha].eclipsed) {
+      if (modifiedFiles[file[0]] &&
+          modifiedFiles[file[0]].eclipsed) {
       
         // remove the eclipsed file
         // from modifiedFiles
-        deleteModFile(file.sha);
+        deleteModFile(file[0]);
         
       }
       
