@@ -4,14 +4,12 @@ const body = document.body,
       cd = document.querySelector('cd-el'),
 
       bottomWrapper = document.querySelector('.bottom-wrapper'),
-      
+
       bottomFloat = bottomWrapper.querySelector('.bottom-float'),
       sidebarOpen = bottomFloat.querySelector('.sidebar-open'),
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
-      
-      liveButtonShare = bottomWrapper.querySelector('.live-button.share'),
-      liveButtonArrow = bottomWrapper.querySelector('.live-button.arrow'),
+      floatDownload = bottomFloat.querySelector('.download'),
 
       sidebarToggle = document.querySelector('.sidebar-toggle'),
       liveToggle = document.querySelector('.live-toggle'),
@@ -26,44 +24,60 @@ const body = document.body,
       loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
 
-      titleScreen = header.querySelector('.titlescreen'),
-      searchScreen = header.querySelector('.searchscreen'),
+      titleScreen = header.querySelector('.title-screen'),
+      optionsScreen = header.querySelector('.options-screen'),
+      searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
+      sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
+
+      optionsButton = header.querySelector('.options'),
+
+      newFileButton = optionsScreen.querySelector('.new-file'),
+      branchButton = optionsScreen.querySelector('.branch'),
+      repoShareButton = optionsScreen.querySelector('.share'),
 
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
-      searchInput = searchScreen.querySelector('.searchinput'),
+      searchInput = searchScreen.querySelector('.search-input'),
       searchClear = searchScreen.querySelector('.clear'),
-      
-      addButton = titleScreen.querySelector('.add'),
-      
+
       sidebarBackground = document.querySelector('.sidebar-background'),
-      
+
       fileWrapper = sidebar.querySelector('.files'),
-      
+
       versionEl = learnWrapper.querySelector('.version'),
       learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
       
+      branchMenu = document.querySelector('.branch-menu'),
+
       liveView = document.querySelector('.live-view');
 
 
+
 // version
-const version = '1.9.0';
+const version = '2.0.0';
 versionEl.innerText = version;
+
+let logVersion = () => {
+  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
+}
+
+logVersion();
+
 
 
 // dev build
 let isDev = false;
 
 if (window.location.href.includes('dev')) {
-  
+
   isDev = true;
   learnTitle.innerHTML += '<sup>dev</sup>';
-  
+
 }
 
 
@@ -72,24 +86,24 @@ if (window.location.href.includes('dev')) {
 let loadInterval;
 
 function startLoading() {
-      
+
   sidebar.classList.add('loading');
-  
+
   loader.style.width = '0%';
   loader.style.transition = 'none';
   loader.style.opacity = 1;
 
   onNextFrame(load);
-  
+
   if (loadInterval) window.clearInterval(loadInterval);
   loadInterval = window.setInterval(load, 180);
 
 }
 
 function stopLoading() {
-  
+
   sidebar.classList.remove('loading');
-  
+
   window.clearInterval(loadInterval);
   loadInterval = false;
 
@@ -162,7 +176,7 @@ window.addEventListener('offline', () => { isOffline = true });
 // base64 encode/decode
 
 let encodeUnicode = (str) => {
-  
+
   // first we use encodeURIComponent to get percent-encoded UTF-8,
   // then we convert the percent encodings into raw bytes which
   // can be fed into btoa
@@ -170,44 +184,69 @@ let encodeUnicode = (str) => {
       function toSolidBytes(match, p1) {
           return String.fromCharCode('0x' + p1);
   }));
-  
+
 }
 
 let decodeUnicode = (str) => {
-  
+
   // going backwards: from bytestream, to percent-encoding, to original string
   return decodeURIComponent(atob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-  
+
 }
 
 
 // split file name
 let splitFileName = (src) => {
-  
+
   src = src.replaceAll('\n', '');
 
   const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
   return [src.replace(('.' + extension), ''), extension];
-  
+
 }
 
 
-// MIME types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+// file types (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 
-const mimetypes = {
-  png: 'image/png',
-  jpeg: 'image/jpeg'
+const fileTypes = {
+  'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp'],
+  'video': ['mp4', 'mpeg', 'ogv', 'webm'],
+  'audio': ['avi', 'mp3', 'oga', 'ogg', 'opus', 'wav', 'weba'],
+  'font': ['woff', 'woff2', 'ttf', 'otf'],
+  'html': ['html', 'svg', 'htm'],
+  'css': ['css', 'scss'],
+  'javascript': ['js', 'ts', 'mjs', 'jsx'],
+  'json': ['json'],
+  'python': ['python'],
+  'markdown': ['md'],
+  'midi': ['midi'],
+  'pdf': ['pdf']
 };
 
-let getMimeType = (src) => {
+let getFileType = (fileName) => {
   
   // get file extension
-  const extension = splitFileName(src)[1].slice(1);
+  const extension = splitFileName(fileName)[1];
   
-  return mimetypes[extension];
+  let fileType = 'other';
   
+  if (fileName === 'README') return 'markdown';
+  
+  Object.entries(fileTypes).forEach(type => {
+    
+    if (type[1].includes(extension)) {
+      
+      fileType = type[0];
+      return fileType;
+      
+    }
+  
+  });
+  
+  return fileType;
+
 }
 
 
@@ -226,7 +265,22 @@ let setStorage = (item, value) => {
 }
 
 
-// Attributes
+// move element to element (when origin element has 'position: fixed')
+
+let moveElToEl = (origin, dest) => {
+  
+  const rect = dest.getBoundingClientRect(),
+        left = rect.left,
+        top = rect.top,
+        height = dest.clientHeight;
+  
+  origin.style.left = left + 'px';
+  origin.style.top = top + height + 'px';
+
+}
+
+
+// attributes
 
 let getAttr = (element, item) => {
 
@@ -241,6 +295,34 @@ let setAttr = (element, item, value) => {
 }
 
 
+// validate string
+let validateString = (string) => {
+
+  const acceptableChars = 'abcdefghijklmnopqrstuvwxyz' +
+                          'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+                          '0123456789' +
+                          '-_.';
+  
+  const stringArr = string.split('').filter(char => !acceptableChars.includes(char));
+  
+  return (stringArr.length > 0 ? stringArr : false);
+  
+}
+
+
+// hash string
+let hashCode = (string) => {
+  var hash = 0, i, chr;
+  if (string.length === 0) return hash;
+  for (i = 0; i < string.length; i++) {
+    chr   = string.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // convert to 32bit integer
+  }
+  return hash;
+}
+
+
 // asynchronous thread
 
 let asyncThread = (callback, time) => {
@@ -250,21 +332,37 @@ let asyncThread = (callback, time) => {
 }
 
 let onNextFrame = (callback) => {
-  
+
   window.requestAnimationFrame(callback);
 
 }
 
 
+// add event listeners
+
+Element.prototype.on = (events, callback, passive) => {
+
+  events.split(' ').forEach(evt => {
+
+    this.addEventListener(evt, callback, passive);
+
+  });
+
+}
+
+
 // copy
-let copy = (text) => {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textArea);
+let copy = async (text) => {
+  await navigator.clipboard.writeText(text);
+}
+
+// paste
+let paste = async () => {
+  
+  const text = await navigator.clipboard.readText();
+  
+  return text;
+  
 }
 
 
@@ -278,6 +376,17 @@ let axios = {
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
+          } else if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
           }
         };
         xmlhttp.open('GET', url, true);
@@ -317,6 +426,32 @@ let axios = {
       } catch(e) { reject(e) }
     });
   },
+  'patch': (url, token) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(JSON.parse(this.responseText));
+          } else if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.open('PATCH', url, true);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  },
   'delete': (url, token) => {
     return new Promise((resolve, reject) => {
       try {
@@ -324,10 +459,21 @@ let axios = {
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(JSON.parse(this.responseText));
+          } else if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {}
           }
         };
         xmlhttp.open('DELETE', url, true);
-        xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
@@ -343,8 +489,12 @@ const fileIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="2
 const folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M10.59 4.59C10.21 4.21 9.7 4 9.17 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-1.41-1.41z" fill="currentColor"></path> </svg>';
 
 const imageIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.9 13.98l2.1 2.53 3.1-3.99c.2-.26.6-.26.8.01l3.51 4.68c.25.33.01.8-.4.8H6.02c-.42 0-.65-.48-.39-.81L8.12 14c.19-.26.57-.27.78-.02z" fill="currentColor"></path> </svg>';
-const videoIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 13.5v-7c0-.41.47-.65.8-.4l4.67 3.5c.27.2.27.6 0 .8l-4.67 3.5c-.33.25-.8.01-.8-.4z" fill="currentColor"></path> </svg>';
+const videoIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M18 4v1h-2V4c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v1H6V4c0-.55-.45-1-1-1s-1 .45-1 1v16c0 .55.45 1 1 1s1-.45 1-1v-1h2v1c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-1h2v1c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1s-1 .45-1 1zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z" fill="currentColor"></path> </svg>';
 const audioIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v.2c0 .38.25.71.6.85C17.18 6.53 19 9.06 19 12s-1.82 5.47-4.4 6.5c-.36.14-.6.47-.6.85v.2c0 .63.63 1.07 1.21.85C18.6 19.11 21 15.84 21 12s-2.4-7.11-5.79-8.4c-.58-.23-1.21.22-1.21.85z" fill="currentColor"></path> </svg>';
+
+const branchIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="branch-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M13,14C9.64,14 8.54,15.35 8.18,16.24C9.25,16.7 10,17.76 10,19A3,3 0 0,1 7,22A3,3 0 0,1 4,19C4,17.69 4.83,16.58 6,16.17V7.83C4.83,7.42 4,6.31 4,5A3,3 0 0,1 7,2A3,3 0 0,1 10,5C10,6.31 9.17,7.42 8,7.83V13.12C8.88,12.47 10.16,12 12,12C14.67,12 15.56,10.66 15.85,9.77C14.77,9.32 14,8.25 14,7A3,3 0 0,1 17,4A3,3 0 0,1 20,7C20,8.34 19.12,9.5 17.91,9.86C17.65,11.29 16.68,14 13,14M7,18A1,1 0 0,0 6,19A1,1 0 0,0 7,20A1,1 0 0,0 8,19A1,1 0 0,0 7,18M7,4A1,1 0 0,0 6,5A1,1 0 0,0 7,6A1,1 0 0,0 8,5A1,1 0 0,0 7,4M17,6A1,1 0 0,0 16,7A1,1 0 0,0 17,8A1,1 0 0,0 18,7A1,1 0 0,0 17,6Z" fill="currentColor"></path></svg>';
+const moreIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"></path></svg>';
+const plusIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" fill="currentColor"></path></svg>';
 
 const arrowIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="arrow" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" fill="currentColor"></path> </svg>';
 

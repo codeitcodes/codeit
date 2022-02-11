@@ -32,7 +32,7 @@ function updateFloat() {
 sidebarOpen.addEventListener('click', () => {
   
   // if bottom float isn't expanded
-  if (liveView.children.length == 0) {
+  if (!liveView.querySelector('.live-frame')) {
     
     toggleSidebar(true);
     saveSidebarStateLS();
@@ -87,6 +87,10 @@ pushWrapper.addEventListener('click', () => {
   }
 
 })
+
+
+// download selected file on click of button
+floatDownload.addEventListener('click', downloadSelFile);
 
 
 // if on mobile

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="background: #313744" translate="no">
 <head>
-  
+
   <title>Codeit</title>
 
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
@@ -15,55 +15,44 @@
   <meta http-equiv="origin-trial" content="At6bIDqQqUBcNVY46zIFOhsfQekTjYXogHK35lCdfrpna6/wqhxQsIh+kfTDRcLVPP0jyfFX5gTbBM4trLnn4g0AAABqeyJvcmlnaW4iOiJodHRwczovL2NvZGVpdC5jb2Rlczo0NDMiLCJmZWF0dXJlIjoiV2ViQXBwVXJsSGFuZGxpbmciLCJleHBpcnkiOjE2NDMxNTUxOTksImlzU3ViZG9tYWluIjp0cnVlfQ==">
 
   <meta charset="utf-8">
-  <meta name="description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
-  
-  <meta property="og:title" content="Codeit | Mobile code editor connected to Git">
-  <meta property="og:description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
+  <meta name="description" content="Mobile code editor connected to Git. Runs on the web, open source, and free. Supports JavaScript, HTML, CSS, Python, React, XML, Bootstrap, and more. Easy to use and simple.">
+  <meta property="og:title" content="Codeit - Mobile code editor">
+  <meta property="og:description" content="Mobile code editor connected to Git. Runs on the web, open source, and free. Supports JavaScript, HTML, CSS, Python, React, XML, Bootstrap, and more. Easy to use and simple.">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="application">
-  <meta property="og:site_name" content="Codeit Code Editor">
-  
-  <meta property="twitter:title" content="Codeit | Mobile code editor connected to Git">
-  <meta property="twitter:account_id" content="1484271514543345665">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="codeit.codes">
-  <meta property="twitter:url" content="https://codeit.codes">
-  <meta name="twitter:description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
-  <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
-  
+  <meta property="og:site_name" content="Codeit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="referrer" content="origin-when-cross-origin">
-  <meta name="keywords" content="code editor, version control tools, source code versioning, source code management tools, python, jquery demo, html, git, how to, bootstrap, jquery, javascript, javascript tutorial, javascript tutorial for beginners, javascript programming, html web form, create form in html, responsive web design, html web design, html design, responsive website development, html5 tutorial, html5 css3, html5 development, web design software, web development software, git tutorial, git howto, git repository, git command, git source code, top programming languages to learn, best programming language, best computer language, open source, open source code, open source applications, source code editor, software development tools, development tool, software developer tools list, programmer tool, web application development software">
-  <link rel="canonical" href="https://codeit.codes/">
+  <meta name="keywords" content="code editor, version control tools, source code versioning, source code management tools, python, jquery demo, html, git, how to, bootstrap, jquery, javascript, javascript tutorial, javascript tutorial for beginners, javascript programming, html web form, create form in html, responsive web design, html web design, html design, responsive website development, html5 tutorial, codeit, html5 css3, html5 development, web design software, web development software, git tutorial, git howto, git repository, git command, git source code, top programming languages to learn, best programming language, best programming language to learn, best computer language, open source, open source code, open source applications, source code editor, software development tools, development tool, software developer tools list, programmer tool, web application development software, app development software for pc">
   <meta name="next-head-count" content="24">
   <meta name="robots" content="all">
-  <script nonce>if (top != window) { top.location.href = 'https://codeit.codes/' }</script>
   <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
-  
+
   <link rel="shortcut icon" href="/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
 
   <link rel="stylesheet" href="/full.css">
-  
+
   <link rel="apple-touch-startup-image" href="https://codeit.codes/splashes/apple-splash-2048-2732.jpg" media="(orientation: portrait) and (orientation: landscape)">
-  
+
   <link rel="preconnect" href="https://codeit.codes">
   <link rel="preconnect" href="https://api.github.com" crossorigin>
-    
+
   <link href="/fonts/fonts.css" rel="stylesheet">
-  
+
 </head>
 <body ontouchstart="">
 
   <div class="cd-wrapper">
     <cd-el class="line-numbers" lang="none" tabindex="0"></cd-el>
+    <div class="menu"></div>
   </div>
 
   <div class="bottom-wrapper">
     <div class="bottom-float">
       <div class="sidebar-open menu-item">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="menu">
           <rect fill="none" height="24" width="24"></rect>
           <path
             d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"
@@ -72,12 +61,6 @@
         </svg>
         <div class="badge"></div>
         <div class="logo"></div>
-      </div>
-      <div class="menu-item download">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-          <rect fill="none" height="24" width="24"></rect>
-          <path d="M16.59,9H15V4c0-0.55-0.45-1-1-1h-4C9.45,3,9,3.45,9,4v5H7.41c-0.89,0-1.34,1.08-0.71,1.71l4.59,4.59 c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59C17.92,10.08,17.48,9,16.59,9z M5,19c0,0.55,0.45,1,1,1h12c0.55,0,1-0.45,1-1s-0.45-1-1-1H6 C5.45,18,5,18.45,5,19z" fill="currentColor"></path>
-        </svg>
       </div>
       <div class="menu-item push-wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><rect fill="none" height="24" width="24"/><path d="M7.4,10h1.59v5c0,0.55,0.45,1,1,1h4c0.55,0,1-0.45,1-1v-5h1.59c0.89,0,1.34-1.08,0.71-1.71L12.7,3.7 c-0.39-0.39-1.02-0.39-1.41,0L6.7,8.29C6.07,8.92,6.51,10,7.4,10z M5,19c0,0.55,0.45,1,1,1h12c0.55,0,1-0.45,1-1s-0.45-1-1-1H6 C5.45,18,5,18.45,5,19z" fill="currentColor"/></svg>
@@ -97,18 +80,14 @@
         <path d="M0 0h24v24H0z" fill="none"></path>
         <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" fill="currentColor"></path>
       </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="download">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M16.59,9H15V4c0-0.55-0.45-1-1-1h-4C9.45,3,9,3.45,9,4v5H7.41c-0.89,0-1.34,1.08-0.71,1.71l4.59,4.59 c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59C17.92,10.08,17.48,9,16.59,9z M5,19c0,0.55,0.45,1,1,1h12c0.55,0,1-0.45,1-1s-0.45-1-1-1H6 C5.45,18,5,18.45,5,19z" fill="currentColor" class="left"></path>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="expand" style="display: none">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="expand">
         <path d="M0 0h24v24H0z" fill="none"></path>
         <path d="M21,8.59V4c0-0.55-0.45-1-1-1h-4.59c-0.89,0-1.34,1.08-0.71,1.71l1.59,1.59l-10,10l-1.59-1.59C4.08,14.08,3,14.52,3,15.41 V20c0,0.55,0.45,1,1,1h4.59c0.89,0,1.34-1.08,0.71-1.71l-1.59-1.59l10-10l1.59,1.59C19.92,9.92,21,9.48,21,8.59z" fill="currentColor"></path>
       </svg>
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="arrow">
         <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z" fill="currentColor" class="right"></path>
-        <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" fill="currentColor" class="left"></path>
+        <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" fill="currentColor" class="right"></path>
+        <path d="M14.71 6.71c-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z" fill="currentColor" class="left"></path>
       </svg>
     </div>
   </div>
@@ -179,7 +158,11 @@
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="new-file roundbutton" title="Clone repository">
               <path d="M0 0h24v24H0V0z" fill="none"></path>
-              <path d="M14.59 2.59c-.38-.38-.89-.59-1.42-.59H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.82-4.83zM15 16h-2v2c0 .55-.45 1-1 1s-1-.45-1-1v-2H9c-.55 0-1-.45-1-1s.45-1 1-1h2v-2c0-.55.45-1 1-1s1 .45 1 1v2h2c.55 0 1 .45 1 1s-.45 1-1 1zm-2-8V3.5L18.5 9H14c-.55 0-1-.45-1-1z" fill="currentColor"></path>
+              <path d="" fill="currentColor" class="icon"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="global-search roundbutton" title="Global Search">
+              <path d="M0 0h24v24H0V0z" fill="none"></path>
+              <path d="M19.3,16.9c0.58-1.01,0.95-2.23,0.51-3.65c-0.53-1.72-2.04-3.05-3.84-3.22c-2.87-0.28-5.23,2.07-4.95,4.95 c0.18,1.79,1.5,3.31,3.22,3.84c1.43,0.44,2.64,0.07,3.65-0.51l2.5,2.5c0.39,0.39,1.01,0.39,1.4,0l0,0c0.39-0.39,0.39-1.01,0-1.4 L19.3,16.9z M15.5,17c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5s2.5,1.1,2.5,2.5S16.9,17,15.5,17z M12,20v2C6.48,22,2,17.52,2,12 C2,6.48,6.48,2,12,2c4.84,0,8.87,3.44,9.8,8h-2.07c-0.64-2.46-2.4-4.47-4.73-5.41V5c0,1.1-0.9,2-2,2h-2v2c0,0.55-0.45,1-1,1H8v2h2v3 H9l-4.79-4.79C4.08,10.79,4,11.38,4,12C4,16.41,7.59,20,12,20z" fill="currentColor"></path>
             </svg>
           </div>
         </div>
@@ -220,48 +203,14 @@
 
   <div class="splash-wrapper">
     <div class="cube-loader"></div>
-    <div class="loading-subtitle">Connection problems? <a href="https://twitter.com/codeitcodes" target="_blank">Let us know!</a></div>
+    <div class="loading-subtitle">Connection problems? <a href="https://github.com/codeitcodes/codeit/issues/new/choose" target="_blank">Let us know!</a></div>
   </div>
 
 
-  <script src="lib/prism.js" data-manual></script>
-  <script>
-  Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/';
-  </script>
+  <link rel="stylesheet" href="dark-theme.css">
 
+  <script src="codeit.app.js" data-manual></script>
 
-  <link rel="stylesheet" href="/dark-theme.css">
-
-  <script src="lib/codeit.js"></script>
-
-  <script src="lib/plugins/codeit-line-numbers.js"></script>
-  <script src="lib/plugins/codeit-match-braces.js"></script>
-  <script src="lib/plugins/codeit-inline-color.js"></script>
-  <script src="lib/plugins/codeit-autolinker.js"></script>
-
-
-  <script src="utils.js"></script>
-  <script src="manifest.js"></script>
-  <script src="files.js"></script>
-  <script src="links.js"></script>
-
-  <script src="git/gitapi.js"></script>
-  <script src="git/gitauth.js"></script>
-
-  <script src="codedrop.js"></script>
-  <script src="filebrowser.js"></script>
-
-  <script src="live-view/live-view.js"></script>
-  
-  <script src="spotlightsearch.js"></script>
-
-  <script src="localstorage.js"></script>
-
-  <script src="bottomfloat.js"></script>
-  
-  <script src="live-view/extensions/beautifier.min.js" async></script>
-  <script src="live-view/extensions/module-importer.js"></script>
-  
 
   <script>
 

@@ -1,14 +1,33 @@
 [[headers]]
-  # Define which paths this specific [[headers]] block will cover.
+  # define which paths this specific [[headers]] block will cover.
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+[[redirects]]
+  from = "/live-fetch/*"
+  to = "/live-view/fetch-resp"
+  status = 301
+  force = true
+  
+[[redirects]]
+  from = "https://cde.run"
+  to = "https://codeit.codes/full"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://dev.cde.run"
+  to = "https://dev.codeit.codes/full"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "https://dev.codeit.codes"
   to = "https://dev.codeit.codes/full"
   status = 301
   force = true
+
 
 [[redirects]]
   from = "https://codeit.berryscript.com"
@@ -21,3 +40,4 @@
   to = "https://codeit.codes/full"
   status = 301
   force = true
+

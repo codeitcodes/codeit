@@ -22,12 +22,32 @@ let manifest = {
   "capture_links": "existing_client_event",
   "file_handlers": [
     {
-      "action": window.location.origin + "/full/?file=true",
+      "action": window.location.origin + "/full?file=true",
       "accept": {
-        "text/plain": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs"]
-      }
+        "text/*": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+      },
+      "icons": [
+        {
+          "src": window.location.origin + "/icons/file.png",
+          "sizes": "256x256",
+          "type": "image/png"
+        }
+      ]
     }
   ],
+  "share_target": {
+    "action": window.location.origin + "/full?file=true",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [
+        {
+          "name": "file",
+          "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+        }
+      ]
+    }
+  },
   "url_handlers": [
     {
       "origin": window.location.origin

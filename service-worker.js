@@ -1,45 +1,51 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v270';
+const CACHE_NAME = 'static-cache-v289';
 
 // list of files to cache
 const FILES_TO_CACHE = [
-  
+
   '/lib/codeit.js',
   '/lib/prism.js',
-  
-  '/lib/codeit-line-numbers.js',
-  '/lib/codeit-match-braces.js',
-  '/lib/codeit-inline-color.js',
-  '/lib/codeit-autolinker.js',
+
+  '/lib/plugins/codeit-line-numbers.js',
+  '/lib/plugins/codeit-match-braces.js',
+  '/lib/plugins/codeit-inline-color.js',
+  '/lib/plugins/codeit-autolinker.js',
 
   '/full.html',
   '/full.css',
 
   '/utils.js',
   '/manifest.js',
-  '/file.js',
+  '/files.js',
+  '/links.js',
   '/git/gitapi.js',
   '/git/gitauth.js',
   '/codedrop.js',
   '/filebrowser.js',
-  '/live-view.js',
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
 
+  '/live-view/live-view.js',
+  '/live-view/fetch-resp',
+  
+  '/live-view/extensions/beautifier.min.js',
+  '/live-view/extensions/module-importer.js',
+  
   '/dark-theme.css',
 
   '/fonts/fonts.css',
-  
+
   '/fonts/Mono-Sans/MonoSans-Regular.woff2',
   '/fonts/Mono-Sans/MonoSans-Bold.woff2',
-  
+
   '/fonts/Inter/Inter.var.woff2',
-  
+
   'https://plausible.io/js/plausible.js',
-  
+
   '/icons/android-app-512.png',
   '/icons/iphone-app-180.png',
   '/icons/app-favicon.png',
@@ -48,7 +54,7 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener('install', (evt) => {
-  
+
   // precache static resources
   evt.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {

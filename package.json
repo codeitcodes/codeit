@@ -1,0 +1,11 @@
+{
+  "name": "Codeit minify stuffs for prods",
+  "scripts": {
+    "joinFiles": "type file1.csv file2.csv > concat.csv",
+    "minifyJS": "uglifyjs scripts.js --compress --mangle --warn --output scripts.min.js",
+    "doTheProdThing": "npm run minifyJS --silent",
+  },
+  "dependencies": {
+    "uglify-js": "^3.3.11"
+  }
+}

@@ -42,12 +42,97 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 }
 
 
+.cd-wrapper .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: hsl(218deg 23% 35%);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  color: #a6c3d4;
+  padding: 6px;
+  scroll-padding: 6px;
+  left: 121.984375px;
+  top: 12.5px;
+  border-radius: 5px;
+  font-weight: 500;
+  max-width: 190px;
+  max-height: calc(30px * 3 + 4px + 17px);
+  /* max-width: 290px; */
+  /* max-height: 113px; */
+  min-width: 85px;
+  overflow-y: overlay;
+  margin-top: 20px;
+  border-top-left-radius: 0;
+  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  line-height: 1.5;
+  display: none;
+}
+
+.cd-wrapper .menu.visible {
+  display: block;
+}
+
+.cd-wrapper .menu .icon {
+  padding: 3px 6px;
+  border-radius: 2.5px;
+  cursor: pointer;
+  overflow-x: overlay;
+  position: relative;
+  white-space: nowrap;
+  /* -webkit-mask-image: linear-gradient(90deg, transparent 0px, black 6px, black calc(100% - 6px), transparent 100%); */
+}
+
+.cd-wrapper .menu .icon:hover {
+  background: hsl(218deg 27% 50% / 32%);
+}
+
+.cd-wrapper .menu .icon:active {
+  background: hsl(218deg 27% 53% / 72%) !important;
+}
+
+.cd-wrapper .menu .icon.active {
+  color: #f9f9f9;
+  background: hsl(218deg 27% 50%);
+}
+
+.cd-wrapper .menu .icon.active:hover {
+  background: hsl(218deg 27% 53%);
+}
+
+.cd-wrapper .menu::-webkit-scrollbar {
+  width: 0;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar {
+  height: 10px;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb {
+  background-color: rgb(249 249 249 / 15%);
+  border-right-width: 6px;
+  border-left-width: 6px;
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(249 249 249 / 27%);
+}
+
+.cd-wrapper .menu .icon::-webkit-scrollbar-thumb:active {
+  background-color: rgb(249 249 249 / 17%);
+}
+
+
 cd-el {
   background: #313744;
   color: #a6c3d4;
   caret-color: #fff;
 
-  font-family: 'Mono Sans', 'Roboto Mono', monospace;
+  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
 
   font-size: 14px;
   line-height: 1.5;
@@ -64,7 +149,9 @@ cd-el {
 
 .token.punctuation,
 .token.interpolation,
-.token.important {
+.token.important,
+.token.url .token.content,
+.token.url-reference .token.variable {
   color: #a6c3d4;
 }
 
@@ -91,13 +178,13 @@ cd-el {
   color: #e5b09f;
 }
 
-.token.attr-value,
 .token.char,
 .token.url,
 .token.builtin,
 .token.inserted,
 .token.template-string,
 .token.regex,
+.token.string-property,
 .token.variable {
   color: #c1ffd5cc;
 }
@@ -130,6 +217,8 @@ cd-el {
 
 .token.string,
 .token.string *,
+.token.attr-value,
+.token.attr-value *:not(.attr-equals),
 .style .token.string {
   color: #c1ffd5cc !important;
 }
@@ -144,14 +233,7 @@ cd-el {
 
 .token a {
   color: inherit;
-}
-
-.token.string .token.url-link {
-  text-decoration: none;
-}
-
-.language-css .token.string .token.url-link {
-  text-decoration: underline;
+  caret-color: #fff;
 }
 
 
@@ -185,14 +267,12 @@ cd-el {
 .line-numbers {
   position: relative;
   padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
-  scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
 }
 
 .line-numbers .line-numbers-rows {
-  position: absolute;
+  position: sticky;
   cursor: default;
-  top: 10.5px;
   left: 0;
   user-select: none;
   -webkit-user-select: none;
@@ -200,12 +280,17 @@ cd-el {
   line-height: inherit;
   font-size: inherit;
   color: #636d83;
+  background: #313744;
   display: block;
   text-align: right;
-  padding-right: 13.5px;
-  padding-left: calc(13.5px + env(safe-area-inset-left));
   min-width: 1.2em;
   white-space: pre;
+  float: left;
+  z-index: 1;
+  margin-right: -100%;
+  transform: translateX(-100%);
+  padding-left: 13.5px;
+  padding-right: 13.5px;
 }
 
 .line-numbers .line-numbers-rows::before {
@@ -226,7 +311,7 @@ span.inline-color-wrapper {
    * https://stackoverflow.com/a/21626701/7595472
    */
   background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0iI2NjYyIgZD0iTTAgMGgxdjFIMHpNMSAxaDF2MUgxeiIvPjwvc3ZnPg==);
-  
+
   height: 12px;
   width: 12px;
   margin-left: 2px;
@@ -237,7 +322,7 @@ span.inline-color-wrapper {
   line-height: 10px;
   border-radius: 50%;
   cursor: pointer;
-  
+
   transition: 0.3s cubic-bezier(0, 0.88, 0.46, 1.36);
   transition: 0.6s cubic-bezier(.165,.84,.44,1);
   transition: .4s cubic-bezier(.68,-.55,.265,1.55);
