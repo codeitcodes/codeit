@@ -4603,7 +4603,6 @@ body {
 
 a:not(.btn),
 .link {
-  cursor: default;
   color: rgba(70, 188, 247, 1);
   --link-hover-bg: rgba(70, 188, 247, 0.05);
   --link-hover: rgb(9, 140, 206);
