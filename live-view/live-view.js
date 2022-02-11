@@ -385,8 +385,7 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup'
-      || selectedFile.lang == 'python') {
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup') {
 
     liveToggle.classList.add('visible');
 
@@ -519,7 +518,7 @@ function toggleLiveView(file) {
 
       renderLiveViewHTML(file);
 
-    } else if (file.lang == 'python') {
+    } /* else if (file.lang == 'python') {
       
       window.setTimeout(() => {
 
@@ -533,7 +532,7 @@ function toggleLiveView(file) {
 
       renderLiveViewPython(file);
       
-    }
+    } */
 
   } else {
 
