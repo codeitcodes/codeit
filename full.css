@@ -1026,7 +1026,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
-.sidebar .header .options-screen.out-of-repo .roundbutton.global-search {
+.sidebar .header .options-screen.out-of-repo .roundbutton.share {
   display: block;
 }
 
