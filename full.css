@@ -1032,6 +1032,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .header .options-screen.out-of-repo .roundbutton.share {
   display: block;
+  transition-delay: 0s;
 }
 
 
