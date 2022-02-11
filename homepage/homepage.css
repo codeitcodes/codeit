@@ -4648,7 +4648,7 @@ a,
   font-weight: 600;
 }
 
-a:not(.btn):hover {
+a[href]:not(.btn):hover {
   text-decoration: underline
 }
 
@@ -4838,7 +4838,7 @@ body {
   background: #1c1c1d !important;
 }
 
-#footer a {
+#footer a[href] {
   color: inherit !important;
   font-weight: inherit;
 }
