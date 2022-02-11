@@ -38,6 +38,7 @@ window.onload = async () => {
       
       // add default branch to repo
       treeLoc[1] += ':main';
+      saveTreeLocLS(treeLoc);
       
     }
     
