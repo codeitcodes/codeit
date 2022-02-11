@@ -104,15 +104,7 @@ async function setupLiveView() {
     // show file content in codeit
     try {
 
-      const fileContent = decodeUnicode(selectedFile.content);
-    
-      // compare current code with new code
-      if (hashCode(cd.textContent) !== hashCode(fileContent)) {
-        
-        // if code is different, swap it
-        cd.textContent = fileContent;
-        
-      }
+      cd.textContent = decodeUnicode(selectedFile.content);
 
       // change codeit lang
       cd.lang = selectedFile.lang;
@@ -1058,4 +1050,3 @@ async function asyncForEach(array, callback) {
     await callback(array[index], index, array);
   }
 }
-
