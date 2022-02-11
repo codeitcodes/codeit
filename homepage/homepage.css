@@ -3365,10 +3365,6 @@ body {
     margin: 0;
     padding: 25px 30px
   }
-  
-  .with-codeit {
-    margin-top: 0 !important;
-  }
 }
 
 @media only screen and (max-width:400px) {
@@ -4842,7 +4838,7 @@ body {
   background: #1c1c1d !important;
 }
 
-#footer a[href] {
+#footer a {
   color: inherit !important;
   font-weight: inherit;
 }
