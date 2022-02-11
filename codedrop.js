@@ -95,7 +95,7 @@ function getFileLang(src) {
   } /*]*/ ;
   
   src = src.replaceAll('\n', '');
-  const extension = (/\.(\w+)$/.exec(src) || [, 'plain'])[1];
+  const extension = (/\.(\w+)$/.exec(src) || [, 'none'])[1];
   return lang_aliases[extension] || extension;
 
 }
