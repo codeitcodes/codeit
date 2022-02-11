@@ -250,8 +250,7 @@ function getLatestVersion(item) {
       
     } else {
       
-      console.log(item, crumb);
-      return;
+      return item;
       
     }
     
