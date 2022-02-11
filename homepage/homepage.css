@@ -268,7 +268,6 @@ body {
   border-radius: 3px;
   font-weight: 500;
   font-size: 1.05em;
-  cursor: pointer;
   transition: all .2s ease-in-out;
   background: transparent
 }
@@ -2014,7 +2013,6 @@ body {
   width: 40px;
   margin-top: 3px;
   height: 40px;
-  cursor: pointer;
   z-index: 999999
 }
 
@@ -2085,7 +2083,6 @@ body {
   outline: none;
   box-shadow: none;
   margin: 0;
-  cursor: pointer;
   font-size: 1.1em
 }
 
@@ -2695,7 +2692,6 @@ body {
 
 .cycleA,
 .cycleB {
-  cursor: pointer;
   display: flex;
   width: 300px
 }
@@ -2730,7 +2726,6 @@ body {
   width: 34px;
   border: 2px solid;
   border-radius: 10px;
-  cursor: pointer;
   margin: 0 12px;
   flex-shrink: 0
 }
@@ -3050,7 +3045,6 @@ body {
 .faq.expandable .faqItem__question {
   position: relative;
   padding: 12px 30px 12px 0;
-  cursor: pointer;
   color: inherit
 }
 
@@ -3339,7 +3333,6 @@ body {
   font-size: 16px;
   font-family: inherit;
   height: 36px;
-  cursor: pointer
 }
 
 .cookieBannerButton {
@@ -3352,7 +3345,6 @@ body {
   border-radius: 2px;
   font-family: inherit;
   font-size: 15px;
-  cursor: pointer;
   border: 1px solid rgba(0, 0, 0, .1);
   min-width: 30px
 }
@@ -3406,14 +3398,12 @@ body {
   margin-left: 10px;
   font-weight: 600;
   font-size: 16px;
-  cursor: pointer
 }
 
 .umsoModal .categorySummary {
   margin-left: 35px;
   margin-bottom: 30px;
   margin-top: 5px;
-  cursor: pointer
 }
 
 .umsoModal .checkbox {
