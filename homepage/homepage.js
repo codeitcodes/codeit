@@ -82,12 +82,18 @@ function installPWA(evt) {
     } else { // open in the browser
 
       window.location.replace(window.location.origin + '/full');
+      
+      // save installation in local storage
+      localStorage.setItem('installed', 'true');
 
     }
     
   } else { // open in the browser
     
     window.location.replace(window.location.origin + '/full');
+    
+    // save installation in local storage
+    localStorage.setItem('installed', 'true');
     
   }
   
@@ -110,9 +116,12 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
   
-  if (isSafari) {
+  if (isSafari || !isMobile) {
     
     button.classList.remove('loading');
+    
+    // save installation in local storage
+    localStorage.setItem('installed', 'true');
     
   }
   
