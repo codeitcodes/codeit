@@ -82,7 +82,7 @@ pushWrapper.addEventListener('click', () => {
     playPushAnimation(pushWrapper);
     
     // push file
-    pushFileFromHTML(selectedEl);
+    pushFileFromHTML(selectedEl, ('Update ' + selectedEl.innerText));
     
   }
 
