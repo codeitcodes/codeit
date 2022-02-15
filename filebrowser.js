@@ -576,7 +576,7 @@ function clickedOnFileHTML(fileEl, event) {
     let commitMessage;
     
     // if ctrl/meta/shift-clicked on push button
-    if (isKeyEventMeta(event) || event.shiftKey) {
+    if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
       // get selected branch
       let selBranch = treeLoc[1].split(':')[1];
@@ -797,7 +797,7 @@ async function loadFileInHTML(fileEl, fileSha) {
   }
 
   // set caret pos in codeit
-  cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+  if (!isMobile) cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
 
   // set scroll pos in codeit
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
