@@ -1500,7 +1500,7 @@ body .sidebar .button:active:not(:hover) {
   font-weight: 500;
 }
 
-.menu .icon:hover {
+body:not(.mobile) .menu .icon:hover {
   background: rgba(255,255,255,0.05);
 }
 
