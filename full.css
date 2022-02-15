@@ -225,7 +225,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .download {
   background: hsl(0deg 0% 100% / 5%);
-  border-left: 1px solid hsl(0deg 0% 100% / 3%);
+  box-shadow: inset 1px 0 0 0 hsl(0deg 0% 100% / 3%);
   border-radius: 0 20px 20px 0;
   width: 65px;
   box-sizing: border-box;
