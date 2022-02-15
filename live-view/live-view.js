@@ -313,7 +313,8 @@ function addBottomSwipeListener() {
       if (direction == 'up') {
 
         // if swiped up and bottom float isn't expanded
-        if (swiped && !bottomWrapper.classList.contains('expanded')) {
+        if (swiped && !bottomWrapper.classList.contains('expanded')
+            && !bottomFloat.classList.contains('file-open')) {
 
           swiped = false;
 
@@ -339,7 +340,8 @@ function addBottomSwipeListener() {
       } else if (direction == 'down') {
 
         // if swiped down and bottom float is expanded
-        if (swiped && bottomWrapper.classList.contains('expanded')) {
+        if (swiped && bottomWrapper.classList.contains('expanded')
+            && !bottomFloat.classList.contains('file-open')) {
 
           swiped = false;
 
