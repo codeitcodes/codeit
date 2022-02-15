@@ -144,22 +144,26 @@ async function renderSidebarHTML() {
   let modFilesChanged = false;
   
   Object.values(modifiedFiles).forEach(modFile => {
-
-    // map modified file location
-    let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
     
-    // if modified file dosen't have a branch
-    // and is in current repo
-    if (!fileRepo.includes(':')
-        && fileUser === user
-        && fileRepo === repoName) {
-
-      // append default branch to file
-      fileRepo = fileRepo + ':' + branch;
-      modFile.dir = [fileUser, fileRepo, fileDir].join();
+    if (modFile.dir) {
       
-      modFilesChanged = true;
+      // map modified file location
+      let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
 
+      // if modified file dosen't have a branch
+      // and is in current repo
+      if (!fileRepo.includes(':')
+          && fileUser === user
+          && fileRepo === repoName) {
+
+        // append default branch to file
+        fileRepo = fileRepo + ':' + branch;
+        modFile.dir = [fileUser, fileRepo, fileDir].join();
+
+        modFilesChanged = true;
+
+      }
+      
     }
 
   });
