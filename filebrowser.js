@@ -767,6 +767,9 @@ async function loadFileInHTML(fileEl, fileSha) {
     // change codeit lang
     cd.lang = selectedFile.lang;
     
+    // update bottom float
+    if (isMobile) updateFloat();
+    
   } catch(e) { // if file is binary
     
     if (hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
