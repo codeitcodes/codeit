@@ -1899,7 +1899,7 @@ function setupEditor() {
   
   document.addEventListener('keydown', (e) => {
 
-    // disable Ctrl/Cmd+S
+    // disable Ctrl/Cmd + S
     if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
@@ -1910,8 +1910,10 @@ function setupEditor() {
     }
     
     
-    // beautify on Ctrl/Cmd+D
-    if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
+    // beautify on Ctrl/Cmd + D/B
+    if (((e.key === 'd' || e.keyCode === 68)
+        || (e.key === 'b' || e.keyCode === 66))
+        && isKeyEventMeta(e)) {
       
       e.preventDefault();
       
