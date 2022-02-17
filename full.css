@@ -1308,6 +1308,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   padding-left: 10px;
 }
 
+.sidebar .files .intro {
+  height: calc(100% - 85px);
+}
+
 .sidebar .intro .picture {
   width: 100%;
   height: 100%;
