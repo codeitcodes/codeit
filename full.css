@@ -1216,7 +1216,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item.focused .name:empty::before {
-  content: 'new.file';
+  content: 'new-file';
   color: gray;
   pointer-events: none;
 }
