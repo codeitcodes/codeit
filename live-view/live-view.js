@@ -107,7 +107,7 @@ async function setupLiveView() {
     try {
       
       // compare current code with new code
-      if (hashCode(cd.textContent) !== hashCode(selectedFile.content)) {
+      if (hashCode(cd.textContent) !== hashCode(decodeUnicode(selectedFile.content))) {
 
         // if the code is different, swap it
         cd.textContent = decodeUnicode(selectedFile.content);
