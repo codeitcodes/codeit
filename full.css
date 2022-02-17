@@ -910,7 +910,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   opacity: 1 !important;
 }
 
-.sidebar .header .roundbutton.options {
+.sidebar .header .roundbutton.add {
   margin: 0;
   margin-right: calc(20px - var(--spacing-1));
   position: absolute;
@@ -919,18 +919,21 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transition: .18s var(--ease-function) opacity;
 }
 
-.sidebar .header .roundbutton.options .icon {
+/*
+.sidebar .header .roundbutton.add .icon {
   transform-origin: center;
   transition: .18s var(--bounce-function);
   will-change: transform;
 }
 
-.sidebar .header .roundbutton.options.open .icon {
+.sidebar .header .roundbutton.add.open .icon {
   transform: rotate(-45deg);
   opacity: .9;
 }
+*/
 
 
+/*
 .sidebar .header .options-screen,
 .sidebar .header .title-screen {
   opacity: 1;
@@ -951,6 +954,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .header .title-screen.visible > * {
   transform: none;
 }
+*/
 
 
 .sidebar .header .titlescreen .title::before,
@@ -989,6 +993,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
+/*
 .sidebar .header .options-screen .roundbutton {
   transform: translateY(-40px);
   transition: .18s var(--bounce-function);
@@ -1040,6 +1045,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .header .options-screen.out-of-repo.visible .roundbutton.share {
   transition-delay: .045s;
 }
+*/
 
 
 .sidebar .header .search-screen {
