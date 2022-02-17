@@ -1985,7 +1985,8 @@ function setupEditor() {
     }
     
     // show beautify message on Ctrl/Cmd + B
-    if ((e.key === 'b' || e.keyCode === 66)
+    if (((e.key === 'b' || e.keyCode === 66)
+        || (e.key === 'p' || e.keyCode === 80))
         && isKeyEventMeta(e)) {
       
       e.preventDefault();
