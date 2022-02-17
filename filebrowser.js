@@ -1828,7 +1828,6 @@ function setupEditor() {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-      cd.dispatchCaretMoveEvent();
       
     }
 
