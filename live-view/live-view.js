@@ -5,6 +5,49 @@ async function setupLiveView() {
   // if URL has a file
   if (linkData.file) {
 
+    const fileName = linkData.file.name;
+    const fileSha = linkData.file.sha;
+
+    // if file is not modified; fetch from Git
+    if (!modifiedFiles[fileSha]) {
+
+      // start loading
+      startLoading();
+
+      // get file from git
+      
+      try {
+        
+        const resp = await git.getFile(treeLoc, fileName);
+        
+      } catch(e) {
+        
+        // stop loading
+        stopLoading();
+        
+        showMessage('Hmm... that file dosen\'t exist.');
+        
+        return;
+        
+      }
+
+      // change selected file
+      changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
+                         [0, 0], [0, 0], false);
+
+      // stop loading
+      stopLoading();
+
+    } else { // else, load file from modifiedFiles object
+
+      const modFile = modifiedFiles[fileSha];
+
+      changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
+                         modFile.caretPos, modFile.scrollPos, false);
+
+    }
+    
+    
     if (isMobile) {
 
       toggleSidebar(false);
@@ -16,13 +59,6 @@ async function setupLiveView() {
       saveSidebarStateLS();
 
     }
-
-    const fileName = linkData.file.name;
-    const fileSha = linkData.file.sha;
-
-    // change selected file
-    changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
-                       [0, 0], [0, 0], false);
     
     
     // if URL has a live view flag
@@ -62,38 +98,6 @@ async function setupLiveView() {
         });
 
       }
-      
-    }
-    
-
-    // if file is not modified; fetch from Git
-    if (!modifiedFiles[fileSha]) {
-
-      // start loading
-      startLoading();
-
-      // get file from git
-      const resp = await git.getFile(treeLoc, fileName);
-
-      // change selected file
-      changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
-                         [0, 0], [0, 0], false);
-
-      // stop loading
-      stopLoading();
-
-    } else { // else, load file from modifiedFiles object
-
-      const modFile = modifiedFiles[fileSha];
-
-      changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
-                         modFile.caretPos, modFile.scrollPos, false);
-
-    }
-    
-    
-    // if URL has a live view flag
-    if (linkData.openLive) {
       
       // open live view
       toggleLiveView(selectedFile);
