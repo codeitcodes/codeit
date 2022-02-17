@@ -25,19 +25,19 @@ const body = document.body,
       header = contentWrapper.querySelector('.header'),
 
       titleScreen = header.querySelector('.title-screen'),
-      optionsScreen = header.querySelector('.options-screen'),
+      //optionsScreen = header.querySelector('.options-screen'),
       searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
-      optionsButton = header.querySelector('.options'),
+      addButton = header.querySelector('.add'),
       
-      newRepoButton = optionsScreen.querySelector('.new-repo'),
+      /* newRepoButton = optionsScreen.querySelector('.new-repo'),
       newFileButton = optionsScreen.querySelector('.new-file'),
       branchButton = optionsScreen.querySelector('.branch'),
-      repoShareButton = optionsScreen.querySelector('.share'),
+      repoShareButton = optionsScreen.querySelector('.share'), */
 
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
