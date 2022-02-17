@@ -59,9 +59,17 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  // get items in current tree from git
   try {
 
+    // if navigating in repository
+    if (repo != '') {
+
+      // render branch menu
+      renderBranchMenuHTML();
+      
+    }
+    
+    // get items in current tree from git
     resp = await git.getItems(treeLoc);
 
   } catch(e) {
@@ -245,10 +253,6 @@ async function renderSidebarHTML() {
 
     // if navigating in repository
     if (repo != '') {
-      
-      // render branch menu
-      renderBranchMenuHTML();
-
 
       // render files
       resp.forEach(item => {
