@@ -53,6 +53,8 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
       
       branchMenu = document.querySelector('.branch-menu'),
+      
+      messageEl = document.querySelector('.message'),
 
       liveView = document.querySelector('.live-view');
 
