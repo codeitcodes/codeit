@@ -160,9 +160,9 @@ function showMessage(message) {
   
   messageTimeout = window.setTimeout(() => {
     
-    message.classList.remove('visible');
+    messageEl.classList.remove('visible');
     
-  });
+  }, 2000);
   
 }
 
