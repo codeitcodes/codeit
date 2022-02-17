@@ -1563,6 +1563,9 @@ body.mobile .menu .icon a {
   left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
   left: calc(var(--sidebar-width) / 2);
   left: 50vw;
+  max-width: 356px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .message.visible {
