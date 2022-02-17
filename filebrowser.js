@@ -247,7 +247,7 @@ async function renderSidebarHTML() {
     if (repo != '') {
       
       // render branch menu
-      window.setTimeout(renderBranchMenuHTML, 180);
+      renderBranchMenuHTML();
 
 
       // render files
