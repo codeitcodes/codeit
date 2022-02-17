@@ -1162,9 +1162,7 @@ sidebarBranch.addEventListener('click', () => {
   if (branchMenu.classList.contains('visible')) {
     
     // move branch menu to icon
-    onNextFrame(() => {
-      moveElToEl(branchMenu, sidebarBranch, 13);
-    });
+    moveElToEl(branchMenu, sidebarBranch, 13);
     
     branchMenu.classList.add('top-margin');
     
@@ -1183,9 +1181,7 @@ branchButton.addEventListener('click', () => {
   if (branchMenu.classList.contains('visible')) {
     
     // move branch menu to button
-    onNextFrame(() => {
-      moveElToEl(branchMenu, branchButton, 13);
-    });
+    moveElToEl(branchMenu, branchButton, 13);
     
     branchMenu.classList.remove('top-margin');
     
