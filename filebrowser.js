@@ -111,7 +111,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    showMessage('Hmm... we can\'t find that branch.', 5000);
+    alert('Hmm... we can\'t find that branch.');
     
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
