@@ -1914,21 +1914,39 @@ function setupEditor() {
   };
   
   
+  let saveMessageShown = getStorage('saveMessageShown') ?? false;
+  
   document.addEventListener('keydown', (e) => {
 
-    // disable Ctrl/Cmd+S
+    // disable Ctrl/Cmd + S
     if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
+      
+      if (!saveMessageShown || saveMessageShown === '1') {
+        
+        showMessage('We autosave :D');
+        
+        if (saveMessageShown === '1') {
+          
+          saveMessageShown = '2';
+          
+        } else {
+          
+          saveMessageShown = '1';
 
-      if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
-      else console.log('[Ctrl+S] Always saving. Always saving.');
-
+        }
+        
+        setStorage('saveMessageShown', saveMessageShown);
+        
+      }
+      
     }
     
     
-    // beautify on Ctrl/Cmd+D
-    if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
+    // beautify on Ctrl/Cmd + D
+    if ((e.key === 'd' || e.keyCode === 68)
+        && isKeyEventMeta(e)) {
       
       e.preventDefault();
       
@@ -1978,6 +1996,23 @@ function setupEditor() {
         
       }
 
+    }
+    
+    // show beautify message on Ctrl/Cmd + B/D
+    if (((e.key === 'b' || e.keyCode === 66)
+        || (e.key === 'p' || e.keyCode === 80))
+        && isKeyEventMeta(e)) {
+      
+      e.preventDefault();
+      
+      // if codeit is active
+      if (document.activeElement === cd) {
+        
+        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
+        else showMessage('You can beautify with ⌘ + D', 5000);
+        
+      }
+      
     }
 
   });
