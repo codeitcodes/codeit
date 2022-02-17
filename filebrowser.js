@@ -43,7 +43,7 @@ async function renderSidebarHTML() {
 
 
   // if not logged into git
-  // and navigated to Projects page
+  // and navigated to Repositories page
   if (gitToken == '' && repo == '') {
 
     // stop loading
@@ -229,7 +229,7 @@ async function renderSidebarHTML() {
     } else {
 
       // show title
-      sidebarLogo.innerText = 'Projects';
+      sidebarLogo.innerText = 'Repositories';
 
     }
 
@@ -2192,7 +2192,7 @@ function updateLineNumbersHTML() {
 function setupSidebar() {
 
   // if not logged into git
-  // and navigated to Projects page
+  // and navigated to Repositories page
   if (gitToken == '' && treeLoc[1] == '') {
 
     // show intro screen
