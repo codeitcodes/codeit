@@ -808,6 +808,9 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
+  // prevent bottom float disappearing on mobile
+  if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
+  
   // set scroll pos in codeit
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
