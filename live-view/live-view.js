@@ -257,7 +257,7 @@ function addBottomSwipeListener() {
           } catch(e) {
 
             copy(link).then(() => {
-              alert('Copied link to clipboard.');
+              showMessage('Copied link!');
             });
 
           }
@@ -265,7 +265,7 @@ function addBottomSwipeListener() {
         } else {
 
           copy(link).then(() => {
-            alert('Copied link to clipboard.');
+            showMessage('Copied link!');
           });
 
         }
@@ -425,7 +425,7 @@ if (isMobile) {
     });
 
     copy(link).then(() => {
-      alert('Copied link to clipboard.');
+      showMessage('Copied link!');
     });
 
   });
