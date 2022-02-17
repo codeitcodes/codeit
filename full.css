@@ -1343,6 +1343,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .intro .subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 3.5px;
   color: #b3b3b3;
   font-size: 15px;
   line-height: 23px;
