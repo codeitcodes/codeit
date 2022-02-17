@@ -14,6 +14,7 @@ async function setupLiveView() {
       // start loading
       startLoading();
 
+      
       // get file from git
       const resp = await git.getFile(treeLoc, fileName);
       
@@ -28,7 +29,20 @@ async function setupLiveView() {
         return;
         
       }
+      
+      // if branch dosen't exist
+      if (resp.message && resp.message.startsWith('No commit found for the ref')) {
+        
+        // stop loading
+        stopLoading();
+        
+        showMessage('Hmm... we can\'t find that branch.', 5000);
+        
+        return;
+        
+      }
 
+      
       // change selected file
       changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
                          [0, 0], [0, 0], false);
