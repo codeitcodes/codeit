@@ -33,7 +33,8 @@ const body = document.body,
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
       optionsButton = header.querySelector('.options'),
-
+      
+      newRepoButton = optionsScreen.querySelector('.new-repo'),
       newFileButton = optionsScreen.querySelector('.new-file'),
       branchButton = optionsScreen.querySelector('.branch'),
       repoShareButton = optionsScreen.querySelector('.share'),
