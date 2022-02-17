@@ -1823,12 +1823,13 @@ function setupEditor() {
 
     }
       
-    // if sidebar is closed, focus codeit
+    // if on desktop, focus codeit
     if (!isMobile) {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-
+      cd.dispatchCaretMoveEvent();
+      
     }
 
     // prevent bottom float disappearing on mobile
