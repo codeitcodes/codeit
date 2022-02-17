@@ -1520,7 +1520,7 @@ repoShareButton.addEventListener('click', () => {
       } catch(e) {
 
         copy(link).then(() => {
-          alert('Copied link to clipboard.');
+          showMessage('Copied link!');
         });
 
       }
@@ -1528,7 +1528,7 @@ repoShareButton.addEventListener('click', () => {
     } else {
 
       copy(link).then(() => {
-        alert('Copied link to clipboard.');
+        showMessage('Copied link!');
       });
 
     }
@@ -1553,7 +1553,7 @@ repoShareButton.addEventListener('click', () => {
         // if couldn't open share dialog
         // copy text to clipboard
         copy(shareText).then(() => {
-          alert('Copied text to clipboard.');
+          showMessage('Copied text!');
         });
 
       }
@@ -1563,7 +1563,7 @@ repoShareButton.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied text!');
       });
 
     }
@@ -1592,7 +1592,7 @@ learnShare.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied text!');
       });
 
     }
@@ -1602,7 +1602,7 @@ learnShare.addEventListener('click', () => {
     // if couldn't open share dialog
     // copy text to clipboard
     copy(shareText).then(() => {
-      alert('Copied text to clipboard.');
+      showMessage('Copied text!');
     });
 
   }
