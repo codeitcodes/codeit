@@ -1552,7 +1552,7 @@ body.mobile .menu .icon a {
   padding: 14px 11px;
   transform: translateY(15.25px) translateX(-50%);
   background: var( --deep-midnight-blue);
-  color: transparent;
+  color: #dcddde;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   border-radius: 11.5px;
   line-height: 1.5;
@@ -1568,7 +1568,6 @@ body.mobile .menu .icon a {
 .message.visible {
   padding: 10px 16px;
   opacity: 1;
-  color: #dcddde;
   transform: translateX(-50%);
   transition: .18s var( --bounce-function);
 }
