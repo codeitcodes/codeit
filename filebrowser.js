@@ -1506,7 +1506,7 @@ repoShareButton.addEventListener('click', () => {
       } catch(e) {
 
         copy(link).then(() => {
-          alert('Copied link to clipboard.');
+          showMessage('Copied link!');
         });
 
       }
@@ -1514,7 +1514,7 @@ repoShareButton.addEventListener('click', () => {
     } else {
 
       copy(link).then(() => {
-        alert('Copied link to clipboard.');
+        showMessage('Copied link!');
       });
 
     }
@@ -1539,7 +1539,7 @@ repoShareButton.addEventListener('click', () => {
         // if couldn't open share dialog
         // copy text to clipboard
         copy(shareText).then(() => {
-          alert('Copied text to clipboard.');
+          showMessage('Copied link!');
         });
 
       }
@@ -1549,7 +1549,7 @@ repoShareButton.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied link!');
       });
 
     }
@@ -1578,7 +1578,7 @@ learnShare.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied link!');
       });
 
     }
@@ -1588,7 +1588,7 @@ learnShare.addEventListener('click', () => {
     // if couldn't open share dialog
     // copy text to clipboard
     copy(shareText).then(() => {
-      alert('Copied text to clipboard.');
+      showMessage('Copied link!');
     });
 
   }
@@ -1930,6 +1930,14 @@ function setupEditor() {
     }
     
     
+    // show copy message on Ctrl/Cmd + C
+    if ((e.key === 'c' || e.keyCode === 67) && isKeyEventMeta(e)) {
+      
+      showMessage('Copied!');
+      
+    }
+    
+    
     // beautify on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
         && isKeyEventMeta(e)) {
@@ -1984,7 +1992,7 @@ function setupEditor() {
 
     }
     
-    // show beautify message on Ctrl/Cmd + B
+    // show beautify message on Ctrl/Cmd + B/D
     if (((e.key === 'b' || e.keyCode === 66)
         || (e.key === 'p' || e.keyCode === 80))
         && isKeyEventMeta(e)) {
@@ -1994,7 +2002,8 @@ function setupEditor() {
       // if codeit is active
       if (document.activeElement === cd) {
         
-        showMessage('You can beautify with Ctrl + D', 5000);
+        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
+        else showMessage('You can beautify with ⌘ + D', 5000);
         
       }
       
