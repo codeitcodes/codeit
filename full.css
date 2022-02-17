@@ -1025,6 +1025,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
+.sidebar .header .options-screen.out-of-repo .roundbutton {
+  display: none;
+}
+
 .sidebar .header .options-screen.out-of-repo .roundbutton.add-repo {
   display: block;
 }
