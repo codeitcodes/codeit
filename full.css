@@ -1019,7 +1019,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
-.sidebar .header .options-screen .add-repo,
+.sidebar .header .options-screen .new-repo,
 .sidebar .header .options-screen .clone-repo,
 .sidebar .header .options-screen .global-search {
   display: none;
@@ -1029,7 +1029,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
-.sidebar .header .options-screen.out-of-repo .roundbutton.add-repo {
+.sidebar .header .options-screen.out-of-repo .roundbutton.new-repo {
   display: block;
 }
 
