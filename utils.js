@@ -481,7 +481,7 @@ let axios = {
       } catch(e) { reject(e) }
     });
   },
-  'post': (url, data, token) => {
+  'post': (url, token, data) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
