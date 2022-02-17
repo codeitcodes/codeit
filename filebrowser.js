@@ -33,10 +33,7 @@ async function renderSidebarHTML() {
     startLoading();
   }
 
-  // hide header screens
-  titleScreen.classList.add('visible');
-  optionsScreen.classList.remove('visible');
-  optionsButton.classList.remove('open');
+  // hide search screen
   header.classList.remove('searching');
 
 
@@ -255,9 +252,6 @@ async function renderSidebarHTML() {
       // render branch menu
       window.setTimeout(renderBranchMenuHTML, 180);
 
-      // change header options
-      optionsScreen.classList.remove('out-of-repo');
-
 
       // render files
       resp.forEach(item => {
@@ -376,9 +370,6 @@ async function renderSidebarHTML() {
 
       // hide branch button
       sidebarBranch.classList.remove('visible');
-      
-      // change header options
-      optionsScreen.classList.add('out-of-repo');
 
       
       // render repositories
@@ -1021,7 +1012,6 @@ async function renderBranchMenuHTML(renderAll) {
         // hide branch menu
         branchMenu.classList.remove('visible');
         sidebarBranch.classList.remove('active');
-        branchButton.classList.remove('active');
 
         // if branch isn't already selected
         if (!branch.classList.contains('selected')) {
@@ -1061,7 +1051,6 @@ async function renderBranchMenuHTML(renderAll) {
           // hide branch menu
           branchMenu.classList.remove('visible');
           sidebarBranch.classList.remove('active');
-          branchButton.classList.remove('active');
           
           // start loading
           startLoading();
@@ -1166,24 +1155,12 @@ sidebarLogo.addEventListener('scroll', () => {
 })
 
 
-// show options on click of button
-optionsButton.addEventListener('click', () => {
-
-  optionsButton.classList.toggle('open');
-
-  titleScreen.classList.toggle('visible');
-  optionsScreen.classList.toggle('visible');
-
-})
-
-
 // if clicked on branch icon,
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
   
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
-  branchButton.classList.toggle('active');
 
   if (branchMenu.classList.contains('visible')) {
 
@@ -1191,25 +1168,6 @@ sidebarBranch.addEventListener('click', () => {
     moveElToEl(branchMenu, sidebarBranch, 13);
 
     branchMenu.classList.add('top-margin');
-
-  }
-  
-})
-
-// if clicked on branch button,
-// toggle branch menu
-branchButton.addEventListener('click', () => {
-  
-  branchMenu.classList.toggle('visible');
-  sidebarBranch.classList.toggle('active');
-  branchButton.classList.toggle('active');
-  
-  if (branchMenu.classList.contains('visible')) {
-
-    // move branch menu to button
-    moveElToEl(branchMenu, branchButton, 13);
-
-    branchMenu.classList.remove('top-margin');
 
   }
   
@@ -1233,7 +1191,7 @@ function checkBranchMenu(e) {
   // if branch menu is visible
   if (branchMenu.classList.contains('visible')) {
     
-    const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch && e.target != branchButton);
+    const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch);
     const notClickedOnMenuChild = ((e.target.parentElement && e.target.parentElement != branchMenu)
                                    && (e.target.parentElement.parentElement &&
                                        e.target.parentElement.parentElement != branchMenu));
@@ -1243,7 +1201,6 @@ function checkBranchMenu(e) {
       // hide branch menu
       branchMenu.classList.remove('visible');
       sidebarBranch.classList.remove('active');
-      branchButton.classList.remove('active');
 
     }
     
@@ -1252,9 +1209,29 @@ function checkBranchMenu(e) {
 }
 
 
+// create new repository or file
+// on click of button
+addButton.addEventListener('click', () => {
+  
+  // if navigating in repository
+  if (treeLoc[1] != '') {
+    
+    // create new file
+    createNewFileInHTML();
+    
+  } else {
+    
+    // create new repo
+    createNewRepoInHTML();
+    
+  }
+
+})
+
+
 // create new repo
 // on click of button
-newRepoButton.addEventListener('click', () => {
+function createNewRepoInHTML() {
 
   // if not already adding new repo
   if (!fileWrapper.querySelector('.focused')) {
@@ -1329,7 +1306,6 @@ newRepoButton.addEventListener('click', () => {
         
         // hide header screens
         titleScreen.classList.add('visible');
-        optionsScreen.classList.remove('visible');
         optionsButton.classList.remove('open');
         
 
@@ -1398,12 +1374,12 @@ newRepoButton.addEventListener('click', () => {
 
   }
 
-})
+}
 
 
 // create new file
 // on click of button
-newFileButton.addEventListener('click', () => {
+function createNewFileInHTML() {
 
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
@@ -1475,11 +1451,6 @@ newFileButton.addEventListener('click', () => {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
-        
-        // hide header screens
-        titleScreen.classList.add('visible');
-        optionsScreen.classList.remove('visible');
-        optionsButton.classList.remove('open');
 
         
         // pad file content with random number of invisible chars
@@ -1644,9 +1615,10 @@ newFileButton.addEventListener('click', () => {
 
   }
 
-})
+}
 
 
+/*
 // if clicked on share button,
 // share repository link
 repoShareButton.addEventListener('click', () => {
@@ -1723,6 +1695,7 @@ repoShareButton.addEventListener('click', () => {
   }
 
 });
+*/
 
 
 // share codeit on click of button
