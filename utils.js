@@ -271,8 +271,7 @@ let moveElToEl = (origin, dest, marginFromScreenEdges) => {
   
   // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
-        height = dest.clientHeight,
-        width = dest.clientWidth;
+        destHeight = dest.clientHeight;
   
   // get bounding box of origin element
   const originHeight = origin.clientHeight,
@@ -301,7 +300,7 @@ let moveElToEl = (origin, dest, marginFromScreenEdges) => {
   }
   
   
-  let destTop = rect.top + originHeight,
+  let destTop = rect.top + destHeight,
       destLeft = rect.left;
   
   // check if menu is outside window
