@@ -267,15 +267,52 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest) => {
+let moveElToEl = (origin, dest, marginFromScreenEdges) => {
   
+  // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
-        left = rect.left,
-        top = rect.top,
-        height = dest.clientHeight;
+        height = dest.clientHeight,
+        width = dest.clientWidth;
   
-  origin.style.left = left + 'px';
-  origin.style.top = top + height + 'px';
+  // get bounding box of origin element
+  const originHeight = origin.clientHeight,
+        originWidth = origin.clientWidth;
+  
+  
+  // define screen boundry
+  // (stop moving element when it's offscreen)
+  let maxTop = window.innerHeight,
+      minTop = -originHeight,
+      maxLeft = window.innerWidth,
+      minLeft = -originWidth;
+  
+  
+  // add margin from screen edges
+  if (marginFromScreenEdges && !isNaN(marginFromScreenEdges)) {
+    
+    // add vertical margin from screen edges
+    maxTop -= originHeight + marginFromScreenEdges;
+    minTop = marginFromScreenEdges;
+    
+    // add horizontal margin from screen edges
+    maxLeft -= originWidth + marginFromScreenEdges;
+    minLeft = marginFromScreenEdges;
+    
+  }
+  
+  
+  let destTop = rect.top,
+      destLeft = rect.left;
+  
+  // check if menu is outside window
+  if (maxTop < destTop) destTop = maxTop;
+  if (minTop > destTop) destTop = minTop;
+  if (maxLeft < destLeft) destLeft = maxLeft;
+  if (minLeft > destLeft) destLeft = minLeft;
+  
+  
+  origin.style.top = destTop + 'px';
+  origin.style.left = destLeft + 'px';
 
 }
 
