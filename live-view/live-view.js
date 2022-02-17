@@ -35,9 +35,7 @@ async function setupLiveView() {
         
         // stop loading
         stopLoading();
-        
-        showMessage('Hmm... we can\'t find that branch.', 5000);
-        
+                
         return;
         
       }
