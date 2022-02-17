@@ -109,7 +109,7 @@ async function setupLiveView() {
       const fileContent = decodeUnicode(selectedFile.content);
       
       // compare current code with new code
-      if (hashCode(cd.textContent) !== hashCode(fileContent) {
+      if (hashCode(cd.textContent) !== hashCode(fileContent)) {
 
         // if the code is different, swap it
         cd.textContent = decodeUnicode(fileContent);
