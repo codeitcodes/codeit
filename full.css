@@ -1530,14 +1530,39 @@ body.mobile .menu .icon a {
   transform: scale(1.35) translateX(-0.1px);
 }
 
-
-.context-menu {
+.menu.context-menu {
   margin-top: -4px;
   margin-left: -2px;
 }
 
-.context-menu .icon .bigger-icon {
+.menu.context-menu .icon .bigger-icon {
   opacity: 1;
+}
+
+
+.message {
+  position: fixed;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  bottom: 15px;
+  opacity: 0;
+  padding: 14px 11px;
+  transform: translateY(15.25px) translateX(-50%);
+  background: var( --deep-midnight-blue);
+  color: #dcddde;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  border-radius: 11.5px;
+  line-height: 1.5;
+  pointer-events: none;
+  transition: 0s .18s, .18s var( --bounce-function) opacity;
+  z-index: 1000;
+  /* background: hsl(218deg 23% 35%); */
+  left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
+  left: calc(var(--sidebar-width) / 2);
+  left: 50vw;
 }
 
 
