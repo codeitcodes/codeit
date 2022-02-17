@@ -1168,19 +1168,15 @@ optionsButton.addEventListener('click', () => {
 // if clicked on branch icon,
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
-    
+  
+  // move branch menu to icon
+  moveElToEl(branchMenu, sidebarBranch, 13);
+
+  branchMenu.classList.add('top-margin');
+  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
   branchButton.classList.toggle('active');
-  
-  if (branchMenu.classList.contains('visible')) {
-    
-    // move branch menu to icon
-    moveElToEl(branchMenu, sidebarBranch, 13);
-    
-    branchMenu.classList.add('top-margin');
-    
-  }
   
 })
 
@@ -1188,18 +1184,14 @@ sidebarBranch.addEventListener('click', () => {
 // toggle branch menu
 branchButton.addEventListener('click', () => {
   
+  // move branch menu to button
+  moveElToEl(branchMenu, branchButton, 13);
+
+  branchMenu.classList.remove('top-margin');
+  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
   branchButton.classList.toggle('active');
-  
-  if (branchMenu.classList.contains('visible')) {
-    
-    // move branch menu to button
-    moveElToEl(branchMenu, branchButton, 13);
-    
-    branchMenu.classList.remove('top-margin');
-    
-  }
   
 })
 
