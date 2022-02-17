@@ -1565,6 +1565,21 @@ body.mobile .menu .icon a {
   left: 50vw;
 }
 
+.message.visible {
+  padding: 10px 16px;
+  opacity: 1;
+  transform: translateX(-50%);
+  transition: .18s var( --bounce-function);
+}
+
+.message.animating {
+  transform: translateY(-10px) translateX(-50%);
+  color: transparent;
+  border-radius: 8px;
+  padding: 0;
+  transition: none;
+}
+
 
 .base-spacing-left {
   margin-left: var(--spacing-1);
