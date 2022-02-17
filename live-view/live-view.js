@@ -16,9 +16,11 @@ async function setupLiveView() {
 
       // get file from git
       
+      let resp;
+      
       try {
         
-        const resp = await git.getFile(treeLoc, fileName);
+        resp = await git.getFile(treeLoc, fileName);
         
       } catch(e) {
         
