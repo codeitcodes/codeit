@@ -1092,7 +1092,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
-.sidebar .header.searching .roundbutton.options,
+.sidebar .header.searching .roundbutton.add,
 .sidebar .header.searching .title-screen {
   opacity: 0;
   pointer-events: none;
