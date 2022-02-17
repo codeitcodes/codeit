@@ -105,8 +105,14 @@ async function setupLiveView() {
     
     // show file content in codeit
     try {
+      
+      // compare current code with new code
+      if (hashCode(cd.textContent) !== hashCode(selectedFile.content)) {
 
-      cd.textContent = decodeUnicode(selectedFile.content);
+        // if the code is different, swap it
+        cd.textContent = decodeUnicode(selectedFile.content);
+        
+      }
 
       // change codeit lang
       cd.lang = selectedFile.lang;
