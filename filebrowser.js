@@ -246,9 +246,6 @@ async function renderSidebarHTML() {
     // if navigating in repository
     if (repo != '') {
       
-      // show branch button
-      sidebarBranch.classList.add('visible');
-      
       // render branch menu
       window.setTimeout(renderBranchMenuHTML, 180);
 
@@ -946,6 +943,13 @@ async function renderBranchMenuHTML(renderAll) {
     
     // save resp in HTML
     setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
+    
+    
+    if (branchResp.length > 1) {
+      
+      sidebarBranch.classList.add('visible');
+      
+    }
     
   }
     
