@@ -1930,14 +1930,6 @@ function setupEditor() {
     }
     
     
-    // show copy message on Ctrl/Cmd + C
-    if ((e.key === 'c' || e.keyCode === 67) && isKeyEventMeta(e)) {
-      
-      showMessage('Copied!');
-      
-    }
-    
-    
     // beautify on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
         && isKeyEventMeta(e)) {
