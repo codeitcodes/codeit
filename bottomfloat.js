@@ -3,10 +3,6 @@
 // if isMobile
 function updateFloat() {
 
-  // close sidebar
-  toggleSidebar(false);
-  saveSidebarStateLS();
-
   // show bottom floater
   bottomWrapper.classList.remove('hidden');
 
