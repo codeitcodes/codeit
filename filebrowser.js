@@ -102,7 +102,7 @@ async function renderSidebarHTML() {
 
   }
   
-  if (resp.message && resp.message.startsWith('No commit found')) {
+  if (resp.message && resp.message.startsWith('No commit found for the ref')) {
     
     // if couldn't find branch, show not found screen
     
@@ -111,7 +111,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Hmm... we can\'t find that branch.');
+    showMessage('Hmm... we can\'t find that branch.', 5000);
     
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
