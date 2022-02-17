@@ -563,11 +563,15 @@ function clickedOnFileHTML(fileEl, event) {
 
       // load file
       loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+      
+    }
 
-    } else if (isMobile) { // if on mobile device
+    // if on mobile device
+    if (isMobile) {
 
-      // update bottom float
-      updateFloat();
+      // close sidebar
+      toggleSidebar(false);
+      saveSidebarStateLS();
 
     }
 
@@ -699,36 +703,35 @@ async function loadFileInHTML(fileEl, fileSha) {
     // if file is over 1MB
     if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
       
-      // show file size prompt
+      // set resp to file size prompt
+      resp = { content: fileSizeText };
+      
+      
+      // show prompt in HTML
       
       liveView.classList.add('file-open', 'notransition');
+      
       liveView.innerHTML = '<div class="prompt">' +
                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="file-svg"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g><g clip-path="url(#c)" fill="hsl(223deg 85% 58%)"><path d="m24 56c4.4183 0 8-3.5817 8-8s-3.5817-8-8-8-8 3.5817-8 8 3.5817 8 8 8z"></path><path d="m44 55.998-10.352 15.528-5.648-7.528-12 16h40z"></path></g></g></svg>' +
                            '<div class="title">This file is too big to view</div><div class="desc">You can download it below :D</div></div>';
-
-      resp = { content: fileSizeText };
-
+      
+      onNextFrame(() => {
+        liveView.classList.remove('notransition');
+      });
+      
+      
       // if on mobile device
       if (isMobile) {
-
-        onNextFrame(() => {
-
-          liveView.classList.remove('notransition');
-
-          // update bottom float
-          bottomFloat.classList.add('file-open');
-          updateFloat();
-
-        })
+        
+        // update bottom float
+        bottomFloat.classList.add('file-open');
+        updateFloat();
 
       } else {
-
+        
+        // update scrollbar arrows
         liveToggle.classList.add('file-open');
         updateScrollbarArrow();
-
-        onNextFrame(() => {
-          liveView.classList.remove('notransition');
-        })
 
       }
       
@@ -843,39 +846,22 @@ function loadBinaryFileHTML(file, toggled) {
     
     // update bottom float
     bottomFloat.classList.add('file-open');
-    
-  }
-  
-  // if sidebar is open and on mobile device
-  if (toggled && isMobile) {
-    
-    liveView.classList.add('notransition', 'file-open');
-    
-    onNextFrame(() => {
-      
-      liveView.classList.remove('notransition');
-      
-      updateFloat();
-      
-    })
+    updateFloat();
     
   } else {
     
-    liveView.classList.add('notransition');
-    liveView.classList.add('file-open');
-    
-    if (!isMobile) {
-      
-      liveToggle.classList.add('file-open');
-      updateScrollbarArrow();
-      
-    }
-    
-    onNextFrame(() => {
-      liveView.classList.remove('notransition');
-    });
+    // update scrollbar arrows
+    liveToggle.classList.add('file-open');
+    updateScrollbarArrow();
     
   }
+
+  
+  liveView.classList.add('notransition', 'file-open');
+
+  onNextFrame(() => {
+    liveView.classList.remove('notransition');
+  });
   
 
   const fileType = getFileType(file.name);
@@ -1753,7 +1739,7 @@ function protectUnsavedCode() {
 
         // load file
         loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
-
+        
       } else {
 
         // if the selected file was deleted,
