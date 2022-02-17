@@ -1163,7 +1163,7 @@ sidebarBranch.addEventListener('click', () => {
     
     // move branch menu to icon
     onNextFrame(() => {
-      moveElToEl(branchMenu, sidebarBranch, 13);
+      moveElToEl(branchMenu, sidebarBranch, sidebar, 13);
     });
     
     branchMenu.classList.add('top-margin');
@@ -1184,7 +1184,7 @@ branchButton.addEventListener('click', () => {
     
     // move branch menu to button
     onNextFrame(() => {
-      moveElToEl(branchMenu, branchButton, 13);
+      moveElToEl(branchMenu, branchButton, sidebar, 13);
     });
     
     branchMenu.classList.remove('top-margin');
