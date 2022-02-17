@@ -805,6 +805,10 @@ async function loadFileInHTML(fileEl, fileSha) {
     
     cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
     
+  } else {
+    
+    cd.blur();
+    
   }
   
   // set scroll pos in codeit
