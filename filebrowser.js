@@ -949,6 +949,10 @@ async function renderBranchMenuHTML(renderAll) {
       
       sidebarBranch.classList.add('visible');
       
+    } else {
+      
+      return;
+      
     }
     
   }
