@@ -131,9 +131,6 @@ async function setupLiveView() {
 
     }
     
-    // set caret pos in codeit
-    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-
     // set scroll pos in codeit
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
