@@ -267,7 +267,7 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest, marginFromScreenEdges) => {
+let moveElToEl = (origin, dest, boundryEl, boundryMargin) => {
   
   // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
@@ -278,24 +278,34 @@ let moveElToEl = (origin, dest, marginFromScreenEdges) => {
         originWidth = origin.clientWidth;
   
   
-  // define screen boundry
-  // (stop moving element when it's offscreen)
+  // define window constraints
+  // (stop moving element when it goes offscreen)
   let maxTop = window.innerHeight,
       minTop = -originHeight,
       maxLeft = window.innerWidth,
       minLeft = -originWidth;
   
   
-  // add margin from screen edges
-  if (marginFromScreenEdges && !isNaN(marginFromScreenEdges)) {
+  // if defined boundry element,
+  // update constraints
+  if (boundryEl) {
+    
+    maxTop = boundryEl.clientHeight;
+    maxLeft = boundryEl.clientWidth;
+    
+  }
+  
+  
+  // add margin from boundry edges
+  if (boundryMargin && !isNaN(boundryMargin)) {
     
     // add vertical margin from screen edges
-    maxTop -= originHeight + marginFromScreenEdges;
-    minTop = marginFromScreenEdges;
+    maxTop -= originHeight + boundryMargin;
+    minTop = boundryMargin;
     
     // add horizontal margin from screen edges
-    maxLeft -= originWidth + marginFromScreenEdges;
-    minLeft = marginFromScreenEdges;
+    maxLeft -= originWidth + boundryMargin;
+    minLeft = boundryMargin;
     
   }
   
