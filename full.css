@@ -1019,21 +1019,19 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
-.sidebar .header .options-screen .clone-repo {
-  display: none;
-}
-
+.sidebar .header .options-screen .add-repo,
+.sidebar .header .options-screen .clone-repo,
 .sidebar .header .options-screen .global-search {
   display: none;
 }
 
-.sidebar .header .options-screen.out-of-repo .roundbutton {
-  display: none;
+.sidebar .header .options-screen.out-of-repo .roundbutton.add-repo {
+  display: block;
 }
 
 .sidebar .header .options-screen.out-of-repo .roundbutton.share {
   display: block;
-  transition-delay: 0s;
+  transition-delay: .045s;
 }
 
 
