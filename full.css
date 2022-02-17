@@ -1549,12 +1549,10 @@ body.mobile .menu .icon a {
   overflow: hidden;
   bottom: 15px;
   opacity: 0;
-  padding: 14px 11px;
-  transform: translateY(15.25px) translateX(-50%);
   background: var( --deep-midnight-blue);
   color: #dcddde;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  border-radius: 11.5px;
+  border-radius: 8px;
   line-height: 1.5;
   pointer-events: none;
   transition: 0s .18s, .18s var( --bounce-function) opacity;
@@ -1566,11 +1564,14 @@ body.mobile .menu .icon a {
   max-width: 356px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  transform: translateY(-10px) translateX(-50%);
+  padding: 0;
 }
 
 .message.visible {
   padding: 10px 16px;
   opacity: 1;
+  border-radius: 11.5px;
   transform: translateX(-50%);
   transition: .18s var( --bounce-function);
 }
