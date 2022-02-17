@@ -1556,13 +1556,13 @@ body.mobile .menu .icon a {
   line-height: 1.5;
   pointer-events: none;
   transition: 0s .18s, .18s var( --bounce-function) opacity;
-  z-index: 1000;
+  z-index: 1001;
   /* background: hsl(218deg 23% 35%); */
   left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
   left: calc(var(--sidebar-width) / 2);
   left: 50vw;
   max-width: 356px;
-  white-space: pre-wrap;
+  white-space: pre;
   overflow-wrap: anywhere;
   transform: translateY(-10px) translateX(-50%);
   padding: 0;
