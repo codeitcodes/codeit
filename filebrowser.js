@@ -550,7 +550,7 @@ function addHTMLItemListeners() {
 
 
 // when clicked on file in HTML
-function clickedOnFileHTML(fileEl, event) {
+async function clickedOnFileHTML(fileEl, event) {
   
   // if not clicked on push button
   let pushWrapper = fileEl.querySelector('.push-wrapper');
@@ -562,7 +562,7 @@ function clickedOnFileHTML(fileEl, event) {
     if (!fileEl.classList.contains('selected')) {
 
       // load file
-      loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+      await loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
       
     }
 
