@@ -267,7 +267,7 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest, boundryEl, boundryMargin) => {
+let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
   
   // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
