@@ -1330,6 +1330,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   letter-spacing: -.002em;
 }
 
+.sidebar .files .intro .title {
+  margin-bottom: 0;
+}
+
 .sidebar .intro .title sup {
   margin-left: 6px;
   margin-right: -16px;
