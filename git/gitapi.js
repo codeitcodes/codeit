@@ -224,7 +224,7 @@ let git = {
       name: repoName,
       private: true,
       has_wiki: false,
-      auto_init: true
+      auto_init: false
     };
 
     // post the query
