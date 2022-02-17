@@ -135,7 +135,7 @@ function load() {
 
 let messageTimeout;
 
-function showMessage(message) {
+function showMessage(message, duration) {
   
   // show message in HTML
   messageEl.textContent = message;
@@ -162,7 +162,7 @@ function showMessage(message) {
     
     messageEl.classList.remove('visible');
     
-  }, 2000);
+  }, (duration ?? 2000));
   
 }
 
