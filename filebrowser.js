@@ -1824,7 +1824,7 @@ function setupEditor() {
     }
       
     // if sidebar is closed, focus codeit
-    if (!isMobile || (isMobile && getStorage('sidebar') != 'true')) {
+    if (!isMobile && modifiedFiles[selectedFile.sha]) {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
