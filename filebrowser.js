@@ -550,7 +550,7 @@ function addHTMLItemListeners() {
 
 
 // when clicked on file in HTML
-async function clickedOnFileHTML(fileEl, event) {
+function clickedOnFileHTML(fileEl, event) {
   
   // if not clicked on push button
   let pushWrapper = fileEl.querySelector('.push-wrapper');
@@ -562,16 +562,12 @@ async function clickedOnFileHTML(fileEl, event) {
     if (!fileEl.classList.contains('selected')) {
 
       // load file
-      await loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
-      
-    }
+      loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
 
-    // if on mobile device
-    if (isMobile) {
+    } else if (isMobile) { // if on mobile device
 
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
+      // update bottom float
+      updateFloat();
 
     }
 
@@ -703,35 +699,36 @@ async function loadFileInHTML(fileEl, fileSha) {
     // if file is over 1MB
     if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
       
-      // set resp to file size prompt
-      resp = { content: fileSizeText };
-      
-      
-      // show prompt in HTML
+      // show file size prompt
       
       liveView.classList.add('file-open', 'notransition');
-      
       liveView.innerHTML = '<div class="prompt">' +
                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="file-svg"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g><g clip-path="url(#c)" fill="hsl(223deg 85% 58%)"><path d="m24 56c4.4183 0 8-3.5817 8-8s-3.5817-8-8-8-8 3.5817-8 8 3.5817 8 8 8z"></path><path d="m44 55.998-10.352 15.528-5.648-7.528-12 16h40z"></path></g></g></svg>' +
                            '<div class="title">This file is too big to view</div><div class="desc">You can download it below :D</div></div>';
-      
-      onNextFrame(() => {
-        liveView.classList.remove('notransition');
-      });
-      
-      
+
+      resp = { content: fileSizeText };
+
       // if on mobile device
       if (isMobile) {
-        
-        // update bottom float
-        bottomFloat.classList.add('file-open');
-        updateFloat();
+
+        onNextFrame(() => {
+
+          liveView.classList.remove('notransition');
+
+          // update bottom float
+          bottomFloat.classList.add('file-open');
+          updateFloat();
+
+        })
 
       } else {
-        
-        // update scrollbar arrows
+
         liveToggle.classList.add('file-open');
         updateScrollbarArrow();
+
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        })
 
       }
       
@@ -799,18 +796,18 @@ async function loadFileInHTML(fileEl, fileSha) {
     
   }
 
-  // set caret pos in codeit
-  // if on desktop and modified file
+  // if on desktop and file is modified
   if (!isMobile && modifiedFiles[fileSha]) {
-    
+
+    // set caret pos in codeit
     cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-    
+
   } else {
-    
+
     cd.blur();
-    
+
   }
-  
+
   // set scroll pos in codeit
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -855,22 +852,39 @@ function loadBinaryFileHTML(file, toggled) {
     
     // update bottom float
     bottomFloat.classList.add('file-open');
-    updateFloat();
+    
+  }
+  
+  // if sidebar is open and on mobile device
+  if (toggled && isMobile) {
+    
+    liveView.classList.add('notransition', 'file-open');
+    
+    onNextFrame(() => {
+      
+      liveView.classList.remove('notransition');
+      
+      updateFloat();
+      
+    })
     
   } else {
     
-    // update scrollbar arrows
-    liveToggle.classList.add('file-open');
-    updateScrollbarArrow();
+    liveView.classList.add('notransition');
+    liveView.classList.add('file-open');
+    
+    if (!isMobile) {
+      
+      liveToggle.classList.add('file-open');
+      updateScrollbarArrow();
+      
+    }
+    
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
     
   }
-
-  
-  liveView.classList.add('notransition', 'file-open');
-
-  onNextFrame(() => {
-    liveView.classList.remove('notransition');
-  });
   
 
   const fileType = getFileType(file.name);
@@ -1163,18 +1177,18 @@ optionsButton.addEventListener('click', () => {
 // if clicked on branch icon,
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
-    
+  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
   branchButton.classList.toggle('active');
-  
+
   if (branchMenu.classList.contains('visible')) {
-    
+
     // move branch menu to icon
     moveElToEl(branchMenu, sidebarBranch, 13);
-    
+
     branchMenu.classList.add('top-margin');
-    
+
   }
   
 })
@@ -1188,12 +1202,12 @@ branchButton.addEventListener('click', () => {
   branchButton.classList.toggle('active');
   
   if (branchMenu.classList.contains('visible')) {
-    
+
     // move branch menu to button
     moveElToEl(branchMenu, branchButton, 13);
-    
+
     branchMenu.classList.remove('top-margin');
-    
+
   }
   
 })
@@ -1506,7 +1520,7 @@ repoShareButton.addEventListener('click', () => {
       } catch(e) {
 
         copy(link).then(() => {
-          showMessage('Copied link!');
+          alert('Copied link to clipboard.');
         });
 
       }
@@ -1514,7 +1528,7 @@ repoShareButton.addEventListener('click', () => {
     } else {
 
       copy(link).then(() => {
-        showMessage('Copied link!');
+        alert('Copied link to clipboard.');
       });
 
     }
@@ -1539,7 +1553,7 @@ repoShareButton.addEventListener('click', () => {
         // if couldn't open share dialog
         // copy text to clipboard
         copy(shareText).then(() => {
-          showMessage('Copied link!');
+          alert('Copied text to clipboard.');
         });
 
       }
@@ -1549,7 +1563,7 @@ repoShareButton.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        showMessage('Copied link!');
+        alert('Copied text to clipboard.');
       });
 
     }
@@ -1578,7 +1592,7 @@ learnShare.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        showMessage('Copied link!');
+        alert('Copied text to clipboard.');
       });
 
     }
@@ -1588,7 +1602,7 @@ learnShare.addEventListener('click', () => {
     // if couldn't open share dialog
     // copy text to clipboard
     copy(shareText).then(() => {
-      showMessage('Copied link!');
+      alert('Copied text to clipboard.');
     });
 
   }
@@ -1744,7 +1758,7 @@ function protectUnsavedCode() {
 
         // load file
         loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
-        
+
       } else {
 
         // if the selected file was deleted,
@@ -1828,16 +1842,11 @@ function setupEditor() {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-      
+
     }
 
     // prevent bottom float disappearing on mobile
-    if (isMobile) {
-      
-      lastScrollTop = selectedFile.scrollPos[1];
-      updateFloat();
-      
-    }
+    if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
 
     // scroll to pos in code
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
@@ -1905,39 +1914,21 @@ function setupEditor() {
   };
   
   
-  let saveMessageShown = getStorage('saveMessageShown') ?? false;
-  
   document.addEventListener('keydown', (e) => {
 
-    // disable Ctrl/Cmd + S
+    // disable Ctrl/Cmd+S
     if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
-      
-      if (!saveMessageShown || saveMessageShown === '1') {
-        
-        showMessage('We autosave :D');
-        
-        if (saveMessageShown === '1') {
-          
-          saveMessageShown = '2';
-          
-        } else {
-          
-          saveMessageShown = '1';
 
-        }
-        
-        setStorage('saveMessageShown', saveMessageShown);
-        
-      }
-      
+      if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
+      else console.log('[Ctrl+S] Always saving. Always saving.');
+
     }
     
     
-    // beautify on Ctrl/Cmd + D
-    if ((e.key === 'd' || e.keyCode === 68)
-        && isKeyEventMeta(e)) {
+    // beautify on Ctrl/Cmd+D
+    if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
       
       e.preventDefault();
       
@@ -1987,23 +1978,6 @@ function setupEditor() {
         
       }
 
-    }
-    
-    // show beautify message on Ctrl/Cmd + B/D
-    if (((e.key === 'b' || e.keyCode === 66)
-        || (e.key === 'p' || e.keyCode === 80))
-        && isKeyEventMeta(e)) {
-      
-      e.preventDefault();
-      
-      // if codeit is active
-      if (document.activeElement === cd) {
-        
-        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
-        else showMessage('You can beautify with ⌘ + D', 5000);
-        
-      }
-      
     }
 
   });
