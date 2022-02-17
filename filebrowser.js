@@ -1252,6 +1252,149 @@ function checkBranchMenu(e) {
 }
 
 
+// create new repo
+// on click of button
+newRepoButton.addEventListener('click', () => {
+
+  // if not already adding new repo
+  if (!fileWrapper.querySelector('.focused')) {
+
+    // clear existing selections
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
+    }
+
+    // create new repo
+    const repoEl = document.createElement('div');
+    repoEl.classList = 'item repo selected focused hidden';
+
+    repoEl.innerHTML = `
+    <div class="label">
+      `+ repoIcon +`
+      <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
+    </div>
+    <div class="push-wrapper">
+      `+ pushIcon +`
+    </div>
+    `;
+
+    // add new repo to DOM
+    fileWrapper.prepend(repoEl);
+
+    // focus repo
+    repoEl.querySelector('.name').focus();
+    repoEl.scrollIntoViewIfNeeded();
+
+
+    // add push button event listener
+    const pushWrapper = repoEl.querySelector('.push-wrapper');
+
+    repoEl.querySelector('.name').addEventListener('keydown', (e) => {
+
+      if (e.key === 'Enter') {
+
+        e.preventDefault();
+
+        onNextFrame(pushNewRepoInHTML);
+
+      }
+
+    });
+
+    let pushListener = pushWrapper.addEventListener('click', pushNewRepoInHTML);
+
+
+    // on next frame
+    onNextFrame(() => {
+
+      // animate repo
+      repoEl.classList.remove('hidden');
+
+    });
+
+
+    async function pushNewRepoInHTML() {
+
+      if (repoEl.classList.contains('focused')) {
+
+        // play push animation
+        playPushAnimation(repoEl.querySelector('.push-wrapper'));
+
+        // disable pushing file from HTML
+        repoEl.classList.remove('focused');
+
+        // make file name uneditable
+        repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
+        repoEl.querySelector('.name').blur();
+        
+        // hide header screens
+        titleScreen.classList.add('visible');
+        optionsScreen.classList.remove('visible');
+        optionsButton.classList.remove('open');
+        
+
+        // validate repo name
+
+        // get repo name
+        let repoName = repoEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // replace all special chars in name with dashes
+        
+        const specialChars = validateString(repoName);
+        
+        if (specialChars) {
+          
+          specialChars.forEach(char => { repoName = repoName.replaceAll(char, '-') });
+          
+        }
+        
+        
+        // if another repo in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
+
+          if (repoElem !== repoEl
+              && (repoName === repoElem.querySelector('.name').textContent)) {
+
+            // add a differentiating number
+            // to repo name
+            repoName = repoName + '-1';
+
+          }
+
+        });
+
+        repoEl.querySelector('.name').textContent = repoName;
+
+
+        // push repo asynchronously
+        const newSha = await git.createRepo(repoName);
+        
+        
+        // open repo
+        
+        // change location
+        treeLoc[0] = loggedUser;
+        treeLoc[1] = repoName + ':main';
+        saveTreeLocLS(treeLoc);
+
+        // render sidebar
+        renderSidebarHTML();
+        
+      }
+      
+    }
+
+  } else {
+
+    // if already adding a new repo, focus it
+    fileWrapper.querySelector('.item.focused .name').focus();
+
+  }
+
+})
+
+
 // create new file
 // on click of button
 newFileButton.addEventListener('click', () => {
