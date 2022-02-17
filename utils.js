@@ -131,6 +131,43 @@ function load() {
 
 
 
+// show message
+
+let messageTimeout;
+
+function showMessage(message) {
+  
+  // show message in HTML
+  messageEl.textContent = message;
+  
+  // if message is already visible
+  if (messageEl.classList.contains('visible')) {
+    
+    // animate new message
+    
+    messageEl.classList.add('animating');
+    
+    onNextFrame(() => {
+      messageEl.classList.remove('animating');
+    });
+    
+  }
+  
+  messageEl.classList.add('visible');
+  
+  
+  if (messageTimeout) window.clearTimeout(messageTimeout);
+  
+  messageTimeout = window.setTimeout(() => {
+    
+    message.classList.remove('visible');
+    
+  });
+  
+}
+
+
+
 // device and platform queries
 
 const isMobile = navigator.userAgent.match('Mobile') ?? false;
