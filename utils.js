@@ -301,7 +301,7 @@ let moveElToEl = (origin, dest, marginFromScreenEdges) => {
   }
   
   
-  let destTop = rect.top,
+  let destTop = rect.top + originHeight,
       destLeft = rect.left;
   
   // check if menu is outside window
