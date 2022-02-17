@@ -1004,11 +1004,11 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transform: none;
 }
 
-.sidebar .header .options-screen.visible .roundbutton:first-of-type {
+.sidebar .header .options-screen.visible .roundbutton.share {
   transition-delay: .09s;
 }
 
-.sidebar .header .options-screen.visible .roundbutton:nth-of-type(2) {
+.sidebar .header .options-screen.visible .roundbutton.branch {
   transition-delay: .045s;
 }
 
