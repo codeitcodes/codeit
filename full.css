@@ -1294,6 +1294,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   box-sizing: border-box;
 }
 
+.sidebar .files .picture-wrapper {
+  padding: var(--spacing-4);
+}
+
 .sidebar .intro {
   position: absolute;
   width: 100%;
