@@ -15,15 +15,11 @@ async function setupLiveView() {
       startLoading();
 
       // get file from git
+      const resp = await git.getFile(treeLoc, fileName);
       
-      let resp;
-      
-      try {
-        
-        resp = await git.getFile(treeLoc, fileName);
-        
-      } catch(e) {
-        
+      // if file dosen't exist
+      if (resp.message && resp.message === 'Not Found') {
+
         // stop loading
         stopLoading();
         
