@@ -23,7 +23,7 @@ async function setupLiveView() {
         // stop loading
         stopLoading();
         
-        showMessage('Hmm... that file dosen\'t exist.');
+        showMessage('Hmm... that file dosen\'t exist.', 5000);
         
         return;
         
