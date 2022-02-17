@@ -1367,8 +1367,14 @@ newRepoButton.addEventListener('click', () => {
         repoEl.querySelector('.name').textContent = repoName;
 
 
+        // start loading
+        startLoading();
+        
         // push repo asynchronously
         const newSha = await git.createRepo(repoName);
+        
+        // stop loading
+        stopLoading();
         
         
         // open repo
