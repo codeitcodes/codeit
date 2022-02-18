@@ -84,6 +84,8 @@ self.addEventListener('activate', (evt) => {
 
 self.addEventListener('fetch', (evt) => {
 
+  console.log(evt);
+  
   evt.respondWith(
 
     // try the cache
