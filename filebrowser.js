@@ -144,11 +144,15 @@ async function renderSidebarHTML() {
   }
 
 
-  // legacy modified file dir
+  // render modified files
+  
+  let modifiedFilesTemp;
   
   // if navigating in repository
   if (repo != '') {
 
+    // legacy modified file dir
+    
     let modFilesChanged = false;
 
     Object.values(modifiedFiles).forEach(modFile => {
