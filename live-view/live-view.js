@@ -62,6 +62,47 @@ async function setupLiveView() {
       
     }
     
+    function closeLiveView() {
+
+      // if URL has a live view flag
+      if (linkData.openLive) {
+
+        // if on mobile device
+        if (isMobile) {
+
+          // don't transition bottom float
+          bottomWrapper.classList.add('notransition');
+
+          // close bottom float
+          bottomWrapper.classList.remove('expanded');
+
+          // fix bottom float on safari
+          if (isSafari) bottomWrapper.classList.remove('fromtop');
+
+          // restore transition on next frame
+          onNextFrame(() => {
+            bottomWrapper.classList.remove('notransition');
+          });
+
+        } else {
+
+          // don't transition live view
+          liveView.classList.add('notransition');
+
+          // hide live view
+          liveView.classList.remove('visible');
+
+          // restore transition on next frame
+          onNextFrame(() => {
+            liveView.classList.remove('notransition');
+          });
+
+        }
+
+      }
+      
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
@@ -79,6 +120,9 @@ async function setupLiveView() {
         // stop loading
         stopLoading();
         
+        // close live view
+        closeLiveView();
+        
         showMessage('Hmm... that file dosen\'t exist.', 5000);
         
         return;
@@ -90,6 +134,9 @@ async function setupLiveView() {
         
         // stop loading
         stopLoading();
+        
+        // close live view
+        closeLiveView();
 
         return;
         
