@@ -7,6 +7,20 @@ async function setupLiveView() {
 
     const fileName = linkData.file.name;
     const fileSha = linkData.file.sha;
+    
+    
+    if (isMobile) {
+
+      toggleSidebar(false);
+      saveSidebarStateLS();
+
+    } else {
+
+      toggleSidebar(true);
+      saveSidebarStateLS();
+
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
@@ -35,7 +49,7 @@ async function setupLiveView() {
         
         // stop loading
         stopLoading();
-                
+
         return;
         
       }
@@ -54,19 +68,6 @@ async function setupLiveView() {
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                          modFile.caretPos, modFile.scrollPos, false);
-
-    }
-    
-    
-    if (isMobile) {
-
-      toggleSidebar(false);
-      saveSidebarStateLS();
-
-    } else {
-
-      toggleSidebar(true);
-      saveSidebarStateLS();
 
     }
     
