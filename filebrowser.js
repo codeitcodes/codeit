@@ -1338,10 +1338,6 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
         
-        // hide header screens
-        titleScreen.classList.add('visible');
-        optionsButton.classList.remove('open');
-        
 
         // validate repo name
 
