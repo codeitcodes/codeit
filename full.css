@@ -1222,7 +1222,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .repo.focused .name:empty::before {
-  content: 'new-project';
+  content: 'new-repo';
 }
 
 .sidebar .repo.focused .arrow {
