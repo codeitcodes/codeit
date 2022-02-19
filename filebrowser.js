@@ -33,10 +33,7 @@ async function renderSidebarHTML() {
     startLoading();
   }
 
-  // hide header screens
-  titleScreen.classList.add('visible');
-  optionsScreen.classList.remove('visible');
-  optionsButton.classList.remove('open');
+  // hide search screen
   header.classList.remove('searching');
 
 
@@ -62,9 +59,17 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  // get items in current tree from git
   try {
 
+    // if navigating in repository
+    if (repo != '') {
+
+      // render branch menu
+      renderBranchMenuHTML();
+      
+    }
+    
+    // get items in current tree from git
     resp = await git.getItems(treeLoc);
 
   } catch(e) {
@@ -102,7 +107,7 @@ async function renderSidebarHTML() {
 
   }
   
-  if (resp.message && resp.message.startsWith('No commit found')) {
+  if (resp.message && resp.message.startsWith('No commit found for the ref')) {
     
     // if couldn't find branch, show not found screen
     
@@ -111,7 +116,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Hmm... we can\'t find that branch.');
+    showMessage('Hmm... we can\'t find that branch.', 5000);
     
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
@@ -139,45 +144,54 @@ async function renderSidebarHTML() {
   }
 
 
-  // legacy modified file dir
+  // render modified files
   
-  let modFilesChanged = false;
+  let modifiedFilesTemp;
   
-  Object.values(modifiedFiles).forEach(modFile => {
+  // if navigating in repository
+  if (repo != '') {
+
+    // legacy modified file dir
     
-    if (modFile.dir) {
-      
-      // map modified file location
-      let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
+    let modFilesChanged = false;
 
-      // if modified file dosen't have a branch
-      // and is in current repo
-      if (!fileRepo.includes(':')
-          && fileUser === user
-          && fileRepo === repoName) {
+    Object.values(modifiedFiles).forEach(modFile => {
 
-        // append default branch to file
-        fileRepo = fileRepo + ':' + branch;
-        modFile.dir = [fileUser, fileRepo, fileDir].join();
+      if (modFile.dir) {
 
-        modFilesChanged = true;
+        // map modified file location
+        let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
+
+        // if modified file dosen't have a branch
+        // and is in current repo
+        if (!fileRepo.includes(':')
+            && fileUser === user
+            && fileRepo === repoName) {
+
+          // append default branch to file
+          fileRepo = fileRepo + ':' + branch;
+          modFile.dir = [fileUser, fileRepo, fileDir].join();
+
+          modFilesChanged = true;
+
+        }
 
       }
-      
-    }
 
-  });
+    });
+
+    if (modFilesChanged) updateModFilesLS();
+    
+    
+    // create temporary modified files array
+    modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
+
+    // get all modified files in directory
+    modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+
+  }
   
-  if (modFilesChanged) updateModFilesLS();
   
-  
-  // create temporary modified files array
-  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
-
-  // get all modified files in directory
-  modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
-
-
   // save rendered HTML
   let out = '';
 
@@ -248,16 +262,6 @@ async function renderSidebarHTML() {
 
     // if navigating in repository
     if (repo != '') {
-      
-      // show branch button
-      sidebarBranch.classList.add('visible');
-      
-      // render branch menu
-      window.setTimeout(renderBranchMenuHTML, 180);
-
-      // change header options
-      optionsScreen.classList.remove('out-of-repo');
-
 
       // render files
       resp.forEach(item => {
@@ -376,9 +380,6 @@ async function renderSidebarHTML() {
 
       // hide branch button
       sidebarBranch.classList.remove('visible');
-      
-      // change header options
-      optionsScreen.classList.add('out-of-repo');
 
       
       // render repositories
@@ -651,6 +652,18 @@ async function loadFileInHTML(fileEl, fileSha) {
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
+  
+  // if adding a new file, remove it
+  if (fileWrapper.querySelector('.focused')) {
+    
+    fileWrapper.querySelector('.focused').classList.add('hidden');
+    
+    window.setTimeout(() => {
+      fileWrapper.querySelector('.focused').remove();
+    }, 180);
+    
+  }
+  
 
   // select the new file in HTML
   fileEl.classList.add('selected');
@@ -744,7 +757,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   } else { // else, load file from modifiedFiles object
 
-    const modFile = modifiedFiles[fileSha];
+    const modFile = (selectedFile.sha === fileSha) ? selectedFile : modifiedFiles[fileSha];
 
     changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                        modFile.caretPos, modFile.scrollPos, false);
@@ -796,9 +809,21 @@ async function loadFileInHTML(fileEl, fileSha) {
     
   }
 
-  // set caret pos in codeit
-  if (!isMobile) cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+  // if on desktop and file is modified
+  if (!isMobile && modifiedFiles[fileSha]) {
 
+    // set caret pos in codeit
+    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
+
+  } else {
+
+    cd.blur();
+
+  }
+
+  // prevent bottom float disappearing on mobile
+  if (isMobile) lastScrollTop = selectedFile.scrollPos[1];
+  
   // set scroll pos in codeit
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -944,6 +969,17 @@ async function renderBranchMenuHTML(renderAll) {
     // save resp in HTML
     setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
     
+    
+    if (branchResp.length > 1) {
+      
+      sidebarBranch.classList.add('visible');
+      
+    } else {
+      
+      return;
+      
+    }
+    
   }
     
 
@@ -1009,7 +1045,6 @@ async function renderBranchMenuHTML(renderAll) {
         // hide branch menu
         branchMenu.classList.remove('visible');
         sidebarBranch.classList.remove('active');
-        branchButton.classList.remove('active');
 
         // if branch isn't already selected
         if (!branch.classList.contains('selected')) {
@@ -1049,7 +1084,6 @@ async function renderBranchMenuHTML(renderAll) {
           // hide branch menu
           branchMenu.classList.remove('visible');
           sidebarBranch.classList.remove('active');
-          branchButton.classList.remove('active');
           
           // start loading
           startLoading();
@@ -1154,44 +1188,21 @@ sidebarLogo.addEventListener('scroll', () => {
 })
 
 
-// show options on click of button
-optionsButton.addEventListener('click', () => {
-
-  optionsButton.classList.toggle('open');
-
-  titleScreen.classList.toggle('visible');
-  optionsScreen.classList.toggle('visible');
-
-})
-
-
 // if clicked on branch icon,
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
   
-  // move branch menu to icon
-  moveElToEl(branchMenu, sidebarBranch);
-  
-  branchMenu.classList.add('top-margin');
-  
   branchMenu.classList.toggle('visible');
   sidebarBranch.classList.toggle('active');
-  branchButton.classList.toggle('active');
-  
-})
 
-// if clicked on branch button,
-// toggle branch menu
-branchButton.addEventListener('click', () => {
-  
-  // move branch menu to button
-  moveElToEl(branchMenu, branchButton);
-  
-  branchMenu.classList.remove('top-margin');
-  
-  branchMenu.classList.toggle('visible');
-  sidebarBranch.classList.toggle('active');
-  branchButton.classList.toggle('active');
+  if (branchMenu.classList.contains('visible')) {
+
+    // move branch menu to icon
+    moveElToEl(branchMenu, sidebarBranch, 13);
+
+    branchMenu.classList.add('top-margin');
+
+  }
   
 })
 
@@ -1213,7 +1224,7 @@ function checkBranchMenu(e) {
   // if branch menu is visible
   if (branchMenu.classList.contains('visible')) {
     
-    const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch && e.target != branchButton);
+    const notClickedOnMenu = (e.target != branchMenu && e.target != sidebarBranch);
     const notClickedOnMenuChild = ((e.target.parentElement && e.target.parentElement != branchMenu)
                                    && (e.target.parentElement.parentElement &&
                                        e.target.parentElement.parentElement != branchMenu));
@@ -1223,7 +1234,6 @@ function checkBranchMenu(e) {
       // hide branch menu
       branchMenu.classList.remove('visible');
       sidebarBranch.classList.remove('active');
-      branchButton.classList.remove('active');
 
     }
     
@@ -1232,9 +1242,173 @@ function checkBranchMenu(e) {
 }
 
 
+// create new repository or file
+// on click of button
+addButton.addEventListener('click', () => {
+  
+  // if navigating in repository
+  if (treeLoc[1] != '') {
+    
+    // create new file
+    createNewFileInHTML();
+    
+  } else {
+    
+    // create new repo
+    createNewRepoInHTML();
+    
+  }
+
+})
+
+
+// create new repo
+// on click of button
+function createNewRepoInHTML() {
+
+  // if not already adding new repo
+  if (!fileWrapper.querySelector('.focused')) {
+
+    // clear existing selections
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
+    }
+
+    // create new repo
+    const repoEl = document.createElement('div');
+    repoEl.classList = 'item repo selected focused hidden';
+
+    repoEl.innerHTML = `
+    <div class="label">
+      `+ repoIcon +`
+      <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
+    </div>
+    <div class="push-wrapper">
+      `+ pushIcon +`
+    </div>
+    `+ arrowIcon;
+
+    // add new repo to DOM
+    fileWrapper.prepend(repoEl);
+
+    // focus repo
+    repoEl.querySelector('.name').focus();
+    repoEl.scrollIntoViewIfNeeded();
+
+
+    // add push button event listener
+    const pushWrapper = repoEl.querySelector('.push-wrapper');
+
+    repoEl.querySelector('.name').addEventListener('keydown', (e) => {
+
+      if (e.key === 'Enter') {
+
+        e.preventDefault();
+
+        onNextFrame(pushNewRepoInHTML);
+
+      }
+
+    });
+
+    let pushListener = pushWrapper.addEventListener('click', pushNewRepoInHTML);
+
+
+    // on next frame
+    onNextFrame(() => {
+
+      // animate repo
+      repoEl.classList.remove('hidden');
+
+    });
+
+
+    async function pushNewRepoInHTML() {
+
+      if (repoEl.classList.contains('focused')) {
+
+        // play push animation
+        playPushAnimation(repoEl.querySelector('.push-wrapper'));
+
+        // disable pushing file from HTML
+        repoEl.classList.remove('focused');
+
+        // make file name uneditable
+        repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
+        repoEl.querySelector('.name').blur();
+        
+
+        // validate repo name
+
+        // get repo name
+        let repoName = repoEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // replace all special chars in name with dashes
+        
+        const specialChars = validateString(repoName);
+        
+        if (specialChars) {
+          
+          specialChars.forEach(char => { repoName = repoName.replaceAll(char, '-') });
+          
+        }
+        
+        
+        // if another repo in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
+
+          if (repoElem !== repoEl
+              && (repoName === repoElem.querySelector('.name').textContent)) {
+
+            // add a differentiating number
+            // to repo name
+            repoName = repoName + '-1';
+
+          }
+
+        });
+
+        repoEl.querySelector('.name').textContent = repoName;
+
+
+        // start loading
+        startLoading();
+        
+        // push repo asynchronously
+        const newSha = await git.createRepo(repoName);
+        
+        // stop loading
+        stopLoading();
+        
+        
+        // open repo
+        
+        // change location
+        treeLoc[0] = loggedUser;
+        treeLoc[1] = repoName + ':main';
+        saveTreeLocLS(treeLoc);
+
+        // render sidebar
+        renderSidebarHTML();
+        
+      }
+      
+    }
+
+  } else {
+
+    // if already adding a new repo, focus it
+    fileWrapper.querySelector('.item.focused .name').focus();
+
+  }
+
+}
+
+
 // create new file
 // on click of button
-newFileButton.addEventListener('click', () => {
+function createNewFileInHTML() {
 
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
@@ -1306,11 +1480,6 @@ newFileButton.addEventListener('click', () => {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
-        
-        // hide header screens
-        titleScreen.classList.add('visible');
-        optionsScreen.classList.remove('visible');
-        optionsButton.classList.remove('open');
 
         
         // pad file content with random number of invisible chars
@@ -1475,9 +1644,10 @@ newFileButton.addEventListener('click', () => {
 
   }
 
-})
+}
 
 
+/*
 // if clicked on share button,
 // share repository link
 repoShareButton.addEventListener('click', () => {
@@ -1503,7 +1673,7 @@ repoShareButton.addEventListener('click', () => {
       } catch(e) {
 
         copy(link).then(() => {
-          alert('Copied link to clipboard.');
+          showMessage('Copied link!');
         });
 
       }
@@ -1511,7 +1681,7 @@ repoShareButton.addEventListener('click', () => {
     } else {
 
       copy(link).then(() => {
-        alert('Copied link to clipboard.');
+        showMessage('Copied link!');
       });
 
     }
@@ -1536,7 +1706,7 @@ repoShareButton.addEventListener('click', () => {
         // if couldn't open share dialog
         // copy text to clipboard
         copy(shareText).then(() => {
-          alert('Copied text to clipboard.');
+          showMessage('Copied text!');
         });
 
       }
@@ -1546,7 +1716,7 @@ repoShareButton.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied text!');
       });
 
     }
@@ -1554,6 +1724,7 @@ repoShareButton.addEventListener('click', () => {
   }
 
 });
+*/
 
 
 // share codeit on click of button
@@ -1575,7 +1746,7 @@ learnShare.addEventListener('click', () => {
       // if couldn't open share dialog
       // copy text to clipboard
       copy(shareText).then(() => {
-        alert('Copied text to clipboard.');
+        showMessage('Copied text!');
       });
 
     }
@@ -1585,7 +1756,7 @@ learnShare.addEventListener('click', () => {
     // if couldn't open share dialog
     // copy text to clipboard
     copy(shareText).then(() => {
-      alert('Copied text to clipboard.');
+      showMessage('Copied text!');
     });
 
   }
@@ -1820,8 +1991,8 @@ function setupEditor() {
 
     }
       
-    // if sidebar is closed, focus codeit
-    if (!isMobile || (isMobile && getStorage('sidebar') != 'true')) {
+    // if on desktop, focus codeit
+    if (!isMobile) {
 
       // set caret pos in code
       cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
@@ -1897,21 +2068,39 @@ function setupEditor() {
   };
   
   
+  let saveMessageShown = getStorage('saveMessageShown') ?? false;
+  
   document.addEventListener('keydown', (e) => {
 
-    // disable Ctrl/Cmd+S
+    // disable Ctrl/Cmd + S
     if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
 
       e.preventDefault();
+      
+      if (!saveMessageShown || saveMessageShown === '1') {
+        
+        showMessage('We autosave :D');
+        
+        if (saveMessageShown === '1') {
+          
+          saveMessageShown = '2';
+          
+        } else {
+          
+          saveMessageShown = '1';
 
-      if (isMac) console.log('[Cmd+S] Always saving. Always saving.');
-      else console.log('[Ctrl+S] Always saving. Always saving.');
-
+        }
+        
+        setStorage('saveMessageShown', saveMessageShown);
+        
+      }
+      
     }
     
     
-    // beautify on Ctrl/Cmd+D
-    if ((e.key === 'd' || e.keyCode === 68) && isKeyEventMeta(e)) {
+    // beautify on Ctrl/Cmd + D
+    if ((e.key === 'd' || e.keyCode === 68)
+        && isKeyEventMeta(e)) {
       
       e.preventDefault();
       
@@ -1961,6 +2150,23 @@ function setupEditor() {
         
       }
 
+    }
+    
+    // show beautify message on Ctrl/Cmd + B/D
+    if (((e.key === 'b' || e.keyCode === 66)
+        || (e.key === 'p' || e.keyCode === 80))
+        && isKeyEventMeta(e)) {
+      
+      e.preventDefault();
+      
+      // if codeit is active
+      if (document.activeElement === cd) {
+        
+        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
+        else showMessage('You can beautify with ⌘ + D', 5000);
+        
+      }
+      
     }
 
   });

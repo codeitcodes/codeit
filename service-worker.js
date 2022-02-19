@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v295';
+const CACHE_NAME = 'static-cache-v304';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -11,7 +11,6 @@ const FILES_TO_CACHE = [
 
   '/lib/plugins/codeit-line-numbers.js',
   '/lib/plugins/codeit-match-braces.js',
-  '/lib/plugins/codeit-inline-color.js',
   '/lib/plugins/codeit-autolinker.js',
 
   '/full.html',
@@ -83,8 +82,9 @@ self.addEventListener('activate', (evt) => {
 
 });
 
-self.addEventListener('fetch', (evt) => {
 
+self.addEventListener('fetch', (evt) => {
+  
   evt.respondWith(
 
     // try the cache

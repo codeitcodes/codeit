@@ -910,7 +910,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   opacity: 1 !important;
 }
 
-.sidebar .header .roundbutton.options {
+.sidebar .header .roundbutton.add {
   margin: 0;
   margin-right: calc(20px - var(--spacing-1));
   position: absolute;
@@ -919,18 +919,21 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transition: .18s var(--ease-function) opacity;
 }
 
-.sidebar .header .roundbutton.options .icon {
+/*
+.sidebar .header .roundbutton.add .icon {
   transform-origin: center;
   transition: .18s var(--bounce-function);
   will-change: transform;
 }
 
-.sidebar .header .roundbutton.options.open .icon {
+.sidebar .header .roundbutton.add.open .icon {
   transform: rotate(-45deg);
   opacity: .9;
 }
+*/
 
 
+/*
 .sidebar .header .options-screen,
 .sidebar .header .title-screen {
   opacity: 1;
@@ -951,6 +954,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .header .title-screen.visible > * {
   transform: none;
 }
+*/
 
 
 .sidebar .header .titlescreen .title::before,
@@ -989,6 +993,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
+/*
 .sidebar .header .options-screen .roundbutton {
   transform: translateY(-40px);
   transition: .18s var(--bounce-function);
@@ -1004,25 +1009,23 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transform: none;
 }
 
-.sidebar .header .options-screen.visible .roundbutton:first-of-type {
+.sidebar .header .options-screen.visible .roundbutton.share {
   transition-delay: .09s;
 }
 
-.sidebar .header .options-screen.visible .roundbutton:nth-of-type(2) {
+.sidebar .header .options-screen.visible .roundbutton.branch {
   transition-delay: .045s;
 }
 
 
 .sidebar .header .options-screen .new-file .icon {
-  /* if user dosen't have push access in repo, show clone repo icon */
-  /* d: path('M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z'); */
+  / if user dosen't have push access in repo, show clone repo icon /
+  / d: path('M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z'); /
 }
 
 
-.sidebar .header .options-screen .clone-repo {
-  display: none;
-}
-
+.sidebar .header .options-screen .new-repo,
+.sidebar .header .options-screen .clone-repo,
 .sidebar .header .options-screen .global-search {
   display: none;
 }
@@ -1031,10 +1034,18 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
+.sidebar .header .options-screen.out-of-repo .roundbutton.new-repo {
+  display: block;
+}
+
 .sidebar .header .options-screen.out-of-repo .roundbutton.share {
   display: block;
-  transition-delay: 0s;
 }
+
+.sidebar .header .options-screen.out-of-repo.visible .roundbutton.share {
+  transition-delay: .045s;
+}
+*/
 
 
 .sidebar .header .search-screen {
@@ -1081,7 +1092,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
-.sidebar .header.searching .roundbutton.options,
+.sidebar .header.searching .roundbutton.add,
 .sidebar .header.searching .title-screen {
   opacity: 0;
   pointer-events: none;
@@ -1205,16 +1216,20 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item.focused .name:empty::before {
-  content: 'untitled file';
+  content: 'new-file';
   color: gray;
   pointer-events: none;
 }
 
 .sidebar .repo.focused .name:empty::before {
-  content: 'untitled repo';
+  content: 'new-repo';
 }
 
 .sidebar .repo.focused .arrow {
+  display: none;
+}
+
+.sidebar .repo .push-wrapper.checked + .arrow {
   display: none;
 }
 
@@ -1297,6 +1312,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   padding-left: 10px;
 }
 
+.sidebar .files .intro {
+  height: calc(100% - 85px);
+}
+
 .sidebar .intro .picture {
   width: 100%;
   height: 100%;
@@ -1314,6 +1333,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   letter-spacing: -.002em;
 }
 
+.sidebar .files .intro .title {
+  margin-bottom: 0;
+}
+
 .sidebar .intro .title sup {
   margin-left: 6px;
   margin-right: -16px;
@@ -1328,6 +1351,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .intro .subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 3.5px;
   color: #b3b3b3;
   font-size: 15px;
   line-height: 23px;
@@ -1530,14 +1557,58 @@ body.mobile .menu .icon a {
   transform: scale(1.35) translateX(-0.1px);
 }
 
-
-.context-menu {
+.menu.context-menu {
   margin-top: -4px;
   margin-left: -2px;
 }
 
-.context-menu .icon .bigger-icon {
+.menu.context-menu .icon .bigger-icon {
   opacity: 1;
+}
+
+
+.message {
+  position: fixed;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 15px);
+  opacity: 0;
+  background: var( --deep-midnight-blue);
+  color: #dcddde;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  border-radius: 8px;
+  line-height: 1.5;
+  pointer-events: none;
+  transition: 0s .18s, .18s var( --bounce-function) opacity;
+  z-index: 1001;
+  /* background: hsl(218deg 23% 35%); */
+  left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
+  left: calc(var(--sidebar-width) / 2);
+  left: 50vw;
+  max-width: 356px;
+  white-space: pre;
+  overflow-wrap: anywhere;
+  transform: translateY(-10px) translateX(-50%);
+  padding: 0;
+}
+
+.message.visible {
+  padding: 10px 16px;
+  opacity: 1;
+  border-radius: 11.5px;
+  transform: translateX(-50%);
+  transition: .18s var( --bounce-function);
+}
+
+.message.animating {
+  transform: translateY(-10px) translateX(-50%);
+  color: transparent;
+  border-radius: 8px;
+  padding: 0;
+  transition: none;
 }
 
 

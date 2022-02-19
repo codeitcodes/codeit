@@ -25,18 +25,19 @@ const body = document.body,
       header = contentWrapper.querySelector('.header'),
 
       titleScreen = header.querySelector('.title-screen'),
-      optionsScreen = header.querySelector('.options-screen'),
+      //optionsScreen = header.querySelector('.options-screen'),
       searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
       sidebarLogo = sidebarTitle.querySelector('.logo'),
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
-      optionsButton = header.querySelector('.options'),
-
+      addButton = header.querySelector('.add'),
+      
+      /* newRepoButton = optionsScreen.querySelector('.new-repo'),
       newFileButton = optionsScreen.querySelector('.new-file'),
       branchButton = optionsScreen.querySelector('.branch'),
-      repoShareButton = optionsScreen.querySelector('.share'),
+      repoShareButton = optionsScreen.querySelector('.share'), */
 
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
@@ -53,13 +54,15 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
       
       branchMenu = document.querySelector('.branch-menu'),
+      
+      messageEl = document.querySelector('.message'),
 
       liveView = document.querySelector('.live-view');
 
 
 
 // version
-const version = '2.0.0';
+const version = '2.0.1';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -125,6 +128,43 @@ function load() {
 
   }
 
+}
+
+
+
+// show message
+
+let messageTimeout;
+
+function showMessage(message, duration) {
+  
+  // show message in HTML
+  messageEl.textContent = message;
+  
+  // if message is already visible
+  if (messageEl.classList.contains('visible')) {
+    
+    // animate new message
+    
+    messageEl.classList.add('animating');
+    
+    onNextFrame(() => {
+      messageEl.classList.remove('animating');
+    });
+    
+  }
+  
+  messageEl.classList.add('visible');
+  
+  
+  if (messageTimeout) window.clearTimeout(messageTimeout);
+  
+  messageTimeout = window.setTimeout(() => {
+    
+    messageEl.classList.remove('visible');
+    
+  }, (duration ?? 2000));
+  
 }
 
 
@@ -267,15 +307,61 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest) => {
+let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
   
+  // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
-        left = rect.left,
-        top = rect.top,
-        height = dest.clientHeight;
+        destHeight = dest.clientHeight;
   
-  origin.style.left = left + 'px';
-  origin.style.top = top + height + 'px';
+  // get bounding box of origin element
+  const originHeight = origin.clientHeight,
+        originWidth = origin.clientWidth;
+  
+  
+  // define window constraints
+  // (stop moving element when it goes offscreen)
+  let maxTop = window.innerHeight,
+      minTop = -originHeight,
+      maxLeft = window.innerWidth,
+      minLeft = -originWidth;
+  
+  
+  // if defined boundry element,
+  // update constraints
+  if (boundryEl) {
+    
+    maxTop = boundryEl.clientHeight;
+    maxLeft = boundryEl.clientWidth;
+    
+  }
+  
+  
+  // add margin from boundry edges
+  if (boundryMargin && !isNaN(boundryMargin)) {
+    
+    // add vertical margin from screen edges
+    maxTop -= originHeight + boundryMargin;
+    minTop = boundryMargin;
+    
+    // add horizontal margin from screen edges
+    maxLeft -= originWidth + boundryMargin;
+    minLeft = boundryMargin;
+    
+  }
+  
+  
+  let destTop = rect.top + destHeight,
+      destLeft = rect.left;
+  
+  // check if menu is outside window
+  if (maxTop < destTop) destTop = maxTop;
+  if (minTop > destTop) destTop = minTop;
+  if (maxLeft < destLeft) destLeft = maxLeft;
+  if (minLeft > destLeft) destLeft = minLeft;
+  
+  
+  origin.style.top = destTop + 'px';
+  origin.style.left = destLeft + 'px';
 
 }
 
@@ -395,7 +481,7 @@ let axios = {
       } catch(e) { reject(e) }
     });
   },
-  'post': (url, data, token) => {
+  'post': (url, token, data) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -537,4 +623,27 @@ const pushIcon = `
   </g>
   <path id="bounding-box" d="M17.54,16.34h24v24h-24Z" transform="translate(-9.08 -8.23)" fill="none"></path>
 </svg>
+`;
+
+
+const repoIntroScreen = `
+<div class="intro">
+  <div class="picture-wrapper">
+    <svg viewBox="0 0 356 415" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="picture" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M272.41 168.81c-40.867 0-73.996 33.129-73.996 74V479.6c0 40.867 33.129 73.996 73.996 73.996h14.797c8.176 0 14.801-6.625 14.801-14.801 0-8.172-6.625-14.797-14.801-14.797H272.41c-24.52 0-44.398-19.879-44.398-44.398 0-16.727 9.25-31.293 22.91-38.863 5.828-3 12.902-5.031 21.488-5.535H524v88.797h-29.598c-8.176 0-14.801 6.625-14.801 14.797 0 8.176 6.625 14.801 14.801 14.801h44.395c8.176 0 14.801-6.625 14.801-14.801v-117.06c.871-5.914 0-13.172 0-13.172v-195.35c0-24.52-19.875-44.398-44.398-44.398l-236.79-.006Z" fill="hsl(223deg 92% 87%)" transform="translate(-198.414 -168.81)"></path><path d="M331.6 479.6c0-8.176 6.629-14.801 14.801-14.801h88.797c8.172 0 14.801 6.625 14.801 14.801v88.797a14.797 14.797 0 0 1-7.816 13.047 14.808 14.808 0 0 1-15.195-.734L390.8 556.585l-36.188 24.125a14.804 14.804 0 0 1-23.012-12.313V479.6Z" fill="hsl(223deg 85% 58%)" transform="translate(-198.414 -168.81)"></path></svg>
+  </div>
+  <div class="subhead">
+    <div class="title">Create a repository</div>
+  </div>
+</div>
+`;
+
+const fileIntroScreen = `
+<div class="intro">
+  <div class="picture-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="picture"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g></g></svg>
+  </div>
+  <div class="subhead">
+    <div class="title">Create a file</div>
+  </div>
+</div>
 `;

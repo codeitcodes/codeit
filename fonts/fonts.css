@@ -16,25 +16,9 @@
 @font-face {
   font-family: 'Mono Sans';
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Mono Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('Mono-Sans/MonoSans-Semibold.woff2') format('woff2');
 }
 
 @font-face {

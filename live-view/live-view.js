@@ -5,24 +5,33 @@ async function setupLiveView() {
   // if URL has a file
   if (linkData.file) {
 
-    if (isMobile) {
+    // get file from URL
+    const fileName = linkData.file.name;
+    const fileSha = linkData.file.sha;
+    
+    
+    // don't transition
+    body.classList.add('notransition');
 
+    // if on mobile device
+    if (isMobile) {
+      
+      // close sidebar
       toggleSidebar(false);
       saveSidebarStateLS();
 
     } else {
-
+      
+      // open sidebar
       toggleSidebar(true);
       saveSidebarStateLS();
 
     }
 
-    const fileName = linkData.file.name;
-    const fileSha = linkData.file.sha;
-
-    // change selected file
-    changeSelectedFile(treeLoc.join(), fileSha, fileName, '\n\r', getFileLang(fileName),
-                       [0, 0], [0, 0], false);
+    // restore transition on next frame
+    onNextFrame(() => {
+      body.classList.remove('notransition');
+    });
     
     
     // if URL has a live view flag
@@ -30,9 +39,9 @@ async function setupLiveView() {
 
       // if on mobile device
       if (isMobile) {
-
-        // update bottom float
-        updateFloat();
+        
+        // clear selected file name
+        floatLogo.innerText = '';
 
         // don't transition bottom float
         bottomWrapper.classList.add('notransition');
@@ -65,6 +74,60 @@ async function setupLiveView() {
       
     }
     
+    function closeLiveView() {
+
+      // if URL has a live view flag
+      if (linkData.openLive) {
+
+        // if on mobile device
+        if (isMobile) {
+          
+          // don't transition
+          body.classList.add('notransition');
+          
+          // open sidebar
+          toggleSidebar(true);
+          saveSidebarStateLS();
+          
+          // restore transition on next frame
+          onNextFrame(() => {
+            body.classList.remove('notransition');
+          });
+          
+
+          // don't transition bottom float
+          bottomWrapper.classList.add('notransition');
+
+          // close bottom float
+          bottomWrapper.classList.remove('expanded');
+
+          // fix bottom float on safari
+          if (isSafari) bottomWrapper.classList.remove('fromtop');
+
+          // restore transition on next frame
+          onNextFrame(() => {
+            bottomWrapper.classList.remove('notransition');
+          });
+
+        } else {
+
+          // don't transition live view
+          liveView.classList.add('notransition');
+
+          // hide live view
+          liveView.classList.remove('visible');
+
+          // restore transition on next frame
+          onNextFrame(() => {
+            liveView.classList.remove('notransition');
+          });
+
+        }
+
+      }
+      
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
@@ -72,9 +135,39 @@ async function setupLiveView() {
       // start loading
       startLoading();
 
+      
       // get file from git
       const resp = await git.getFile(treeLoc, fileName);
+      
+      // if file dosen't exist
+      if (resp.message && resp.message === 'Not Found') {
 
+        // stop loading
+        stopLoading();
+        
+        // close live view
+        closeLiveView();
+        
+        showMessage('Hmm... that file dosen\'t exist.', 5000);
+        
+        return;
+        
+      }
+      
+      // if branch dosen't exist
+      if (resp.message && resp.message.startsWith('No commit found for the ref')) {
+        
+        // stop loading
+        stopLoading();
+        
+        // close live view
+        closeLiveView();
+
+        return;
+        
+      }
+
+      
       // change selected file
       changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
                          [0, 0], [0, 0], false);
@@ -83,8 +176,8 @@ async function setupLiveView() {
       stopLoading();
 
     } else { // else, load file from modifiedFiles object
-
-      const modFile = modifiedFiles[fileSha];
+      
+      const modFile = (selectedFile.sha === fileSha) ? selectedFile : modifiedFiles[fileSha];
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                          modFile.caretPos, modFile.scrollPos, false);
@@ -95,6 +188,14 @@ async function setupLiveView() {
     // if URL has a live view flag
     if (linkData.openLive) {
       
+      // if on mobile device
+      if (isMobile) {
+
+        // update bottom float
+        updateFloat();
+        
+      }
+      
       // open live view
       toggleLiveView(selectedFile);
       
@@ -103,8 +204,16 @@ async function setupLiveView() {
     
     // show file content in codeit
     try {
+      
+      const fileContent = decodeUnicode(selectedFile.content);
+      
+      // compare current code with new code
+      if (hashCode(cd.textContent) !== hashCode(fileContent)) {
 
-      cd.textContent = decodeUnicode(selectedFile.content);
+        // if the code is different, swap it
+        cd.textContent = fileContent;
+        
+      }
 
       // change codeit lang
       cd.lang = selectedFile.lang;
@@ -131,9 +240,6 @@ async function setupLiveView() {
 
     }
     
-    // set caret pos in codeit
-    cd.setSelection(selectedFile.caretPos[0], selectedFile.caretPos[1]);
-
     // set scroll pos in codeit
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -260,7 +366,7 @@ function addBottomSwipeListener() {
           } catch(e) {
 
             copy(link).then(() => {
-              alert('Copied link to clipboard.');
+              showMessage('Copied link!');
             });
 
           }
@@ -268,7 +374,7 @@ function addBottomSwipeListener() {
         } else {
 
           copy(link).then(() => {
-            alert('Copied link to clipboard.');
+            showMessage('Copied link!');
           });
 
         }
@@ -428,7 +534,7 @@ if (isMobile) {
     });
 
     copy(link).then(() => {
-      alert('Copied link to clipboard.');
+      showMessage('Copied link!');
     });
 
   });
