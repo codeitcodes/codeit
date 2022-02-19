@@ -146,43 +146,48 @@ async function renderSidebarHTML() {
 
   // legacy modified file dir
   
-  let modFilesChanged = false;
-  
-  Object.values(modifiedFiles).forEach(modFile => {
-    
-    if (modFile.dir) {
-      
-      // map modified file location
-      let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
+  // if navigating in repository
+  if (repo != '') {
 
-      // if modified file dosen't have a branch
-      // and is in current repo
-      if (!fileRepo.includes(':')
-          && fileUser === user
-          && fileRepo === repoName) {
+    let modFilesChanged = false;
 
-        // append default branch to file
-        fileRepo = fileRepo + ':' + branch;
-        modFile.dir = [fileUser, fileRepo, fileDir].join();
+    Object.values(modifiedFiles).forEach(modFile => {
 
-        modFilesChanged = true;
+      if (modFile.dir) {
+
+        // map modified file location
+        let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
+
+        // if modified file dosen't have a branch
+        // and is in current repo
+        if (!fileRepo.includes(':')
+            && fileUser === user
+            && fileRepo === repoName) {
+
+          // append default branch to file
+          fileRepo = fileRepo + ':' + branch;
+          modFile.dir = [fileUser, fileRepo, fileDir].join();
+
+          modFilesChanged = true;
+
+        }
 
       }
-      
-    }
 
-  });
+    });
+
+    if (modFilesChanged) updateModFilesLS();
+    
+    
+    // create temporary modified files array
+    let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
+
+    // get all modified files in directory
+    modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+
+  }
   
-  if (modFilesChanged) updateModFilesLS();
   
-  
-  // create temporary modified files array
-  let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
-
-  // get all modified files in directory
-  modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
-
-
   // save rendered HTML
   let out = '';
 
@@ -643,6 +648,18 @@ async function loadFileInHTML(fileEl, fileSha) {
   if (fileWrapper.querySelector('.selected')) {
     fileWrapper.querySelector('.selected').classList.remove('selected');
   }
+  
+  // if adding a new file, remove it
+  if (fileWrapper.querySelector('.focused')) {
+    
+    fileWrapper.querySelector('.focused').classList.add('hidden');
+    
+    window.setTimeout(() => {
+      fileWrapper.querySelector('.focused').remove();
+    }, 180);
+    
+  }
+  
 
   // select the new file in HTML
   fileEl.classList.add('selected');
