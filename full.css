@@ -1229,6 +1229,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
+.sidebar .repo .push-wrapper.checked + .arrow {
+  display: none;
+}
+
 .sidebar .item .push-wrapper {
   width: 53.5px;
   position: absolute;
