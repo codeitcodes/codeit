@@ -184,7 +184,7 @@ async function renderSidebarHTML() {
     
     
     // create temporary modified files array
-    let modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
+    modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
 
     // get all modified files in directory
     modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
