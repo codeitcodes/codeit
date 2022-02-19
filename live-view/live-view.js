@@ -39,6 +39,9 @@ async function setupLiveView() {
 
       // if on mobile device
       if (isMobile) {
+        
+        // clear selected file name
+        floatLogo.innerText = '';
 
         // don't transition bottom float
         bottomWrapper.classList.add('notransition');
