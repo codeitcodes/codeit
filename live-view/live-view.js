@@ -5,21 +5,33 @@ async function setupLiveView() {
   // if URL has a file
   if (linkData.file) {
 
+    // get file from URL
     const fileName = linkData.file.name;
     const fileSha = linkData.file.sha;
     
     
-    if (isMobile) {
+    // don't transition
+    body.classList.add('notransition');
 
+    // if on mobile device
+    if (isMobile) {
+      
+      // close sidebar
       toggleSidebar(false);
       saveSidebarStateLS();
 
     } else {
-
+      
+      // open sidebar
       toggleSidebar(true);
       saveSidebarStateLS();
 
     }
+
+    // restore transition on next frame
+    onNextFrame(() => {
+      body.classList.remove('notransition');
+    });
     
     
     // if URL has a live view flag
@@ -69,6 +81,19 @@ async function setupLiveView() {
 
         // if on mobile device
         if (isMobile) {
+          
+          // don't transition
+          body.classList.add('notransition');
+          
+          // close sidebar
+          toggleSidebar(false);
+          saveSidebarStateLS();
+          
+          // restore transition on next frame
+          onNextFrame(() => {
+            body.classList.remove('notransition');
+          });
+          
 
           // don't transition bottom float
           bottomWrapper.classList.add('notransition');
