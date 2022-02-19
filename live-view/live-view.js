@@ -21,6 +21,47 @@ async function setupLiveView() {
 
     }
     
+    
+    // if URL has a live view flag
+    if (linkData.openLive) {
+
+      // if on mobile device
+      if (isMobile) {
+
+        // update bottom float
+        updateFloat();
+
+        // don't transition bottom float
+        bottomWrapper.classList.add('notransition');
+
+        // expand bottom float
+        bottomWrapper.classList.add('expanded');
+
+        // fix bottom float on safari
+        if (isSafari) bottomWrapper.classList.add('fromtop');
+
+        // restore transition on next frame
+        onNextFrame(() => {
+          bottomWrapper.classList.remove('notransition');
+        });
+
+      } else {
+
+        // don't transition live view
+        liveView.classList.add('notransition');
+
+        // show live view
+        liveView.classList.add('visible');
+
+        // restore transition on next frame
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        });
+
+      }
+      
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
@@ -74,41 +115,6 @@ async function setupLiveView() {
     
     // if URL has a live view flag
     if (linkData.openLive) {
-
-      // if on mobile device
-      if (isMobile) {
-
-        // update bottom float
-        updateFloat();
-
-        // don't transition bottom float
-        bottomWrapper.classList.add('notransition');
-
-        // expand bottom float
-        bottomWrapper.classList.add('expanded');
-
-        // fix bottom float on safari
-        if (isSafari) bottomWrapper.classList.add('fromtop');
-
-        // restore transition on next frame
-        onNextFrame(() => {
-          bottomWrapper.classList.remove('notransition');
-        });
-
-      } else {
-
-        // don't transition live view
-        liveView.classList.add('notransition');
-
-        // show live view
-        liveView.classList.add('visible');
-
-        // restore transition on next frame
-        onNextFrame(() => {
-          liveView.classList.remove('notransition');
-        });
-
-      }
       
       // open live view
       toggleLiveView(selectedFile);
