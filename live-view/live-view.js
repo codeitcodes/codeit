@@ -85,8 +85,8 @@ async function setupLiveView() {
           // don't transition
           body.classList.add('notransition');
           
-          // close sidebar
-          toggleSidebar(false);
+          // open sidebar
+          toggleSidebar(true);
           saveSidebarStateLS();
           
           // restore transition on next frame
