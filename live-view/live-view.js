@@ -40,9 +40,6 @@ async function setupLiveView() {
       // if on mobile device
       if (isMobile) {
 
-        // update bottom float
-        updateFloat();
-
         // don't transition bottom float
         bottomWrapper.classList.add('notransition');
 
@@ -187,6 +184,14 @@ async function setupLiveView() {
     
     // if URL has a live view flag
     if (linkData.openLive) {
+      
+      // if on mobile device
+      if (isMobile) {
+
+        // update bottom float
+        updateFloat();
+        
+      }
       
       // open live view
       toggleLiveView(selectedFile);
