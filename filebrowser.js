@@ -1283,11 +1283,10 @@ function createNewRepoInHTML() {
       `+ repoIcon +`
       <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
     </div>
-    `+ arrowIcon +`
     <div class="push-wrapper">
       `+ pushIcon +`
     </div>
-    `;
+    `+ arrowIcon;
 
     // add new repo to DOM
     fileWrapper.prepend(repoEl);
