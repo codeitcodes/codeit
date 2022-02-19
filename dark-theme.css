@@ -231,7 +231,8 @@ cd-el {
   cursor: unset;
 }
 
-.token a {
+.token a,
+.token.url-link {
   color: inherit;
   caret-color: #fff;
 }
