@@ -757,7 +757,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   } else { // else, load file from modifiedFiles object
 
-    const modFile = modifiedFiles[fileSha];
+    const modFile = (selectedFile.sha === fileSha) ? selectedFile : modifiedFiles[fileSha];
 
     changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                        modFile.caretPos, modFile.scrollPos, false);
