@@ -894,6 +894,10 @@ body.notransition .sidebar {
   display: block;
 }
 
+.sidebar .header.out-of-repo .title .branch-icon {
+  display: none;
+}
+
 body:not(.mobile) .sidebar .header .title .branch-icon:hover {
   opacity: 0.72;
 }
