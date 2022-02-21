@@ -756,6 +756,7 @@ body.notransition .sidebar {
   background: #568af2;
   background: var(--rosemary-lighter);
   transition: width .4s ease, opacity .4s linear;
+  overscroll-behavior: none;
   z-index: 1000;
 }
 
@@ -771,6 +772,7 @@ body.notransition .sidebar {
   display: flex;
   align-items: center;
   justify-content: right;
+  overscroll-behavior: none;
   overflow: hidden;
   z-index: 100;
 }
@@ -892,6 +894,10 @@ body.notransition .sidebar {
 
 .sidebar .header .title .branch-icon.visible {
   display: block;
+}
+
+.sidebar .header.out-of-repo .title .branch-icon {
+  display: none;
 }
 
 body:not(.mobile) .sidebar .header .title .branch-icon:hover {
@@ -1288,7 +1294,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .picture-wrapper {
   background: hsl(228deg 38% 21%);
-  color: rgba(241,241,242,0.8);
+  color: hsl(223deg 92% 87%);
   height: 120px;
   width: 120px;
   overflow: hidden;

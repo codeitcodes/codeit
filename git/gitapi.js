@@ -104,7 +104,8 @@ let git = {
 
   },
   
-  'getRepoPushAccess': async (treeLoc, loggedUser) => {
+  // check if user has push access in repository
+  'checkPushAccess': async (treeLoc, userToCheck) => {
     
     // map tree location
     let query = 'https://api.github.com';
@@ -112,13 +113,13 @@ let git = {
     
     const [repoName] = repo.split(':');
     
-    query += '/repos/' + user + '/' + repoName + '/collaborators/' + loggedUser + '/permission';
+    query += '/repos/' + user + '/' + repoName + '/collaborators/' + userToCheck + '/permission';
     
     // get the query
     const resp = await axios.get(query, gitToken);
     
     if (resp.message &&
-        resp.message === 'Must have push access to view collaborator permission.') {
+        resp.message.startsWith('Must have push access')) {
       
       return false;
       
@@ -216,20 +217,26 @@ let git = {
   },
 
   // create a repository
-  'createRepo': async (repoName) => {
+  'createRepo': async (repoName, private) => {
 
     const query = 'https://api.github.com/user/repos';
 
     const repoData = {
       name: repoName,
-      private: true,
+      private: private,
       has_wiki: false,
       auto_init: true
     };
 
+    // change pushing state
+    changePushingState(true);
+    
     // post the query
     const resp = await axios.post(query, gitToken, repoData);
 
+    // change pushing state
+    changePushingState(false);
+    
     return resp.full_name;
 
   },
@@ -250,10 +257,16 @@ let git = {
       ref: 'refs/heads/' + newBranchName,
       sha: shaToBranchFrom
     };
+    
+    // change pushing state
+    changePushingState(true);
 
     // post the query
     const resp = await axios.post(query, branchData, gitToken);
 
+    // change pushing state
+    changePushingState(false);
+    
     return resp;
 
   },
@@ -267,9 +280,15 @@ let git = {
     const query = 'https://api.github.com/repos' +
                   '/' + user + '/' + repo + '/forks';
 
+    // change pushing state
+    changePushingState(true);
+    
     // post the query
     const resp = await axios.post(query, gitToken);
 
+    // change pushing state
+    changePushingState(false);
+    
     return resp.full_name;
     
     // change treeLoc to fork dir, change all the repo's modified files' dir to the fork's dir, and push modified files in dir. 
@@ -286,13 +305,20 @@ let git = {
                   '/' + user + '/' + repo +
                   '/collaborators/' + usernameToInvite;
 
+    // change pushing state
+    changePushingState(true);
+    
     // put the query
     const resp = await axios.put(query, gitToken);
 
+    // change pushing state
+    changePushingState(false);
+    
     return resp.node_id;
 
   },
   
+  // accept an invitation to a repository
   'acceptInviteToRepo': async (treeLoc) => {
 
     // map tree location

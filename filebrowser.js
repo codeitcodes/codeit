@@ -59,34 +59,17 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  try {
+  // if navigating in repository
+  if (repo != '') {
 
-    // if navigating in repository
-    if (repo != '') {
-
-      // render branch menu
-      renderBranchMenuHTML();
-      
-    }
-    
-    // get items in current tree from git
-    resp = await git.getItems(treeLoc);
-
-  } catch(e) {
-
-    // if failed to get items,
-    // show login screen
-
-    // stop loading
-    stopLoading();
-    
-    alert('Whoops, your Github login expired. Log in again?');
-
-    sidebar.classList.add('intro');
-
-    return;
+    // render branch menu
+    renderBranchMenuHTML();
 
   }
+
+  // get items in current tree from git
+  resp = await git.getItems(treeLoc);
+  
 
   if (resp.message == 'Not Found') {
 
@@ -263,6 +246,9 @@ async function renderSidebarHTML() {
     // if navigating in repository
     if (repo != '') {
 
+      // change header options
+      header.classList.remove('out-of-repo');
+      
       // render files
       resp.forEach(item => {
 
@@ -378,6 +364,9 @@ async function renderSidebarHTML() {
 
     } else { // else, show all repositories
 
+      // change header options
+      header.classList.add('out-of-repo');
+      
       // hide branch button
       sidebarBranch.classList.remove('visible');
 
@@ -969,19 +958,21 @@ async function renderBranchMenuHTML(renderAll) {
     // save resp in HTML
     setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
     
-    
-    if (branchResp.length > 1) {
-      
-      sidebarBranch.classList.add('visible');
-      
-    } else {
-      
-      return;
-      
-    }
-    
   }
+  
+  
+  // if repository has more than one branch,
+  // show branch button
+  if (branchResp && branchResp.length > 1) {
+
+    sidebarBranch.classList.add('visible');
+
+  } else {
     
+    return;
+
+  }
+  
 
   // save rendered HTML
   let out = '';
@@ -1247,7 +1238,7 @@ function checkBranchMenu(e) {
 addButton.addEventListener('click', () => {
   
   // if navigating in repository
-  if (treeLoc[1] != '') {
+  if (!header.classList.contains('out-of-repo')) {
     
     // create new file
     createNewFileInHTML();
@@ -1376,7 +1367,7 @@ function createNewRepoInHTML() {
         startLoading();
         
         // push repo asynchronously
-        const newSha = await git.createRepo(repoName);
+        const newSha = await git.createRepo(repoName, true);
         
         // stop loading
         stopLoading();
