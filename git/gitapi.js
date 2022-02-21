@@ -217,13 +217,13 @@ let git = {
   },
 
   // create a repository
-  'createRepo': async (repoName) => {
+  'createRepo': async (repoName, private) => {
 
     const query = 'https://api.github.com/user/repos';
 
     const repoData = {
       name: repoName,
-      private: true,
+      private: private,
       has_wiki: false,
       auto_init: true
     };
