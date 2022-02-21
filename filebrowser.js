@@ -59,20 +59,16 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  try {
+  // if navigating in repository
+  if (repo != '') {
 
-    // if navigating in repository
-    if (repo != '') {
-
-      // render branch menu
-      renderBranchMenuHTML();
-      
-    }
-    
-    // get items in current tree from git
-    resp = await git.getItems(treeLoc);
+    // render branch menu
+    renderBranchMenuHTML();
 
   }
+
+  // get items in current tree from git
+  resp = await git.getItems(treeLoc);
   
 
   if (resp.message == 'Not Found') {
