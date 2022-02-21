@@ -1367,7 +1367,7 @@ function createNewRepoInHTML() {
         startLoading();
         
         // push repo asynchronously
-        const newSha = await git.createRepo(repoName, false);
+        const newSha = await git.createRepo(repoName, true);
         
         // stop loading
         stopLoading();
