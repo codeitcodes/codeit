@@ -1238,7 +1238,7 @@ function checkBranchMenu(e) {
 addButton.addEventListener('click', () => {
   
   // if navigating in repository
-  if (!header.classList.includes('out-of-repo')) {
+  if (!header.classList.contains('out-of-repo')) {
     
     // create new file
     createNewFileInHTML();
