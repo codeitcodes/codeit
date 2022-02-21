@@ -246,6 +246,9 @@ async function renderSidebarHTML() {
     // if navigating in repository
     if (repo != '') {
 
+      // change header options
+      header.classList.remove('out-of-repo');
+      
       // render files
       resp.forEach(item => {
 
@@ -361,6 +364,9 @@ async function renderSidebarHTML() {
 
     } else { // else, show all repositories
 
+      // change header options
+      header.classList.add('out-of-repo');
+      
       // hide branch button
       sidebarBranch.classList.remove('visible');
 
@@ -1232,7 +1238,7 @@ function checkBranchMenu(e) {
 addButton.addEventListener('click', () => {
   
   // if navigating in repository
-  if (treeLoc[1] != '') {
+  if (!header.classList.includes('out-of-repo')) {
     
     // create new file
     createNewFileInHTML();
@@ -1361,7 +1367,7 @@ function createNewRepoInHTML() {
         startLoading();
         
         // push repo asynchronously
-        const newSha = await git.createRepo(repoName);
+        const newSha = await git.createRepo(repoName, true);
         
         // stop loading
         stopLoading();
