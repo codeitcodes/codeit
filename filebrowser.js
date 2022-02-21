@@ -980,8 +980,20 @@ async function renderBranchMenuHTML(renderAll) {
       
     }
     
-  }
+  } else if (branchResp) {
     
+    if (branchResp.length > 1) {
+      
+      sidebarBranch.classList.add('visible');
+      
+    } else {
+      
+      return;
+      
+    }
+    
+  }
+  
 
   // save rendered HTML
   let out = '';
