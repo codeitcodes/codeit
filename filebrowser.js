@@ -72,21 +72,8 @@ async function renderSidebarHTML() {
     // get items in current tree from git
     resp = await git.getItems(treeLoc);
 
-  } catch(e) {
-
-    // if failed to get items,
-    // show login screen
-
-    // stop loading
-    stopLoading();
-    
-    alert('Whoops, your Github login expired. Log in again?');
-
-    sidebar.classList.add('intro');
-
-    return;
-
   }
+  
 
   if (resp.message == 'Not Found') {
 
@@ -969,29 +956,19 @@ async function renderBranchMenuHTML(renderAll) {
     // save resp in HTML
     setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
     
+  }
+  
+  
+  // if repository has more than one branch,
+  // show branch button
+  if (branchResp && branchResp.length > 1) {
+
+    sidebarBranch.classList.add('visible');
+
+  } else {
     
-    if (branchResp.length > 1) {
-      
-      sidebarBranch.classList.add('visible');
-      
-    } else {
-      
-      return;
-      
-    }
-    
-  } else if (branchResp) {
-    
-    if (branchResp.length > 1) {
-      
-      sidebarBranch.classList.add('visible');
-      
-    } else {
-      
-      return;
-      
-    }
-    
+    return;
+
   }
   
 
