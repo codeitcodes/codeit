@@ -1294,7 +1294,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .picture-wrapper {
   background: hsl(228deg 38% 21%);
-  color: rgba(241,241,242,0.8);
+  color: hsl(223deg 92% 87%);
   height: 120px;
   width: 120px;
   overflow: hidden;
