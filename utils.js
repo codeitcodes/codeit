@@ -647,3 +647,42 @@ const fileIntroScreen = `
   </div>
 </div>
 `;
+
+
+const repoNotFoundScreen = `
+<div class="intro">
+  <div class="picture-wrapper" style="margin-bottom: 31.5px;/* margin-bottom: 33.25px; */">
+    <svg viewBox="0 0 356 415" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="picture" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M272.41 168.81c-40.867 0-73.996 33.129-73.996 74V479.6c0 40.867 33.129 73.996 73.996 73.996h14.797c8.176 0 14.801-6.625 14.801-14.801 0-8.172-6.625-14.797-14.801-14.797H272.41c-24.52 0-44.398-19.879-44.398-44.398 0-16.727 9.25-31.293 22.91-38.863 5.828-3 12.902-5.031 21.488-5.535H524v88.797h-29.598c-8.176 0-14.801 6.625-14.801 14.797 0 8.176 6.625 14.801 14.801 14.801h44.395c8.176 0 14.801-6.625 14.801-14.801v-117.06c.871-5.914 0-13.172 0-13.172v-195.35c0-24.52-19.875-44.398-44.398-44.398l-236.79-.006Z" fill="hsl(223deg 92% 87%)" transform="translate(-198.414 -168.81)"></path><path d="M331.6 479.6c0-8.176 6.629-14.801 14.801-14.801h88.797c8.172 0 14.801 6.625 14.801 14.801v88.797a14.797 14.797 0 0 1-7.816 13.047 14.808 14.808 0 0 1-15.195-.734L390.8 556.585l-36.188 24.125a14.804 14.804 0 0 1-23.012-12.313V479.6Z" fill="hsl(223deg 85% 58%)" transform="translate(-198.414 -168.81)"></path></svg>
+  </div>
+  <div class="subhead">
+    <div class="title" style="/* margin-bottom: 10.5px; */margin-bottom: 12.25px;">Hmm... we can't find that repo.</div>
+    <div class="subtitle">If it's private, try double checking you're on the account with access.</div>
+  </div>
+  <div class="button secondary large-spacing-top login" style="/* margin-top: 38.5px; */margin-top: 45.5px;">Close</div>
+</div>
+`;
+
+const pageErrorScreen = `
+<div class="intro">
+  <div class="picture-wrapper">
+    <a style="white-space: nowrap;font-size: 58px;font-weight: 600;">🤔</a>
+  </div>
+  <div class="subhead">
+    <div class="title">We couldn't load this page.</div>
+  </div>
+  <div class="button secondary medium-spacing-top login">Try again</div>
+</div>
+`;
+
+const offlineScreen = `
+<div class="intro">
+  <div class="picture-wrapper">
+    <svg viewBox="0 0 24 24" class="picture"><path d="M1.626 17.87c.125 0 .253-.03.37-.098.36-.205.485-.663.28-1.023-.355-.627-.544-1.343-.544-2.07 0-2.218 1.732-4.02 3.913-4.172.018.282.046.564.096.84.067.36.383.614.738.614.045 0 .09-.004.136-.012.407-.074.678-.465.604-.873-.062-.34-.094-.69-.094-1.04 0-3.204 2.606-5.81 5.81-5.81.58 0 1.15.085 1.702.253.394.123.814-.103.937-.498.12-.396-.103-.815-.5-.937-.69-.21-1.41-.318-2.14-.318-3.673 0-6.714 2.727-7.225 6.262-3.04.118-5.475 2.62-5.475 5.69 0 .986.256 1.958.74 2.81.138.243.39.38.653.38zm18.554-6.802c.03-.312.063-.78.063-1.032 0-.59-.07-1.177-.21-1.745-.1-.4-.503-.645-.907-.55-.402.1-.648.506-.55.908.11.45.167.92.167 1.388 0 .203-.03.615-.055.888-2.067.132-3.816 1.567-4.306 3.603-.097.402.15.808.555.904.397.094.808-.15.904-.554.352-1.46 1.647-2.48 3.15-2.48 1.788 0 3.242 1.455 3.242 3.242s-1.454 3.24-3.24 3.24H8.454c-.414 0-.75.336-.75.75s.336.75.75.75H18.99c2.615 0 4.742-2.126 4.742-4.74 0-2.2-1.514-4.038-3.55-4.57zm.878-8.848c-.293-.293-.768-.293-1.06 0l-19 19c-.294.293-.294.768 0 1.06.145.147.337.22.53.22s.383-.072.53-.22l19-19c.293-.293.293-.767 0-1.06z" fill="currentColor"></path></svg>
+  </div>
+  <div class="subhead">
+    <div class="title">Looks like you're offline.</div>
+  </div>
+  <div class="button secondary medium-spacing-top login">Edit modified files</div>
+  <div class="button teritary tiny-spacing-top login">Try again</div>
+</div>
+`;
