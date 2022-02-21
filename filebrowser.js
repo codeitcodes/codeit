@@ -249,118 +249,135 @@ async function renderSidebarHTML() {
       // change header options
       header.classList.remove('out-of-repo');
       
-      // render files
-      resp.forEach(item => {
+      // if files exist
+      if (resp.length > 0 || modifiedFilesTemp.length > 0) {
+        
+        // show search button
+        searchButton.classList.remove('hidden');
 
-        // if item is a file
-        if (item.type == 'file') {
+        // render files
+        resp.forEach(item => {
 
-          let file = getLatestVersion(item);
+          // if item is a file
+          if (item.type == 'file') {
 
-          // search for matching modified files
-          for (let i = 0; i < modifiedFilesTemp.length; i++) {
+            let file = getLatestVersion(item);
 
-            let modFile = modifiedFilesTemp[i];
+            // search for matching modified files
+            for (let i = 0; i < modifiedFilesTemp.length; i++) {
 
-            // if modified file has matching SHA or name
-            if (modFile.sha === file.sha || modFile.name === file.name) {
+              let modFile = modifiedFilesTemp[i];
 
-              // remove modified file from temporary array
-              modifiedFilesTemp.splice(i, 1);
+              // if modified file has matching SHA or name
+              if (modFile.sha === file.sha || modFile.name === file.name) {
 
-              // reset index
-              i--;
+                // remove modified file from temporary array
+                modifiedFilesTemp.splice(i, 1);
+
+                // reset index
+                i--;
+
+              }
 
             }
 
+
+            // add modified flag to file
+            let modified = '';
+            if (modifiedFiles[file.sha] &&
+                !modifiedFiles[file.sha].eclipsed) modified = ' modified';
+
+            // add icon to file
+            const fileType = getFileType(file.name);
+            let fileIconHTML = fileIcon;
+
+            if (fileType === 'image') fileIconHTML = imageIcon;
+            if (fileType === 'video') fileIconHTML = videoIcon;
+            if (fileType === 'audio') fileIconHTML = audioIcon;
+
+            out += `
+            <div class="item file`+ modified +`" sha="`+ file.sha +`">
+              <div class="label">
+                `+ fileIconHTML +`
+                <a class="name">`+ file.name +`</a>
+              </div>
+              <div class="push-wrapper">
+                `+ pushIcon +`
+              </div>
+            </div>
+            `;
+
+          } else { // if item is a folder
+
+            out += `
+            <div class="item folder">
+              <div class="label">
+                `+ folderIcon +`
+                <a class="name">`+ item.name +`</a>
+              </div>
+              `+ arrowIcon +`
+            </div>
+            `;
+
           }
 
+        });
 
-          // add modified flag to file
-          let modified = '';
-          if (modifiedFiles[file.sha] &&
-              !modifiedFiles[file.sha].eclipsed) modified = ' modified';
-          
-          // add icon to file
-          const fileType = getFileType(file.name);
-          let fileIconHTML = fileIcon;
-          
-          if (fileType === 'image') fileIconHTML = imageIcon;
-          if (fileType === 'video') fileIconHTML = videoIcon;
-          if (fileType === 'audio') fileIconHTML = audioIcon;
-          
-          out += `
-          <div class="item file`+ modified +`" sha="`+ file.sha +`">
-            <div class="label">
-              `+ fileIconHTML +`
-              <a class="name">`+ file.name +`</a>
+
+        // render modified files from temporary array
+
+        let modFileNames = {};
+
+        modifiedFilesTemp.forEach(file => {
+
+          // if file isn't already in HTML
+          if (!modFileNames[file.name]) {
+
+            // add file to HTML
+
+            modFileNames[file.name] = true;
+
+            // get the file's latest version
+            file = getLatestVersion(file);
+
+            // add modified flag to file
+            let modified = '';
+            if (!file.eclipsed) modified = ' modified';
+
+            // add icon to file
+            const fileType = getFileType(file.name);
+            let fileIconHTML = fileIcon;
+
+            if (fileType === 'image') fileIconHTML = imageIcon;
+            if (fileType === 'video') fileIconHTML = videoIcon;
+            if (fileType === 'audio') fileIconHTML = audioIcon;
+
+            out += `
+            <div class="item file`+ modified +`" sha="`+ file.sha +`">
+              <div class="label">
+                `+ fileIconHTML +`
+                <a class="name">`+ file.name +`</a>
+              </div>
+              <div class="push-wrapper">
+                `+ pushIcon +`
+              </div>
             </div>
-            <div class="push-wrapper">
-              `+ pushIcon +`
-            </div>
-          </div>
-          `;
+            `;
 
-        } else { // if item is a folder
+          }
 
-          out += `
-          <div class="item folder">
-            <div class="label">
-              `+ folderIcon +`
-              <a class="name">`+ item.name +`</a>
-            </div>
-            `+ arrowIcon +`
-          </div>
-          `;
-
-        }
-
-      });
-
-
-      // render modified files from temporary array
-
-      let modFileNames = {};
-
-      modifiedFilesTemp.forEach(file => {
-
-        // if file isn't already in HTML
-        if (!modFileNames[file.name]) {
-
-          // add file to HTML
-
-          modFileNames[file.name] = true;
-
-          // get the file's latest version
-          file = getLatestVersion(file);
-
-          // add modified flag to file
-          let modified = '';
-          if (!file.eclipsed) modified = ' modified';
-
-          // add icon to file
-          const fileType = getFileType(file.name);
-          let fileIconHTML = fileIcon;
-          
-          if (fileType === 'image') fileIconHTML = imageIcon;
-          if (fileType === 'video') fileIconHTML = videoIcon;
-          if (fileType === 'audio') fileIconHTML = audioIcon;
-          
-          out += `
-          <div class="item file`+ modified +`" sha="`+ file.sha +`">
-            <div class="label">
-              `+ fileIconHTML +`
-              <a class="name">`+ file.name +`</a>
-            </div>
-            <div class="push-wrapper">
-              `+ pushIcon +`
-            </div>
-          </div>
-          `;
-
-        }
-
-      });
+        });
+        
+      } else {
+        
+        // if no files exist,
+        // show intro screen in HTML
+        fileWrapper.innerHTML = fileIntroScreen;
+        
+        // hide search button
+        searchButton.classList.add('hidden');
+        
+      }
 
     } else { // else, show all repositories
 
@@ -369,48 +386,65 @@ async function renderSidebarHTML() {
       
       // hide branch button
       sidebarBranch.classList.remove('visible');
-
       
-      // render repositories
-      resp.forEach(item => {
+      
+      // if repositories exist
+      if (resp.length > 0) {
+        
+        // show search button
+        searchButton.classList.remove('hidden');
 
-        let fullName;
+        // render repositories
+        resp.forEach(item => {
 
-        // if repo is owned by logged user
-        if (item.full_name.split('/')[0] === loggedUser) {
+          let fullName;
 
-          // show repo name
-          fullName = item.name;
+          // if repo is owned by logged user
+          if (item.full_name.split('/')[0] === loggedUser) {
 
-        } else {
+            // show repo name
+            fullName = item.name;
 
-          // show username and repo name
-          fullName = item.full_name;
+          } else {
 
-        }
+            // show username and repo name
+            fullName = item.full_name;
 
-
-        /*
-        // create repo obj
-        const repoObj = {
-          name: item.fullname,
-          defaultBranch: item.default_branch,
-          pushAccess: ((item.permissions.admin || item.permissions.push) ? true : false),
-        };
-        */
+          }
 
 
-        out += `
-        <div class="item repo" fullname="`+ item.full_name +`" defaultbranch="`+ item.default_branch +`">
-          <div class="label">
-            `+ repoIcon +`
-            <a class="name">`+ fullName +`</a>
+          /*
+          // create repo obj
+          const repoObj = {
+            name: item.fullname,
+            defaultBranch: item.default_branch,
+            pushAccess: ((item.permissions.admin || item.permissions.push) ? true : false),
+          };
+          */
+
+
+          out += `
+          <div class="item repo" fullname="`+ item.full_name +`" defaultbranch="`+ item.default_branch +`">
+            <div class="label">
+              `+ repoIcon +`
+              <a class="name">`+ fullName +`</a>
+            </div>
+            `+ arrowIcon +`
           </div>
-          `+ arrowIcon +`
-        </div>
-        `;
+          `;
 
-      });
+        });
+        
+      } else {
+        
+        // if no repositories exist,
+        // show intro screen in HTML
+        fileWrapper.innerHTML = repoIntroScreen;
+        
+        // hide search button
+        searchButton.classList.add('hidden');
+        
+      }
 
     }
 
