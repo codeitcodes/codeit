@@ -756,6 +756,7 @@ body.notransition .sidebar {
   background: #568af2;
   background: var(--rosemary-lighter);
   transition: width .4s ease, opacity .4s linear;
+  overscroll-behavior: none;
   z-index: 1000;
 }
 
@@ -771,6 +772,7 @@ body.notransition .sidebar {
   display: flex;
   align-items: center;
   justify-content: right;
+  overscroll-behavior: none;
   overflow: hidden;
   z-index: 100;
 }
