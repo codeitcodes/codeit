@@ -86,47 +86,16 @@ if (window.location.href.includes('dev')) {
 
 
 // sidebar loader
-let loadInterval;
 
 function startLoading() {
 
   sidebar.classList.add('loading');
-
-  loader.style.width = '0%';
-  loader.style.transition = 'none';
-  loader.style.opacity = 1;
-
-  onNextFrame(load);
-
-  if (loadInterval) window.clearInterval(loadInterval);
-  loadInterval = window.setInterval(load, 180);
 
 }
 
 function stopLoading() {
 
   sidebar.classList.remove('loading');
-
-  window.clearInterval(loadInterval);
-  loadInterval = false;
-
-  loader.style.width = '100%';
-  loader.style.opacity = 0;
-
-}
-
-function load() {
-
-  let loadPercent = Number(loader.style.width.replace('%',''));
-
-  loadPercent += 5;
-
-  if (loadPercent < 100) {
-
-    loader.style.transition = '';
-    loader.style.width = loadPercent + '%';
-
-  }
 
 }
 
