@@ -7,7 +7,7 @@ function changePushingState(to, pendingPromise) {
 
   if (to === true) {
 
-    pendingPromise = pendingPromise;
+    pendingPromise = pendingPromise ?? null;
     
     window.addEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
