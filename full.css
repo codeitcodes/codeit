@@ -772,7 +772,7 @@ body.notransition .sidebar {
     transform: translateX(-100%);
   }
   to {
-    transform: translateX(100vw);
+    transform: translateX(var(--sidebar-width));
   }
 }
 
