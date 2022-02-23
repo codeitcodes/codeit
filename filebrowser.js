@@ -59,17 +59,35 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  // if navigating in repository
-  if (repo != '') {
+  try {
 
-    // render branch menu
-    renderBranchMenuHTML();
+    // if navigating in repository
+    if (repo != '') {
+
+      // render branch menu
+      renderBranchMenuHTML();
+
+    }
+
+    // get items in current tree from git
+    resp = await git.getItems(treeLoc);
+  
+  } catch(e) {
+
+    // if failed to get items,
+    // show login screen
+
+    // stop loading
+    stopLoading();
+    
+    showMessage('Whoops, your Github login expired.', 5000);
+
+    sidebar.classList.add('intro');
+
+    return;
 
   }
 
-  // get items in current tree from git
-  resp = await git.getItems(treeLoc);
-  
 
   if (resp.message == 'Not Found') {
 
