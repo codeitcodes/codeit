@@ -59,35 +59,17 @@ async function renderSidebarHTML() {
 
   let resp;
 
-  try {
+  // if navigating in repository
+  if (repo != '') {
 
-    // if navigating in repository
-    if (repo != '') {
-
-      // render branch menu
-      renderBranchMenuHTML();
-
-    }
-
-    // get items in current tree from git
-    resp = await git.getItems(treeLoc);
-  
-  } catch(e) {
-
-    // if failed to get items,
-    // show login screen
-
-    // stop loading
-    stopLoading();
-    
-    showMessage('Whoops, your Github login expired.', 5000);
-
-    sidebar.classList.add('intro');
-
-    return;
+    // render branch menu
+    renderBranchMenuHTML();
 
   }
 
+  // get items in current tree from git
+  resp = await git.getItems(treeLoc);
+  
 
   if (resp.message == 'Not Found') {
 
@@ -1002,14 +984,23 @@ async function renderBranchMenuHTML(renderAll) {
     // get branches for repository
     branchResp = await git.getBranches(treeLoc);
     
-    // clean resp and save only relevant fields
-    let cleanedResp = branchResp.map(branch => {
-      return { name: branch.name, commit: { sha: branch.commit.sha } };
-    });
-    
-    // save resp in HTML
-    setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
-    
+    if (!branchResp.message) {
+
+      // clean resp and save only relevant fields
+      let cleanedResp = branchResp.map(branch => {
+        return { name: branch.name, commit: { sha: branch.commit.sha } };
+      });
+
+      // save resp in HTML
+      setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
+
+    } else {
+      
+      setAttr(branchMenu, 'tree', '');
+      return;
+      
+    }
+      
   }
   
   
@@ -1413,8 +1404,29 @@ function createNewRepoInHTML() {
         });
 
         repoEl.querySelector('.name').textContent = repoName;
-
-
+        
+        
+        // wait for push animation to finish,
+        // then open new repository
+        window.setTimeout(() => {
+          
+          // change location
+          treeLoc[0] = loggedUser;
+          treeLoc[1] = repoName + ':main';
+          saveTreeLocLS(treeLoc);
+          
+          // show intro screen
+          fileWrapper.innerHTML = repoIntroScreen;
+          
+          // show repo name in sidebar
+          sidebarLogo.innerText = repoName;
+            
+          // hide search button
+          searchButton.classList.add('hidden');
+          
+        }, checkDelay);
+        
+        
         // start loading
         startLoading();
         
@@ -1423,17 +1435,6 @@ function createNewRepoInHTML() {
         
         // stop loading
         stopLoading();
-        
-        
-        // open repo
-        
-        // change location
-        treeLoc[0] = loggedUser;
-        treeLoc[1] = repoName + ':main';
-        saveTreeLocLS(treeLoc);
-
-        // render sidebar
-        renderSidebarHTML();
         
       }
       
