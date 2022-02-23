@@ -750,6 +750,7 @@ body.notransition .sidebar {
   left: 0;
   opacity: 0;
   height: 2px;
+  width: 120px;
   margin-bottom: -2px;
   border-radius: 6px;
   pointer-events: none;
