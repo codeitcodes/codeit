@@ -756,9 +756,9 @@ body.notransition .sidebar {
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transition: opacity .4s linear;
-  transform: translateX(-100%);
+  transition: opacity .18s var(--ease-function);
   animation: loader .72s var(--cubic-function) infinite;
+  transform: translateX(-100%);
   overscroll-behavior: none;
   z-index: 1000;
 }
