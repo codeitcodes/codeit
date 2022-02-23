@@ -1,7 +1,7 @@
 
 // change pushing state
 
-const pendingPromise;
+let pendingPromise;
 
 function changePushingState(to, pendingPromise) {
 
