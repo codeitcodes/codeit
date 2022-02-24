@@ -748,7 +748,6 @@ body.notransition .sidebar {
   position: sticky;
   top: 0;
   left: 0;
-  opacity: 0;
   height: 2px;
   width: 120px;
   margin-bottom: -2px;
@@ -756,15 +755,13 @@ body.notransition .sidebar {
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transition: opacity .18s var(--ease-function);
-  animation: loader .72s var(--cubic-function) infinite;
   transform: translateX(-100%);
   overscroll-behavior: none;
   z-index: 1000;
 }
 
 .sidebar.loading .loader {
-  opacity: 1;
+  animation: loader .72s var(--cubic-function) infinite;
 }
 
 @keyframes loader {
@@ -1596,40 +1593,28 @@ body.mobile .menu .icon a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 15px);
+  bottom: calc(15px + env(safe-area-inset-bottom, 0px));
   opacity: 0;
-  background: var( --deep-midnight-blue);
+  background: var(--deep-midnight-blue);
   color: #dcddde;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 11.5px;
   line-height: 1.5;
   pointer-events: none;
-  transition: 0s .18s, .18s var( --bounce-function) opacity;
-  z-index: 1001;
-  /* background: hsl(218deg 23% 35%); */
+  max-width: 356px;
+  white-space: pre;
   left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
   left: calc(var(--sidebar-width) / 2);
   left: 50vw;
-  max-width: 356px;
-  white-space: pre;
   overflow-wrap: anywhere;
-  transform: translateY(-10px) translateX(-50%);
-  padding: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 1001;
 }
 
 .message.visible {
-  padding: 10px 16px;
   opacity: 1;
-  border-radius: 11.5px;
-  transform: translateX(-50%);
-  transition: .18s var( --bounce-function);
-}
-
-.message.animating {
-  transform: translateY(-10px) translateX(-50%);
-  color: transparent;
-  border-radius: 8px;
-  padding: 0;
   transition: none;
 }
 
