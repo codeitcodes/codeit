@@ -1776,34 +1776,10 @@ learnShare.addEventListener('click', () => {
   
   const shareText = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
-  if (!isWindows) {
-
-    try {
-
-      navigator.share({
-        title: 'Share Codeit',
-        text: shareText
-      });
-
-    } catch(e) {
-
-      // if couldn't open share dialog
-      // copy text to clipboard
-      copy(shareText).then(() => {
-        showMessage('Copied text!');
-      });
-
-    }
-
-  } else {
-
-    // if couldn't open share dialog
-    // copy text to clipboard
-    copy(shareText).then(() => {
-      showMessage('Copied text!');
-    });
-
-  }
+  // copy text to clipboard
+  copy(shareText).then(() => {
+    showMessage('Copied text to clipboard');
+  });
 
 })
 
