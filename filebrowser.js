@@ -1778,7 +1778,7 @@ learnShare.addEventListener('click', () => {
   
   // copy text to clipboard
   copy(shareText).then(() => {
-    showMessage('Copied text to clipboard');
+    showMessage('Copied invite!');
   });
 
 })
