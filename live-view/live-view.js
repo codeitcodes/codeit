@@ -354,30 +354,9 @@ function addBottomSwipeListener() {
           openLive: true
         });
 
-        if (isMobile) {
-
-          try {
-
-            navigator.share({
-              title: 'Share live view',
-              text: link
-            });
-
-          } catch(e) {
-
-            copy(link).then(() => {
-              showMessage('Copied link!');
-            });
-
-          }
-
-        } else {
-
-          copy(link).then(() => {
-            showMessage('Copied link!');
-          });
-
-        }
+        copy(link).then(() => {
+          showMessage('Copied link to clipboard');
+        });
 
       }
 
@@ -534,7 +513,7 @@ if (isMobile) {
     });
 
     copy(link).then(() => {
-      showMessage('Copied link!');
+      showMessage('Copied link to clipboard');
     });
 
   });
