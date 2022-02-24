@@ -110,6 +110,19 @@ function showMessage(message, duration) {
   // show message in HTML
   messageEl.textContent = message;
   
+  // if message is already visible
+  if (messageEl.classList.contains('visible')) {
+
+    // animate new message
+
+    messageEl.classList.add('animating');
+
+    onNextFrame(() => {
+      messageEl.classList.remove('animating');
+    });
+
+  }
+  
   messageEl.classList.add('visible');
   
   
