@@ -1598,24 +1598,35 @@ body.mobile .menu .icon a {
   background: var(--deep-midnight-blue);
   color: #dcddde;
   font-weight: 500;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  padding: 10px 16px;
-  border-radius: 11.5px;
   line-height: 1.5;
-  pointer-events: none;
-  max-width: 356px;
-  white-space: pre;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
   left: calc(var(--sidebar-width) / 2);
   left: 50vw;
+  max-width: 356px;
+  white-space: pre;
   overflow-wrap: anywhere;
-  transform: translateX(-50%);
-  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform: translateY(-10px) translateX(-50%);
+  pointer-events: none;
+  transition: 0s .18s, .18s var( --bounce-function) opacity;
   z-index: 1001;
 }
 
 .message.visible {
+  padding: 10px 16px;
   opacity: 1;
+  border-radius: 11.5px;
+  transform: translateX(-50%);
+  transition: .18s var( --bounce-function);
+}
+
+.message.animating {
+  transform: translateY(-10px) translateX(-50%);
+  color: transparent;
+  border-radius: 8px;
+  padding: 0;
   transition: none;
 }
 
