@@ -1038,12 +1038,6 @@ async function renderBranchMenuHTML(renderAll) {
     // from repo obj
     branchResp = repoObj.branches;
     
-  } else {
-    
-    // get repository branches
-    // from HTML
-    branchResp = JSON.parse(decodeURI(getAttr(branchMenu, 'resp')));
-    
   }
   
   
