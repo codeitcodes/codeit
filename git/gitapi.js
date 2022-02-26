@@ -379,8 +379,11 @@ let git = {
     // map tree location
     const [user, repo] = treeLoc;
     
+    // get repository branch
+    const [repoName, branch] = repo.split(':');
+    
     const query = 'https://api.github.com/user/repos' +
-                  '/' + user + '/' + repo;
+                  '/' + user + '/' + repoName;
     
     // dispatch request with query
     const resp = await axios.delete(query, gitToken);
