@@ -1149,15 +1149,15 @@ async function renderBranchMenuHTML(renderAll) {
 
         // if branch isn't already selected
         if (!branch.classList.contains('selected')) {
-
-          // update selected branch in local storage
-          updateRepoSelectedBranchLS(fullName, selectedBranch);
           
           // change location
           selectedBranch = branch.querySelector('a').textContent;
           treeLoc[1] = repoName + ':' + selectedBranch;
           saveTreeLocLS(treeLoc);
 
+          // update selected branch in local storage
+          updateRepoSelectedBranchLS(fullName, selectedBranch);
+          
           // render sidebar
           renderSidebarHTML();
 
