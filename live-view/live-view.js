@@ -541,9 +541,6 @@ if (isMobile) {
 // download selected file
 async function downloadSelFile() {
   
-  // show download message
-  showMessage('Downloading...');
-  
   // if selected file is already fetched
   if (selectedFile.content &&
       hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
@@ -553,6 +550,9 @@ async function downloadSelFile() {
 
   } else {
 
+    // show download message
+    showMessage('Downloading...');
+    
     // fetch selected file
     const resp = await git.getBlob(treeLoc, selectedFile.sha);
 
