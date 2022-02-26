@@ -77,13 +77,9 @@ function createRepoObj(fullName, selectedBranch, pushAccess,
 
 }
 
-function addRepoObjToLS(fullName, selectedBranch, pushAccess,
-                        branches, private, isFork) {
+function addRepoObjToLS(repoObj) {
   
-  const repoObj = createRepoObj(fullName, selectedBranch, pushAccess,
-                                branches, private, isFork);
-  
-  modifiedRepos[fullName] = repoObj;
+  modifiedRepos[repoObj.fullName] = repoObj;
   
   updateModReposLS();
   
