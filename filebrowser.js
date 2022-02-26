@@ -1303,6 +1303,11 @@ function createNewRepoInHTML() {
   // if not already adding new repo
   if (!fileWrapper.querySelector('.focused')) {
 
+    // if intro screen is visible, remove it
+    if (fileWrapper.querySelector('.intro')) {
+      fileWrapper.querySelector('.intro').remove();
+    }
+    
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -1451,6 +1456,11 @@ function createNewFileInHTML() {
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
 
+    // if intro screen is visible, remove it
+    if (fileWrapper.querySelector('.intro')) {
+      fileWrapper.querySelector('.intro').remove();
+    }
+    
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
