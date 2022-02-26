@@ -63,39 +63,59 @@ function updateModFilesLS() {
 // repos
 
 // create a repository object
-function createRepoObj(repoName, branches,
-                       selectedBranch) {
+function createRepoObj(fullName, selectedBranch, pushAccess,
+                       branches, private, isFork) {
 
   return {
-    repoName,
+    fullName,
+    selectedBranch,
+    pushAccess,
     branches,
-    selectedBranch
+    private,
+    isFork
   }
 
 }
 
-function createRepoObjLS(repoName, branches, selectedBranch) {
+function addRepoObjToLS(fullName, selectedBranch, pushAccess,
+                        branches, private, isFork) {
   
-  const repoObj = createRepoObj(repoName, branches,
-                                selectedBranch);
+  const repoObj = createRepoObj(fullName, selectedBranch, pushAccess,
+                                branches, private, isFork);
   
-  modifiedRepos[repoName] = repoObj;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoSelectedBranchLS(repoName, selectedBranch) {
-  
-  modifiedRepos[repoName].selectedBranch = selectedBranch;
+  modifiedRepos[fullName] = repoObj;
   
   updateModReposLS();
   
 }
 
-function updateRepoBranchesLS(repoName, branches) {
+function updateRepoSelectedBranchLS(fullName, selectedBranch) {
+  
+  modifiedRepos[fullName].selectedBranch = selectedBranch;
+  
+  updateModReposLS();
+  
+}
 
-  modifiedRepos[repoName].branches = branches;
+function updateRepoPushAccessLS(fullName, pushAccess) {
+  
+  modifiedRepos[fullName].pushAccess = pushAccess;
+  
+  updateModReposLS();
+  
+}
+
+function updateRepoBranchesLS(fullName, branches) {
+
+  modifiedRepos[fullName].branches = branches;
+  
+  updateModReposLS();
+  
+}
+
+function updateRepoPrivateStatusLS(fullName, private) {
+
+  modifiedRepos[fullName].private = private;
   
   updateModReposLS();
   
