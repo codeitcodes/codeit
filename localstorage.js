@@ -63,12 +63,12 @@ function updateModFilesLS() {
 // repos
 
 // create a repository object
-function createRepoObj(fullName, selectedBranch, pushAccess,
+function createRepoObj(fullName, selBranch, pushAccess,
                        branches, private, isFork) {
 
   return {
     fullName,
-    selectedBranch,
+    selBranch,
     pushAccess,
     branches,
     private,
@@ -85,9 +85,9 @@ function addRepoObjToLS(repoObj) {
   
 }
 
-function updateRepoSelectedBranchLS(fullName, selectedBranch) {
+function updateRepoSelectedBranchLS(fullName, selBranch) {
   
-  modifiedRepos[fullName].selectedBranch = selectedBranch;
+  modifiedRepos[fullName].selBranch = selBranch;
   
   updateModReposLS();
   
