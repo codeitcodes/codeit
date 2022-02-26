@@ -355,7 +355,7 @@ function addBottomSwipeListener() {
         });
 
         copy(link).then(() => {
-          showMessage('Copied link to clipboard');
+          showMessage('Copied link!');
         });
 
       }
@@ -513,7 +513,7 @@ if (isMobile) {
     });
 
     copy(link).then(() => {
-      showMessage('Copied link to clipboard');
+      showMessage('Copied link!');
     });
 
   });
