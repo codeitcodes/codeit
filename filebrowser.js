@@ -1569,6 +1569,20 @@ function createNewFileInHTML() {
 
 
         // open file
+        
+        // if on mobile device
+        if (isMobile) {
+          
+          // wait for push animation to finish,
+          // then open new file
+          window.setTimeout(() => {
+            
+            // update bottom float
+            updateFloat();
+            
+          }, (pushAnimDuration * 1000));
+          
+        }
 
         // show file content in codeit
         cd.textContent = '\r\n';
@@ -1582,13 +1596,8 @@ function createNewFileInHTML() {
         // update line numbers
         updateLineNumbersHTML();
 
-        // if on desktop
-        if (!isMobile) {
-
-          // set caret pos in codeit
-          cd.setSelection(0, 0);
-
-        }
+        // set caret pos in codeit
+        cd.setSelection(0, 0);
 
 
         // create commit
