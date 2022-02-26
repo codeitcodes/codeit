@@ -1416,7 +1416,7 @@ function createNewRepoInHTML() {
           saveTreeLocLS(treeLoc);
           
           // show intro screen
-          fileWrapper.innerHTML = repoIntroScreen;
+          fileWrapper.innerHTML = fileIntroScreen;
           
           // show repo name in sidebar
           sidebarLogo.innerText = repoName;
@@ -1427,14 +1427,8 @@ function createNewRepoInHTML() {
         }, checkDelay);
         
         
-        // start loading
-        startLoading();
-        
         // push repo asynchronously
         const newSha = await git.createRepo(repoName, true);
-        
-        // stop loading
-        stopLoading();
         
       }
       
