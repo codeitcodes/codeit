@@ -1,4 +1,9 @@
 
+let treeLoc, linkData, gitToken, authUser,
+    
+    selectedFile, modifiedFiles, modifiedRepos;
+
+
 const body = document.body,
 
       cd = document.querySelector('cd-el'),
