@@ -371,6 +371,22 @@ let git = {
       
     }
 
+  },
+  
+  // delete a repository
+  'deleteRepo': async (treeLoc) => {
+
+    // map tree location
+    const [user, repo] = treeLoc;
+    
+    const query = 'https://api.github.com/user/repos' +
+                  '/' + user + '/' + repo;
+    
+    // dispatch request with query
+    const resp = await axios.delete(query, gitToken);
+    
+    return true;
+
   }
 
 };
