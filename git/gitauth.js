@@ -5,8 +5,6 @@
 // git login
 const clientId = '7ede3eed3185e59c042d';
 
-let gitToken, treeLoc, linkData, authUser;
-
 window.onload = async () => {
 
   gitToken = getStorage('gitToken') ?? '';
