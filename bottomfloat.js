@@ -51,7 +51,7 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
-const checkAnimDuration = 0.85; // s
+const pushAnimDuration = 0.85; // s
 const endAnimDuration = 0.18; // s
 const checkDelay = (2 - endAnimDuration) * 1000; // ms
 
