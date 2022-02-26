@@ -429,8 +429,12 @@ let axios = {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {
+              resolve();
+            }
           } else if (this.responseText) {
             try {
               resolve(JSON.parse(this.responseText));
@@ -455,8 +459,12 @@ let axios = {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
-            resolve(JSON.parse(this.responseText));
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {
+              resolve();
+            }
           }
         };
         xmlhttp.open('POST', url, true);
@@ -471,8 +479,12 @@ let axios = {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
-            resolve(JSON.parse(this.responseText));
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {
+              resolve();
+            }
           }
         };
         xmlhttp.open('PUT', url, true);
@@ -486,8 +498,12 @@ let axios = {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {
+              resolve();
+            }
           } else if (this.responseText) {
             try {
               resolve(JSON.parse(this.responseText));
@@ -512,8 +528,12 @@ let axios = {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              resolve(JSON.parse(this.responseText));
+            } catch(e) {
+              resolve();
+            }
           } else if (this.responseText) {
             try {
               resolve(JSON.parse(this.responseText));
