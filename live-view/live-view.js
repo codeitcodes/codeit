@@ -541,6 +541,9 @@ if (isMobile) {
 // download selected file
 async function downloadSelFile() {
   
+  // show download message
+  showMessage('Downloading...');
+  
   // if selected file is already fetched
   if (selectedFile.content &&
       hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
