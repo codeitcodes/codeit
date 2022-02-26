@@ -382,7 +382,7 @@ let git = {
     // get repository branch
     const [repoName, branch] = repo.split(':');
     
-    const query = 'https://api.github.com/user/repos' +
+    const query = 'https://api.github.com/repos' +
                   '/' + user + '/' + repoName;
     
     // dispatch request with query
