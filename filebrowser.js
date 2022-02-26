@@ -557,6 +557,9 @@ function addHTMLItemListeners() {
           // show repo name in sidebar
           sidebarLogo.innerText = treeLoc[1];
           
+          // change header options
+          header.classList.remove('out-of-repo');
+          
           // hide search button
           searchButton.classList.add('hidden');
           
@@ -1501,7 +1504,10 @@ function createNewRepoInHTML() {
           
           // show repo name in sidebar
           sidebarLogo.innerText = repoName;
-            
+          
+          // change header options
+          header.classList.remove('out-of-repo');
+          
           // hide search button
           searchButton.classList.add('hidden');
           
