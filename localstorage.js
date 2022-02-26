@@ -27,6 +27,18 @@ function loadLS() {
 
   }
 
+  // if modified repos exist in storage
+  if (getStorage('modifiedRepos')) {
+
+    // load modified repos from storage
+    modifiedRepos = Object.fromEntries(JSON.parse(getStorage('modifiedRepos')));
+
+  } else {
+
+    modifiedRepos = {};
+
+  }
+  
   setupLiveView();
   setupCodeitApp();
 
@@ -44,6 +56,54 @@ function updateSelectedFileLS() {
 function updateModFilesLS() {
 
   setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+
+}
+
+
+// repos
+
+// create a repository object
+function createRepoObj(repoName, branches,
+                       selectedBranch) {
+
+  return {
+    repoName,
+    branches,
+    selectedBranch
+  }
+
+}
+
+function createRepoObjLS(repoName, branches, selectedBranch) {
+  
+  const repoObj = createRepoObj(repoName, branches,
+                                selectedBranch);
+  
+  modifiedRepos[repoName] = repoObj;
+  
+  updateModReposLS();
+  
+}
+
+function updateRepoSelectedBranchLS(repoName, selectedBranch) {
+  
+  modifiedRepos[repoName].selectedBranch = selectedBranch;
+  
+  updateModReposLS();
+  
+}
+
+function updateRepoBranchesLS(repoName, branches) {
+
+  modifiedRepos[repoName].branches = branches;
+  
+  updateModReposLS();
+  
+}
+
+function updateModReposLS() {
+
+  setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
 
 }
 
