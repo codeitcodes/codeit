@@ -1,6 +1,4 @@
 
-let modifiedFiles, selectedFile;
-
 // create a file
 function createFile(dir, sha, name, content, lang,
                     caretPos, scrollPos, eclipsed) {
