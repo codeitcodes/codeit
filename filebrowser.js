@@ -429,7 +429,7 @@ async function renderSidebarHTML() {
           }
 
           out += `
-          <div class="item repo" ` + (repoObj ? ('repoObj="' + repoObj + '"') : ('fullName=' + item.full_name + '"') + `>
+          <div class="item repo" ` + (repoObj ? ('repoObj="' + repoObj + '"') : ('fullName=' + item.full_name + '"')) + `>
             <div class="label">
               `+ repoIcon +`
               <a class="name">`+ fullName +`</a>
