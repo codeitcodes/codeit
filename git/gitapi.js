@@ -209,6 +209,11 @@ let git = {
       };
 
     }
+    
+    
+    // if there's a pending promise, await it
+    if (pendingPromise) await pendingPromise;
+    
 
     // change pushing state
     changePushingState(true);
