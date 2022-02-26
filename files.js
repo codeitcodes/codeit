@@ -4,14 +4,14 @@ function createFile(dir, sha, name, content, lang,
                     caretPos, scrollPos, eclipsed) {
 
   return {
-    dir: dir,
-    sha: sha,
-    name: name,
-    content: content,
-    lang: lang,
-    caretPos: caretPos,
-    scrollPos: scrollPos,
-    eclipsed: eclipsed
+    dir,
+    sha,
+    name,
+    content,
+    lang,
+    caretPos,
+    scrollPos,
+    eclipsed
   }
 
 }
