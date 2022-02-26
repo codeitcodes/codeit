@@ -1868,10 +1868,16 @@ body.mobile.expanded .cube-loader::after {
   fill: rgba(241,241,242,0.63);
   fill: rgb(212 213 215 / 72%);
 }
+
 .push-svg #check {
   fill: transparent;
   transform: scale(1.075);
 }
+
+body.safari .push-svg #check {
+  transform: scale(1);
+}
+
 .push-svg #circle {
   transform-origin: 20.95px 20.95px;
 }
@@ -1879,14 +1885,22 @@ body.mobile.expanded .cube-loader::after {
 .push-wrapper.checked {
   pointer-events: none;
 }
+
 .push-wrapper.checked .push-svg #check {
   transform: scale(1);
   fill: rgb(23, 191, 99);
   transition: .18s var(--ease-function), 0s fill;
   animation: push-pre-bobble 0.2s,
              push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-             push-bobble 0.55s 0.3s var(--cubic-function) backwards;
+             push-bobble 0.55s 0.3s var(--cubic-function);
 }
+
+body.safari .push-wrapper.checked .push-svg #check {
+  animation: push-pre-bobble 0.2s,
+             push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+             push-bobble 0.55s 0.3s var(--cubic-function) forwards;
+}
+
 .push-wrapper.checked .push-svg #push {
   fill: transparent;
   transform: scale(0);
