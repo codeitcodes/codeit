@@ -1424,7 +1424,7 @@ function createNewRepoInHTML() {
           // hide search button
           searchButton.classList.add('hidden');
           
-        }, checkDelay);
+        }, (pushAnimDuration * 1000));
         
         
         // push repo asynchronously
