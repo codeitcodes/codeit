@@ -389,7 +389,7 @@ async function renderSidebarHTML() {
       
       
       // if repositories exist
-      if (resp.length > 0 || modifiedRepos.length > 0) {
+      if (resp.length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
@@ -430,25 +430,6 @@ async function renderSidebarHTML() {
 
           out += `
           <div class="item repo" ` + (repoObj ? ('repoObj="' + encodeURI(JSON.stringify(repoObj)) + '"') : ('fullName="' + item.full_name + '"')) + `>
-            <div class="label">
-              `+ repoIcon +`
-              <a class="name">`+ fullName +`</a>
-            </div>
-            `+ arrowIcon +`
-          </div>
-          `;
-
-        });
-        
-        
-        // render modified repos
-        Object.values(modifiedRepos).forEach(item => {
-
-          // show repo name
-          const fullName = item.fullName.split('/')[1];
-
-          out += `
-          <div class="item repo" repoObj="{ modified: true }">
             <div class="label">
               `+ repoIcon +`
               <a class="name">`+ fullName +`</a>
@@ -535,36 +516,17 @@ function addHTMLItemListeners() {
         treeLoc[1] = repoLoc[1] + ':' + repoObj.selBranch;
         saveTreeLocLS(treeLoc);
 
-        // if repo isn't modified
-        if (!repoObj.modified) {
+        // if repo obj is in HTML
+        if (getAttr(item, 'repoObj')) {
 
-          // if repo obj is in HTML
-          if (getAttr(item, 'repoObj')) {
-            
-            // add repo obj to local storage
-            addRepoObjToLS(repoObj);
-            
-          }
+          // add repo obj to local storage
+          addRepoObjToLS(repoObj);
 
-          // render sidebar
-          renderSidebarHTML();
-          
-        } else {
-          
-          // show file intro screen
-          fileWrapper.innerHTML = fileIntroScreen;
-          
-          // show repo name in sidebar
-          sidebarLogo.innerText = treeLoc[1];
-          
-          // change header options
-          header.classList.remove('out-of-repo');
-          
-          // hide search button
-          searchButton.classList.add('hidden');
-          
         }
 
+        // render sidebar
+        renderSidebarHTML();
+        
       } else if (item.classList.contains('folder')) {
 
         // if item is a folder
@@ -1484,36 +1446,40 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').textContent = repoName;
         
         
-        // wait for push animation to finish,
-        // then open new repository
-        window.setTimeout(() => {
-          
-          // change location
-          treeLoc[0] = loggedUser;
-          treeLoc[1] = repoName + ':main';
-          saveTreeLocLS(treeLoc);
-          
-          // show intro screen
-          fileWrapper.innerHTML = fileIntroScreen;
-          
-          // show repo name in sidebar
-          sidebarLogo.innerText = repoName;
-          
-          // change header options
-          header.classList.remove('out-of-repo');
-          
-          // hide search button
-          searchButton.classList.add('hidden');
-          
-        }, (pushAnimDuration * 1000));
-        
-        
-        // create repo obj
-        repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true, false,
-                                true, false);
+        // start loading
+        startLoading();
         
         // push repo asynchronously
         const newSha = await git.createRepo(repoName, true);
+        
+        // stop loading
+        stopLoading();
+        
+        
+        // open new repository
+
+        // change location
+        treeLoc[0] = loggedUser;
+        treeLoc[1] = repoName + ':main';
+        saveTreeLocLS(treeLoc);
+        
+        // add repo obj to local storage
+        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true, false,
+                                      true, false);
+        
+        addRepoObjToLS(repoObj);
+
+        // show intro screen
+        fileWrapper.innerHTML = fileIntroScreen;
+
+        // show repo name in sidebar
+        sidebarLogo.innerText = repoName;
+
+        // change header options
+        header.classList.remove('out-of-repo');
+
+        // hide search button
+        searchButton.classList.add('hidden');
         
       }
       
