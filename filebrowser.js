@@ -525,7 +525,7 @@ function addHTMLItemListeners() {
       if (item.classList.contains('repo')) {
 
         // parse repo obj from HTML
-        const repoObj = getAttr(item, 'repoObj') ? JSON.parse(getAttr(item, 'repoObj')) :
+        const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
                                                    modifiedRepos[getAttr(item, 'fullName')];
         
         // change location
@@ -1042,7 +1042,7 @@ async function renderBranchMenuHTML(renderAll) {
     
     // get repository branches
     // from HTML
-    branchResp = JSON.parse(getAttr(branchMenu, 'resp'));
+    branchResp = JSON.parse(decodeURI(getAttr(branchMenu, 'resp')));
     
   }
   
