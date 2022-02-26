@@ -1774,11 +1774,11 @@ repoShareButton.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const shareText = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
-  // copy text to clipboard
-  copy(shareText).then(() => {
-    showMessage('Copied invite to clipboard');
+  // copy invite to clipboard
+  copy(invite).then(() => {
+    showMessage('Copied invite!');
   });
 
 })
