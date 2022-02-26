@@ -389,7 +389,7 @@ async function renderSidebarHTML() {
       
       
       // if repositories exist
-      if (resp.length > 0) {
+      if (resp.length > 0 || modifiedRepos.length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
@@ -413,18 +413,42 @@ async function renderSidebarHTML() {
           }
 
 
-          /*
-          // create repo obj
-          const repoObj = {
-            name: item.fullname,
-            defaultBranch: item.default_branch,
-            pushAccess: ((item.permissions.admin || item.permissions.push) ? true : false),
-          };
-          */
-
+          let repoObj;
+          
+          // if repo obj dosen't already exist
+          if (!modifiedRepos[item.full_name]) {
+            
+            // create repo obj
+            repoObj = createRepoObj(item.full_name, item.default_branch, (item.permissions.push ?? false), false,
+                                    item.private, item.fork);
+            
+          } else {
+            
+            repoObj = false;
+            
+          }
 
           out += `
-          <div class="item repo" fullname="`+ item.full_name +`" defaultbranch="`+ item.default_branch +`">
+          <div class="item repo" ` + (repoObj ? ('repoObj="' + repoObj + '"') : ('fullName=' + item.full_name + '"') + `>
+            <div class="label">
+              `+ repoIcon +`
+              <a class="name">`+ fullName +`</a>
+            </div>
+            `+ arrowIcon +`
+          </div>
+          `;
+
+        });
+        
+        
+        // render modified repos
+        Object.values(modifiedRepos).forEach(item => {
+
+          // show repo name
+          const fullName = item.fullName.split('/')[1];
+
+          out += `
+          <div class="item repo" repoObj="{ modified: true }">
             <div class="label">
               `+ repoIcon +`
               <a class="name">`+ fullName +`</a>
@@ -500,16 +524,43 @@ function addHTMLItemListeners() {
       // if item is a repository
       if (item.classList.contains('repo')) {
 
-        // change location
-        let itemLoc = getAttr(item, 'fullname').split('/');
-        let defaultBranch = getAttr(item, 'defaultbranch');
+        // parse repo obj from HTML
+        const repoObj = getAttr(item, 'repoObj') ? JSON.parse(getAttr(item, 'repoObj')) :
+                                                   modifiedRepos[getAttr(item, 'fullName')];
         
-        treeLoc[0] = itemLoc[0],
-        treeLoc[1] = itemLoc[1] +':'+ defaultBranch;
+        // change location
+        const repoLoc = repoObj.fullName.split('/');
+        
+        treeLoc[0] = repoLoc[0],
+        treeLoc[1] = repoLoc[1] + ':' + repoObj.selBranch;
         saveTreeLocLS(treeLoc);
 
-        // render sidebar
-        renderSidebarHTML();
+        // if repo isn't modified
+        if (!repoObj.modified) {
+
+          // if repo obj is in HTML
+          if (getAttr(item, 'repoObj')) {
+            
+            // add repo obj to local storage
+            addRepoObjToLS(repoObj);
+            
+          }
+
+          // render sidebar
+          renderSidebarHTML();
+          
+        } else {
+          
+          // show file intro screen
+          fileWrapper.innerHTML = fileIntroScreen;
+          
+          // show repo name in sidebar
+          sidebarLogo.innerText = treeLoc[1];
+          
+          // hide search button
+          searchButton.classList.add('hidden');
+          
+        }
 
       } else if (item.classList.contains('folder')) {
 
@@ -969,8 +1020,28 @@ async function renderBranchMenuHTML(renderAll) {
   // get repository branch
   let [repoName, selectedBranch] = repo.split(':');
   
-  // get repository branches
-  let branchResp = JSON.parse(getAttr(branchMenu, 'resp'));
+  
+  // check if repository object exists
+  
+  const fullName = user + '/' + repoName;
+  const repoObj = modifiedRepos[fullName];
+  
+  let branchResp;
+  
+  // if repo obj exists
+  if (repoObj && repoObj.branches) {
+  
+    // get repository branches
+    // from repo obj
+    branchResp = repoObj.branches;
+    
+  } else {
+    
+    // get repository branches
+    // from HTML
+    branchResp = JSON.parse(getAttr(branchMenu, 'resp'));
+    
+  }
   
   
   // if branch menu isn't already rendered
@@ -981,24 +1052,23 @@ async function renderBranchMenuHTML(renderAll) {
     // show loading message
     branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
     
-    // get branches for repository
-    branchResp = await git.getBranches(treeLoc);
+    // if branch resp isn't already stored
+    // in local storage
+    if (!repoObj || !repoObj.branches) {
+      
+      // get branches for repository
+      branchResp = await git.getBranches(treeLoc);
+
+      // save branch resp in local storage
+      updateRepoBranchesLS(fullName, branchResp);
+      
+    }
     
-    if (!branchResp.message) {
-
-      // clean resp and save only relevant fields
-      let cleanedResp = branchResp.map(branch => {
-        return { name: branch.name, commit: { sha: branch.commit.sha } };
-      });
-
-      // save resp in HTML
-      setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
-
-    } else {
+    // if repo dosen't exist, return
+    if (branchResp.message) {
       
-      setAttr(branchMenu, 'tree', '');
       return;
-      
+
     }
       
   }
@@ -1083,6 +1153,9 @@ async function renderBranchMenuHTML(renderAll) {
         // if branch isn't already selected
         if (!branch.classList.contains('selected')) {
 
+          // update selected branch in local storage
+          updateRepoSelectedBranchLS(fullName, selectedBranch);
+          
           // change location
           selectedBranch = branch.querySelector('a').textContent;
           treeLoc[1] = repoName + ':' + selectedBranch;
@@ -1128,8 +1201,11 @@ async function renderBranchMenuHTML(renderAll) {
           // create branch
           await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
           
-          // clear tree from HTML
-          setAttr(branchMenu, 'tree', '');
+          // update selected branch in local storage
+          updateRepoSelectedBranchLS(fullName, selectedBranch);
+          
+          // clear branch resp from local storage
+          updateRepoBranchesLS(fullName, false);
           
           // change location
           treeLoc[1] = repoName + ':' + newBranchName;
@@ -1431,6 +1507,10 @@ function createNewRepoInHTML() {
           
         }, (pushAnimDuration * 1000));
         
+        
+        // create repo obj
+        repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true, false,
+                                true, false);
         
         // push repo asynchronously
         const newSha = await git.createRepo(repoName, true);
