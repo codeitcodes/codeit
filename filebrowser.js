@@ -565,7 +565,7 @@ function addHTMLItemListeners() {
           fileWrapper.innerHTML = fileIntroScreen;
 
           // show repo name in sidebar
-          sidebarLogo.innerText = repoName;
+          sidebarLogo.innerText = repoLoc[1];
 
           // change header options
           header.classList.remove('out-of-repo');
