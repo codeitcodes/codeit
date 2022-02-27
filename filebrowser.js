@@ -61,7 +61,30 @@ async function renderSidebarHTML() {
 
   // if navigating in repository
   if (repo != '') {
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo is empty
+    if (repoObj && repoObj.empty) {
+      
+      // show intro screen
+      fileWrapper.innerHTML = fileIntroScreen;
 
+      // show repo name in sidebar
+      sidebarLogo.innerText = repoName;
+
+      // change header options
+      header.classList.remove('out-of-repo');
+
+      // hide search button
+      searchButton.classList.add('hidden');
+      
+      return;
+      
+    }
+    
+    
     // render branch menu
     renderBranchMenuHTML();
 
@@ -420,7 +443,7 @@ async function renderSidebarHTML() {
             
             // create repo obj
             repoObj = createRepoObj(item.full_name, item.default_branch, (item.permissions.push ?? false), false,
-                                    item.private, item.fork);
+                                    item.private, item.fork, false);
             
           } else {
             
@@ -509,6 +532,7 @@ function addHTMLItemListeners() {
         const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
                                                    modifiedRepos[getAttr(item, 'fullName')];
         
+        
         // change location
         const repoLoc = repoObj.fullName.split('/');
         
@@ -516,6 +540,7 @@ function addHTMLItemListeners() {
         treeLoc[1] = repoLoc[1] + ':' + repoObj.selBranch;
         saveTreeLocLS(treeLoc);
 
+        
         // if repo obj is in HTML
         if (getAttr(item, 'repoObj')) {
 
@@ -523,9 +548,29 @@ function addHTMLItemListeners() {
           addRepoObjToLS(repoObj);
 
         }
+        
 
-        // render sidebar
-        renderSidebarHTML();
+        // if repo isn't empty
+        if (!repoObj.empty) {
+          
+          // render sidebar
+          renderSidebarHTML();
+          
+        } else {
+          
+          // show intro screen
+          fileWrapper.innerHTML = fileIntroScreen;
+
+          // show repo name in sidebar
+          sidebarLogo.innerText = repoName;
+
+          // change header options
+          header.classList.remove('out-of-repo');
+
+          // hide search button
+          searchButton.classList.add('hidden');
+          
+        }
         
       } else if (item.classList.contains('folder')) {
 
@@ -1465,7 +1510,7 @@ function createNewRepoInHTML() {
         
         // add repo obj to local storage
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true, false,
-                                      true, false);
+                                      true, false, true);
         
         addRepoObjToLS(repoObj);
 
