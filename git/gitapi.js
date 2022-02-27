@@ -329,16 +329,16 @@ let git = {
     const invites = await axios.get(query, gitToken);
 
     // find repo invite
-    let repoInvite = invites.filter(invite =>
+    const repoInvite = invites.filter(invite =>
                                       invite.repository.full_name ===
                                       (user + '/' + repoName)
-                                   );
+                                     );
     
     // if invite exists
-    if (repoInvite) {
+    if (repoInvite.length > 0) {
       
       // accept invite
-      query += '/' + repoInvite.node_id;
+      query += '/' + repoInvite[0].id;
       
       // patch the query
       const resp = await axios.patch(query, gitToken);
