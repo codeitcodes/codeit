@@ -1587,14 +1587,24 @@ body.mobile .menu .icon a {
 }
 
 
-.message {
+.message-wrapper {
   position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.message {
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  bottom: calc(15px + env(safe-area-inset-bottom, 0px));
   opacity: 0;
   background: var(--deep-midnight-blue);
   color: #dcddde;
@@ -1603,28 +1613,22 @@ body.mobile .menu .icon a {
   padding: 0;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
-  left: calc(var(--sidebar-width) / 2);
-  left: 50vw;
+  /* left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width)); */
+  /* left: calc(var(--sidebar-width) / 2); */
   max-width: 356px;
   white-space: pre;
   overflow-wrap: anywhere;
-  transform: translateY(-10px) translateX(-50%);
-  pointer-events: none;
   transition: 0s .18s, .18s var( --bounce-function) opacity;
-  z-index: 1001;
 }
 
 .message.visible {
   padding: 10px 16px;
   opacity: 1;
   border-radius: 11.5px;
-  transform: translateX(-50%);
   transition: .18s var( --bounce-function);
 }
 
 .message.animating {
-  transform: translateY(-10px) translateX(-50%);
   color: transparent;
   border-radius: 8px;
   padding: 0;
