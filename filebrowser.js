@@ -1739,6 +1739,9 @@ function createNewFileInHTML() {
           // update repo empty status in local storage
           updateRepoEmptyStatusLS(repoObj.fullName, false);
           
+          // show search button
+          searchButton.classList.remove('hidden');
+          
         }
 
         
