@@ -64,7 +64,7 @@ function updateModFilesLS() {
 
 // create a repository object
 function createRepoObj(fullName, selBranch, pushAccess,
-                       branches, private, isFork) {
+                       branches, private, isFork, empty) {
 
   return {
     fullName,
@@ -72,7 +72,8 @@ function createRepoObj(fullName, selBranch, pushAccess,
     pushAccess,
     branches,
     private,
-    isFork
+    isFork,
+    empty
   }
 
 }
@@ -112,6 +113,14 @@ function updateRepoBranchesLS(fullName, branches) {
 function updateRepoPrivateStatusLS(fullName, private) {
 
   modifiedRepos[fullName].private = private;
+  
+  updateModReposLS();
+  
+}
+
+function updateRepoEmptyStatusLS(fullName, empty) {
+
+  modifiedRepos[fullName].empty = empty;
   
   updateModReposLS();
   
