@@ -1136,7 +1136,7 @@ async function renderBranchMenuHTML(renderAll) {
   
 
   // add rendered HTML to DOM
-  branchMenu.innerHTML = out;
+  window.setTimeout(() => { branchMenu.innerHTML = out; }, 180);
 
 
   // add branch event listeners
