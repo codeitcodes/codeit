@@ -1134,100 +1134,104 @@ async function renderBranchMenuHTML(renderAll) {
   // render new branch button
   // out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
   
+  // wait for menu animation to finish
+  window.setTimeout(() => {
+    
+    // add rendered HTML to DOM
+    branchMenu.innerHTML = out;
 
-  // add rendered HTML to DOM
-  window.setTimeout(() => { branchMenu.innerHTML = out; }, 180);
 
+    // add branch event listeners
 
-  // add branch event listeners
+    let branches = branchMenu.querySelectorAll('.icon');
 
-  let branches = branchMenu.querySelectorAll('.icon');
+    // run on all branches
+    branches.forEach(branch => {
 
-  // run on all branches
-  branches.forEach(branch => {
+      // select branch on click
+      branch.addEventListener('click', async () => {
 
-    // select branch on click
-    branch.addEventListener('click', async () => {
-      
-      // if clicked on branch, not a special button
-      if (!branch.classList.contains('new-branch')
-          && !branch.classList.contains('see-more')) {
+        // if clicked on branch, not a special button
+        if (!branch.classList.contains('new-branch')
+            && !branch.classList.contains('see-more')) {
 
-        // hide branch menu
-        branchMenu.classList.remove('visible');
-        sidebarBranch.classList.remove('active');
-
-        // if branch isn't already selected
-        if (!branch.classList.contains('selected')) {
-          
-          // change location
-          selectedBranch = branch.querySelector('a').textContent;
-          treeLoc[1] = repoName + ':' + selectedBranch;
-          saveTreeLocLS(treeLoc);
-
-          // update selected branch in local storage
-          updateRepoSelectedBranchLS(fullName, selectedBranch);
-          
-          // render sidebar
-          renderSidebarHTML();
-
-        }
-
-      } else if (branch.classList.contains('see-more')) { // if clicked on show more button
-
-        // render branch menu
-        renderBranchMenuHTML(true);
-
-      } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
-        
-        let newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
-
-        if (newBranchName) {
-          
-          // replace all special chars in name with dashes
-        
-          const specialChars = validateString(newBranchName);
-
-          if (specialChars) {
-
-            specialChars.forEach(char => { newBranchName = newBranchName.replaceAll(char, '-') });
-
-          }
-          
-          
           // hide branch menu
           branchMenu.classList.remove('visible');
           sidebarBranch.classList.remove('active');
-          
-          // start loading
-          startLoading();
-          
-          // get origin branch SHA
-          const shaToBranchFrom = selBranchObj.commit.sha;
-          
-          // create branch
-          await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
-          
-          // update selected branch in local storage
-          updateRepoSelectedBranchLS(fullName, selectedBranch);
-          
-          // clear branch resp from local storage
-          updateRepoBranchesLS(fullName, false);
-          
-          // change location
-          treeLoc[1] = repoName + ':' + newBranchName;
-          saveTreeLocLS(treeLoc);
 
-          // render sidebar
-          renderSidebarHTML();
-          
+          // if branch isn't already selected
+          if (!branch.classList.contains('selected')) {
+
+            // change location
+            selectedBranch = branch.querySelector('a').textContent;
+            treeLoc[1] = repoName + ':' + selectedBranch;
+            saveTreeLocLS(treeLoc);
+
+            // update selected branch in local storage
+            updateRepoSelectedBranchLS(fullName, selectedBranch);
+
+            // render sidebar
+            renderSidebarHTML();
+
+          }
+
+        } else if (branch.classList.contains('see-more')) { // if clicked on show more button
+
+          // render branch menu
+          renderBranchMenuHTML(true);
+
+        } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
+
+          let newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
+
+          if (newBranchName) {
+
+            // replace all special chars in name with dashes
+
+            const specialChars = validateString(newBranchName);
+
+            if (specialChars) {
+
+              specialChars.forEach(char => { newBranchName = newBranchName.replaceAll(char, '-') });
+
+            }
+
+
+            // hide branch menu
+            branchMenu.classList.remove('visible');
+            sidebarBranch.classList.remove('active');
+
+            // start loading
+            startLoading();
+
+            // get origin branch SHA
+            const shaToBranchFrom = selBranchObj.commit.sha;
+
+            // create branch
+            await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
+
+            // update selected branch in local storage
+            updateRepoSelectedBranchLS(fullName, selectedBranch);
+
+            // clear branch resp from local storage
+            updateRepoBranchesLS(fullName, false);
+
+            // change location
+            treeLoc[1] = repoName + ':' + newBranchName;
+            saveTreeLocLS(treeLoc);
+
+            // render sidebar
+            renderSidebarHTML();
+
+          }
+
         }
-        
-      }
+
+      });
 
     });
-
-  });
+    
+  }, 180);
   
 }
 
