@@ -1705,7 +1705,7 @@ function createNewFileInHTML() {
         updateLineNumbersHTML();
 
         // set caret pos in codeit
-        cd.setSelection(0, 0);
+        if (!isMobile) cd.setSelection(0, 0);
 
 
         // create commit
