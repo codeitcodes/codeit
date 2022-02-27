@@ -243,7 +243,6 @@ let git = {
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
-    
     const [repoName] = repo.split(':');
         
     query += '/repos/'+ user +'/'+ repoName +'/git/refs';
@@ -272,9 +271,10 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
 
     const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo + '/forks';
+                  '/' + user + '/' + repoName + '/forks';
 
     // change pushing state
     changePushingState(true);
@@ -296,9 +296,10 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
 
     const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo +
+                  '/' + user + '/' + repoName +
                   '/collaborators/' + usernameToInvite;
 
     // change pushing state
@@ -319,6 +320,7 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
     
     let query = 'https://api.github.com/user' +
                 '/repository_invitations';
@@ -329,7 +331,7 @@ let git = {
     // find repo invite
     let repoInvite = invites.filter(invite =>
                                       invite.repository.full_name ===
-                                      (user + '/' + repo)
+                                      (user + '/' + repoName)
                                    );
     
     // if invite exists
@@ -356,9 +358,7 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
-    
-    // get repository branch
-    const [repoName, branch] = repo.split(':');
+    const [repoName] = repo.split(':');
     
     const query = 'https://api.github.com/repos' +
                   '/' + user + '/' + repoName;
