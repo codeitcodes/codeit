@@ -226,7 +226,7 @@ let git = {
       name: repoName,
       private: private,
       has_wiki: false,
-      auto_init: true
+      auto_init: false
     };
     
     
