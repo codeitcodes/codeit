@@ -68,6 +68,9 @@ async function renderSidebarHTML() {
     // if repo is empty
     if (repoObj && repoObj.empty) {
       
+      // stop loading
+      stopLoading();
+      
       // show intro screen
       fileWrapper.innerHTML = fileIntroScreen;
 
