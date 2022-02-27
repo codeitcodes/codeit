@@ -1720,7 +1720,24 @@ function createNewFileInHTML() {
 
         // push file asynchronously
         const newSha = await git.push(commit);
+        
+        
+        // map tree location
+        const [user, repo] = treeLoc;
+        const [repoName, branch] = repo.split(':');
+        
+        // get repo obj from local storage
+        const repoObj = modifiedRepos[user + '/' + repoName];
 
+        // if repo is empty
+        if (repoObj && repoObj.empty) {
+          
+          // update repo empty status in local storage
+          updateRepoEmptyStatusLS(repoObj.fullName, false);
+          
+        }
+
+        
         // update file sha in HTML with new sha from Git
         setAttr(fileEl, 'sha', newSha);
 
