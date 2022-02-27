@@ -1231,7 +1231,7 @@ async function renderBranchMenuHTML(renderAll) {
 
     });
     
-  }, 180);
+  }, (renderAll ? 0 : 180));
   
 }
 
