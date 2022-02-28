@@ -93,7 +93,7 @@ async function renderSidebarHTML() {
       
       // get repo obj from git
       // and save to local storage
-      fetchRepoAndSaveToLS(treeLoc);@@
+      fetchRepoAndSaveToLS(treeLoc);
       
     }
     
@@ -143,9 +143,6 @@ async function renderSidebarHTML() {
       // update repo empty status in local storage
       updateRepoEmptyStatusLS(repoObj.fullName, true);
     
-      // add repository to local storage
-      //@@const repoObj = createRepoObj((user + '/' + repoName), 'main', null, null, null, );
-      
     }
     
     
