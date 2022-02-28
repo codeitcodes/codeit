@@ -93,7 +93,7 @@ async function renderSidebarHTML() {
       
       // get repo obj from git
       // and save to local storage
-      fetchRepoAndSaveToLS(treeLoc);
+      fetchRepoAndSaveToLS(treeLoc, (user + '/' + repoName));
       
     }
     
