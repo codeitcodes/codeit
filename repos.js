@@ -26,6 +26,14 @@ function addRepoToModRepos(repoObj) {
   
 }
 
+function removeRepoFromModRepos(fullName) {
+  
+  delete modifiedRepos[fullName];
+  
+  updateModReposLS();
+  
+}
+
 function updateModRepoSelectedBranch(fullName, selBranch) {
   
   modifiedRepos[fullName].selBranch = selBranch;
@@ -72,18 +80,50 @@ function updateModRepoEmptyStatus(fullName, empty) {
 // and save to modified repos
 async function fetchRepoAndSaveToModRepos(treeLoc) {
   
+  // get full name of repository
+  const fullName = treeLoc[0] + '/' + treeLoc[1].split(':')[0];
+  const selBranch = treeLoc[1].split(':')[1];
+  
+  
+  // create temporary repo object
+  const tempRepoObj = createRepoObj(fullName, selBranch, null,
+                                    null, null, null, null);
+  
+  // add temp repo object
+  // to modified repos
+  addRepoToModRepos(tempRepoObj);
+  
+
   // get repository from git
   const repo = await git.getRepo(treeLoc);
+  
   
   // if didn't encounter an error
   if (!repo.message) {
     
+    // if temp repo changed, 
+    const tempRepo = modifiedRepos[fullName];
+    
     // create repo obj
-    const repoObj = createRepoObj(repo.full_name, repo.default_branch, (repo.permissions.push ?? false),
-                                  null, repo.private, repo.fork, false);
+    const repoObj = createRepoObj(fullName, repo.default_branch,
+                                  
+                                  (tempRepo.pushAccess ?? (repo.permissions.push ?? false)),
+                                  
+                                  (tempRepo.branches ?? null),
+                                  
+                                  repo.private, repo.fork,
+                                  
+                                  (tempRepo.empty ?? false));
 
-    // add repo to modified repos
+    // add repo object
+    // to modified repos
     addRepoToModRepos(repoObj);
+    
+  } else {
+    
+    // remove temp repo object
+    // from modified repos
+    removeRepoFromModRepos(fullName);
     
   }
   
