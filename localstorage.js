@@ -137,13 +137,20 @@ function updateModReposLS() {
 // and save to local storage
 async function fetchRepoAndSaveToLS(treeLoc) {
   
-  // get repo obj from git
+  // get repository from git
   const repo = await git.getRepo(treeLoc);
   
-  // create repo obj
-  
-  // add repo obj to local storage
-  addRepoObjToLS
+  // if didn't encounter an error
+  if (!repo.message) {
+    
+    // create repo obj
+    const repoObj = createRepoObj(repo.full_name, repo.default_branch, (item.permissions.push ?? false),
+                                  null, repo.private, repo.fork, false);
+
+    // add repo obj to local storage
+    addRepoObjToLS(repoObj);
+    
+  }
   
 }
 
