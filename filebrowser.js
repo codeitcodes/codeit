@@ -447,7 +447,7 @@ async function renderSidebarHTML() {
         
         // if no files exist,
         // show intro screen in HTML
-        fileWrapper.innerHTML = fileIntroScreen;
+        out = fileIntroScreen;
         
         // hide search button
         searchButton.classList.add('hidden');
@@ -519,7 +519,7 @@ async function renderSidebarHTML() {
         
         // if no repositories exist,
         // show intro screen in HTML
-        fileWrapper.innerHTML = repoIntroScreen;
+        out = repoIntroScreen;
         
         // hide search button
         searchButton.classList.add('hidden');
