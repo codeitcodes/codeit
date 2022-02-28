@@ -62,96 +62,10 @@ function updateModFilesLS() {
 
 // repos
 
-// create a repository object
-function createRepoObj(fullName, selBranch, pushAccess,
-                       branches, private, isFork, empty) {
-
-  return {
-    fullName,
-    selBranch,
-    pushAccess,
-    branches,
-    private,
-    isFork,
-    empty
-  }
-
-}
-
-function addRepoObjToLS(repoObj) {
-  
-  modifiedRepos[repoObj.fullName] = repoObj;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoSelectedBranchLS(fullName, selBranch) {
-  
-  modifiedRepos[fullName].selBranch = selBranch;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoPushAccessLS(fullName, pushAccess) {
-  
-  modifiedRepos[fullName].pushAccess = pushAccess;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoBranchesLS(fullName, branches) {
-
-  modifiedRepos[fullName].branches = branches;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoPrivateStatusLS(fullName, private) {
-
-  modifiedRepos[fullName].private = private;
-  
-  updateModReposLS();
-  
-}
-
-function updateRepoEmptyStatusLS(fullName, empty) {
-
-  modifiedRepos[fullName].empty = empty;
-  
-  updateModReposLS();
-  
-}
-
 function updateModReposLS() {
 
   setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
 
-}
-
-
-// fetch repo obj from git
-// and save to local storage
-async function fetchRepoAndSaveToLS(treeLoc) {
-  
-  // get repository from git
-  const repo = await git.getRepo(treeLoc);
-  
-  // if didn't encounter an error
-  if (!repo.message) {
-    
-    // create repo obj
-    const repoObj = createRepoObj(repo.full_name, repo.default_branch, (item.permissions.push ?? false),
-                                  null, repo.private, repo.fork, false);
-
-    // add repo obj to local storage
-    addRepoObjToLS(repoObj);
-    
-  }
-  
 }
 
 
