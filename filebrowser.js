@@ -1112,8 +1112,13 @@ async function renderBranchMenuHTML(renderAll) {
       // get branches for repository
       branchResp = await git.getBranches(treeLoc);
 
+      // clean resp and save only relevant fields
+      const cleanedResp = branchResp.map(branch => {
+        return { name: branch.name, commit: { sha: branch.commit.sha } };
+      });
+      
       // save branch resp in local storage
-      updateModRepoBranches(fullName, branchResp);
+      updateModRepoBranches(fullName, cleanedResp);
       
     }
     
