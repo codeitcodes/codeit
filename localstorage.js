@@ -133,8 +133,8 @@ function updateModReposLS() {
 }
 
 
-// fetch repo obj and save it
-// to local storage
+// fetch repo obj from git
+// and save to local storage
 async function fetchRepoAndSaveToLS(treeLoc) {
   
   // get repo obj from git
