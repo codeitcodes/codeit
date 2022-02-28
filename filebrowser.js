@@ -88,6 +88,16 @@ async function renderSidebarHTML() {
     }
     
     
+    // if repo obj dosen't exist
+    if (!repoObj) {
+      
+      // get repo obj from git
+      // and save to local storage
+      fetchRepoAndSaveToLS(treeLoc);@@
+      
+    }
+    
+    
     // render branch menu
     renderBranchMenuHTML();
 
