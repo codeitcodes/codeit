@@ -141,7 +141,7 @@ async function renderSidebarHTML() {
     if (repoObj) {
       
       // update repo empty status in local storage
-      updateRepoEmptyStatusLS(repoObj.fullName, true);
+      updateModRepoEmptyStatus(repoObj.fullName, true);
     
     }
     
@@ -1113,7 +1113,7 @@ async function renderBranchMenuHTML(renderAll) {
       branchResp = await git.getBranches(treeLoc);
 
       // save branch resp in local storage
-      updateRepoBranchesLS(fullName, branchResp);
+      updateModRepoBranches(fullName, branchResp);
       
     }
     
@@ -1214,7 +1214,7 @@ async function renderBranchMenuHTML(renderAll) {
             saveTreeLocLS(treeLoc);
 
             // update selected branch in local storage
-            updateRepoSelectedBranchLS(fullName, selectedBranch);
+            updateModRepoSelectedBranch(fullName, selectedBranch);
 
             // render sidebar
             renderSidebarHTML();
@@ -1257,10 +1257,10 @@ async function renderBranchMenuHTML(renderAll) {
             await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
 
             // update selected branch in local storage
-            updateRepoSelectedBranchLS(fullName, selectedBranch);
+            updateModRepoSelectedBranch(fullName, selectedBranch);
 
             // clear branch resp from local storage
-            updateRepoBranchesLS(fullName, false);
+            updateModRepoBranches(fullName, false);
 
             // change location
             treeLoc[1] = repoName + ':' + newBranchName;
@@ -1766,7 +1766,7 @@ function createNewFileInHTML() {
         if (repoObj && repoObj.empty) {
           
           // update repo empty status in local storage
-          updateRepoEmptyStatusLS(repoObj.fullName, false);
+          updateModRepoEmptyStatus(repoObj.fullName, false);
           
           // show search button
           searchButton.classList.remove('hidden');
