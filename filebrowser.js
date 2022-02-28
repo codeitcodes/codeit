@@ -1745,24 +1745,6 @@ function createNewFileInHTML() {
 
         // set caret pos in codeit
         if (!isMobile) cd.setSelection(0, 0);
-
-
-        // create commit
-        const commitMessage = 'Create ' + fileName;
-
-        const commitFile = {
-          name: fileName,
-          dir: treeLoc.join(),
-          content: encodeUnicode(fileContent)
-        };
-
-        let commit = {
-          message: commitMessage,
-          file: commitFile
-        };
-
-        // push file asynchronously
-        const newSha = await git.push(commit);
         
         
         // map tree location
@@ -1783,6 +1765,24 @@ function createNewFileInHTML() {
           
         }
 
+
+        // create commit
+        const commitMessage = 'Create ' + fileName;
+
+        const commitFile = {
+          name: fileName,
+          dir: treeLoc.join(),
+          content: encodeUnicode(fileContent)
+        };
+
+        let commit = {
+          message: commitMessage,
+          file: commitFile
+        };
+
+        // push file asynchronously
+        const newSha = await git.push(commit);
+        
         
         // update file sha in HTML with new sha from Git
         setAttr(fileEl, 'sha', newSha);
