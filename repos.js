@@ -68,7 +68,7 @@ function updateModRepoEmptyStatus(fullName, empty) {
 
 
 
-// fetch repo obj from git
+// get repo obj from git
 // and save to modified repos
 async function fetchRepoAndSaveToModRepos(treeLoc) {
   
