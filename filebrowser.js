@@ -116,6 +116,45 @@ async function renderSidebarHTML() {
 
   }
   
+  if (resp.message && resp.message === 'This repository is empty.') {
+    
+    // if repository is empty, show file intro screen
+    
+    // stop loading
+    stopLoading();
+
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo obj exists
+    if (repoObj) {
+      
+      // update repo empty status in local storage
+      updateRepoEmptyStatusLS(repoObj.fullName, true);
+    
+      // add repository to local storage
+      //@@const repoObj = createRepoObj((user + '/' + repoName), 'main', null, null, null, );
+      
+    }
+    
+    
+    // show intro screen
+    fileWrapper.innerHTML = fileIntroScreen;
+
+    // show repo name in sidebar
+    sidebarLogo.innerText = repoName;
+
+    // change header options
+    header.classList.remove('out-of-repo');
+
+    // hide search button
+    searchButton.classList.add('hidden');
+
+    return;
+    
+  }
+  
   if (resp.message && resp.message.startsWith('No commit found for the ref')) {
     
     // if couldn't find branch, show not found screen
