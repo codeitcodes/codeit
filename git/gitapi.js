@@ -104,31 +104,22 @@ let git = {
 
   },
   
-  // check if user has push access in repository
-  'checkPushAccess': async (treeLoc, userToCheck) => {
-    
+  // get repository
+  'getRepo': async (treeLoc) => {
+
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
     
     const [repoName] = repo.split(':');
-    
-    query += '/repos/' + user + '/' + repoName + '/collaborators/' + userToCheck + '/permission';
-    
+
+    query += '/repos/' + user + '/' + repoName;
+
     // get the query
     const resp = await axios.get(query, gitToken);
-    
-    if (resp.message &&
-        resp.message.startsWith('Must have push access')) {
-      
-      return false;
-      
-    } else {
-      
-      return true;
-      
-    }
-    
+
+    return resp;
+
   },
   
   // list branches for repository
@@ -228,7 +219,6 @@ let git = {
       has_wiki: false,
       auto_init: false
     };
-    
     
     // post the query
     const resp = await axios.post(query, gitToken, repoData);
@@ -364,9 +354,9 @@ let git = {
                   '/' + user + '/' + repoName;
     
     // dispatch request with query
-    const resp = await axios.delete(query, gitToken);
+    await axios.delete(query, gitToken);
     
-    return true;
+    return;
 
   }
 
