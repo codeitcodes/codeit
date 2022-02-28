@@ -104,22 +104,23 @@ let git = {
 
   },
   
-  // get repository
+  // get a repository
   'getRepo': async (treeLoc) => {
 
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
     
-    const [repoName] = repo.split(':');
-
+    // get repository branch
+    const [repoName, branch] = repo.split(':');
+    
     query += '/repos/' + user + '/' + repoName;
-
+    
     // get the query
     const resp = await axios.get(query, gitToken);
 
     return resp;
-
+    
   },
   
   // list branches for repository
@@ -138,25 +139,6 @@ let git = {
 
     return resp;
 
-  },
-  
-  // get a repository
-  'getRepo': async (treeLoc) => {
-
-    // map tree location
-    let query = 'https://api.github.com';
-    const [user, repo] = treeLoc;
-    
-    // get repository branch
-    const [repoName, branch] = repo.split(':');
-    
-    query += '/repos/' + user + '/' + repoName;
-    
-    // get the query
-    const resp = await axios.get(query, gitToken);
-
-    return resp;
-    
   },
 
   // push a file
