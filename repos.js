@@ -79,7 +79,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   if (!repo.message) {
     
     // create repo obj
-    const repoObj = createRepoObj(repo.full_name, repo.default_branch, (item.permissions.push ?? false),
+    const repoObj = createRepoObj(repo.full_name, repo.default_branch, (repo.permissions.push ?? false),
                                   null, repo.private, repo.fork, false);
 
     // add repo to modified repos
