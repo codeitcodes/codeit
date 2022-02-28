@@ -231,7 +231,9 @@ cd-el {
   cursor: unset;
 }
 
-.token.url-link {
+.token.url-link,
+.token.email-link,
+.token.md-link {
   color: inherit;
   caret-color: #fff;
   text-decoration: underline;
