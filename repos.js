@@ -101,11 +101,13 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   // if didn't encounter an error
   if (!repo.message) {
     
-    // if temp repo changed, 
+    // check temp repo changed
     const tempRepo = modifiedRepos[fullName];
     
     // create repo obj
-    const repoObj = createRepoObj(fullName, repo.default_branch,
+    const repoObj = createRepoObj(fullName,
+                                  
+                                  (tempRepo.selBranch ?? repo.default_branch),
                                   
                                   (tempRepo.pushAccess ?? (repo.permissions.push ?? false)),
                                   
