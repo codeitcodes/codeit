@@ -175,6 +175,9 @@ async function renderSidebarHTML() {
     
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
+    
+    // update selected branch in local storage
+    updateModRepoSelectedBranch((user + '/' + repoName), defaultBranch);
 
     renderSidebarHTML();
 
