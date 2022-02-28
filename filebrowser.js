@@ -92,8 +92,8 @@ async function renderSidebarHTML() {
     if (!repoObj) {
       
       // get repo obj from git
-      // and save to local storage
-      fetchRepoAndSaveToLS(treeLoc);
+      // and save to modified repos
+      fetchRepoAndSaveToModRepos(treeLoc);
       
     }
     
@@ -593,8 +593,8 @@ function addHTMLItemListeners() {
         // if repo obj is in HTML
         if (getAttr(item, 'repoObj')) {
 
-          // add repo obj to local storage
-          addRepoObjToLS(repoObj);
+          // add repo obj to modified repos
+          addRepoToModRepos(repoObj);
 
         }
         
@@ -1561,11 +1561,12 @@ function createNewRepoInHTML() {
         treeLoc[1] = repoName + ':main';
         saveTreeLocLS(treeLoc);
         
-        // add repo obj to local storage
+        // add repo obj to modified repos
+        
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true,
                                       null, true, false, true);
         
-        addRepoObjToLS(repoObj);
+        addRepoToModRepos(repoObj);
 
         // show intro screen
         fileWrapper.innerHTML = fileIntroScreen;
