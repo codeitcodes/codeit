@@ -460,6 +460,9 @@ async function renderSidebarHTML() {
       sidebarBranch.classList.remove('visible');
       
       
+      // get rendered repos
+      let renderedRepos = {};
+      
       // if repositories exist
       if (resp.length > 0) {
         
@@ -468,6 +471,15 @@ async function renderSidebarHTML() {
 
         // render repositories
         resp.forEach(item => {
+          
+          // if repo is in modified repos
+          if (modifiedRepos[item.full_name]) {
+            
+            // add repo to rendered repos
+            renderedRepos[item.full_name] = true;
+            
+          }
+          
 
           let fullName;
 
@@ -509,6 +521,31 @@ async function renderSidebarHTML() {
             `+ arrowIcon +`
           </div>
           `;
+
+        });
+        
+        
+        // render eclipsed repos
+        for (const modRepoName in modifiedRepos) {
+          
+          const modRepo = modifiedRepos[modRepoName];
+          
+          // if repo isn't rendered
+          if (!renderedRepos[modRepoName]) {
+            
+            // render repo
+
+            out += `
+            <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
+              <div class="label">
+                `+ repoIcon +`
+                <a class="name">`+ modRepoName.split('/')[1] +`</a>
+              </div>
+              `+ arrowIcon +`
+            </div>
+            `;
+            
+          }
 
         });
         
