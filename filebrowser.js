@@ -61,7 +61,43 @@ async function renderSidebarHTML() {
 
   // if navigating in repository
   if (repo != '') {
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo is empty
+    if (repoObj && repoObj.empty) {
+      
+      // stop loading
+      stopLoading();
+      
+      // show intro screen
+      fileWrapper.innerHTML = fileIntroScreen;
 
+      // show repo name in sidebar
+      sidebarLogo.innerText = repoName;
+
+      // change header options
+      header.classList.remove('out-of-repo');
+
+      // hide search button
+      searchButton.classList.add('hidden');
+      
+      return;
+      
+    }
+    
+    
+    // if repo obj dosen't exist
+    if (!repoObj) {
+      
+      // get repo obj from git
+      // and save to modified repos
+      fetchRepoAndSaveToModRepos(treeLoc);
+      
+    }
+    
+    
     // render branch menu
     renderBranchMenuHTML();
 
@@ -90,6 +126,42 @@ async function renderSidebarHTML() {
 
   }
   
+  if (resp.message && resp.message === 'This repository is empty.') {
+    
+    // if repository is empty, show file intro screen
+    
+    // stop loading
+    stopLoading();
+
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo obj exists
+    if (repoObj) {
+      
+      // update repo empty status in local storage
+      updateModRepoEmptyStatus(repoObj.fullName, true);
+    
+    }
+    
+    
+    // show intro screen
+    fileWrapper.innerHTML = fileIntroScreen;
+
+    // show repo name in sidebar
+    sidebarLogo.innerText = repoName;
+
+    // change header options
+    header.classList.remove('out-of-repo');
+
+    // hide search button
+    searchButton.classList.add('hidden');
+
+    return;
+    
+  }
+  
   if (resp.message && resp.message.startsWith('No commit found for the ref')) {
     
     // if couldn't find branch, show not found screen
@@ -103,6 +175,9 @@ async function renderSidebarHTML() {
     
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
+    
+    // update selected branch in local storage
+    updateModRepoSelectedBranch((user + '/' + repoName), defaultBranch);
 
     renderSidebarHTML();
 
@@ -118,7 +193,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Whoops, your Github login expired. Log in again?');
+    showMessage('Whoops, your Github login expired.', 5000);
 
     sidebar.classList.add('intro');
 
@@ -129,7 +204,7 @@ async function renderSidebarHTML() {
 
   // render modified files
   
-  let modifiedFilesTemp;
+  let eclipsedFiles;
   
   // if navigating in repository
   if (repo != '') {
@@ -166,11 +241,8 @@ async function renderSidebarHTML() {
     if (modFilesChanged) updateModFilesLS();
     
     
-    // create temporary modified files array
-    modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
-
-    // get all modified files in directory
-    modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+    // get all eclipsed files in directory
+    eclipsedFiles = Object.values(modifiedFiles).filter(modFile => modFile.dir == treeLoc.join());
 
   }
   
@@ -249,118 +321,135 @@ async function renderSidebarHTML() {
       // change header options
       header.classList.remove('out-of-repo');
       
-      // render files
-      resp.forEach(item => {
+      // if files exist
+      if (resp.length > 0 || eclipsedFiles.length > 0) {
+        
+        // show search button
+        searchButton.classList.remove('hidden');
 
-        // if item is a file
-        if (item.type == 'file') {
+        // render files
+        resp.forEach(item => {
 
-          let file = getLatestVersion(item);
+          // if item is a file
+          if (item.type == 'file') {
 
-          // search for matching modified files
-          for (let i = 0; i < modifiedFilesTemp.length; i++) {
+            let file = getLatestVersion(item);
 
-            let modFile = modifiedFilesTemp[i];
+            // search for matching eclipsed files
+            for (let i = 0; i < eclipsedFiles.length; i++) {
 
-            // if modified file has matching SHA or name
-            if (modFile.sha === file.sha || modFile.name === file.name) {
+              let modFile = eclipsedFiles[i];
 
-              // remove modified file from temporary array
-              modifiedFilesTemp.splice(i, 1);
+              // if eclipsed file has matching SHA or name
+              if (modFile.sha === file.sha || modFile.name === file.name) {
 
-              // reset index
-              i--;
+                // remove eclipsed file from array
+                eclipsedFiles.splice(i, 1);
+
+                // reset index
+                i--;
+
+              }
 
             }
 
+
+            // add modified flag to file
+            let modified = '';
+            if (modifiedFiles[file.sha] &&
+                !modifiedFiles[file.sha].eclipsed) modified = ' modified';
+
+            // add icon to file
+            const fileType = getFileType(file.name);
+            let fileIconHTML = fileIcon;
+
+            if (fileType === 'image') fileIconHTML = imageIcon;
+            if (fileType === 'video') fileIconHTML = videoIcon;
+            if (fileType === 'audio') fileIconHTML = audioIcon;
+
+            out += `
+            <div class="item file`+ modified +`" sha="`+ file.sha +`">
+              <div class="label">
+                `+ fileIconHTML +`
+                <a class="name">`+ file.name +`</a>
+              </div>
+              <div class="push-wrapper">
+                `+ pushIcon +`
+              </div>
+            </div>
+            `;
+
+          } else { // if item is a folder
+
+            out += `
+            <div class="item folder">
+              <div class="label">
+                `+ folderIcon +`
+                <a class="name">`+ item.name +`</a>
+              </div>
+              `+ arrowIcon +`
+            </div>
+            `;
+
           }
 
+        });
 
-          // add modified flag to file
-          let modified = '';
-          if (modifiedFiles[file.sha] &&
-              !modifiedFiles[file.sha].eclipsed) modified = ' modified';
-          
-          // add icon to file
-          const fileType = getFileType(file.name);
-          let fileIconHTML = fileIcon;
-          
-          if (fileType === 'image') fileIconHTML = imageIcon;
-          if (fileType === 'video') fileIconHTML = videoIcon;
-          if (fileType === 'audio') fileIconHTML = audioIcon;
-          
-          out += `
-          <div class="item file`+ modified +`" sha="`+ file.sha +`">
-            <div class="label">
-              `+ fileIconHTML +`
-              <a class="name">`+ file.name +`</a>
+
+        // render eclipsed files from array
+
+        let eclipsedFileNames = {};
+
+        eclipsedFiles.forEach(file => {
+
+          // if file isn't already in HTML
+          if (!eclipsedFileNames[file.name]) {
+
+            // add file to HTML
+
+            eclipsedFileNames[file.name] = true;
+
+            // get the file's latest version
+            file = getLatestVersion(file);
+
+            // add modified flag to file
+            let modified = '';
+            if (!file.eclipsed) modified = ' modified';
+
+            // add icon to file
+            const fileType = getFileType(file.name);
+            let fileIconHTML = fileIcon;
+
+            if (fileType === 'image') fileIconHTML = imageIcon;
+            if (fileType === 'video') fileIconHTML = videoIcon;
+            if (fileType === 'audio') fileIconHTML = audioIcon;
+
+            out += `
+            <div class="item file`+ modified +`" sha="`+ file.sha +`">
+              <div class="label">
+                `+ fileIconHTML +`
+                <a class="name">`+ file.name +`</a>
+              </div>
+              <div class="push-wrapper">
+                `+ pushIcon +`
+              </div>
             </div>
-            <div class="push-wrapper">
-              `+ pushIcon +`
-            </div>
-          </div>
-          `;
+            `;
 
-        } else { // if item is a folder
+          }
 
-          out += `
-          <div class="item folder">
-            <div class="label">
-              `+ folderIcon +`
-              <a class="name">`+ item.name +`</a>
-            </div>
-            `+ arrowIcon +`
-          </div>
-          `;
-
-        }
-
-      });
-
-
-      // render modified files from temporary array
-
-      let modFileNames = {};
-
-      modifiedFilesTemp.forEach(file => {
-
-        // if file isn't already in HTML
-        if (!modFileNames[file.name]) {
-
-          // add file to HTML
-
-          modFileNames[file.name] = true;
-
-          // get the file's latest version
-          file = getLatestVersion(file);
-
-          // add modified flag to file
-          let modified = '';
-          if (!file.eclipsed) modified = ' modified';
-
-          // add icon to file
-          const fileType = getFileType(file.name);
-          let fileIconHTML = fileIcon;
-          
-          if (fileType === 'image') fileIconHTML = imageIcon;
-          if (fileType === 'video') fileIconHTML = videoIcon;
-          if (fileType === 'audio') fileIconHTML = audioIcon;
-          
-          out += `
-          <div class="item file`+ modified +`" sha="`+ file.sha +`">
-            <div class="label">
-              `+ fileIconHTML +`
-              <a class="name">`+ file.name +`</a>
-            </div>
-            <div class="push-wrapper">
-              `+ pushIcon +`
-            </div>
-          </div>
-          `;
-
-        }
-
-      });
+        });
+        
+      } else {
+        
+        // if no files exist,
+        // show intro screen in HTML
+        out = fileIntroScreen;
+        
+        // hide search button
+        searchButton.classList.add('hidden');
+        
+      }
 
     } else { // else, show all repositories
 
@@ -369,48 +458,107 @@ async function renderSidebarHTML() {
       
       // hide branch button
       sidebarBranch.classList.remove('visible');
-
       
-      // render repositories
-      resp.forEach(item => {
+      
+      // get rendered repos
+      let renderedRepos = {};
+      
+      // if repositories exist
+      if (resp.length > 0 || Object.keys(modifiedRepos).length > 0) {
+        
+        // show search button
+        searchButton.classList.remove('hidden');
 
-        let fullName;
+        // render repositories
+        resp.forEach(item => {
+          
+          // if repo is in modified repos
+          if (modifiedRepos[item.full_name]) {
+            
+            // add repo to rendered repos
+            renderedRepos[item.full_name] = true;
+            
+          }
+          
 
-        // if repo is owned by logged user
-        if (item.full_name.split('/')[0] === loggedUser) {
+          let fullName;
 
-          // show repo name
-          fullName = item.name;
+          // if repo is owned by logged user
+          if (item.full_name.split('/')[0] === loggedUser) {
 
-        } else {
+            // show repo name
+            fullName = item.name;
 
-          // show username and repo name
-          fullName = item.full_name;
+          } else {
+
+            // show username and repo name
+            fullName = item.full_name;
+
+          }
+
+
+          let repoObj;
+          
+          // if repo obj dosen't already exist
+          if (!modifiedRepos[item.full_name]) {
+            
+            // create repo obj
+            repoObj = createRepoObj(item.full_name, item.default_branch, (item.permissions.push ?? false),
+                                    null, item.private, item.fork, false);
+            
+          } else {
+            
+            repoObj = false;
+            
+          }
+
+          out += `
+          <div class="item repo" ` + (repoObj ? ('repoObj="' + encodeURI(JSON.stringify(repoObj)) + '"') : ('fullName="' + item.full_name + '"')) + `>
+            <div class="label">
+              `+ repoIcon +`
+              <a class="name">`+ fullName +`</a>
+            </div>
+            `+ arrowIcon +`
+          </div>
+          `;
+
+        });
+        
+        
+        // render eclipsed repos
+        for (const modRepoName in modifiedRepos) {
+          
+          const modRepo = modifiedRepos[modRepoName];
+          
+          // if repo isn't rendered
+          if (!renderedRepos[modRepoName]) {
+            
+            // render repo
+
+            out += `
+            <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
+              <div class="label">
+                `+ repoIcon +`
+                <a class="name">`+ modRepoName.split('/')[1] +`</a>
+              </div>
+              `+ arrowIcon +`
+            </div>
+            `;
+            
+          }
 
         }
-
-
-        /*
-        // create repo obj
-        const repoObj = {
-          name: item.fullname,
-          defaultBranch: item.default_branch,
-          pushAccess: ((item.permissions.admin || item.permissions.push) ? true : false),
-        };
-        */
-
-
-        out += `
-        <div class="item repo" fullname="`+ item.full_name +`" defaultbranch="`+ item.default_branch +`">
-          <div class="label">
-            `+ repoIcon +`
-            <a class="name">`+ fullName +`</a>
-          </div>
-          `+ arrowIcon +`
-        </div>
-        `;
-
-      });
+        
+      } else {
+        
+        // if no repositories exist,
+        // show intro screen in HTML
+        out = repoIntroScreen;
+        
+        // hide search button
+        searchButton.classList.add('hidden');
+        
+      }
 
     }
 
@@ -466,17 +614,50 @@ function addHTMLItemListeners() {
       // if item is a repository
       if (item.classList.contains('repo')) {
 
-        // change location
-        let itemLoc = getAttr(item, 'fullname').split('/');
-        let defaultBranch = getAttr(item, 'defaultbranch');
+        // parse repo obj from HTML
+        const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
+                                                   modifiedRepos[getAttr(item, 'fullName')];
         
-        treeLoc[0] = itemLoc[0],
-        treeLoc[1] = itemLoc[1] +':'+ defaultBranch;
+        
+        // change location
+        const repoLoc = repoObj.fullName.split('/');
+        
+        treeLoc[0] = repoLoc[0],
+        treeLoc[1] = repoLoc[1] + ':' + repoObj.selBranch;
         saveTreeLocLS(treeLoc);
 
-        // render sidebar
-        renderSidebarHTML();
+        
+        // if repo obj is in HTML
+        if (getAttr(item, 'repoObj')) {
 
+          // add repo obj to modified repos
+          addRepoToModRepos(repoObj);
+
+        }
+        
+
+        // if repo isn't empty
+        if (!repoObj.empty) {
+          
+          // render sidebar
+          renderSidebarHTML();
+          
+        } else {
+          
+          // show intro screen
+          fileWrapper.innerHTML = fileIntroScreen;
+
+          // show repo name in sidebar
+          sidebarLogo.innerText = repoLoc[1];
+
+          // change header options
+          header.classList.remove('out-of-repo');
+
+          // hide search button
+          searchButton.classList.add('hidden');
+          
+        }
+        
       } else if (item.classList.contains('folder')) {
 
         // if item is a folder
@@ -935,8 +1116,22 @@ async function renderBranchMenuHTML(renderAll) {
   // get repository branch
   let [repoName, selectedBranch] = repo.split(':');
   
-  // get repository branches
-  let branchResp = JSON.parse(getAttr(branchMenu, 'resp'));
+  
+  // check if repository object exists
+  
+  const fullName = user + '/' + repoName;
+  const repoObj = modifiedRepos[fullName];
+  
+  let branchResp;
+  
+  // if repo obj exists
+  if (repoObj && repoObj.branches) {
+  
+    // get repository branches
+    // from repo obj
+    branchResp = repoObj.branches;
+    
+  }
   
   
   // if branch menu isn't already rendered
@@ -947,17 +1142,28 @@ async function renderBranchMenuHTML(renderAll) {
     // show loading message
     branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
     
-    // get branches for repository
-    branchResp = await git.getBranches(treeLoc);
-    
-    // clean resp and save only relevant fields
-    let cleanedResp = branchResp.map(branch => {
-      return { name: branch.name, commit: { sha: branch.commit.sha } };
-    });
-    
-    // save resp in HTML
-    setAttr(branchMenu, 'resp', JSON.stringify(cleanedResp));
-    
+    // if branch resp isn't already stored
+    // in local storage
+    if (!repoObj || !repoObj.branches) {
+      
+      // get branches for repository
+      branchResp = await git.getBranches(treeLoc);
+
+      // if repo dosen't exist, return
+      if (branchResp.message) {
+        return;
+      }
+      
+      // clean resp and save only relevant fields
+      const cleanedResp = branchResp.map(branch => {
+        return { name: branch.name, commit: { sha: branch.commit.sha } };
+      });
+      
+      // save branch resp in local storage
+      updateModRepoBranches(fullName, cleanedResp);
+      
+    }
+      
   }
   
   
@@ -1014,94 +1220,104 @@ async function renderBranchMenuHTML(renderAll) {
   // render new branch button
   // out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
   
+  // wait for menu animation to finish
+  window.setTimeout(() => {
+    
+    // add rendered HTML to DOM
+    branchMenu.innerHTML = out;
 
-  // add rendered HTML to DOM
-  branchMenu.innerHTML = out;
 
+    // add branch event listeners
 
-  // add branch event listeners
+    let branches = branchMenu.querySelectorAll('.icon');
 
-  let branches = branchMenu.querySelectorAll('.icon');
+    // run on all branches
+    branches.forEach(branch => {
 
-  // run on all branches
-  branches.forEach(branch => {
+      // select branch on click
+      branch.addEventListener('click', async () => {
 
-    // select branch on click
-    branch.addEventListener('click', async () => {
-      
-      // if clicked on branch, not a special button
-      if (!branch.classList.contains('new-branch')
-          && !branch.classList.contains('see-more')) {
+        // if clicked on branch, not a special button
+        if (!branch.classList.contains('new-branch')
+            && !branch.classList.contains('see-more')) {
 
-        // hide branch menu
-        branchMenu.classList.remove('visible');
-        sidebarBranch.classList.remove('active');
-
-        // if branch isn't already selected
-        if (!branch.classList.contains('selected')) {
-
-          // change location
-          selectedBranch = branch.querySelector('a').textContent;
-          treeLoc[1] = repoName + ':' + selectedBranch;
-          saveTreeLocLS(treeLoc);
-
-          // render sidebar
-          renderSidebarHTML();
-
-        }
-
-      } else if (branch.classList.contains('see-more')) { // if clicked on show more button
-
-        // render branch menu
-        renderBranchMenuHTML(true);
-
-      } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
-        
-        let newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
-
-        if (newBranchName) {
-          
-          // replace all special chars in name with dashes
-        
-          const specialChars = validateString(newBranchName);
-
-          if (specialChars) {
-
-            specialChars.forEach(char => { newBranchName = newBranchName.replaceAll(char, '-') });
-
-          }
-          
-          
           // hide branch menu
           branchMenu.classList.remove('visible');
           sidebarBranch.classList.remove('active');
-          
-          // start loading
-          startLoading();
-          
-          // get origin branch SHA
-          const shaToBranchFrom = selBranchObj.commit.sha;
-          
-          // create branch
-          await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
-          
-          // clear tree from HTML
-          setAttr(branchMenu, 'tree', '');
-          
-          // change location
-          treeLoc[1] = repoName + ':' + newBranchName;
-          saveTreeLocLS(treeLoc);
 
-          // render sidebar
-          renderSidebarHTML();
-          
+          // if branch isn't already selected
+          if (!branch.classList.contains('selected')) {
+
+            // change location
+            selectedBranch = branch.querySelector('a').textContent;
+            treeLoc[1] = repoName + ':' + selectedBranch;
+            saveTreeLocLS(treeLoc);
+
+            // update selected branch in local storage
+            updateModRepoSelectedBranch(fullName, selectedBranch);
+
+            // render sidebar
+            renderSidebarHTML();
+
+          }
+
+        } else if (branch.classList.contains('see-more')) { // if clicked on show more button
+
+          // render branch menu
+          renderBranchMenuHTML(true);
+
+        } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
+
+          let newBranchName = prompt('New branch from \'' + selectedBranch + '\':', 'branch name');
+
+          if (newBranchName) {
+
+            // replace all special chars in name with dashes
+
+            const specialChars = validateString(newBranchName);
+
+            if (specialChars) {
+
+              specialChars.forEach(char => { newBranchName = newBranchName.replaceAll(char, '-') });
+
+            }
+
+
+            // hide branch menu
+            branchMenu.classList.remove('visible');
+            sidebarBranch.classList.remove('active');
+
+            // start loading
+            startLoading();
+
+            // get origin branch SHA
+            const shaToBranchFrom = selBranchObj.commit.sha;
+
+            // create branch
+            await git.createBranch(treeLoc, shaToBranchFrom, newBranchName);
+
+            // update selected branch in local storage
+            updateModRepoSelectedBranch(fullName, selectedBranch);
+
+            // clear branch resp from local storage
+            updateModRepoBranches(fullName, false);
+
+            // change location
+            treeLoc[1] = repoName + ':' + newBranchName;
+            saveTreeLocLS(treeLoc);
+
+            // render sidebar
+            renderSidebarHTML();
+
+          }
+
         }
-        
-      }
+
+      });
 
     });
-
-  });
+    
+  }, (renderAll ? 0 : 180));
   
 }
 
@@ -1260,6 +1476,11 @@ function createNewRepoInHTML() {
   // if not already adding new repo
   if (!fileWrapper.querySelector('.focused')) {
 
+    // if intro screen is visible, remove it
+    if (fileWrapper.querySelector('.intro')) {
+      fileWrapper.querySelector('.intro').remove();
+    }
+    
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -1314,7 +1535,7 @@ function createNewRepoInHTML() {
     });
 
 
-    async function pushNewRepoInHTML() {
+    function pushNewRepoInHTML() {
 
       if (repoEl.classList.contains('focused')) {
 
@@ -1361,27 +1582,33 @@ function createNewRepoInHTML() {
         });
 
         repoEl.querySelector('.name').textContent = repoName;
+        
+        
+        // create new repo obj
+        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true,
+                                      null, true, false, true);
 
+        // add repo obj to modified repos
+        addRepoToModRepos(repoObj);
+        
+        
+        // wait for push animation to finish,
+        // then open new repo
+        window.setTimeout(() => {
 
-        // start loading
-        startLoading();
+          // change location
+          treeLoc[0] = loggedUser;
+          treeLoc[1] = repoName + ':main';
+          saveTreeLocLS(treeLoc);
+
+          // render sidebar
+          renderSidebarHTML();
+          
+        }, (pushAnimDuration * 1000));
+        
         
         // push repo asynchronously
-        const newSha = await git.createRepo(repoName, true);
-        
-        // stop loading
-        stopLoading();
-        
-        
-        // open repo
-        
-        // change location
-        treeLoc[0] = loggedUser;
-        treeLoc[1] = repoName + ':main';
-        saveTreeLocLS(treeLoc);
-
-        // render sidebar
-        renderSidebarHTML();
+        const newSha = git.createRepo(repoName, true);
         
       }
       
@@ -1404,6 +1631,11 @@ function createNewFileInHTML() {
   // if not already adding new file
   if (!fileWrapper.querySelector('.focused')) {
 
+    // if intro screen is visible, remove it
+    if (fileWrapper.querySelector('.intro')) {
+      fileWrapper.querySelector('.intro').remove();
+    }
+    
     // clear existing selections
     if (fileWrapper.querySelector('.selected')) {
       fileWrapper.querySelector('.selected').classList.remove('selected');
@@ -1522,6 +1754,20 @@ function createNewFileInHTML() {
 
 
         // open file
+        
+        // if on mobile device
+        if (isMobile) {
+          
+          // wait for push animation to finish,
+          // then open new file
+          window.setTimeout(() => {
+            
+            // update bottom float
+            updateFloat();
+            
+          }, (pushAnimDuration * 1000));
+          
+        }
 
         // show file content in codeit
         cd.textContent = '\r\n';
@@ -1535,12 +1781,35 @@ function createNewFileInHTML() {
         // update line numbers
         updateLineNumbersHTML();
 
-        // if on desktop
-        if (!isMobile) {
+        // set caret pos in codeit
+        if (!isMobile) cd.setSelection(0, 0);
+        
+        
+        // map tree location
+        const [user, repo] = treeLoc;
+        const [repoName, branch] = repo.split(':');
+        
+        // get repo obj from local storage
+        const repoObj = modifiedRepos[user + '/' + repoName];
 
-          // set caret pos in codeit
-          cd.setSelection(0, 0);
-
+        // if repo is empty
+        if (repoObj && repoObj.empty) {
+          
+          // update repo empty status in local storage
+          updateModRepoEmptyStatus(repoObj.fullName, false);
+          
+          // show search button
+          searchButton.classList.remove('hidden');
+          
+        }
+        
+        
+        // if a pending promise exists,
+        // await it
+        if (pendingPromise) {
+          
+          await pendingPromise;
+          
         }
 
 
@@ -1560,7 +1829,8 @@ function createNewFileInHTML() {
 
         // push file asynchronously
         const newSha = await git.push(commit);
-
+        
+        
         // update file sha in HTML with new sha from Git
         setAttr(fileEl, 'sha', newSha);
 
@@ -1721,36 +1991,12 @@ repoShareButton.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const shareText = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
-  if (!isWindows) {
-
-    try {
-
-      navigator.share({
-        title: 'Share Codeit',
-        text: shareText
-      });
-
-    } catch(e) {
-
-      // if couldn't open share dialog
-      // copy text to clipboard
-      copy(shareText).then(() => {
-        showMessage('Copied text!');
-      });
-
-    }
-
-  } else {
-
-    // if couldn't open share dialog
-    // copy text to clipboard
-    copy(shareText).then(() => {
-      showMessage('Copied text!');
-    });
-
-  }
+  // copy invite to clipboard
+  copy(invite).then(() => {
+    showMessage('Copied invite!');
+  });
 
 })
 

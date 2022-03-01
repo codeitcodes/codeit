@@ -51,10 +51,11 @@ sidebarOpen.addEventListener('click', () => {
 })
 
 
-function playPushAnimation(element) {
+const pushAnimDuration = 0.85; // s
+const endAnimDuration = 0.18; // s
+const checkDelay = (2 - endAnimDuration) * 1000; // ms
 
-  const endAnimDuration = 0.18; // s
-  const checkDelay = 2 - endAnimDuration;
+function playPushAnimation(element) {
 
   element.classList.add('checked');
 
@@ -62,7 +63,7 @@ function playPushAnimation(element) {
 
     element.classList.remove('checked');
 
-  }, (checkDelay * 1000));
+  }, checkDelay);
 
 }
 

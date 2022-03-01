@@ -354,30 +354,9 @@ function addBottomSwipeListener() {
           openLive: true
         });
 
-        if (isMobile) {
-
-          try {
-
-            navigator.share({
-              title: 'Share live view',
-              text: link
-            });
-
-          } catch(e) {
-
-            copy(link).then(() => {
-              showMessage('Copied link!');
-            });
-
-          }
-
-        } else {
-
-          copy(link).then(() => {
-            showMessage('Copied link!');
-          });
-
-        }
+        copy(link).then(() => {
+          showMessage('Copied link!');
+        });
 
       }
 
@@ -571,6 +550,9 @@ async function downloadSelFile() {
 
   } else {
 
+    // show download message
+    showMessage('Downloading...');
+    
     // fetch selected file
     const resp = await git.getBlob(treeLoc, selectedFile.sha);
 

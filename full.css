@@ -748,16 +748,30 @@ body.notransition .sidebar {
   position: sticky;
   top: 0;
   left: 0;
-  opacity: 0;
   height: 2px;
+  width: 120px;
   margin-bottom: -2px;
   border-radius: 6px;
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transition: width .4s ease, opacity .4s linear;
+  transform: translateX(-100%);
   overscroll-behavior: none;
+  will-change: transform;
   z-index: 1000;
+}
+
+.sidebar.loading .loader {
+  animation: loader .72s var(--cubic-function) infinite;
+}
+
+@keyframes loader {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(var(--sidebar-width));
+  }
 }
 
 .sidebar .header {
@@ -1304,6 +1318,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   box-sizing: border-box;
 }
 
+.sidebar .picture-wrapper.faded {
+  background: hsl(228deg 59% 6% / 50%);
+}
+
 .sidebar .intro {
   position: absolute;
   width: 100%;
@@ -1573,44 +1591,48 @@ body.mobile .menu .icon a {
 }
 
 
-.message {
+.message-wrapper {
   position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.message {
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 15px);
   opacity: 0;
-  background: var( --deep-midnight-blue);
+  background: var(--deep-midnight-blue);
   color: #dcddde;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  border-radius: 8px;
+  font-weight: 500;
   line-height: 1.5;
-  pointer-events: none;
-  transition: 0s .18s, .18s var( --bounce-function) opacity;
-  z-index: 1001;
-  /* background: hsl(218deg 23% 35%); */
-  left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width));
-  left: calc(var(--sidebar-width) / 2);
-  left: 50vw;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  /* left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width)); */
+  /* left: calc(var(--sidebar-width) / 2); */
   max-width: 356px;
   white-space: pre;
   overflow-wrap: anywhere;
-  transform: translateY(-10px) translateX(-50%);
-  padding: 0;
+  transition: 0s .18s, .18s var( --bounce-function) opacity;
 }
 
 .message.visible {
   padding: 10px 16px;
   opacity: 1;
   border-radius: 11.5px;
-  transform: translateX(-50%);
   transition: .18s var( --bounce-function);
 }
 
 .message.animating {
-  transform: translateY(-10px) translateX(-50%);
   color: transparent;
   border-radius: 8px;
   padding: 0;
@@ -1855,10 +1877,16 @@ body.mobile.expanded .cube-loader::after {
   fill: rgba(241,241,242,0.63);
   fill: rgb(212 213 215 / 72%);
 }
+
 .push-svg #check {
   fill: transparent;
   transform: scale(1.075);
 }
+
+body.safari .push-svg #check {
+  transform: scale(1);
+}
+
 .push-svg #circle {
   transform-origin: 20.95px 20.95px;
 }
@@ -1866,6 +1894,7 @@ body.mobile.expanded .cube-loader::after {
 .push-wrapper.checked {
   pointer-events: none;
 }
+
 .push-wrapper.checked .push-svg #check {
   transform: scale(1);
   fill: rgb(23, 191, 99);
@@ -1874,6 +1903,13 @@ body.mobile.expanded .cube-loader::after {
              push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
              push-bobble 0.55s 0.3s var(--cubic-function) forwards;
 }
+
+body.safari .push-wrapper.checked .push-svg #check {
+  animation: push-pre-bobble 0.2s,
+             push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+             push-bobble 0.55s 0.3s var(--cubic-function) forwards;
+}
+
 .push-wrapper.checked .push-svg #push {
   fill: transparent;
   transform: scale(0);

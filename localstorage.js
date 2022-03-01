@@ -27,6 +27,18 @@ function loadLS() {
 
   }
 
+  // if modified repos exist in storage
+  if (getStorage('modifiedRepos')) {
+
+    // load modified repos from storage
+    modifiedRepos = Object.fromEntries(JSON.parse(getStorage('modifiedRepos')));
+
+  } else {
+
+    modifiedRepos = {};
+
+  }
+  
   setupLiveView();
   setupCodeitApp();
 
@@ -44,6 +56,15 @@ function updateSelectedFileLS() {
 function updateModFilesLS() {
 
   setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+
+}
+
+
+// repos
+
+function updateModReposLS() {
+
+  setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
 
 }
 

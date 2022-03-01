@@ -1,13 +1,20 @@
 
 // change pushing state
-function changePushingState(to) {
+
+let pendingPromise;
+
+function changePushingState(to, pendingPromise) {
 
   if (to === true) {
 
+    pendingPromise = pendingPromise ?? null;
+    
     window.addEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
   } else {
 
+    pendingPromise = null;
+    
     window.removeEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
   }
@@ -104,30 +111,22 @@ let git = {
 
   },
   
-  // check if user has push access in repository
-  'checkPushAccess': async (treeLoc, userToCheck) => {
-    
+  // get a repository
+  'getRepo': async (treeLoc) => {
+
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
     
-    const [repoName] = repo.split(':');
+    // get repository branch
+    const [repoName, branch] = repo.split(':');
     
-    query += '/repos/' + user + '/' + repoName + '/collaborators/' + userToCheck + '/permission';
+    query += '/repos/' + user + '/' + repoName;
     
     // get the query
     const resp = await axios.get(query, gitToken);
-    
-    if (resp.message &&
-        resp.message.startsWith('Must have push access')) {
-      
-      return false;
-      
-    } else {
-      
-      return true;
-      
-    }
+
+    return resp;
     
   },
   
@@ -147,25 +146,6 @@ let git = {
 
     return resp;
 
-  },
-  
-  // get a repository
-  'getRepo': async (treeLoc) => {
-
-    // map tree location
-    let query = 'https://api.github.com';
-    const [user, repo] = treeLoc;
-    
-    // get repository branch
-    const [repoName, branch] = repo.split(':');
-    
-    query += '/repos/' + user + '/' + repoName;
-    
-    // get the query
-    const resp = await axios.get(query, gitToken);
-
-    return resp;
-    
   },
 
   // push a file
@@ -202,6 +182,7 @@ let git = {
       };
 
     }
+    
 
     // change pushing state
     changePushingState(true);
@@ -225,15 +206,18 @@ let git = {
       name: repoName,
       private: private,
       has_wiki: false,
-      auto_init: true
+      auto_init: false
     };
-
-    // change pushing state
-    changePushingState(true);
     
-    // post the query
-    const resp = await axios.post(query, gitToken, repoData);
-
+    // create post request with query
+    const postRequest = axios.post(query, gitToken, repoData);
+    
+    // change pushing state
+    changePushingState(true, postRequest);
+    
+    // await the request
+    const resp = await postRequest;
+    
     // change pushing state
     changePushingState(false);
     
@@ -247,7 +231,6 @@ let git = {
     // map tree location
     let query = 'https://api.github.com';
     const [user, repo] = treeLoc;
-    
     const [repoName] = repo.split(':');
         
     query += '/repos/'+ user +'/'+ repoName +'/git/refs';
@@ -276,9 +259,10 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
 
     const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo + '/forks';
+                  '/' + user + '/' + repoName + '/forks';
 
     // change pushing state
     changePushingState(true);
@@ -300,9 +284,10 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
 
     const query = 'https://api.github.com/repos' +
-                  '/' + user + '/' + repo +
+                  '/' + user + '/' + repoName +
                   '/collaborators/' + usernameToInvite;
 
     // change pushing state
@@ -323,6 +308,7 @@ let git = {
 
     // map tree location
     const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
     
     let query = 'https://api.github.com/user' +
                 '/repository_invitations';
@@ -331,16 +317,16 @@ let git = {
     const invites = await axios.get(query, gitToken);
 
     // find repo invite
-    let repoInvite = invites.filter(invite =>
+    const repoInvite = invites.filter(invite =>
                                       invite.repository.full_name ===
-                                      (user + '/' + repo)
-                                   );
+                                      (user + '/' + repoName)
+                                     );
     
     // if invite exists
-    if (repoInvite) {
+    if (repoInvite.length > 0) {
       
       // accept invite
-      query += '/' + repoInvite.node_id;
+      query += '/' + repoInvite[0].id;
       
       // patch the query
       const resp = await axios.patch(query, gitToken);
@@ -352,6 +338,23 @@ let git = {
       return false;
       
     }
+
+  },
+  
+  // delete a repository
+  'deleteRepo': async (treeLoc) => {
+
+    // map tree location
+    const [user, repo] = treeLoc;
+    const [repoName] = repo.split(':');
+    
+    const query = 'https://api.github.com/repos' +
+                  '/' + user + '/' + repoName;
+    
+    // dispatch request with query
+    await axios.delete(query, gitToken);
+    
+    return;
 
   }
 
