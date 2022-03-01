@@ -1584,22 +1584,27 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').textContent = repoName;
         
         
-        // open new repository
-
-        // change location
-        treeLoc[0] = loggedUser;
-        treeLoc[1] = repoName + ':main';
-        saveTreeLocLS(treeLoc);
-        
-        // add repo obj to modified repos
-        
+        // create new repo obj
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true,
                                       null, true, false, true);
-        
-        addRepoToModRepos(repoObj);
 
-        // render sidebar
-        renderSidebarHTML();
+        // add repo obj to modified repos
+        addRepoToModRepos(repoObj);
+        
+        
+        // wait for push animation to finish,
+        // then open new repo
+        window.setTimeout(() => {
+
+          // change location
+          treeLoc[0] = loggedUser;
+          treeLoc[1] = repoName + ':main';
+          saveTreeLocLS(treeLoc);
+
+          // render sidebar
+          renderSidebarHTML();
+          
+        }, (pushAnimDuration * 1000));
         
         
         // push repo asynchronously
