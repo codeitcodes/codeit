@@ -547,7 +547,7 @@ async function renderSidebarHTML() {
             
           }
 
-        });
+        }
         
       } else {
         
