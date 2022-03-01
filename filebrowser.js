@@ -1802,6 +1802,15 @@ function createNewFileInHTML() {
           searchButton.classList.remove('hidden');
           
         }
+        
+        
+        // if a pending promise exists,
+        // await it
+        if (pendingPromise) {
+          
+          await pendingPromise;
+          
+        }
 
 
         // create commit
