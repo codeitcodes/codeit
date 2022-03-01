@@ -1,12 +1,19 @@
 
 // change pushing state
-function changePushingState(to) {
+
+let pendingPromise;
+
+function changePushingState(to, pendingPromise) {
 
   if (to === true) {
+
+    pendingPromise = pendingPromise ?? null;
     
     window.addEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
   } else {
+
+    pendingPromise = null;
     
     window.removeEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
@@ -202,8 +209,17 @@ let git = {
       auto_init: false
     };
     
-    // post the query
-    const resp = await axios.post(query, gitToken, repoData);
+    // create post request with query
+    const postRequest = axios.post(query, gitToken, repoData);
+    
+    // change pushing state
+    changePushingState(true, postRequest);
+    
+    // await the request
+    const resp = await postRequest;
+    
+    // change pushing state
+    changePushingState(false);
     
     return resp.full_name;
 
