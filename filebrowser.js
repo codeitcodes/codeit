@@ -204,7 +204,7 @@ async function renderSidebarHTML() {
 
   // render modified files
   
-  let modifiedFilesTemp;
+  let eclipsedFiles;
   
   // if navigating in repository
   if (repo != '') {
@@ -241,11 +241,8 @@ async function renderSidebarHTML() {
     if (modFilesChanged) updateModFilesLS();
     
     
-    // create temporary modified files array
-    modifiedFilesTemp = Object.values(JSON.parse(JSON.stringify(modifiedFiles)));
-
-    // get all modified files in directory
-    modifiedFilesTemp = modifiedFilesTemp.filter(modFile => modFile.dir == treeLoc.join());
+    // get all eclipsed files in directory
+    eclipsedFiles = Object.values(modifiedFiles).filter(modFile => modFile.dir == treeLoc.join());
 
   }
   
@@ -325,7 +322,7 @@ async function renderSidebarHTML() {
       header.classList.remove('out-of-repo');
       
       // if files exist
-      if (resp.length > 0 || modifiedFilesTemp.length > 0) {
+      if (resp.length > 0 || eclipsedFiles.length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
@@ -338,16 +335,16 @@ async function renderSidebarHTML() {
 
             let file = getLatestVersion(item);
 
-            // search for matching modified files
-            for (let i = 0; i < modifiedFilesTemp.length; i++) {
+            // search for matching eclipsed files
+            for (let i = 0; i < eclipsedFiles.length; i++) {
 
-              let modFile = modifiedFilesTemp[i];
+              let modFile = eclipsedFiles[i];
 
-              // if modified file has matching SHA or name
+              // if eclipsed file has matching SHA or name
               if (modFile.sha === file.sha || modFile.name === file.name) {
 
-                // remove modified file from temporary array
-                modifiedFilesTemp.splice(i, 1);
+                // remove eclipsed file from array
+                eclipsedFiles.splice(i, 1);
 
                 // reset index
                 i--;
@@ -399,18 +396,18 @@ async function renderSidebarHTML() {
         });
 
 
-        // render modified files from temporary array
+        // render eclipsed files from array
 
-        let modFileNames = {};
+        let eclipsedFileNames = {};
 
-        modifiedFilesTemp.forEach(file => {
+        eclipsedFiles.forEach(file => {
 
           // if file isn't already in HTML
-          if (!modFileNames[file.name]) {
+          if (!eclipsedFileNames[file.name]) {
 
             // add file to HTML
 
-            modFileNames[file.name] = true;
+            eclipsedFileNames[file.name] = true;
 
             // get the file's latest version
             file = getLatestVersion(file);
