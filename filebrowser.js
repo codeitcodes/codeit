@@ -464,7 +464,7 @@ async function renderSidebarHTML() {
       let renderedRepos = {};
       
       // if repositories exist
-      if (resp.length > 0) {
+      if (resp.length > 0 || Object.keys(modifiedRepos).length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
