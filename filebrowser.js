@@ -1501,7 +1501,7 @@ function createNewRepoInHTML() {
     });
 
 
-    async function pushNewRepoInHTML() {
+    function pushNewRepoInHTML() {
 
       if (repoEl.classList.contains('focused')) {
 
@@ -1550,16 +1550,6 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').textContent = repoName;
         
         
-        // start loading
-        startLoading();
-        
-        // push repo asynchronously
-        const newSha = await git.createRepo(repoName, true);
-        
-        // stop loading
-        stopLoading();
-        
-        
         // open new repository
 
         // change location
@@ -1574,17 +1564,12 @@ function createNewRepoInHTML() {
         
         addRepoToModRepos(repoObj);
 
-        // show intro screen
-        fileWrapper.innerHTML = fileIntroScreen;
-
-        // show repo name in sidebar
-        sidebarLogo.innerText = repoName;
-
-        // change header options
-        header.classList.remove('out-of-repo');
-
-        // hide search button
-        searchButton.classList.add('hidden');
+        // render sidebar
+        renderSidebarHTML();
+        
+        
+        // push repo asynchronously
+        const newSha = git.createRepo(repoName, true);
         
       }
       
