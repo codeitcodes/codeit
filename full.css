@@ -755,7 +755,7 @@ body.notransition .sidebar {
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   overscroll-behavior: none;
   will-change: transform;
   z-index: 1000;
