@@ -1334,7 +1334,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   box-sizing: border-box;
   padding-right: 10px;
   padding-left: 10px;
-  overflow-y: auto;
 }
 
 .sidebar .files .intro {
