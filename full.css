@@ -767,7 +767,7 @@ body.notransition .sidebar {
 
 @keyframes loader {
   from {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   }
   to {
     transform: translateX(var(--sidebar-width));
