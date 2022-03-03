@@ -96,8 +96,7 @@ self.addEventListener('fetch', (evt) => {
     function() {
   
       broadcast.postMessage({
-        payload: evt.request,
-        type: 'json'
+        payload: evt.request
       });
       
       // try the cache
