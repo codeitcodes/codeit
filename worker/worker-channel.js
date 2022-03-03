@@ -3,17 +3,30 @@
 // client/service worker communication channel
 
 
-// create broadcast channel
-const broadcast = new BroadcastChannel('worker-channel');
+// setup worker channel
+function setupWorkerChannel() {
 
-// add message listener
-broadcast.onmessage = (event) => {
-  console.log(event.data.payload);
-};
+  // register service worker
+  navigator.serviceWorker.register('/worker/service-worker.js');
 
-// send request
-broadcast.postMessage({
-  type: 'hello!'
-});
+  // create broadcast channel
+  const broadcast = new BroadcastChannel('worker-channel');
 
-console.log('registered listener');
+  // add message listener
+  broadcast.onmessage = (event) => {
+    console.log(event.data.payload);
+  };
+
+  // send request
+  broadcast.postMessage({
+    type: 'hello!'
+  });
+
+  console.log('registered listener');
+  
+}
+
+
+// setup worker channel
+setupWorkerChannel();
+
