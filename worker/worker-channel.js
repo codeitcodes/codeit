@@ -15,7 +15,7 @@ async function setupWorkerChannel() {
   // add message listener
   broadcast.onmessage = (event) => {
     
-    if (event.data.type === 'JSON') {
+    if (event.data.type === 'json') {
       
       console.log(JSON.parse(event.data.payload));
       
