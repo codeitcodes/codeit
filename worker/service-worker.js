@@ -91,28 +91,26 @@ self.addEventListener('activate', (evt) => {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
   
+  broadcast.postMessage({
+    payload: evt.request
+  });
+  
   // respond to request
   evt.respondWith(
-    function() {
-  
-      broadcast.postMessage({
-        payload: evt.request
-      });
-      
-      // try the cache
-      caches.match(evt.request).then(function(response) {
-  
-        // fall back to network
-        return response || fetch(evt.request);
-  
-      }).catch(function() {
-  
-        // if both fail, show the fallback:
-        return caches.match('full.html');
-  
-      })
-      
-    }
+
+    // try the cache
+    caches.match(evt.request).then(function(response) {
+
+      // fall back to network
+      return response || fetch(evt.request);
+
+    }).catch(function() {
+
+      // if both fail, show the fallback:
+      return caches.match('full.html');
+
+    })
+
   );
   
 });
