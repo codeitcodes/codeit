@@ -18,5 +18,5 @@ self.addEventListener('fetch', (evt) => {
   
   broadcast.postMessage({ payload: evt });
   
-}
+});
 
