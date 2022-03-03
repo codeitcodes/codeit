@@ -12,3 +12,5 @@ window.addEventListener('message', (event) => {
   }
   
 });
+
+console.log('registered listener');
