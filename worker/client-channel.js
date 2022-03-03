@@ -14,10 +14,7 @@ self.clients.matchAll({
     
     // send a response - the clients
     // array is ordered by last focused
-    clients[0].postMessage({
-      type: 'test',
-      value: 'hello!',
-    });
+    clients[0].postMessage('hello!');
     
   }
   
