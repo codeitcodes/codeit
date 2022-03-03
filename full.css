@@ -464,6 +464,7 @@ body.notransition .live-view.file-open {
 
 .live-view img {
   width: 100%;
+  max-height: 100%;
   max-width: max-content;
   background: hsl(0, 0%, 90%);
 }
