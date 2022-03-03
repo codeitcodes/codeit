@@ -2,15 +2,18 @@
 // client-side
 // client/service worker communication channel
 
-// add message event listener
-window.addEventListener('message', (event) => {
 
-  console.log(event);
-  
-  // if message is from service worker
-  if (event.source) {
-  }
-  
+// create broadcast channel
+const broadcast = new BroadcastChannel('worker-channel');
+
+// add message listener
+broadcast.onmessage = (event) => {
+  console.log(event.data.payload);
+};
+
+// send request
+broadcast.postMessage({
+  type: 'hello!'
 });
 
 console.log('registered listener');
