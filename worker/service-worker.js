@@ -102,6 +102,8 @@ self.addEventListener('fetch', (evt) => {
   // respond to request
   evt.respondWith(
 
+    return 'hi';
+
     // try the cache
     caches.match(evt.request).then(function(response) {
 
