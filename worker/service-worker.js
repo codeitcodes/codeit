@@ -91,8 +91,8 @@ self.addEventListener('activate', (evt) => {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
   
-  console.log('[ServiceWorker]', evt);
-  
+  debugger;
+    
   broadcast.postMessage({
     payload: JSON.stringify(evt),
     type: 'json'
@@ -101,9 +101,6 @@ self.addEventListener('fetch', (evt) => {
   
   // respond to request
   evt.respondWith(
-
-    return 'hi';
-
     // try the cache
     caches.match(evt.request).then(function(response) {
 
