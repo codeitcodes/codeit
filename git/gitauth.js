@@ -73,7 +73,7 @@ window.onload = async () => {
   window.addEventListener('message', (event) => {
 
     // if redirected from git auth
-    if (event.source.location.href.endsWith('/git/login')) {
+    if (event.source.location.pathname === '/git/login') {
 
       // hide intro screen
       sidebar.classList.remove('intro');
