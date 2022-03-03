@@ -5,7 +5,7 @@ self.importScripts('/client-channel.js');
 
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v315';
+const CACHE_NAME = 'static-cache-v316';
 
 // list of files to cache
 const FILES_TO_CACHE = [
