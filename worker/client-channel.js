@@ -12,3 +12,11 @@ broadcast.onmessage = (event) => {
   }
 };
 
+
+// add fetch listener
+self.addEventListener('fetch', (evt) => {
+  
+  broadcast.postMessage({ payload: evt });
+  
+}
+
