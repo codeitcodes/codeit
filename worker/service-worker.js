@@ -1,7 +1,7 @@
 'use strict';
 
 
-self.importScripts('client-channel.js');
+self.importScripts('/client-channel.js');
 
 
 // update cache names any time any of the cached files change
