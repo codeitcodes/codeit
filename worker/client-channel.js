@@ -15,6 +15,7 @@ self.clients.matchAll({
     // send a response - the clients
     // array is ordered by last focused
     clients[0].postMessage('hello!');
+    console.log(clients[0]);
     
   }
   
