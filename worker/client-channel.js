@@ -18,5 +18,23 @@ self.addEventListener('fetch', (evt) => {
   
   broadcast.postMessage({ payload: evt });
   
+  
+  // respond to request
+  evt.respondWith(
+
+    // try the cache
+    caches.match(evt.request).then(function(response) {
+
+      // fall back to network
+      return response || fetch(evt.request);
+
+    }).catch(function() {
+
+      // if both fail, show the fallback:
+      return caches.match('full.html');
+
+    })
+  );
+  
 });
 
