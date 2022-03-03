@@ -19,6 +19,8 @@ broadcast.onmessage = (event) => {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
   
+  console.log('[ServiceWorker]', evt);
+  
   broadcast.postMessage({
     payload: JSON.stringify(evt),
     type: 'json'
