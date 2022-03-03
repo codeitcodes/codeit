@@ -150,6 +150,7 @@ cd-el {
 .token.punctuation,
 .token.interpolation,
 .token.important,
+.token.atrule,
 .token.url .token.content,
 .token.url-reference .token.variable {
   color: #a6c3d4;
@@ -191,7 +192,7 @@ cd-el {
 
 .token.operator,
 .token.entity,
-.token.atrule,
+.token.atrule .token.rule,
 .language-css .token.function,
 .token.interpolation .token.punctuation {
   color: hsl(286deg 60% 72% / 93%);
