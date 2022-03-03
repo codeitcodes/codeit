@@ -2,13 +2,24 @@
 // worker-side
 // client/service worker communication channel
 
-// add message event listener
-window.addEventListener('message', (event) => {
-
-  console.log(event);
+// find the current client
+self.clients.matchAll({
   
-  // if message is from service worker
-  if (event.source) {
+  includeUncontrolled: true,
+  type: 'window'
+  
+}).then((clients) => {
+  
+  if (clients && clients.length) {
+    
+    // send a response - the clients
+    // array is ordered by last focused
+    clients[0].postMessage({
+      type: 'test',
+      value: 'hello!',
+    });
+    
   }
   
 });
+    
