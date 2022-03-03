@@ -299,20 +299,12 @@
 
     window.addEventListener('load', () => {
 
-        body.classList.add('loaded');
+      body.classList.add('loaded');
+      
+      // register service worker
+      navigator.serviceWorker.register('/worker/service-worker.js');
 
     });
-
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-
-      window.addEventListener('load', () => {
-
-        navigator.serviceWorker.register('/service-worker.js');
-
-      });
-
-    }
 
   </script>
 
