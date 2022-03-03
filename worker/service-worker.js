@@ -96,7 +96,7 @@ self.addEventListener('fetch', (evt) => {
     function() {
   
       broadcast.postMessage({
-        payload: JSON.stringify(evt),
+        payload: evt.request,
         type: 'json'
       });
       
