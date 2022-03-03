@@ -8,7 +8,10 @@ const broadcast = new BroadcastChannel('worker-channel');
 
 broadcast.onmessage = (event) => {
   if (event.data && event.data.type === 'hello!') {
-    broadcast.postMessage({ payload: 'hi, what\'s up?' });
+    broadcast.postMessage({
+      payload: 'hi, what\'s up?',
+      type: 'text'
+    });
   }
 };
 
@@ -16,7 +19,10 @@ broadcast.onmessage = (event) => {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
   
-  broadcast.postMessage({ payload: evt });
+  broadcast.postMessage({
+    payload: JSON.stringify(evt),
+    type: 'json'
+  });
   
   
   // respond to request
