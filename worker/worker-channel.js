@@ -21,8 +21,6 @@ function setupWorkerChannel() {
   broadcast.postMessage({
     type: 'hello!'
   });
-
-  console.log('registered listener');
   
 }
 
