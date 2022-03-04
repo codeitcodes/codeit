@@ -4,7 +4,7 @@
 
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v319';
+const CACHE_NAME = 'static-cache-v320';
 
 
 // create broadcast channel
@@ -21,10 +21,12 @@ broadcast.onmessage = (event) => {
 
 self.addEventListener('fetch', (evt) => {
   
-  console.log(evt);
-  /*broadcast.postMessage({
-    payload: evt.clone()
-  });*/
+  console.log(evt.request.method, evt.request.url);
+  broadcast.postMessage({
+    payload: ('[ServiceWorker] Intercepted ' + evt.request.method
+              + ' ' + evt.request.url
+              + '\nfrom origin' + evt.request.referrer)
+  });
   
   evt.respondWith(
 
