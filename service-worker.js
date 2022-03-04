@@ -1,5 +1,7 @@
 'use strict';
 
+self.importScripts('/worker/client-channel.js');
+
 // update cache names any time any of the cached files change
 const CACHE_NAME = 'static-cache-v317';
 
@@ -103,6 +105,4 @@ self.addEventListener('fetch', (evt) => {
   );
 
 });
-
-//self.importScripts('/worker/client-channel.js');
 
