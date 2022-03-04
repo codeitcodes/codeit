@@ -21,7 +21,6 @@ broadcast.onmessage = (event) => {
 
 self.addEventListener('fetch', (evt) => {
   
-  console.log(evt.request.method, evt.request.url);
   broadcast.postMessage({
     payload: ('[ServiceWorker] Intercepted ' + evt.request.method
               + ' ' + evt.request.url
