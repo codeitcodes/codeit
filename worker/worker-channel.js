@@ -39,7 +39,5 @@ async function setupWorkerChannel() {
 
 
 // setup worker channel
-window.addEventListener('load', () => {
-  setupWorkerChannel();
-});
+setupWorkerChannel();
 
