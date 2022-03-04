@@ -85,24 +85,3 @@ self.addEventListener('activate', (evt) => {
 
 });
 
-
-self.addEventListener('fetch', (evt) => {
-  
-  evt.respondWith(
-
-    // try the cache
-    caches.match(evt.request).then(function(response) {
-
-      // fall back to network
-      return response || fetch(evt.request);
-
-    }).catch(function() {
-
-      // if both fail, show the fallback:
-      return caches.match('full.html');
-
-    })
-  );
-
-});
-
