@@ -9,9 +9,33 @@ const broadcast = new BroadcastChannel('worker-channel');
 broadcast.onmessage = (event) => {
   if (event.data && event.data.type === 'hello!') {
     broadcast.postMessage({
-      payload: 'hi, what\'s up?',
-      type: 'text'
+      payload: 'hi, what\'s up?'
     });
   }
 };
+
+
+self.addEventListener('fetch', (evt) => {
+  
+  broadcast.postMessage({
+    payload: evt.request
+  });
+  
+  evt.respondWith(
+
+    // try the cache
+    caches.match(evt.request).then(function(response) {
+
+      // fall back to network
+      return response || fetch(evt.request);
+
+    }).catch(function() {
+
+      // if both fail, show the fallback:
+      return caches.match('full.html');
+
+    })
+  );
+
+});
 
