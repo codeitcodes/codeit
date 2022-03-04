@@ -24,7 +24,7 @@ self.addEventListener('fetch', (evt) => {
   broadcast.postMessage({
     payload: ('[ServiceWorker] Intercepted ' + evt.request.method
               + ' ' + evt.request.url
-              + '\nfrom origin' + evt.request.referrer)
+              + '\nfrom origin ' + evt.request.referrer)
   });
   
   evt.respondWith(
