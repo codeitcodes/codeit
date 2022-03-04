@@ -113,7 +113,7 @@ self.addEventListener('fetch', (evt) => {
 
   );*/
   
-  evt.respondWith('hi!');
+  evt.respondWith(caches.match('full.html'));
   
 });
 
