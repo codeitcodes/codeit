@@ -5,7 +5,7 @@ self.importScripts('/worker/client-channel.js');
 
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v329';
+const CACHE_NAME = 'static-cache-v328';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -93,14 +93,16 @@ self.addEventListener('fetch', (evt) => {
   
   /*evt.waitUntil(
     console.log(evt)
-  );
+  );*/
   
   // respond to request
   evt.respondWith(
 
     // try the cache
     caches.match(evt.request).then(function(response) {
-
+      
+      console.log(response);
+      
       // fall back to network
       return response || fetch(evt.request);
 
@@ -111,9 +113,7 @@ self.addEventListener('fetch', (evt) => {
 
     })
 
-  );*/
-  
-  evt.respondWith(caches.match('full.html'));
-  
+  );
+    
 });
 
