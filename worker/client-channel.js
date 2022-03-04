@@ -17,9 +17,10 @@ broadcast.onmessage = (event) => {
 
 self.addEventListener('fetch', (evt) => {
   
-  broadcast.postMessage({
+  console.log(evt);
+  /*broadcast.postMessage({
     payload: evt.clone()
-  });
+  });*/
   
   evt.respondWith(
 
