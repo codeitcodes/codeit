@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v329';
+const CACHE_NAME = 'static-cache-v330';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -112,5 +112,5 @@ self.addEventListener('fetch', (evt) => {
 });
 
 
-self.importScripts('/worker/client-channel.js');
+//self.importScripts('/worker/client-channel.js');
 
