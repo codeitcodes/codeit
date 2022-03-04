@@ -1,30 +1,30 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v315';
+const CACHE_NAME = 'static-cache-v316';
 
 // list of files to cache
 const FILES_TO_CACHE = [
 
-  '/lib/codeit.js',
-  '/lib/prism.js',
+  '../lib/codeit.js',
+  '../lib/prism.js',
 
-  '/lib/plugins/codeit-line-numbers.js',
-  '/lib/plugins/codeit-match-braces.js',
-  '/lib/plugins/codeit-autolinker.js',
+  '../lib/plugins/codeit-line-numbers.js',
+  '../lib/plugins/codeit-match-braces.js',
+  '../lib/plugins/codeit-autolinker.js',
 
-  '/full.html',
-  '/full.css',
+  '../full.html',
+  '../full.css',
 
-  '/utils.js',
-  '/manifest.js',
-  '/files.js',
-  '/links.js',
-  '/repos.js',
-  '/git/gitapi.js',
-  '/git/gitauth.js',
-  '/codedrop.js',
-  '/filebrowser.js',
+  '../utils.js',
+  '../manifest.js',
+  '../files.js',
+  '../links.js',
+  '../repos.js',
+  '../git/gitapi.js',
+  '../git/gitauth.js',
+  '../codedrop.js',
+  '../filebrowser.js',
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
