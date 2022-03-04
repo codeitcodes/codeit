@@ -1,7 +1,7 @@
 'use strict';
 
 // update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v330';
+const CACHE_NAME = 'static-cache-v315';
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -84,19 +84,13 @@ self.addEventListener('activate', (evt) => {
 });
 
 
-// add fetch listener
 self.addEventListener('fetch', (evt) => {
   
-  /*evt.waitUntil(
-    console.log(evt)
-  );*/
-  
-  // respond to request
   evt.respondWith(
 
     // try the cache
     caches.match(evt.request).then(function(response) {
-            
+
       // fall back to network
       return response || fetch(evt.request);
 
@@ -106,11 +100,9 @@ self.addEventListener('fetch', (evt) => {
       return caches.match('full.html');
 
     })
-
   );
-    
-});
 
+});
 
 //self.importScripts('/worker/client-channel.js');
 
