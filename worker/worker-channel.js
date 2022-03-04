@@ -4,10 +4,7 @@
 
 
 // setup worker channel
-async function setupWorkerChannel() {
-
-  // register service worker
-  await navigator.serviceWorker.register('/worker/service-worker.js');
+function setupWorkerChannel() {
 
   // create broadcast channel
   const broadcast = new BroadcastChannel('worker-channel');
