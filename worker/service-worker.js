@@ -91,7 +91,7 @@ self.addEventListener('activate', (evt) => {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
   
-  evt.waitUntil(
+  /*evt.waitUntil(
     console.log(evt)
   );
   
@@ -111,7 +111,9 @@ self.addEventListener('fetch', (evt) => {
 
     })
 
-  );
+  );*/
+  
+  evt.respondWith('hi!');
   
 });
 
