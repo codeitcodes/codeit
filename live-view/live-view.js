@@ -660,10 +660,14 @@ const liveFetchURL = window.location.origin + '/live-fetch/';
 
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
-
-  // clear console
-  console.clear();
-  logVersion();
+  
+  if (!isDev) {
+    
+    // clear console
+    console.clear();
+    logVersion();
+    
+  }
 
 
   liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
@@ -1044,9 +1048,13 @@ function addScript(documentNode, code, src, type) {
 // render live view for Python files
 async function renderLiveViewPython(file) {
 
-  // clear console
-  console.clear();
-  logVersion();
+  if (!isDev) {
+    
+    // clear console
+    console.clear();
+    logVersion();
+    
+  }
 
 
   liveView.innerHTML = '<iframe name="Python Context" class="python-frame" style="display: none"></iframe>'
