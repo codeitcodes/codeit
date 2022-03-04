@@ -3,6 +3,10 @@
 // client/service worker communication channel
 
 
+// update cache names any time any of the cached files change
+const CACHE_NAME = 'static-cache-v319';
+
+
 // create broadcast channel
 const broadcast = new BroadcastChannel('worker-channel');
 
