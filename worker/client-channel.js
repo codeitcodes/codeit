@@ -11,10 +11,10 @@ const WORKER_NAME = 'codeit-worker-v328';
 const INTERNAL_PATHS = {
   
   internal: 'https://codeit.codes/full',
-  _internal_: 'https://dev.codeit.codes/full',
+  internal_: 'https://dev.codeit.codes/full',
   
   run: 'https://codeit.codes/run',
-  _run_: 'https://dev.codeit.codes/run'
+  run_: 'https://dev.codeit.codes/run'
   
 }
 
@@ -26,7 +26,7 @@ function getPathType(path) {
     
     if (path.startsWith(pathType[1])) {
       
-      return pathType[0].replaceAll('_', '');
+      return pathType[0].replace('_', '');
       
     }
     
@@ -96,7 +96,7 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  evt.respondWith(async () => {
+  evt.respondWith(() => {
   
     // get request type
     const type = getPathType(evt.request.referrer);
@@ -107,7 +107,7 @@ self.addEventListener('fetch', (evt) => {
       workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
       
       // return response from cache
-      return await caches.match(evt.request);
+      return caches.match(evt.request) ?? fetch(evt.request);
       
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
@@ -115,14 +115,14 @@ self.addEventListener('fetch', (evt) => {
       workerLog('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
       
       // return response from client
-      return await sendRequestToClient(evt.request);
+      return sendRequestToClient(evt.request);
       
     } else { // if fetch is external
       
       workerLog('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
       
       // return response from network
-      return await fetch(evt.request);
+      return fetch(evt.request);
       
     }
     
