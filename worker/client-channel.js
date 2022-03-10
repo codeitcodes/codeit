@@ -96,8 +96,10 @@ function sendRequestToClient(request) {
 
 // handle fetch request
 function handleFetchRequest(request) {
-
+    
   return new Promise((resolve, reject) => {
+
+    workerLog(request);
 
     // get request path type
     const pathType = getPathType(request.referrer);
