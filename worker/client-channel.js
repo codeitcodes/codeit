@@ -50,8 +50,6 @@ function sendRequestToClient(request) {
     // send request to client
     workerChannel.postMessage({
       url: request.url,
-      method: request.method,
-      origin: request.referrer,
       type: 'request'
     });
     
@@ -103,7 +101,8 @@ self.addEventListener('fetch', (evt) => {
       // return response from cache
       return caches.match(evt.request);
       
-    } else if (type === 'run') { // if fetch originates in live view
+    } else if (type === 'run'
+               && evt.request.type === 'GET') { // if fetch originates in live view
       
       // return response from client
       return sendRequestToClient(evt.request);
