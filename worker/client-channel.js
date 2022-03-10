@@ -99,7 +99,7 @@ self.addEventListener('fetch', (evt) => {
     if (type === 'internal') {
       
       // return response from cache
-      return caches.match(evt.request);
+      return caches.match(evt.request) || fetch(evt.request);
       
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
