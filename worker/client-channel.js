@@ -11,10 +11,10 @@ const WORKER_NAME = 'codeit-worker-v327';
 const INTERNAL_PATHS = {
   
   internal: 'https://codeit.codes/full',
-  internal_: 'https://dev.codeit.codes/full',
+  _internal_: 'https://dev.codeit.codes/full',
   
   run: 'https://codeit.codes/run',
-  run_: 'https://dev.codeit.codes/run'
+  _run_: 'https://dev.codeit.codes/run'
   
 }
 
