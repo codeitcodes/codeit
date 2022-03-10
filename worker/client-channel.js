@@ -3,26 +3,51 @@
 // client/service worker communication channel
 
 
-// update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v322';
+// update worker name when worker changes
+const WORKER_NAME = 'codeit-worker-v324';
+
+
+// internal paths
+const INTERNAL_PATHS = {
+  
+  internal: 'https://codeit.codes/full',
+  _internal_: 'https://dev.codeit.codes/full',
+  __internal__: 'https://plausible.io/js/plausible.js',
+  
+  run: 'https://codeit.codes/run',
+  _run_: 'https://dev.codeit.codes/run'
+  
+}
+
+
+// get path type
+function getPathType(path) {
+  
+  Object.entries(INTERNAL_PATHS).forEach(pathType => {
+    
+    if (path.startsWith(pathType[1])) {
+      
+      return pathType[0].replaceAll('_', '');
+      
+    }
+    
+  });
+  
+  return 'external';
+  
+}
 
 
 // create broadcast channel
-const broadcast = new BroadcastChannel('worker-channel');
-
-broadcast.onmessage = (evt) => {
-  if (event.data && event.data.type === 'hello!') {
-    broadcast.postMessage({
-      payload: 'hi, what\'s up?'
-    });
-  }
-};
+const channel = new BroadcastChannel('worker-channel');
 
 
+// send fetch request to client
 function sendRequestToClient(request) {
   
   return new Promise((resolve, reject) => {
     
+    // send request to client
     broadcast.postMessage({
       url: request.url,
       method: request.method,
@@ -30,14 +55,29 @@ function sendRequestToClient(request) {
       type: 'request'
     });
     
-    broadcast.addEventListener('message', (evt) => {
+    
+    // add client channel listener
+    channel.addEventListener('message', (evt) => {
       
-      if (event.data.type === 'response'
-          && event.data.url === request.url) {
+      console.log('[ServiceWorker] Called client channel listener');
+      
+      const handler = (evt) => {
         
-        resolve(event.data.response);
+        // if response url matches
+        if (event.data.type === 'response'
+            && event.data.url === request.url) {
+          
+          // remove channel listener
+          channel.removeEventListener('message', handler);
+          
+          // resolve promise
+          resolve(event.data.response);
+          
+        }
         
       }
+      
+      return handler;
       
     });
     
@@ -48,29 +88,34 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  const resp = sendRequestToClient(evt.request);
-  
-  broadcast.postMessage({
-    payload: ('[ServiceWorker] Intercepted ' + evt.request.method
+  console.log('[ServiceWorker] Intercepted ' + evt.request.method
               + ' ' + evt.request.url
-              + '\nfrom origin ' + evt.request.referrer)
-  });
+              + '\nfrom origin ' + evt.request.referrer);
   
-  evt.respondWith(
+  evt.respondWith(() => {
+  
+    // get request type
+    const type = getPathType(evt.request.referrer);
 
-    // try the cache
-    caches.match(evt.request).then(function(response) {
-
-      // fall back to network
-      return response || fetch(evt.request);
-
-    }).catch(function() {
-
-      // if both fail, show the fallback:
-      return caches.match('full.html');
-
-    })
-  );
+    // if fetch originates in codeit itself
+    if (type === 'internal') {
+      
+      // return response from cache
+      return caches.match(evt.request);
+      
+    } else if (type === 'run') { // if fetch originates in live view
+      
+      // return response from client
+      return sendRequestToClient(evt.request);
+      
+    } else { // if fetch is external
+      
+      // return response from network
+      return fetch(evt.request);
+      
+    }
+    
+  });
 
 });
 
