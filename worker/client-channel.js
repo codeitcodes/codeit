@@ -99,7 +99,7 @@ function handleFetchRequest(request) {
     
   return new Promise((resolve, reject) => {
 
-    workerLog(JSON.parse(request));
+    workerLog(request.url);
 
     // get request path type
     const pathType = getPathType(request.referrer);
