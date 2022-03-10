@@ -672,6 +672,10 @@ function handleLiveViewRequest(request) {
     // return open live view file
     return openLiveViewFile;
     
+  } else {
+    
+    return '';
+    
   }
   
 }
