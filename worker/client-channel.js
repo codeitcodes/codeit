@@ -113,7 +113,7 @@ function handleFetchRequest(request) {
       console.log('[ServiceWorker] Intercepted internal fetch\n' + request.url);
   
       // return response from cache
-      resolve(caches.match(request));
+      resolve(caches.match(request) || fetch(request));
   
     } else if (pathType === 'run'
       && request.type === 'GET') { // if fetch originated in live view
