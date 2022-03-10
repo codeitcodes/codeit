@@ -107,7 +107,7 @@ self.addEventListener('fetch', (evt) => {
       workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
       
       // return response from cache
-      return caches.match(evt.request) || fetch(evt.request);
+      return caches.match(evt.request);
       
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
