@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v331';
+const WORKER_NAME = 'codeit-worker-v332';
 
 
 // internal paths
@@ -96,7 +96,7 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  evt.respondWith(return function() {
+  evt.respondWith(() => {
   
     // get request type
     const type = getPathType(evt.request.referrer);
