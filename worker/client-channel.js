@@ -4,17 +4,17 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v346';
+const WORKER_NAME = 'codeit-worker-v347';
 
 
 // internal paths
 const INTERNAL_PATHS = {
+    
+  internal: 'https://codeit.codes/',
+  internal_: 'https://dev.codeit.codes/',
   
   run: 'https://codeit.codes/run',
-  run_: 'https://dev.codeit.codes/run',
-  
-  internal: 'https://codeit.codes/',
-  internal_: 'https://dev.codeit.codes/'
+  run_: 'https://dev.codeit.codes/run'
   
 }
 
