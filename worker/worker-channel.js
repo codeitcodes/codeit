@@ -1,34 +1,35 @@
 
 // client-side
-// client/service worker communication channel
+// service worker/client communication channel
 
+
+let workerChannel;
 
 // setup worker channel
 async function setupWorkerChannel() {
   
   // register service worker
-  navigator.serviceWorker.register('/service-worker.js');
+  await navigator.serviceWorker.register('/service-worker.js');
   
+  
+  // create worker channel
+  workerChannel = new BroadcastChannel('worker-channel');
 
-  // create broadcast channel
-  const broadcast = new BroadcastChannel('worker-channel');
 
-  // add message listener
-  broadcast.onmessage = (event) => {
+  // add worker channel listener
+  workerChannel.addEventListener((evt) => {
     
-    console.log(event.data.payload);
-    /*
-    if (event.data.type === 'json') {
+    // if recived request
+    if (event.data.type === 'request') {
       
-      console.log(JSON.parse(event.data.payload));
+    } else if (event.data.type === 'message') { // if recived message
       
-    } else {
+      // log message
+      console.log(event.data.message);
       
-      console.log(event.data.payload);
-      
-    }*/
+    }
     
-  };
+  });
 
   // send request
   broadcast.postMessage({
