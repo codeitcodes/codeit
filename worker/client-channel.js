@@ -10,7 +10,7 @@ const CACHE_NAME = 'static-cache-v322';
 // create broadcast channel
 const broadcast = new BroadcastChannel('worker-channel');
 
-broadcast.onmessage = (event) => {
+broadcast.onmessage = (evt) => {
   if (event.data && event.data.type === 'hello!') {
     broadcast.postMessage({
       payload: 'hi, what\'s up?'
@@ -19,7 +19,36 @@ broadcast.onmessage = (event) => {
 };
 
 
+function sendRequestToClient(request) {
+  
+  return new Promise((resolve, reject) => {
+    
+    broadcast.postMessage({
+      url: request.url,
+      method: request.method,
+      origin: request.referrer,
+      type: 'request'
+    });
+    
+    broadcast.addEventListener('message', (evt) => {
+      
+      if (event.data.type === 'response'
+          && event.data.url === request.url) {
+        
+        resolve(event.data.response);
+        
+      }
+      
+    });
+    
+  });
+  
+}
+
+
 self.addEventListener('fetch', (evt) => {
+  
+  const resp = sendRequestToClient(evt.request);
   
   broadcast.postMessage({
     payload: ('[ServiceWorker] Intercepted ' + evt.request.method
