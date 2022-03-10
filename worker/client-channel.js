@@ -106,6 +106,8 @@ self.addEventListener('fetch', (evt) => {
       
       workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
       
+      console.log('internal');
+      
       // return response from cache
       return caches.match(evt.request) ?? fetch(evt.request);
       
