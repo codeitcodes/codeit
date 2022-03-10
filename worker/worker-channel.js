@@ -5,6 +5,7 @@
 
 let workerChannel;
 
+
 // setup worker channel
 async function setupWorkerChannel() {
   
@@ -17,10 +18,21 @@ async function setupWorkerChannel() {
 
 
   // add worker channel listener
-  workerChannel.addEventListener((evt) => {
+  workerChannel.addEventListener(async (evt) => {
     
     // if recived request
     if (event.data.type === 'request') {
+      
+      // send request to /live-view/live-view.js
+      // for handling
+      const resp = await handleLiveViewRequest(event.data.url);
+      
+      // send response back to worker
+      workerChannel.postMessage({
+        url: event.data.url,
+        response: resp,
+        type: 'response'
+      });
       
     } else if (event.data.type === 'message') { // if recived message
       
@@ -29,11 +41,6 @@ async function setupWorkerChannel() {
       
     }
     
-  });
-
-  // send request
-  broadcast.postMessage({
-    type: 'hello!'
   });
   
 }
