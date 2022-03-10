@@ -11,10 +11,10 @@ const WORKER_NAME = 'codeit-worker-v327';
 const INTERNAL_PATHS = {
   
   internal: 'https://codeit.codes/full',
-  internalDev: 'https://dev.codeit.codes/full',
+  internal_: 'https://dev.codeit.codes/full',
   
   run: 'https://codeit.codes/run',
-  runDev: 'https://dev.codeit.codes/run'
+  run_: 'https://dev.codeit.codes/run'
   
 }
 
@@ -26,7 +26,7 @@ function getPathType(path) {
     
     if (path.startsWith(pathType[1])) {
       
-      return pathType[0].replaceAll('Dev', '');
+      return pathType[0].replaceAll('_', '');
       
     }
     
