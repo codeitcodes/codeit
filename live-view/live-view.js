@@ -658,7 +658,7 @@ function toggleLiveView(file) {
 
 
 const livePathLength = 15;
-const livePath = window.location.origin + '/live/' + '_/'.repeat(livePathLength);
+const livePath = window.location.origin + '/run/' + '_/'.repeat(livePathLength);
 
 let openLiveViewFile;
 
