@@ -18,7 +18,7 @@ async function setupWorkerChannel() {
 
 
   // add worker channel listener
-  workerChannel.addEventListener(async (evt) => {
+  workerChannel.addEventListener('message', async (evt) => {
     
     // if recived request
     if (event.data.type === 'request') {
