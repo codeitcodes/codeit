@@ -98,6 +98,8 @@ self.addEventListener('fetch', (evt) => {
   
   evt.respondWith(() => {
   
+    return fetch(evt.request);
+  
     // get request type
     const type = getPathType(evt.request.referrer);
 
