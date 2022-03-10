@@ -96,7 +96,7 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  evt.respondWith(() => {
+  evt.respondWith(return function() {
   
     // get request type
     const type = getPathType(evt.request.referrer);
