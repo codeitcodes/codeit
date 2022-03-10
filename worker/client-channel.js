@@ -96,7 +96,7 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  evt.respondWith(() => {
+  evt.respondWith(async () => {
   
     // get request type
     const type = getPathType(evt.request.referrer);
@@ -107,7 +107,7 @@ self.addEventListener('fetch', (evt) => {
       workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
       
       // return response from cache
-      return caches.match(evt.request);
+      return await caches.match(evt.request);
       
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
@@ -115,14 +115,14 @@ self.addEventListener('fetch', (evt) => {
       workerLog('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
       
       // return response from client
-      return sendRequestToClient(evt.request);
+      return await sendRequestToClient(evt.request);
       
     } else { // if fetch is external
       
       workerLog('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
       
       // return response from network
-      return fetch(evt.request);
+      return await fetch(evt.request);
       
     }
     
