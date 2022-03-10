@@ -1,10 +1,10 @@
 
 // worker-side
-// client/service worker communication channel
+// service worker/client communication channel
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v324';
+const WORKER_NAME = 'codeit-worker-v325';
 
 
 // internal paths
@@ -38,8 +38,8 @@ function getPathType(path) {
 }
 
 
-// create broadcast channel
-const channel = new BroadcastChannel('worker-channel');
+// create worker channel
+const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // send fetch request to client
@@ -48,7 +48,7 @@ function sendRequestToClient(request) {
   return new Promise((resolve, reject) => {
     
     // send request to client
-    broadcast.postMessage({
+    workerChannel.postMessage({
       url: request.url,
       method: request.method,
       origin: request.referrer,
@@ -56,8 +56,8 @@ function sendRequestToClient(request) {
     });
     
     
-    // add client channel listener
-    channel.addEventListener('message', (evt) => {
+    // add worker/client channel listener
+    workerChannel.addEventListener('message', (evt) => {
       
       console.log('[ServiceWorker] Called client channel listener');
       
@@ -68,7 +68,7 @@ function sendRequestToClient(request) {
             && event.data.url === request.url) {
           
           // remove channel listener
-          channel.removeEventListener('message', handler);
+          workerChannel.removeEventListener('message', handler);
           
           // resolve promise
           resolve(event.data.response);
