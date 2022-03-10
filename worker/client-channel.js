@@ -37,6 +37,17 @@ function getPathType(path) {
 }
 
 
+// worker log
+function workerLog(log) {
+  
+  workerChannel.postMessage({
+    message: log,
+    type: 'message'
+  });
+  
+}
+
+
 // create worker channel
 const workerChannel = new BroadcastChannel('worker-channel');
 
@@ -56,7 +67,7 @@ function sendRequestToClient(request) {
     // add worker/client channel listener
     workerChannel.addEventListener('message', (evt) => {
       
-      console.log('[ServiceWorker] Called client channel listener');
+      workerLog('[ServiceWorker] Called client channel listener');
       
       const handler = (evt) => {
         
@@ -93,7 +104,7 @@ self.addEventListener('fetch', (evt) => {
     // if fetch originates in codeit itself
     if (type === 'internal') {
       
-      console.log('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
+      workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
       
       // return response from cache
       return caches.match(evt.request) || fetch(evt.request);
@@ -101,14 +112,14 @@ self.addEventListener('fetch', (evt) => {
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
       
-      console.log('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
+      workerLog('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
       
       // return response from client
       return sendRequestToClient(evt.request);
       
     } else { // if fetch is external
       
-      console.log('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
+      workerLog('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
       
       // return response from network
       return fetch(evt.request);
