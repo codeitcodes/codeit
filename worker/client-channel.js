@@ -86,10 +86,6 @@ function sendRequestToClient(request) {
 
 self.addEventListener('fetch', (evt) => {
   
-  console.log('[ServiceWorker] Intercepted ' + evt.request.method
-              + ' ' + evt.request.url
-              + '\nfrom origin ' + evt.request.referrer);
-  
   evt.respondWith(() => {
   
     // get request type
@@ -98,16 +94,22 @@ self.addEventListener('fetch', (evt) => {
     // if fetch originates in codeit itself
     if (type === 'internal') {
       
+      console.log('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
+      
       // return response from cache
       return caches.match(evt.request) || fetch(evt.request);
       
     } else if (type === 'run'
                && evt.request.type === 'GET') { // if fetch originates in live view
       
+      console.log('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
+      
       // return response from client
       return sendRequestToClient(evt.request);
       
     } else { // if fetch is external
+      
+      console.log('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
       
       // return response from network
       return fetch(evt.request);
