@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v345';
+const WORKER_NAME = 'codeit-worker-v346';
 
 
 // internal paths
@@ -101,7 +101,7 @@ function sendRequestToClient(request) {
 // handle fetch request
 function handleFetchRequest(request) {
     
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
 
     // get request path type
     const pathType = getPathType(request.url);
@@ -111,15 +111,16 @@ function handleFetchRequest(request) {
         && (getPathType(request.referrer) !== 'run')) {
   
       console.log('[ServiceWorker] Intercepted internal fetch\n' + request.url);
-  
+    
       // return response from cache
-      resolve(caches.match(request));
+      //resolve(caches.match(request));
+      resolve(fetch(request));
   
     } else if (pathType === 'run'
       && request.type === 'GET') { // if fetch originated in live view
   
       console.log('[ServiceWorker] Intercepted live fetch\n' + request.url);
-  
+    
       // return response from client
       resolve(sendRequestToClient(request));
   
