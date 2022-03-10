@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v342';
+const WORKER_NAME = 'codeit-worker-v343';
 
 
 // internal paths
@@ -109,7 +109,7 @@ function handleFetchRequest(request) {
     // if fetch originated in codeit itself
     if (pathType === 'internal') {
   
-      workerLog('[ServiceWorker] Intercepted internal fetch\n' + request.url);
+      console.log('[ServiceWorker] Intercepted internal fetch\n' + request.url);
   
       // return response from cache
       resolve(caches.match(request));
@@ -117,14 +117,14 @@ function handleFetchRequest(request) {
     } else if (pathType === 'run' &&
       request.type === 'GET') { // if fetch originated in live view
   
-      workerLog('[ServiceWorker] Intercepted live fetch\n' + request.url);
+      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url);
   
       // return response from client
       resolve(sendRequestToClient(request));
   
     } else { // if fetch is external
   
-      workerLog('[ServiceWorker] Intercepted external fetch\n' + request.url);
+      console.log('[ServiceWorker] Intercepted external fetch\n' + request.url);
   
       // return response from network
       resolve(fetch(request));
