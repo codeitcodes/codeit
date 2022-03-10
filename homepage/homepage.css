@@ -4745,7 +4745,7 @@ body {
   color: transparent !important;
   padding: 0;
   margin-top: 5px;
-  width: 28px;
+  width: 28px !important;
   pointer-events: none;
 }
 
