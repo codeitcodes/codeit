@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v333';
+const WORKER_NAME = 'codeit-worker-v334';
 
 
 // internal paths
@@ -54,83 +54,88 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 // send fetch request to client
 function sendRequestToClient(request) {
-  
+
   return new Promise((resolve, reject) => {
-    
+
     // send request to client
     workerChannel.postMessage({
       url: request.url,
       type: 'request'
     });
-    
-    
+  
+  
     // add worker/client channel listener
     workerChannel.addEventListener('message', (evt) => {
-      
+  
       workerLog('[ServiceWorker] Called client channel listener');
-      
+  
       const handler = (evt) => {
-        
+  
         // if response url matches
-        if (event.data.type === 'response'
-            && event.data.url === request.url) {
-          
+        if (event.data.type === 'response' &&
+          event.data.url === request.url) {
+  
           // remove channel listener
           workerChannel.removeEventListener('message', handler);
-          
+  
           // resolve promise
           resolve(event.data.response);
-          
+  
         }
-        
+  
       }
-      
+  
       return handler;
-      
+  
     });
     
   });
-  
+
 }
 
 
-self.addEventListener('fetch', (evt) => {
-  
-  evt.respondWith(() => {
-  
-    return fetch(evt.request);
-  
-    // get request type
-    const type = getPathType(evt.request.referrer);
+// handle fetch request
+function handleFetchRequest(request) {
 
-    // if fetch originates in codeit itself
-    if (type === 'internal') {
-      
-      workerLog('[ServiceWorker] Intercepted internal fetch\n', evt.request.url);
-      
-      console.log('internal');
-      
+  return new Promise((resolve, reject) => {
+
+    // get request path type
+    const pathType = getPathType(request.referrer);
+  
+    // if fetch originated in codeit itself
+    if (pathType === 'internal') {
+  
+      workerLog('[ServiceWorker] Intercepted internal fetch\n', request.url);
+  
       // return response from cache
-      return caches.match(evt.request) ?? fetch(evt.request);
-      
-    } else if (type === 'run'
-               && evt.request.type === 'GET') { // if fetch originates in live view
-      
-      workerLog('[ServiceWorker] Intercepted live fetch\n', evt.request.url);
-      
+      resolve(caches.match(request));
+  
+    } else if (pathType === 'run' &&
+      request.type === 'GET') { // if fetch originated in live view
+  
+      workerLog('[ServiceWorker] Intercepted live fetch\n', request.url);
+  
       // return response from client
-      return sendRequestToClient(evt.request);
-      
+      resolve(sendRequestToClient(request));
+  
     } else { // if fetch is external
-      
-      workerLog('[ServiceWorker] Intercepted external fetch\n', evt.request.url);
-      
+  
+      workerLog('[ServiceWorker] Intercepted external fetch\n', request.url);
+  
       // return response from network
-      return fetch(evt.request);
-      
+      resolve(fetch(request));
+  
     }
     
   });
+
+}
+
+
+// add fetch listener
+self.addEventListener('fetch', (evt) => {
+  
+  evt.respondWith(handleFetchRequest(evt.request));
 
 });
 
