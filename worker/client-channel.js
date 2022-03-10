@@ -4,17 +4,17 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v338';
+const WORKER_NAME = 'codeit-worker-v339';
 
 
 // internal paths
 const INTERNAL_PATHS = {
   
-  internal: 'https://codeit.codes/full',
-  internal_: 'https://dev.codeit.codes/full',
-  
   run: 'https://codeit.codes/run',
-  run_: 'https://dev.codeit.codes/run'
+  run_: 'https://dev.codeit.codes/run',
+  
+  internal: 'https://codeit.codes/',
+  internal_: 'https://dev.codeit.codes/'
   
 }
 
@@ -98,8 +98,6 @@ function sendRequestToClient(request) {
 function handleFetchRequest(request) {
     
   return new Promise((resolve, reject) => {
-
-    workerLog(request.url);
 
     // get request path type
     const pathType = getPathType(request.referrer);
