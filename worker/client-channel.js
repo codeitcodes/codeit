@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v341';
+const WORKER_NAME = 'codeit-worker-v342';
 
 
 // internal paths
@@ -24,11 +24,11 @@ function getPathType(path) {
   
   let pathType = 'external';
   
-  Object.entries(INTERNAL_PATHS).forEach(pathType => {
+  Object.entries(INTERNAL_PATHS).forEach(type => {
     
-    if (path.startsWith(pathType[1])) {
+    if (path.startsWith(type[1])) {
       
-      pathType = pathType[0].replace('_', '');
+      pathType = type[0].replace('_', '');
       
       return;
       
