@@ -11,11 +11,10 @@ const WORKER_NAME = 'codeit-worker-v326';
 const INTERNAL_PATHS = {
   
   internal: 'https://codeit.codes/full',
-  _internal_: 'https://dev.codeit.codes/full',
-  __internal__: 'https://plausible.io/js/plausible.js',
+  internalDev: 'https://dev.codeit.codes/full',
   
   run: 'https://codeit.codes/run',
-  _run_: 'https://dev.codeit.codes/run'
+  runDev: 'https://dev.codeit.codes/run'
   
 }
 
@@ -27,7 +26,7 @@ function getPathType(path) {
     
     if (path.startsWith(pathType[1])) {
       
-      return pathType[0].replaceAll('_', '');
+      return pathType[0].replaceAll('Dev', '');
       
     }
     
