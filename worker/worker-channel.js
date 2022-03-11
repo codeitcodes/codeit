@@ -34,6 +34,11 @@ async function setupWorkerChannel() {
         type: 'response'
       });
       
+    } else if (event.data.type === 'reload') { // if recived reload request
+      
+      // reload page
+      window.location.reload();
+      
     } else if (event.data.type === 'message') { // if recived message
       
       // log message
