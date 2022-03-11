@@ -118,7 +118,7 @@ function handleFetchRequest(request) {
   
     } else if (pathType === 'run') { // if fetch originated in live view
   
-      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url + ' ' + request.method);
+      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url + ' ' + request);
     
       // return response from client
       resolve(sendRequestToClient(request));
