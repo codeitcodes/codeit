@@ -391,7 +391,9 @@ body.loaded:not(.mobile) .live-view {
   background: var(--rosemary-lighter);
   transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   will-change: transform;
-  animation: live-loader .72s .22s var(--cubic-function) infinite;
+  opacity: 0;
+  animation: live-loader .72s .4s var(--cubic-function) infinite,
+             live-visible .4s linear;
   z-index: 1;
 }
 
@@ -401,6 +403,15 @@ body.loaded:not(.mobile) .live-view {
   }
   to {
     transform: translateX(100vw);
+  }
+}
+
+@keyframes live-visible {
+  99.99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
