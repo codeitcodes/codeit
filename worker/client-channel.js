@@ -3,7 +3,7 @@
 // service worker/client communication channel
 
 
-// update worker name to update worker
+// update worker name when updating worker
 const WORKER_NAME = 'codeit-worker-v361';
 
 
