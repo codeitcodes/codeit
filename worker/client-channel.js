@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v353';
+const WORKER_NAME = 'codeit-worker-v354';
 
 
 // internal paths
@@ -69,29 +69,26 @@ function sendRequestToClient(request) {
   
   
     // add worker/client channel listener
-    workerChannel.addEventListener('message', (evt) => {
-  
+    
+    function workerListener(evt) {
+
       workerLog('[ServiceWorker] Called client channel listener');
-  
-      const handler = (evt) => {
-  
-        // if response url matches
-        if (event.data.type === 'response' &&
-          event.data.url === request.url) {
-  
-          // remove channel listener
-          workerChannel.removeEventListener('message', handler);
-  
-          // resolve promise
-          resolve(event.data.response);
-  
-        }
-  
+      
+      // if response url matches
+      if (event.data.type === 'response' &&
+        event.data.url === request.url) {
+
+        // remove channel listener
+        workerChannel.removeEventListener('message', workerListener);
+
+        // resolve promise
+        resolve(event.data.response);
+
       }
-  
-      return handler;
-  
-    });
+
+    }
+    
+    workerChannel.addEventListener('message', workerListener);
     
   });
 
