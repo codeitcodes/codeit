@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v354';
+const WORKER_NAME = 'codeit-worker-v355';
 
 
 // internal paths
@@ -70,7 +70,7 @@ function sendRequestToClient(request) {
   
     // add worker/client channel listener
     
-    function workerListener(evt) {
+    function workerListener(event) {
 
       workerLog('[ServiceWorker] Called client channel listener');
       
