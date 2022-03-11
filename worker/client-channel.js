@@ -103,6 +103,8 @@ function handleFetchRequest(request) {
     
   return new Promise(async (resolve, reject) => {
 
+    console.log('[ServiceWorker] Intercepted fetch', request);
+
     // get request path type
     const pathType = getPathType(request.url);
   
@@ -118,7 +120,7 @@ function handleFetchRequest(request) {
   
     } else if (pathType === 'run') { // if fetch originated in live view
   
-      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url, request);
+      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url);
     
       // return response from client
       resolve(sendRequestToClient(request));
