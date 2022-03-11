@@ -4,7 +4,7 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v356';
+const WORKER_NAME = 'codeit-worker-v358';
 
 
 // internal paths
@@ -72,7 +72,7 @@ function sendRequestToClient(request) {
     
     function workerListener(event) {
 
-      workerLog('[ServiceWorker] Called client channel listener', event.data);
+      console.log('[ServiceWorker] Called client channel listener', event.data);
       
       // if response url matches
       if (event.data.type === 'response' &&
