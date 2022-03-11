@@ -379,7 +379,7 @@ body.loaded:not(.mobile) .live-view {
   transition: none !important;
 }
 
-.live-view:not(.loaded).loading::before {
+.live-view:not(.loaded)::before {
   content: '';
   position: fixed;
   top: 0;
