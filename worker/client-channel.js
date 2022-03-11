@@ -4,19 +4,39 @@
 
 
 // update worker name when worker changes
-const WORKER_NAME = 'codeit-worker-v348';
+const WORKER_NAME = 'codeit-worker-v347';
+
+
+// internal paths
+const INTERNAL_PATHS = {
+    
+  internal: 'https://codeit.codes/',
+  internal_: 'https://dev.codeit.codes/',
+  
+  run: 'https://codeit.codes/run',
+  run_: 'https://dev.codeit.codes/run'
+  
+}
 
 
 // get path type
 function getPathType(path) {
   
-  if (path.startsWith('https://codeit.codes/run')) return 'run';
-  if (path.startsWith('https://dev.codeit.codes/run')) return 'run';
+  let pathType = 'external';
   
-  if (path.startsWith('https://codeit.codes/')) return 'internal';
-  if (path.startsWith('https://dev.codeit.codes/')) return 'internal';
+  Object.entries(INTERNAL_PATHS).forEach(type => {
+    
+    if (path.startsWith(type[1])) {
+      
+      pathType = type[0].replace('_', '');
+      
+      return;
+      
+    }
+    
+  });
   
-  return 'external';
+  return pathType;
   
 }
 
@@ -96,8 +116,7 @@ function handleFetchRequest(request) {
       //resolve(caches.match(request));
       resolve(fetch(request));
   
-    } else if (pathType === 'run'
-      && request.type === 'GET') { // if fetch originated in live view
+    } else if (pathType === 'run') { // if fetch originated in live view
   
       console.log('[ServiceWorker] Intercepted live fetch\n' + request.url);
     
