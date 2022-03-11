@@ -79,6 +79,12 @@ self.addEventListener('activate', (evt) => {
   );
 
   self.clients.claim();
+  
+  
+  // send reload request to client
+  workerChannel.postMessage({
+    type: 'reload'
+  });
 
 });
 
