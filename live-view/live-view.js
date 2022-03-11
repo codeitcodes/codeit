@@ -596,29 +596,9 @@ function toggleLiveView(file) {
 
     if (file.lang == 'html' || file.lang == 'markup') {
 
-      window.setTimeout(() => {
-
-        if (liveViewToggle && !liveView.classList.contains('loaded')) {
-
-          liveView.classList.add('loading');
-
-        }
-
-      }, 1200);
-
       renderLiveViewHTML(file);
 
     } /* else if (file.lang == 'python') {
-      
-      window.setTimeout(() => {
-
-        if (liveViewToggle && !liveView.classList.contains('loaded')) {
-
-          liveView.classList.add('loading');
-
-        }
-
-      }, 1200);
 
       renderLiveViewPython(file);
       
