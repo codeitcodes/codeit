@@ -379,7 +379,7 @@ body.loaded:not(.mobile) .live-view {
   transition: none !important;
 }
 
-.live-view:not(.loaded)::before {
+.live-view.visible:not(.loaded)::before {
   content: '';
   position: fixed;
   top: 0;
@@ -391,7 +391,7 @@ body.loaded:not(.mobile) .live-view {
   background: var(--rosemary-lighter);
   transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   will-change: transform;
-  animation: live-loader .72s var(--cubic-function) infinite;
+  animation: live-loader .72s .22s var(--cubic-function) infinite;
   z-index: 1;
 }
 
