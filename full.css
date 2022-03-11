@@ -393,7 +393,7 @@ body.loaded:not(.mobile) .live-view {
   will-change: transform;
   opacity: 0;
   animation: live-loader .72s .4s var(--cubic-function) infinite,
-             live-visible .4s linear;
+             live-visible .4s linear forwards;
   z-index: 1;
 }
 
