@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v369';
+const WORKER_NAME = 'codeit-worker-v370';
 
 
 // internal paths
@@ -56,6 +56,29 @@ function workerLog(log) {
 const workerChannel = new BroadcastChannel('worker-channel');
 
 
+// create Response from data
+function createResponse(data) {
+  
+  // create a ReadableStream
+  const stream = new ReadableStream({
+    
+    start(controller) {
+      
+      // add data to stream
+      controller.enqueue(data);
+      
+    }
+    
+  });
+  
+  // create Response from stream
+  const response = new Response(stream);
+  
+  return response;
+
+}
+
+
 // send fetch request to client
 function sendRequestToClient(request) {
 
@@ -81,8 +104,11 @@ function sendRequestToClient(request) {
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
 
-        // resolve promise
-        resolve(event.data.response);
+        // create Response from data
+        const response = createResponse(event.data.response);
+
+        // resolve promise with Response
+        resolve(response);
 
       }
 
