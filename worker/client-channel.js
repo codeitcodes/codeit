@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v373';
+const WORKER_NAME = 'codeit-worker-v374';
 
 
 // internal paths
@@ -70,9 +70,11 @@ function createResponse(data) {
     }
     
   });
-  
+    
   // create Response from stream
   const response = new Response(stream);
+  
+  console.log('[ServiceWorker] Created response from data', data, response);
   
   return response;
 
@@ -106,8 +108,6 @@ function sendRequestToClient(request) {
 
         // create Response from data
         const response = createResponse(event.data.response);
-
-        console.log('[ServiceWorker] Created Response', response);
 
         // resolve promise with Response
         resolve(response);
