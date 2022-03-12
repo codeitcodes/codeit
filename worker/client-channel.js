@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v381';
+const WORKER_NAME = 'codeit-worker-v382';
 
 
 // internal paths
@@ -99,7 +99,7 @@ function sendRequestToClient(request) {
         // create Response from data
         const response = createResponse(event.data.resp, event.data.respType);
 
-        console.log('[ServiceWorker] Created Response from data', event.data);
+        console.log('[ServiceWorker] Created Response from data', response);
 
         // resolve promise with Response
         resolve(response);
