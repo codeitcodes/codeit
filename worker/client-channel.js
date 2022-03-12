@@ -60,7 +60,7 @@ const workerChannel = new BroadcastChannel('worker-channel');
 function createResponse(data) {
   
   // create a ReadableStream
-  const stream = new ReadableStream({
+  /*const stream = new ReadableStream({
     
     start(controller) {
       
@@ -69,10 +69,11 @@ function createResponse(data) {
       
     }
     
-  });
+  });*/
     
   // create Response from stream
-  const response = new Response(stream, {'status': 201});
+  //const response = new Response(stream);
+  const response = new Response(data);
   
   console.log('[ServiceWorker] Created response from data', data, response);
   
