@@ -118,6 +118,8 @@ function handleFetchRequest(request) {
 
     // get request path type
     const pathType = getPathType(request.url);
+    
+    console.log(request);
   
     // if fetch originated in codeit itself
     if (pathType === 'internal'
