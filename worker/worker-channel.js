@@ -25,12 +25,13 @@ async function setupWorkerChannel() {
       
       // send request to /live-view/live-view.js
       // for handling
-      const resp = await handleLiveViewRequest(event.data.url);
+      const [resp, respType] = await handleLiveViewRequest(event.data.url);
       
       // send response back to worker
       workerChannel.postMessage({
         url: event.data.url,
-        response: resp,
+        resp: resp,
+        respType: respType,
         type: 'response'
       });
       
