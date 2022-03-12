@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v380';
+const WORKER_NAME = 'codeit-worker-v381';
 
 
 // internal paths
@@ -79,13 +79,15 @@ function sendRequestToClient(request) {
       url: request.url,
       type: 'request'
     });
+    
+    console.log('[ServiceWorker] Sent fetch request to client');
   
   
     // add worker/client channel listener
     
     function workerListener(event) {
 
-      console.log('[ServiceWorker] Called client channel listener', event.data);
+      console.log('[ServiceWorker] Recived response data from client', event.data);
       
       // if response url matches
       if (event.data.type === 'response' &&
@@ -96,6 +98,8 @@ function sendRequestToClient(request) {
 
         // create Response from data
         const response = createResponse(event.data.resp, event.data.respType);
+
+        console.log('[ServiceWorker] Created Response from data', event.data);
 
         // resolve promise with Response
         resolve(response);
@@ -134,15 +138,13 @@ function handleFetchRequest(request) {
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
   
-      console.log('[ServiceWorker] Intercepted live fetch\n' + request.url, request);
+      console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
     
       // return response from client
       resolve(sendRequestToClient(request));
   
     } else { // if fetch is external
-  
-      console.log('[ServiceWorker] Intercepted external fetch\n' + request.url, request);
-  
+    
       // return response from network
       resolve(fetch(request));
   
