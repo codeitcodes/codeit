@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v376';
+const WORKER_NAME = 'codeit-worker-v377';
 
 
 // internal paths
@@ -57,26 +57,13 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data) {
-  
-  // create a ReadableStream
-  /*const stream = new ReadableStream({
+function createResponse(data, type) {
     
-    start(controller) {
-      
-      // add data to stream
-      controller.enqueue(data);
-      
-    }
+  // create Response from data
+  const response = new Response(data, {
+    headers: {'Content-Type': type}
+  });
     
-  });*/
-    
-  // create Response from stream
-  //const response = new Response(stream);
-  const response = new Response(data);
-  
-  console.log('[ServiceWorker] Created response from data', data, response);
-  
   return response;
 
 }
@@ -108,7 +95,7 @@ function sendRequestToClient(request) {
         workerChannel.removeEventListener('message', workerListener);
 
         // create Response from data
-        const response = createResponse(event.data.response);
+        const response = createResponse(event.data.resp, event.data.respType);
 
         // resolve promise with Response
         resolve(response);
