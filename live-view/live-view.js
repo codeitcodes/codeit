@@ -650,7 +650,7 @@ function handleLiveViewRequest(request) {
   if (request === livePath) {
     
     // return open live view file
-    return [openLiveViewFile, 'text/html';
+    return [openLiveViewFile, 'text/html'];
     
   } else {
     
