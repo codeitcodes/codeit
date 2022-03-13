@@ -57,11 +57,12 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type) {
+function createResponse(data, type, status) {
     
   // create Response from data
   const response = new Response(data, {
-    headers: {'Content-Type': type}
+    headers: {'Content-Type': type},
+    status: status
   });
     
   return response;
@@ -97,7 +98,7 @@ function sendRequestToClient(request) {
         workerChannel.removeEventListener('message', workerListener);
 
         // create Response from data
-        const response = createResponse(event.data.resp, event.data.respType);
+        const response = createResponse(event.data.resp, event.data.respType, event.data.respStatus);
 
         console.log('[ServiceWorker] Resolved request with client response');
 
