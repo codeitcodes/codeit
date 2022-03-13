@@ -673,12 +673,14 @@ async function handleLiveViewRequest(requestPath) {
     // slice file name from relative path
     relPath = relPath.slice(0, -fileName.length);
     
+    // map file dir
+    let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
+    
     // add relative path to live file path
-    let contents = liveFile.dir[2];
-    contents += relPath;
+    fileContents += relPath;
     
     // get file from git
-    const resp = await git.getFile([liveFile.dir[0], liveFile.dir[1], contents],
+    const resp = await git.getFile([fileUser, fileRepo, fileContents],
                                    fileName);
     
     return [decodeUnicode(resp.content), 'application/octet-stream'];
