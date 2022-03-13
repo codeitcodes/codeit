@@ -663,24 +663,32 @@ async function handleLiveViewRequest(requestPath) {
     
     dirPath = dirPath.split('_');
     
-    const fileName = dirPath[dirPath.length-1];
-    
-    dirPath.pop();
-    
-    const traveseDir = (livePathLength + 1) - dirPath.length;
-    
     // map file dir
     let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
     
-    // split file contents
-    fileContents = fileContents.split('/');
+    let fileName = dirPath[dirPath.length-1];
     
-    // traverse dir backwards
-    for (let i = 0; i < traveseDir; i++) fileContents.pop();
-    
-    // join file contents
-    fileContents.join('/');
-    
+    if (dirPath.length === 1) {
+      
+      fileName = fileName.slice(1);
+      
+    } else {
+      
+      dirPath.pop();
+      
+      const traveseDir = (livePathLength + 1) - dirPath.length;
+      
+      // split file contents
+      fileContents = fileContents.split('/');
+      
+      // traverse dir backwards
+      for (let i = 0; i < traveseDir; i++) fileContents.pop();
+      
+      // join file contents
+      fileContents.join('/');
+      
+    }
+      
     // get file from git
     const resp = await git.getFile([fileUser, fileRepo, fileContents],
                                    fileName);
