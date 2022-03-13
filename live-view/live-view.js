@@ -713,7 +713,15 @@ async function handleLiveViewRequest(requestPath) {
     }
     
     
-    return [decodeUnicode(resp.content), 'application/octet-stream'];
+    try {
+      
+      return [decodeUnicode(resp.content), 'application/octet-stream'];
+      
+    } catch(e) { // if file is binary
+      
+      return [resp.content, 'application/octet-stream'];
+      
+    }
     
   } else {
     
