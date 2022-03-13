@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v394';
+const WORKER_NAME = 'codeit-worker-v395';
 
 
 // internal paths
@@ -126,9 +126,7 @@ function handleFetchRequest(request) {
 
     // get request path type
     const pathType = getPathType(request.url);
-    
-    console.log(request);
-    
+        
     // if fetch originated in codeit itself
     if (pathType === 'internal'
         && (getPathType(request.referrer) !== 'run')) {
