@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v389';
+const WORKER_NAME = 'codeit-worker-v390';
 
 
 // internal paths
@@ -80,9 +80,7 @@ function sendRequestToClient(request) {
       url: request.url,
       type: 'request'
     });
-    
-    console.log('[ServiceWorker] Sent fetch request to client');
-  
+      
   
     // add worker/client channel listener
     
@@ -92,15 +90,13 @@ function sendRequestToClient(request) {
       if (event.data.type === 'response' &&
         event.data.url === request.url) {
         
-        console.log('[ServiceWorker] Recived response data from client', event.data);
-
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
 
         // create Response from data
         const response = createResponse(event.data.resp, event.data.respType, event.data.respStatus);
 
-        console.log('[ServiceWorker] Resolved request with client response');
+        console.log('[ServiceWorker] Resolved live view request with client response', request.url, response);
 
         // resolve promise with Response
         resolve(response);
@@ -138,9 +134,7 @@ function handleFetchRequest(request) {
   
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
-  
-      console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
-    
+      
       // return response from client
       resolve(sendRequestToClient(request));
   
