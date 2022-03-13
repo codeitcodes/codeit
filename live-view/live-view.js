@@ -652,7 +652,7 @@ async function handleLiveViewRequest(requestPath) {
     // return live file
     return [decodeUnicode(liveFile.content), 'text/html'];
     
-  } else if (requestPath.length < livePath.length) {
+  } else if (!requestPath.includes(livePath)) {
     
     // if requesting path above
     
