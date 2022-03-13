@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v393';
+const WORKER_NAME = 'codeit-worker-v394';
 
 
 // internal paths
@@ -72,14 +72,21 @@ function createResponse(data, type, status) {
 
 // send fetch request to client
 function sendRequestToClient(request) {
-
+  
   return new Promise((resolve, reject) => {
 
-    // send request to client
-    workerChannel.postMessage({
-      url: request.url,
-      type: 'request'
-    });
+      let url = request.url;
+
+      // append .html to url if navigating
+      if (request.mode === 'navigate' &&
+        !url.endsWith('.html')) url += '.html';
+      
+
+      // send request to client
+      workerChannel.postMessage({
+        url: url,
+        type: 'request'
+      });
       
   
     // add worker/client channel listener
@@ -88,7 +95,7 @@ function sendRequestToClient(request) {
       
       // if response url matches
       if (event.data.type === 'response' &&
-        event.data.url === request.url) {
+        event.data.url === url) {
         
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
@@ -96,7 +103,7 @@ function sendRequestToClient(request) {
         // create Response from data
         const response = createResponse(event.data.resp, event.data.respType, event.data.respStatus);
 
-        console.log('[ServiceWorker] Resolved live view request with client response', request.url, event.data.resp, event.data.respStatus);
+        console.log('[ServiceWorker] Resolved live view request with client response', url, event.data.resp, event.data.respStatus);
 
         // resolve promise with Response
         resolve(response);
@@ -128,8 +135,9 @@ function handleFetchRequest(request) {
   
       let url = request.url;
       
-      // append .html to url if requesting full.html
-      if (url.endsWith('/full')) url += '.html';
+      // append .html to url if navigating
+      if (request.mode === 'navigate'
+          && !url.endsWith('.html')) url += '.html';
       
       // return response from cache
       resolve(caches.match(url));
