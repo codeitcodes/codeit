@@ -19,6 +19,7 @@ body:not(.mobile) ::-webkit-scrollbar-track:horizontal {
 
 body:not(.mobile) ::-webkit-scrollbar-corner {
   background-color: #2B303B;
+  box-shadow: inset -15px -15px 0 0 #2b303b, inset 1px 1px 0 0 rgb(0 0 0 / 20%);
 }
 
 body:not(.mobile) ::-webkit-scrollbar-thumb {
