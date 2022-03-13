@@ -656,6 +656,13 @@ async function handleLiveViewRequest(requestPath) {
     
     // if requesting path above
     
+    // slice origin from request
+    // to get directory path
+    let dirPath = requestPath.slice(window.location.origin);
+    dirPath = dirPath.replace('/run', '/_');
+    
+    console.log(dirPath);
+    
     return ['', 'application/octet-stream'];
     
   } else {
