@@ -86,12 +86,12 @@ function sendRequestToClient(request) {
     // add worker/client channel listener
     
     function workerListener(event) {
-
-      console.log('[ServiceWorker] Recived response data from client', event.data);
       
       // if response url matches
       if (event.data.type === 'response' &&
         event.data.url === request.url) {
+        
+        console.log('[ServiceWorker] Recived response data from client', event.data);
 
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
