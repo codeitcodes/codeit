@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v396';
+const WORKER_NAME = 'codeit-worker-v397';
 
 
 // internal paths
@@ -100,6 +100,7 @@ function sendRequestToClient(request) {
         
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
+        
 
         // create Response from data
         const response = createResponse(event.data.resp, event.data.respType, event.data.respStatus);
