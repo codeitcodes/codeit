@@ -685,7 +685,7 @@ async function handleLiveViewRequest(requestPath) {
       for (let i = 0; i < traveseDir; i++) fileContents.pop();
       
       // join file contents
-      fileContents.join('/');
+      fileContents = fileContents.join('/');
       
     }
     
