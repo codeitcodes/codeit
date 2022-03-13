@@ -32,7 +32,7 @@ async function setupWorkerChannel() {
         url: event.data.url,
         resp: resp,
         respType: respType,
-        respCode: (respCode ?? 200),
+        respStatus: (respCode ?? 200),
         type: 'response'
       });
       
