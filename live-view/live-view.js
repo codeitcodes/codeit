@@ -640,21 +640,48 @@ function toggleLiveView(file) {
 const livePathLength = 15;
 const livePath = window.location.origin + '/run/' + '_/'.repeat(livePathLength);
 
-let openLiveViewFile;
+let liveFile;
 
 
 // handle live view request
-function handleLiveViewRequest(request) {
+async function handleLiveViewRequest(requestPath) {
   
-  // if requesting topmost path
-  if (request === livePath) {
+  // if requesting base path
+  if (requestPath === livePath) {
     
-    // return open live view file
-    return [openLiveViewFile, 'text/html'];
+    // return live file
+    return [decodeUnicode(liveFile.content), 'text/html'];
+    
+  } else if (requestPath.length < livePath.length) {
+    
+    // if requesting path above
+    
+    return ['', 'application/octet-stream'];
     
   } else {
     
-    return ['', 'application/octet-stream'];
+    // if requesting path below
+    
+    // slice live path from request
+    // to get relative path
+    let relPath = requestPath.slice(livePath.length);
+    
+    // get file name
+    let fileName = relPath.split('/');
+    fileName = fileName[fileName.length-1];
+    
+    // slice file name from relative path
+    relPath = relPath.slice(0, -fileName.length);
+    
+    // add relative path to live file path
+    let contents = liveFile.dir[2];
+    contents += relPath;
+    
+    // get file from git
+    const resp = await git.getFile([liveFile.dir[0], liveFile.dir[1], contents],
+                                   fileName);
+    
+    return [decodeUnicode(resp.content), 'application/octet-stream'];
     
   }
   
@@ -686,7 +713,7 @@ async function renderLiveViewHTML(file) {
   });
   
   
-  openLiveViewFile = decodeUnicode(file.content);
+  liveFile = file;
 
 }
 
