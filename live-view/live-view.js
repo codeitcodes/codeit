@@ -712,7 +712,15 @@ async function handleLiveViewRequest(requestPath) {
     
     try {
       
-      return [decodeUnicode(resp.content), 'application/octet-stream'];
+      if (fileName.endsWith('.html')) {
+        
+        return [decodeUnicode(resp.content), 'text/html'];
+        
+      } else {
+        
+        return [decodeUnicode(resp.content), 'application/octet-stream'];
+        
+      }
       
     } catch(e) { // if file is binary
       
@@ -745,7 +753,42 @@ async function handleLiveViewRequest(requestPath) {
     const resp = await git.getFile([fileUser, fileRepo, fileContents],
                                    fileName);
     
-    return [decodeUnicode(resp.content), 'application/octet-stream'];
+    
+    // if file is over 1MB
+    if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+      
+      console.log('[Live View] File over 1MB', fileName);
+      
+      return ['', 'application/octet-stream'];
+      
+    }
+    
+    
+    // if couldn't fetch file
+    if (resp.message) {
+    
+      return ['', 'application/octet-stream', 400];
+      
+    }
+    
+    
+    try {
+      
+      if (fileName.endsWith('.html')) {
+        
+        return [decodeUnicode(resp.content), 'text/html'];
+        
+      } else {
+        
+        return [decodeUnicode(resp.content), 'application/octet-stream'];
+        
+      }
+      
+    } catch(e) { // if file is binary
+      
+      return [resp.content, 'application/octet-stream'];
+      
+    }
     
   }
   
