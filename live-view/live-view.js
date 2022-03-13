@@ -658,7 +658,7 @@ async function handleLiveViewRequest(requestPath) {
     
     // slice origin from request
     // to get directory path
-    let dirPath = requestPath.slice(window.location.origin);
+    let dirPath = requestPath.slice(window.location.origin.length);
     dirPath = dirPath.replace('/run', '/_');
     
     console.log(dirPath);
