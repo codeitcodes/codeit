@@ -637,7 +637,7 @@ function toggleLiveView(file) {
 
 
 
-const livePathLength = 15;
+const livePathLength = 15; // +1
 const livePath = window.location.origin + '/run/' + '_/'.repeat(livePathLength);
 
 let liveFile;
@@ -661,9 +661,31 @@ async function handleLiveViewRequest(requestPath) {
     let dirPath = requestPath.slice(window.location.origin.length);
     dirPath = dirPath.replace('/run', '/_');
     
-    console.log(dirPath);
+    dirPath = dirPath.split('_');
     
-    return ['', 'application/octet-stream'];
+    const fileName = dirPath[dirPath.length-1];
+    
+    dirPath.pop();
+    
+    const traveseDir = (livePathLength + 1) - dirPath.length;
+    
+    // map file dir
+    let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
+    
+    // split file contents
+    fileContents = fileContents.split('/');
+    
+    // traverse dir backwards
+    for (let i = 0; i < traveseDir; i++) fileContents.pop();
+    
+    // join file contents
+    fileContents.join('/');
+    
+    // get file from git
+    const resp = await git.getFile([fileUser, fileRepo, fileContents],
+                                   fileName);
+    
+    return [decodeUnicode(resp.content), 'application/octet-stream'];
     
   } else {
     
