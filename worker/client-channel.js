@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v397';
+const WORKER_NAME = 'codeit-worker-v398';
 
 
 // internal paths
@@ -125,6 +125,8 @@ function sendRequestToClient(request) {
 function handleFetchRequest(request) {
     
   return new Promise(async (resolve, reject) => {
+
+    console.log(request);
 
     // get request path type
     const pathType = getPathType(request.url);
