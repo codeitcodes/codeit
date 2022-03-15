@@ -1542,12 +1542,13 @@ function createNewRepoInHTML() {
         // play push animation
         playPushAnimation(repoEl.querySelector('.push-wrapper'));
 
-        // disable pushing file from HTML
+        // disable pushing repo from HTML
         repoEl.classList.remove('focused');
 
-        // make file name uneditable
+        // make repo name uneditable
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
+        repoEl.querySelector('.name').scrollTo(0, 0);
         
 
         // validate repo name
@@ -1703,6 +1704,7 @@ function createNewFileInHTML() {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
+        fileEl.querySelector('.name').scrollTo(0, 0);
 
         
         // pad file content with random number of invisible chars
