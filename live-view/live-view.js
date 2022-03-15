@@ -666,8 +666,8 @@ async function handleLiveViewRequest(requestPath) {
     // map file dir
     let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
     
-    let fileName = dirPath[dirPath.length-1];
-    fileName = fileName.slice(1);
+    let fileName = dirPath.split('/');
+    fileName = fileName[fileName.length-1];
     
     if (dirPath.length !== 1) {
       
