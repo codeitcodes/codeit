@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v399';
+const WORKER_NAME = 'codeit-worker-v400';
 
 
 // internal paths
@@ -141,6 +141,8 @@ function handleFetchRequest(request) {
       if (request.mode === 'navigate'
           && !url.endsWith('.html')
           && !url.endsWith('/')) url.replace('/full', '/full.html');
+          
+          console.log(url);
       
       // return response from cache
       resolve(caches.match(url));
