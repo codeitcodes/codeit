@@ -661,7 +661,7 @@ async function handleLiveViewRequest(requestPath) {
     let dirPath = requestPath.slice(window.location.origin.length);
     dirPath = dirPath.replace('/run', '/_');
     
-    dirPath = dirPath.split('_');
+    dirPath = dirPath.split('/_/');
     
     // map file dir
     let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
