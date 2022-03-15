@@ -705,6 +705,8 @@ async function handleLiveViewRequest(requestPath) {
     // if couldn't fetch file
     if (resp.message) {
     
+      console.log('[Live View] Couldn\'t fetch file', resp.message);
+    
       return ['', 'application/octet-stream', 400];
       
     }
