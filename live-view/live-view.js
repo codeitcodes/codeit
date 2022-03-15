@@ -684,6 +684,11 @@ async function handleLiveViewRequest(requestPath) {
       // join file contents
       fileContents = fileContents.join('/');
       
+    } else {
+      
+      // clear file contents
+      fileContents = '';
+      
     }
     
     
