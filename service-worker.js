@@ -12,7 +12,7 @@ const FILES_TO_CACHE = [
   '/lib/plugins/codeit-match-braces.js',
   '/lib/plugins/codeit-autolinker.js',
 
-  '/full.html',
+  '/full',
   '/full.css',
 
   '/worker/worker-channel.js',
