@@ -158,7 +158,7 @@ function handleFetchRequest(request) {
 
       // append .html to url if navigating
       if (request.mode === 'navigate'
-          && url.includes('/full')) url = 'full.html';
+          && url.includes('/full')) url = '/full.html';
 
       // return response from cache
       resolve(caches.match(url));
