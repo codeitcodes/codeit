@@ -162,6 +162,8 @@ function handleFetchRequest(request) {
 
       const resp = await caches.match(url);
 
+      console.log(request, resp);
+
       // return response from cache
       resolve(resp ?? fetch(request));
 
