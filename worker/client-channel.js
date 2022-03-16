@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v459';
+const WORKER_NAME = 'codeit-worker-v460';
 
 
 // internal paths
@@ -163,8 +163,8 @@ function handleFetchRequest(request) {
       const resp = await caches.match(url);
 
       // return response from cache
-      //resolve(resp ?? fetch(request));
-      resolve(fetch(request));
+      resolve(resp ?? fetch(request));
+      //resolve(fetch(request));
 
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
