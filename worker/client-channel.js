@@ -4,51 +4,53 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v403';
+const WORKER_NAME = 'codeit-worker-v453';
 
 
 // internal paths
 const INTERNAL_PATHS = {
-    
+
   internal: 'https://codeit.codes/',
   internal_: 'https://dev.codeit.codes/',
-  
+  internal__: 'http://127.0.0.1:3000/',
+
   run: 'https://codeit.codes/run',
-  run_: 'https://dev.codeit.codes/run'
-  
+  run_: 'https://dev.codeit.codes/run',
+  run__: 'http://127.0.0.1:3000/run',
+
 }
 
 
 // get path type
 function getPathType(path) {
-  
+
   let pathType = 'external';
-  
+
   Object.entries(INTERNAL_PATHS).forEach(type => {
-    
+
     if (path.startsWith(type[1])) {
-      
-      pathType = type[0].replace('_', '');
-      
+
+      pathType = type[0].replaceAll('_', '');
+
       return;
-      
+
     }
-    
+
   });
-  
+
   return pathType;
-  
+
 }
 
 
 // worker log
 function workerLog(log) {
-  
+
   workerChannel.postMessage({
     message: log,
     type: 'message'
   });
-  
+
 }
 
 
@@ -58,13 +60,13 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 // create Response from data
 function createResponse(data, type, status) {
-    
+
   // create Response from data
   const response = new Response(data, {
     headers: {'Content-Type': type},
     status: status
   });
-    
+
   return response;
 
 }
@@ -72,40 +74,59 @@ function createResponse(data, type, status) {
 
 // send fetch request to client
 function sendRequestToClient(request) {
-  
+
   return new Promise((resolve, reject) => {
 
-      let url = request.url;
+    // set MIME type depending on request mode
+    let mimeType = 'application/octet-stream';
 
-      // append .html to url if navigating
-      if (request.mode === 'navigate'
-          && !url.endsWith('.html')
-          && !url.endsWith('/')) url += '.html';
-      
+    if (request.mode === 'navigate'
+        || request.url.endsWith('.html')) mimeType = 'text/html';
 
-      // send request to client
-      workerChannel.postMessage({
-        url: url,
-        type: 'request'
-      });
-      
-  
+    if (request.mode === 'script'
+        || request.url.endsWith('.js')) mimeType = 'text/javascript';
+
+    if (request.mode === 'style'
+        || request.url.endsWith('.css')) mimeType = 'text/css';
+
+    if (request.url.endsWith('.wasm')) mimeType = 'application/wasm';
+
+    console.warn(mimeType, request.mode, request.url);
+
+
+    let url = request.url;
+
+    // append .html to url if navigating
+    if (request.mode === 'navigate'
+        && !url.endsWith('.html')
+        && !url.endsWith('/')) url += '.html';
+
+
+    // send request to client
+    workerChannel.postMessage({
+      url: url,
+      type: 'request'
+    });
+
+
     // add worker/client channel listener
-    
+
     function workerListener(event) {
-      
+
       // if response url matches
       if (event.data.type === 'response' &&
         event.data.url === url) {
-        
+
+        console.log('[ServiceWorker] Recived response data from client', event.data);
+
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
-        
+
 
         // create Response from data
-        const response = createResponse(event.data.resp, event.data.respType, event.data.respStatus);
+        const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
 
-        console.log('[ServiceWorker] Resolved live view request with client response', url, event.data.resp, event.data.respStatus);
+        console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
 
         // resolve promise with Response
         resolve(response);
@@ -113,9 +134,9 @@ function sendRequestToClient(request) {
       }
 
     }
-    
+
     workerChannel.addEventListener('message', workerListener);
-    
+
   });
 
 }
@@ -123,39 +144,40 @@ function sendRequestToClient(request) {
 
 // handle fetch request
 function handleFetchRequest(request) {
-    
-  return new Promise(async (resolve, reject) => {
 
-    console.log(request);
+  return new Promise(async (resolve, reject) => {
 
     // get request path type
     const pathType = getPathType(request.url);
-        
+
     // if fetch originated in codeit itself
     if (pathType === 'internal'
         && (getPathType(request.referrer) !== 'run')) {
-  
+
       let url = request.url;
-      
+
       // append .html to url if navigating
-      if (request.mode === 'navigate') url = url.replace('/full', '/full.html');
-      
+      if (request.mode === 'navigate'
+          && url.includes('/full')) url = '/full.html';
+
       // return response from cache
       resolve(caches.match(url));
-  
+
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
-      
+
+      console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+
       // return response from client
       resolve(sendRequestToClient(request));
-  
+
     } else { // if fetch is external
-    
+
       // return response from network
       resolve(fetch(request));
-  
+
     }
-    
+
   });
 
 }
@@ -163,8 +185,7 @@ function handleFetchRequest(request) {
 
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
-  
+
   evt.respondWith(handleFetchRequest(evt.request));
 
 });
-
