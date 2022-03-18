@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v469';
+const WORKER_NAME = 'codeit-worker-v470';
 
 
 // internal paths
@@ -91,7 +91,9 @@ function sendRequestToClient(request) {
 
     if (request.url.endsWith('.wasm')) mimeType = 'application/wasm';
 
-    console.warn(mimeType, request.mode, request.url);
+    if (enableDevLogs) {
+      console.warn(mimeType, request.mode, request.url);
+    }
 
 
     let url = request.url;
@@ -177,7 +179,6 @@ function handleFetchRequest(request) {
 
       // return response from cache
       resolve(resp ?? fetch(request));
-      //resolve(fetch(request));
 
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
