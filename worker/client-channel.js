@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v467';
+const WORKER_NAME = 'codeit-worker-v468';
 
 
 // internal paths
@@ -117,7 +117,9 @@ function sendRequestToClient(request) {
       if (event.data.type === 'response' &&
         event.data.url === url) {
 
-        console.log('[ServiceWorker] Recived response data from client', event.data);
+        if (enableDevLogs) {
+          console.log('[ServiceWorker] Recived response data from client', event.data);
+        }
 
         // remove channel listener
         workerChannel.removeEventListener('message', workerListener);
@@ -126,7 +128,9 @@ function sendRequestToClient(request) {
         // create Response from data
         const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
 
-        console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
+        if (enableDevLogs) {
+          console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
+        }
 
         // resolve promise with Response
         resolve(response);
@@ -140,6 +144,15 @@ function sendRequestToClient(request) {
   });
 
 }
+
+
+let enableDevLogs = false;
+
+workerChannel.addEventListener('message', () => {
+  
+  if (event.data.type === 'enableDevLogs') enableDevLogs = true;
+  
+});
 
 
 // handle fetch request
@@ -169,7 +182,9 @@ function handleFetchRequest(request) {
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
 
-      console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+      if (enableDevLogs) {
+        console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+      }
 
       // return response from client
       resolve(sendRequestToClient(request));
