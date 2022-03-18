@@ -396,7 +396,8 @@ let asyncThread = (callback, time) => {
 
 let onNextFrame = (callback) => {
 
-  window.requestAnimationFrame(callback);
+  //window.requestAnimationFrame(callback);
+  window.setTimeout(callback, 23); // minimum time to update
 
 }
 
