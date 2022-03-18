@@ -342,7 +342,7 @@ function addBottomSwipeListener() {
 
         toggleLiveView(selectedFile);
 
-      } else {
+      } else if (active) {
 
         // if clicked on share button,
         // share live view link
@@ -401,8 +401,6 @@ function addBottomSwipeListener() {
         if (swiped && !bottomWrapper.classList.contains('expanded')
             && !bottomFloat.classList.contains('file-open')) {
 
-          swiped = false;
-
           // expand bottom float
           bottomWrapper.classList.add('expanded');
 
@@ -419,6 +417,11 @@ function addBottomSwipeListener() {
           }
 
           toggleLiveView(selectedFile);
+          
+          // wait until animation has ended to enable swiping
+          window.setTimeout(() => {
+            swiped = false;
+          }, 400);
 
         }
 
@@ -427,8 +430,6 @@ function addBottomSwipeListener() {
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')
             && !bottomFloat.classList.contains('file-open')) {
-
-          swiped = false;
 
           // fix bottom float on safari
           if (isSafari) {
@@ -457,6 +458,11 @@ function addBottomSwipeListener() {
           }
 
           toggleLiveView(selectedFile);
+          
+          // wait until animation has ended to enable swiping
+          window.setTimeout(() => {
+            swiped = false;
+          }, 400);
 
         }
 
