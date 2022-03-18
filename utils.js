@@ -119,8 +119,6 @@ function showMessage(message, duration) {
   // if message is already visible
   if (messageEl.classList.contains('visible')) {
 
-    console.log('a');
-
     // animate new message
 
     messageEl.classList.add('animating');
