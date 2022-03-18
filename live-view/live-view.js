@@ -662,7 +662,7 @@ async function handleLiveViewRequest(requestPath) {
 
     // map file dir
     let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
-
+    
     // get file name
     const fileName = requestPath.split('/').slice(-1)[0];
 
@@ -731,54 +731,75 @@ async function handleLiveViewRequest(requestPath) {
       }
 
     }
+    
+    
+    
+    // map file dir
+    const liveFileDir = [fileUser, fileRepo, fileContents].join(',');
+    
+    let respContent;
+    
+    
+    
+    // search modified files for file
+    const modFile = Object.values(modifiedFiles).filter(file =>
+                      (file.dir == liveFileDir && file.name == fileName))[0];
+    
+    // if matching modified file exists
+    if (modFile) {
+      
+      // return modified file content
+      respContent = modFile.content;
+      
+    } else {
 
-
-
-    //console.warn(fileContents);
-
-    // get file from git
-    let resp = await git.getFile([fileUser, fileRepo, fileContents],
-                                 fileName);
-
-
-
-    // if file is over 1MB
-    if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
-
-      console.log('[Live View] File', fileName, 'over 1MB, fetching from blob API');
-
-      // fetch file directory
-      const dirResp = await git.getItems([fileUser, fileRepo, fileContents]);
-
-      // find file in directory
-      const fileObj = dirResp.filter(file => file.name === fileName)[0];
-
-      // if file exists
-      if (fileObj) {
-
-        // fetch file from blob API (up to 100MB)
-        resp = await git.getBlob([fileUser, fileRepo, fileContents],
-                                 fileObj.sha);
-
+      // get file from git
+      let resp = await git.getFile(liveFileDir,
+                                   fileName);
+ 
+  
+      // if file is over 1MB
+      if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+  
+        console.log('[Live View] File', fileName, 'over 1MB, fetching from blob API');
+  
+        // fetch file directory
+        const dirResp = await git.getItems(liveFileDir);
+  
+        // find file in directory
+        const fileObj = dirResp.filter(file => file.name === fileName)[0];
+  
+        // if file exists
+        if (fileObj) {
+  
+          // fetch file from blob API (up to 100MB)
+          resp = await git.getBlob(liveFileDir,
+                                   fileObj.sha);
+  
+        }
+  
       }
-
-    }
-
-
-
-    // if couldn't fetch file
-    if (resp.message) {
-
-      console.log('[Live View] Couldn\'t fetch file', resp.message);
-
-      return ['', 400];
+  
+  
+      // if couldn't fetch file
+      if (resp.message) {
+  
+        console.log('[Live View] Couldn\'t fetch file', resp.message);
+  
+        return ['', 400];
+  
+      }
+      
+      
+      // return contents from git response
+      respContent = resp.content;
 
     }
 
 
 
     // decode base64 file with browser
-    const dataURL = 'data:application/octet-stream;base64,' + resp.content;
+    const dataURL = 'data:application/octet-stream;base64,' + respContent;
 
     // send (instant) request
     const response = await fetch(dataURL);
