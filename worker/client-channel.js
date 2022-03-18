@@ -148,7 +148,7 @@ function sendRequestToClient(request) {
 
 let enableDevLogs = false;
 
-workerChannel.addEventListener('message', () => {
+workerChannel.addEventListener('message', (event) => {
   
   if (event.data.type === 'enableDevLogs') enableDevLogs = true;
   
