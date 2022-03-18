@@ -48,7 +48,25 @@ async function setupWorkerChannel() {
     }
 
   });
+  
+  
+  if (getStorage('workerDevLogs')) {
+    
+    workerChannel.postMessage({
+      type: 'enableDevLogs'
+    });
+    
+  }
 
+}
+
+
+// enable service worker logs
+function enableWorkerLogs() {
+  
+  setStorage('workerDevLogs', 'true');
+  window.location.reload();
+  
 }
 
 
