@@ -735,7 +735,7 @@ async function handleLiveViewRequest(requestPath) {
     
     
     // map file dir
-    const liveFileDir = [fileUser, fileRepo, fileContents].join(',');
+    const liveFileDir = [fileUser, fileRepo, fileContents];
     
     let respContent;
     
@@ -743,7 +743,8 @@ async function handleLiveViewRequest(requestPath) {
     
     // search modified files for file
     const modFile = Object.values(modifiedFiles).filter(file =>
-                      (file.dir == liveFileDir && file.name == fileName))[0];
+                      (file.dir == liveFileDir.join(',')
+                       && file.name == fileName))[0];
     
     // if matching modified file exists
     if (modFile) {
