@@ -1,7 +1,6 @@
 'use strict';
 
-// update cache names any time any of the cached files change
-const CACHE_NAME = 'static-cache-v317';
+self.importScripts('/worker/client-channel.js');
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -13,8 +12,10 @@ const FILES_TO_CACHE = [
   '/lib/plugins/codeit-match-braces.js',
   '/lib/plugins/codeit-autolinker.js',
 
-  '/full.html',
+  '/full',
   '/full.css',
+
+  '/worker/worker-channel.js',
 
   '/utils.js',
   '/manifest.js',
@@ -30,7 +31,6 @@ const FILES_TO_CACHE = [
   '/bottomfloat.js',
 
   '/live-view/live-view.js',
-  '/live-view/fetch-resp',
   
   '/live-view/extensions/beautifier.min.js',
   '/live-view/extensions/module-importer.js',
@@ -57,7 +57,7 @@ self.addEventListener('install', (evt) => {
 
   // precache static resources
   evt.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(WORKER_NAME).then((cache) => {
       return cache.addAll(FILES_TO_CACHE);
     })
   );
@@ -72,7 +72,7 @@ self.addEventListener('activate', (evt) => {
   evt.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
+        if (key !== WORKER_NAME) {
           return caches.delete(key);
         }
       }));
@@ -80,26 +80,11 @@ self.addEventListener('activate', (evt) => {
   );
 
   self.clients.claim();
-
-});
-
-
-self.addEventListener('fetch', (evt) => {
   
-  evt.respondWith(
-
-    // try the cache
-    caches.match(evt.request).then(function(response) {
-
-      // fall back to network
-      return response || fetch(evt.request);
-
-    }).catch(function() {
-
-      // if both fail, show the fallback:
-      return caches.match('full.html');
-
-    })
-  );
+  
+  // send reload request to client
+  workerChannel.postMessage({
+    type: 'reload'
+  });
 
 });

@@ -102,6 +102,50 @@ async function renderSidebarHTML() {
     renderBranchMenuHTML();
 
   }
+  
+  
+  // if sidebar title is empty
+  if (sidebarLogo.innerText === '') {
+    
+    if (contents != '') {
+
+      // if repo is owned by logged user
+      if (user === loggedUser) {
+
+        // show repo name and path
+        sidebarLogo.innerText = repoName + contents;
+
+      } else {
+
+        // show username, repo name and path
+        sidebarLogo.innerText = user + '/' + repoName + contents;
+
+      }
+
+    } else if (repo != '') {
+
+      // if repo is owned by logged user
+      if (user === loggedUser) {
+
+        // show repo name
+        sidebarLogo.innerText = repoName;
+
+      } else {
+
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repoName;
+
+      }
+
+    } else {
+
+      // show title
+      sidebarLogo.innerText = 'Repositories';
+
+    }
+    
+  }
+
 
   // get items in current tree from git
   resp = await git.getItems(treeLoc);
@@ -424,7 +468,7 @@ async function renderSidebarHTML() {
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
 
-            out += `
+            out = `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
               <div class="label">
                 `+ fileIconHTML +`
@@ -434,7 +478,7 @@ async function renderSidebarHTML() {
                 `+ pushIcon +`
               </div>
             </div>
-            `;
+            ` + out;
 
           }
 
@@ -535,7 +579,7 @@ async function renderSidebarHTML() {
             
             // render repo
 
-            out += `
+            out = `
             <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
               <div class="label">
                 `+ repoIcon +`
@@ -543,7 +587,7 @@ async function renderSidebarHTML() {
               </div>
               `+ arrowIcon +`
             </div>
-            `;
+            ` + out;
             
           }
 
@@ -1542,12 +1586,13 @@ function createNewRepoInHTML() {
         // play push animation
         playPushAnimation(repoEl.querySelector('.push-wrapper'));
 
-        // disable pushing file from HTML
+        // disable pushing repo from HTML
         repoEl.classList.remove('focused');
 
-        // make file name uneditable
+        // make repo name uneditable
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
+        repoEl.querySelector('.name').scrollTo(0, 0);
         
 
         // validate repo name
@@ -1703,6 +1748,7 @@ function createNewFileInHTML() {
         // make file name uneditable
         fileEl.querySelector('.name').setAttribute('contenteditable', 'false');
         fileEl.querySelector('.name').blur();
+        fileEl.querySelector('.name').scrollTo(0, 0);
 
         
         // pad file content with random number of invisible chars
@@ -1746,15 +1792,37 @@ function createNewFileInHTML() {
         });
 
         fileEl.querySelector('.name').textContent = fileName;
-
-
-        // change selected file
-        changeSelectedFile(treeLoc.join(), fileContent, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
-                           [0, 0], [0, 0], true);
+        
+        
+        // generate temporary SHA
+        const tempSHA = generateSHA();
+        setAttr(fileEl, 'sha', tempSHA);
 
 
         // open file
         
+        // if previous file selection exists
+        if (selectedFile.sha) {
+      
+          // get previous selection in modifiedFiles array
+          let selectedItem = modifiedFiles[selectedFile.sha];
+      
+          // if previous selection was modified
+          if (selectedItem) {
+      
+            // save previous selection in localStorage
+            updateModFileContent(selectedFile.sha, selectedFile.content);
+            updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+            updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+      
+          }
+      
+        }
+        
+        // change selected file
+        changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+            
         // if on mobile device
         if (isMobile) {
           
@@ -1826,27 +1894,28 @@ function createNewFileInHTML() {
           message: commitMessage,
           file: commitFile
         };
+        
 
         // push file asynchronously
-        const newSha = await git.push(commit);
+        const newSHA = await git.push(commit);
         
         
-        // update file sha in HTML with new sha from Git
-        setAttr(fileEl, 'sha', newSha);
+        // update file sha in HTML with new sha from git
+        setAttr(fileEl, 'sha', newSHA);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
-
+        
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
-        if (modifiedFiles[fileContent]) {
+        if (modifiedFiles[tempSHA]) {
 
-          onFileEclipsedInCache(fileContent, newSha, selectedFile);
+          onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
 
         } else {
 
-          onFileEclipsedInCache(false, newSha, selectedFile);
+          onFileEclipsedInCache(false, newSHA, selectedFile);
 
         }
 

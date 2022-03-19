@@ -1,6 +1,6 @@
 
 let treeLoc, linkData, gitToken, authUser,
-    
+
     selectedFile, modifiedFiles, modifiedRepos;
 
 
@@ -38,7 +38,7 @@ const body = document.body,
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
       addButton = header.querySelector('.add'),
-      
+
       /* newRepoButton = optionsScreen.querySelector('.new-repo'),
       newFileButton = optionsScreen.querySelector('.new-file'),
       branchButton = optionsScreen.querySelector('.branch'),
@@ -57,9 +57,9 @@ const body = document.body,
       learnTitle = learnWrapper.querySelector('.title'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
-      
+
       branchMenu = document.querySelector('.branch-menu'),
-      
+
       messageEl = document.querySelector('.message'),
 
       liveView = document.querySelector('.live-view');
@@ -67,7 +67,7 @@ const body = document.body,
 
 
 // version
-const version = '2.0.4';
+const version = '2.0.6';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -111,10 +111,10 @@ function stopLoading() {
 let messageTimeout;
 
 function showMessage(message, duration) {
-  
+
   // show message in HTML
   messageEl.textContent = message;
-  
+
   // if message is already visible
   if (messageEl.classList.contains('visible')) {
 
@@ -127,18 +127,18 @@ function showMessage(message, duration) {
     });
 
   }
-  
+
   messageEl.classList.add('visible');
-  
-  
+
+
   if (messageTimeout) window.clearTimeout(messageTimeout);
-  
+
   messageTimeout = window.setTimeout(() => {
-    
+
     messageEl.classList.remove('visible');
-    
+
   }, (duration ?? 2000));
-  
+
 }
 
 
@@ -240,25 +240,25 @@ const fileTypes = {
 };
 
 let getFileType = (fileName) => {
-  
+
   // get file extension
   const extension = splitFileName(fileName)[1];
-  
+
   let fileType = 'other';
-  
+
   if (fileName === 'README') return 'markdown';
-  
+
   Object.entries(fileTypes).forEach(type => {
-    
+
     if (type[1].includes(extension)) {
-      
+
       fileType = type[0];
       return fileType;
-      
+
     }
-  
+
   });
-  
+
   return fileType;
 
 }
@@ -282,58 +282,58 @@ let setStorage = (item, value) => {
 // move element to element (when origin element has 'position: fixed')
 
 let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
-  
+
   // get bounding box of dest element
   const rect = dest.getBoundingClientRect(),
         destHeight = dest.clientHeight;
-  
+
   // get bounding box of origin element
   const originHeight = origin.clientHeight,
         originWidth = origin.clientWidth;
-  
-  
+
+
   // define window constraints
   // (stop moving element when it goes offscreen)
   let maxTop = window.innerHeight,
       minTop = -originHeight,
       maxLeft = window.innerWidth,
       minLeft = -originWidth;
-  
-  
+
+
   // if defined boundry element,
   // update constraints
   if (boundryEl) {
-    
+
     maxTop = boundryEl.clientHeight;
     maxLeft = boundryEl.clientWidth;
-    
+
   }
-  
-  
+
+
   // add margin from boundry edges
   if (boundryMargin && !isNaN(boundryMargin)) {
-    
+
     // add vertical margin from screen edges
     maxTop -= originHeight + boundryMargin;
     minTop = boundryMargin;
-    
+
     // add horizontal margin from screen edges
     maxLeft -= originWidth + boundryMargin;
     minLeft = boundryMargin;
-    
+
   }
-  
-  
+
+
   let destTop = rect.top + destHeight,
       destLeft = rect.left;
-  
+
   // check if menu is outside window
   if (maxTop < destTop) destTop = maxTop;
   if (minTop > destTop) destTop = minTop;
   if (maxLeft < destLeft) destLeft = maxLeft;
   if (minLeft > destLeft) destLeft = minLeft;
-  
-  
+
+
   origin.style.top = destTop + 'px';
   origin.style.left = destLeft + 'px';
 
@@ -362,17 +362,17 @@ let validateString = (string) => {
                           'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
                           '0123456789' +
                           '-_.';
-  
+
   const stringArr = string.split('').filter(char => !acceptableChars.includes(char));
-  
+
   return (stringArr.length > 0 ? stringArr : false);
-  
+
 }
 
 
 // hash string
 let hashCode = (string) => {
-  var hash = 0, i, chr;
+  let hash = 0, i, chr;
   if (string.length === 0) return hash;
   for (i = 0; i < string.length; i++) {
     chr   = string.charCodeAt(i);
@@ -380,6 +380,17 @@ let hashCode = (string) => {
     hash |= 0; // convert to 32bit integer
   }
   return hash;
+}
+
+
+// generate SHA
+let generateSHA = (len) => {
+  let dec2hex = (dec) => {
+    return dec.toString(16).padStart(2, '0');
+  }
+  const arr = new Uint8Array((len || 40) / 2);
+  window.crypto.getRandomValues(arr);
+  return Array.from(arr, dec2hex).join('');
 }
 
 
@@ -418,11 +429,11 @@ let copy = async (text) => {
 
 // paste
 let paste = async () => {
-  
+
   const text = await navigator.clipboard.readText();
-  
+
   return text;
-  
+
 }
 
 
@@ -453,6 +464,7 @@ let axios = {
             } catch(e) {}
           }
         };
+
         xmlhttp.open('GET', url, true);
         if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();

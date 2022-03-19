@@ -8,20 +8,20 @@ async function setupLiveView() {
     // get file from URL
     const fileName = linkData.file.name;
     const fileSha = linkData.file.sha;
-    
-    
+
+
     // don't transition
     body.classList.add('notransition');
 
     // if on mobile device
     if (isMobile) {
-      
+
       // close sidebar
       toggleSidebar(false);
       saveSidebarStateLS();
 
     } else {
-      
+
       // open sidebar
       toggleSidebar(true);
       saveSidebarStateLS();
@@ -32,14 +32,14 @@ async function setupLiveView() {
     onNextFrame(() => {
       body.classList.remove('notransition');
     });
-    
-    
+
+
     // if URL has a live view flag
     if (linkData.openLive) {
 
       // if on mobile device
       if (isMobile) {
-        
+
         // clear selected file name
         floatLogo.innerText = '';
 
@@ -71,9 +71,9 @@ async function setupLiveView() {
         });
 
       }
-      
+
     }
-    
+
     function closeLiveView() {
 
       // if URL has a live view flag
@@ -81,19 +81,19 @@ async function setupLiveView() {
 
         // if on mobile device
         if (isMobile) {
-          
+
           // don't transition
           body.classList.add('notransition');
-          
+
           // open sidebar
           toggleSidebar(true);
           saveSidebarStateLS();
-          
+
           // restore transition on next frame
           onNextFrame(() => {
             body.classList.remove('notransition');
           });
-          
+
 
           // don't transition bottom float
           bottomWrapper.classList.add('notransition');
@@ -125,7 +125,7 @@ async function setupLiveView() {
         }
 
       }
-      
+
     }
     
 
@@ -135,39 +135,39 @@ async function setupLiveView() {
       // start loading
       startLoading();
 
-      
+
       // get file from git
       const resp = await git.getFile(treeLoc, fileName);
-      
+
       // if file dosen't exist
       if (resp.message && resp.message === 'Not Found') {
 
         // stop loading
         stopLoading();
-        
+
         // close live view
         closeLiveView();
-        
+
         showMessage('Hmm... that file dosen\'t exist.', 5000);
-        
+
         return;
-        
+
       }
-      
+
       // if branch dosen't exist
       if (resp.message && resp.message.startsWith('No commit found for the ref')) {
-        
+
         // stop loading
         stopLoading();
-        
+
         // close live view
         closeLiveView();
 
         return;
-        
+
       }
 
-      
+
       // change selected file
       changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
                          [0, 0], [0, 0], false);
@@ -176,43 +176,43 @@ async function setupLiveView() {
       stopLoading();
 
     } else { // else, load file from modifiedFiles object
-      
+
       const modFile = (selectedFile.sha === fileSha) ? selectedFile : modifiedFiles[fileSha];
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                          modFile.caretPos, modFile.scrollPos, false);
 
     }
-    
-    
+
+
     // if URL has a live view flag
     if (linkData.openLive) {
-      
+
       // if on mobile device
       if (isMobile) {
 
         // update bottom float
         updateFloat();
-        
+
       }
-      
+
       // open live view
       toggleLiveView(selectedFile);
-      
+
     }
 
-    
+
     // show file content in codeit
     try {
-      
+
       const fileContent = decodeUnicode(selectedFile.content);
-      
+
       // compare current code with new code
       if (hashCode(cd.textContent) !== hashCode(fileContent)) {
 
         // if the code is different, swap it
         cd.textContent = fileContent;
-        
+
       }
 
       // change codeit lang
@@ -228,7 +228,7 @@ async function setupLiveView() {
       return;
 
     }
-    
+
     // change tab character
     if (cd.textContent.includes('\t')) {
 
@@ -239,7 +239,7 @@ async function setupLiveView() {
       cd.options.tab = '  ';
 
     }
-    
+
     // set scroll pos in codeit
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
@@ -342,7 +342,7 @@ function addBottomSwipeListener() {
 
         toggleLiveView(selectedFile);
 
-      } else {
+      } else if (active) {
 
         // if clicked on share button,
         // share live view link
@@ -401,8 +401,6 @@ function addBottomSwipeListener() {
         if (swiped && !bottomWrapper.classList.contains('expanded')
             && !bottomFloat.classList.contains('file-open')) {
 
-          swiped = false;
-
           // expand bottom float
           bottomWrapper.classList.add('expanded');
 
@@ -419,6 +417,11 @@ function addBottomSwipeListener() {
           }
 
           toggleLiveView(selectedFile);
+          
+          // wait until animation has ended to enable swiping
+          window.setTimeout(() => {
+            swiped = false;
+          }, 400);
 
         }
 
@@ -427,8 +430,6 @@ function addBottomSwipeListener() {
         // if swiped down and bottom float is expanded
         if (swiped && bottomWrapper.classList.contains('expanded')
             && !bottomFloat.classList.contains('file-open')) {
-
-          swiped = false;
 
           // fix bottom float on safari
           if (isSafari) {
@@ -457,6 +458,11 @@ function addBottomSwipeListener() {
           }
 
           toggleLiveView(selectedFile);
+          
+          // wait until animation has ended to enable swiping
+          window.setTimeout(() => {
+            swiped = false;
+          }, 400);
 
         }
 
@@ -498,7 +504,7 @@ if (isMobile) {
     toggleLiveView(selectedFile);
 
   });
-  
+
   liveToggle.querySelector('.download').addEventListener('click', downloadSelFile);
 
   liveToggle.querySelector('.share').addEventListener('click', () => {
@@ -540,7 +546,7 @@ if (isMobile) {
 
 // download selected file
 async function downloadSelFile() {
-  
+
   // if selected file is already fetched
   if (selectedFile.content &&
       hashCode(selectedFile.content) !== hashCode(fileSizeText)) {
@@ -552,7 +558,7 @@ async function downloadSelFile() {
 
     // show download message
     showMessage('Downloading...');
-    
+
     // fetch selected file
     const resp = await git.getBlob(treeLoc, selectedFile.sha);
 
@@ -560,20 +566,20 @@ async function downloadSelFile() {
     downloadFile(resp.content, selectedFile.name);
 
   }
-  
+
 }
 
 function downloadFile(file, name) {
-  
+
   const a = document.createElement('a');
-  
+
   a.href = 'data:application/octet-stream;base64,' + file;
   a.target = '_blank';
   a.download = name;
-  
+
   a.click();
   a.remove();
-  
+
 }
 
 
@@ -596,32 +602,12 @@ function toggleLiveView(file) {
 
     if (file.lang == 'html' || file.lang == 'markup') {
 
-      window.setTimeout(() => {
-
-        if (liveViewToggle && !liveView.classList.contains('loaded')) {
-
-          liveView.classList.add('loading');
-
-        }
-
-      }, 1200);
-
       renderLiveViewHTML(file);
 
     } /* else if (file.lang == 'python') {
-      
-      window.setTimeout(() => {
-
-        if (liveViewToggle && !liveView.classList.contains('loaded')) {
-
-          liveView.classList.add('loading');
-
-        }
-
-      }, 1200);
 
       renderLiveViewPython(file);
-      
+
     } */
 
   } else {
@@ -656,386 +642,205 @@ function toggleLiveView(file) {
 }
 
 
-const liveFetchURL = window.location.origin + '/live-fetch/';
+
+const livePathLength = 15; // +1
+const livePath = window.location.origin + '/run/' + '_/'.repeat(livePathLength);
+
+let liveFile;
+
+
+// handle live view request
+async function handleLiveViewRequest(requestPath) {
+
+  // if requesting base path
+  if (requestPath === livePath) {
+
+    // return live file
+    return [decodeUnicode(liveFile.content)];
+
+  } else {
+
+    // map file dir
+    let [fileUser, fileRepo, fileContents] = liveFile.dir.split(',');
+    
+    // get file name
+    const fileName = requestPath.split('/').slice(-1)[0];
+
+
+
+    // if requesting path above
+    if (!requestPath.includes(livePath)) {
+
+      // slice origin from request
+      // to get directory path
+      let dirPath = requestPath.slice(window.location.origin.length);
+      dirPath = dirPath.replace('/run', '/_');
+
+      dirPath = dirPath.split('/_');
+
+
+      // if didn't request uppermost directory
+      if (dirPath.length !== 1) {
+
+        // don't count file name in directory array
+        const traveseDir = (livePathLength + 1) - (dirPath.length - 1);
+
+        // split file contents
+        fileContents = fileContents.split('/');
+
+        // traverse dir backwards
+        for (let i = 0; i < traveseDir; i++) fileContents.pop();
+
+        // join file contents
+        fileContents = fileContents.join('/');
+
+      } else { // if requested uppermost directory
+
+        // clear file contents
+        fileContents = '';
+
+      }
+
+
+      // get path down
+      let pathDown = dirPath[dirPath.length-1];
+
+      // slice file name from relative path
+      pathDown = pathDown.slice(0, (-fileName.length - 1));
+
+      // add path down to file directory
+      fileContents += pathDown;
+
+    } else {
+
+      // if requesting path below
+
+      // slice live path from request
+      // to get relative path
+      let relPath = requestPath.slice(livePath.length);
+
+      // slice file name from relative path
+      relPath = relPath.slice(0, (-fileName.length - 1));
+
+      // if relative path exists
+      if (relPath) {
+
+        // add relative path to live file path
+        fileContents += '/' + relPath;
+
+      }
+
+    }
+    
+    
+    
+    // map file dir
+    const liveFileDir = [fileUser, fileRepo, fileContents];
+    
+    let respContent;
+    
+    
+    
+    // search modified files for file
+    const modFile = Object.values(modifiedFiles).filter(file =>
+                      (file.dir == liveFileDir.join(',')
+                       && file.name == fileName))[0];
+    
+    // if matching modified file exists
+    if (modFile) {
+      
+      // return modified file content
+      respContent = modFile.content;
+      
+    } else {
+
+      // get file from git
+      let resp = await git.getFile(liveFileDir,
+                                   fileName);
+ 
+  
+      // if file is over 1MB
+      if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+  
+        console.log('[Live View] File', fileName, 'over 1MB, fetching from blob API');
+  
+        // fetch file directory
+        const dirResp = await git.getItems(liveFileDir);
+  
+        // find file in directory
+        const fileObj = dirResp.filter(file => file.name === fileName)[0];
+  
+        // if file exists
+        if (fileObj) {
+  
+          // fetch file from blob API (up to 100MB)
+          resp = await git.getBlob(liveFileDir,
+                                   fileObj.sha);
+  
+        }
+  
+      }
+  
+  
+      // if couldn't fetch file
+      if (resp.message) {
+  
+        console.log('[Live View] Couldn\'t fetch file', resp.message);
+  
+        return ['', 400];
+  
+      }
+      
+      
+      // return contents from git response
+      respContent = resp.content;
+
+    }
+
+
+
+    // decode base64 file with browser
+    const dataURL = 'data:application/octet-stream;base64,' + respContent;
+
+    // send (instant) request
+    const response = await fetch(dataURL);
+
+    // get data from response
+    const respObj = (await (response.body.getReader()).read()).value;
+
+    return [respObj];
+
+  }
+
+}
+
+
 
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
 
-  // clear console
-  console.clear();
-  logVersion();
+  if (!isDev) {
 
+    // clear console
+    console.clear();
+    logVersion();
 
-  liveView.innerHTML = '<iframe name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
-
-  const frame = liveView.querySelector('.live-frame');
-  const frameDocument = frame.contentDocument;
-
-  frameDocument.addEventListener('keydown', handleMetaP);
-  
-  
-  frameDocument.documentElement.innerHTML = decodeUnicode(file.content);
-
-  
-  // add <base> element
-  
-  const baseEl = frameDocument.createElement('base');
-  baseEl.href = liveFetchURL;
-  
-  if (frameDocument.head.children.length > 0) {
-    
-    frameDocument.head.insertBefore(baseEl, frameDocument.head.children[0]);
-    
-  } else {
-    
-    frameDocument.head.appendChild(baseEl);
-    
   }
-  
-  
-  // fetch styles
-  const frameLinks = frameDocument.querySelectorAll('link[rel="stylesheet"]');
 
-  if (frameLinks.length > 0) {
 
-    frameLinks.forEach(async (link) => {
+  liveView.innerHTML = '<iframe src="'+ livePath +'" name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
-      const linkHref = new URL(link.href);
-      const fileName = linkHref.pathname.replace('/live-fetch/','');
 
-      if (linkHref.href.startsWith(liveFetchURL)) {
+  const liveFrame = liveView.querySelector('.live-frame');
 
-        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-        let resp;
+  liveFrame.contentWindow.addEventListener('load', () => {
 
-        if (!file[0]) {
-
-          try {
-            resp = await git.getFile(selectedFile.dir.split(','), fileName);
-          } catch(e) { resp = ''; }
-
-        } else {
-
-          resp = file[0];
-
-        }
-
-        link.outerHTML = '<style>' + decodeUnicode(resp.content) + '</style>';
-
-        // hide loader
-        liveView.classList.add('loaded');
-
-        // remove original tag
-        link.remove();
-
-      } else {
-
-        // hide loader
-        liveView.classList.add('loaded');
-
-      }
-
-    });
-
-  } else {
-
-    // hide loader
     liveView.classList.add('loaded');
 
-  }
-
-  // fetch scripts
-  fetchLiveViewScripts(frameDocument);
-
-  
-  // if not navigating in current tree,
-  // fetch current tree
-  
-  let fileTree = {};
-  
-  if (file.dir !== treeLoc.join(',')) {
-    
-    fileTree = await git.getItems(file.dir.split(','));
-    
-  } else {
-    
-    const files = fileWrapper.querySelectorAll('.item.file');
-    
-    // parse file elements and save relevant fields
-    files.forEach(fileEl => {
-      
-      const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
-      
-      fileTree[fileName] = { sha: getAttr(fileEl, 'sha') };
-      
-    });
-    
-  }
-  
-  
-  // fetch images
-  frameDocument.querySelectorAll('img').forEach(async (image) => {
-
-    const linkHref = new URL(image.src);
-    const fileDir = linkHref.pathname.replace('/live-fetch/','');
-    const splitDir = fileDir.split('/');
-    
-    if (linkHref.href.startsWith(liveFetchURL)) {
-      
-      // if image is in current directory
-      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
-
-        const fileName = splitDir[splitDir.length-1];
-        
-        // find file by name
-        const fileObj = fileTree[fileName];
-
-        // if file exists
-        if (fileObj) {
-
-          // fetch image
-
-          // get MIME type (https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
-          let mimeType = 'image/' + fileName.split('.')[1];
-
-          if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
-
-          // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
-
-          image.src = 'data:' + mimeType + ';base64,' + resp.content;
-
-        }
-
-      } else if (!fileDir.includes('./')) { // if image is below current directory
-
-        // fetch image
-
-        // get MIME type
-        let mimeType = 'image/' + fileName.split('.')[1];
-
-        if (mimeType.endsWith('svg')) mimeType = 'image/svg+xml';
-
-        const fileTree = linkHref.pathname.replaceAll(fileName, '');
-
-        let tree = selectedFile.dir.split(',');
-        tree[2] = tree[2] + fileDir.slice(1, -1);
-
-        const resp = await git.getFile(tree, fileName);
-
-        image.src = 'data:' + mimeType + ';base64,' + resp.content;
-
-      }
-
-    }
-
-  })
-
-  // fetch videos
-  frameDocument.querySelectorAll('video').forEach(async (video) => {
-
-    const linkHref = new URL(video.src);
-    const fileDir = linkHref.pathname.replace('/live-fetch/','');
-    const splitDir = fileDir.split('/');
-    
-    if (linkHref.href.startsWith(liveFetchURL)) {
-      
-      // if video is in current directory
-      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
-
-        const fileName = splitDir[splitDir.length-1];
-        
-        // find file by name
-        const fileObj = fileTree[fileName];
-
-        // if file exists
-        if (fileObj) {
-
-          // fetch video
-
-          // get MIME type
-          let mimeType = 'video/' + fileName.split('.')[1];
-          
-          if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
-          if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
-          if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
-          
-          // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
-
-          video.src = 'data:' + mimeType + ';base64,' + resp.content;
-
-        }
-
-      } else if (!fileDir.includes('./')) { // if image is below current directory
-
-        // fetch video
-
-        // get MIME type
-        let mimeType = 'video/' + fileName.split('.')[1];
-
-        if (mimeType.endsWith('avi')) mimeType = 'video/x-msvideo';
-        if (mimeType.endsWith('ogv')) mimeType = 'video/ogg';
-        if (mimeType.endsWith('ts')) mimeType = 'video/mp2t';
-        
-        const fileTree = linkHref.pathname.replaceAll(fileName, '');
-
-        let tree = selectedFile.dir.split(',');
-        tree[2] = tree[2] + fileDir.slice(1, -1);
-
-        const resp = await git.getFile(tree, fileName);
-
-        video.src = 'data:' + mimeType + ';base64,' + resp.content;
-
-      }
-
-    }
-
-  })
-
-  // fetch audio
-  frameDocument.querySelectorAll('audio').forEach(async (audio) => {
-
-    const linkHref = new URL(audio.src);
-    const fileDir = linkHref.pathname.replace('/live-fetch/','');
-    const splitDir = fileDir.split('/');
-    
-    if (linkHref.href.startsWith(liveFetchURL)) {
-      
-      // if audio is in current directory
-      if (splitDir.length < 3 && (splitDir.length == 2 ? splitDir[0] == '' : true)) {
-
-        const fileName = splitDir[splitDir.length-1];
-        
-        // find file by name
-        const fileObj = fileTree[fileName];
-
-        // if file exists
-        if (fileObj) {
-
-          // fetch audio
-
-          // get file as blob with SHA (up to 100MB)
-          const resp = await git.getBlob(selectedFile.dir.split(','), fileObj.sha);
-
-          audio.src = 'data:audio/mpeg;base64,' + resp.content;
-
-        }
-
-      } else if (!fileDir.includes('./')) { // if audio is below current directory
-
-        // fetch audio
-
-        const fileTree = linkHref.pathname.replaceAll(fileName, '');
-
-        let tree = selectedFile.dir.split(',');
-        tree[2] = tree[2] + fileDir.slice(1, -1);
-
-        const resp = await git.getFile(tree, fileName);
-
-        audio.src = 'data:audio/mpeg;base64,' + resp.content;
-
-      }
-
-    }
-
-  })
-
-}
-
-
-async function fetchLiveViewScripts(frameDocument) {
-
-  // fetch scripts
-  await asyncForEach(frameDocument.querySelectorAll('script'), async (script) => {
-
-    // if script is external
-    if (script.src) {
-
-      const linkHref = new URL(script.src);
-      const fileName = linkHref.pathname.replace('/live-fetch/','');
-
-      if (linkHref.href.startsWith(liveFetchURL)) {
-
-        const file = Object.values(modifiedFiles).filter(file => (file.dir == selectedFile.dir.split(',') && file.name == fileName));
-        let resp;
-
-        if (!file[0]) {
-
-          resp = await git.getFile(selectedFile.dir.split(','), fileName);
-
-        } else {
-
-          resp = file[0];
-
-        }
-
-        addScript(frameDocument, decodeUnicode(resp.content), false, script.type);
-
-        // remove original tag
-        script.remove();
-
-      } else {
-        
-        await addScript(frameDocument, false, script.src, script.type);
-
-        // delete original
-        script.remove();
-
-      }
-
-    } else {
-
-      let scriptContent = script.textContent;
-      
-      // if script is a module
-      if (script.type === 'module') {
-        
-        const filePath = selectedFile.dir.split(',')[2];
-        
-        // get all imports in module
-        scriptContent = await moduleImporter.getImports(scriptContent, filePath);
-
-      }
-      
-      addScript(frameDocument, scriptContent, false, script.type);
-
-      // delete original
-      script.remove();
-
-    }
-
   });
 
-}
 
-
-function addScript(documentNode, code, src, type) {
-
-  return new Promise((resolve) => {
-
-    const script = documentNode.createElement('script');
-
-    if (type && type != '') script.type = type;
-
-    if (code) {
-
-      script.appendChild(documentNode.createTextNode(code));
-
-    } else {
-
-      script.src = src;
-      script.defer = true;
-      script.async = false;
-
-      script.onload = resolve;
-      script.onerror = resolve;
-
-    }
-
-    documentNode.head.appendChild(script);
-
-  });
+  liveFile = file;
 
 }
 
@@ -1044,67 +849,71 @@ function addScript(documentNode, code, src, type) {
 // render live view for Python files
 async function renderLiveViewPython(file) {
 
-  // clear console
-  console.clear();
-  logVersion();
+  if (!isDev) {
+
+    // clear console
+    console.clear();
+    logVersion();
+
+  }
 
 
   liveView.innerHTML = '<iframe name="Python Context" class="python-frame" style="display: none"></iframe>'
                        + '<div class="console"></div>';
-  
+
   liveView.classList.add('loaded');
-  
+
   const consoleEl = liveView.querySelector('.console');
   const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
-  
-  
+
+
   await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
-  
-  
+
+
   function logMessage(msg, options) {
-    
+
     if (msg) {
-      
+
       if (options && options.color) {
-        
+
         if (options.color === 'gray') {
-          
+
           consoleEl.innerHTML += '<div class="message" style="color:gray;font-style:italic">'+msg+'<br></div>';
-        
+
         } else if (options.color === 'purplepink') {
-          
+
           consoleEl.innerHTML += '<div class="message" style="color:hsl(302,100%,72.5%)">'+msg+'<br></div>';
-          
+
         }
-          
+
       } else {
-        
+
         consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
-      
+
       }
-       
+
     }
-    
+
   }
-  
+
   function clearOutput() {
-    
+
     consoleEl.innerHTML = '';
     logMessage('Console was cleared', { color: 'gray' });
-    
+
   }
-  
-  
+
+
   logMessage('Loading Python...', { color: 'gray' });
-  
+
   // load pyodide in python frame
   pythonFrame.pyodide = await pythonFrame.loadPyodide({
     indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
   });
-  
+
   logMessage('Loaded!', { color: 'gray' });
-  
-  
+
+
   // override logs in python context
   pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
   pythonFrame.console.logs = [];
@@ -1114,22 +923,22 @@ async function renderLiveViewPython(file) {
     pythonFrame.console.logs.forEach(msg => addToOutput(msg));
     pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
   }
-  
-  
+
+
   // run file
-  
+
   try {
-    
+
     let output = pythonFrame.pyodide.runPython(decodeUnicode(file.content));
-    
+
     //addToOutput(output);
-    
+
   } catch (err) {
-    
+
     logMessage(err, { color: 'purplepink' });
-    
+
   }
-  
+
 }
 
 
