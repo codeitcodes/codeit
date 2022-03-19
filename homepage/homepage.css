@@ -4858,11 +4858,11 @@ body {
   }
   
   .ft__half:first-child .ft__wrapper {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
   
   .pdxParent--smartphones {
-    padding-right: 0;
+    padding-right: 0 !important;
   }
   
 }
