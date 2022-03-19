@@ -50,13 +50,17 @@ async function setupWorkerChannel() {
   });
   
   
-  if (getStorage('workerDevLogs')) {
+  window.addEventListener('load', () => {
     
-    workerChannel.postMessage({
-      type: 'enableDevLogs'
-    });
+    if (getStorage('workerDevLogs')) {
+      
+      workerChannel.postMessage({
+        type: 'enableDevLogs'
+      });
+      
+    }
     
-  }
+  });
 
 }
 
