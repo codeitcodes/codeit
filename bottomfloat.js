@@ -98,6 +98,12 @@ floatDownload.addEventListener('click', downloadSelFile);
 if (isMobile) {
 
   cd.on('scroll', checkBottomFloat, false);
+  
+  cd.on('blur', () => {
+    
+    bottomFloat.classList.remove('hidden');
+    
+  });
 
 }
 
