@@ -4853,10 +4853,6 @@ body {
     width: auto !important;
   }
   
-  #hero .pdxParent--smartphones::after {
-    content: unset;
-  }
-  
 }
 
 body {
