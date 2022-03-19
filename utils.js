@@ -372,7 +372,7 @@ let validateString = (string) => {
 
 // hash string
 let hashCode = (string) => {
-  var hash = 0, i, chr;
+  let hash = 0, i, chr;
   if (string.length === 0) return hash;
   for (i = 0; i < string.length; i++) {
     chr   = string.charCodeAt(i);
@@ -380,6 +380,17 @@ let hashCode = (string) => {
     hash |= 0; // convert to 32bit integer
   }
   return hash;
+}
+
+
+// generate SHA
+let generateSHA = (len) => {
+  let dec2hex = (dec) => {
+    return dec.toString(16).padStart(2, '0');
+  }
+  const arr = new Uint8Array((len || 40) / 2);
+  window.crypto.getRandomValues(arr);
+  return Array.from(arr, dec2hex).join('');
 }
 
 
