@@ -1889,7 +1889,7 @@ body.safari .push-svg #check {
   transition: .18s var(--ease-function), 0s fill;
   animation: push-pre-bobble 0.2s,
              push-expand 0.27s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-             push-bobble 0.55s 0.3s var(--cubic-function);
+             push-bobble 0.55s 0.3s var(--cubic-function) forwards;
 }
 
 body.safari .push-wrapper.checked .push-svg #check {
