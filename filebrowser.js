@@ -2449,7 +2449,7 @@ function setupEditor() {
               const pos = cd.getSelection();
     
               // select beautified text
-              cd.setSelection(pos.start, (pos.start - beautifiedText.length));
+              cd.setSelection((pos.start - beautifiedText.length), pos.start);
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
