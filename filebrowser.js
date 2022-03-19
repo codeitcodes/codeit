@@ -102,6 +102,50 @@ async function renderSidebarHTML() {
     renderBranchMenuHTML();
 
   }
+  
+  
+  // if sidebar title is empty
+  if (sidebarLogo.innerText === '') {
+    
+    if (contents != '') {
+
+      // if repo is owned by logged user
+      if (user === loggedUser) {
+
+        // show repo name and path
+        sidebarLogo.innerText = repoName + contents;
+
+      } else {
+
+        // show username, repo name and path
+        sidebarLogo.innerText = user + '/' + repoName + contents;
+
+      }
+
+    } else if (repo != '') {
+
+      // if repo is owned by logged user
+      if (user === loggedUser) {
+
+        // show repo name
+        sidebarLogo.innerText = repoName;
+
+      } else {
+
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repoName;
+
+      }
+
+    } else {
+
+      // show title
+      sidebarLogo.innerText = 'Repositories';
+
+    }
+    
+  }
+
 
   // get items in current tree from git
   resp = await git.getItems(treeLoc);
