@@ -833,7 +833,7 @@ const fileSizeText = '<this file is too big to view>';
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl, commitMessage) {
-
+  
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
@@ -2439,11 +2439,17 @@ function setupEditor() {
             // compare current code with new code
             // if the code is different, swap it
             if (hashCode(selText) !== hashCode(beautifiedText)) {
-
+              
               // replace selection contents
               // with beautified text
               cd.deleteCurrentSelection();
-              cd.insert(beautifiedText);
+              cd.insert(beautifiedText, { moveToEnd: false });
+              
+              // get caret pos in text
+              const pos = cd.getSelection();
+    
+              // select beautified text
+              cd.setSelection(pos.start, (pos.start + beautifiedText.length));
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
