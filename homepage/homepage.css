@@ -4857,12 +4857,12 @@ body {
     width: auto !important;
   }
   
-  .ft__half:first-child .ft__wrapper {
-    margin-left: 0 !important;
+  #hero .ft__half:first-child .ft__wrapper {
+    margin-left: 20px !important;
   }
   
-  .pdxParent--smartphones {
-    padding-right: 0 !important;
+  #hero .pdxParent--smartphones {
+    padding-right: 20px !important;
   }
   
 }
