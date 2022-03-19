@@ -4848,20 +4848,20 @@ body {
     height: 149px;
   }
   
-  #hero .ft {
+  .ft {
     justify-content: center;
     align-items: center;
   }
   
-  #hero .ft__half {
+  .ft__half {
     width: auto !important;
   }
   
-  #hero .ft__half:first-child .ft__wrapper {
+  .ft__half:first-child .ft__wrapper {
     margin-left: 0;
   }
   
-  #hero .pdxParent--smartphones {
+  .pdxParent--smartphones {
     padding-right: 0;
   }
   
