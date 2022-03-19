@@ -127,7 +127,26 @@ async function setupLiveView() {
       }
 
     }
-
+    
+    
+    // if previous file selection exists
+    if (selectedFile.sha) {
+  
+      // get previous selection in modifiedFiles array
+      let selectedItem = modifiedFiles[selectedFile.sha];
+  
+      // if previous selection was modified
+      if (selectedItem) {
+  
+        // save previous selection in localStorage
+        updateModFileContent(selectedFile.sha, selectedFile.content);
+        updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+        updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+  
+      }
+  
+    }
+  
 
     // if file is not modified; fetch from Git
     if (!modifiedFiles[fileSha]) {
