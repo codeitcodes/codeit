@@ -83,9 +83,9 @@ self.addEventListener('activate', (evt) => {
   
   
   // send reload request to client
-  /* workerChannel.postMessage({
+  workerChannel.postMessage({
     type: 'reload'
-  }); */
+  });
 
 });
 
