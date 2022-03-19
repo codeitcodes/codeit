@@ -2440,16 +2440,16 @@ function setupEditor() {
             // if the code is different, swap it
             if (hashCode(selText) !== hashCode(beautifiedText)) {
               
-              // get caret pos in text
-              const pos = cd.getSelection();
-              
               // replace selection contents
               // with beautified text
               cd.deleteCurrentSelection();
               cd.insert(beautifiedText);
+              
+              // get caret pos in text
+              const pos = cd.getSelection();
     
-              // restore pos in text
-              cd.setSelection(pos.start, pos.end);
+              // select beautified text
+              cd.setSelection(pos.start, (pos.start - beautifiedText.length));
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
