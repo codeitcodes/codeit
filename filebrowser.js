@@ -1797,15 +1797,32 @@ function createNewFileInHTML() {
         // generate temporary SHA
         const tempSHA = generateSHA();
         setAttr(fileEl, 'sha', tempSHA);
-        
-        
-        // change selected file
-        changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
-                           [0, 0], [0, 0], true);
 
 
         // open file
         
+        // if previous file selection exists
+        if (selectedFile.sha) {
+      
+          // get previous selection in modifiedFiles array
+          let selectedItem = modifiedFiles[selectedFile.sha];
+      
+          // if previous selection was modified
+          if (selectedItem) {
+      
+            // save previous selection in localStorage
+            updateModFileContent(selectedFile.sha, selectedFile.content);
+            updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+            updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+      
+          }
+      
+        }
+        
+        // change selected file
+        changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+                           [0, 0], [0, 0], true);
+            
         // if on mobile device
         if (isMobile) {
           
