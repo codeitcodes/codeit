@@ -81,8 +81,7 @@ logVersion();
 // dev build
 let isDev = false;
 
-if (window.location.href.includes('dev')
-    || window.location.href.includes('127.0.0.1:3000')) {
+if (window.location.href.includes('dev')) {
 
   isDev = true;
   learnTitle.innerHTML += '<sup>dev</sup>';
