@@ -4780,7 +4780,7 @@ body {
 }
 
 .ctas .btn.cookies::before {
-  content: 'Cookies Disabled';
+  content: 'Cookies disabled';
 }
 
 @keyframes loader {
@@ -4840,6 +4840,23 @@ body {
 #footer a {
   color: inherit !important;
   font-weight: inherit;
+}
+
+@media only screen and (min-width:750px) {
+  
+  .ft {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ft__half {
+    width: auto !important;
+  }
+  
+  #hero .pdxParent--smartphones::after {
+    content: unset;
+  }
+  
 }
 
 body {
