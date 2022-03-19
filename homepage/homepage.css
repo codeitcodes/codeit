@@ -4844,13 +4844,25 @@ body {
 
 @media only screen and (min-width:750px) {
   
-  .ft {
+  #header > .wr {
+    height: 149px;
+  }
+  
+  #hero .ft {
     justify-content: center;
     align-items: center;
   }
   
-  .ft__half {
+  #hero .ft__half {
     width: auto !important;
+  }
+  
+  #hero .ft__half:first-child .ft__wrapper {
+    margin-left: 0;
+  }
+  
+  #hero .pdxParent--smartphones {
+    padding-right: 0;
   }
   
 }
