@@ -468,7 +468,7 @@ async function renderSidebarHTML() {
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
 
-            out = out + `
+            out = `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
               <div class="label">
                 `+ fileIconHTML +`
@@ -478,7 +478,7 @@ async function renderSidebarHTML() {
                 `+ pushIcon +`
               </div>
             </div>
-            `;
+            ` + out;
 
           }
 
@@ -579,7 +579,7 @@ async function renderSidebarHTML() {
             
             // render repo
 
-            out = out + `
+            out = `
             <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
               <div class="label">
                 `+ repoIcon +`
@@ -587,7 +587,7 @@ async function renderSidebarHTML() {
               </div>
               `+ arrowIcon +`
             </div>
-            `;
+            ` + out;
             
           }
 
