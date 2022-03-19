@@ -833,7 +833,7 @@ const fileSizeText = '<this file is too big to view>';
 
 // push file to Git from HTML element
 async function pushFileFromHTML(fileEl, commitMessage) {
-
+  
   // disable pushing file in HTML
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
