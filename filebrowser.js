@@ -2443,13 +2443,13 @@ function setupEditor() {
               // replace selection contents
               // with beautified text
               cd.deleteCurrentSelection();
-              cd.insert(beautifiedText);
+              cd.insert(beautifiedText, { moveToEnd: false });
               
               // get caret pos in text
               const pos = cd.getSelection();
     
               // select beautified text
-              cd.setSelection((pos.start - beautifiedText.length), pos.start);
+              cd.setSelection(pos.start, (pos.start + beautifiedText.length));
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
