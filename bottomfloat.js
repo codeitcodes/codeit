@@ -101,7 +101,7 @@ if (isMobile) {
   
   cd.on('blur', () => {
     
-    bottomFloat.classList.remove('hidden');
+    bottomWrapper.classList.remove('hidden');
     
   });
 
