@@ -1792,10 +1792,15 @@ function createNewFileInHTML() {
         });
 
         fileEl.querySelector('.name').textContent = fileName;
-
-
+        
+        
+        // generate temporary SHA
+        const tempSHA = generateSHA();
+        setAttr(fileEl, 'sha', tempSHA);
+        
+        
         // change selected file
-        changeSelectedFile(treeLoc.join(), fileContent, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
 
 
@@ -1872,27 +1877,28 @@ function createNewFileInHTML() {
           message: commitMessage,
           file: commitFile
         };
+        
 
         // push file asynchronously
-        const newSha = await git.push(commit);
+        const newSHA = await git.push(commit);
         
         
-        // update file sha in HTML with new sha from Git
-        setAttr(fileEl, 'sha', newSha);
+        // update file sha in HTML with new sha from git
+        setAttr(fileEl, 'sha', newSHA);
 
         // change selected file
-        changeSelectedFile(treeLoc.join(), newSha, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
+        changeSelectedFile(treeLoc.join(), newSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
-
+        
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
-        if (modifiedFiles[fileContent]) {
+        if (modifiedFiles[tempSHA]) {
 
-          onFileEclipsedInCache(fileContent, newSha, selectedFile);
+          onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
 
         } else {
 
-          onFileEclipsedInCache(false, newSha, selectedFile);
+          onFileEclipsedInCache(false, newSHA, selectedFile);
 
         }
 
