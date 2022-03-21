@@ -887,6 +887,8 @@ body.notransition .sidebar {
 .sidebar .header .title .branch-icon {
   padding: 5px;
   opacity: .5;
+  position: absolute;
+  right: -26px;
   color: #828689;
   display: none;
   z-index: 1;
