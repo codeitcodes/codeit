@@ -439,6 +439,11 @@ async function renderSidebarHTML() {
           // show search button
           searchButton.classList.remove('hidden');
           
+        } else {
+          
+          // hide search button
+          searchButton.classList.add('hidden');
+          
         }
         
         // render files
@@ -585,6 +590,11 @@ async function renderSidebarHTML() {
           
           // show search button
           searchButton.classList.remove('hidden');
+          
+        } else {
+          
+          // hide search button
+          searchButton.classList.add('hidden');
           
         }
 
