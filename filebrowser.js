@@ -74,8 +74,18 @@ async function renderSidebarHTML() {
       // show intro screen
       fileWrapper.innerHTML = fileIntroScreen;
 
-      // show repo name in sidebar
-      sidebarLogo.innerText = repoName;
+      // if repo is owned by logged user
+      if (user === loggedUser) {
+
+        // show repo name
+        sidebarLogo.innerText = repoName;
+
+      } else {
+
+        // show username and repo name
+        sidebarLogo.innerText = user + '/' + repoName;
+
+      }
       
       // scroll to start of repo name
       sidebarLogo.scrollTo(0, 0);
@@ -226,14 +236,23 @@ async function renderSidebarHTML() {
     
     // show intro screen
     fileWrapper.innerHTML = fileIntroScreen;
-
-    // show repo name in sidebar
-    sidebarLogo.innerText = repoName;
+    
+    // if repo is owned by logged user
+    if (user === loggedUser) {
+    
+      // show repo name
+      sidebarLogo.innerText = repoName;
+    
+    } else {
+    
+      // show username and repo name
+      sidebarLogo.innerText = user + '/' + repoName;
+    
+    }
     
     // scroll to start of repo name
     sidebarLogo.scrollTo(0, 0);
     scrolledSidebarTitle();
-
     // change header options
     header.classList.remove('out-of-repo');
 
@@ -736,8 +755,18 @@ function addHTMLItemListeners() {
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
 
-          // show repo name in sidebar
-          sidebarLogo.innerText = repoLoc[1];
+          // if repo is owned by logged user
+          if (user === loggedUser) {
+    
+            // show repo name
+            sidebarLogo.innerText = repoLoc[1];
+    
+          } else {
+    
+            // show username and repo name
+            sidebarLogo.innerText = repoLoc[0] + '/' + repoLoc[1];
+    
+          }
           
           // scroll to start of repo name
           sidebarLogo.scrollTo(0, 0);
