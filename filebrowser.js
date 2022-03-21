@@ -433,18 +433,8 @@ async function renderSidebarHTML() {
       // if files exist
       if (resp.length > 0 || eclipsedFiles.length > 0) {
         
-        // if there's more than one file
-        if ((resp.length + eclipsedFiles.length) > 1) {
-          
-          // show search button
-          searchButton.classList.remove('hidden');
-          
-        } else {
-          
-          // hide search button
-          searchButton.classList.add('hidden');
-          
-        }
+        // show search button
+        searchButton.classList.remove('hidden');
         
         // render files
         resp.forEach(item => {
@@ -585,18 +575,8 @@ async function renderSidebarHTML() {
       // if repositories exist
       if (resp.length > 0 || Object.keys(modifiedRepos).length > 0) {
         
-        // if there's more than one repository
-        if ((resp.length + Object.keys(modifiedRepos).length) > 1) {
-          
-          // show search button
-          searchButton.classList.remove('hidden');
-          
-        } else {
-          
-          // hide search button
-          searchButton.classList.add('hidden');
-          
-        }
+        // show search button
+        searchButton.classList.remove('hidden');
 
         // render repositories
         resp.forEach(item => {
@@ -1967,13 +1947,8 @@ function createNewFileInHTML() {
           // update repo empty status in local storage
           updateModRepoEmptyStatus(repoObj.fullName, false);
           
-          // if there's more than one file
-          if (fileWrapper.querySelectorAll('.item').length > 1) {
-            
-            // show search button
-            searchButton.classList.remove('hidden');
-            
-          }
+          // show search button
+          searchButton.classList.remove('hidden');
           
         }
         
