@@ -368,6 +368,11 @@ async function renderSidebarHTML() {
       
       // scroll to start of repo name
       sidebarLogo.scrollTo(0, 0);
+      sidebarLogo.classList.add('notransition');
+      
+      window.setTimeout(() => {
+        sidebarLogo.classList.remove('notransition');
+      }, 180);
 
     } else {
 
@@ -376,6 +381,11 @@ async function renderSidebarHTML() {
       
       // scroll to start of repo name
       sidebarLogo.scrollTo(0, 0);
+      sidebarLogo.classList.add('notransition');
+      
+      window.setTimeout(() => {
+        sidebarLogo.classList.remove('notransition');
+      }, 180);
 
     }
 
