@@ -335,7 +335,7 @@ async function renderSidebarHTML() {
       // scroll to end of title
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
-        behavior: titleAnimation
+        behavior: 'smooth'
       });
 
     } else if (repo != '') {
