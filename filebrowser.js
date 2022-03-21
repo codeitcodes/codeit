@@ -78,9 +78,8 @@ async function renderSidebarHTML() {
       sidebarLogo.innerText = repoName;
       
       // scroll to start of repo name
-      sidebarLogo.scrollTo({
-        left: 0,
-      });
+      sidebarLogo.scrollTo(0, 0);
+      scrolledSidebarTitle();
 
       // change header options
       header.classList.remove('out-of-repo');
@@ -173,9 +172,8 @@ async function renderSidebarHTML() {
     sidebarLogo.innerText = 'Repositories';
     
     // scroll to start of repo name
-    sidebarLogo.scrollTo({
-      left: 0,
-    });
+    sidebarLogo.scrollTo(0, 0);
+    scrolledSidebarTitle();
     
     renderSidebarHTML();
     
@@ -210,9 +208,8 @@ async function renderSidebarHTML() {
     sidebarLogo.innerText = repoName;
     
     // scroll to start of repo name
-    sidebarLogo.scrollTo({
-      left: 0
-    });
+    sidebarLogo.scrollTo(0, 0);
+    scrolledSidebarTitle();
 
     // change header options
     header.classList.remove('out-of-repo');
@@ -370,9 +367,7 @@ async function renderSidebarHTML() {
       }
       
       // scroll to start of repo name
-      sidebarLogo.scrollTo({
-        left: 0,
-      });
+      sidebarLogo.scrollTo(0, 0);
 
     } else {
 
@@ -380,9 +375,7 @@ async function renderSidebarHTML() {
       sidebarLogo.innerText = 'Repositories';
       
       // scroll to start of repo name
-      sidebarLogo.scrollTo({
-        left: 0,
-      });
+      sidebarLogo.scrollTo(0, 0);
 
     }
 
@@ -723,9 +716,8 @@ function addHTMLItemListeners() {
           sidebarLogo.innerText = repoLoc[1];
           
           // scroll to start of repo name
-          sidebarLogo.scrollTo({
-            left: 0
-          });
+          sidebarLogo.scrollTo(0, 0);
+          scrolledSidebarTitle();
 
           // change header options
           header.classList.remove('out-of-repo');
@@ -1446,8 +1438,10 @@ sidebarTitle.addEventListener('click', (e) => {
 // show gradients on edges of sidebar title
 // when scrolling long titles
 
-sidebarLogo.addEventListener('scroll', () => {
+sidebarLogo.addEventListener('scroll', scrolledSidebarTitle);
 
+function scrolledSidebarTitle() {
+  
   if (sidebarLogo.scrollLeft > 0) {
 
     sidebarLogo.classList.add('scrolled-start');
@@ -1468,8 +1462,8 @@ sidebarLogo.addEventListener('scroll', () => {
     sidebarLogo.classList.remove('scrolled-end');
 
   }
-
-})
+  
+}
 
 
 // if clicked on branch icon,
