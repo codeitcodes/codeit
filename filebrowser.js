@@ -253,6 +253,7 @@ async function renderSidebarHTML() {
     // scroll to start of repo name
     sidebarLogo.scrollTo(0, 0);
     scrolledSidebarTitle();
+    
     // change header options
     header.classList.remove('out-of-repo');
 
