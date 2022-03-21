@@ -757,7 +757,7 @@ function addHTMLItemListeners() {
           fileWrapper.innerHTML = fileIntroScreen;
 
           // if repo is owned by logged user
-          if (user === loggedUser) {
+          if (repoLoc[0] === loggedUser) {
     
             // show repo name
             sidebarLogo.innerText = repoLoc[1];
