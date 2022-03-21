@@ -373,6 +373,8 @@ async function renderSidebarHTML() {
       window.setTimeout(() => {
         sidebarLogo.classList.remove('notransition');
       }, 180);
+      
+      scrolledSidebarTitle();
 
     } else {
 
@@ -386,6 +388,8 @@ async function renderSidebarHTML() {
       window.setTimeout(() => {
         sidebarLogo.classList.remove('notransition');
       }, 180);
+      
+      scrolledSidebarTitle();
 
     }
 
