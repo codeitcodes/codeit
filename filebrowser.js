@@ -111,6 +111,13 @@ async function renderSidebarHTML() {
   // if sidebar title is empty
   if (sidebarLogo.innerText === '') {
     
+    sidebarLogo.classList.add('notransition');
+    
+    window.setTimeout(() => {
+      sidebarLogo.classList.remove('notransition');
+    }, 180);
+    
+    
     if (contents != '') {
 
       // if repo is owned by logged user
@@ -125,6 +132,12 @@ async function renderSidebarHTML() {
         sidebarLogo.innerText = user + '/' + repoName + contents;
 
       }
+      
+      
+      // scroll to end of title
+      sidebarLogo.scrollTo({
+        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
+      });
 
     } else if (repo != '') {
 
@@ -140,11 +153,21 @@ async function renderSidebarHTML() {
         sidebarLogo.innerText = user + '/' + repoName;
 
       }
+      
+      
+      // scroll to start of title
+      sidebarLogo.scrollTo(0, 0);
+      scrolledSidebarTitle();
 
     } else {
 
       // show title
       sidebarLogo.innerText = 'Repositories';
+      
+      
+      // scroll to start of title
+      sidebarLogo.scrollTo(0, 0);
+      scrolledSidebarTitle();
 
     }
     
