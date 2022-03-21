@@ -168,9 +168,17 @@ async function renderSidebarHTML() {
     treeLoc[1] = '';
     treeLoc[2] = '';
     saveTreeLocLS(treeLoc);
-
+    
+    // change sidebar title
+    sidebarLogo.innerText = 'Repositories';
+    
+    // scroll to start of repo name
+    sidebarLogo.scrollTo({
+      left: 0,
+    });
+    
     renderSidebarHTML();
-
+    
     return;
 
   }
