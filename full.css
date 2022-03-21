@@ -825,7 +825,6 @@ body.notransition .sidebar {
   padding: 12px 0;
   padding-left: 18px;
   margin-left: -18px;
-  flex: 1;
 }
 
 .sidebar .header .title-screen .title:hover {
@@ -852,7 +851,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::after {
   content: '';
   position: absolute;
-  right: 44px;
+  right: 0;
   width: 28px;
   height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
