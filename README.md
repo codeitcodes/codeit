@@ -41,7 +41,7 @@
 
 <h2>Security</h2>
 
-Your code stays on your device. Anyone can verify the open-source code deploys to the Codeit site by <a href="https://app.netlify.com/sites/codeitcodes/deploys?filter=main">scrolling the deploy log.</a></li>
+Your code stays on your device. Anyone can verify the open-source code deploys to the Codeit site by <a href="https://github.com/codeitcodes/codeit/deployments">scrolling the Github deploy log.</a></li>
 
 <hr>
 
