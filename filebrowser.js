@@ -332,19 +332,6 @@ async function renderSidebarHTML() {
       }
 
 
-      // animate title
-      if (sidebarLogo.scrollLeft > 0) titleAnimation = 'smooth';
-  
-      if (!titleAnimation) {
-  
-        sidebarLogo.classList.add('notransition');
-  
-        window.setTimeout(() => {
-          sidebarLogo.classList.remove('notransition');
-        }, 180);
-  
-      }
-  
       // scroll to end of title
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
