@@ -76,6 +76,10 @@ async function renderSidebarHTML() {
 
       // show repo name in sidebar
       sidebarLogo.innerText = repoName;
+      
+      // scroll to start of repo name
+      sidebarLogo.scrollTo(0, 0);
+      scrolledSidebarTitle();
 
       // change header options
       header.classList.remove('out-of-repo');
@@ -163,9 +167,16 @@ async function renderSidebarHTML() {
     treeLoc[1] = '';
     treeLoc[2] = '';
     saveTreeLocLS(treeLoc);
-
+    
+    // change sidebar title
+    sidebarLogo.innerText = 'Repositories';
+    
+    // scroll to start of repo name
+    sidebarLogo.scrollTo(0, 0);
+    scrolledSidebarTitle();
+    
     renderSidebarHTML();
-
+    
     return;
 
   }
@@ -195,6 +206,10 @@ async function renderSidebarHTML() {
 
     // show repo name in sidebar
     sidebarLogo.innerText = repoName;
+    
+    // scroll to start of repo name
+    sidebarLogo.scrollTo(0, 0);
+    scrolledSidebarTitle();
 
     // change header options
     header.classList.remove('out-of-repo');
@@ -316,8 +331,12 @@ async function renderSidebarHTML() {
 
       }
 
-      // animate title
-      if (sidebarLogo.scrollLeft > 0) titleAnimation = 'smooth';
+
+      // scroll to end of title
+      sidebarLogo.scrollTo({
+        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
+        behavior: 'smooth'
+      });
 
     } else if (repo != '') {
 
@@ -333,30 +352,33 @@ async function renderSidebarHTML() {
         sidebarLogo.innerText = user + '/' + repoName;
 
       }
+      
+      // scroll to start of repo name
+      sidebarLogo.scrollTo(0, 0);
+      sidebarLogo.classList.add('notransition');
+      
+      window.setTimeout(() => {
+        sidebarLogo.classList.remove('notransition');
+      }, 180);
+      
+      scrolledSidebarTitle();
 
     } else {
 
       // show title
       sidebarLogo.innerText = 'Repositories';
-
-    }
-
-    // scroll to end of title
-
-    if (!titleAnimation) {
-
+      
+      // scroll to start of repo name
+      sidebarLogo.scrollTo(0, 0);
       sidebarLogo.classList.add('notransition');
-
+      
       window.setTimeout(() => {
         sidebarLogo.classList.remove('notransition');
       }, 180);
+      
+      scrolledSidebarTitle();
 
     }
-
-    sidebarTitle.children[1].scrollTo({
-      left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
-      behavior: titleAnimation
-    });
 
 
     // if navigating in repository
@@ -693,6 +715,10 @@ function addHTMLItemListeners() {
 
           // show repo name in sidebar
           sidebarLogo.innerText = repoLoc[1];
+          
+          // scroll to start of repo name
+          sidebarLogo.scrollTo(0, 0);
+          scrolledSidebarTitle();
 
           // change header options
           header.classList.remove('out-of-repo');
@@ -1413,8 +1439,10 @@ sidebarTitle.addEventListener('click', (e) => {
 // show gradients on edges of sidebar title
 // when scrolling long titles
 
-sidebarLogo.addEventListener('scroll', () => {
+sidebarLogo.addEventListener('scroll', scrolledSidebarTitle);
 
+function scrolledSidebarTitle() {
+  
   if (sidebarLogo.scrollLeft > 0) {
 
     sidebarLogo.classList.add('scrolled-start');
@@ -1435,8 +1463,8 @@ sidebarLogo.addEventListener('scroll', () => {
     sidebarLogo.classList.remove('scrolled-end');
 
   }
-
-})
+  
+}
 
 
 // if clicked on branch icon,

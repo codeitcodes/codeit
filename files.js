@@ -120,30 +120,34 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
     // find the eclipsed file
     fileToUpdate = modifiedFiles[oldSha];
     
-    // update old file to new sha
-    fileToUpdate.sha = newSha;
-    
-    // update old file caret pos
-    fileToUpdate.caretPos = [0, 0];
-    
-    // set old file to eclipsed mode
-    fileToUpdate.eclipsed = true;
-
-    // if file to update is selected
-    if (selectedFile.sha === oldSha) {
-
-      // update its content
-      // to the selected file contents
-      fileToUpdate.content = selectedFile.content;
-
-      // update selected file to new sha
-      selectedFile.sha = newSha;
+    if (fileToUpdate) {
       
-      // set selected file to eclipsed mode
-      selectedFile.eclipsed = true;
-
-      updateSelectedFileLS();
-
+      // update old file to new sha
+      fileToUpdate.sha = newSha;
+      
+      // update old file caret pos
+      fileToUpdate.caretPos = [0, 0];
+      
+      // set old file to eclipsed mode
+      fileToUpdate.eclipsed = true;
+  
+      // if file to update is selected
+      if (selectedFile.sha === oldSha) {
+  
+        // update its content
+        // to the selected file contents
+        fileToUpdate.content = selectedFile.content;
+  
+        // update selected file to new sha
+        selectedFile.sha = newSha;
+        
+        // set selected file to eclipsed mode
+        selectedFile.eclipsed = true;
+  
+        updateSelectedFileLS();
+        
+      }
+      
     }
     
   } else {
@@ -153,8 +157,12 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   }
   
   
-  // store the updated file under new sha as key
-  modifiedFiles[newSha] = fileToUpdate;
+  if (fileToUpdate) {
+    
+    // store the updated file under new sha as key
+    modifiedFiles[newSha] = fileToUpdate;
+    
+  }
   
   
   // update modified files in local storage
