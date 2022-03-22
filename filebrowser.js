@@ -644,11 +644,26 @@ async function renderSidebarHTML() {
             
             // render repo
 
+            let fullName;
+  
+            // if repo is owned by logged user
+            if (modRepoName.split('/')[0] === loggedUser) {
+  
+              // show repo name
+              fullName = modRepoName.split('/')[1];
+  
+            } else {
+  
+              // show username and repo name
+              fullName = modRepoName;
+  
+            }
+  
             out = `
             <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
               <div class="label">
                 `+ repoIcon +`
-                <a class="name">`+ modRepoName.split('/')[1] +`</a>
+                <a class="name">`+ fullName +`</a>
               </div>
               `+ arrowIcon +`
             </div>
