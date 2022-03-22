@@ -608,11 +608,14 @@ function toggleLiveView(file) {
 
       renderLiveViewPython(file);
 
-    } */
+    } */ else {
+      
+      // hide loader
+      liveView.classList.add('loaded');
+      
+    }
 
   } else {
-
-    liveView.classList.remove('loading');
 
     if (isMobile) {
 
