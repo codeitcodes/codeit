@@ -2574,7 +2574,7 @@ function updateLineNumbersHTML() {
 
     if (cd.querySelector('.line-numbers-rows')) {
 
-      cd.querySelector('.line-numbers-rows').textContent = '';
+      setAttr(cd.querySelector('.line-numbers-rows'), 'line-numbers', '');
 
     }
 
