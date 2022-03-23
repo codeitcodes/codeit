@@ -47,7 +47,6 @@ const html = `
   <link rel="canonical" href="https://codeit.codes/">
   <meta name="next-head-count" content="24">
   <meta name="robots" content="all">
-  <script nonce>if (top != window) { top.location.href = 'https://codeit.codes/' }</script>
   <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
   
   <link rel="shortcut icon" href="https://codeit.codes/icons/android-app-512.png">
