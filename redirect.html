@@ -120,8 +120,19 @@
   
   const url = new URL(window.location.href).searchParams;
   
-  title.innerText = url.get('text');
-  button.onclick = 'window.open('+ url.get('to') +', "_blank")';
+  const toURL = (new URL(url.get('to'))).hostname;
+  
+  if (toURL === 'codeit.codes'
+      || toURL === 'dev.codeit.codes') {
+  
+    title.innerText = url.get('text');
+    button.onclick = 'window.open('+ url.get('to') +', "_blank")';
+    
+  } else {
+    
+    window.top.location.href = window.location.origin;
+        
+  }
     
   </script>
 </body>
