@@ -17,6 +17,8 @@ function decodeLink(url) {
 
   // save link data
 
+  url = decodeURIComponent(url);
+
   const isEmbed = url.endsWith('&embed=true');
   if (isEmbed) url = url.slice(0, -('&embed=true'.length));
 
