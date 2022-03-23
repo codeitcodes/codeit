@@ -47,6 +47,12 @@ function decodeLink(url) {
 
     linkData.contents = url.slice((linkData.user + '/' + linkData.repo).length);
     
+    if (linkData.contents.endsWith('/')) {
+      
+      linkData.contents = linkData.contents.slice(0, -1);
+      
+    }
+    
     
     // if link includes a Github URL
     if (isGithub) {
