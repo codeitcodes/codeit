@@ -8,7 +8,10 @@ export default function handler(request, response) {
   if (query.url) {
     
     // parse URL
-    let url = query.url.replace('https://cde.run/', '').replace('https://dev.cde.run/', '');
+    let url = query.url.replace('https://cde.run/', '')
+                       .replace('https://dev.cde.run/', '')
+                       .replace('https://github.com/', '')
+                       .replace('https:/github.com/', '');
     
     url = url.split('/');
     
