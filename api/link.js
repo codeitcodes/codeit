@@ -60,6 +60,7 @@ const html = `
   // decode URL
   const resp = decodeLink(window.location.href);
 
+  // redirect
   window.location.href = resp;
 
   /*
