@@ -1326,6 +1326,26 @@ async function renderBranchMenuHTML(renderAll) {
   
   // render selected branch
   
+  // if selected branch is not defined
+  if (!selectedBranch) {
+    
+    // if default branch isn't fetched yet
+    if (!repoObj.selBranch) {
+      
+      // await fetch
+      
+      
+    }
+    
+    // add branch to tree
+    treeLoc[1] = repo.split(':')[0] + ':' + repoObj.selBranch;
+    saveTreeLocLS(treeLoc);
+    
+    // update selected branch
+    selectedBranch = repoObj.selBranch;
+    
+  }
+  
   const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch)[0];
   
   out += '<div class="icon selected">' + branchIcon + '<a>' + selectedBranch +'</a></div>';
