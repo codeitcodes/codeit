@@ -88,8 +88,7 @@ const html = `
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    //window.location.href = resp;
-    console.log(resp);
+    window.location.href = resp;
     
   } else {
     
@@ -97,29 +96,6 @@ const html = `
     
   }
 
-  /*
-  (() => {
-
-    let openGraphTitle = 'Codeit - Mobile code editor';
-
-    // update open graph title
-    if (linkData.openLive) {
-
-      openGraphTitle = 'Run ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
-
-    } else if (linkData.dir) {
-
-      openGraphTitle = 'Open ' + linkData.dir[0] + '/' + linkData.dir[1].split(':')[0] + ' with Codeit.';
-
-    }
-
-    const titleEl1 = document.head.querySelector('meta[property="og:title"]');
-    const titleEl2 = document.head.querySelector('meta[property="twitter:title"]');
-
-    titleEl1.content = openGraphTitle;
-    titleEl2.content = openGraphTitle;
-
-  })();*/
   </script>
   
 </head>
