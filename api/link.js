@@ -84,7 +84,11 @@ const html = `
   <script>
 
   // decode link
-  let link = (new URL(window.location.href)).searchParams.get('url');
+  
+  const url = new URL(window.location.href).searchParams;
+  
+  let link = url.get('url');
+  let embed = url.get('embed');
   
   const isDev = window.location.href.includes('dev');
   
@@ -93,7 +97,7 @@ const html = `
     
     if (!isDev) link = 'https://cde.run/' + link;
     else link = 'https://cde.run/' + link;
-        
+    
   }
   
   if (link && link.startsWith('https:/github.com')) {
@@ -104,12 +108,12 @@ const html = `
   
   if (link) {
     
+    if (embed) link += '?embed=true';
+    
     const resp = decodeLink(link);
 
-    console.log(link);
-
     // redirect to decoded URL
-    //window.location.href = resp;
+    window.location.href = resp;
     
   } else {
     
