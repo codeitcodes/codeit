@@ -79,7 +79,7 @@ function updateModRepoEmptyStatus(fullName, empty) {
 // get repo obj from git
 // and save to modified repos
 
-const repoPromise;
+let repoPromise;
 
 async function fetchRepoAndSaveToModRepos(treeLoc) {
   
