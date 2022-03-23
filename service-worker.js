@@ -13,7 +13,6 @@ const FILES_TO_CACHE = [
   '/lib/plugins/codeit-autolinker.js',
 
   '/full',
-  '/full/',
   '/full.css',
 
   '/worker/worker-channel.js',
