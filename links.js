@@ -15,20 +15,27 @@ function createLink(linkData) {
   let link = '';
 
   if (linkData.dir) {
-
-    link += '/' +
-            encodeURI(
-              linkData.dir.join('/')
-            );
-
-
-    if (linkData.file) {
-
-      link += '/' +
-              encodeURI(
-                linkData.file.name
-              );
-
+    
+    [user, repo, contents] = linkData.dir;
+    
+    if (user && repo) {
+      
+      link += '/' + encodeURIComponent(user) +
+              '/' + encodeURIComponent(repo);
+      
+      if (contents) {
+        
+        link += '/' + encodeURIComponent(contents);
+        
+      }
+      
+      
+      if (linkData.file) {
+                
+        link += '/' + encodeURIComponent(linkData.file.name);
+  
+      }
+      
     }
 
   }
