@@ -17,6 +17,8 @@ export default function handler(request, response) {
     
   }
   
+  console.log(response);
+  
   response.status(200).send({
     data: html,
     headers: {
