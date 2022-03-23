@@ -75,7 +75,7 @@ function decodeLink(url) {
     if (lastEntry.split('.').length > 1) {
 
       linkData.file = lastEntry;
-      linkData.contents = linkData.contents.slice(0, -lastEntry.length);
+      linkData.contents = linkData.contents.slice(0, (-lastEntry.length - 1));
 
       // if linked file can be viewed live
       if (lastEntry.endsWith('.html') || lastEntry.endsWith('.svg')) {
