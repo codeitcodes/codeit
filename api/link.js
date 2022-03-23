@@ -93,7 +93,7 @@ const html = `
         
   }
   
-  if (link && !link.startsWith('https:/github.com') {
+  if (link && !link.startsWith('https:/github.com')) {
     
     link = link.replace('https:/github.com', 'https://github.com');
     
