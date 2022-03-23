@@ -31,7 +31,7 @@ function decodeLink(url) {
   if (isGithub) url = url.slice('https://github.com/'.length);
   
   
-  let baseURL = 'https://codeit.codes';
+  let baseURL = 'https://dev.codeit.codes';
   if (isDev) baseURL = 'https://dev.codeit.codes';
 
 
