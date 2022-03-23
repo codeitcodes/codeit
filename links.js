@@ -9,32 +9,48 @@
 function createLink(linkData) {
 
   // save link
-  const base = window.location.origin + '/full';
+  let base = 'https://cde.run';
+  if (isDev) base = 'https://dev.cde.run';
+  
   let link = '';
 
   if (linkData.dir) {
-
-    link += '?dir=' +
-            encodeURI(
-              linkData.dir.join(',')
-            );
-
-
-    if (linkData.file) {
-
-      link += '&file=' +
-              encodeURI(
-                linkData.file.name + ',' +
-                linkData.file.sha
-              );
-
-
-      if (linkData.openLive) {
-
-        link += '&openLive=true';
-
+    
+    const [user, repo, contents] = linkData.dir;
+    let [repoName, branch] = repo.split(':');
+    
+    if (user && repo) {
+      
+      const modRepo = modifiedRepos[user + '/' + repoName];
+    
+      if (modRepo && modRepo.branches
+          && modRepo.branches.length === 1) {
+        
+        branch = '';
+        
+      } else {
+        
+        branch = ':' + branch;
+        
       }
-
+      
+      
+      link += '/' + encodeURI(user) +
+              '/' + encodeURI(repoName + branch);
+      
+      if (contents) {
+        
+        link += encodeURI(contents);
+        
+      }
+      
+      
+      if (linkData.file) {
+        
+        link += '/' + encodeURI(linkData.file.name);
+  
+      }
+      
     }
 
   }
@@ -67,11 +83,11 @@ function decodeLink(url) {
 
         if (link.get('file')) {
 
-          const [name, sha] = link.get('file').split(',');
+          const file = link.get('file');
 
-          if (name && sha) {
+          if (file) {
 
-            linkData.file = {name, sha};
+            linkData.file = file;
 
 
             if (link.get('openLive') === 'true') {
@@ -96,9 +112,9 @@ function decodeLink(url) {
       linkData.dir = link.get('q').split('+')[0].split(',');
       linkData.dir[1] = linkData.dir[1] + ':main';
       
-      const [name, sha] = link.get('q').split('+')[1].split(',');
+      const [name] = link.get('q').split('+')[1].split(',');
       
-      linkData.file = {name, sha};
+      linkData.file = name;
       
       linkData.openLive = true;
       

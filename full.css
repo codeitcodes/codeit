@@ -1428,10 +1428,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   height: 50px;
   width: 233px;
   font-weight: 500;
-}
-
-body .sidebar .button:active:not(:hover) {
-  transition: .18s var(--ease-function);
+  transition: .1s var(--ease-function);
   transition-property: background, color;
 }
 
@@ -1443,6 +1440,7 @@ body .sidebar .button:active:not(:hover) {
 .sidebar .button.secondary:active {
   color: rgba(255,255,255,0.25);
   background: hsla(223deg 88% 52% / 50%) !important;
+  transition: none;
 }
 
 .sidebar .button.teritary {
@@ -1455,6 +1453,7 @@ body .sidebar .button:active:not(:hover) {
   color: hsl(220deg 4% 84% / 25%);
   background: transparent !important;
   box-shadow: inset 0 0 0 1px hsl(228deg 16% 37% / 50%);
+  transition: none;
 }
 
 .sidebar .button svg {

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Codeit - Redirect</title>
+  <meta name="theme-color" content="#1a1c24">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
+  <link rel="shortcut icon" href="/icons/app-favicon.png">
+  <style>
+  
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('/fonts/Inter/Inter.var.woff2') format('woff2');
+      font-named-instance: 'Regular';
+    }
+
+
+    html {
+      height: 100%;
+      background: #1a1c24;
+      color: #d4d5d7;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      height: 100%;
+      margin: 0;
+      max-width: 500px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      width: 70px;
+      border-radius: 22.5%;
+      border: 1px solid rgba(255,255,255,.1);
+      margin: 0 auto;
+      margin-bottom: 24px;
+    }
+    
+    .title {
+      font-size: 19px;
+      margin-bottom: 50px;
+      margin-top: 0;
+      position: relative;
+      text-align: center;
+    }
+    
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      box-sizing: border-box;
+      min-height: 40px;
+      white-space: nowrap;
+      font-size: 16px;
+      padding: 7px 84px;
+      height: 50px;
+      width: 233px;
+      font-weight: 500;
+      background: hsl(223deg 88% 52%);
+      color: #fff;
+      margin: 0 auto;
+      transition: .1s var(--ease-function);
+      transition-property: background, color;
+    }
+    
+    .button:hover {
+      background: hsl(223deg 85% 54%);
+      transition: none;
+    }
+    
+    .button:active {
+      color: rgba(255,255,255,0.25);
+      background: hsla(223deg 88% 52% / 50%) !important;
+      transition: none;
+    }
+    
+    
+    body {
+      --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
+    }
+    
+    html, body {
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern";
+      -webkit-font-feature-settings: "kern";
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+      -webkit-text-size-adjust: none;
+    }
+    
+  </style>
+</head>
+
+<body ontouchstart="">
+  <img class="logo" src="/icons/iphone-app-180.png" width="80" draggable="false" alt="Codeit">
+  <p class="title">Open mrdoob/threejs with Codeit</p>
+  <div class="button">Open</div>
+  
+  <script>
+    
+  const title = document.querySelector('.title');
+  const button = document.querySelector('.button');
+  
+  const url = new URL(window.location.href).searchParams;
+  
+  const toURL = (new URL(url.get('to'))).hostname;
+  
+  if (toURL === 'codeit.codes'
+      || toURL === 'dev.codeit.codes') {
+  
+    title.innerText = url.get('text');
+    
+    button.addEventListener('click', () => {
+      
+      if (top != window) {
+        window.open(url.get('to'), '_blank');
+      } else {
+        window.location.href = url.get('to');
+      }
+      
+    });
+    
+  } else {
+    
+    window.top.location.href = window.location.origin;
+        
+  }
+  
+  
+  navigator.serviceWorker.register('/service-worker.js');
+    
+  </script>
+</body>
+
+</html>

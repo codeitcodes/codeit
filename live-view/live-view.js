@@ -6,9 +6,7 @@ async function setupLiveView() {
   if (linkData.file) {
 
     // get file from URL
-    const fileName = linkData.file.name;
-    const fileSha = linkData.file.sha;
-
+    const fileName = linkData.file;
 
     // don't transition
     body.classList.add('notransition');
@@ -129,8 +127,13 @@ async function setupLiveView() {
     }
     
 
+    // search modified files for file
+    const modFile = Object.values(modifiedFiles).filter(file =>
+                      (file.dir == treeLoc
+                       && file.name == fileName))[0];
+
     // if file is not modified; fetch from Git
-    if (!modifiedFiles[fileSha]) {
+    if (!modFile) {
 
       // start loading
       startLoading();
@@ -169,15 +172,13 @@ async function setupLiveView() {
 
 
       // change selected file
-      changeSelectedFile(treeLoc.join(), fileSha, fileName, resp.content, getFileLang(fileName),
+      changeSelectedFile(treeLoc.join(), resp.sha, fileName, resp.content, getFileLang(fileName),
                          [0, 0], [0, 0], false);
 
       // stop loading
       stopLoading();
 
     } else { // else, load file from modifiedFiles object
-
-      const modFile = (selectedFile.sha === fileSha) ? selectedFile : modifiedFiles[fileSha];
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
                          modFile.caretPos, modFile.scrollPos, false);
@@ -608,11 +609,14 @@ function toggleLiveView(file) {
 
       renderLiveViewPython(file);
 
-    } */
+    } */ else {
+      
+      // hide loader
+      liveView.classList.add('loaded');
+      
+    }
 
   } else {
-
-    liveView.classList.remove('loading');
 
     if (isMobile) {
 

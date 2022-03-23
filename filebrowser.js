@@ -148,6 +148,8 @@ async function renderSidebarHTML() {
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
+      
+      scrolledSidebarTitle();
 
     } else if (repo != '') {
 
@@ -380,7 +382,7 @@ async function renderSidebarHTML() {
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
         behavior: 'smooth'
       });
-
+      
     } else if (repo != '') {
 
       // if repo is owned by logged user
@@ -644,11 +646,26 @@ async function renderSidebarHTML() {
             
             // render repo
 
+            let fullName;
+  
+            // if repo is owned by logged user
+            if (modRepoName.split('/')[0] === loggedUser) {
+  
+              // show repo name
+              fullName = modRepoName.split('/')[1];
+  
+            } else {
+  
+              // show username and repo name
+              fullName = modRepoName;
+  
+            }
+  
             out = `
             <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
               <div class="label">
                 `+ repoIcon +`
-                <a class="name">`+ modRepoName.split('/')[1] +`</a>
+                <a class="name">`+ fullName +`</a>
               </div>
               `+ arrowIcon +`
             </div>
@@ -1308,6 +1325,26 @@ async function renderBranchMenuHTML(renderAll) {
   
   
   // render selected branch
+  
+  // if selected branch is not defined
+  if (!selectedBranch) {
+    
+    // if default branch isn't fetched yet
+    if (!repoObj.selBranch) {
+      
+      // await fetch
+      await repoPromise;
+      
+    }
+    
+    // add branch to tree
+    treeLoc[1] = repo.split(':')[0] + ':' + repoObj.selBranch;
+    saveTreeLocLS(treeLoc);
+    
+    // update selected branch
+    selectedBranch = repoObj.selBranch;
+    
+  }
   
   const selBranchObj = branchResp.filter(branch => branch.name === selectedBranch)[0];
   
@@ -2574,7 +2611,7 @@ function updateLineNumbersHTML() {
 
     if (cd.querySelector('.line-numbers-rows')) {
 
-      cd.querySelector('.line-numbers-rows').textContent = '';
+      setAttr(cd.querySelector('.line-numbers-rows'), 'line-numbers', '');
 
     }
 
