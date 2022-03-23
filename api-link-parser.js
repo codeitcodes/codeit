@@ -105,7 +105,7 @@ function decodeLink(url) {
   } else {
 
     // show codeit link
-    linkData.redirect = baseURL.slice(0, -('/full'.length));
+    linkData.redirect = baseURL;
 
   }
   
