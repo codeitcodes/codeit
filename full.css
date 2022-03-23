@@ -1428,7 +1428,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   height: 50px;
   width: 233px;
   font-weight: 500;
-  transition: .18s var(--ease-function);
+  transition: .1s var(--ease-function);
   transition-property: background, color;
 }
 
