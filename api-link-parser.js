@@ -117,7 +117,7 @@ function decodeLink(url) {
   // if redirect exists
   if (linkData.redirect) {
     
-    resp += '/api/redirect?to=' + linkData.redirect;
+    resp += '/redirect?to=' + linkData.redirect;
     
   } else {
 
