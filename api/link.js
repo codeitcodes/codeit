@@ -96,7 +96,7 @@ const html = `
       && !link.startsWith('https://dev.cde.run')) {
     
     if (!isDev) link = 'https://cde.run/' + link;
-    else link = 'https://cde.run/' + link;
+    else link = 'https://dev.cde.run/' + link;
     
   }
   
