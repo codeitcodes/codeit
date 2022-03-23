@@ -6,12 +6,6 @@
 // or
 // https://cde.run/https://github.com/mrdoob/three.js/blob/dev/examples/physics_ammo_break.html
 
-
-// mrdoob/three.js/examples/physics_ammo_break.html
-// mrdoob, three.js, examples, physics_ammo_break.html
-
-// mrdoob/three.js:dev/examples/physics_ammo_break.html
-
 // decode link
 function decodeLink(url) {
 
