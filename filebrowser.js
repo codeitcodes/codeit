@@ -148,6 +148,8 @@ async function renderSidebarHTML() {
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
+      
+      scrolledSidebarTitle();
 
     } else if (repo != '') {
 
