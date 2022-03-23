@@ -57,14 +57,14 @@ function decodeLink(url) {
     // if link includes a Github URL
     if (isGithub) {
       
+      linkData.contents = linkData.contents.slice('/blob'.length);
+      
       // if link includes a branch
-      if (link[2]) {
+      if (link[3]) {
         
-        linkData.repo += ':' + link[2];
+        linkData.repo += ':' + link[3];
         
       }
-      
-      linkData.contents = linkData.contents.slice('/blob'.length);
       
     }
 
