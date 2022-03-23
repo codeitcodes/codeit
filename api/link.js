@@ -81,14 +81,24 @@ const html = `
   <script>
 
   // decode link
-  const link = (new URL(window.location.href)).searchParams.get('url');
-  console.log(link);
+  let link = (new URL(window.location.href)).searchParams.get('url');
+  
+  const isDev = window.location.href.includes('dev');
+  
+  if (link && !link.startsWith('https://cde.run')
+      && !link.startsWith('https://dev.cde.run')) {
+    
+    if (!isDev) link = 'https://cde.run/' + link;
+    else link = 'https://cde.run/' + link;
+        
+  }
+  
   if (link) {
     
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    //window.location.href = resp;
+    window.location.href = resp;
     
   } else {
     
