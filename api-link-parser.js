@@ -6,7 +6,6 @@
 // or
 // https://cde.run/https://github.com/mrdoob/three.js/blob/dev/examples/physics_ammo_break.html
 
-// decode link
 function decodeLink(url) {
 
   // save link data
