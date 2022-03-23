@@ -17,11 +17,11 @@ export default function handler(request, response) {
       if (url[url.length-1].endsWith('.html')
           || url[url.length-1].endsWith('.svg')) {
             
-        title = 'Run ' + url[0] + '/' + url[1] + ' with Codeit';
+        title = 'Run ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
       
       } else {
         
-        title = 'Open ' + url[0] + '/' + url[1] + ' with Codeit';
+        title = 'Open ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
         
       }
       
