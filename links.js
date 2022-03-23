@@ -16,16 +16,31 @@ function createLink(linkData) {
 
   if (linkData.dir) {
     
-    [user, repo, contents] = linkData.dir;
+    const [user, repo, contents] = linkData.dir;
+    let [repoName, branch] = repo.split(':');
     
     if (user && repo) {
       
-      link += '/' + encodeURIComponent(user) +
-              '/' + encodeURIComponent(repo);
+      const modRepo = modifiedRepos[user + '/' + repoName];
+    
+      if (modRepo && modRepo.branches
+          && modRepo.branches.length === 1) {
+        
+        branch = '';
+        
+      } else {
+        
+        branch = ':' + branch;
+        
+      }
+      
+      
+      link += '/' + encodeURI(user) +
+              '/' + encodeURI(repo + branch);
       
       if (contents) {
         
-        link += '/' + encodeURIComponent(contents);
+        link += '/' + encodeURI(contents);
         
       }
       
