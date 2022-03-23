@@ -5,7 +5,7 @@ export default function handler(request, response) {
   
   let html = '';
   
-  console.log(query);
+  console.log(request);
   
   if (query[0] === 'url') {
     
