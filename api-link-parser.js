@@ -90,7 +90,7 @@ function decodeLink(url) {
     } else { // if linking to directory
 
       // if link is embed
-      if (!isEmbed) {
+      if (isEmbed) {
 
         // show directory link
         linkData.redirect = baseURL + '/full?dir=' +
