@@ -64,6 +64,8 @@ function decodeLink(url) {
         
         linkData.repo += ':' + link[3];
         
+        linkData.contents = linkData.contents.slice(('/' + link[3]).length);
+        
       }
       
     }
