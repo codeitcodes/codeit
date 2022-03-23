@@ -88,22 +88,18 @@ function decodeLink(url) {
           '&file=' + linkData.file;
           
         linkData.redirectText = 'Open ' + linkData.user + '/' + linkData.repo + ' with Codeit';
-        
+      
       } // else, show the file's code
 
-    } else { // if linking to directory
+    } else if (isEmbed) { // if linking to directory
+                          // and link is embed
 
-      // if link is embed
-      if (isEmbed) {
+      // show directory link
+      linkData.redirect = baseURL + '/full?dir=' +
+        linkData.user + ',' + linkData.repo +
+        ',' + linkData.contents;
 
-        // show directory link
-        linkData.redirect = baseURL + '/full?dir=' +
-          linkData.user + ',' + linkData.repo +
-          ',' + linkData.contents;
-        
-        linkData.redirectText = 'Open ' + linkData.user + '/' + linkData.repo + ' with Codeit';
-
-      } // else, show directory
+      linkData.redirectText = 'Open ' + linkData.user + '/' + linkData.repo + ' with Codeit';
 
     }
 
