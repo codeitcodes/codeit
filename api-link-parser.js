@@ -12,8 +12,8 @@ function decodeLink(url) {
 
   url = decodeURIComponent(url);
 
-  const isEmbed = url.endsWith('?embed=true');
-  if (isEmbed) url = url.slice(0, -('?embed=true'.length));
+  const isEmbed = url.endsWith('&embed=true');
+  if (isEmbed) url = url.slice(0, -('&embed=true'.length));
 
   const isDev = url.startsWith('https://dev.cde.run/');
 
