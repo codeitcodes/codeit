@@ -105,6 +105,9 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   // await promise
   const repo = await repoPromise;
   
+  // remove promise
+  repoPromise = null;
+  
   
   // if didn't encounter an error
   if (!repo.message) {
