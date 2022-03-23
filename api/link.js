@@ -3,17 +3,6 @@ export default function handler(request, response) {
   
   const query = Object.keys(request.query);
 
-  response.status(200).send(html);
-  
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -102,4 +91,10 @@ const html = `
 </head>
 </html>
 `;
+
+
+
+  response.status(200).send(html);
+  
+}
 
