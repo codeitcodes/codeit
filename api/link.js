@@ -51,14 +51,14 @@ const html = `
   <meta charset="utf-8">
   <meta name="description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
   
-  <meta property="og:title" content="Codeit | Mobile code editor connected to Git">
+  <meta property="og:title" content="`+ title +`">
   <meta property="og:description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="application">
   <meta property="og:site_name" content="Codeit Code Editor">
   
-  <meta property="twitter:title" content="Codeit | Mobile code editor connected to Git">
+  <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:account_id" content="1484271514543345665">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:domain" content="codeit.codes">
