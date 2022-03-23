@@ -90,7 +90,7 @@ const html = `
   let link = url.get('url');
   let embed = url.get('embed');
   
-  const isDev = window.location.href.includes('dev');
+  const isDev = (window.location.hostname === 'dev.codeit.codes');
   
   if (link && !link.startsWith('https://cde.run')
       && !link.startsWith('https://dev.cde.run')) {
