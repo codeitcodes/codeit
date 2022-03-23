@@ -17,7 +17,7 @@ export default function handler(request, response) {
     
   }
   
-  response.status(200).send(html);
+  response.status(200).send({data: html});
   
 }
 
