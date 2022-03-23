@@ -21,10 +21,6 @@ export default function handler(request, response) {
     'content-type': 'application/xml'
   };
   
-  response.parser["_headers"] = {
-    'content-type': 'application/xml'
-  };
-  
   console.log(response);
   
   response.status(200).send(html);
