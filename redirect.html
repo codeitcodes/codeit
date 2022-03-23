@@ -128,7 +128,13 @@
     title.innerText = url.get('text');
     
     button.addEventListener('click', () => {
-      window.open(url.get('to'), '_blank');
+      
+      if (top != window) {
+        window.open(url.get('to'), '_blank');
+      } else {
+        window.location.href = url.get('to');
+      }
+      
     });
     
   } else {
