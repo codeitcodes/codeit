@@ -1,8 +1,33 @@
 
 export default function handler(request, response) {
   
-  const query = Object.keys(request.query);
+  const query = request.query;
 
+  let title = 'Codeit | Mobile code editor connected to Git';
+
+  if (query.url) {
+    
+    // parse URL
+    let url = query.url.replace('https://cde.run/', '').replace('https://dev.cde.run/', '');
+    
+    url = url.split('/');
+    
+    if (url[0] && url[1]) {
+      
+      if (url[url.length-1].endsWith('.html')
+          || url[url.length-1].endsWith('.svg')) {
+            
+        title = 'Run ' + url[0] + '/' + url[1] + ' with Codeit';
+      
+      } else {
+        
+        title = 'Open ' + url[0] + '/' + url[1] + ' with Codeit';
+        
+      }
+      
+    }
+    
+  }
 
 
 
