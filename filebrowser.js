@@ -383,8 +383,6 @@ async function renderSidebarHTML() {
         behavior: 'smooth'
       });
       
-      scrolledSidebarTitle();
-
     } else if (repo != '') {
 
       // if repo is owned by logged user
