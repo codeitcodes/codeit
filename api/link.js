@@ -59,7 +59,8 @@ const html = `
   const resp = decodeLink(window.location.href);
 
   // redirect to decoded URL
-  window.location.href = resp;
+  //window.location.href = resp;
+  console.log(resp);
 
   /*
   (() => {
