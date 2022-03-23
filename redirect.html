@@ -126,7 +126,10 @@
       || toURL === 'dev.codeit.codes') {
   
     title.innerText = url.get('text');
-    button.onclick = 'window.open('+ url.get('to') +', "_blank")';
+    
+    button.addEventListener(() => {
+      window.open(url.get('to'), '_blank');
+    });
     
   } else {
     
