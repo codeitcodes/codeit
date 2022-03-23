@@ -74,7 +74,8 @@ function decodeLink(url) {
     const lastEntry = link[link.length - 1];
 
     // if linking to file
-    if (lastEntry.split('.').length > 1) {
+    if (lastEntry !== linkData.repo
+        && lastEntry.split('.').length > 1) {
 
       linkData.file = lastEntry;
       linkData.contents = linkData.contents.slice(0, (-lastEntry.length - 1));
