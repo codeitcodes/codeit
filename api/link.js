@@ -63,7 +63,7 @@ const html = `
   
   <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:account_id" content="1484271514543345665">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta property="twitter:domain" content="codeit.codes">
   <meta property="twitter:url" content="https://codeit.codes">
   <meta name="twitter:description" content="Codeit runs on the web, open source, and free. Supports HTML, CSS, JavaScript, Python, Bootstrap, XML and more. Easy to use without how to.">
