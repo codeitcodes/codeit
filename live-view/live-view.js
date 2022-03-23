@@ -6,7 +6,7 @@ async function setupLiveView() {
   if (linkData.file) {
 
     // get file from URL
-    const fileName = linkData.file.name;
+    const fileName = linkData.file;
 
     // don't transition
     body.classList.add('notransition');
