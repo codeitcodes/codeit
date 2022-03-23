@@ -91,7 +91,7 @@ function decodeLink(url) {
       if (!isEmbed) {
 
         // show directory link
-        linkData.redirect = baseURL + '/full/?dir=' +
+        linkData.redirect = baseURL + '/full?dir=' +
           linkData.user + ',' + linkData.repo +
           ',' + linkData.contents;
 
@@ -114,11 +114,11 @@ function decodeLink(url) {
   // if redirect exists
   if (linkData.redirect) {
     
-    resp += '/api/redirect/?to=' + linkData.redirect;
+    resp += '/api/redirect?to=' + linkData.redirect;
     
   } else {
 
-    resp += '/full/?dir=' +
+    resp += '/full?dir=' +
             linkData.user + ',' + linkData.repo +
             ',' + linkData.contents;
     
