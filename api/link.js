@@ -82,13 +82,13 @@ const html = `
 
   // decode link
   const link = (new URL(window.location.href)).searchParams.get('url');
-  
+  console.log(link);
   if (link) {
     
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    window.location.href = resp;
+    //window.location.href = resp;
     
   } else {
     
