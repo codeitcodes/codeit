@@ -55,8 +55,9 @@ const html = `
   
   <script>
 
-  // decode URL
-  const resp = decodeLink(window.location.href);
+  // decode link
+  const link = (new URL(window.location.href)).searchParams.get('url');
+  const resp = decodeLink(link);
 
   // redirect to decoded URL
   //window.location.href = resp;
