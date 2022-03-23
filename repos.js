@@ -78,6 +78,9 @@ function updateModRepoEmptyStatus(fullName, empty) {
 
 // get repo obj from git
 // and save to modified repos
+
+const repoPromise;
+
 async function fetchRepoAndSaveToModRepos(treeLoc) {
   
   // get full name of repository
@@ -95,7 +98,12 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   
 
   // get repository from git
-  const repo = await git.getRepo(treeLoc);
+  
+  // create promise
+  repoPromise = git.getRepo(treeLoc);
+  
+  // await promise
+  const repo = await repoPromise;
   
   
   // if didn't encounter an error
