@@ -382,6 +382,8 @@ async function renderSidebarHTML() {
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
         behavior: 'smooth'
       });
+      
+      scrolledSidebarTitle();
 
     } else if (repo != '') {
 
