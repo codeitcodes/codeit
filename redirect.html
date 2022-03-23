@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
   <link rel="shortcut icon" href="/icons/app-favicon.png">
   <style>
+  
     @font-face {
       font-family: 'Inter';
       font-style: normal;
@@ -23,8 +24,6 @@
       background: #1a1c24;
       color: #d4d5d7;
       font-family: 'Inter', system-ui, sans-serif;
-      user-select: none;
-      -webkit-user-select: none;
     }
     
     body {
@@ -88,6 +87,22 @@
     
     body {
       --ease-function: cubic-bezier(0.32, 0.08, 0.24, 1);
+    }
+    
+    html, body {
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern";
+      -webkit-font-feature-settings: "kern";
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+      -webkit-text-size-adjust: none;
     }
     
   </style>
