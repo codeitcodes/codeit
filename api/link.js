@@ -106,7 +106,7 @@ const html = `
     
     const resp = decodeLink(link);
 
-    console.log(resp);
+    console.log(link);
 
     // redirect to decoded URL
     //window.location.href = resp;
