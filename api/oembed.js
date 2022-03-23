@@ -17,14 +17,17 @@ export default function handler(request, response) {
     
   }
   
+  response.headers = {
+    'content-type': 'application/xml'
+  };
+  
+  response.parser["_headers"] = {
+    'content-type': 'application/xml'
+  };
+  
   console.log(response);
   
-  response.status(200).send({
-    data: html,
-    headers: {
-      'content-type': 'application/xml',
-    },
-  });
+  response.status(200).send(html);
   
 }
 
