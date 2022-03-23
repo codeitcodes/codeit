@@ -36,7 +36,7 @@ function createLink(linkData) {
       
       
       link += '/' + encodeURI(user) +
-              '/' + encodeURI(repo + branch);
+              '/' + encodeURI(repoName + branch);
       
       if (contents) {
         
