@@ -141,15 +141,8 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
 
 // Register service worker
-if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('/service-worker.js');
 
-  window.addEventListener('load', () => {
-
-    navigator.serviceWorker.register('/service-worker.js');
-
-  });
-
-}
 
 function checkPWA() {
 
