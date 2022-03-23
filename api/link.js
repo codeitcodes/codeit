@@ -51,7 +51,7 @@ const html = `
   <link rel="shortcut icon" href="https://codeit.codes/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="https://codeit.codes/icons/iphone-app-180.png">
   
-  <script src="_link.js"></script>
+  <script src="_link-parser.js"></script>
   
   <script>
 
