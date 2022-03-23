@@ -79,6 +79,16 @@ function decodeLink(url) {
         // show file in live view
         linkData.openLive = true;
 
+      } else if (isEmbed) { // if link is embed
+        
+        // show file link
+        linkData.redirect = baseURL + '/full?dir=' +
+          linkData.user + ',' + linkData.repo +
+          ',' + linkData.contents +
+          '&file=' + linkData.file;
+          
+        linkData.redirectText = 'Open ' + linkData.user + '/' + linkData.repo + ' with Codeit';
+        
       } // else, show the file's code
 
     } else { // if linking to directory
@@ -90,6 +100,8 @@ function decodeLink(url) {
         linkData.redirect = baseURL + '/full?dir=' +
           linkData.user + ',' + linkData.repo +
           ',' + linkData.contents;
+        
+        linkData.redirectText = 'Open ' + linkData.user + '/' + linkData.repo + ' with Codeit';
 
       } // else, show directory
 
@@ -99,6 +111,7 @@ function decodeLink(url) {
 
     // show codeit link
     linkData.redirect = baseURL;
+    linkData.redirectText = 'Open Codeit';
 
   }
   
@@ -109,8 +122,9 @@ function decodeLink(url) {
   
   // if redirect exists
   if (linkData.redirect) {
-    
-    resp += '/redirect?to=' + linkData.redirect;
+
+    resp += '/redirect?to=' + linkData.redirect +
+            '&text=' + linkData.redirectText;
     
   } else {
 
