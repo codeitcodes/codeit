@@ -106,8 +106,10 @@ const html = `
     
     const resp = decodeLink(link);
 
+    console.log(resp);
+
     // redirect to decoded URL
-    window.location.href = resp;
+    //window.location.href = resp;
     
   } else {
     
