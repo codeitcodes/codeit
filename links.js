@@ -40,14 +40,14 @@ function createLink(linkData) {
       
       if (contents) {
         
-        link += '/' + encodeURI(contents);
+        link += encodeURI(contents);
         
       }
       
       
       if (linkData.file) {
-                
-        link += '/' + encodeURIComponent(linkData.file.name);
+        
+        link += '/' + encodeURI(linkData.file.name);
   
       }
       
