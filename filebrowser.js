@@ -1333,7 +1333,7 @@ async function renderBranchMenuHTML(renderAll) {
     if (!repoObj.selBranch) {
       
       // await fetch
-      
+      await repoPromise;
       
     }
     
