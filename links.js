@@ -9,30 +9,25 @@
 function createLink(linkData) {
 
   // save link
-  const base = window.location.origin + '/full';
+  let base = 'https://cde.run';
+  if (isDev) base = 'https://dev.cde.run';
+  
   let link = '';
 
   if (linkData.dir) {
 
-    link += '?dir=' +
+    link += '/' +
             encodeURI(
-              linkData.dir.join(',')
+              linkData.dir.join('/')
             );
 
 
     if (linkData.file) {
 
-      link += '&file=' +
+      link += '/' +
               encodeURI(
                 linkData.file.name
               );
-
-
-      if (linkData.openLive) {
-
-        link += '&openLive=true';
-
-      }
 
     }
 
