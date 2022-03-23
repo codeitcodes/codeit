@@ -57,11 +57,20 @@ const html = `
 
   // decode link
   const link = (new URL(window.location.href)).searchParams.get('url');
-  const resp = decodeLink(link);
+  
+  if (link) {
+    
+    const resp = decodeLink(link);
 
-  // redirect to decoded URL
-  //window.location.href = resp;
-  console.log(resp);
+    // redirect to decoded URL
+    //window.location.href = resp;
+    console.log(resp);
+    
+  } else {
+    
+    window.location.href = window.location.origin;
+    
+  }
 
   /*
   (() => {
