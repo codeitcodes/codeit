@@ -53,17 +53,16 @@ const html = `
   <link rel="shortcut icon" href="https://codeit.codes/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="https://codeit.codes/icons/iphone-app-180.png">
   
-  <script src="/links.js"></script>
+  <script src="_link.js"></script>
   
   <script>
 
   // decode URL
-  const linkData = decodeLink(window.location.href);
+  const resp = decodeLink(window.location.href);
 
-  // clear URL
-  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  window.location.href = resp;
 
-
+  /*
   (() => {
 
     let openGraphTitle = 'Codeit - Mobile code editor';
@@ -85,7 +84,7 @@ const html = `
     titleEl1.content = openGraphTitle;
     titleEl2.content = openGraphTitle;
 
-  })();
+  })();*/
   </script>
   
 </head>
