@@ -106,7 +106,7 @@ function decodeLink(url) {
   } else {
 
     // show codeit link
-    linkData.redirect = baseURL;
+    linkData.redirect = baseURL + '/full';
     linkData.redirectText = 'Open Codeit';
 
   }
