@@ -1337,8 +1337,10 @@ async function renderBranchMenuHTML(renderAll) {
       
     }
     
+    console.log(repoObj, treeLoc, selectedBranch);
+    
     // add branch to tree
-    treeLoc[1] = repo.split(':')[0] + ':' + repoObj.selBranch;
+    treeLoc[1] = repo + ':' + repoObj.selBranch;
     saveTreeLocLS(treeLoc);
     
     // update selected branch
