@@ -1260,7 +1260,7 @@ async function renderBranchMenuHTML(renderAll) {
   // check if repository object exists
   
   const fullName = user + '/' + repoName;
-  const repoObj = modifiedRepos[fullName];
+  let repoObj = modifiedRepos[fullName];
   
   let branchResp;
   
@@ -1329,11 +1329,15 @@ async function renderBranchMenuHTML(renderAll) {
   // if selected branch is not defined
   if (!selectedBranch) {
     
+    repoObj = modifiedRepos[fullName];
+    
     // if default branch isn't fetched yet
     if (!repoObj.selBranch) {
       
       // await fetch
       await repoPromise;
+      
+      repoObj = modifiedRepos[fullName];
       
       console.log(repoObj, treeLoc, selectedBranch);
       
