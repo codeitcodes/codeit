@@ -113,7 +113,7 @@ const html = `
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    //window.location.href = resp;
+    window.location.href = resp;
     
   } else {
     
