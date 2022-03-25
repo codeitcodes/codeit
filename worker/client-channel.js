@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v483';
+const WORKER_NAME = 'codeit-worker-v484';
 
 
 // internal paths
@@ -192,6 +192,7 @@ function handleFetchRequest(request) {
 
     } else { // if fetch is external
       
+      /*
       let resp = await fetch(request);
       
       // if fetch is an internal Git fetch
@@ -207,10 +208,11 @@ function handleFetchRequest(request) {
           status: 200
         });
         
-      }
+      }*/
       
       // return response from network
-      resolve(resp);
+      //resolve(resp);
+      resolve(fetch(request));
 
     }
 
