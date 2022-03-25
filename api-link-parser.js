@@ -144,6 +144,8 @@ function decodeLink(url) {
     
   }
   
+  if (isEmbed) resp += '&embed=true';
+  
   
   return resp;
 
