@@ -191,7 +191,23 @@ function handleFetchRequest(request) {
       resolve(sendRequestToClient(request));
 
     } else { // if fetch is external
-
+      
+      let resp = await fetch(request);
+      
+      // if fetch is an internal Git fetch
+      // with an error code
+      if (request.url.startsWith('https://api.github.com')
+          && resp.status === 403) {
+        
+        console.log('[ServiceWorker] Intercepted Github API request', request);
+        
+        // return an identical response without the error code
+        resp = new Response(resp.body, {
+          headers: resp.headers,
+          status: 200
+        });
+        
+      }
       // return response from network
       resolve(fetch(request));
 
