@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v482';
+const WORKER_NAME = 'codeit-worker-v483';
 
 
 // internal paths
@@ -208,8 +208,9 @@ function handleFetchRequest(request) {
         });
         
       }
+      
       // return response from network
-      resolve(fetch(request));
+      resolve(resp);
 
     }
 
