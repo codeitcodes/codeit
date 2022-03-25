@@ -228,5 +228,7 @@ self.addEventListener('fetch', (evt) => {
 
 });
 
-console.log('finished');
+
+// claim clients
+self.clients.claim();
 
