@@ -23,6 +23,14 @@ function decodeLink(url) {
   const isGithub = url.startsWith('https://github.com/');
   if (isGithub) url = url.slice('https://github.com/'.length);
   
+  // if link is a Git URL
+  if (isGithub && url.endsWith('.git')) {
+    
+    // slice .git ending
+    url = url.slice(0, -('.git'.length));
+    
+  }
+  
   
   let baseURL = 'https://codeit.codes';
   if (isDev) baseURL = 'https://dev.codeit.codes';
@@ -34,15 +42,6 @@ function decodeLink(url) {
 
   // if link exists
   if (link.length > 1) {
-
-    // if link is a Git URL
-    if (isGithub && url.endsWith('.git')) {
-      
-      // slice .git ending
-      url = url.slice(0, -('.git'.length));
-      
-    }
-    
 
     linkData.user = link[0];
     linkData.repo = link[1];
