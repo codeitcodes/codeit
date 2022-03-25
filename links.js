@@ -104,6 +104,12 @@ function decodeLink(url) {
 
     }
     
+    if (link.get('embed')) {
+      
+      linkData.embed = true;
+      
+    }
+    
     
     
     // legacy link type
