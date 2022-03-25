@@ -1334,20 +1334,19 @@ async function renderBranchMenuHTML(renderAll) {
   
   // render selected branch
   
-  // if selected branch is not defined
-  if (!selectedBranch) {
+  repoObj = modifiedRepos[fullName];
     
+  // if default branch isn't fetched yet
+  if (!repoObj.selBranch) {
+      
+    // await fetch
+    await repoPromise;
+      
     repoObj = modifiedRepos[fullName];
-    
-    // if default branch isn't fetched yet
-    if (!repoObj.selBranch) {
-      
-      // await fetch
-      await repoPromise;
-      
-      repoObj = modifiedRepos[fullName];
             
-    }
+  }
+  
+  if (!selectedBranch) {
         
     // add branch to tree
     treeLoc[1] = repo + ':' + repoObj.selBranch;
