@@ -642,7 +642,9 @@ async function renderSidebarHTML() {
           const modRepo = modifiedRepos[modRepoName];
           
           // if repo isn't rendered
-          if (!renderedRepos[modRepoName]) {
+          // and user has push access in repo
+          if (!renderedRepos[modRepoName]
+              && modRepo.pushAccess) {
             
             // render repo
 
