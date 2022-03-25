@@ -92,17 +92,17 @@ const html = `
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
+  if (link && link.startsWith('https:/github.com')) {
+    
+    link = link.replace('https:/github.com', 'https://github.com');
+    
+  }
+  
   if (link && !link.startsWith('https://cde.run')
       && !link.startsWith('https://dev.cde.run')) {
     
     if (!isDev) link = 'https://cde.run/' + link;
     else link = 'https://dev.cde.run/' + link;
-    
-  }
-  
-  if (link && link.includes('https:/github.com')) {
-    
-    link = link.replace('https:/github.com', 'https://github.com');
     
   }
   
