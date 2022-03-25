@@ -228,7 +228,3 @@ self.addEventListener('fetch', (evt) => {
 
 });
 
-
-// claim clients
-self.clients.claim();
-
