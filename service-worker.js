@@ -53,12 +53,11 @@ const FILES_TO_CACHE = [
 
 ];
 
-self.addEventListener('install', (evt) => {
-
-});
-
 self.addEventListener('activate', (evt) => {
-
+  
+  self.clients.claim();
+  
+  
   // remove previous cached data from disk
   evt.waitUntil(
     caches.keys().then((keyList) => {
@@ -68,10 +67,7 @@ self.addEventListener('activate', (evt) => {
         }
       }));
     })
-  );  
-  
-  self.clients.claim();
-  
+  );
   
   // precache static resources
   evt.waitUntil(
