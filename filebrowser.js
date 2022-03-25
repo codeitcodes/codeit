@@ -1338,9 +1338,7 @@ async function renderBranchMenuHTML(renderAll) {
       await repoPromise;
       
       repoObj = modifiedRepos[fullName];
-      
-      console.log(repoObj, treeLoc, selectedBranch);
-      
+            
     }
         
     // add branch to tree
