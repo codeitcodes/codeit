@@ -1335,10 +1335,10 @@ async function renderBranchMenuHTML(renderAll) {
       // await fetch
       await repoPromise;
       
+      console.log(repoObj, treeLoc, selectedBranch);
+      
     }
-    
-    console.log(repoObj, treeLoc, selectedBranch);
-    
+        
     // add branch to tree
     treeLoc[1] = repo + ':' + repoObj.selBranch;
     saveTreeLocLS(treeLoc);
