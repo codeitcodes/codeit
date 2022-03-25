@@ -834,14 +834,10 @@ async function renderLiveViewHTML(file) {
 
   // if service worker isn't installed yet
   if (workerInstallPromise) {
-    
-    console.log(workerInstallPromise);
-    
+        
     // wait until finished installing
     await workerInstallPromise;
-    
-    console.log('finshed');
-        
+            
   }
 
 
