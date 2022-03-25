@@ -228,3 +228,5 @@ self.addEventListener('fetch', (evt) => {
 
 });
 
+console.log('finished');
+
