@@ -81,8 +81,6 @@ self.addEventListener('activate', (evt) => {
 
   self.clients.claim();
   
-  console.log('finished');
-  
   
   // send reload request to client
   /*workerChannel.postMessage({
