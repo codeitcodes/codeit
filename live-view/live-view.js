@@ -832,6 +832,15 @@ async function renderLiveViewHTML(file) {
   }
 
 
+  // if service worker isn't installed yet
+  if (workerInstallPromise) {
+    
+    // wait until finished installing
+    await workerInstallPromise;
+    
+  }
+
+
   liveView.innerHTML = '<iframe src="'+ livePath +'" name="' + file.name + '" title="' + file.name + '" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
 
