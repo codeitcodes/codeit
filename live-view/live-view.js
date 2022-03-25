@@ -2,6 +2,11 @@
 // setup live view
 async function setupLiveView() {
 
+  // if link is embed
+  if (linkData.embed) {
+    body.classList.add('embed');
+  }
+
   // if URL has a file
   if (linkData.file) {
 
