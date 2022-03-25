@@ -55,15 +55,6 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (evt) => {
 
-  // precache static resources
-  evt.waitUntil(
-    caches.open(WORKER_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
-
-  self.skipWaiting();
-
 });
 
 self.addEventListener('activate', (evt) => {
@@ -78,6 +69,19 @@ self.addEventListener('activate', (evt) => {
       }));
     })
   );  
+  
+  self.clients.claim();
+  
+  
+  // precache static resources
+  evt.waitUntil(
+    caches.open(WORKER_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+
+  self.skipWaiting();
+  
   
   // send reload request to client
   /*workerChannel.postMessage({
