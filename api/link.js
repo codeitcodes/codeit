@@ -93,7 +93,9 @@ const html = `
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
   if (link && !link.startsWith('https://cde.run')
-      && !link.startsWith('https://dev.cde.run')) {
+      && !link.startsWith('https://dev.cde.run')
+      && !link.startsWith('https://github.com')
+      && !link.startsWith('https:/github.com')) {
     
     if (!isDev) link = 'https://cde.run/' + link;
     else link = 'https://dev.cde.run/' + link;
