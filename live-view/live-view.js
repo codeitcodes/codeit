@@ -839,6 +839,8 @@ async function renderLiveViewHTML(file) {
     
     // wait until finished installing
     await workerInstallPromise;
+    
+    console.log('finshed');
         
   }
 
