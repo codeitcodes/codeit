@@ -227,3 +227,6 @@ self.addEventListener('fetch', (evt) => {
   evt.respondWith(handleFetchRequest(evt.request));
 
 });
+
+console.log('finished');
+
