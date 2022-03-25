@@ -114,6 +114,7 @@ const html = `
 
     // redirect to decoded URL
     //window.location.href = resp;
+    console.log(resp);
     
   } else {
     
