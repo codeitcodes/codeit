@@ -35,6 +35,15 @@ function decodeLink(url) {
   // if link exists
   if (link.length > 1) {
 
+    // if link is a Git URL
+    if (isGithub && url.endsWith('.git')) {
+      
+      // slice .git ending
+      url = url.slice(0, -('.git'.length));
+      
+    }
+    
+
     linkData.user = link[0];
     linkData.repo = link[1];
 
