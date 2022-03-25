@@ -60,6 +60,8 @@ async function setupWorkerChannel() {
     
     if (getStorage('workerDevLogs')) {
       
+      console.log(workerInstallPromise);
+      
       workerChannel.postMessage({
         type: 'enableDevLogs'
       });
