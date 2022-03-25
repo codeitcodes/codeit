@@ -5,7 +5,7 @@
 // git login
 const clientId = '7ede3eed3185e59c042d';
 
-async function loadGitAuth() {
+window.onload = async () => {
 
   gitToken = getStorage('gitToken') ?? '';
 
@@ -134,7 +134,4 @@ async function getGithubToken(gitCode) {
   renderSidebarHTML();
 
 }
-
-
-loadGitAuth();
 
