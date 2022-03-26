@@ -4,14 +4,20 @@
 
 
 let workerChannel;
+let workerInstallPromise;
 
 
 // setup worker channel
 async function setupWorkerChannel() {
 
   // register service worker
-  await navigator.serviceWorker.register('/service-worker.js');
-
+  
+  workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
+  
+  await workerInstallPromise;
+  
+  workerInstallPromise = null;
+  
 
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
@@ -53,7 +59,7 @@ async function setupWorkerChannel() {
   window.addEventListener('load', () => {
     
     if (getStorage('workerDevLogs')) {
-      
+            
       workerChannel.postMessage({
         type: 'enableDevLogs'
       });

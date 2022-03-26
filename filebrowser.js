@@ -176,6 +176,9 @@ async function renderSidebarHTML() {
       // show title
       sidebarLogo.innerText = 'Repositories';
       
+      // hide branch button
+      sidebarBranch.classList.remove('visible');
+      
       
       // scroll to start of title
       sidebarLogo.scrollTo(0, 0);
@@ -205,6 +208,9 @@ async function renderSidebarHTML() {
     
     // change sidebar title
     sidebarLogo.innerText = 'Repositories';
+    
+    // hide branch button
+    sidebarBranch.classList.remove('visible');
     
     // scroll to start of repo name
     sidebarLogo.scrollTo(0, 0);
@@ -413,6 +419,9 @@ async function renderSidebarHTML() {
       // show title
       sidebarLogo.innerText = 'Repositories';
       
+      // hide branch button
+      sidebarBranch.classList.remove('visible');
+      
       // scroll to start of repo name
       sidebarLogo.scrollTo(0, 0);
       sidebarLogo.classList.add('notransition');
@@ -567,9 +576,6 @@ async function renderSidebarHTML() {
       // change header options
       header.classList.add('out-of-repo');
       
-      // hide branch button
-      sidebarBranch.classList.remove('visible');
-      
       
       // get rendered repos
       let renderedRepos = {};
@@ -642,7 +648,9 @@ async function renderSidebarHTML() {
           const modRepo = modifiedRepos[modRepoName];
           
           // if repo isn't rendered
-          if (!renderedRepos[modRepoName]) {
+          // and user has push access in repo
+          if (!renderedRepos[modRepoName]
+              && modRepo.pushAccess) {
             
             // render repo
 
@@ -1260,7 +1268,7 @@ async function renderBranchMenuHTML(renderAll) {
   // check if repository object exists
   
   const fullName = user + '/' + repoName;
-  const repoObj = modifiedRepos[fullName];
+  let repoObj = modifiedRepos[fullName];
   
   let branchResp;
   
@@ -1329,16 +1337,20 @@ async function renderBranchMenuHTML(renderAll) {
   // if selected branch is not defined
   if (!selectedBranch) {
     
+    repoObj = modifiedRepos[fullName];
+    
     // if default branch isn't fetched yet
     if (!repoObj.selBranch) {
-      
+        
       // await fetch
       await repoPromise;
-      
+        
+      repoObj = modifiedRepos[fullName];
+              
     }
     
     // add branch to tree
-    treeLoc[1] = repo.split(':')[0] + ':' + repoObj.selBranch;
+    treeLoc[1] = repo + ':' + repoObj.selBranch;
     saveTreeLocLS(treeLoc);
     
     // update selected branch

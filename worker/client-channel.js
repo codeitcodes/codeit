@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v484';
+const WORKER_NAME = 'codeit-worker-v487';
 
 
 // internal paths
@@ -153,6 +153,7 @@ let enableDevLogs = false;
 workerChannel.addEventListener('message', (event) => {
   
   if (event.data.type === 'enableDevLogs') enableDevLogs = true;
+  if (event.data.type === 'hello') workerChannel.postMessage('hello!');
   
 });
 
@@ -191,8 +192,27 @@ function handleFetchRequest(request) {
       resolve(sendRequestToClient(request));
 
     } else { // if fetch is external
-
+      
+      /*
+      let resp = await fetch(request);
+      
+      // if fetch is an internal Git fetch
+      // with an error code
+      if (request.url.startsWith('https://api.github.com')
+          && resp.status === 403) {
+        
+        console.log('[ServiceWorker] Intercepted Github API request', request);
+        
+        // return an identical response without the error code
+        resp = new Response(resp.body, {
+          headers: resp.headers,
+          status: 200
+        });
+        
+      }*/
+      
       // return response from network
+      //resolve(resp);
       resolve(fetch(request));
 
     }
@@ -208,3 +228,4 @@ self.addEventListener('fetch', (evt) => {
   evt.respondWith(handleFetchRequest(evt.request));
 
 });
+

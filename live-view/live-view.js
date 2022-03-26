@@ -2,6 +2,11 @@
 // setup live view
 async function setupLiveView() {
 
+  // if link is embed
+  if (linkData.embed) {
+    body.classList.add('embed');
+  }
+
   // if URL has a file
   if (linkData.file) {
 
@@ -829,6 +834,15 @@ async function renderLiveViewHTML(file) {
     console.clear();
     logVersion();
 
+  }
+
+
+  // if service worker isn't installed yet
+  if (workerInstallPromise) {
+        
+    // wait until finished installing
+    await workerInstallPromise;
+            
   }
 
 

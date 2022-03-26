@@ -15,7 +15,7 @@ export default function handler(request, response) {
     
     html = `
     <oembed>
-      <html><iframe src="`+ url +`/api/link?url=`+ query.url +`&embed=true" width="700" height="480"></html>
+      <html><iframe src="`+ url +`/api/link?url=`+ query.url +`&embed=true" width="700" height="480"></iframe></html>
       <width>700</width>
       <height>480</height>
     </oembed>

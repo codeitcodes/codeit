@@ -23,6 +23,14 @@ function decodeLink(url) {
   const isGithub = url.startsWith('https://github.com/');
   if (isGithub) url = url.slice('https://github.com/'.length);
   
+  // if link is a Git URL
+  if (isGithub && url.endsWith('.git')) {
+    
+    // slice .git ending
+    url = url.slice(0, -('.git'.length));
+    
+  }
+  
   
   let baseURL = 'https://codeit.codes';
   if (isDev) baseURL = 'https://dev.codeit.codes';
@@ -106,7 +114,7 @@ function decodeLink(url) {
   } else {
 
     // show codeit link
-    linkData.redirect = baseURL;
+    linkData.redirect = baseURL + '/full';
     linkData.redirectText = 'Open Codeit';
 
   }
@@ -143,6 +151,8 @@ function decodeLink(url) {
     }
     
   }
+  
+  if (isEmbed) resp += '&embed=true';
   
   
   return resp;
