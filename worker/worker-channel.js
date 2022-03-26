@@ -59,9 +59,7 @@ async function setupWorkerChannel() {
   window.addEventListener('load', () => {
     
     if (getStorage('workerDevLogs')) {
-      
-      console.log(workerInstallPromise);
-      
+            
       workerChannel.postMessage({
         type: 'enableDevLogs'
       });
