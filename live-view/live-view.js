@@ -835,6 +835,36 @@ async function renderLiveViewHTML(file) {
     logVersion();
 
   }
+  
+  
+  // if iOS version is lower than minimum
+  
+  const isSafariWithMac = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
+  
+  if (isSafariWithMac) {
+    
+    const safariVersion = Number(navigator.userAgent.split('Version/')[1].split(' Safari')[0]);
+    
+    if (safariVersion < 15.4) {
+    
+      // show message and return
+      
+      liveView.innerHTML = `
+      <div class="prompt">
+        <svg style="margin-bottom: 7px;margin-top: -42px;" class="file-svg" viewBox="0 0 752 752" version="1.1" height="146" width="146" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="a"><path d="m139.21 139.21h473.58v473.58h-473.58z"></path></clipPath></defs><g clip-path="url(#a)"><path d="m356.27 572.35v-38.492c0-10.898 8.7578-19.73 19.73-19.73 10.898 0 19.734 8.7578 19.734 19.73v38.492c93.223-9.2539 167.36-83.395 176.62-176.62h-38.492c-10.898 0-19.73-8.7578-19.73-19.734 0-10.898 8.7578-19.73 19.73-19.73h38.492c-9.2539-93.227-83.395-167.36-176.62-176.62v38.496c0 10.895-8.7578 19.73-19.734 19.73-10.898 0-19.73-8.7578-19.73-19.73v-38.496c-93.227 9.2578-167.36 83.395-176.62 176.62h38.496c10.895 0 19.73 8.7578 19.73 19.73 0 10.898-8.7578 19.734-19.73 19.734h-38.496c9.2578 93.223 83.395 167.36 176.62 176.62zm19.73 40.441c-130.77 0-236.79-106.02-236.79-236.79 0-130.77 106.02-236.79 236.79-236.79 130.78 0 236.79 106.02 236.79 236.79 0 130.78-106.02 236.79-236.79 236.79zm88.371-333.09c10.426-3.1719 16.32 2.6562 13.133 13.133l-37.344 122.7c-3.1758 10.426-14.148 21.434-24.625 24.625l-122.7 37.344c-10.426 3.1719-16.32-2.6562-13.133-13.133l37.344-122.7c3.1719-10.426 14.148-21.438 24.625-24.625zm-111.21 75.098c0.69141-0.20703 1.0391-0.23047 1.2148-0.23828 0.19531-0.36328 0.21875-0.71094 0.42578-1.4023l-21.543 70.793 70.789-21.547c-0.69141 0.21094-1.0391 0.23438-1.2148 0.23828-0.19141 0.36328-0.21484 0.71094-0.42578 1.4023l21.547-70.789z" fill="hsl(223deg 75% 38%)"></path></g></svg>
+        <div class="title">Upgrade iOS to run this file</div>
+        <a class="desc link" href="https://support.apple.com/en-us/HT204416" target="_blank">Here's how</a>
+      </div>
+      `;
+      
+      liveView.classList.add('centered-contents');
+      liveView.classList.add('loaded');
+      
+      return;
+      
+    }
+    
+  }
 
 
   // if service worker isn't installed yet
