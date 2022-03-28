@@ -857,6 +857,7 @@ async function renderLiveViewHTML(file) {
       </div>
       `;
       
+      liveView.classList.add('centered-contents');
       liveView.classList.add('loaded');
       
       return;
