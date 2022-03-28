@@ -1739,7 +1739,7 @@ body.mobile.expanded .splash-wrapper::before {
 }
 
 a.link[href] {
-  color: var(--rosemary-lightness-deluxe);
+  color: var(--rosemary-lightness-deluxe) !important;
   text-decoration: none;
 }
 
