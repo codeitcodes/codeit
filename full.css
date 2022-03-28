@@ -448,6 +448,12 @@ body.notransition .live-view.file-open {
   content: unset;
 }
 
+.live-view.centered-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .live-view img {
   width: 100%;
   max-height: 100%;
