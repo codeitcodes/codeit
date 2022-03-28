@@ -1732,16 +1732,16 @@ body.mobile.expanded .splash-wrapper::before {
   pointer-events: auto;
 }
 
-.splash-wrapper .loading-subtitle a {
+a.link[href] {
   color: var(--rosemary-lightness-deluxe);
   text-decoration: none;
 }
 
-.splash-wrapper a:active {
+a.link[href]:active {
   text-decoration: underline;
 }
 
-body:not(.mobile) .splash-wrapper a:hover {
+body:not(.mobile) a.link[href]:hover {
   text-decoration: underline;
 }
 
