@@ -654,7 +654,7 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle .arrow .right {
-  transform: scaleX(0.55);
+  transform: scaleX(0.43);
   transform-origin: center;
 }
 
