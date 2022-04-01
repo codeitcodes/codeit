@@ -648,8 +648,14 @@ body.expanded .sidebar-toggle svg .left {
   transition: .4s var(--cubic-function);
 }
 
+.live-toggle .arrow .right {
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
 .live-view.visible ~ .live-toggle .arrow .right {
   opacity: 1;
+  transform: none;
 }
 
 .live-view:not(.visible) ~ .live-toggle .arrow .left {
