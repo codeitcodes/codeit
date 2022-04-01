@@ -191,18 +191,24 @@ window.addEventListener('offline', () => { isOffline = true });
 
 let isPersistStorage = false;
 
-if (navigator.storage && navigator.storage.persist) {
+async function checkPersistStorage() {
   
-  isPersistStorage = await navigator.storage.persisted();
-  
-  if (!isPersistStorage) {
-    
-    // request persistent storage
-    isPersistStorage = await navigator.storage.persist();
-    
+  if (navigator.storage && navigator.storage.persist) {
+
+    isPersistStorage = await navigator.storage.persisted();
+
+    if (!isPersistStorage) {
+
+      // request persistent storage
+      isPersistStorage = await navigator.storage.persist();
+
+    }
+
   }
   
 }
+
+checkPersistStorage();
 
 
 // base64 encode/decode
