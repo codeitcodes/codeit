@@ -645,11 +645,16 @@ body.expanded .sidebar-toggle svg .left {
 
 .live-toggle .arrow path {
   opacity: 0;
+  transform-origin: center;
   transition: .4s var(--cubic-function);
 }
 
+.live-toggle .arrow .left {
+  transform: translateX(5.45px) scaleX(0.7);
+}
+
 .live-toggle .arrow .right {
-  transform: rotate(90deg);
+  transform: scaleX(0.55);
   transform-origin: center;
 }
 
@@ -660,6 +665,7 @@ body.expanded .sidebar-toggle svg .left {
 
 .live-view:not(.visible) ~ .live-toggle .arrow .left {
   opacity: 1;
+  transform: none;
 }
 
 .live-toggle:not(.file-open) svg.download {
