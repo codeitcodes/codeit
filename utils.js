@@ -187,6 +187,24 @@ window.addEventListener('online', () => { isOffline = false });
 window.addEventListener('offline', () => { isOffline = true });
 
 
+// persistent storage
+
+let isPersistStorage = false;
+
+if (navigator.storage && navigator.storage.persist) {
+  
+  isPersistStorage = await navigator.storage.persisted();
+  
+  if (!isPersistStorage) {
+    
+    // request persistent storage
+    isPersistStorage = await navigator.storage.persist();
+    
+  }
+  
+}
+
+
 // base64 encode/decode
 
 let encodeUnicode = (str) => {
