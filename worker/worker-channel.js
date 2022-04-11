@@ -21,6 +21,7 @@ async function setupWorkerChannel() {
   workerInstallPromise = null;
   
   
+  console.log(workerInstallPromise);
   // get client ID from worker
   workerClientId = await axios.get('/worker/getLatestClientId', '', true);
   console.log(workerClientId);
