@@ -12,11 +12,12 @@ const INTERNAL_PATHS = {
 
   internal: 'https://codeit.codes/',
   internal_: 'https://dev.codeit.codes/',
-  internal__: 'http://127.0.0.1:3000/',
 
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
-  run__: 'http://127.0.0.1:3000/run',
+  
+  clientId: 'https://codeit.codes/getLatestClientId',
+  clientId_: 'https://dev.codeit.codes/getLatestClientId',
 
 }
 
@@ -31,8 +32,6 @@ function getPathType(path) {
     if (path.startsWith(type[1])) {
 
       pathType = type[0].replaceAll('_', '');
-
-      return;
 
     }
 
@@ -195,6 +194,13 @@ function handleFetchRequest(request) {
       // return response from client
       resolve(sendRequestToClient(request));
 
+    } else if (pathType === 'clientId') { // if fetching client ID
+      
+      // return latest client ID
+      resolve(createResponse({
+        latestClientID, 'text/plain', 200
+      }));
+      
     } else { // if fetch is external
       
       /*
@@ -226,10 +232,19 @@ function handleFetchRequest(request) {
 }
 
 
+let latestClientID; 
+
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
-  console.log(evt);
+  // if creating a new client
+  if (!evt.clientId
+      && evt.resultingClientId) {
+    
+    // save latest client ID
+    latestClientID = evt.resultingClientId;
+    
+  }
 
   evt.respondWith(handleFetchRequest(evt.request));
 
