@@ -196,9 +196,14 @@ function handleFetchRequest(request) {
 
     } else if (pathType === 'clientId') { // if fetching client ID
       
+      const clients = await self.clients.matchAll({
+        includeUncontrolled: true,
+        type: 'window',
+      });
+      
       // return latest client ID
       resolve(createResponse(
-        latestClientId, 'text/plain', 200
+        clients[0].id, 'text/plain', 200
       ));
       
     } else { // if fetch is external
@@ -232,13 +237,8 @@ function handleFetchRequest(request) {
 }
 
 
-let latestClientId; 
-
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
-
-  // save latest client ID
-  latestClientId = evt.clientId ?? evt.resultingClientId;
 
   evt.respondWith(handleFetchRequest(evt.request));
 
