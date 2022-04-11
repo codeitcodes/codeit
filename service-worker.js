@@ -62,6 +62,7 @@ self.addEventListener('install', (evt) => {
 self.addEventListener('activate', (evt) => {
   
   self.clients.claim();
+  console.log('done');
   
   
   // remove previous cached data from disk
