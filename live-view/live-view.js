@@ -666,7 +666,6 @@ async function handleLiveViewRequest(requestPath) {
 
     // return live file
     return {
-      fileDir: (liveFile.dir + liveFile.name),
       fileContent: decodeUnicode(liveFile.content)
     };
 
@@ -804,7 +803,6 @@ async function handleLiveViewRequest(requestPath) {
         
         return {
           respStatus: respStatus,
-          fileDir: (liveFileDir.join(',') + fileName),
           fileContent: ''
         };
   
@@ -829,7 +827,6 @@ async function handleLiveViewRequest(requestPath) {
 
     // return response data
     return {
-      fileDir: (liveFileDir.join(',') + fileName),
       fileContent: respObj
     };
 
