@@ -227,6 +227,8 @@ function handleFetchRequest(request) {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
+  console.log(evt);
+
   evt.respondWith(handleFetchRequest(evt.request));
 
 });
