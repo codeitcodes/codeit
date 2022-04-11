@@ -14,10 +14,8 @@ async function setupWorkerChannel() {
   
   workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
   
-  const workerInstallation = await workerInstallPromise;
-  
-  console.log(workerInstallation);
-  
+  await workerInstallPromise;
+    
   workerInstallPromise = null;
   
 
