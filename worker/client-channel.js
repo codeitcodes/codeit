@@ -160,7 +160,7 @@ workerChannel.addEventListener('message', (event) => {
 
 
 // handle fetch request
-function handleFetchRequest(request) {
+function handleFetchRequest(request, event) {
 
   return new Promise(async (resolve, reject) => {
 
@@ -196,14 +196,12 @@ function handleFetchRequest(request) {
 
     } else if (pathType === 'clientId') { // if fetching client ID
       
-      const clients = await self.clients.matchAll({
-        includeUncontrolled: true,
-        type: 'window',
-      });
+      console.log(event);
+      const clientId = event.clientId;
       
       // return latest client ID
       resolve(createResponse(
-        clients[0].id, 'text/plain', 200
+        clientId, 'text/plain', 200
       ));
       
     } else { // if fetch is external
@@ -240,7 +238,7 @@ function handleFetchRequest(request) {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
-  evt.respondWith(handleFetchRequest(evt.request));
+  evt.respondWith(handleFetchRequest(evt.request, evt));
 
 });
 
