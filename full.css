@@ -355,8 +355,7 @@ body.safari .live-buttons .live-button.share path.ios {
 body:not(.mobile) .live-view {
   top: 0;
   opacity: 1;
-  transform: none;
-  clip-path: circle(0% at 100% 100%);
+  transform: translateX(100%);
 }
 
 body.loaded .live-view {
@@ -365,7 +364,7 @@ body.loaded .live-view {
 }
 
 body.loaded:not(.mobile) .live-view {
-  transition-property: clip-path;
+  transition-property: transform;
 }
 
 .live-view.visible,
@@ -373,10 +372,6 @@ body.loaded:not(.mobile) .live-view {
   opacity: 1;
   transform: none !important;
   pointer-events: auto;
-}
-
-body:not(.mobile) .live-view.visible {
-  clip-path: circle(141.4% at 100% 100%);
 }
 
 .live-view.notransition,
