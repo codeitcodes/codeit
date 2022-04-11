@@ -6,6 +6,8 @@
 let workerChannel;
 let workerInstallPromise;
 
+let clientID;
+
 
 // setup worker channel
 async function setupWorkerChannel() {
@@ -18,11 +20,15 @@ async function setupWorkerChannel() {
     
   workerInstallPromise = null;
   
+  
+  // get client ID from worker
+  clientID = await axios.get('/worker/getLatestClientID');
+  
 
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
-
-
+  
+  
   // add worker channel listener
   workerChannel.addEventListener('message', async (event) => {
 
