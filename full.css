@@ -650,7 +650,7 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle .arrow .left {
-  transform: translateX(5.45px) scaleX(0.7);
+  transform: scale(1.4);
 }
 
 .live-toggle .arrow .right {
