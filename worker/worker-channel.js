@@ -6,7 +6,7 @@
 let workerChannel;
 let workerInstallPromise;
 
-let clientId;
+let clientID;
 
 
 // setup worker channel
@@ -22,8 +22,8 @@ async function setupWorkerChannel() {
   
   
   // get client ID from worker
-  clientId = await axios.get('/worker/getLatestClientID');
-  console.log(clientId);
+  clientID = await axios.get('/worker/getLatestClientID');
+  console.log(clientID);
   
 
   // create worker channel
