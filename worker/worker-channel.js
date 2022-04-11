@@ -20,11 +20,6 @@ async function setupWorkerChannel() {
     
   workerInstallPromise = null;
   
-  
-  // get client ID from worker
-  clientID = await axios.get('/worker/getLatestClientID');
-  console.log(clientID);
-  
 
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
@@ -65,6 +60,10 @@ async function setupWorkerChannel() {
   
   
   window.addEventListener('load', () => {
+    
+    // get client ID from worker
+    clientID = await axios.get('/worker/getLatestClientID');
+    console.log(clientID);
     
     if (getStorage('workerDevLogs')) {
             
