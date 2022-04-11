@@ -197,9 +197,9 @@ function handleFetchRequest(request) {
     } else if (pathType === 'clientId') { // if fetching client ID
       
       // return latest client ID
-      resolve(createResponse({
+      resolve(createResponse(
         latestClientID, 'text/plain', 200
-      }));
+      ));
       
     } else { // if fetch is external
       
