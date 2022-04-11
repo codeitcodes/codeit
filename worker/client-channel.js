@@ -237,14 +237,8 @@ let latestClientID;
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
-  // if creating a new client
-  if (!evt.clientId
-      && evt.resultingClientId) {
-    
-    // save latest client ID
-    latestClientID = evt.resultingClientId;
-    
-  }
+  // save latest client ID
+  latestClientID = evt.clientId ?? evt.resultingClientId;
 
   evt.respondWith(handleFetchRequest(evt.request));
 
