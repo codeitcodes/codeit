@@ -666,7 +666,8 @@ async function handleLiveViewRequest(requestPath) {
 
     // return live file
     return {
-      fileContent: decodeUnicode(liveFile.content)
+      fileContent: decodeUnicode(liveFile.content),
+      respStatus: 200
     };
 
   } else {
@@ -802,8 +803,8 @@ async function handleLiveViewRequest(requestPath) {
         if (resp.message === 'Not Found') respStatus = 404;
         
         return {
-          respStatus: respStatus,
-          fileContent: ''
+          fileContent: '',
+          respStatus: respStatus
         };
   
       }
@@ -827,7 +828,8 @@ async function handleLiveViewRequest(requestPath) {
 
     // return response data
     return {
-      fileContent: respObj
+      fileContent: respObj,
+      respStatus: 200
     };
 
   }
