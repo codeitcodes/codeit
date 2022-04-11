@@ -16,8 +16,8 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
-  clientID: 'https://codeit.codes/worker/getLatestClientID',
-  clientID_: 'https://dev.codeit.codes/worker/getLatestClientID',
+  clientId: 'https://codeit.codes/worker/getLatestClientID',
+  clientId_: 'https://dev.codeit.codes/worker/getLatestClientID',
 
 }
 
@@ -232,13 +232,13 @@ function handleFetchRequest(request) {
 }
 
 
-let latestClientID; 
+let latestClientId; 
 
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
   // save latest client ID
-  latestClientID = evt.clientId ?? evt.resultingClientId;
+  latestClientId = evt.clientId ?? evt.resultingClientId;
 
   evt.respondWith(handleFetchRequest(evt.request));
 
