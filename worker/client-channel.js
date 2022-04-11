@@ -16,8 +16,8 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
-  clientId: 'https://codeit.codes/getLatestClientId',
-  clientId_: 'https://dev.codeit.codes/getLatestClientId',
+  clientId: 'https://codeit.codes/worker/getLatestClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getLatestClientId',
 
 }
 
