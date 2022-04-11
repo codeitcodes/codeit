@@ -665,7 +665,10 @@ async function handleLiveViewRequest(requestPath) {
   if (requestPath === livePath) {
 
     // return live file
-    return [decodeUnicode(liveFile.content)];
+    return {
+      fileDir: (liveFile.dir + liveFile.name),
+      fileContent: decodeUnicode(liveFile.content)
+    };
 
   } else {
 
@@ -794,9 +797,16 @@ async function handleLiveViewRequest(requestPath) {
       // if couldn't fetch file
       if (resp.message) {
   
-        console.log('[Live View] Couldn\'t fetch file', resp.message);
-  
-        return ['', 400];
+        // return an error
+        
+        let respStatus = 400;
+        if (resp.message === 'Not Found') respStatus = 404;
+        
+        return {
+          respStatus: respStatus,
+          fileDir: (liveFileDir.join(',') + fileName),
+          fileContent: ''
+        };
   
       }
       
@@ -817,7 +827,11 @@ async function handleLiveViewRequest(requestPath) {
     // get data from response
     const respObj = (await (response.body.getReader()).read()).value;
 
-    return [respObj];
+    // return response data
+    return {
+      fileDir: (liveFileDir.join(',') + fileName),
+      fileContent: respObj
+    };
 
   }
 
