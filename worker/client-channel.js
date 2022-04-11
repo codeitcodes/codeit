@@ -117,7 +117,7 @@ function sendRequestToClient(request) {
 
       // if response url matches
       if (event.data.type === 'response' &&
-        event.data.url === url) {
+          event.data.url === url) {
 
         if (enableDevLogs) {
           console.log('[ServiceWorker] Recived response data from client', event.data);
@@ -171,6 +171,8 @@ function handleFetchRequest(request) {
         && (getPathType(request.referrer) !== 'run')) {
 
       let url = request.url;
+      
+      url = url.slice('?')[0];
 
       // append .html to url if navigating
       /*if (request.mode === 'navigate'
