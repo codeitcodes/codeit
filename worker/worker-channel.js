@@ -18,7 +18,7 @@ async function setupWorkerChannel() {
   
   await workerInstallPromise;
     
-  workerInstallPromise = null;
+  //workerInstallPromise = null;
   
   
   console.log(workerInstallPromise);
