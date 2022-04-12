@@ -661,6 +661,8 @@ let liveFile;
 // handle live view request
 async function handleLiveViewRequest(requestPath) {
 
+  console.log(requestPath);
+
   // if requesting base path
   if (requestPath === livePath) {
 
