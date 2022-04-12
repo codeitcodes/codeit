@@ -161,8 +161,6 @@ workerChannel.addEventListener('message', (event) => {
 // handle fetch request
 function handleFetchRequest(request) {
 
-  console.log(request);
-
   return new Promise(async (resolve, reject) => {
 
     // get request path type
