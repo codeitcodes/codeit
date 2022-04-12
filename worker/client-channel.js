@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v493';
+const WORKER_NAME = 'codeit-worker-v494';
 
 
 // internal paths
@@ -12,11 +12,11 @@ const INTERNAL_PATHS = {
 
   internal: 'https://codeit.codes/',
   internal_: 'https://dev.codeit.codes/',
-  internal__: 'http://127.0.0.1:3000/',
+  internal__: 'https://codedragon.netlify.app/',
 
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
-  run__: 'http://127.0.0.1:3000/run',
+  run__: 'https://codedragon.netlify.app/run',
 
 }
 
