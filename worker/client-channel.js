@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v494';
+const WORKER_NAME = 'codeit-worker-v495';
 
 
 // internal paths
@@ -160,6 +160,8 @@ workerChannel.addEventListener('message', (event) => {
 
 // handle fetch request
 function handleFetchRequest(request) {
+
+  console.log(request);
 
   return new Promise(async (resolve, reject) => {
 
