@@ -46,7 +46,6 @@ async function setupWorkerChannel() {
   
   // ping worker for client ID
   workerClientId = await pingWorkerForClientId();  
-  console.log(workerClientId);
   
   
   // create worker channel
