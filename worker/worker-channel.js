@@ -24,22 +24,22 @@ async function setupWorkerChannel() {
   async function pingWorkerForClientId() {
     
     // get client ID from worker
-    workerClientId = (await axios.get('/worker/getLatestClientId')).clientId;
+    const resp = await axios.get('/worker/getLatestClientId');
     
-    if (!workerClientId) {
+    if (!resp || !resp.clientId) {
       
       return await pingWorkerForClientId();
       
     } else {
       
-      return true;
+      return resp.clientId;
       
     }
     
   }
   
   // ping worker for client ID
-  await pingWorkerForClientId();  
+  workerClientId = await pingWorkerForClientId();  
   console.log(workerClientId);
   
   
