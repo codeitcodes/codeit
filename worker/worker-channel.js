@@ -28,12 +28,7 @@ async function setupWorkerChannel() {
     
     if (!workerClientId) {
       
-      await new Promise(resolve => {
-        window.requestAnimationFrame(async () => {
-          await pingWorkerForClientId();
-          resolve();
-        });
-      });
+      return await pingWorkerForClientId();
       
     } else {
       
