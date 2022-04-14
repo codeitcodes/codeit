@@ -21,6 +21,7 @@ async function setupWorkerChannel() {
   workerInstallPromise = null;
   
   
+  /*
   async function pingWorkerForClientId() {
     
     // get client ID from worker
@@ -39,9 +40,10 @@ async function setupWorkerChannel() {
   }
   
   // ping worker for client ID
-  await pingWorkerForClientId();
+  await pingWorkerForClientId();*/
   
-  
+  // get client ID from worker
+  workerClientId = await axios.get('/worker/getLatestClientId');
   console.log(workerClientId);
   
   
@@ -155,5 +157,5 @@ let axios = {
 
 
 // setup worker channel
-setupWorkerChannel();
+window.addEventListener('load', setupWorkerChannel);
 
