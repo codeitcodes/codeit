@@ -199,7 +199,7 @@ function handleFetchRequest(request, event) {
       // return the ID of the client
       // who sent the request
       resolve(createResponse(
-        JSON.stringify({ event.clientId }), 'application/json', 200
+        JSON.stringify({ clientId: event.clientId }), 'application/json', 200
       ));
       
     } else { // if fetch is external
