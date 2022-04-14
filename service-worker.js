@@ -45,6 +45,7 @@ const FILES_TO_CACHE = [
   '/fonts/Inter/Inter.var.woff2',
 
   'https://plausible.io/js/plausible.js',
+  '/404',
 
   '/icons/android-app-512.png',
   '/icons/iphone-app-180.png',
