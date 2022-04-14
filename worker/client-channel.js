@@ -196,7 +196,7 @@ function handleFetchRequest(request, event) {
 
     } else if (pathType === 'clientId') { // if fetching client ID
       
-      // return ID of the client
+      // return the ID of the client
       // who sent the request
       resolve(createResponse(
         JSON.stringify({ event.clientId }), 'application/json', 200
