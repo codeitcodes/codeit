@@ -3,7 +3,6 @@
 */
 
 // git login
-const clientId = '7ede3eed3185e59c042d';
 
 window.onload = async () => {
 
@@ -65,7 +64,7 @@ window.onload = async () => {
 
   loginButton.addEventListener('click', () => {
 
-    window.open('https://github.com/login/oauth/authorize?client_id='+ clientId +'&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+    window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
 
   })
 
@@ -113,7 +112,7 @@ async function getGithubToken(gitCode) {
   // post through CORS proxy to git with clientId, clientSecret and code
   const resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
                                'https://github.com/login/oauth/access_token?' +
-                               'client_id=' + clientId +
+                               'client_id=7ede3eed3185e59c042d' +
                                '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
                                '&code=' + gitCode);
 
