@@ -199,7 +199,7 @@ function handleFetchRequest(request, event) {
       
       // return latest client ID
       resolve(createResponse(
-        '{ clientId: "' + clientId + '" }', 'application/json', 200
+        { clientId }, 'application/json', 200
       ));
       
     } else { // if fetch is external
