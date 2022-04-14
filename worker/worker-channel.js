@@ -31,9 +31,7 @@ async function setupWorkerChannel() {
     } catch(e) {
       resp = '';
     }
-    
-    console.log(resp);
-    
+        
     if (!resp || !resp.clientId) {
       
       return await pingWorkerForClientId();
