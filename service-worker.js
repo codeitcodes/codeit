@@ -61,9 +61,7 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
   
-  self.clients.claim();
-  console.log('done');
-  
+  self.clients.claim();  
   
   // remove previous cached data from disk
   evt.waitUntil(
