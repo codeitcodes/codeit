@@ -386,7 +386,7 @@ body.loaded:not(.mobile) .live-view {
   top: 0;
   left: 0;
   height: 2px;
-  width: 120px;
+  width: 100vw;
   border-radius: 6px;
   pointer-events: none;
   background: var(--rosemary-lighter);
@@ -400,9 +400,15 @@ body.loaded:not(.mobile) .live-view {
 
 @keyframes live-loader {
   from {
+    width: 0;
     transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   }
+  50% {
+    width: 100vw;
+    transform: none;
+  }
   to {
+    width: 100vw;
     transform: translateX(100vw);
   }
 }
@@ -754,7 +760,7 @@ body.notransition .sidebar {
   top: 0;
   left: 0;
   height: 2px;
-  width: 120px;
+  width: var(--sidebar-width);
   margin-bottom: -2px;
   border-radius: 6px;
   pointer-events: none;
@@ -772,9 +778,15 @@ body.notransition .sidebar {
 
 @keyframes loader {
   from {
+    width: 0;
     transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   }
+  50% {
+    width: var(--sidebar-width);
+    transform: none;
+  }
   to {
+    width: var(--sidebar-width);
     transform: translateX(var(--sidebar-width));
   }
 }
