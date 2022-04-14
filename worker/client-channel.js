@@ -16,8 +16,8 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
-  clientId: 'https://codeit.codes/worker/getLatestClientId',
-  clientId_: 'https://dev.codeit.codes/worker/getLatestClientId',
+  clientId: 'https://codeit.codes/worker/getClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
 }
 
@@ -196,12 +196,10 @@ function handleFetchRequest(request, event) {
 
     } else if (pathType === 'clientId') { // if fetching client ID
       
-      console.log(event);
-      const clientId = event.clientId;
-      
-      // return latest client ID
+      // return the ID of the client
+      // who sent the request
       resolve(createResponse(
-        JSON.stringify({ clientId }), 'application/json', 200
+        JSON.stringify({ event.clientId }), 'application/json', 200
       ));
       
     } else { // if fetch is external
