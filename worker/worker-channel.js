@@ -24,7 +24,10 @@ async function setupWorkerChannel() {
   async function pingWorkerForClientId() {
     
     // get client ID from worker
-    const resp = await axios.get('/worker/getLatestClientId');
+    let resp;
+    try {
+      resp = await axios.get('/worker/getLatestClientId');
+    } catch(e) {}
     
     console.log(resp);
     
