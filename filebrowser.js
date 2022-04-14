@@ -985,7 +985,9 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   // select the new file in HTML
   fileEl.classList.add('selected');
-  fileEl.scrollIntoViewIfNeeded();
+  onNextFrame(() => {
+    fileEl.scrollIntoViewIfNeeded();
+  });
 
   // show all files in HTML
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
