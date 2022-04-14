@@ -155,5 +155,5 @@ let axios = {
 
 
 // setup worker channel
-window.addEventListener('load', setupWorkerChannel);
+setupWorkerChannel();
 
