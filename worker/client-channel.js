@@ -114,8 +114,6 @@ function sendRequestToClient(request) {
 
     function workerListener(event) {
 
-      console.log(event);
-
       // if response url matches
       if (event.data.type === 'response' &&
           event.data.url === url) {
