@@ -9,7 +9,7 @@ sidebarToggle.addEventListener('mouseover', () => {
 
     sidebarToggle.classList.add('visible');
 
-  }
+  }sidebarLogo.offsetWidth + sidebarLogo.scrollLeft
 
 })
 
@@ -1558,7 +1558,7 @@ function scrolledSidebarTitle() {
 
   }
 
-  if ((sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
+  if (Math.round(sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
       >= sidebarLogo.scrollWidth) {
 
     sidebarLogo.classList.add('scrolled-end');
