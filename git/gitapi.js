@@ -79,7 +79,7 @@ let git = {
   },
   
   // get public file content
-  'getPublicFile': {
+  'getPublicFile': async (treeLoc, fileName) => {
     
     // map tree location
     let query = 'https://raw.githubusercontent.com';
