@@ -9,7 +9,7 @@ sidebarToggle.addEventListener('mouseover', () => {
 
     sidebarToggle.classList.add('visible');
 
-  }sidebarLogo.offsetWidth + sidebarLogo.scrollLeft
+  }
 
 })
 
