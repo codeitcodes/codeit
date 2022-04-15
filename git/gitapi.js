@@ -65,15 +65,15 @@ let git = {
 
     if (branch) branch = '?ref='+ branch;
     else branch = '';
-
+  
     query += '/repos/' + user + '/' + repoName +
              '/contents/' + contents
              + '/' + fileName +
              branch;
-
+  
     // get the query
     const resp = await axios.get(query, gitToken);
-
+  
     return resp;
 
   },
