@@ -20,15 +20,15 @@
 
   <li><b>Live view.</b> Run JavaScript, HTML and CSS projects with a tap.</li>
   
-  <li><b>Share.</b> Share links to repos, live views, branches and files.</li>
+  <li><b>Share.</b> Live views, repos, and files.</li>
   
   <li><b>Private.</b> Codeit dosen't collect data. Your code stays on your device.</li>
   
-  <li>PWA support. <b>Weighs 70% less</b> than regular apps, can be installed and <b>works offline.</b></li>
+  <li><b>PWA support.</b> Weighs 70% less than regular apps, can be installed and works offline.</li>
   
-  <li><b>Autosaving</b> Code, caret positions, and location in your repos.</li>
+  <li><b>Autosaving.</b> Instant and down to the character.</li>
   
-  <li>Codeit is built for Chrome on <b>Android, Windows, macOS and Linux</b>, as well as <b>Safari on iOS.</b></li>
+  <li><b>Cross-platform.</b> Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.</li>
 
 </ul>
 <h2>Technical</h2>
