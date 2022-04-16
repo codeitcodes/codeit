@@ -33,7 +33,7 @@
 </ul>
 <h2>Technical</h2>
 
-<li>Supports +290 lanugages.</li>
+<li>Supports <a href="https://dev.codeit.codes/homepage/lang">290++ lanugages.</a></li>
 
 <li>Uses blazing-fast Web APIs.</li>
 
