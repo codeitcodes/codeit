@@ -21,6 +21,7 @@ async function setupWorkerChannel() {
   workerInstallPromise = null;
   
   
+  /*
   async function pingWorkerForClientId() {
     
     // get client ID from worker
@@ -45,7 +46,8 @@ async function setupWorkerChannel() {
   }
   
   // ping worker for client ID
-  workerClientId = await pingWorkerForClientId();  
+  workerClientId = await pingWorkerForClientId();
+  */
   
   
   // create worker channel
