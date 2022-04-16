@@ -18,7 +18,7 @@
 
 <ul>
 
-  <li><b>Live view.</b> Run Javascript, HTML and CSS projects with a tap.</li>
+  <li><b>Live view.</b> Run JavaScript, HTML and CSS projects with a tap.</li>
   
   <li><b>Share.</b> Share links to repos, live views, branches and files.</li>
   
