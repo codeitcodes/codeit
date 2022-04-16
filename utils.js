@@ -385,7 +385,7 @@ let validateString = (string) => {
   const acceptableChars = 'abcdefghijklmnopqrstuvwxyz' +
                           'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
                           '0123456789' +
-                          '-_./';
+                          '-_.';
 
   const stringArr = string.split('').filter(char => !acceptableChars.includes(char));
 
