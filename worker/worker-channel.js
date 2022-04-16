@@ -6,6 +6,8 @@
 let workerChannel;
 let workerInstallPromise;
 
+let workerClientId;
+
 
 // setup worker channel
 async function setupWorkerChannel() {
@@ -15,14 +17,43 @@ async function setupWorkerChannel() {
   workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
   
   await workerInstallPromise;
-  
+    
   workerInstallPromise = null;
   
-
+  
+  /*
+  async function pingWorkerForClientId() {
+    
+    // get client ID from worker
+    let resp = await axios.get('/worker/getClientId', '', true);
+    
+    try {
+      resp = JSON.parse(resp);
+    } catch(e) {
+      resp = '';
+    }
+        
+    if (!resp || !resp.clientId) {
+      
+      return await pingWorkerForClientId();
+      
+    } else {
+      
+      return resp.clientId;
+      
+    }
+    
+  }
+  
+  // ping worker for client ID
+  workerClientId = await pingWorkerForClientId();
+  */
+  
+  
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
-
-
+  
+  
   // add worker channel listener
   workerChannel.addEventListener('message', async (event) => {
 
@@ -31,13 +62,14 @@ async function setupWorkerChannel() {
 
       // send request to /live-view/live-view.js
       // for handling
-      const [resp, respCode] = await handleLiveViewRequest(event.data.url);
+      const {fileContent, respStatus} =
+            await handleLiveViewRequest(event.data.url);
 
       // send response back to worker
       workerChannel.postMessage({
         url: event.data.url,
-        resp: resp,
-        respStatus: (respCode ?? 200),
+        resp: fileContent,
+        respStatus: (respStatus ?? 200),
         type: 'response'
       });
 
@@ -80,5 +112,55 @@ function enableWorkerLogs() {
 }
 
 
+/*
+let axios = {
+  'get': (url, token, noParse) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {
+              resolve();
+            }
+          } else if (this.responseText) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {}
+          }
+        };
+
+        xmlhttp.open('GET', url, true);
+        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  }
+};
+*/
+
+
 // setup worker channel
 setupWorkerChannel();
+

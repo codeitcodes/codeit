@@ -65,17 +65,38 @@ let git = {
 
     if (branch) branch = '?ref='+ branch;
     else branch = '';
-
+  
     query += '/repos/' + user + '/' + repoName +
              '/contents/' + contents
              + '/' + fileName +
              branch;
-
+  
     // get the query
     const resp = await axios.get(query, gitToken);
-
+  
     return resp;
 
+  },
+  
+  // get public file content
+  'getPublicFile': async (treeLoc, fileName) => {
+    
+    // map tree location
+    let query = 'https://raw.githubusercontent.com';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await axios.get(query, '', true);
+    
+    return resp;
+        
   },
 
   // get items in tree
