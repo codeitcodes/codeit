@@ -1,3 +1,7 @@
+/* Yeah I know it's messy,
+   I was busy working on the Codeit app so I used a site generator :3
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
@@ -4796,6 +4800,14 @@ body {
 
 #features .ftPoint {
   margin-top: 34px;
+  opacity: 0;
+  transition: .4s cubic-bezier(0.4, 0, 0.25, 1);
+  transform: translateY(20px);
+}
+
+#features .ftPoint.visible {
+  opacity: 1;
+  transform: none;
 }
 
 #features .ftPoint .iconWrapper {
