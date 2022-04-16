@@ -463,7 +463,7 @@ let paste = async () => {
 
 // HTTP Request
 
-axios = {
+let axios = {
   'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
       try {
