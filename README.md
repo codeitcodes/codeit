@@ -26,7 +26,7 @@
   
   <li>PWA support. <b>Weighs 70% less</b> than regular apps, can be installed and <b>works offline.</b></li>
   
-  <li><b>Autosaving</b> down to the character helps you pick up right where you left off. Code, scroll and caret positions, and location in your repos.</li>
+  <li><b>Autosaving</b> Code, caret positions, and location in your repos.</li>
   
   <li>Codeit is built for Chrome on <b>Android, Windows, macOS and Linux</b>, as well as <b>Safari on iOS.</b></li>
 
