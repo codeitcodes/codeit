@@ -3209,7 +3209,7 @@ body {
   display: flex;
   list-style-type: none;
   padding-left: 0;
-  margin: 15px auto;
+  margin: 0;
 }
 
 .footer__social li {
@@ -4380,7 +4380,7 @@ body {
   }
   
   #footer .footer__social {
-    margin: 0;
+    margin: 15px auto;
   }
   
   #footer .footer__primary {
