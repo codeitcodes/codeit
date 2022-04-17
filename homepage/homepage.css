@@ -3128,7 +3128,8 @@ body {
 }
 
 .footer__primary {
-  margin: auto;
+  margin: 0;
+  margin-right: -7px;
 }
 
 .footer__end {
@@ -4378,7 +4379,12 @@ body {
     justify-content: center
   }
   
+  #footer .footer__social {
+    margin: 0;
+  }
+  
   #footer .footer__primary {
+    margin: auto;
     margin-bottom: 10px;
   }
 }
