@@ -4375,6 +4375,10 @@ body {
     justify-content: center
   }
   
+  #footer .footer {
+    flex-direction: column;
+  }
+  
   #footer .footer__social {
     margin: 15px auto;
   }
