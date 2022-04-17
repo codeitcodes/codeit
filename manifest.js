@@ -8,7 +8,7 @@ let manifest = {
   "background_color": "#313744",
   "theme_color": "#313744",
   "display": "standalone",
-  "scope": window.location.origin + "/full",
+  "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
   "orientation": "any",
   "icons": [
