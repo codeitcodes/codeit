@@ -169,7 +169,7 @@ function checkPWA() {
 
   if (displayMode != 'browser tab') {
     
-    window.location.replace(window.location.origin + '/full');
+    //window.location.replace(window.location.origin + '/full');
     
   }
 
