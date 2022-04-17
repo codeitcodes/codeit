@@ -19,20 +19,13 @@ let manifest = {
       "purpose": "any"
     }
   ],
-  "capture_links": "existing_client_event",
   "file_handlers": [
     {
       "action": window.location.origin + "/full?file=true",
+      "name": "Code",
       "accept": {
         "text/*": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
-      },
-      "icons": [
-        {
-          "src": window.location.origin + "/icons/file.png",
-          "sizes": "256x256",
-          "type": "image/png"
-        }
-      ]
+      }
     }
   ],
   "share_target": {
@@ -48,12 +41,10 @@ let manifest = {
       ]
     }
   },
-  "url_handlers": [
-    {
-      "origin": window.location.origin
-    }
-  ],
-  "display_override": ["window-controls-overlay"]
+  "handle_links": "preferred",
+  "launch_handler": {
+    "route_to": "new-client"
+  }
 };
 
 
