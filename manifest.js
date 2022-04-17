@@ -39,11 +39,12 @@ let manifest = {
           "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
         }
       ]
-    }
-  },
-  "handle_links": "preferred",
-  "launch_handler": {
-    "route_to": "new-client"
+    },
+    "handle_links": "preferred",
+    "launch_handler": {
+      "route_to": "new-client"
+    },
+    "capture_links": "new-client"
   }
 };
 

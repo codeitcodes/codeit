@@ -145,11 +145,25 @@ function showMessage(message, duration) {
 
 // device and platform queries
 
-const isMobile = navigator.userAgent.match('Mobile') ?? false;
-const isSafari = isMobile && navigator.userAgent.toLowerCase().indexOf('safari') != -1;
+let isMobile = false;
 
-const isMac = navigator.platform.indexOf('Mac') > -1;
-const isWindows = navigator.platform.indexOf('Win') > -1;
+if (navigator.userAgentData
+    && navigator.userAgentData.mobile) isMobile = true;
+
+if (navigator.userAgent
+    && navigator.userAgent.includes('Mobile')) isMobile = true;
+
+let isSafari = false;
+
+if (navigator.userAgentData
+    && navigator.userAgentData.platform === 'iOS') isSafari = true;
+
+if (navigator.userAgent
+    && isMobile
+    && navigator.userAgent.toLowerCase().includes('safari')) isSafari = true;
+
+const isMac = navigator.platform.includes('Mac');
+const isWindows = navigator.platform.includes('Win');
 
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 

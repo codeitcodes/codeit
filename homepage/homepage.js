@@ -2,7 +2,7 @@
 const isMobile = navigator.userAgent.match('Mobile') || false;
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
-
+/*
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
@@ -19,13 +19,13 @@ function logAppInstalled(evt) {
     localStorage.setItem('installed', 'true');
     
     if (!isMobile) {
-      window.location.replace(window.location.origin + '/full');
+      //window.location.replace(window.location.origin + '/full');
     }
     
   });
   
-}
-
+}*/
+/*
 let deferredInstallPrompt = null;
 
 window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
@@ -43,11 +43,12 @@ function saveBeforeInstallPromptEvent(evt) {
   
   deferredInstallPrompt = evt;
   
-}
+}*/
 
 // Event handler for butInstall - Does the PWA installation.
 function installPWA(evt) {
   
+  /*
   // if codeit isn't already installed
   if (!localStorage.getItem('installed')) {
 
@@ -89,13 +90,13 @@ function installPWA(evt) {
     }
     
   } else { // open in the browser
-    
-    window.location.replace(window.location.origin + '/full');
+    */
+    window.location.href = (window.location.origin + '/full');
     
     // save installation in local storage
     localStorage.setItem('installed', 'true');
     
-  }
+  /*}*/
   
 }
 
@@ -116,11 +117,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
 
   button.addEventListener('click', installPWA);
   
-  if (isSafari) {
-    
-    button.classList.remove('loading');
-    
-  }
+  button.classList.remove('loading');
   
   if (!checkLocalStorage()) {
     
@@ -143,11 +140,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
 // Register service worker
 if ('serviceWorker' in navigator) {
 
-  window.addEventListener('load', () => {
-
-    navigator.serviceWorker.register('/service-worker.js');
-
-  });
+  navigator.serviceWorker.register('/service-worker.js');
 
 }
 
@@ -169,14 +162,14 @@ function checkPWA() {
 
   if (displayMode != 'browser tab') {
     
-    window.location.replace(window.location.origin + '/full');
+    //window.location.replace(window.location.origin + '/full');
     
   }
 
 };
-
+/*
 document.addEventListener('visibilitychange', () => { window.setTimeout(checkPWA, 2000) });
-checkPWA();
+checkPWA();*/
 
 
 // add scroll event listeners
