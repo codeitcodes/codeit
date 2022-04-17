@@ -40,10 +40,6 @@ let manifest = {
         }
       ]
     }
-  },
-  "handle_links": "preferred",
-  "launch_handler": {
-    "route_to": "new-client"
   }
 };
 
