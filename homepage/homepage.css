@@ -4323,7 +4323,7 @@ body {
   }
 
   .ft:not(.ft--right):not(.ft--noPdx) .ft__half:last-child {
-    padding-top: 50px
+    padding-top: 25px
   }
 
   .ft:not(.ft--right):not(.ft--noPdx) .ft__half:first-child {
