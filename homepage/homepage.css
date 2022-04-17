@@ -3128,8 +3128,8 @@ body {
 }
 
 .footer__primary {
-  margin-right: 40px;
-  margin-bottom: 0
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 .footer__end {
@@ -3208,7 +3208,8 @@ body {
 .footer__social {
   display: flex;
   list-style-type: none;
-  padding-left: 0
+  padding-left: 0;
+  margin: 15px auto;
 }
 
 .footer__social li {
@@ -3234,12 +3235,11 @@ body {
 .footer__linkRow {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -8px
 }
 
 .footer__linkRow a {
   color: inherit;
-  margin: 0 8px
+  margin: 0 7px
 }
 
 .footer__linkGroups {
@@ -4847,12 +4847,12 @@ body {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background: linear-gradient(0deg, #111111, #11111100);
+  background: linear-gradient(0deg, #1a1c24, #1a1c2400);
   z-index: 10;
 }
 
 #cta {
-  background: #1c1c1d !important;
+  background: #1a1c24 !important;
 }
 
 #footer a {
