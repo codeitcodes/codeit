@@ -91,7 +91,7 @@ function installPWA(evt) {
     
   } else { // open in the browser
     */
-    window.location.replace(window.location.origin + '/full');
+    window.location.href = (window.location.origin + '/full');
     
     // save installation in local storage
     localStorage.setItem('installed', 'true');
