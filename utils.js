@@ -257,7 +257,7 @@ const fileTypes = {
   'css': ['css', 'scss'],
   'javascript': ['js', 'ts', 'mjs', 'jsx'],
   'json': ['json'],
-  'python': ['python'],
+  'python': ['py', 'python'],
   'markdown': ['md'],
   'midi': ['midi'],
   'pdf': ['pdf']
