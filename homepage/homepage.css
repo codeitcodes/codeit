@@ -3129,7 +3129,6 @@ body {
 
 .footer__primary {
   margin: auto;
-  margin-bottom: 10px;
 }
 
 .footer__end {
@@ -4377,6 +4376,10 @@ body {
 
   .ftChecks {
     justify-content: center
+  }
+  
+  #footer .footer__primary {
+    margin-bottom: 10px;
   }
 }
 
