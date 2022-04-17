@@ -4867,13 +4867,6 @@ body {
 
 #footer a {
   font-weight: inherit;
-}
-
-#footer .footer__social a {
-  color: rgba(241,241,242,0.92) !important;
-}
-
-#footer .footer__primary a {
   color: rgba(241,241,242,0.92) !important;
 }
 
