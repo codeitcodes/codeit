@@ -4681,11 +4681,11 @@ a[href]:not(.btn):hover {
 }
 
 #hero {
-  background: #010101 !important;
+  background: hsl(228deg 14% 7%) !important;
 }
 
 body {
-  background: #010101;
+  background: hsl(228deg 14% 7%);
 }
 
 #hero .pdxParent--smartphones::after {
@@ -4694,7 +4694,7 @@ body {
   top: 0;
   width: 100%;
   height: 100px;
-  background: linear-gradient(180deg, #010101, #01010100);
+  background: linear-gradient(180deg, hsl(228deg 14% 7%), hsl(228deg 14% 7% / 0%));
   z-index: 10;
 }
 
