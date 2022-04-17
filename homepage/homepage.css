@@ -4820,7 +4820,7 @@ body {
 
 #features .iconWrapper .backdrop {
   border-radius: 50%;
-  background: #0066B8;
+  background: hsl(228deg 38% 21%);
 }
 
 #features .iconWrapper .backdrop circle {
@@ -4828,11 +4828,11 @@ body {
 }
 
 #features .iconWrapper.circle svg.icon {
-  stroke: #fff;
   width: 34px;
   height: 34px;
   max-width: auto;
   max-height: auto;
+  color: hsl(223deg 92% 87%);
 }
 
 #features::after {
