@@ -62,6 +62,7 @@ function installPWA(evt) {
           if (choice.outcome === 'accepted') {
 
             console.log('Accepted the install prompt');
+            window.location.replace(window.location.origin + '/full');
 
             document.querySelectorAll('.btn.install').forEach(button => {
 
