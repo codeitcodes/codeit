@@ -44,7 +44,7 @@ let manifest = {
     "launch_handler": {
       "route_to": "new-client"
     },
-    "capture_links": "existing-client-navigate"
+    "capture_links": "new-client"
   }
 };
 
