@@ -4242,7 +4242,8 @@ body {
 }
 
 .ftPoint__description {
-  font-size: 1.15em
+  font-size: 1.15em;
+  color: #b3b3b3;
 }
 
 .ftPoint__description p {
@@ -4833,6 +4834,11 @@ body {
   max-width: auto;
   max-height: auto;
   color: hsl(223deg 92% 87%);
+}
+
+#features .ftPoint__title {
+  color: #f1f1f2e0;
+  margin-bottom: 1px;
 }
 
 #features::after {
