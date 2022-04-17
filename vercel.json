@@ -2,5 +2,12 @@
   "cleanUrls": true,
   "github": {
     "silent": true
-  }
+  },
+  "redirects": [
+      {
+        "source": "/homepage/codedwithcodeit",
+        "destination": "https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&autoplay=1",
+        "permanent": true
+      }
+  ]
 }
