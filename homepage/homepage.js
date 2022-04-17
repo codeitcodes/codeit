@@ -19,7 +19,7 @@ function logAppInstalled(evt) {
     localStorage.setItem('installed', 'true');
     
     if (!isMobile) {
-      window.location.replace(window.location.origin + '/full');
+      //window.location.replace(window.location.origin + '/full');
     }
     
   });
