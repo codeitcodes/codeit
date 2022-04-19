@@ -21,22 +21,21 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": window.location.origin + "/full?file=true",
-      "name": "Code",
+      "action": window.location.origin + "/full",
       "accept": {
-        "text/*": [".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+        "text/css": [".css"]
       }
     }
   ],
   "share_target": {
-    "action": window.location.origin + "/full?file=true",
+    "action": window.location.origin + "/full",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "files": [
         {
           "name": "file",
-          "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
+          "accept": ["text/css", "application/json", ".css"]
         }
       ]
     }
