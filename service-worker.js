@@ -61,30 +61,24 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
     
-  evt.waitUntil(
-    self.clients.claim().then(() => {
-      console.log('hello from service worker');
-    });
-  );
-          
+  self.clients.claim().then(() => {
+    console.log('hello from service worker');
+  });
+  
   
   // precache static resources
-  evt.waitUntil(
-    caches.open(WORKER_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
+  caches.open(WORKER_NAME).then((cache) => {
+    return cache.addAll(FILES_TO_CACHE);
+  })
   
   // remove previous cached data from disk
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== WORKER_NAME) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
+  caches.keys().then((keyList) => {
+    return Promise.all(keyList.map((key) => {
+      if (key !== WORKER_NAME) {
+        return caches.delete(key);
+      }
+    }));
+  })
   
   // send reload request to client
   /*workerChannel.postMessage({
