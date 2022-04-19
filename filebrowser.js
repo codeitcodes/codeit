@@ -202,6 +202,7 @@ async function renderSidebarHTML() {
     
     alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
     
+    // change location
     treeLoc[1] = '';
     treeLoc[2] = '';
     saveTreeLocLS(treeLoc);
@@ -283,6 +284,7 @@ async function renderSidebarHTML() {
     
     showMessage('Hmm... we can\'t find that branch.', 5000);
     
+    // add branch to tree
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
     
