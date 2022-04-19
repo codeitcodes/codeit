@@ -116,6 +116,15 @@ let git = {
     // get the query
     const resp = await fetch(query);
     
+    // if recived an error code
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        error: 'error'
+      };
+      
+    }
+    
     // get data from response
     const respObj = (await (resp.body.getReader()).read()).value;
     
