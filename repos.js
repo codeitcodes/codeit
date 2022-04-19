@@ -120,7 +120,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
                                   
                                   (tempRepo.selBranch ?? repo.default_branch),
                                   
-                                  (tempRepo.pushAccess ?? (repo.permissions.push ?? false)),
+                                  (tempRepo.pushAccess ?? ((repo.permissions && repo.permissions.push) ?? false)),
                                   
                                   (tempRepo.branches ?? null),
                                   
