@@ -85,5 +85,8 @@ self.addEventListener('activate', (evt) => {
   /*workerChannel.postMessage({
     type: 'reload'
   });*/
+  workerChannel.postMessage({
+    type: 'installed'
+  });
 
 });
