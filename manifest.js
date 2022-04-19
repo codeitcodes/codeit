@@ -2,8 +2,8 @@
 // dynamic manifest
 
 let manifest = {
-  "name": "Codeit",
-  "short_name": "Codeit",
+  "name": (!isDev ? "Codeit" : "Codeit Dev"),
+  "short_name": (!isDev ? "Codeit" : "Codeit Dev"),
   "description": "Mobile code editor connected to Git. Runs on the web, open source, and free.",
   "background_color": "#313744",
   "theme_color": "#313744",
