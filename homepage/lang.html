@@ -190,7 +190,8 @@
     // scroll listener
     
     const scrollEl = document.documentElement,
-          scrollEnd = scrollToEl.offsetTop,
+          title = document.querySelector('.title'),
+          scrollEnd = title.offsetTop,
           logo = document.querySelector('.logo');
     
     window.addEventListener('scroll', () => {
