@@ -18,10 +18,7 @@ async function setupWorkerChannel() {
   
   await workerInstallPromise;
     
-  workerInstallPromise = null;
   
-  
-  /*
   async function pingWorkerForClientId() {
     
     // get client ID from worker
@@ -31,6 +28,7 @@ async function setupWorkerChannel() {
       resp = JSON.parse(resp);
     } catch(e) {
       resp = '';
+      console.log('[ServiceWorker] Pinging for installation');
     }
         
     if (!resp || !resp.clientId) {
@@ -46,8 +44,12 @@ async function setupWorkerChannel() {
   }
   
   // ping worker for client ID
-  workerClientId = await pingWorkerForClientId();
-  */
+  
+  workerInstallPromise = pingWorkerForClientId();
+  
+  workerClientId = await workerInstallPromise;
+  
+  workerInstallPromise = null;
   
   
   // create worker channel
