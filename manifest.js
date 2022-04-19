@@ -21,14 +21,14 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": "/full",
+      "action": window.location.origin + "/full",
       "accept": {
         "text/css": [".css"]
       }
     }
   ],
   "share_target": {
-    "action": "/full",
+    "action": window.location.origin + "/full",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
