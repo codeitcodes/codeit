@@ -2,40 +2,40 @@
 // setup live view
 async function setupLiveView() {
 
-  // if link is embed
-  if (linkData.embed) {
-    body.classList.add('embed');
-  }
+  // if URL has a directory
+  if (linkData.dir) {
 
+    // don't transition
+    body.classList.add('notransition');
+  
+    // if on mobile device
+    if (isMobile) {
+  
+      // close sidebar
+      toggleSidebar(false);
+      saveSidebarStateLS();
+  
+    } else {
+  
+      // open sidebar
+      toggleSidebar(true);
+      saveSidebarStateLS();
+  
+    }
+    
+    // restore transition on next frame
+    onNextFrame(() => {
+      body.classList.remove('notransition');
+    });
+    
+  }
+  
   // if URL has a file
   if (linkData.file) {
 
     // get file from URL
     const fileName = linkData.file;
-
-    // don't transition
-    body.classList.add('notransition');
-
-    // if on mobile device
-    if (isMobile) {
-
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
-
-    } else {
-
-      // open sidebar
-      toggleSidebar(true);
-      saveSidebarStateLS();
-
-    }
-
-    // restore transition on next frame
-    onNextFrame(() => {
-      body.classList.remove('notransition');
-    });
-
+    
 
     // if URL has a live view flag
     if (linkData.openLive) {
@@ -43,8 +43,8 @@ async function setupLiveView() {
       // if on mobile device
       if (isMobile) {
 
-        // clear selected file name
-        floatLogo.innerText = '';
+        // show URL file name
+        floatLogo.innerText = fileName;
 
         // don't transition bottom float
         bottomWrapper.classList.add('notransition');
@@ -210,8 +210,37 @@ async function setupLiveView() {
 
     // show file content in codeit
     try {
-
-      const fileContent = decodeUnicode(selectedFile.content);
+      
+      let fileContent;
+      
+      // if not logged in
+      // and fetching an HTML file
+      if (gitToken === ''
+          && getFileType(fileName) === 'html') {
+        
+        // if branch doesn't exist in tree
+        if (!treeLoc[1].includes(':')) {
+          
+          // get default branch
+          const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+          
+          // add branch to tree
+          treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
+          saveTreeLocLS(treeLoc);
+          
+          // update selected branch in local storage
+          updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), defaultBranch);
+                    
+        }
+        
+        // get public file from git
+        fileContent = await git.getPublicFile(treeLoc, fileName);
+        
+      } else {
+      
+        fileContent = decodeUnicode(selectedFile.content);
+        
+      }
 
       // compare current code with new code
       if (hashCode(cd.textContent) !== hashCode(fileContent)) {
@@ -766,66 +795,108 @@ async function handleLiveViewRequest(requestPath) {
       
     } else {
 
-      // get file from git
-      let resp = await git.getFile(liveFileDir,
-                                   fileName);
- 
-  
-      // if file is over 1MB
-      if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
-  
-        console.log('[Live View] File', fileName, 'over 1MB, fetching from blob API');
-  
-        // fetch file directory
-        const dirResp = await git.getItems(liveFileDir);
-  
-        // find file in directory
-        const fileObj = dirResp.filter(file => file.name === fileName)[0];
-  
-        // if file exists
-        if (fileObj) {
-  
-          // fetch file from blob API (up to 100MB)
-          resp = await git.getBlob(liveFileDir,
-                                   fileObj.sha);
-  
+      let respObj;
+
+      // if not logged in
+      if (gitToken === '') {
+        
+        // if branch doesn't exist in tree
+        if (!treeLoc[1].includes(':')) {
+          
+          // get default branch
+          const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+          
+          // add branch to tree
+          treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
+          saveTreeLocLS(treeLoc);
+          
+          // update selected branch in local storage
+          updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), defaultBranch);
+                    
         }
-  
-      }
-  
-  
-      // if couldn't fetch file
-      if (resp.message) {
-  
-        // return an error
         
-        let respStatus = 400;
-        if (resp.message === 'Not Found') respStatus = 404;
+        // get public file from git as ReadableStream
+        respObj = await git.getPublicFileAsStream(liveFileDir, fileName);
         
-        return {
-          fileContent: '',
-          respStatus: respStatus
-        };
-  
-      }
-      
-      
-      // return contents from git response
-      respContent = resp.content;
+        // if couldn't fetch file
+        if (respObj.errorCode) {
+          
+          // return an error
+          
+          const respStatus = respObj.errorCode;
+          
+          return {
+            fileContent: '',
+            respStatus: respStatus
+          };
+          
+        }
+        
+      } else {
 
+        // get file from git
+        let resp = await git.getFile(liveFileDir,
+                                     fileName);
+   
+    
+        // if file is over 1MB
+        if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+    
+          console.log('[Live view] File', fileName, 'over 1MB, fetching from blob API');
+    
+          // fetch file directory
+          const dirResp = await git.getItems(liveFileDir);
+    
+          // find file in directory
+          const fileObj = dirResp.filter(file => file.name === fileName)[0];
+    
+          // if file exists
+          if (fileObj) {
+    
+            // fetch file from blob API (up to 100MB)
+            resp = await git.getBlob(liveFileDir,
+                                     fileObj.sha);
+    
+          }
+    
+        }
+    
+    
+        // if couldn't fetch file
+        if (resp.message) {
+    
+          // return an error
+          
+          let respStatus = 400;
+          if (resp.message === 'Not Found') respStatus = 404;
+          
+          return {
+            fileContent: '',
+            respStatus: respStatus
+          };
+    
+        }
+        
+        
+        // return contents from git response
+        respContent = resp.content;
+  
+      }
+  
+  
+  
+      // decode base64 file with browser
+      const dataURL = 'data:application/octet-stream;base64,' + respContent;
+  
+      // send (instant) request
+      const response = await fetch(dataURL);
+  
+      // get data from response
+      respObj = (await (response.body.getReader()).read()).value;
+      
     }
-
-
-
-    // decode base64 file with browser
-    const dataURL = 'data:application/octet-stream;base64,' + respContent;
-
-    // send (instant) request
-    const response = await fetch(dataURL);
-
-    // get data from response
-    const respObj = (await (response.body.getReader()).read()).value;
-
+    
+  
     // return response data
     return {
       fileContent: respObj,
