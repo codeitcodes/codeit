@@ -39,13 +39,25 @@ let manifest = {
           "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
         }
       ]
+    }
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "route_to": "new-client"
+  },
+  "capture_links": "new-client",
+  "screenshots": [
+    {
+      "src": window.location.origin + "/homepage/featured-pic.png",
+      "type": "image/png",
+      "sizes": "750x1590"
     },
-    "handle_links": "preferred",
-    "launch_handler": {
-      "route_to": "new-client"
-    },
-    "capture_links": "new-client"
-  }
+    {
+      "src": window.location.origin + "/homepage/secondary-pic.png",
+      "type": "image/png",
+      "sizes": "750x1590"
+    }
+  ]
 };
 
 
