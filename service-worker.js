@@ -60,9 +60,7 @@ self.addEventListener('install', (evt) => {
 });
 
 self.addEventListener('activate', (evt) => {
-  
-  console.log('hello from service worker');
-  
+    
   evt.waitUntil(
     self.clients.claim().then(() => {
       console.log('hello from service worker');
