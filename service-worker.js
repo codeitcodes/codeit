@@ -53,18 +53,23 @@ const FILES_TO_CACHE = [
 
 ];
 
-self.addEventListener('install', async (evt) => {
+self.addEventListener('install', (evt) => {
   
   self.skipWaiting();
-  
-  await self.clients.claim();
-  
-  console.log('hello from service worker');
-  
+    
 });
 
 self.addEventListener('activate', (evt) => {
-    
+  
+  console.log('hello from service worker');
+  
+  evt.waitUntil(
+    self.clients.claim().then(() => {
+      console.log('hello from service worker');
+    });
+  );
+          
+  
   // precache static resources
   evt.waitUntil(
     caches.open(WORKER_NAME).then((cache) => {
