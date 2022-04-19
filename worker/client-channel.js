@@ -4,6 +4,7 @@
 
 
 // update worker name when updating worker
+
 const WORKER_NAME = 'codeit-worker-v495';
 
 
@@ -12,10 +13,15 @@ const INTERNAL_PATHS = {
 
   internal: 'https://codeit.codes/',
   internal_: 'https://dev.codeit.codes/',
-  internal__: 'https://codedragon.netlify.app/',
 
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
+  
+  clientId: 'https://codeit.codes/worker/getClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  
+  internal__: 'https://codedragon.netlify.app/',
+
   run__: 'https://codedragon.netlify.app/run',
 
 }
@@ -31,8 +37,6 @@ function getPathType(path) {
     if (path.startsWith(type[1])) {
 
       pathType = type[0].replaceAll('_', '');
-
-      return;
 
     }
 
@@ -117,7 +121,7 @@ function sendRequestToClient(request) {
 
       // if response url matches
       if (event.data.type === 'response' &&
-        event.data.url === url) {
+          event.data.url === url) {
 
         if (enableDevLogs) {
           console.log('[ServiceWorker] Recived response data from client', event.data);
@@ -159,7 +163,7 @@ workerChannel.addEventListener('message', (event) => {
 
 
 // handle fetch request
-function handleFetchRequest(request) {
+function handleFetchRequest(request, event) {
 
   console.log(request);
 
@@ -173,6 +177,8 @@ function handleFetchRequest(request) {
         && (getPathType(request.referrer) !== 'run')) {
 
       let url = request.url;
+      
+      url = url.slice('?')[0];
 
       // append .html to url if navigating
       /*if (request.mode === 'navigate'
@@ -193,6 +199,17 @@ function handleFetchRequest(request) {
       // return response from client
       resolve(sendRequestToClient(request));
 
+    } else if (pathType === 'clientId') { // if fetching client ID
+      
+      // return the ID of the client
+      // who sent the request
+      
+      const clientId = event.clientId;
+      
+      resolve(createResponse(
+        JSON.stringify({ clientId }), 'application/json', 200
+      ));
+      
     } else { // if fetch is external
       
       /*
@@ -227,7 +244,7 @@ function handleFetchRequest(request) {
 // add fetch listener
 self.addEventListener('fetch', (evt) => {
 
-  evt.respondWith(handleFetchRequest(evt.request));
+  evt.respondWith(handleFetchRequest(evt.request, evt));
 
 });
 

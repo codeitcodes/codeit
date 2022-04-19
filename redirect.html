@@ -110,7 +110,7 @@
 
 <body ontouchstart="">
   <img class="logo" src="/icons/iphone-app-180.png" width="80" draggable="false" alt="Codeit">
-  <p class="title">Open mrdoob/threejs with Codeit</p>
+  <p class="title">Open Codeit</p>
   <div class="button">Open</div>
   
   <script>
@@ -120,27 +120,51 @@
   
   const url = new URL(window.location.href).searchParams;
   
-  const toURL = (new URL(url.get('to'))).hostname;
-  
-  if (toURL === 'codeit.codes'
-      || toURL === 'dev.codeit.codes') {
-  
-    title.innerText = url.get('text');
+  if (url.get('to')) {
     
-    button.addEventListener('click', () => {
+    const toURL = (new URL(url.get('to'))).hostname;
+    
+    if (toURL === 'codeit.codes'
+        || toURL === 'dev.codeit.codes') {
+    
+      title.innerText = url.get('text');
       
-      if (top != window) {
-        window.open(url.get('to'), '_blank');
-      } else {
-        window.location.href = url.get('to');
-      }
+      button.addEventListener('click', () => {
+        
+        if (top != window) {
+          window.open(url.get('to'), '_blank');
+        } else {
+          window.location.href = url.get('to');
+        }
+        
+      });
       
-    });
+    } else {
+      
+      button.addEventListener('click', () => {
+        
+        if (top != window) {
+          window.open((window.location.origin + '/full'), '_blank');
+        } else {
+          window.location.href = (window.location.origin + '/full');
+        }
+        
+      });
+      
+    }
     
   } else {
+
+    button.addEventListener('click', () => {
+
+      if (top != window) {
+        window.open((window.location.origin + '/full'), '_blank');
+      } else {
+        window.location.href = (window.location.origin + '/full');
+      }
+
+    });
     
-    window.top.location.href = window.location.origin;
-        
   }
   
   

@@ -10,7 +10,7 @@ function createLink(linkData) {
 
   // save link
   let base = 'https://cde.run';
-  if (window.location.origin === 'dev.codeit.codes') base = 'https://dev.cde.run';
+  if (window.location.hostname === 'dev.codeit.codes') base = 'https://dev.cde.run';
   
   let link = '';
 

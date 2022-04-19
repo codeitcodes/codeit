@@ -985,7 +985,9 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   // select the new file in HTML
   fileEl.classList.add('selected');
-  fileEl.scrollIntoViewIfNeeded();
+  onNextFrame(() => {
+    fileEl.scrollIntoViewIfNeeded();
+  });
 
   // show all files in HTML
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
@@ -1365,7 +1367,8 @@ async function renderBranchMenuHTML(renderAll) {
   
   // if clicked on show more button,
   // render all branches
-  if (renderAll) {
+  if (renderAll
+      || (branchResp.length === 2)) {
 
     // run on all branches
     branchResp.forEach(branch => {
@@ -1383,7 +1386,7 @@ async function renderBranchMenuHTML(renderAll) {
   
   
   // render show more button
-  if (!renderAll && branchResp.length > 1) {
+  if (!renderAll && branchResp.length > 2) {
     
     out += '<div class="icon see-more">' + moreIcon + '<a>see more</a></div>';
     
@@ -1555,7 +1558,7 @@ function scrolledSidebarTitle() {
 
   }
 
-  if ((sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
+  if (Math.round(sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
       >= sidebarLogo.scrollWidth) {
 
     sidebarLogo.classList.add('scrolled-end');

@@ -67,7 +67,7 @@ const body = document.body,
 
 
 // version
-const version = '2.0.7';
+const version = '2.0.8';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -145,11 +145,25 @@ function showMessage(message, duration) {
 
 // device and platform queries
 
-const isMobile = navigator.userAgent.match('Mobile') ?? false;
-const isSafari = isMobile && navigator.userAgent.toLowerCase().indexOf('safari') != -1;
+let isMobile = false;
 
-const isMac = navigator.platform.indexOf('Mac') > -1;
-const isWindows = navigator.platform.indexOf('Win') > -1;
+if (navigator.userAgentData
+    && navigator.userAgentData.mobile) isMobile = true;
+
+if (navigator.userAgent
+    && navigator.userAgent.includes('Mobile')) isMobile = true;
+
+let isSafari = false;
+
+if (navigator.userAgentData
+    && navigator.userAgentData.platform === 'iOS') isSafari = true;
+
+if (navigator.userAgent
+    && isMobile
+    && navigator.userAgent.toLowerCase().includes('safari')) isSafari = true;
+
+const isMac = navigator.platform.includes('Mac');
+const isWindows = navigator.platform.includes('Win');
 
 let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
@@ -257,7 +271,7 @@ const fileTypes = {
   'css': ['css', 'scss'],
   'javascript': ['js', 'ts', 'mjs', 'jsx'],
   'json': ['json'],
-  'python': ['python'],
+  'python': ['py', 'python'],
   'markdown': ['md'],
   'midi': ['midi'],
   'pdf': ['pdf']
@@ -464,27 +478,39 @@ let paste = async () => {
 // HTTP Request
 
 let axios = {
-  'get': (url, token) => {
+  'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && String(this.status).startsWith('2')) {
             try {
-              resolve(JSON.parse(this.responseText));
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
             } catch(e) {
               resolve();
             }
           } else if (this.responseText) {
             try {
-              resolve(JSON.parse(this.responseText));
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
             } catch(e) {}
           }
         };
         xmlhttp.onerror = function () {
           if (this.responseText) {
             try {
-              resolve(JSON.parse(this.responseText));
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
             } catch(e) {}
           }
         };
