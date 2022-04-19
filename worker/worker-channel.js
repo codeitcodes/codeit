@@ -17,7 +17,9 @@ async function setupWorkerChannel() {
   workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
   
   await workerInstallPromise;
-    
+  
+  workerInstallPromise = null;
+  
   
   async function pingWorkerForClientId() {
     
@@ -43,14 +45,9 @@ async function setupWorkerChannel() {
     
   }
   
-  // ping worker for client ID
-  
-  workerInstallPromise = pingWorkerForClientId();
-  
-  workerClientId = await workerInstallPromise;
-  
-  workerInstallPromise = null;
-  
+  // ping worker for client ID  
+  workerClientId = await pingWorkerForClientId();
+    
   
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
