@@ -1,90 +1,247 @@
-'use strict';
 
-self.importScripts('/worker/client-channel.js');
+// worker-side
+// service worker/client communication channel
 
-// list of files to cache
-const FILES_TO_CACHE = [
 
-  '/lib/codeit.js',
-  '/lib/prism.js',
+// update worker name when updating worker
+const WORKER_NAME = 'codeit-worker-v505';
 
-  '/lib/plugins/codeit-line-numbers.js',
-  '/lib/plugins/codeit-match-braces.js',
-  '/lib/plugins/codeit-autolinker.js',
 
-  '/full',
-  '/full.css',
+// internal paths
+const INTERNAL_PATHS = {
 
-  '/worker/worker-channel.js',
+  internal: 'https://codeit.codes/',
+  internal_: 'https://dev.codeit.codes/',
 
-  '/utils.js',
-  '/manifest.js',
-  '/files.js',
-  '/links.js',
-  '/repos.js',
-  '/git/gitapi.js',
-  '/git/gitauth.js',
-  '/codedrop.js',
-  '/filebrowser.js',
-  '/spotlightsearch.js',
-  '/localstorage.js',
-  '/bottomfloat.js',
-
-  '/live-view/live-view.js',
+  run: 'https://codeit.codes/run',
+  run_: 'https://dev.codeit.codes/run',
   
-  '/live-view/extensions/beautifier.min.js',
-  '/live-view/extensions/module-importer.js',
+  clientId: 'https://codeit.codes/worker/getClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getClientId',
   
-  '/dark-theme.css',
+  internal__: 'https://codedragon.netlify.app/',
 
-  '/fonts/fonts.css',
+  run__: 'https://codedragon.netlify.app/run',
 
-  '/fonts/Mono-Sans/MonoSans-Regular.woff2',
-  '/fonts/Mono-Sans/MonoSans-Bold.woff2',
+}
 
-  '/fonts/Inter/Inter.var.woff2',
 
-  'https://plausible.io/js/plausible.js',
+// get path type
+function getPathType(path) {
 
-  '/icons/android-app-512.png',
-  '/icons/iphone-app-180.png',
-  '/icons/app-favicon.png',
-  '/icons/mac-icon-512-padding.png'
+  let pathType = 'external';
 
-];
+  Object.entries(INTERNAL_PATHS).forEach(type => {
 
-self.addEventListener('install', (evt) => {
+    if (path.startsWith(type[1])) {
+
+      pathType = type[0].replaceAll('_', '');
+
+    }
+
+  });
+
+  return pathType;
+
+}
+
+
+// worker log
+function workerLog(log) {
+
+  workerChannel.postMessage({
+    message: log,
+    type: 'message'
+  });
+
+}
+
+
+// create worker channel
+const workerChannel = new BroadcastChannel('worker-channel');
+
+
+// create Response from data
+function createResponse(data, type, status) {
+
+  // create Response from data
+  const response = new Response(data, {
+    headers: {'Content-Type': type},
+    status: status
+  });
+
+  return response;
+
+}
+
+
+// send fetch request to client
+function sendRequestToClient(request) {
+
+  return new Promise((resolve, reject) => {
+
+    // set MIME type depending on request mode
+    let mimeType = 'application/octet-stream';
+
+    if (request.mode === 'navigate'
+        || request.url.endsWith('.html')) mimeType = 'text/html';
+
+    if (request.mode === 'script'
+        || request.url.endsWith('.js')) mimeType = 'text/javascript';
+
+    if (request.mode === 'style'
+        || request.url.endsWith('.css')) mimeType = 'text/css';
+
+    if (request.url.endsWith('.wasm')) mimeType = 'application/wasm';
+
+    if (enableDevLogs) {
+      console.warn(mimeType, request.mode, request.url);
+    }
+
+
+    let url = request.url;
+
+    // append .html to url if navigating
+    if (request.mode === 'navigate'
+        && !url.endsWith('.html')
+        && !url.endsWith('/')) url += '.html';
+
+
+    // send request to client
+    workerChannel.postMessage({
+      url: url,
+      type: 'request'
+    });
+
+
+    // add worker/client channel listener
+
+    function workerListener(event) {
+
+      // if response url matches
+      if (event.data.type === 'response' &&
+          event.data.url === url) {
+
+        if (enableDevLogs) {
+          console.log('[ServiceWorker] Recived response data from client', event.data);
+        }
+
+        // remove channel listener
+        workerChannel.removeEventListener('message', workerListener);
+
+
+        // create Response from data
+        const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
+
+        if (enableDevLogs) {
+          console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
+        }
+
+        // resolve promise with Response
+        resolve(response);
+
+      }
+
+    }
+
+    workerChannel.addEventListener('message', workerListener);
+
+  });
+
+}
+
+
+let enableDevLogs = false;
+
+workerChannel.addEventListener('message', (event) => {
   
-  self.skipWaiting();
+  if (event.data.type === 'enableDevLogs') enableDevLogs = true;
+  if (event.data.type === 'hello') workerChannel.postMessage('hello!');
   
 });
 
-self.addEventListener('activate', (evt) => {
-  
-  self.clients.claim();  
-  
-  // remove previous cached data from disk
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== WORKER_NAME) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-  
-  // precache static resources
-  evt.waitUntil(
-    caches.open(WORKER_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );  
-  
-  // send reload request to client
-  /*workerChannel.postMessage({
-    type: 'reload'
-  });*/
+
+// handle fetch request
+function handleFetchRequest(request, event) {
+
+  return new Promise(async (resolve, reject) => {
+
+    // get request path type
+    const pathType = getPathType(request.url);
+
+    // if fetch originated in codeit itself
+    if (pathType === 'internal'
+        && (getPathType(request.referrer) !== 'run')) {
+
+      let url = request.url;
+      
+      url = url.slice('?')[0];
+
+      // append .html to url if navigating
+      /*if (request.mode === 'navigate'
+          && url.includes('/full')) url = url.replace('/full', '/full.html');*/
+
+      const resp = await caches.match(url);
+
+      // return response from cache
+      resolve(resp ?? fetch(request));
+
+    } else if (pathType === 'run'
+               || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
+
+      if (enableDevLogs) {
+        console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+      }
+
+      // return response from client
+      resolve(sendRequestToClient(request));
+
+    } else if (pathType === 'clientId') { // if fetching client ID
+      
+      // return the ID of the client
+      // who sent the request
+      
+      const clientId = event.clientId;
+      
+      resolve(createResponse(
+        JSON.stringify({ clientId }), 'application/json', 200
+      ));
+      
+    } else { // if fetch is external
+      
+      /*
+      let resp = await fetch(request);
+      
+      // if fetch is an internal Git fetch
+      // with an error code
+      if (request.url.startsWith('https://api.github.com')
+          && resp.status === 403) {
+        
+        console.log('[ServiceWorker] Intercepted Github API request', request);
+        
+        // return an identical response without the error code
+        resp = new Response(resp.body, {
+          headers: resp.headers,
+          status: 200
+        });
+        
+      }*/
+      
+      // return response from network
+      //resolve(resp);
+      resolve(fetch(request));
+
+    }
+
+  });
+
+}
+
+
+// add fetch listener
+self.addEventListener('fetch', (evt) => {
+
+  evt.respondWith(handleFetchRequest(evt.request, evt));
 
 });
 
