@@ -57,14 +57,14 @@ self.addEventListener('install', (evt) => {
   
   self.skipWaiting();
   
-});
-
-self.addEventListener('activate', async (evt) => {
-  
   await self.clients.claim();
   
   console.log('hello from service worker');
   
+});
+
+self.addEventListener('activate', async (evt) => {
+    
   // precache static resources
   evt.waitUntil(
     caches.open(WORKER_NAME).then((cache) => {
