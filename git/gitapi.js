@@ -120,7 +120,7 @@ let git = {
     if (String(resp.status).startsWith('4')) {
       
       return {
-        error: resp.status
+        errorCode: resp.status
       };
       
     }
