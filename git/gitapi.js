@@ -116,7 +116,7 @@ let git = {
     // get the query
     const resp = await fetch(query);
     
-    // if recived an error
+    // if received an error
     if (String(resp.status).startsWith('4')) {
       
       return {
