@@ -4,7 +4,8 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v499';
+
+const WORKER_NAME = 'codeit-worker-v495';
 
 
 // internal paths
@@ -18,6 +19,10 @@ const INTERNAL_PATHS = {
   
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  
+  internal__: 'https://codedragon.netlify.app/',
+
+  run__: 'https://codedragon.netlify.app/run',
 
 }
 
@@ -159,6 +164,8 @@ workerChannel.addEventListener('message', (event) => {
 
 // handle fetch request
 function handleFetchRequest(request, event) {
+
+  console.log(request);
 
   return new Promise(async (resolve, reject) => {
 
