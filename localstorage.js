@@ -47,15 +47,20 @@ function loadLS() {
 
 // files
 
+//' selectedBranch, treeLoc and 
+
 function updateSelectedFileLS() {
 
-  setStorage('selectedFile', JSON.stringify(selectedFile));
+
+  if(!isEmbed)
+    setStorage('selectedFile', JSON.stringify(selectedFile));
 
 }
 
 function updateModFilesLS() {
 
-  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+  if(!isEmbed)
+    setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
 
 }
 
@@ -64,7 +69,8 @@ function updateModFilesLS() {
 
 function updateModReposLS() {
 
-  setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
+  if(!isEmbed)
+    setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
 
 }
 
@@ -73,13 +79,15 @@ function updateModReposLS() {
 
 function saveTreeLocLS(treeLoc) {
 
-  setStorage('tree', treeLoc.join());
+  if(!isEmbed)
+    setStorage('tree', treeLoc.join());
 
 }
 
 function saveSidebarStateLS() {
 
-  setStorage('sidebar', body.classList.contains('expanded'));
+  if(!isEmbed)
+    setStorage('sidebar', body.classList.contains('expanded'));
 
 }
 
