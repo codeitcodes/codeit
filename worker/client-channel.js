@@ -18,6 +18,10 @@ const INTERNAL_PATHS = {
   
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  
+  internal__: 'https://codedragon.netlify.app/',
+
+  run__: 'https://codedragon.netlify.app/run',
 
 }
 
@@ -159,6 +163,8 @@ workerChannel.addEventListener('message', (event) => {
 
 // handle fetch request
 function handleFetchRequest(request, event) {
+
+  console.log(request);
 
   return new Promise(async (resolve, reject) => {
 
