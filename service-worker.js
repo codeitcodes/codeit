@@ -53,7 +53,7 @@ const FILES_TO_CACHE = [
 
 ];
 
-self.addEventListener('install', (evt) => {
+self.addEventListener('install', async (evt) => {
   
   self.skipWaiting();
   
@@ -63,7 +63,7 @@ self.addEventListener('install', (evt) => {
   
 });
 
-self.addEventListener('activate', async (evt) => {
+self.addEventListener('activate', (evt) => {
     
   // precache static resources
   evt.waitUntil(
