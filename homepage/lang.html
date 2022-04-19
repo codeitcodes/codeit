@@ -198,8 +198,13 @@
     window.addEventListener('scroll', () => {
       
       const scrollPos = scrollEl.scrollTop;
-      const opacityPercent = 1 - (scrollPos / scrollEnd);
-      logo.style.opacity = opacityPercent;
+      
+      if (scrollPos <= scrollEnd) {
+        
+        const opacityPercent = 1 - (scrollPos / scrollEnd);
+        logo.style.opacity = opacityPercent;
+        
+      }
       
     });
 
