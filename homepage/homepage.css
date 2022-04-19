@@ -4906,3 +4906,8 @@ body {
   overscroll-behavior: none;
   overscroll-behavior-y: contain;
 }
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
