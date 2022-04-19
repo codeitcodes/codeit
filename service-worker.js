@@ -61,12 +61,9 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
     
-  evt.waitUntil(
-    self.clients.claim().then(() => {
-      console.log('hello from service worker');
-      return new Promise(resolve => resolve);
-    });
-  );
+  self.clients.claim().then(() => {
+    console.log('hello from service worker');
+  });
   
   
   // precache static resources
