@@ -880,28 +880,26 @@ async function handleLiveViewRequest(requestPath) {
         
         // return contents from git response
         respContent = resp.content;
-  
+        
+        // decode base64 file with browser
+        const dataURL = 'data:application/octet-stream;base64,' + respContent;
+    
+        // send (instant) request
+        const response = await fetch(dataURL);
+    
+        // get data from response
+        respObj = (await (response.body.getReader()).read()).value;
+        
       }
-  
-  
-  
-      // decode base64 file with browser
-      const dataURL = 'data:application/octet-stream;base64,' + respContent;
-  
-      // send (instant) request
-      const response = await fetch(dataURL);
-  
-      // get data from response
-      respObj = (await (response.body.getReader()).read()).value;
+      
+      
+      // return response data
+      return {
+        fileContent: respObj,
+        respStatus: 200
+      };
       
     }
-    
-  
-    // return response data
-    return {
-      fileContent: respObj,
-      respStatus: 200
-    };
 
   }
 
