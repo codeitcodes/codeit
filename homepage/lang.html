@@ -173,9 +173,12 @@
   <script src="https://prismjs.com/components.js"></script>
   <script>
   
+    const languages = Object.keys(components.languages);
     let out = '';
-
-    Object.keys(components.languages).forEach(lang => {
+    
+    out += '<p style="margin-top:0;margin-bottom:7px;">'+ languages.length +' languages</p>';
+    
+    languages.forEach(lang => {
 
       out += '<li>' + lang + '</li>';
 
