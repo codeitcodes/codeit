@@ -59,9 +59,11 @@ self.addEventListener('install', (evt) => {
   
 });
 
-self.addEventListener('activate', (evt) => {
+self.addEventListener('activate', async (evt) => {
+    
+  await self.clients.claim();
   
-  self.clients.claim();  
+  console.log('hello from service worker');  
   
   // remove previous cached data from disk
   evt.waitUntil(
@@ -79,7 +81,7 @@ self.addEventListener('activate', (evt) => {
     caches.open(WORKER_NAME).then((cache) => {
       return cache.addAll(FILES_TO_CACHE);
     })
-  );  
+  );
   
   // send reload request to client
   /*workerChannel.postMessage({
