@@ -4,7 +4,7 @@
 let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
-  "description": "Mobile code editor connected to Git. Runs on the web, open source, and free.",
+  "description": "Mobile code editor connected to Git.",
   "background_color": "#313744",
   "theme_color": "#313744",
   "display": "standalone",
@@ -39,13 +39,25 @@ let manifest = {
           "accept": ["text/*", ".js", ".json", ".html", ".css", ".htm", ".svg", ".ts", ".mjs", ".py", ".scss"]
         }
       ]
+    }
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "route_to": "new-client"
+  },
+  "capture_links": "new-client",
+  "screenshots": [
+    {
+      "src": window.location.origin + "/homepage/featured-pic.png",
+      "type": "image/png",
+      "sizes": "750x1590"
     },
-    "handle_links": "preferred",
-    "launch_handler": {
-      "route_to": "new-client"
-    },
-    "capture_links": "new-client"
-  }
+    {
+      "src": window.location.origin + "/homepage/secondary-pic.png",
+      "type": "image/png",
+      "sizes": "750x1590"
+    }
+  ]
 };
 
 
