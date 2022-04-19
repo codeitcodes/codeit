@@ -99,6 +99,30 @@ let git = {
         
   },
 
+  // get public file content as ReadableStream
+  'getPublicFileAsStream': async (treeLoc, fileName) => {
+    
+    // map tree location
+    let query = 'https://raw.githubusercontent.com';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // get data from response
+    const respObj = (await (resp.body.getReader()).read()).value;
+    
+    return respObj;
+        
+  },
+
   // get items in tree
   'getItems': async (treeLoc) => {
 
