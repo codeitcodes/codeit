@@ -169,6 +169,8 @@ let isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
 let isOffline = !window.navigator.onLine;
 
+let isEmbed = (window.top !== window);
+
 if (isMobile) {
 
   body.classList.add('mobile');
