@@ -24,6 +24,7 @@
       color: #d4d5d7;
       font-family: 'Inter', system-ui, sans-serif;
       text-align: center;
+      scroll-snap-type: y proximity;
     }
     
     body {
@@ -35,6 +36,10 @@
       padding: 0 20px;
     }
     
+    .top-snap-marker {
+      scroll-snap-align: start;
+    }
+    
     .logo {
       width: 70px;
       border-radius: 22.5%;
@@ -42,14 +47,35 @@
       margin: 0 auto;
       margin-bottom: 24px;
       margin-top: 50px;
+      position: relative;
+      z-index: 1000;
     }
     
     .title {
       font-size: 19px;
       margin-bottom: 24px;
+      padding-top: 24px;
       margin-top: 0;
-      position: relative;
       text-align: center;
+      position: sticky;
+      z-index: 999;
+      top: 0;
+      scroll-snap-align: start;
+    }
+    
+    .title::before {
+      content: '';
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      background: linear-gradient(180deg, #1a1c24 calc(100% - 23px), #1a1c2400);
+      height: calc(24px + 23px + 24px + 12px);
+      z-index: -1;
+    }
+    
+    .center {
+      scroll-snap-align: center;
     }
     
     .button {
@@ -139,7 +165,7 @@
 <body ontouchstart="">
   <img class="logo" src="/icons/iphone-app-180.png" width="80" draggable="false" alt="Codeit">
   <p class="title">Supported languages</p>
-  <div class="languages" style="display: inline-block;line-height: 1.5;text-align: left;width: max-content;margin: auto;">Just a sec...</div>
+  <div class="languages center" style="display: inline-block;line-height: 1.5;text-align: left;width: max-content;margin: auto;">Just a sec...</div>
   <p style="margin-top: 50px;margin-bottom: 50px;">
     <a href="/" style="color: inherit;">- ❤️ Codeit team</a>
   </p>
@@ -157,6 +183,21 @@
 
     document.querySelector('.languages').innerHTML = out;
     
+    
+    // scroll listener
+    
+    const scrollEl = document.documentElement,
+          scrollEnd = scrollToEl.offsetTop,
+          logo = document.querySelector('.logo');
+    
+    window.addEventListener('scroll', () => {
+      
+      const scrollPos = scrollEl.scrollTop;
+      const opacityPercent = 1 - (scrollPos / scrollEnd);
+      logo.style.opacity = opacityPercent;
+      
+    });
+
   </script>
   
 </body>
