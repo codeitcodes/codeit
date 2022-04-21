@@ -28,6 +28,7 @@ async function setupWorkerChannel() {
       resp = JSON.parse(resp);
     } catch(e) {
       resp = '';
+      console.log('[Client] Pinged ServiceWorker for installation');
     }
         
     if (!resp || !resp.clientId) {
