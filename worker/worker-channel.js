@@ -55,6 +55,37 @@ async function setupWorkerChannel() {
   workerChannel = new BroadcastChannel('worker-channel');
   
   
+  // await service worker installation
+  workerInstallPromise = new Promise(resolve => {
+    
+    // add worker/client channel listener
+
+    function workerListener(event) {
+
+      // if service worker finished installing
+      if (event.data.type === 'installed') {
+        
+        console.debug('[ServiceWorker] Installed');
+
+        // remove channel listener
+        workerChannel.removeEventListener('message', workerListener);
+
+        // resolve promise
+        resolve();
+
+      }
+
+    }
+
+    workerChannel.addEventListener('message', workerListener);
+    
+  });
+  
+  await workerInstallPromise;
+  
+  workerInstallPromise = null;
+  
+  
   // add worker channel listener
   workerChannel.addEventListener('message', async (event) => {
 
@@ -82,7 +113,7 @@ async function setupWorkerChannel() {
     } else if (event.data.type === 'message') { // if recived message
 
       // log message
-      console.log(event.data.message);
+      console.debug(event.data.message);
 
     }
 
