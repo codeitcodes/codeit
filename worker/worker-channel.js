@@ -18,10 +18,36 @@ async function setupWorkerChannel() {
   
   await workerInstallPromise;
   
-  workerInstallPromise = null;
   
-  console.debug('[ServiceWorker] Installed');
+  async function pingWorkerForClientId() {
+    
+    // get client ID from worker
+    let resp = await axios.get('/worker/getClientId', '', true);
+    
+    try {
+      resp = JSON.parse(resp);
+    } catch(e) {
+      resp = '';
+    }
+        
+    if (!resp || !resp.clientId) {
+      
+      return await pingWorkerForClientId();
+      
+    } else {
+      
+      return resp.clientId;
+      
+    }
+    
+  }
   
+  // ping worker for client ID
+  
+  workerInstallPromise = pingWorkerForClientId();
+  
+  workerClientId = await workerInstallPromise;
+    
   
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
