@@ -3,6 +3,10 @@
 // service worker/client communication channel
 
 
+// update worker name when updating worker
+const WORKER_NAME = 'codeit-worker-v500';
+
+
 // internal paths
 const INTERNAL_PATHS = {
 
