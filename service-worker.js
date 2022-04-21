@@ -53,6 +53,9 @@ const FILES_TO_CACHE = [
 
 ];
 
+
+// add install and activate event listeners
+
 self.addEventListener('install', (evt) => {
   
   self.skipWaiting();
@@ -63,28 +66,25 @@ self.addEventListener('activate', (evt) => {
   
   self.clients.claim();
   
-  // remove previous cached data from disk
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== WORKER_NAME) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-  
-  // precache static resources
-  evt.waitUntil(
-    caches.open(WORKER_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );  
-  
-  // send message to client
+  // send install message to client
   workerChannel.postMessage({
     type: 'installed'
   });
 
+});
+
+
+// remove previous cached data from disk
+caches.keys().then((keyList) => {
+  return Promise.all(keyList.map((key) => {
+    if (key !== WORKER_NAME) {
+      return caches.delete(key);
+    }
+  }));
+});
+
+// precache static resources
+caches.open(WORKER_NAME).then((cache) => {
+  return cache.addAll(FILES_TO_CACHE);
 });
 
