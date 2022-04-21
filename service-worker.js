@@ -61,7 +61,7 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
   
-  self.clients.claim();  
+  self.clients.claim();
   
   // remove previous cached data from disk
   evt.waitUntil(
@@ -81,10 +81,10 @@ self.addEventListener('activate', (evt) => {
     })
   );  
   
-  // send reload request to client
-  /*workerChannel.postMessage({
-    type: 'reload'
-  });*/
+  // send message to client
+  workerChannel.postMessage({
+    type: 'installed'
+  });
 
 });
 
