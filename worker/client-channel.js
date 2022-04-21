@@ -119,7 +119,7 @@ function sendRequestToClient(request) {
           event.data.url === url) {
 
         if (enableDevLogs) {
-          console.log('[ServiceWorker] Recived response data from client', event.data);
+          console.debug('[ServiceWorker] Recived response data from client', event.data);
         }
 
         // remove channel listener
@@ -130,7 +130,7 @@ function sendRequestToClient(request) {
         const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
 
         if (enableDevLogs) {
-          console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
+          console.debug('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
         }
 
         // resolve promise with Response
@@ -186,7 +186,7 @@ function handleFetchRequest(request, event) {
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
 
       if (enableDevLogs) {
-        console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+        console.debug('[ServiceWorker] Intercepted live fetch', request.url, request);
       }
 
       // return response from client
@@ -213,7 +213,7 @@ function handleFetchRequest(request, event) {
       if (request.url.startsWith('https://api.github.com')
           && resp.status === 403) {
         
-        console.log('[ServiceWorker] Intercepted Github API request', request);
+        console.debug('[ServiceWorker] Intercepted Github API request', request);
         
         // return an identical response without the error code
         resp = new Response(resp.body, {
