@@ -2477,7 +2477,7 @@ function setupEditor() {
   });
 
   // disable context menu
-  if (!isMobile) {
+  if (!isMobile && !isDev) {
 
     window.addEventListener('contextmenu', (e) => {
 
