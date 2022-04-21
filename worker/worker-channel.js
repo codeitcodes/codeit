@@ -28,7 +28,7 @@ async function setupWorkerChannel() {
       resp = JSON.parse(resp);
     } catch(e) {
       resp = '';
-      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
+      console.log('%cPinged worker for installation', 'color: #80868b');
     }
         
     if (!resp || !resp.clientId) {
