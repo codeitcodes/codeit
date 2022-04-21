@@ -125,16 +125,18 @@ let git = {
       
     }
     
+    
     // get data from response
     
-    const respReader = await resp.body.getReader();
+    const reader = await resp.body.getReader();
     
-    const respReaderObj = await respReader.read();
+    const readerResp = await reader.read();
     
-    const respObj = respReaderObj.value;
+    const readerChunk = readerResp.value;
+    const readerDone = readerResp.done; // true if read all chunks
     
-    return respObj;
-        
+    return readerChunk;
+    
   },
 
   // get items in tree
