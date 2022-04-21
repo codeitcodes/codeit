@@ -9,18 +9,19 @@ async function setupLiveView() {
     body.classList.add('notransition');
   
     // if on mobile device
-    if (isMobile) {
+    // and URL has a file
+    if (isMobile && linkData.file) {
   
       // close sidebar
       toggleSidebar(false);
       saveSidebarStateLS();
   
     } else {
-  
+      
       // open sidebar
       toggleSidebar(true);
       saveSidebarStateLS();
-  
+      
     }
     
     // restore transition on next frame
