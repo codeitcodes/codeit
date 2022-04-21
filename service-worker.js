@@ -1,4 +1,3 @@
-'use strict';
 
 self.importScripts('/worker/client-channel.js');
 
