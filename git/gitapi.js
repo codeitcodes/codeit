@@ -126,7 +126,12 @@ let git = {
     }
     
     // get data from response
-    const respObj = (await (resp.body.getReader()).read()).value;
+    
+    const respReader = await resp.body.getReader();
+    
+    const respReaderObj = await respReader.read();
+    
+    const respObj = respReaderObj.value;
     
     return respObj;
         
