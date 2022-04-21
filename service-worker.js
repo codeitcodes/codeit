@@ -54,12 +54,14 @@ const FILES_TO_CACHE = [
 ];
 
 
+// import service worker/client channel script
+self.importScripts('/worker/client-channel.js');
+
+
 // add install and activate event listeners
 
 self.addEventListener('install', (evt) => {
-  
-  self.importScripts('/worker/client-channel.js')
-    
+      
   self.skipWaiting();
   
 });
