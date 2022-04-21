@@ -58,8 +58,8 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (evt) => {
   
-  evt.waitUntil(self.importScripts('/worker/client-channel.js'));
-  
+  self.importScripts('/worker/client-channel.js')
+    
   self.skipWaiting();
   
 });
