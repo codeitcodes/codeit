@@ -1,3 +1,6 @@
+'use strict';
+
+self.importScripts('/worker/client-channel.js');
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -50,39 +53,38 @@ const FILES_TO_CACHE = [
 
 ];
 
-
-// import service worker/client channel script
-self.importScripts('/worker/client-channel.js');
-
-
-// add install and activate event listeners
-
 self.addEventListener('install', (evt) => {
-      
+  
   self.skipWaiting();
   
 });
 
 self.addEventListener('activate', (evt) => {
   
-  self.clients.claim();
+  self.clients.claim();  
   
-  console.debug('[ServiceWorker] Installed');
+  // remove previous cached data from disk
+  evt.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== WORKER_NAME) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  
+  // precache static resources
+  evt.waitUntil(
+    caches.open(WORKER_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );  
+  
+  // send reload request to client
+  /*workerChannel.postMessage({
+    type: 'reload'
+  });*/
 
-});
-
-
-// remove previous cached data from disk
-caches.keys().then((keyList) => {
-  return Promise.all(keyList.map((key) => {
-    if (key !== WORKER_NAME) {
-      return caches.delete(key);
-    }
-  }));
-});
-
-// precache static resources
-caches.open(WORKER_NAME).then((cache) => {
-  return cache.addAll(FILES_TO_CACHE);
 });
 
