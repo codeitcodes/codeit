@@ -1,6 +1,4 @@
 
-self.importScripts('/worker/client-channel.js');
-
 // list of files to cache
 const FILES_TO_CACHE = [
 
@@ -57,6 +55,8 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (evt) => {
   
+  evt.waitUntil(self.importScripts('/worker/client-channel.js'));
+  
   self.skipWaiting();
   
 });
@@ -64,11 +64,6 @@ self.addEventListener('install', (evt) => {
 self.addEventListener('activate', (evt) => {
   
   self.clients.claim();
-  
-  // send install message to client
-  workerChannel.postMessage({
-    type: 'installed'
-  });
 
 });
 
