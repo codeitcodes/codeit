@@ -1,4 +1,7 @@
 
+// update worker name when updating worker
+const WORKER_NAME = 'codeit-worker-v505';
+
 // list of files to cache
 const FILES_TO_CACHE = [
 
