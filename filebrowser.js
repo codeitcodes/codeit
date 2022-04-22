@@ -206,12 +206,14 @@ async function renderSidebarHTML() {
     // get repo obj from local storage
     const repoObj = modifiedRepos[user + '/' + repoName];
     
+    // if repo obj exists
     if (repoObj) {
       
       // delete repo obj from modified repos
       deleteModRepo(user + '/' + repoName);
       
     }
+    
     
     // change location
     treeLoc[1] = '';
@@ -606,8 +608,11 @@ async function renderSidebarHTML() {
       // get rendered repos
       let renderedRepos = {};
       
+      // get all user-owned modified repos
+      const userModRepos = Object.keys(modifiedRepos).filter(repo => repo.split('/')[0] === loggedUser);
+      
       // if repositories exist
-      if (resp.length > 0 || Object.keys(modifiedRepos).length > 0) {
+      if (resp.length > 0 || userModRepos.length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
