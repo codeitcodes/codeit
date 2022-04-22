@@ -2,6 +2,16 @@
 // setup live view
 async function setupLiveView() {
 
+  // if URL has a file
+  if (linkData.file) {
+    
+    // change selected file
+    changeSelectedFile(treeLoc.join(), generateSHA(), linkData.file, '', getFileLang(linkData.file),
+                       [0, 0], [0, 0], false);
+    
+  }
+  
+
   // if URL has a directory
   if (linkData.dir) {
     
@@ -673,8 +683,6 @@ function toggleLiveView(file) {
     }
 
     if (file.lang == 'html' || file.lang == 'markup') {
-
-      liveView.classList.remove('file-open');
 
       renderLiveViewHTML(file);
 
