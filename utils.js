@@ -71,11 +71,8 @@ const version = '2.0.8';
 versionEl.innerText = version;
 
 let logVersion = () => {
-  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
+  console.log('%cCodeit ' + version + (isDev ? ' [dev]' : ''), 'font-style: italic; color: gray');
 }
-
-logVersion();
-
 
 
 // dev build
@@ -87,6 +84,8 @@ if (window.location.href.includes('dev')) {
   learnTitle.innerHTML += '<sup>dev</sup>';
 
 }
+
+logVersion();
 
 
 
