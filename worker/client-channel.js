@@ -202,7 +202,8 @@ function handleFetchRequest(request, event) {
       
       let clientId = event.clientId;
       
-      const [url, parentClientId] = request.url.split('?');
+      let [url, parentClientId] = request.url.split('?');
+      parentClientId = parentClientId.slice(0, -('/'.length));
       
       const liveFramePath = INTERNAL_PATHS.relLivePath;
       
