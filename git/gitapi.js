@@ -128,14 +128,27 @@ let git = {
     
     // get data from response
     
-    const reader = await resp.body.getReader();
+    const reader = resp.body.getReader();
+    let buffer = [];
     
-    const readerResp = await reader.read();
+    async function readChunk() {
+      
+      const chunk = await reader.read();
+      
+      // if finished reading, return
+      if (chunk.done) return;
+      
+      // add new chunk to buffer
+      buffer = new Uint8Array([...buffer, ...chunk.value]);
+      
+      // read next chunk
+      return readChunk();
+      
+    }
     
-    const readerChunk = readerResp.value;
-    const readerDone = readerResp.done; // true if read all chunks
-    
-    return readerChunk;
+    await readChunk();
+
+    return buffer;
     
   },
 
