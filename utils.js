@@ -55,6 +55,7 @@ const body = document.body,
 
       versionEl = learnWrapper.querySelector('.version'),
       learnTitle = learnWrapper.querySelector('.title'),
+      logoutButton = learnWrapper.querySelector('.logout'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
 
