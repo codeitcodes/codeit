@@ -1568,8 +1568,12 @@ sidebarTitle.addEventListener('click', (e) => {
 
     sidebar.classList.add('learn');
 
-    if (Object.values(modifiedFiles).length === 0) {
+    // if there are no modified files
+    // and no pending promises
+    if (Object.values(modifiedFiles).length === 0
+        && !pendingPromise && !repoPromise) {
       
+      // enable logout
       learnWrapper.classList.add('logout-enabled');
       
     } else {
