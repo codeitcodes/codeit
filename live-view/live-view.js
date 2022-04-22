@@ -742,7 +742,7 @@ let liveFile;
 async function handleLiveViewRequest(requestPath) {
   
   // if requesting base path
-  if (requestPath === livePath) {
+  if (requestPath.split('?')[0] === livePath) {
 
     // return live file
     return {
@@ -1001,19 +1001,25 @@ async function renderLiveViewHTML(file) {
   }
 
 
-  liveView.innerHTML = '<iframe src="'+ livePath +'" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
-
-
-  const liveFrame = liveView.querySelector('.live-frame');
-
-  liveFrame.contentWindow.addEventListener('load', () => {
-
-    liveView.classList.add('loaded');
-
-  });
+  liveView.innerHTML = '<iframe src="'+ livePath +'?'+ workerClientId +'/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
 
   liveFile = file;
+  
+
+  const liveFrame = liveView.querySelector('.live-frame');
+
+  liveFrame.contentWindow.addEventListener('DOMContentLoaded', () => {
+
+    liveFrame.contentWindow.history.replaceState({}, 'Live view', livePath);
+    
+  });
+
+  liveFrame.contentWindow.addEventListener('load', () => {
+    
+    liveView.classList.add('loaded');
+    
+  });
 
 }
 

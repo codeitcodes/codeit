@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v501';
+const WORKER_NAME = 'codeit-worker-v503';
 
 
 // internal paths
@@ -16,10 +16,17 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
+  relLivePath: ('/run/' + '_/'.repeat(15)),
+  
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
 }
+
+
+// key                : value
+// live view client ID: codeit client ID
+let liveViewClients = {};
 
 
 // get path type
@@ -72,42 +79,46 @@ function createResponse(data, type, status) {
 
 
 // send fetch request to client
-function sendRequestToClient(request) {
+function sendRequestToClient(request, clientId) {
 
   return new Promise((resolve, reject) => {
 
-    // set MIME type depending on request mode
-    let mimeType = 'application/octet-stream';
-
-    if (request.mode === 'navigate'
-        || request.url.endsWith('.html')) mimeType = 'text/html';
-
-    if (request.mode === 'script'
-        || request.url.endsWith('.js')) mimeType = 'text/javascript';
-
-    if (request.mode === 'style'
-        || request.url.endsWith('.css')) mimeType = 'text/css';
-
-    if (request.url.endsWith('.wasm')) mimeType = 'application/wasm';
-
-    if (enableDevLogs) {
-      console.warn(mimeType, request.mode, request.url);
-    }
-
-
+    // get client ID
+    clientId = liveViewClients[clientId] ?? clientId;
+    
     let url = request.url;
 
     // append .html to url if navigating
     if (request.mode === 'navigate'
         && !url.endsWith('.html')
         && !url.endsWith('/')) url += '.html';
-
-
+          
     // send request to client
     workerChannel.postMessage({
       url: url,
+      toClient: clientId,
       type: 'request'
     });
+    
+
+    // set MIME type depending on request mode
+    let mimeType = 'application/octet-stream';
+
+    if (request.mode === 'navigate'
+        || url.endsWith('.html')) mimeType = 'text/html';
+
+    if (request.mode === 'script'
+        || url.endsWith('.js')) mimeType = 'text/javascript';
+
+    if (request.mode === 'style'
+        || url.endsWith('.css')) mimeType = 'text/css';
+
+    if (url.endsWith('.wasm')) mimeType = 'application/wasm';
+
+
+    if (enableDevLogs) {
+      console.warn(mimeType, request.mode, request.url);
+    }
 
 
     // add worker/client channel listener
@@ -116,7 +127,8 @@ function sendRequestToClient(request) {
 
       // if response url matches
       if (event.data.type === 'response' &&
-          event.data.url === url) {
+          event.data.url === url &&
+          event.data.fromClient === clientId) {
 
         if (enableDevLogs) {
           console.debug('[ServiceWorker] Recived response data from client', event.data);
@@ -186,9 +198,34 @@ function handleFetchRequest(request, event) {
       if (enableDevLogs) {
         console.debug('[ServiceWorker] Intercepted live fetch', request.url, request);
       }
+      
+      
+      let clientId = event.clientId;
+      
+      let [url, parentClientId] = request.url.split('?');
+            
+      const liveFramePath = INTERNAL_PATHS.relLivePath;
+      
+      // if codeit client is creating a new live view
+      if (url.endsWith(liveFramePath)
+          && event.resultingClientId) {
+        
+        // add live view to client array
+                
+        const liveViewClientId = event.resultingClientId;
+        
+        parentClientId = parentClientId.slice(0, -1);
+        clientId = parentClientId;
+
+        // pair live view client ID
+        // with codeit client ID
+        // in client array
+        liveViewClients[liveViewClientId] = parentClientId;
+        
+      }
 
       // return response from client
-      resolve(sendRequestToClient(request));
+      resolve(sendRequestToClient(request, clientId));
 
     } else if (pathType === 'clientId') { // if fetching client ID
       

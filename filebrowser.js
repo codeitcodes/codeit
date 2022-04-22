@@ -1399,8 +1399,7 @@ async function renderBranchMenuHTML(renderAll) {
   
   // if clicked on show more button,
   // render all branches
-  if (renderAll
-      || (branchResp.length === 2)) {
+  if (renderAll) {
 
     // run on all branches
     branchResp.forEach(branch => {
@@ -1418,7 +1417,7 @@ async function renderBranchMenuHTML(renderAll) {
   
   
   // render show more button
-  if (!renderAll && branchResp.length > 2) {
+  if (!renderAll && branchResp.length > 1) {
     
     out += '<div class="icon see-more">' + moreIcon + '<a>see more</a></div>';
     

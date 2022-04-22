@@ -59,32 +59,38 @@ async function setupWorkerChannel() {
   // add worker channel listener
   workerChannel.addEventListener('message', async (event) => {
 
-    // if recived request
-    if (event.data.type === 'request') {
+    // if message is for current client
+    if (event.data.toClient === workerClientId) {
 
-      // send request to /live-view/live-view.js
-      // for handling
-      const {fileContent, respStatus} =
-            await handleLiveViewRequest(event.data.url);
-
-      // send response back to worker
-      workerChannel.postMessage({
-        url: event.data.url,
-        resp: fileContent,
-        respStatus: (respStatus ?? 200),
-        type: 'response'
-      });
-
-    } else if (event.data.type === 'reload') { // if recived reload request
-
-      // reload page
-      window.location.reload();
-
-    } else if (event.data.type === 'message') { // if recived message
-
-      // log message
-      console.debug(event.data.message);
-
+      // if recived request
+      if (event.data.type === 'request') {
+  
+        // send request to /live-view/live-view.js
+        // for handling
+        const {fileContent, respStatus} =
+              await handleLiveViewRequest(event.data.url);
+  
+        // send response back to worker
+        workerChannel.postMessage({
+          url: event.data.url,
+          resp: fileContent,
+          respStatus: (respStatus ?? 200),
+          fromClient: workerClientId,
+          type: 'response'
+        });
+  
+      } else if (event.data.type === 'reload') { // if recived reload request
+  
+        // reload page
+        window.location.reload();
+  
+      } else if (event.data.type === 'message') { // if recived message
+  
+        // log message
+        console.debug(event.data.message);
+  
+      }
+      
     }
 
   });
