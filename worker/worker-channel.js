@@ -45,7 +45,7 @@ async function setupWorkerChannel() {
   
   // ping worker for client ID
   
-  workerInstallPromise = pingWorkerForClientId();
+  //workerInstallPromise = pingWorkerForClientId();
   
   workerClientId = await workerInstallPromise;
   
