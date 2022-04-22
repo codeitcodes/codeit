@@ -1567,9 +1567,16 @@ sidebarTitle.addEventListener('click', (e) => {
   } else { // show learn page
 
     sidebar.classList.add('learn');
-    
-    if (Object.values(modifiedFiles).length === 0
-        && @@)
+
+    if (Object.values(modifiedFiles).length === 0) {
+      
+      learnWrapper.classList.add('logout-enabled');
+      
+    } else {
+      
+      learnWrapper.classList.remove('logout-enabled');
+      
+    }
 
   }
 
