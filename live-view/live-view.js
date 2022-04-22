@@ -815,7 +815,7 @@ async function handleLiveViewRequest(requestPath) {
       let respObj;
 
       // get repo obj from local storage
-      const repoObj = modifiedRepos[user + '/' + repoName];
+      const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
 
 
       // if not logged in
