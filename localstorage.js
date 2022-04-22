@@ -73,11 +73,7 @@ function updateModFilesLS() {
 
 function updateModReposLS() {
   
-  if (!isEmbed) {
-    
-    setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
-
-  }
+  setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
   
 }
 
