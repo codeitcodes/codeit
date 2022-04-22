@@ -824,7 +824,7 @@ async function handleLiveViewRequest(requestPath) {
           || (repoObj && !repoObj.private)) {
         
         // if branch doesn't exist in tree
-        if (!treeLoc[1].includes(':')) {
+        if (!fileRepo.includes(':')) {
           
           let defaultBranch;
           
