@@ -40,7 +40,9 @@ function updateModRepoSelectedBranch(fullName, selBranch) {
   
   modifiedRepos[fullName].selBranch = selBranch;
   
-  updateModReposLS();
+  if (!isEmbed) {
+    updateModReposLS();
+  }
   
 }
 
