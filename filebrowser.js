@@ -622,7 +622,8 @@ async function renderSidebarHTML() {
           if (!modifiedRepos[item.full_name]) {
             
             // create repo obj
-            repoObj = createRepoObj(item.full_name, item.default_branch, (item.permissions.push ?? false),
+            repoObj = createRepoObj(item.full_name, item.default_branch, item.default_branch,
+                                    (item.permissions.push ?? false),
                                     null, item.private, item.fork, false);
             
           } else {
@@ -1765,8 +1766,8 @@ function createNewRepoInHTML() {
         
         
         // create new repo obj
-        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true,
-                                      null, true, false, true);
+        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
+                                      true, null, true, false, true);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
