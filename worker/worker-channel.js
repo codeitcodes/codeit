@@ -114,7 +114,7 @@ function enableWorkerLogs() {
 }
 
 
-if (!axios) let axios = null;
+if (!axios) window.axios = null;
 
 axios = {
   'get': (url, token, noParse) => {
