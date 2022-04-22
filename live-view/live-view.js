@@ -815,7 +815,7 @@ async function handleLiveViewRequest(requestPath) {
       let respObj;
 
       // get repo obj from local storage
-      const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
+      const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
 
 
       // if not logged in
@@ -824,7 +824,7 @@ async function handleLiveViewRequest(requestPath) {
           || (repoObj && !repoObj.private)) {
         
         // if branch doesn't exist in tree
-        if (!treeLoc[1].includes(':')) {
+        if (!fileRepo.includes(':')) {
           
           let defaultBranch;
           
@@ -840,11 +840,11 @@ async function handleLiveViewRequest(requestPath) {
           }
           
           // add branch to tree
-          treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
+          liveFileDir[1] = fileRepo.split(':')[0] + ':' + defaultBranch;
           saveTreeLocLS(treeLoc);
           
           // update selected branch in local storage
-          updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), defaultBranch);
+          updateModRepoSelectedBranch((treeLoc[0] + '/' + fileRepo.split(':')[0]), defaultBranch);
                     
         }
         
