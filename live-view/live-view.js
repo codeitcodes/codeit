@@ -214,16 +214,32 @@ async function setupLiveView() {
       
       let fileContent;
       
+      // get repo obj from local storage
+      const repoObj = modifiedRepos[user + '/' + repoName];
+      
+      
       // if not logged in
+      // or repository is public
       // and fetching an HTML file
-      if (gitToken === ''
+      if ((gitToken === ''
+          || (repoObj && !repoObj.private))
           && getFileType(fileName) === 'html') {
         
         // if branch doesn't exist in tree
         if (!treeLoc[1].includes(':')) {
           
+          let defaultBranch;
+          
           // get default branch
-          const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+          if (repoObj && repoObj.defaultBranch) {
+            
+            defaultBranch = repoObj.defaultBranch;
+            
+          } else {
+            
+            defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+            
+          }
           
           // add branch to tree
           treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
@@ -798,14 +814,30 @@ async function handleLiveViewRequest(requestPath) {
 
       let respObj;
 
+      // get repo obj from local storage
+      const repoObj = modifiedRepos[user + '/' + repoName];
+
+
       // if not logged in
-      if (gitToken === '') {
+      // or repository is public
+      if (gitToken === ''
+          || (repoObj && !repoObj.private)) {
         
         // if branch doesn't exist in tree
         if (!treeLoc[1].includes(':')) {
           
+          let defaultBranch;
+          
           // get default branch
-          const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+          if (repoObj && repoObj.defaultBranch) {
+            
+            defaultBranch = repoObj.defaultBranch;
+            
+          } else {
+            
+            defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+            
+          }
           
           // add branch to tree
           treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
