@@ -674,6 +674,8 @@ function toggleLiveView(file) {
 
     if (file.lang == 'html' || file.lang == 'markup') {
 
+      liveView.classList.remove('file-open');
+
       renderLiveViewHTML(file);
 
     } /* else if (file.lang == 'python') {
