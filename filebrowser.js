@@ -103,7 +103,7 @@ async function renderSidebarHTML() {
     
     
     // if repo obj dosen't exist
-    if (!repoObj) {
+    if (!repoObj || !repoObj.defaultBranch) {
       
       // get repo obj from git
       // and save to modified repos
