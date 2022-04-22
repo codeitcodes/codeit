@@ -4,7 +4,23 @@ async function setupLiveView() {
 
   // if URL has a directory
   if (linkData.dir) {
-
+    
+    // update repo obj selected branch
+    
+    const selBranch = linkData.dir[1].split(':')[1];
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
+    
+    // if repo obj exists
+    if (repoObj && repoObj.selBranch !== selBranch) {
+      
+      // update selected branch in local storage
+      updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), selBranch);
+    
+    }
+    
+    
     // don't transition
     body.classList.add('notransition');
   
