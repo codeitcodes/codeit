@@ -1515,6 +1515,14 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   -webkit-user-select: text;
 }
 
+.sidebar .learn-wrapper.logout-enabled .logout {
+  display: grid;
+}
+
+.sidebar .learn-wrapper.logout-enabled .share {
+  margin-top: var(--spacing-2);
+}
+
 
 .menu {
   position: fixed;
