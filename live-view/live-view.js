@@ -59,6 +59,31 @@ async function setupLiveView() {
   // if URL has a directory
   if (linkData.dir) {
     
+    // don't transition
+    body.classList.add('notransition');
+  
+    // if on mobile device
+    // and URL has a file
+    if (isMobile && linkData.file) {
+  
+      // close sidebar
+      toggleSidebar(false);
+      saveSidebarStateLS();
+  
+    } else {
+      
+      // open sidebar
+      toggleSidebar(true);
+      saveSidebarStateLS();
+      
+    }
+    
+    // restore transition on next frame
+    onNextFrame(() => {
+      body.classList.remove('notransition');
+    });
+    
+    
     // update repo obj selected branch
     
     let selBranch = linkData.dir[1].split(':')[1];
@@ -102,31 +127,6 @@ async function setupLiveView() {
       updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), selBranch);
       
     }
-    
-    
-    // don't transition
-    body.classList.add('notransition');
-  
-    // if on mobile device
-    // and URL has a file
-    if (isMobile && linkData.file) {
-  
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
-  
-    } else {
-      
-      // open sidebar
-      toggleSidebar(true);
-      saveSidebarStateLS();
-      
-    }
-    
-    // restore transition on next frame
-    onNextFrame(() => {
-      body.classList.remove('notransition');
-    });
     
   }
   
