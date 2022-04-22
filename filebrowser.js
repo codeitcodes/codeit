@@ -202,6 +202,17 @@ async function renderSidebarHTML() {
     
     alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
     
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    if (repoObj) {
+      
+      // delete repo obj from modified repos
+      deleteModRepo(user + '/' + repoName);
+      
+    }
+    
     // change location
     treeLoc[1] = '';
     treeLoc[2] = '';
@@ -1551,6 +1562,9 @@ sidebarTitle.addEventListener('click', (e) => {
   } else { // show learn page
 
     sidebar.classList.add('learn');
+    
+    if (Object.values(modifiedFiles).length === 0
+        && @@)
 
   }
 
