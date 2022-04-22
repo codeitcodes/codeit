@@ -277,7 +277,20 @@ async function renderSidebarHTML() {
     
     // if couldn't find branch, show not found screen
     
-    const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    let defaultBranch;
+    
+    if (repoObj && repoObj.defaultBranch) {
+      
+      defaultBranch = repoObj.defaultBranch;
+      
+    } else {
+      
+      defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+      
+    }
+    
     
     // stop loading
     stopLoading();
