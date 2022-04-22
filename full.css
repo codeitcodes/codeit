@@ -1446,7 +1446,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .button {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
