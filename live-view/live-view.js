@@ -844,7 +844,7 @@ async function handleLiveViewRequest(requestPath) {
           saveTreeLocLS(treeLoc);
           
           // update selected branch in local storage
-          updateModRepoSelectedBranch((treeLoc[0] + '/' + fileRepo.split(':')[0]), defaultBranch);
+          updateModRepoSelectedBranch((fileUser + '/' + fileRepo.split(':')[0]), defaultBranch);
                     
         }
         
