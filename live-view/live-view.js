@@ -12,8 +12,9 @@ async function setupLiveView() {
     // get repo obj from local storage
     const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
     
-    // if repo obj exists
-    if (repoObj && repoObj.selBranch !== selBranch) {
+    // if repo obj and selected branch exist
+    if (repoObj && selBranch &&
+        repoObj.selBranch !== selBranch) {
       
       // update selected branch in local storage
       updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), selBranch);
