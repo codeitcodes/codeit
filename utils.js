@@ -479,7 +479,7 @@ let paste = async () => {
 
 // HTTP Request
 
-if (!axios) axios = null;
+if (!axios) let axios = null;
 
 axios = {
   'get': (url, token, noParse) => {
