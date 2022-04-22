@@ -12,39 +12,41 @@ async function setupLiveView() {
     // get repo obj from local storage
     const repoObj = modifiedRepos[linkData.dir[0] + '/' + linkData.dir[1].split(':')[0]];
     
-    // if repo obj exists
-    if (repoObj && 
-        repoObj.selBranch !== selBranch) {
-      
-      // if selected branch does not exist
-      if (!selBranch) {
-        
-        // get default branch
-        
-        let defaultBranch;
-        
-        if (repoObj.defaultBranch) {
-
-          defaultBranch = repoObj.defaultBranch;
-
-        } else {
-
-          defaultBranch = (await git.getRepo(treeLoc)).default_branch;
-
-        }
-
-        // add branch to tree
-        treeLoc[1] = linkData.dir[1].split(':')[0] + ':' + defaultBranch;
-        saveTreeLocLS(treeLoc);
-        
-        // set selected branch to default branch
-        selBranch = defaultBranch;
-        
+    
+    // if selected branch does not exist
+    if (!selBranch) {
+    
+      // get default branch
+    
+      let defaultBranch;
+    
+      if (repoObj && repoObj.defaultBranch) {
+    
+        defaultBranch = repoObj.defaultBranch;
+    
+      } else {
+    
+        defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+    
       }
+    
+      // add branch to tree
+      treeLoc[1] = linkData.dir[1].split(':')[0] + ':' + defaultBranch;
+      saveTreeLocLS(treeLoc);
+    
+      // set selected branch to default branch
+      selBranch = defaultBranch;
+    
+    }
+    
+    
+    // if repo obj exists
+    if (repoObj &&
+        repoObj.selBranch !== selBranch) {
       
       // update selected branch in local storage
       updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), selBranch);
-    
+      
     }
     
     
