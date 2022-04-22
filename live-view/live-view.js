@@ -815,7 +815,7 @@ async function handleLiveViewRequest(requestPath) {
       let respObj;
 
       // get repo obj from local storage
-      const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
+      const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[]];
 
 
       // if not logged in
@@ -824,7 +824,7 @@ async function handleLiveViewRequest(requestPath) {
           || (repoObj && !repoObj.private)) {
         
         // if branch doesn't exist in tree
-        if (!fileRepo.includes(':')) {
+        if (!treeLoc[1].includes(':')) {
           
           let defaultBranch;
           
