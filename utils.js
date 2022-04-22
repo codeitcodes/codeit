@@ -74,6 +74,8 @@ let logVersion = () => {
   console.log('%cCodeit ' + version + (isDev ? ' [dev]' : ''), 'font-style: italic; color: gray');
 }
 
+logVersion();
+
 
 // dev build
 let isDev = false;
@@ -84,8 +86,6 @@ if (window.location.href.includes('dev')) {
   learnTitle.innerHTML += '<sup>dev</sup>';
 
 }
-
-logVersion();
 
 
 
