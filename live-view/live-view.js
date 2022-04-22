@@ -215,7 +215,7 @@ async function setupLiveView() {
       let fileContent;
       
       // get repo obj from local storage
-      const repoObj = modifiedRepos[user + '/' + repoName];
+      const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
       
       
       // if not logged in
