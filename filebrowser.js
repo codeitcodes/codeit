@@ -1567,7 +1567,8 @@ sidebarTitle.addEventListener('click', (e) => {
   } else { // show learn page
 
     sidebar.classList.add('learn');
-
+    
+    /*
     // if there are no modified files
     // and no pending promises
     if (Object.values(modifiedFiles).length === 0
@@ -1581,6 +1582,7 @@ sidebarTitle.addEventListener('click', (e) => {
       learnWrapper.classList.remove('logout-enabled');
       
     }
+    */
 
   }
 
