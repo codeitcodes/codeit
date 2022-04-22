@@ -844,6 +844,15 @@ async function handleLiveViewRequest(requestPath) {
       // return modified file content
       respContent = modFile.content;
       
+      // decode base64 file with browser
+      const dataURL = 'data:application/octet-stream;base64,' + respContent;
+
+      // send (instant) request
+      const response = await fetch(dataURL);
+
+      // get data from response
+      respObj = (await (response.body.getReader()).read()).value;
+      
     } else {
 
       let respObj;
