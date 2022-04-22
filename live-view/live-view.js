@@ -830,6 +830,7 @@ async function handleLiveViewRequest(requestPath) {
     const liveFileDir = [fileUser, fileRepo, fileContents];
     
     let respContent;
+    let respObj;
     
     
     
@@ -854,8 +855,6 @@ async function handleLiveViewRequest(requestPath) {
       respObj = (await (response.body.getReader()).read()).value;
       
     } else {
-
-      let respObj;
 
       // get repo obj from local storage
       const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
