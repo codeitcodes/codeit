@@ -10,11 +10,36 @@ async function setupLiveView() {
     const selBranch = linkData.dir[1].split(':')[1];
     
     // get repo obj from local storage
-    const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
+    const repoObj = modifiedRepos[linkData.dir[0] + '/' + linkData.dir[1].split(':')[0]];
     
-    // if repo obj and selected branch exist
-    if (repoObj && selBranch &&
+    // if repo obj exists
+    if (repoObj && 
         repoObj.selBranch !== selBranch) {
+      
+      // if selected branch does not exist
+      if (!selBranch) {
+        
+        // get default branch
+        
+        let defaultBranch;
+        
+        if (repoObj.defaultBranch) {
+
+          defaultBranch = repoObj.defaultBranch;
+
+        } else {
+
+          defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+
+        }
+
+        // add branch to tree
+        treeLoc[1] = linkData.dir[1].split(':')[0] + ':' + defaultBranch;
+        saveTreeLocLS(treeLoc);
+        
+        selBranch = defaultBranch;
+        
+      }
       
       // update selected branch in local storage
       updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), selBranch);
@@ -241,31 +266,6 @@ async function setupLiveView() {
       if ((gitToken === ''
           || (repoObj && !repoObj.private))
           && getFileType(fileName) === 'html') {
-        
-        // if branch doesn't exist in tree
-        if (!treeLoc[1].includes(':')) {
-          
-          let defaultBranch;
-          
-          // get default branch
-          if (repoObj && repoObj.defaultBranch) {
-            
-            defaultBranch = repoObj.defaultBranch;
-            
-          } else {
-            
-            defaultBranch = (await git.getRepo(treeLoc)).default_branch;
-            
-          }
-          
-          // add branch to tree
-          treeLoc[1] = treeLoc[1].split(':')[0] + ':' + defaultBranch;
-          saveTreeLocLS(treeLoc);
-          
-          // update selected branch in local storage
-          updateModRepoSelectedBranch((treeLoc[0] + '/' + treeLoc[1].split(':')[0]), defaultBranch);
-                    
-        }
         
         // get public file from git
         fileContent = await git.getPublicFile(treeLoc, fileName);
@@ -839,31 +839,6 @@ async function handleLiveViewRequest(requestPath) {
       // or repository is public
       if (gitToken === ''
           || (repoObj && !repoObj.private)) {
-        
-        // if branch doesn't exist in tree
-        if (!fileRepo.includes(':')) {
-          
-          let defaultBranch;
-          
-          // get default branch
-          if (repoObj && repoObj.defaultBranch) {
-            
-            defaultBranch = repoObj.defaultBranch;
-            
-          } else {
-            
-            defaultBranch = (await git.getRepo(treeLoc)).default_branch;
-            
-          }
-          
-          // add branch to tree
-          liveFileDir[1] = fileRepo.split(':')[0] + ':' + defaultBranch;
-          saveTreeLocLS(treeLoc);
-          
-          // update selected branch in local storage
-          updateModRepoSelectedBranch((fileUser + '/' + fileRepo.split(':')[0]), defaultBranch);
-                    
-        }
         
         // get public file from git as ReadableStream
         respObj = await git.getPublicFileAsStream(liveFileDir, fileName);
