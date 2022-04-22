@@ -170,8 +170,6 @@ function handleFetchRequest(request, event) {
         && (getPathType(request.referrer) !== 'run')) {
 
       let url = request.url;
-      
-      url = url.slice('?')[0];
 
       // append .html to url if navigating
       /*if (request.mode === 'navigate'
