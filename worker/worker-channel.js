@@ -114,7 +114,9 @@ function enableWorkerLogs() {
 }
 
 
-let axios = {
+if (!axios) axios = null;
+
+axios = {
   'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
       try {
