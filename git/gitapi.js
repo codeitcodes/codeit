@@ -99,6 +99,59 @@ let git = {
         
   },
 
+  // get public file content as ReadableStream
+  'getPublicFileAsStream': async (treeLoc, fileName) => {
+    
+    // map tree location
+    let query = 'https://raw.githubusercontent.com';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        errorCode: resp.status
+      };
+      
+    }
+    
+    
+    // get data from response
+    
+    const reader = resp.body.getReader();
+    let buffer = [];
+    
+    async function readChunk() {
+      
+      const chunk = await reader.read();
+      
+      // if finished reading, return
+      if (chunk.done) return;
+      
+      // add new chunk to buffer
+      buffer = new Uint8Array([...buffer, ...chunk.value]);
+      
+      // read next chunk
+      return readChunk();
+      
+    }
+    
+    await readChunk();
+
+    return buffer;
+    
+  },
+
   // get items in tree
   'getItems': async (treeLoc) => {
 

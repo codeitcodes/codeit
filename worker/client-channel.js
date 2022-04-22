@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v500';
+const WORKER_NAME = 'codeit-worker-v501';
 
 
 // internal paths
@@ -18,10 +18,6 @@ const INTERNAL_PATHS = {
   
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
-  
-  internal__: 'https://codedragon.netlify.app/',
-
-  run__: 'https://codedragon.netlify.app/run',
 
 }
 
@@ -123,7 +119,7 @@ function sendRequestToClient(request) {
           event.data.url === url) {
 
         if (enableDevLogs) {
-          console.log('[ServiceWorker] Recived response data from client', event.data);
+          console.debug('[ServiceWorker] Recived response data from client', event.data);
         }
 
         // remove channel listener
@@ -134,7 +130,7 @@ function sendRequestToClient(request) {
         const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
 
         if (enableDevLogs) {
-          console.log('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
+          console.debug('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
         }
 
         // resolve promise with Response
@@ -164,8 +160,6 @@ workerChannel.addEventListener('message', (event) => {
 // handle fetch request
 function handleFetchRequest(request, event) {
 
-  console.log(request);
-
   return new Promise(async (resolve, reject) => {
 
     // get request path type
@@ -176,8 +170,6 @@ function handleFetchRequest(request, event) {
         && (getPathType(request.referrer) !== 'run')) {
 
       let url = request.url;
-      
-      url = url.slice('?')[0];
 
       // append .html to url if navigating
       /*if (request.mode === 'navigate'
@@ -192,7 +184,7 @@ function handleFetchRequest(request, event) {
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
 
       if (enableDevLogs) {
-        console.log('[ServiceWorker] Intercepted live fetch', request.url, request);
+        console.debug('[ServiceWorker] Intercepted live fetch', request.url, request);
       }
 
       // return response from client
@@ -219,7 +211,7 @@ function handleFetchRequest(request, event) {
       if (request.url.startsWith('https://api.github.com')
           && resp.status === 403) {
         
-        console.log('[ServiceWorker] Intercepted Github API request', request);
+        console.debug('[ServiceWorker] Intercepted Github API request', request);
         
         // return an identical response without the error code
         resp = new Response(resp.body, {

@@ -55,6 +55,7 @@ const body = document.body,
 
       versionEl = learnWrapper.querySelector('.version'),
       learnTitle = learnWrapper.querySelector('.title'),
+      logoutButton = learnWrapper.querySelector('.logout'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
 
@@ -67,7 +68,7 @@ const body = document.body,
 
 
 // version
-const version = '2.0.8';
+const version = '3.0.0';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -75,7 +76,6 @@ let logVersion = () => {
 }
 
 logVersion();
-
 
 
 // dev build
@@ -479,7 +479,13 @@ let paste = async () => {
 
 // HTTP Request
 
-let axios = {
+try {
+  axios = axios;
+} catch(e) {
+  window.axios = null;
+}
+
+axios = {
   'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
       try {

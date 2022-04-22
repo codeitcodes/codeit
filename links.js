@@ -23,8 +23,9 @@ function createLink(linkData) {
       
       const modRepo = modifiedRepos[user + '/' + repoName];
     
-      if (modRepo && modRepo.branches
-          && modRepo.branches.length === 1) {
+      // if selected branch is the default branch
+      if (modRepo &&
+          (modRepo.defaultBranch === branch)) {
         
         branch = '';
         

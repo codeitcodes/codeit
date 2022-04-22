@@ -1446,7 +1446,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .button {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
@@ -1512,6 +1513,18 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .learn-wrapper .version {
   user-select: text;
   -webkit-user-select: text;
+}
+
+.sidebar .learn-wrapper .logout {
+  display: none;
+}
+
+.sidebar .learn-wrapper.logout-enabled .logout {
+  display: grid;
+}
+
+.sidebar .learn-wrapper.logout-enabled .share {
+  margin-top: var(--spacing-2);
 }
 
 

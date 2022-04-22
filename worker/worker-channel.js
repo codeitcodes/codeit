@@ -17,11 +17,8 @@ async function setupWorkerChannel() {
   workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
   
   await workerInstallPromise;
-    
-  workerInstallPromise = null;
   
   
-  /*
   async function pingWorkerForClientId() {
     
     // get client ID from worker
@@ -31,6 +28,7 @@ async function setupWorkerChannel() {
       resp = JSON.parse(resp);
     } catch(e) {
       resp = '';
+      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
     }
         
     if (!resp || !resp.clientId) {
@@ -46,9 +44,13 @@ async function setupWorkerChannel() {
   }
   
   // ping worker for client ID
-  workerClientId = await pingWorkerForClientId();
-  */
   
+  workerInstallPromise = pingWorkerForClientId();
+  
+  workerClientId = await workerInstallPromise;
+  
+  workerInstallPromise = null;
+    
   
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
@@ -81,7 +83,7 @@ async function setupWorkerChannel() {
     } else if (event.data.type === 'message') { // if recived message
 
       // log message
-      console.log(event.data.message);
+      console.debug(event.data.message);
 
     }
 
@@ -112,8 +114,13 @@ function enableWorkerLogs() {
 }
 
 
-/*
-let axios = {
+try {
+  axios = axios;
+} catch(e) {
+  window.axios = null;
+}
+
+axios = {
   'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
       try {
@@ -152,13 +159,11 @@ let axios = {
         };
 
         xmlhttp.open('GET', url, true);
-        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
   }
 };
-*/
 
 
 // setup worker channel

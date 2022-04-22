@@ -103,7 +103,7 @@ async function renderSidebarHTML() {
     
     
     // if repo obj dosen't exist
-    if (!repoObj) {
+    if (!repoObj || !repoObj.defaultBranch) {
       
       // get repo obj from git
       // and save to modified repos
@@ -202,6 +202,20 @@ async function renderSidebarHTML() {
     
     alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
     
+    
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo obj exists
+    if (repoObj) {
+      
+      // delete repo obj from modified repos
+      deleteModRepo(user + '/' + repoName);
+      
+    }
+    
+    
+    // change location
     treeLoc[1] = '';
     treeLoc[2] = '';
     saveTreeLocLS(treeLoc);
@@ -276,13 +290,27 @@ async function renderSidebarHTML() {
     
     // if couldn't find branch, show not found screen
     
-    const defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+    // get repo obj from local storage
+    const repoObj = modifiedRepos[user + '/' + repoName];
+    let defaultBranch;
+    
+    if (repoObj && repoObj.defaultBranch) {
+      
+      defaultBranch = repoObj.defaultBranch;
+      
+    } else {
+      
+      defaultBranch = (await git.getRepo(treeLoc)).default_branch;
+      
+    }
+    
     
     // stop loading
     stopLoading();
     
     showMessage('Hmm... we can\'t find that branch.', 5000);
     
+    // add branch to tree
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
     saveTreeLocLS(treeLoc);
     
@@ -580,8 +608,11 @@ async function renderSidebarHTML() {
       // get rendered repos
       let renderedRepos = {};
       
+      // get all user-owned modified repos
+      const userModRepos = Object.keys(modifiedRepos).filter(repo => repo.split('/')[0] === loggedUser);
+      
       // if repositories exist
-      if (resp.length > 0 || Object.keys(modifiedRepos).length > 0) {
+      if (resp.length > 0 || userModRepos.length > 0) {
         
         // show search button
         searchButton.classList.remove('hidden');
@@ -620,7 +651,8 @@ async function renderSidebarHTML() {
           if (!modifiedRepos[item.full_name]) {
             
             // create repo obj
-            repoObj = createRepoObj(item.full_name, item.default_branch, (item.permissions.push ?? false),
+            repoObj = createRepoObj(item.full_name, item.default_branch, item.default_branch,
+                                    (item.permissions.push ?? false),
                                     null, item.private, item.fork, false);
             
           } else {
@@ -1535,6 +1567,22 @@ sidebarTitle.addEventListener('click', (e) => {
   } else { // show learn page
 
     sidebar.classList.add('learn');
+    
+    /*
+    // if there are no modified files
+    // and no pending promises
+    if (Object.values(modifiedFiles).length === 0
+        && !pendingPromise && !repoPromise) {
+      
+      // enable logout
+      learnWrapper.classList.add('logout-enabled');
+      
+    } else {
+      
+      learnWrapper.classList.remove('logout-enabled');
+      
+    }
+    */
 
   }
 
@@ -1763,8 +1811,8 @@ function createNewRepoInHTML() {
         
         
         // create new repo obj
-        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', true,
-                                      null, true, false, true);
+        const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
+                                      true, null, true, false, true);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
@@ -2475,7 +2523,7 @@ function setupEditor() {
   });
 
   // disable context menu
-  if (!isMobile) {
+  if (!isMobile && !isDev) {
 
     window.addEventListener('contextmenu', (e) => {
 

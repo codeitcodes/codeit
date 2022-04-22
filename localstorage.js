@@ -16,7 +16,8 @@ function loadLS() {
   }
 
   // if modified files exist in storage
-  if (getStorage('modifiedFiles')) {
+  // and not embed
+  if (getStorage('modifiedFiles') && !isEmbed) {
 
     // load modified files from storage
     modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
@@ -48,14 +49,22 @@ function loadLS() {
 // files
 
 function updateSelectedFileLS() {
-
-  setStorage('selectedFile', JSON.stringify(selectedFile));
+  
+  if (!isEmbed) {
+    
+    setStorage('selectedFile', JSON.stringify(selectedFile));
+    
+  }
 
 }
 
 function updateModFilesLS() {
-
-  setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+  
+  if (!isEmbed) {
+    
+    setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+    
+  }
 
 }
 
@@ -63,23 +72,31 @@ function updateModFilesLS() {
 // repos
 
 function updateModReposLS() {
-
+  
   setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
-
+  
 }
 
 
 // miscellaneous
 
 function saveTreeLocLS(treeLoc) {
-
-  setStorage('tree', treeLoc.join());
+  
+  if (!isEmbed) {
+    
+    setStorage('tree', treeLoc.join());
+    
+  }
 
 }
 
 function saveSidebarStateLS() {
 
-  setStorage('sidebar', body.classList.contains('expanded'));
+  if (!isEmbed) {
+
+    setStorage('sidebar', body.classList.contains('expanded'));
+    
+  }
 
 }
 
