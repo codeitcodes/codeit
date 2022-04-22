@@ -16,6 +16,8 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
+  relLivePath: '/run/' + '_/'.repeat(15);
+  
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
@@ -198,16 +200,22 @@ function handleFetchRequest(request, event) {
       }
       
       
-      const clientId = event.clientId;
+      let clientId = event.clientId;
+      
+      const [url, parentClientId] = request.url.split('?');
+      
+      const liveFramePath = INTERNAL_PATHS.relLivePath;
       
       // if codeit client is creating a new live view
-      if (clientId && event.resultingClientId) {
+      if (url.endsWith(liveFramePath)
+          && event.resultingClientId) {
         
         // add live view to client array
-        
-        const parentClientId = clientId;
+                
         const liveViewClientId = event.resultingClientId;
         
+        clientId = parentClientId;
+
         // pair live view client ID
         // with codeit client ID
         // in client array
