@@ -7,7 +7,7 @@ async function setupLiveView() {
     
     // update repo obj selected branch
     
-    const selBranch = linkData.dir[1].split(':')[1];
+    let selBranch = linkData.dir[1].split(':')[1];
     
     // get repo obj from local storage
     const repoObj = modifiedRepos[linkData.dir[0] + '/' + linkData.dir[1].split(':')[0]];
@@ -37,6 +37,7 @@ async function setupLiveView() {
         treeLoc[1] = linkData.dir[1].split(':')[0] + ':' + defaultBranch;
         saveTreeLocLS(treeLoc);
         
+        // set selected branch to default branch
         selBranch = defaultBranch;
         
       }
