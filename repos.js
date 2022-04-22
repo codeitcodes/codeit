@@ -1,11 +1,13 @@
 
 // create a repository object
-function createRepoObj(fullName, selBranch, pushAccess,
-                       branches, private, isFork, empty) {
+function createRepoObj(fullName, selBranch, defaultBranch,
+                       pushAccess, branches, private,
+                       isFork, empty) {
 
   return {
     fullName,
     selBranch,
+    defaultBranch,
     pushAccess,
     branches,
     private,
@@ -37,6 +39,14 @@ function removeRepoFromModRepos(fullName) {
 function updateModRepoSelectedBranch(fullName, selBranch) {
   
   modifiedRepos[fullName].selBranch = selBranch;
+  
+  updateModReposLS();
+  
+}
+
+function updateModRepoDefaultBranch(fullName, defaultBranch) {
+  
+  modifiedRepos[fullName].defaultBranch = defaultBranch;
   
   updateModReposLS();
   
@@ -90,7 +100,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   
   // create temporary repo object
   const tempRepoObj = createRepoObj(fullName, selBranch, null,
-                                    null, null, null, null);
+                                    null, null, null, null, null);
   
   // add temp repo object
   // to modified repos
@@ -119,6 +129,8 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
     const repoObj = createRepoObj(fullName,
                                   
                                   (tempRepo.selBranch ?? repo.default_branch),
+                                  
+                                  repo.default_branch,
                                   
                                   (tempRepo.pushAccess ?? ((repo.permissions && repo.permissions.push) ?? false)),
                                   
