@@ -205,7 +205,7 @@ function handleFetchRequest(request, event) {
         
         // add live view to client array
         
-        const parentClientId = event.clientId;
+        const parentClientId = clientId;
         const liveViewClientId = event.resultingClientId;
         
         // pair live view client ID
