@@ -92,7 +92,7 @@ function sendRequestToClient(request, clientId) {
     if (request.mode === 'navigate'
         && !url.endsWith('.html')
         && !url.endsWith('/')) url += '.html';
-    
+          
     // send request to client
     workerChannel.postMessage({
       url: url,
