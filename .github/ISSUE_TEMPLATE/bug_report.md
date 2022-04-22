@@ -17,4 +17,4 @@ A clear and concise description of what the bug is and how to reproduce it.
 If applicable, add screenshots to help explain your problem.
 
 **Example**
-An example which reproduces the bug. This can be a [cde.run](https://cde.run) link, an attached example project, etc.
+An example which reproduces the bug. This can be a cde.run link, an attached example project, etc.
