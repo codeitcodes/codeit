@@ -114,7 +114,6 @@ function enableWorkerLogs() {
 }
 
 
-/*
 let axios = {
   'get': (url, token, noParse) => {
     return new Promise((resolve, reject) => {
@@ -154,13 +153,11 @@ let axios = {
         };
 
         xmlhttp.open('GET', url, true);
-        if (token) xmlhttp.setRequestHeader('Authorization', 'token ' + token);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
   }
 };
-*/
 
 
 // setup worker channel
