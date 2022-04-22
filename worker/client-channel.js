@@ -16,7 +16,7 @@ const INTERNAL_PATHS = {
   run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
-  relLivePath: '/run/' + '_/'.repeat(15);
+  relLivePath: ('/run/' + '_/'.repeat(15)),
   
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
