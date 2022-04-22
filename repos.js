@@ -28,7 +28,7 @@ function addRepoToModRepos(repoObj) {
   
 }
 
-function removeRepoFromModRepos(fullName) {
+function deleteModRepo(fullName) {
   
   delete modifiedRepos[fullName];
   
@@ -150,7 +150,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
     
     // remove temp repo object
     // from modified repos
-    removeRepoFromModRepos(fullName);
+    deleteModRepo(fullName);
     
   }
   
