@@ -5,9 +5,53 @@ async function setupLiveView() {
   // if URL has a file
   if (linkData.file) {
     
+    // get file from URL
+    const fileName = linkData.file;
+    
     // change selected file
-    changeSelectedFile(treeLoc.join(), generateSHA(), linkData.file, '', getFileLang(linkData.file),
+    changeSelectedFile(treeLoc.join(), generateSHA(), fileName, '', getFileLang(fileName),
                        [0, 0], [0, 0], false);
+    
+
+    // if URL has a live view flag
+    if (linkData.openLive) {
+
+      // if on mobile device
+      if (isMobile) {
+
+        // show URL file name
+        floatLogo.innerText = fileName;
+
+        // don't transition bottom float
+        bottomWrapper.classList.add('notransition');
+
+        // expand bottom float
+        bottomWrapper.classList.add('expanded');
+
+        // fix bottom float on safari
+        if (isSafari) bottomWrapper.classList.add('fromtop');
+
+        // restore transition on next frame
+        onNextFrame(() => {
+          bottomWrapper.classList.remove('notransition');
+        });
+
+      } else {
+
+        // don't transition live view
+        liveView.classList.add('notransition');
+
+        // show live view
+        liveView.classList.add('visible');
+
+        // restore transition on next frame
+        onNextFrame(() => {
+          liveView.classList.remove('notransition');
+        });
+
+      }
+
+    }
     
   }
   
@@ -88,50 +132,6 @@ async function setupLiveView() {
   
   // if URL has a file
   if (linkData.file) {
-
-    // get file from URL
-    const fileName = linkData.file;
-    
-
-    // if URL has a live view flag
-    if (linkData.openLive) {
-
-      // if on mobile device
-      if (isMobile) {
-
-        // show URL file name
-        floatLogo.innerText = fileName;
-
-        // don't transition bottom float
-        bottomWrapper.classList.add('notransition');
-
-        // expand bottom float
-        bottomWrapper.classList.add('expanded');
-
-        // fix bottom float on safari
-        if (isSafari) bottomWrapper.classList.add('fromtop');
-
-        // restore transition on next frame
-        onNextFrame(() => {
-          bottomWrapper.classList.remove('notransition');
-        });
-
-      } else {
-
-        // don't transition live view
-        liveView.classList.add('notransition');
-
-        // show live view
-        liveView.classList.add('visible');
-
-        // restore transition on next frame
-        onNextFrame(() => {
-          liveView.classList.remove('notransition');
-        });
-
-      }
-
-    }
 
     function closeLiveView() {
 
