@@ -17,6 +17,12 @@ export default function handler(request, response) {
     
     if (url[0] && url[1]) {
       
+      if (url[1].endsWith('.git')) {
+        
+        url[1] = url[1].slice(0, -('.git'.length));
+        
+      }
+      
       if (url[url.length-1].endsWith('.html')
           || url[url.length-1].endsWith('.svg')) {
             
