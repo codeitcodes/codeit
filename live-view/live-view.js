@@ -133,6 +133,10 @@ async function setupLiveView() {
   // if URL has a file
   if (linkData.file) {
 
+    // get file from URL
+    const fileName = linkData.file;
+    
+
     function closeLiveView() {
 
       // if URL has a live view flag
