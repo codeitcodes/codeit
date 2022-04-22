@@ -943,14 +943,14 @@ async function handleLiveViewRequest(requestPath) {
         
       }
       
-      
-      // return response data
-      return {
-        fileContent: respObj,
-        respStatus: 200
-      };
-      
     }
+    
+    
+    // return response data
+    return {
+      fileContent: respObj,
+      respStatus: 200
+    };
 
   }
 
