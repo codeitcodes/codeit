@@ -742,7 +742,7 @@ let liveFile;
 async function handleLiveViewRequest(requestPath) {
   
   // if requesting base path
-  if (requestPath === livePath) {
+  if (requestPath.split('?')[0] === livePath) {
 
     // return live file
     return {
