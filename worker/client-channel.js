@@ -24,6 +24,9 @@ const INTERNAL_PATHS = {
 }
 
 
+const isSafari = self.navigator.userAgent.toLowerCase().includes('safari');
+
+
 // key                : value
 // live view client ID: codeit client ID
 let liveViewClients = {};
@@ -210,7 +213,7 @@ function handleFetchRequest(request, event) {
             
       const liveFramePath = INTERNAL_PATHS.relLivePath;
       
-      const liveViewClientId = event.resultingClientId ?? event.targetClientId;
+      let liveViewClientId = event.resultingClientId ?? event.targetClientId;
       
       // if codeit client is creating a new live view
       if (url.endsWith(liveFramePath)
@@ -220,6 +223,18 @@ function handleFetchRequest(request, event) {
         
         parentClientId = parentClientId.slice(0, -1);
         clientId = parentClientId;
+
+        // if on safari
+        if (isSafari && event.targetClientId) {
+          
+          // add 1 to live view client id
+          let splitId = liveViewClientId.split('-');
+          
+          splitId[1] = Number(splitId[1]) + 1;
+          
+          liveViewClientId = splitId.join('-');
+          
+        }
 
         // pair live view client ID
         // with codeit client ID
