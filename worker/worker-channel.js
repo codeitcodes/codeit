@@ -19,6 +19,8 @@ async function setupWorkerChannel() {
   await workerInstallPromise;
   
   
+  let numOfRequests = 0;
+  
   async function pingWorkerForClientId() {
     
     // get client ID from worker
@@ -30,14 +32,23 @@ async function setupWorkerChannel() {
       resp = '';
       console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
     }
-        
-    if (!resp || !resp.clientId) {
+    
+    if (numOfRequests < 500) {
       
-      return await pingWorkerForClientId();
+      if (!resp || !resp.clientId) {
+        
+        numOfRequests++;
+        return await pingWorkerForClientId();
+        
+      } else {
+        
+        return resp.clientId;
+        
+      }
       
     } else {
       
-      return resp.clientId;
+      return null;
       
     }
     
@@ -48,6 +59,8 @@ async function setupWorkerChannel() {
   workerInstallPromise = pingWorkerForClientId();
   
   workerClientId = await workerInstallPromise;
+  
+  if (workerClientId) console.debug('[Client] Found client ID:', workerClientId);
   
   workerInstallPromise = null;
     
