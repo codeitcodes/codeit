@@ -30,7 +30,7 @@ let liveViewClients = {};
 
 
 if (enableDevLogs) {
-  self.registration.update();
+  //self.registration.update();
 }
 
 
