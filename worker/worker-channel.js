@@ -87,6 +87,7 @@ async function setupWorkerChannel() {
           resp: fileContent,
           respStatus: (respStatus ?? 200),
           fromClient: workerClientId,
+          sos: true,
           type: 'response'
         });
   
