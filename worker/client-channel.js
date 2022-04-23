@@ -29,6 +29,11 @@ const INTERNAL_PATHS = {
 let liveViewClients = {};
 
 
+if (enableDevLogs) {
+  self.registration.update();
+}
+
+
 // get path type
 function getPathType(path) {
 
@@ -199,6 +204,8 @@ function handleFetchRequest(request, event) {
         console.debug('[ServiceWorker] Intercepted live fetch', event);
         console.debug('[ServiceWorker] targetClientId:', event.targetClientId);
       }
+      
+      // self.registration.update()
       
       
       let clientId = event.clientId;
