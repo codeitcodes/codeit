@@ -197,8 +197,9 @@ function handleFetchRequest(request, event) {
 
       if (enableDevLogs) {
         console.debug('[ServiceWorker] Intercepted live fetch', event);
-        console.debug('[ServiceWorker] targetClientId:', event.targetClientId);
       }
+      
+      console.debug('[ServiceWorker] Intercepted live fetch: targetClientId', event.targetClientId, 'clientId', event.clientId, event);
       
       // self.registration.update()
       
