@@ -196,7 +196,8 @@ function handleFetchRequest(request, event) {
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
 
       if (enableDevLogs) {
-        console.debug('[ServiceWorker] Intercepted live fetch', request.url, request, event);
+        console.debug('[ServiceWorker] Intercepted live fetch', event);
+        console.debug('[ServiceWorker] targetClientId:', event.targetClientId);
       }
       
       
