@@ -59,9 +59,7 @@ async function setupWorkerChannel() {
   workerInstallPromise = pingWorkerForClientId();
   
   workerClientId = await workerInstallPromise;
-  
-  if (workerClientId) console.debug('[Client] Found client ID:', workerClientId);
-  
+    
   workerInstallPromise = null;
     
   
@@ -71,9 +69,7 @@ async function setupWorkerChannel() {
   
   // add worker channel listener
   workerChannel.addEventListener('message', async (event) => {
-    
-    console.debug('[Client] Message from worker', event);
-    
+        
     // if message is for current client
     if (event.data.toClient === workerClientId) {
 
