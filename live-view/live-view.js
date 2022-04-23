@@ -599,7 +599,7 @@ if (isMobile) {
     // share live view link
 
     const link = createLink({
-      dir: treeLoc,
+      dir: selectedFile.dir.split(','),
       file: selectedFile,
       openLive: true
     });

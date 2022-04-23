@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v506';
+const WORKER_NAME = 'codeit-worker-v518';
 
 
 // internal paths
@@ -22,6 +22,9 @@ const INTERNAL_PATHS = {
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
 }
+
+
+const isSafari = self.navigator.userAgent.toLowerCase().includes('safari');
 
 
 // key                : value
@@ -196,7 +199,7 @@ function handleFetchRequest(request, event) {
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
 
       if (enableDevLogs) {
-        console.debug('[ServiceWorker] Intercepted live fetch', request.url, request);
+        console.debug('[ServiceWorker] Intercepted live fetch', event);
       }
       
       
@@ -206,16 +209,28 @@ function handleFetchRequest(request, event) {
             
       const liveFramePath = INTERNAL_PATHS.relLivePath;
       
+      let liveViewClientId = event.resultingClientId ?? event.targetClientId;
+      
       // if codeit client is creating a new live view
       if (url.endsWith(liveFramePath)
-          && event.resultingClientId) {
+          && liveViewClientId) {
         
         // add live view to client array
-                
-        const liveViewClientId = event.resultingClientId;
         
         parentClientId = parentClientId.slice(0, -1);
         clientId = parentClientId;
+
+        // if on safari
+        if (isSafari && event.targetClientId) {
+          
+          // add 1 to live view client id
+          let splitId = liveViewClientId.split('-');
+          
+          splitId[1] = Number(splitId[1]) + 1;
+          
+          liveViewClientId = splitId.join('-');
+          
+        }
 
         // pair live view client ID
         // with codeit client ID
