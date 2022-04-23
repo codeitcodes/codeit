@@ -100,6 +100,7 @@ function sendRequestToClient(request, clientId) {
     workerChannel.postMessage({
       url: url,
       toClient: clientId,
+      sos: true,
       type: 'request'
     });
     
