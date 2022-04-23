@@ -209,13 +209,13 @@ function handleFetchRequest(request, event) {
             
       const liveFramePath = INTERNAL_PATHS.relLivePath;
       
+      const liveViewClientId = event.resultingClientId ?? event.targetClientId;
+      
       // if codeit client is creating a new live view
       if (url.endsWith(liveFramePath)
-          && event.resultingClientId) {
+          && liveViewClientId) {
         
         // add live view to client array
-                
-        const liveViewClientId = event.resultingClientId ?? event.targetClientId;
         
         parentClientId = parentClientId.slice(0, -1);
         clientId = parentClientId;
