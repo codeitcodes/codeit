@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v514';
+const WORKER_NAME = 'codeit-worker-v515';
 
 
 // internal paths
@@ -27,11 +27,6 @@ const INTERNAL_PATHS = {
 // key                : value
 // live view client ID: codeit client ID
 let liveViewClients = {};
-
-
-if (enableDevLogs) {
-  //self.registration.update();
-}
 
 
 // get path type
