@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v517';
+const WORKER_NAME = 'codeit-worker-v518';
 
 
 // internal paths
@@ -201,10 +201,6 @@ function handleFetchRequest(request, event) {
       if (enableDevLogs) {
         console.debug('[ServiceWorker] Intercepted live fetch', event);
       }
-      
-      console.debug('[ServiceWorker] Intercepted live fetch: targetClientId', event.targetClientId, 'clientId', event.clientId, event);
-      
-      // self.registration.update()
       
       
       let clientId = event.clientId;
