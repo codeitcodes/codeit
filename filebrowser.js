@@ -1739,7 +1739,11 @@ function createNewRepoInHTML() {
     
     lockButton.addEventListener('click', () => {
       
+      // toggle lock
       repoPrivate = lockButton.classList.toggle('locked');
+      
+      // focus repo name
+      repoEl.querySelector('.name').focus();
       
     });
     
