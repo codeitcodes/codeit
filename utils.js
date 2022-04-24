@@ -650,13 +650,15 @@ const arrowIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="arrow" height=
 
 const lockIcon = `
 <svg class="lock roundbutton" fill="currentColor" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <g id="shackle-wrapper" transform="matrix(1.33362,0,0,1.20093,-4.00339,-1.60746)">
-    <path id="shackle" d="M9,8.834L9,6C9,4.34 10.34,3 12,3C13.66,3 15,4.34 15,6L15,8.834L9,8.834Z" fill="none"></path>
+  <g id="wrapper">
+    <g id="shackle-wrapper" transform="matrix(1.33362,0,0,1.20093,-4.00339,-1.60746)">
+      <path id="shackle" d="M9,8.834L9,6C9,4.34 10.34,3 12,3C13.66,3 15,4.34 15,6L15,8.834L9,8.834Z" fill="none"></path>
+    </g>
+    <path id="housing" d="M18.026 8H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10a2.006 2.006 0 0 0-1.974-2ZM18 19c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8Z"></path>
+    <path id="housing-fill" d="M18 19c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8Zm-6-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z" fill="transparent"></path>
+    <path id="plug" d="M12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"></path>
+    <path id="bounding-box" fill="none" d="M0 0h24v24H0z"></path>
   </g>
-  <path id="housing" d="M18.026 8H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10a2.006 2.006 0 0 0-1.974-2ZM18 19c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8Z"></path>
-  <path id="housing-fill" d="M18 19c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1h10c.55 0 1 .45 1 1v8Zm-6-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z" fill="transparent"></path>
-  <path id="plug" d="M12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2Z"></path>
-  <path id="bounding-box" fill="none" d="M0 0h24v24H0z"></path>
 </svg>
 `;
 
