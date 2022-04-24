@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v519';
+const WORKER_NAME = 'codeit-worker-v520';
 
 
 // internal paths
@@ -100,7 +100,6 @@ function sendRequestToClient(request, clientId) {
     workerChannel.postMessage({
       url: url,
       toClient: clientId,
-      sos: true,
       type: 'request'
     });
     
@@ -132,7 +131,7 @@ function sendRequestToClient(request, clientId) {
       // if response url matches
       if (event.data.type === 'response' &&
           event.data.url === url &&
-          (event.data.sos || event.data.fromClient === clientId)) {
+          event.data.fromClient === clientId) {
 
         if (enableDevLogs) {
           console.debug('[ServiceWorker] Recived response data from client', event.data);
