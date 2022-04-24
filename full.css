@@ -1304,7 +1304,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 @keyframes lock-click {
   50% {
-    transform: translateY(0.33px);
     transform: translateY(0.5px);
   }
 }
