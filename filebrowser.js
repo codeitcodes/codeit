@@ -1733,6 +1733,17 @@ function createNewRepoInHTML() {
     repoEl.scrollIntoViewIfNeeded();
 
 
+    // add lock button event listener
+    const lockButton = repoEl.querySelector('.lock');
+    let repoPrivate = false;
+    
+    lockButton.addEventListener('click', () => {
+      
+      repoPrivate = lockButton.classList.toggle('locked');
+      
+    });
+    
+
     // add push button event listener
     const pushWrapper = repoEl.querySelector('.push-wrapper');
 
@@ -1748,7 +1759,7 @@ function createNewRepoInHTML() {
 
     });
 
-    let pushListener = pushWrapper.addEventListener('click', pushNewRepoInHTML);
+    pushWrapper.addEventListener('click', pushNewRepoInHTML);
 
 
     // on next frame
@@ -1774,6 +1785,9 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
         repoEl.querySelector('.name').scrollTo(0, 0);
+        
+        // remove lock button from HTML
+        lockButton.remove();
         
 
         // validate repo name
@@ -1812,7 +1826,7 @@ function createNewRepoInHTML() {
         
         // create new repo obj
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
-                                      true, null, true, false, true);
+                                      true, null, repoPrivate, false, true);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
@@ -1834,7 +1848,7 @@ function createNewRepoInHTML() {
         
         
         // push repo asynchronously
-        const newSha = git.createRepo(repoName, true);
+        const newSha = git.createRepo(repoName, repoPrivate);
         
       }
       
