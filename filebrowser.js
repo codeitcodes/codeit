@@ -1221,6 +1221,9 @@ function loadBinaryFileHTML(file, toggled) {
     // update bottom float
     bottomFloat.classList.add('file-open');
     
+    // change status bar color
+    document.querySelector('meta[name="theme-color"]').content = '#0e0e0e';
+    
   }
   
   // if sidebar is open and on mobile device
