@@ -1791,7 +1791,7 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').scrollTo(0, 0);
         
         // disable lock button
-        lockButton.style.pointerEvents = 'none';
+        lockButton.remove();
         
 
         // validate repo name
