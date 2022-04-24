@@ -1276,8 +1276,37 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   margin-right: calc(38px - var(--spacing-1));
 }
 
-.sidebar .repo .lock.locked {
-  /*margin-right: calc(38px - var(--spacing-1));*/
+.sidebar .repo .lock path {
+  transition: .18s var(--ease-function);
+}
+
+.sidebar .repo .lock #shackle {
+  stroke: currentColor;
+  stroke-width: 1.58px;
+  stroke-dasharray: 20px;
+  stroke-dashoffset: -3.4px;
+  stroke-linecap: round;
+  will-change: transform;
+}
+
+.sidebar .repo .lock.locked #shackle {
+  stroke-dashoffset: -1.1px;
+  animation: lock-click .14s .124s var(--ease-function);
+}
+
+.sidebar .repo .lock.locked #housing-fill {
+  fill: currentColor;
+}
+
+.sidebar .repo .lock.locked #plug {
+  fill: transparent;
+}
+
+@keyframes lock-click {
+  50% {
+    transform: translateY(0.33px);
+    transform: translateY(0.5px);
+  }
 }
 
 .sidebar .item .push-wrapper {
