@@ -1277,7 +1277,12 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .repo .lock path {
-  transition: .18s var(--ease-function);
+  opacity: 1 !important;
+  transition: .18s var(--ease-function) !important;
+}
+
+.sidebar .repo .lock:active #wrapper {
+  opacity: .5;
 }
 
 .sidebar .repo .lock #shackle {
