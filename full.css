@@ -271,7 +271,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .push-wrapper .push-svg {
   position: absolute;
-  left: 11.5px;
+  left: 12.5px;
   transition: .4s var(--cubic-function) left;
 }
 
@@ -1273,9 +1273,9 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item .push-wrapper {
-  width: 53.5px;
+  width: 53px;
   position: absolute;
-  right: -1.5px;
+  right: -2px;
   display: none;
 }
 
@@ -1895,8 +1895,8 @@ body.mobile.expanded .cube-loader::after {
 
 .push-svg {
   overflow: visible;
-  width: 39.5px;
-  height: 39.5px;
+  width: 38px;
+  height: 38px;
   pointer-events: none;
 }
 .push-svg #push, .push-svg #check {
