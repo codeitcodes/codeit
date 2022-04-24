@@ -1276,13 +1276,13 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   margin-right: calc(38px - var(--spacing-1));
 }
 
-.sidebar .repo .lock:active #wrapper {
-  opacity: .5;
-}
-
 .sidebar .repo .lock path {
   opacity: 1 !important;
   transition: .18s var(--ease-function) !important;
+}
+
+.sidebar .repo .lock:active #wrapper {
+  opacity: .5;
 }
 
 .sidebar .repo .lock #shackle {
