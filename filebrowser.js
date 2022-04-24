@@ -1719,6 +1719,7 @@ function createNewRepoInHTML() {
       `+ repoIcon +`
       <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
     </div>
+    `+ lockIcon +`
     <div class="push-wrapper">
       `+ pushIcon +`
     </div>
@@ -1731,6 +1732,21 @@ function createNewRepoInHTML() {
     repoEl.querySelector('.name').focus();
     repoEl.scrollIntoViewIfNeeded();
 
+
+    // add lock button event listener
+    const lockButton = repoEl.querySelector('.lock');
+    let repoPrivate = false;
+    
+    lockButton.addEventListener('click', () => {
+      
+      // toggle lock
+      repoPrivate = lockButton.classList.toggle('locked');
+      
+      // focus repo name
+      repoEl.querySelector('.name').focus();
+      
+    });
+    
 
     // add push button event listener
     const pushWrapper = repoEl.querySelector('.push-wrapper');
@@ -1747,7 +1763,7 @@ function createNewRepoInHTML() {
 
     });
 
-    let pushListener = pushWrapper.addEventListener('click', pushNewRepoInHTML);
+    pushWrapper.addEventListener('click', pushNewRepoInHTML);
 
 
     // on next frame
@@ -1773,6 +1789,9 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
         repoEl.querySelector('.name').scrollTo(0, 0);
+        
+        // disable lock button
+        lockButton.style.pointerEvents = 'none';
         
 
         // validate repo name
@@ -1811,7 +1830,7 @@ function createNewRepoInHTML() {
         
         // create new repo obj
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
-                                      true, null, true, false, true);
+                                      true, null, repoPrivate, false, true);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
@@ -1833,7 +1852,7 @@ function createNewRepoInHTML() {
         
         
         // push repo asynchronously
-        const newSha = git.createRepo(repoName, true);
+        const newSha = git.createRepo(repoName, repoPrivate);
         
       }
       
