@@ -1272,6 +1272,14 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   display: none;
 }
 
+.sidebar .repo .lock {
+  margin-right: calc(38px - var(--spacing-1));
+}
+
+.sidebar .repo .lock.locked {
+  /*margin-right: calc(38px - var(--spacing-1));*/
+}
+
 .sidebar .item .push-wrapper {
   width: 53px;
   position: absolute;
