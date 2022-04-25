@@ -1289,13 +1289,15 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   stroke: currentColor;
   stroke-width: 1.58px;
   stroke-dasharray: 20px;
-  stroke-dashoffset: -3.4px;
+  stroke-dashoffset: 8.4px;
   stroke-linecap: round;
+  transform: scaleX(-1);
+  transform-origin: center;
   will-change: transform;
 }
 
 .sidebar .repo .lock.locked #shackle {
-  stroke-dashoffset: -1.1px;
+  stroke-dashoffset: 6.1px;
   animation: lock-click .14s .124s var(--ease-function);
 }
 
@@ -1309,7 +1311,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 @keyframes lock-click {
   50% {
-    transform: translateY(0.5px);
+    transform: scaleX(-1) translateY(0.5px);
   }
 }
 
