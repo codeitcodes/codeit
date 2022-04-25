@@ -1302,8 +1302,12 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   animation: lock-click .14s .124s var(--ease-function);
 }
 
+.sidebar .repo .lock #housing-fill {
+  opacity: 0 !important;
+}
+
 .sidebar .repo .lock.locked #housing-fill {
-  fill: currentColor;
+  opacity: 1 !important;
 }
 
 .sidebar .repo .lock.locked #plug {
