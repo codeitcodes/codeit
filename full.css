@@ -1292,6 +1292,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   stroke-dashoffset: 8.4px;
   stroke-linecap: round;
   transform: scaleX(-1);
+  transform-origin: center;
   will-change: transform;
 }
 
