@@ -59,9 +59,9 @@ async function setupWorkerChannel() {
   workerInstallPromise = pingWorkerForClientId();
   
   workerClientId = await workerInstallPromise;
-    
+  
   workerInstallPromise = null;
-    
+  
   
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');

@@ -575,7 +575,8 @@ body.scroll-enabled .bookmark {
   left: -1px;
 }
 
-.live-toggle.file-open + .sidebar-toggle {
+.live-toggle.file-open + .sidebar-toggle,
+body.embed .sidebar-toggle {
   display: none;
 }
 
