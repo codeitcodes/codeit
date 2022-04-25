@@ -193,6 +193,12 @@ if (isMac) {
 
 }
 
+if (isEmbed) {
+  
+  body.classList.add('embed');
+  
+}
+
 window.addEventListener('resize', () => {
 
   isLandscape = window.matchMedia('(orientation: landscape)').matches;
