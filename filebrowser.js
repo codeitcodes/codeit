@@ -2744,7 +2744,8 @@ function setupSidebar() {
     renderSidebarHTML();
 
     // if sidebar is open
-    if (getStorage('sidebar') == 'true') {
+    if (getStorage('sidebar') == 'true'
+        && !isEmbed) {
 
       // don't transition
       body.classList.add('notransition');
