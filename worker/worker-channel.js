@@ -60,6 +60,8 @@ async function setupWorkerChannel() {
   
   workerClientId = await workerInstallPromise;
   
+  workerInstallPromise = null;
+  
   
   // create worker channel
   workerChannel = new BroadcastChannel('worker-channel');
