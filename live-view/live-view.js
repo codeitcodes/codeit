@@ -64,7 +64,8 @@ async function setupLiveView() {
   
     // if on mobile device
     // and URL has a file
-    if (isMobile && linkData.file && !isEmbed) {
+    if ((isMobile && linkData.file)
+        || isEmbed) {
   
       // close sidebar
       toggleSidebar(false);
