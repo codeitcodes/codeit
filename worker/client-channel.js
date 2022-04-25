@@ -197,8 +197,10 @@ function handleFetchRequest(request, event) {
 
     } else if (pathType === 'run'
                || (getPathType(request.referrer) === 'run')) { // if fetch originated in live view
-
-      console.debug('[ServiceWorker] Intercepted live fetch', event);
+      
+      if (enableDevLogs) {
+        console.debug('[ServiceWorker] Intercepted live fetch', event);
+      }
       
       
       let clientId = event.clientId;
