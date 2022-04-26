@@ -440,8 +440,8 @@ function addBottomSwipeListener() {
           file: selectedFile,
           openLive: true
         });
-
-        copy(link).then(() => {
+        
+        navigator.share({text: link}).then(() => {
           showMessage('Copied link!');
         });
 
