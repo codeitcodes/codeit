@@ -441,7 +441,10 @@ function addBottomSwipeListener() {
           openLive: true
         });
         
-        navigator.share({text: link});
+        navigator.share({
+          title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+          text: link,
+        });
 
       }
 
