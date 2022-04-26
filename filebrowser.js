@@ -2264,7 +2264,10 @@ learnShare.addEventListener('click', () => {
   if (isMobile) {
     
     // share invite
-    navigator.share({text: invite});
+    navigator.share({
+      title: 'Share Codeit',
+      text: invite
+    });
     
   } else {
     
