@@ -2266,7 +2266,7 @@ learnShare.addEventListener('click', () => {
     // share invite
     navigator.share({
       title: 'Share Codeit',
-      text: invite
+      url: invite
     });
     
   } else {
