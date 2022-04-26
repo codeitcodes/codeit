@@ -441,9 +441,7 @@ function addBottomSwipeListener() {
           openLive: true
         });
         
-        navigator.share({text: link}).then(() => {
-          showMessage('Copied link!');
-        });
+        navigator.share({text: link});
 
       }
 
