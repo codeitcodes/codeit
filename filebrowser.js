@@ -2261,10 +2261,19 @@ learnShare.addEventListener('click', () => {
   
   const invite = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
-  // copy invite to clipboard
-  copy(invite).then(() => {
-    showMessage('Copied invite!');
-  });
+  if (isMobile) {
+    
+    // share invite
+    navigator.share({text: invite});
+    
+  } else {
+    
+    // copy invite to clipboard
+    copy(invite).then(() => {
+      showMessage('Copied invite!');
+    });
+    
+  }
 
 })
 
