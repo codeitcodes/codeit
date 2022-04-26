@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v524';
+const WORKER_NAME = 'codeit-worker-v525';
 
 
 // internal paths
@@ -166,6 +166,7 @@ let enableDevLogs = false;
 
 workerChannel.addEventListener('message', (event) => {
   
+  if (event.data.type === 'updateWorker') self.registration.update();
   if (event.data.type === 'enableDevLogs') enableDevLogs = true;
   if (event.data.type === 'hello') workerChannel.postMessage('hello!');
   
