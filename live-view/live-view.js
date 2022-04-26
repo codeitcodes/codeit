@@ -505,8 +505,8 @@ function addBottomSwipeListener() {
 
           }
 
-          // if live view is open
-          if (liveViewToggle) toggleLiveView(selectedFile);
+          // if live view is closed
+          if (!liveViewToggle) toggleLiveView(selectedFile);
 
         }
 
@@ -542,8 +542,8 @@ function addBottomSwipeListener() {
 
           }
 
-          // if live view is closed
-          if (!liveViewToggle) toggleLiveView(selectedFile);
+          // if live view is open
+          if (liveViewToggle) toggleLiveView(selectedFile);
           
         }
 
