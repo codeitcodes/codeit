@@ -117,6 +117,14 @@ async function setupWorkerChannel() {
       
     }
     
+    if (window.location.hostname === 'dev.codeit.codes') {
+      
+      workerChannel.postMessage({
+        type: 'updateWorker'
+      });
+      
+    }
+    
   });
 
 }
