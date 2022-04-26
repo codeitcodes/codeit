@@ -443,7 +443,7 @@ function addBottomSwipeListener() {
         
         navigator.share({
           title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
-          text: link,
+          url: link,
         });
 
       }
