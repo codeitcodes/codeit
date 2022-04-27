@@ -440,9 +440,10 @@ function addBottomSwipeListener() {
           file: selectedFile,
           openLive: true
         });
-
-        copy(link).then(() => {
-          showMessage('Copied link!');
+        
+        navigator.share({
+          title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+          url: link,
         });
 
       }
@@ -451,6 +452,7 @@ function addBottomSwipeListener() {
 
     yOffset = 0;
     active = false;
+    swiped = false;
 
   }
 
@@ -476,7 +478,8 @@ function addBottomSwipeListener() {
       }
 
       // check if passed swipe boundary
-      if (Math.abs(yOffset) > yBoundary) {
+      if (Math.abs(yOffset) > yBoundary
+          || swiped) {
         swiped = true;
       } else {
         swiped = false;
@@ -503,12 +506,8 @@ function addBottomSwipeListener() {
 
           }
 
-          toggleLiveView(selectedFile);
-          
-          // wait until animation has ended to enable swiping
-          window.setTimeout(() => {
-            swiped = false;
-          }, 400);
+          // if live view is closed
+          if (!liveViewToggle) toggleLiveView(selectedFile);
 
         }
 
@@ -544,13 +543,9 @@ function addBottomSwipeListener() {
 
           }
 
-          toggleLiveView(selectedFile);
+          // if live view is open
+          if (liveViewToggle) toggleLiveView(selectedFile);
           
-          // wait until animation has ended to enable swiping
-          window.setTimeout(() => {
-            swiped = false;
-          }, 400);
-
         }
 
       }
