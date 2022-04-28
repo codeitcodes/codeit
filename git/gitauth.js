@@ -17,7 +17,7 @@ window.onload = async () => {
   linkData = decodeLink(window.location.href);
 
   // clear URL
-  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  window.history.replaceState(window.location.origin, 'Codeit', window.location.origin + '/full');
 
 
   // if treeLoc is in local storage
@@ -109,6 +109,35 @@ window.onload = async () => {
     }
     
   })
+  
+  // if git code exists in link
+  if (linkData.gitCode) {
+    
+    // hide intro screen
+    sidebar.classList.remove('intro');
+
+    // if on safari, refresh header color
+    if (isSafari) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+      onNextFrame(() => {
+
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+      });
+
+    }
+
+    // start loading
+    startLoading();
+
+    const gitCode = linkData.gitCode;
+
+    // get git token from Github
+    getGithubToken(gitCode);
+    
+  }
 
 
   loadLS();
