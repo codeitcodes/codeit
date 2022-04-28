@@ -111,9 +111,9 @@ function decodeLink(url) {
       
     }
     
-    if (link.get('gitToken')) {
+    if (link.get('gitCode')) {
       
-      linkData.gitToken = link.get('gitToken');
+      linkData.gitCode = link.get('gitCode');
       
     }
     
