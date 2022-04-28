@@ -109,6 +109,10 @@ window.onload = async () => {
     }
     
   })
+
+  
+  loadLS();
+  
   
   // if git code exists in link
   if (linkData.gitCode) {
@@ -138,9 +142,6 @@ window.onload = async () => {
     getGithubToken(gitCode);
     
   }
-
-
-  loadLS();
 
 }
 
