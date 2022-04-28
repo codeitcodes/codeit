@@ -17,7 +17,7 @@ window.onload = async () => {
   linkData = decodeLink(window.location.href);
 
   // clear URL
-  window.history.replaceState(window.location.origin, 'Codeit', window.location.origin + '/full');
+  window.history.pushState(window.location.origin, 'Codeit', window.location.origin + '/full');
 
 
   // if treeLoc is in local storage
