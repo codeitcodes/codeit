@@ -193,7 +193,7 @@ async function renderSidebarHTML() {
   resp = await git.getItems(treeLoc);
   
 
-  if (resp.message == 'Not Found') {
+  if (resp.message && resp.message == 'Not Found') {
 
     // if couldn't find repository, show not found screen
 
@@ -323,7 +323,7 @@ async function renderSidebarHTML() {
     
   }
 
-  if (resp.message == 'Bad credentials') {
+  if (resp.message && resp.message == 'Bad credentials') {
 
     // if failed to get items,
     // show login screen

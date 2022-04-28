@@ -111,6 +111,12 @@ function decodeLink(url) {
       
     }
     
+    if (link.get('gitCode')) {
+      
+      linkData.gitCode = link.get('gitCode');
+      
+    }
+    
     
     
     // legacy link type

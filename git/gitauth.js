@@ -63,8 +63,16 @@ window.onload = async () => {
 
 
   loginButton.addEventListener('click', () => {
-
-    window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+    
+    if (isMobile) {
+      
+        window.location.href = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+      
+    } else {
+      
+      window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+      
+    }
 
   })
 
@@ -101,9 +109,39 @@ window.onload = async () => {
     }
     
   })
-
-
+  
+  
   loadLS();
+  
+  
+  // if git code exists in link
+  if (linkData.gitCode) {
+    
+    // hide intro screen
+    sidebar.classList.remove('intro');
+
+    // if on safari, refresh header color
+    if (isSafari) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+      onNextFrame(() => {
+
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+      });
+
+    }
+
+    // start loading
+    startLoading();
+
+    const gitCode = linkData.gitCode;
+
+    // get git token from Github
+    getGithubToken(gitCode);
+    
+  }
 
 }
 
