@@ -63,8 +63,16 @@ window.onload = async () => {
 
 
   loginButton.addEventListener('click', () => {
-
-    window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+    
+    if (isMobile) {
+      
+        window.location.href = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+      
+    } else {
+      
+      window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+      
+    }
 
   })
 
