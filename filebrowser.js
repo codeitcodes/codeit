@@ -193,7 +193,7 @@ async function renderSidebarHTML() {
   resp = await git.getItems(treeLoc);
   
 
-  if (resp.message == 'Not Found') {
+  if (resp.message && resp.message == 'Not Found') {
 
     // if couldn't find repository, show not found screen
 
@@ -338,6 +338,8 @@ async function renderSidebarHTML() {
     return;
 
   }
+  
+  if (resp.message) return;
 
 
   // render modified files
