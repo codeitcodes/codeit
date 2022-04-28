@@ -323,7 +323,7 @@ async function renderSidebarHTML() {
     
   }
 
-  if (resp.message == 'Bad credentials') {
+  if (resp.message && resp.message == 'Bad credentials') {
 
     // if failed to get items,
     // show login screen
@@ -338,8 +338,6 @@ async function renderSidebarHTML() {
     return;
 
   }
-  
-  if (resp.message) return;
 
 
   // render modified files
