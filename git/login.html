@@ -3,20 +3,37 @@
 
 const code = window.location.toString().replace(/.+code=/, '');
 
-try {
+let isMobile = false;
+
+if (navigator.userAgentData
+    && navigator.userAgentData.mobile) isMobile = true;
+
+if (navigator.userAgent
+    && navigator.userAgent.includes('Mobile')) isMobile = true;
+
+
+if (!isMobile) {
   
-  // check for cross-origin frame
-  console.log(window.opener.location.href);
+  try {
+
+    // check for cross-origin frame
+    console.log(window.opener.location.href);
+
+    // post login token to opening window
+    window.opener.postMessage(code, window.location);
+    window.close();
+
+  } catch(e) {
+
+    // if cannot access opening window (window is cross-origin)
+    // redirect to dev version and try posting login token from there
+    window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
+
+  }
   
-  // post login token to opening window
-  window.opener.postMessage(code, window.location);
-  window.close();
+} else {
   
-} catch(e) {
-  
-  // if cannot access opening window (window is cross-origin)
-  // redirect to dev version and try posting login token from there
-  window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
+  window.location.href = '/full?gitToken=' + code;
   
 }
 
