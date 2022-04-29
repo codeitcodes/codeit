@@ -1,6 +1,3 @@
-/*
-  github
-*/
 
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
