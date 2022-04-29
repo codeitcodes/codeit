@@ -59,15 +59,17 @@ window.onload = async () => {
   }
 
 
+  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
   loginButton.addEventListener('click', () => {
     
     if (isMobile) {
       
-        window.location.href = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+      window.location.href = authURL;
       
     } else {
       
-      window.open('https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org', 'Login with Github', 'height=575,width=575');
+      window.open(authURL, 'Login with Github', 'height=575,width=575');
       
     }
 
@@ -77,7 +79,7 @@ window.onload = async () => {
   window.addEventListener('message', (event) => {
 
     // if redirected from git auth
-    if (event.source.location.pathname === '/git/login') {
+    if (event.source.location.pathname === '/git/github/oauth') {
 
       // hide intro screen
       sidebar.classList.remove('intro');
