@@ -159,7 +159,7 @@ async function getGitlabToken(gitCode) {
 
 
   // get logged user
-  loggedUser = await axios.get('https://api.github.com/user', gitToken);
+  loggedUser = await axios.get('https://gitlab.com/api/v4/user', gitToken);
   loggedUser = loggedUser.username;
   
   // save logged user in local storage
