@@ -79,7 +79,7 @@ window.onload = async () => {
   window.addEventListener('message', (event) => {
 
     // if redirected from git auth
-    if (event.source.location.pathname === '/git/gitlab/login') {
+    if (event.source.location.pathname === '/git/gitlab/oauth') {
 
       // hide intro screen
       sidebar.classList.remove('intro');
