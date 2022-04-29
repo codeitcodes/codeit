@@ -1,6 +1,3 @@
-/*
-  github
-*/
 
 // git login
 
