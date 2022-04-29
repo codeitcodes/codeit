@@ -1,5 +1,5 @@
 
-// git login
+// github login
 
 window.onload = async () => {
 
