@@ -126,11 +126,11 @@ document.querySelectorAll('.btn.install').forEach(button => {
     
   } else {
   
-    if (localStorage.getItem('installed')) {
+    //if (localStorage.getItem('installed')) {
 
       button.classList.add('installed');
       
-    }
+    //}
     
   }
 
