@@ -12,15 +12,6 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
-    },
-    {
-      "source": "/",
-      "headers" : [
-        {
-          "key": "X-Frame-Options",
-          "value": "sameorigin"
-        }
-      ]
     }
   ]
 }
