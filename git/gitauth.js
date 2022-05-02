@@ -78,35 +78,30 @@ window.onload = async () => {
 
   window.addEventListener('message', (event) => {
 
-    // if redirected from git auth
-    if (event.source.location.pathname === '/git/github/oauth') {
+    // hide intro screen
+    sidebar.classList.remove('intro');
 
-      // hide intro screen
-      sidebar.classList.remove('intro');
+    // if on safari, refresh header color
+    if (isSafari) {
 
-      // if on safari, refresh header color
-      if (isSafari) {
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
 
-        document.querySelector('meta[name="theme-color"]').content = '#313744';
+      onNextFrame(() => {
 
-        onNextFrame(() => {
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
 
-          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-        });
-
-      }
-
-      // start loading
-      startLoading();
-
-      const gitCode = event.data;
-
-      // get git token from Github
-      getGithubToken(gitCode);
+      });
 
     }
-    
+
+    // start loading
+    startLoading();
+
+    const gitCode = event.data;
+
+    // get git token from Github
+    getGithubToken(gitCode);
+
   })
   
   
