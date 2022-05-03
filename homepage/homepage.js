@@ -216,4 +216,4 @@ function checkPointAnimations() {
 
 
 window.addEventListener('scroll', checkPointAnimations);
-checkScrollAnimations();
+checkPointAnimations();
