@@ -1,5 +1,5 @@
 
-// github login
+// gitlab login
 
 window.onload = async () => {
 
@@ -59,17 +59,17 @@ window.onload = async () => {
   }
 
 
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+  const authURL = 'https://gitlab.com/oauth/authorize?client_id=f3b94ba233943fa82855c1b495f28c02ccaa11cf276b419d6d1798488a4bb7b0&redirect_uri=https://codeit.codes/git/gitlab/oauth&response_type=code&state=1f3b3477&scope=api';
 
   loginButton.addEventListener('click', () => {
     
     if (isMobile) {
       
-      window.location.href = authURL;
+      window.location.href = authURL; 
       
     } else {
       
-      window.open(authURL, 'Login with Github', 'height=575,width=575');
+      window.open(authURL, 'Login with Gitlab', 'height=575,width=575');
       
     }
 
@@ -78,30 +78,35 @@ window.onload = async () => {
 
   window.addEventListener('message', (event) => {
 
-    // hide intro screen
-    sidebar.classList.remove('intro');
+    // if redirected from git auth
+    if (event.source.location.pathname === '/git/gitlab/oauth') {
 
-    // if on safari, refresh header color
-    if (isSafari) {
+      // hide intro screen
+      sidebar.classList.remove('intro');
 
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
+      // if on safari, refresh header color
+      if (isSafari) {
 
-      onNextFrame(() => {
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
 
-        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+        onNextFrame(() => {
 
-      });
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+        });
+
+      }
+
+      // start loading
+      startLoading();
+
+      const gitCode = event.data;
+
+      // get git token from Gitlab
+      getGitlabToken(gitCode);
 
     }
-
-    // start loading
-    startLoading();
-
-    const gitCode = event.data;
-
-    // get git token from Github
-    getGithubToken(gitCode);
-
+    
   })
   
   
@@ -132,21 +137,21 @@ window.onload = async () => {
 
     const gitCode = linkData.gitCode;
 
-    // get git token from Github
-    getGithubToken(gitCode);
+    // get git token from Gitlab
+    getGitlabToken(gitCode);
     
   }
 
 }
 
-async function getGithubToken(gitCode) {
+async function getGitlabToken(gitCode) {
 
-  // post through CORS proxy to git with clientId, clientSecret and code
-  const resp = await axios.post('https://scepter-cors2.herokuapp.com/' +
-                               'https://github.com/login/oauth/access_token?' +
-                               'client_id=7ede3eed3185e59c042d' +
-                               '&client_secret=c1934d5aab1c957800ea8e84ce6a24dda6d68f45' +
-                               '&code=' + gitCode);
+  // post to git with clientId, clientSecret and code
+  const resp = await axios.post('https://gitlab.com/oauth/token?' +
+                                'client_id=f3b94ba233943fa82855c1b495f28c02ccaa11cf276b419d6d1798488a4bb7b0' +
+                                '&client_secret=1a4098e4770f84f01c94df563201d87b39dae740fe910622c76cd05d8ea30d03' +
+                                '&grant_type=authorization_code&redirect_uri=https://codeit.codes/git/gitlab/oauth' +
+                                '&code=' + gitCode);
 
   // save git token to localStorage
   gitToken = resp.access_token;
@@ -154,8 +159,8 @@ async function getGithubToken(gitCode) {
 
 
   // get logged user
-  loggedUser = await axios.get('https://api.github.com/user', gitToken);
-  loggedUser = loggedUser.login;
+  loggedUser = await axios.get('https://gitlab.com/api/v4/user', gitToken);
+  loggedUser = loggedUser.username;
   
   // save logged user in local storage
   setStorage('loggedUser', loggedUser);
@@ -165,4 +170,10 @@ async function getGithubToken(gitCode) {
   renderSidebarHTML();
 
 }
+
+
+
+
+
+await axios.post('https://gitlab.com/oauth/token?client_id=&client_secret=&code=&&redirect_uri=https://codeit.codes/git/gitlab/oauth')
 

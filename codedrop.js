@@ -1,3 +1,4 @@
+
 function getFileLang(src) {
 
   var lang_aliases = /*aliases_placeholder[*/ {
