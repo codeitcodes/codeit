@@ -187,9 +187,9 @@ let totalPointAnimation = startPointAnimation,
 // set stagger intervals for feature points
 featurePoints.forEach(point => {
 
-  totalPointAnimation += point.clientHeight + 34;
-
   pointStaggerIntervals.push(totalPointAnimation);
+
+  totalPointAnimation += point.clientHeight + 34;
   
 });
 
