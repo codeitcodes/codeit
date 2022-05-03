@@ -189,7 +189,7 @@ featurePoints.forEach(point => {
 
   pointStaggerIntervals.push(totalPointAnimation);
 
-  totalPointAnimation += point.clientHeight + 34;
+  totalPointAnimation += point.clientHeight;
   
 });
 
