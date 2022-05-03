@@ -174,22 +174,35 @@ checkPWA();*/
 
 // add scroll event listeners
 
-const screenHeight = window.innerHeight;
+const screenHeight = window.innerHeight,
+      featurePoints = document.querySelectorAll('#features .ftPoint'),
+      
+      pointMargin = 34,
+      startPointAnimation = (screenHeight / 3) + pointMargin,
 
-const featurePoints = document.querySelectorAll('#features .ftPoint');
 
-const startPointAnimation = screenHeight / 3;
-const pointStaggerInterval = 34 + (7 * 5);
+let totalPointAnimation = startPointAnimation,
+    pointStaggerIntervals = [];
 
-function checkScrollAnimations() {
+// set stagger intervals for feature points
+featurePoints.forEach(point => {
+
+  totalPointAnimation += point.clientHeight + 34;
+
+  pointStaggerIntervals.push(totalPointAnimation);
+  
+});
+
+
+function checkPointAnimations() {
   
   // window scroll position
   const scrolled = window.scrollY || window.pageYOffset;  
-  
-  // add staggered feature points animation
+
+  // check feature point animation
   featurePoints.forEach((point, index) => {
-    
-    const pointAnimation = startPointAnimation + (pointStaggerInterval * index);
+
+    const pointAnimation = pointStaggerIntervals[index];
     
     if (scrolled >= pointAnimation) {
       point.classList.add('visible');
@@ -202,5 +215,5 @@ function checkScrollAnimations() {
 }
 
 
-window.addEventListener('scroll', checkScrollAnimations);
+window.addEventListener('scroll', checkPointAnimations);
 checkScrollAnimations();
