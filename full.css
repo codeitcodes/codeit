@@ -141,7 +141,8 @@ body.notransition .bottom-wrapper {
   border-radius: 20px;
 }
 
-.bottom-float.modified .sidebar-open {
+.bottom-float.modified .sidebar-open,
+.bottom-float.file-open .sidebar-open {
   border-radius: 20px 0 0 20px;
 }
 
