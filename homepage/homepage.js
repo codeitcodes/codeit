@@ -178,7 +178,7 @@ const screenHeight = window.innerHeight,
       featurePoints = document.querySelectorAll('#features .ftPoint'),
       
       pointMargin = 34,
-      startPointAnimation = (screenHeight / 3) + pointMargin;
+      startPointAnimation = (screenHeight / 3);
 
 
 let totalPointAnimation = startPointAnimation,
