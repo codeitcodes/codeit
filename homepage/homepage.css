@@ -4832,6 +4832,14 @@ body {
 #features .iconWrapper .backdrop {
   border-radius: 50%;
   background: hsl(228deg 38% 21%);
+  transition: .4s cubic-bezier(0.4, 0, 0.25, 1);
+  transform: translate(-50%) scale(0);
+  transform-origin: center;
+  will-change: tranform;
+}
+
+#features .ftPoint.visible .iconWrapper .backdrop {
+  transform: translate(-50%) scale(1);
 }
 
 #features .iconWrapper .backdrop circle {
