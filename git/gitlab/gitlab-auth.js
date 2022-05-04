@@ -78,35 +78,30 @@ window.onload = async () => {
 
   window.addEventListener('message', (event) => {
 
-    // if redirected from git auth
-    if (event.source.location.pathname === '/git/gitlab/oauth') {
+    // hide intro screen
+    sidebar.classList.remove('intro');
 
-      // hide intro screen
-      sidebar.classList.remove('intro');
+    // if on safari, refresh header color
+    if (isSafari) {
 
-      // if on safari, refresh header color
-      if (isSafari) {
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
 
-        document.querySelector('meta[name="theme-color"]').content = '#313744';
+      onNextFrame(() => {
 
-        onNextFrame(() => {
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
 
-          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-        });
-
-      }
-
-      // start loading
-      startLoading();
-
-      const gitCode = event.data;
-
-      // get git token from Gitlab
-      getGitlabToken(gitCode);
+      });
 
     }
-    
+
+    // start loading
+    startLoading();
+
+    const gitCode = event.data;
+
+    // get git token from Gitlab
+    getGitlabToken(gitCode);
+
   })
   
   
@@ -170,10 +165,4 @@ async function getGitlabToken(gitCode) {
   renderSidebarHTML();
 
 }
-
-
-
-
-
-await axios.post('https://gitlab.com/oauth/token?client_id=&client_secret=&code=&&redirect_uri=https://codeit.codes/git/gitlab/oauth')
 
