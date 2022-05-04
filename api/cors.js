@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   
   const {status, data} = await getRequest(decodeURIComponent(request.query.url));
   
-  response.status(status).send(data);
+  response.status(status).json(JSON.parse(data));
   
   
   function getRequest(url) {
