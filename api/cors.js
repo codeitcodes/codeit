@@ -12,8 +12,11 @@ export default async function handler(request, response) {
   
     return new Promise(resolve => {
       
+      url = new URL(url);
+      
       const req = https.request({
-        url: url,
+        host: url.hostname,
+        path: url.pathname + url.search,
         method: 'GET',
         headers: {
           accept: 'application/json'
