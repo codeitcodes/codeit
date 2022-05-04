@@ -53,6 +53,8 @@ const FILES_TO_CACHE = [
 
 ];
 
+self.skipWaiting();
+
 self.addEventListener('install', (evt) => {
   
   self.skipWaiting();
