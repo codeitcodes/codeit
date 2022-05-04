@@ -216,16 +216,6 @@ function handleFetchRequest(request, event) {
       if (url.endsWith(liveFramePath)
           && liveViewClientId) {
         
-        // purge nonexistent clients from client array
-        Object.keys(liveViewClients).forEach(async (clientId) => {
-          
-          const client = await clients.get(clientId);
-          
-          if (!client) delete liveViewClients[clientId];
-          
-        });
-        
-        
         // add live view to client array
         
         parentClientId = parentClientId.slice(0, -1);
