@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   
   const {status, data} = await getRequest(decodeURIComponent(request.query.url));
   
-  response.status(status).json(JSON.parse(data));
+  response.status(status).json(data);
   
   
   function getRequest(url) {
@@ -21,6 +21,9 @@ export default async function handler(request, response) {
         });
         
         resp.on('end', () => {
+          
+          data = JSON.parse(data);
+          
           resolve({status: resp.statusCode, data: data});
         });
         
