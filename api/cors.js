@@ -12,7 +12,10 @@ export default async function handler(request, response) {
   
     return new Promise(resolve => {
       
-      const req = https.get(url, (resp) => {
+      const req = https.get({
+        url: url, headers: {
+        accept: 'application/json'
+      }}, (resp) => {
         
         let data = '';
         
