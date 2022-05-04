@@ -64,18 +64,22 @@ self.addEventListener('activate', (evt) => {
   self.clients.claim();  
   
   // remove previous cached data from disk
-  caches.keys().then((keyList) => {
-    return Promise.all(keyList.map((key) => {
-      if (key !== WORKER_NAME) {
-        return caches.delete(key);
-      }
-    }));
-  });
+  evt.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== WORKER_NAME) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
   
   // precache static resources
-  caches.open(WORKER_NAME).then((cache) => {
-    return cache.addAll(FILES_TO_CACHE);
-  });
+  evt.waitUntil(
+    caches.open(WORKER_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );  
   
   // send reload request to client
   /*workerChannel.postMessage({
