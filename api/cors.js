@@ -3,6 +3,8 @@ export default async function handler(request, response) {
   
   const https = require('https');
   
+  console.log(request.query);
+  
   const {status, data} = await getRequest(decodeURIComponent(request.query.url));
   
   response.status(status).send(data);
