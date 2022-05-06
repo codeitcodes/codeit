@@ -1504,6 +1504,9 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   height: 50px;
   width: 233px;
   font-weight: 500;
+}
+
+body.mobile .sidebar .button {
   transition: .1s var(--ease-function);
   transition-property: background, color;
 }
