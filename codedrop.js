@@ -107,8 +107,13 @@ function processFile(file) {
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
-
-    cd.textContent = event.target.result;
+    
+    if (hashCode(event.target.result) !== hashCode(cd.textContent)) {
+      
+      cd.textContent = event.target.result;
+      
+    }
+    
     cd.lang = getFileLang(file.name);
     cd.focus();
     
