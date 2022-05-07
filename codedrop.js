@@ -220,7 +220,7 @@ if ('launchQueue' in window) {
     
     
     // if logged into git
-    if (gitToken !== '') {
+    if (gitToken) {
       
       showMessage('It seems like you\'re logged in. Try logging out and reopening the file.', 5000);
       return;
