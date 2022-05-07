@@ -128,12 +128,16 @@ function processFile(file) {
 
     }
 
-    cd.history = [];
+    cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
 
-    saveSelectedFileContent();
-    saveSelectedFileCaretPos();
-    saveSelectedFileScrollPos();
-    saveSelectedFileLang();
+    window.addEventListener('load', () => {
+      
+      saveSelectedFileContent();
+      saveSelectedFileCaretPos();
+      saveSelectedFileScrollPos();
+      saveSelectedFileLang();
+      
+    });
 
     showMessage('Loaded file ' + file.name + '!');
 
