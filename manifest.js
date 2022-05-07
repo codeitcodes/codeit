@@ -13,7 +13,7 @@ function generateFileExtensionsFor(types) {
     
     fileTypes.map(fileType => { extensions.push('.' + fileType) });
     
-    output.push(...fileTypes[type]);
+    output.push(...extensions);
     
   });
   
