@@ -14,7 +14,7 @@ function generateFileExtensionsFor(types) {
   
 }
 
-const manifestExtensions = generateFileExtensionsFor('css', 'javascript', 'html', 'json', 'markdown', 'python');
+const manifestExtensions = generateFileExtensionsFor(['css', 'javascript', 'html', 'json', 'markdown', 'python']);
 
 
 let manifest = {
