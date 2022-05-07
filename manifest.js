@@ -45,17 +45,16 @@ let manifest = {
     "route_to": "new-client"
   },
   "capture_links": "new-client",
-  "screenshots": [
-    {
-      "src": window.location.origin + "/homepage/featured-pic.png",
-      "type": "image/png",
-      "sizes": "750x1590"
-    },
-    {
-      "src": window.location.origin + "/homepage/secondary-pic.png",
-      "type": "image/png",
-      "sizes": "750x1590"
-    }
+  "url_handlers": [
+      {
+          "origin": "https://contoso.com"
+      },
+      {
+          "origin": "https://conto.so"
+      },
+      {
+          "origin": "https://*.contoso.com"
+      }
   ]
 };
 
