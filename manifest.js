@@ -7,6 +7,12 @@ function generateFileExtensionsFor(types) {
   let output = [];
   
   types.forEach(type => {
+    
+    const fileTypes = fileTypes[type];
+    let extensions = [];
+    
+    fileTypes.map(fileType => { extensions.push('.' + fileType) });
+    
     output.push(...fileTypes[type]);
   });
   
