@@ -139,7 +139,7 @@ function processFile(file) {
       
     });
 
-    showMessage('Loaded file ' + file.name + '!');
+    showMessage('Loaded ' + file.name + '!', 5000);
 
   });
 
