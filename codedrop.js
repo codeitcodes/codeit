@@ -115,6 +115,12 @@ function processFile(file) {
     }
     
     cd.lang = getFileLang(file.name);
+    
+    cd.scrollTo(0, 0);
+    
+    // set caret pos in codeit
+    if (!isMobile) cd.setSelection(0, 0);
+    
     cd.focus();
     
     // change tab character
