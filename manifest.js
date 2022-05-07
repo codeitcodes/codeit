@@ -47,13 +47,7 @@ let manifest = {
   "capture_links": "new-client",
   "url_handlers": [
       {
-          "origin": "https://contoso.com"
-      },
-      {
-          "origin": "https://conto.so"
-      },
-      {
-          "origin": "https://*.contoso.com"
+          "origin": "https://codeit.codes"
       }
   ]
 };
