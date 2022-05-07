@@ -156,7 +156,7 @@ cd.on('drop', (ev) => {
   if (gitToken == '') {
 
     // remove drop indication
-    document.body.classList.remove('focus');
+    cd.classList.remove('focus');
 
     if (ev.dataTransfer.items) {
 
@@ -197,7 +197,7 @@ cd.on('dragover', (ev) => {
   if (gitToken == '') {
 
     // show drop indication
-    document.body.classList.add('focus');
+    cd.classList.add('focus');
 
   }
 
@@ -209,7 +209,7 @@ cd.on('dragleave', (ev) => {
   if (gitToken == '') {
 
     // remove drop indication
-    document.body.classList.remove('focus');
+    cd.classList.remove('focus');
 
   }
 
