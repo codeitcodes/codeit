@@ -2,7 +2,25 @@
 const isMobile = navigator.userAgent.match('Mobile') || false;
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
-/*
+
+
+const fileTypes = {
+  'image': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'webp'],
+  'video': ['mp4', 'mpeg', 'ogv', 'webm'],
+  'audio': ['avi', 'mp3', 'oga', 'ogg', 'opus', 'wav', 'weba'],
+  'font': ['woff', 'woff2', 'ttf', 'otf'],
+  'html': ['html', 'svg', 'htm'],
+  'css': ['css', 'scss'],
+  'javascript': ['js', 'ts', 'mjs', 'jsx'],
+  'json': ['json'],
+  'python': ['py', 'python'],
+  'markdown': ['md'],
+  'midi': ['midi'],
+  'pdf': ['pdf']
+};
+
+
+
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
@@ -24,8 +42,8 @@ function logAppInstalled(evt) {
     
   });
   
-}*/
-/*
+}
+
 let deferredInstallPrompt = null;
 
 window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
@@ -43,12 +61,11 @@ function saveBeforeInstallPromptEvent(evt) {
   
   deferredInstallPrompt = evt;
   
-}*/
+}
 
 // Event handler for butInstall - Does the PWA installation.
 function installPWA(evt) {
   
-  /*
   // if codeit isn't already installed
   if (!localStorage.getItem('installed')) {
 
@@ -90,13 +107,13 @@ function installPWA(evt) {
     }
     
   } else { // open in the browser
-    */
+    
     window.location.href = (window.location.origin + '/full');
     
     // save installation in local storage
     localStorage.setItem('installed', 'true');
     
-  /*}*/
+  }
   
 }
 
@@ -162,7 +179,7 @@ function checkPWA() {
 
   if (displayMode != 'browser tab') {
     
-    //window.location.replace(window.location.origin + '/full');
+    window.location.replace(window.location.origin + '/full');
     
   }
 
