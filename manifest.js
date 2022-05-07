@@ -6,7 +6,7 @@ function generateFileExtensionsFor(types) {
   
   let output = [];
   
-  forTypes.forEach(type => {
+  types.forEach(type => {
     output.concat(fileTypes[type]);
   });
   
