@@ -1,8 +1,4 @@
 
-const isMobile = navigator.userAgent.match('Mobile') || false;
-const isMac = navigator.platform.indexOf('Mac') > -1;
-const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
-
 window.addEventListener('appinstalled', logAppInstalled);
 
 // Log the installation
