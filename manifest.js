@@ -44,12 +44,7 @@ let manifest = {
   "launch_handler": {
     "route_to": "new-client"
   },
-  "capture_links": "new-client",
-  "url_handlers": [
-      {
-          "origin": "https://codeit.codes"
-      }
-  ]
+  "capture_links": "new-client"
 };
 
 
