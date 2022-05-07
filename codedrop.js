@@ -130,7 +130,7 @@ function processFile(file) {
     saveSelectedFileScrollPos();
     saveSelectedFileLang();
 
-    console.log('Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes');
+    showMessage('Loaded file ' + file.name + '!');
 
   });
 
@@ -208,27 +208,31 @@ cd.on('dragleave', (ev) => {
 
 if ('launchQueue' in window) {
 
-  launchQueue.setConsumer(async (launchParams) => {
-
-    // if not logged into git
-    if (gitToken == '') {
-
-      // nothing to do when the queue is empty
-      if (!launchParams.files.length) {
-        return;
-      }
-
-      for (const fileHandle of launchParams.files) {
-
-        // handle the file
-        const fileData = await fileHandle.getFile();
-
-        processFile(fileData);
-
-      }
-
+  window.launchQueue.setConsumer(async (launchParams) => {
+    
+    console.log('Launched with: ', launchParams);
+    
+    if (!launchParams.files.length) {
+      return;
     }
+    
+    const launchFile = launchParams.files[0];
+    
+    
+    // if logged into git
+    if (gitToken !== '') {
+      
+      showMessage('It seems like you\'re logged in. Try logging out and reopening the file.', 5000);
+      return;
+      
+    }
+    
+    
+    // handle the file
+    const fileData = await launchFile.getFile();
 
+    processFile(fileData);
+        
   });
   
 }
