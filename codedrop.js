@@ -153,7 +153,7 @@ function processFile(file) {
 
 }
 
-cd.on('drop', (ev) => {
+body.addEventListener('drop', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -194,7 +194,7 @@ cd.on('drop', (ev) => {
 
 })
 
-cd.on('dragover', (ev) => {
+body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -209,7 +209,7 @@ cd.on('dragover', (ev) => {
 
 })
 
-cd.on('dragleave', (ev) => {
+body.addEventListener('dragleave', (ev) => {
 
   // if not logged into git
   if (gitToken == '') {
