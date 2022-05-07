@@ -1,6 +1,22 @@
 
 // dynamic manifest
 
+
+function generateFileExtensionsFor(types) {
+  
+  let output = [];
+  
+  forTypes.forEach(type => {
+    output.concat(fileTypes[type]);
+  });
+  
+  return output;
+  
+}
+
+const manifestExtensions = generateFileExtensionsFor('css', 'javascript', 'html', 'json', 'markdown', 'python');
+
+
 let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
@@ -19,23 +35,25 @@ let manifest = {
       "purpose": "any"
     }
   ],
+
   "file_handlers": [
     {
-      "action": window.location.origin + "/full",
+      "action": window.location.origin + "/full?upload=true",
+      "name": "code",
       "accept": {
-        "text/css": [".css"]
+        "text/plain": manifestExtensions
       }
     }
   ],
   "share_target": {
-    "action": window.location.origin + "/full",
+    "action": window.location.origin + "/full?upload=true",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "files": [
         {
-          "name": "file",
-          "accept": ["text/css", "application/json", ".css"]
+          "name": "code",
+          "accept": manifestExtensions
         }
       ]
     }
