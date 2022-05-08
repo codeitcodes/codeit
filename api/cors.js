@@ -28,15 +28,19 @@ export default async function handler(request, response) {
   
     return new Promise(resolve => {
       
-      //url = new URL(url);
+      url = new URL(url);
       
-      let options = new URL(url);
+      let options = {
+        
+        hostname: 'google.com'
+        
+      }
       
-      options.headers = {
+      /*options.headers = {
         'Content-Type': 'application/json'
       };
       
-      options.method = 'GET';
+      options.method = 'GET';*/
       
       const req = https.request(options, (resp) => {
         
