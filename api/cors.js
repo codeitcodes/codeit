@@ -30,7 +30,7 @@ export default async function handler(request, response) {
       
       url = new URL(url);
       
-      const options = new URL(url);
+      let options = new URL(url);
       
       options.headers = {
         'Content-Type': 'application/json'
