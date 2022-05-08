@@ -16,8 +16,6 @@ export default async function handler(request, response) {
     
   });
   
-  console.log(url);
-  
   
   const {status, data} = await getRequest(url);
   
@@ -27,20 +25,6 @@ export default async function handler(request, response) {
   function getRequest(url) {
   
     return new Promise(resolve => {
-      
-      //url = new URL(url);
-      
-      let options = {
-        
-        hostname: 'google.com'
-        
-      }
-      
-      /*options.headers = {
-        'Content-Type': 'application/json'
-      };
-      
-      options.method = 'GET';*/
       
       const req = https.get(url, (resp) => {
         
