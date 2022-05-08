@@ -28,7 +28,18 @@ export default async function handler(request, response) {
   
     return new Promise(resolve => {
       
-      const req = https.get(url, (resp) => {
+      url = new URL(url);
+      
+      const options = {
+        hostname: url.hostname,
+        path: url.pathname + url.query,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      
+      const req = https.request(options, (resp) => {
         
         let data = '';
         
