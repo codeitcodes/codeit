@@ -30,15 +30,13 @@ export default async function handler(request, response) {
       
       url = new URL(url);
       
-      const options = {
-        hostname: url.hostname,
-        path: url.pathname,
-        search: url.search,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      const options = new URL(url);
+      
+      options.headers = {
+        'Content-Type': 'application/json'
       };
+      
+      options.method = 'GET';
       
       const req = https.request(options, (resp) => {
         
