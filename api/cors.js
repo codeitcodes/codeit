@@ -10,14 +10,14 @@ export default async function handler(request, response) {
   
   let url = request.query.url;
   
+  console.log(url);
+  
   query.forEach(entry => {
     
     url += '&' + entry[0] + '=' + entry[1];
     
   });
-  
-  console.log(url);
-  
+    
   
   const {status, data} = await getRequest(url);
   
