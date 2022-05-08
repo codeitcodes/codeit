@@ -28,7 +28,7 @@ export default async function handler(request, response) {
   
     return new Promise(resolve => {
       
-      url = new URL(url);
+      //url = new URL(url);
       
       let options = new URL(url);
       
