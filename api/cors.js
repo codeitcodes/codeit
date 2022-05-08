@@ -32,7 +32,8 @@ export default async function handler(request, response) {
       
       const options = {
         hostname: url.hostname,
-        path: url.pathname + url.query,
+        path: url.pathname,
+        query: url.query,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
