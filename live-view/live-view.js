@@ -617,6 +617,10 @@ if (isMobile) {
     // create a new window with live view URL
     const liveViewWindow = window.open(liveViewURL, '_blank');
     
+    liveViewWindow.addEventListener('beforeunload', () => {
+      console.log('[Live view] Closing window');
+    });
+    
     
     // close inline live view
     
