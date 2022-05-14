@@ -620,14 +620,14 @@ if (isMobile) {
     // replace URL in window address bar
     liveViewWindow.addEventListener('DOMContentLoaded', () => {
       
-      liveViewWindow.window.history.pushState({}, 'Codeit', window.location.origin + '/full/run');
+      liveViewWindow.window.history.pushState({url: liveViewURL}, 'Codeit', window.location.origin + '/full/run');
 
     });
     
     liveViewWindow.addEventListener('beforeunload', () => {
       
-      liveViewWindow.window.location.href = liveViewURL;
-            
+      liveViewWindow.window.location.href = liveViewWindow.window.history.state.url;
+      
     });
     
     
