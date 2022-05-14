@@ -617,19 +617,6 @@ if (isMobile) {
     // create a new window with live view URL
     const liveViewWindow = window.open(liveViewURL, '_blank');
     
-    // replace URL in window address bar
-    liveViewWindow.addEventListener('DOMContentLoaded', () => {
-      
-      liveViewWindow.window.history.pushState({url: liveViewURL}, 'Codeit', window.location.origin + '/full/run');
-
-    });
-    
-    liveViewWindow.addEventListener('beforeunload', () => {
-      
-      liveViewWindow.window.location.href = liveViewWindow.window.history.state.url;
-      
-    });
-    
     
     // close inline live view
     
