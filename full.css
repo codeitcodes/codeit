@@ -1123,12 +1123,16 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .header .search-screen .clear {
   opacity: 0;
   pointer-events: none;
-  transition: none;
+  transition: .18s var(--ease-function) transform;
 }
 
 .sidebar .header .search-screen .clear.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.sidebar .header:not(.searching) .search-screen .clear.visible {
+  transform: rotate(-45deg);
 }
 
 
