@@ -614,7 +614,7 @@ if (isMobile) {
     // get live view URL
     const liveViewURL = livePath +'?'+ workerClientId +'/';
     
-    // create a new window with live view URL
+    // open a new window with live view URL
     window.open(liveViewURL, '_blank');
     
     
