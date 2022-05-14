@@ -617,8 +617,10 @@ if (isMobile) {
     // create a new window with live view URL
     const liveViewWindow = window.open(liveViewURL, '_blank');
     
-    liveViewWindow.window.addEventListener('beforeunload', () => {
-      console.log('[Live view] Closing window');
+    liveViewWindow.window.addEventListener('DOMContentLoaded', () => {
+      liveViewWindow.window.addEventListener('beforeunload', (e) => {
+        console.log('[Live view] Closing window', e);
+      });
     });
     
     
