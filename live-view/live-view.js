@@ -605,6 +605,42 @@ if (isMobile) {
     });
 
   });
+  
+  liveToggle.querySelector('.popout').addEventListener('click', () => {
+    
+    // pop out live view to new window
+    
+    
+    // get live view URL
+    const liveViewURL = livePath +'?'+ workerClientId +'/';
+    
+    // open a new window with live view URL
+    window.open(liveViewURL, '_blank');
+    
+    
+    // close inline live view
+    
+    liveViewToggle = !liveViewToggle;
+
+    // clear live view
+    liveView.innerHTML = '';
+    
+    // show loader
+    liveView.classList.remove('loaded');
+    
+    
+    // don't transition live view
+    liveView.classList.add('notransition');
+
+    // hide live view
+    liveView.classList.remove('visible');
+
+    // restore transition on next frame
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
+    
+  });
 
 
   document.addEventListener('keydown', handleMetaP);
