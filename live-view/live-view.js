@@ -618,7 +618,7 @@ if (isMobile) {
     const liveViewWindow = window.open(liveViewURL, '_blank');
     
     // replace URL in window address bar
-    liveViewWindow.window.history.replaceState({}, 'Codeit', '/run');
+    liveViewWindow.window.history.replaceState({}, 'Codeit', window.location.origin + '/run');
     
     
     // close inline live view
