@@ -149,7 +149,7 @@ async function getGithubToken(gitCode) {
                                '&code=' + gitCode, '', true);
 
   // save git token to localStorage
-  gitToken = resp.access_token;
+  gitToken = resp.split('access_token=')[1].split('&')[0];
   saveGitTokenLS(gitToken);
 
 
