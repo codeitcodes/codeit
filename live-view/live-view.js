@@ -620,7 +620,7 @@ if (isMobile) {
     // replace URL in window address bar
     liveViewWindow.addEventListener('DOMContentLoaded', () => {
       
-      liveViewWindow.window.history.replaceState({}, 'Codeit', window.location.origin + '/run');
+      liveViewWindow.window.history.replaceState({}, 'Codeit', window.location.origin + '/cde/run');
 
     });
     
