@@ -615,13 +615,7 @@ if (isMobile) {
     const liveViewURL = livePath +'?'+ workerClientId +'/';
     
     // create a new window with live view URL
-    const liveViewWindow = window.open(liveViewURL, '_blank');
-    
-    liveViewWindow.window.addEventListener('DOMContentLoaded', () => {
-      liveViewWindow.window.addEventListener('beforeunload', (e) => {
-        console.log('[Live view] Closing window', e);
-      });
-    });
+    window.open(liveViewURL, '_blank');
     
     
     // close inline live view
