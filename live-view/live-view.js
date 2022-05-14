@@ -624,6 +624,12 @@ if (isMobile) {
 
     });
     
+    liveViewWindow.addEventListener('onbeforeunload' => () => {
+      
+      liveViewWindow.window.history.back();
+      
+    });
+    
     
     // close inline live view
     
