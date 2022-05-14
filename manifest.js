@@ -21,21 +21,22 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": window.location.origin + "/full",
+      "action": window.location.origin + "/full?upload=true",
+      "name": "code",
       "accept": {
-        "text/css": [".css"]
+        "text/plain": ["text/*", "application/json"]
       }
     }
   ],
   "share_target": {
-    "action": window.location.origin + "/full",
+    "action": window.location.origin + "/full?upload=true",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "files": [
         {
-          "name": "file",
-          "accept": ["text/css", "application/json", ".css"]
+          "name": "code",
+          "accept": ["text/*", "application/json"]
         }
       ]
     }
@@ -44,19 +45,7 @@ let manifest = {
   "launch_handler": {
     "route_to": "new-client"
   },
-  "capture_links": "new-client",
-  "screenshots": [
-    {
-      "src": window.location.origin + "/homepage/featured-pic.png",
-      "type": "image/png",
-      "sizes": "750x1590"
-    },
-    {
-      "src": window.location.origin + "/homepage/secondary-pic.png",
-      "type": "image/png",
-      "sizes": "750x1590"
-    }
-  ]
+  "capture_links": "new-client"
 };
 
 

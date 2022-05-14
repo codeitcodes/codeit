@@ -107,9 +107,20 @@ function processFile(file) {
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
-
-    cd.textContent = event.target.result;
+    
+    if (hashCode(event.target.result) !== hashCode(cd.textContent)) {
+      
+      cd.textContent = event.target.result;
+      
+    }
+    
     cd.lang = getFileLang(file.name);
+    
+    cd.scrollTo(0, 0);
+    
+    // set caret pos in codeit
+    if (!isMobile) cd.setSelection(0, 0);
+    
     cd.focus();
     
     // change tab character
@@ -123,14 +134,18 @@ function processFile(file) {
 
     }
 
-    cd.history = [];
+    cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
 
-    saveSelectedFileContent();
-    saveSelectedFileCaretPos();
-    saveSelectedFileScrollPos();
-    saveSelectedFileLang();
+    window.addEventListener('load', () => {
+      
+      saveSelectedFileContent();
+      saveSelectedFileCaretPos();
+      saveSelectedFileScrollPos();
+      saveSelectedFileLang();
+      
+    });
 
-    console.log('Loaded local file. Name: ' + file.name + ' Size: ' + file.size + ' bytes');
+    showMessage('Loaded ' + file.name + '!', 5000);
 
   });
 
@@ -138,7 +153,7 @@ function processFile(file) {
 
 }
 
-cd.on('drop', (ev) => {
+body.addEventListener('drop', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -147,7 +162,7 @@ cd.on('drop', (ev) => {
   if (gitToken == '') {
 
     // remove drop indication
-    document.body.classList.remove('focus');
+    cd.classList.remove('focus');
 
     if (ev.dataTransfer.items) {
 
@@ -179,7 +194,7 @@ cd.on('drop', (ev) => {
 
 })
 
-cd.on('dragover', (ev) => {
+body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
@@ -188,19 +203,19 @@ cd.on('dragover', (ev) => {
   if (gitToken == '') {
 
     // show drop indication
-    document.body.classList.add('focus');
+    cd.classList.add('focus');
 
   }
 
 })
 
-cd.on('dragleave', (ev) => {
+body.addEventListener('dragleave', (ev) => {
 
   // if not logged into git
   if (gitToken == '') {
 
     // remove drop indication
-    document.body.classList.remove('focus');
+    cd.classList.remove('focus');
 
   }
 
@@ -208,27 +223,30 @@ cd.on('dragleave', (ev) => {
 
 if ('launchQueue' in window) {
 
-  launchQueue.setConsumer(async (launchParams) => {
-
-    // if not logged into git
-    if (gitToken == '') {
-
-      // nothing to do when the queue is empty
-      if (!launchParams.files.length) {
-        return;
-      }
-
-      for (const fileHandle of launchParams.files) {
-
-        // handle the file
-        const fileData = await fileHandle.getFile();
-
-        processFile(fileData);
-
-      }
-
+  window.launchQueue.setConsumer(async (launchParams) => {
+    
+    console.log('Launched with: ', launchParams);
+    
+    if (!launchParams.files.length) {
+      return;
     }
+    
+    const launchFile = launchParams.files[0];
+    
+    
+    // if logged into git
+    if (gitToken) {
+      
+      return;
+      
+    }
+    
+    
+    // handle the file
+    const fileData = await launchFile.getFile();
 
+    processFile(fileData);
+        
   });
   
 }

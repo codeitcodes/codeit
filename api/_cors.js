@@ -3,9 +3,21 @@ export default async function handler(request, response) {
   
   const https = require('https');
   
-  console.log(request);
   
-  const {status, data} = await getRequest(decodeURIComponent(request.query.url));
+  let query = Object.entries(request.query);
+  
+  query.shift();
+  
+  let url = request.query.url;
+    
+  query.forEach(entry => {
+    
+    url += '&' + entry[0] + '=' + entry[1];
+    
+  });
+  
+  
+  const {status, data} = await getRequest(url);
   
   response.status(status).send(data);
   
