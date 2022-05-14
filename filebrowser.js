@@ -698,7 +698,7 @@ async function renderSidebarHTML() {
   
             }
   
-            out = `
+            out += `
             <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
               <div class="label">
                 `+ repoIcon +`
@@ -706,7 +706,7 @@ async function renderSidebarHTML() {
               </div>
               `+ arrowIcon +`
             </div>
-            ` + out;
+            `;
             
           }
 
