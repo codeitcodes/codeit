@@ -23,9 +23,7 @@ let manifest = {
     {
       "action": window.location.origin + "/full?upload=true",
       "name": "code",
-      "accept": {
-        "text/plain": ["text/*", "application/json"]
-      }
+      "accept": ["text/*", "application/json"]
     }
   ],
   "share_target": {
