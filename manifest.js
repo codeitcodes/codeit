@@ -1,26 +1,6 @@
 
 // dynamic manifest
 
-
-function generateFileExtensionsFor(types) {
-  
-  let output = [];
-  
-  types.forEach(type => {
-    
-    const extensions = fileTypes[type];
-    
-    extensions.map(fileType => { output.push('.' + fileType) });
-    
-  });
-  
-  return output;
-  
-}
-
-const manifestExtensions = generateFileExtensionsFor(['css', 'javascript', 'html', 'json', 'markdown', 'python']);
-
-
 let manifest = {
   "name": "Codeit",
   "short_name": "Codeit",
@@ -45,7 +25,7 @@ let manifest = {
       "action": window.location.origin + "/full?upload=true",
       "name": "code",
       "accept": {
-        "text/plain": manifestExtensions
+        "text/plain": ["text/*", "application/json"]
       }
     }
   ],
@@ -57,7 +37,7 @@ let manifest = {
       "files": [
         {
           "name": "code",
-          "accept": manifestExtensions
+          "accept": ["text/*", "application/json"]
         }
       ]
     }
