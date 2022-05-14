@@ -620,6 +620,8 @@ if (isMobile) {
     
     // close inline live view
     
+    liveViewToggle = !liveViewToggle;
+    
     // don't transition live view
     liveView.classList.add('notransition');
 
