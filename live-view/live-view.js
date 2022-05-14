@@ -628,7 +628,6 @@ if (isMobile) {
     // show loader
     liveView.classList.remove('loaded');
     
-    
     // don't transition live view
     liveView.classList.add('notransition');
 
