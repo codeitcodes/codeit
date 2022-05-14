@@ -617,6 +617,9 @@ if (isMobile) {
     // create a new window with live view URL
     const liveViewWindow = window.open(liveViewURL, '_blank');
     
+    // replace URL in window address bar
+    liveViewWindow.window.history.replaceState({}, 'Codeit', '/run');
+    
     
     // close inline live view
     
@@ -639,10 +642,6 @@ if (isMobile) {
     onNextFrame(() => {
       liveView.classList.remove('notransition');
     });
-    
-    
-    
-    console.log(liveViewWindow);
     
   });
 
