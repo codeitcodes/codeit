@@ -621,18 +621,19 @@ if (isMobile) {
     // close inline live view
     
     liveViewToggle = !liveViewToggle;
-    
-    // don't transition live view
-    liveView.classList.add('notransition');
-
-    // hide live view
-    liveView.classList.remove('visible');
 
     // clear live view
     liveView.innerHTML = '';
     
     // show loader
     liveView.classList.remove('loaded');
+    
+    
+    // don't transition live view
+    liveView.classList.add('notransition');
+
+    // hide live view
+    liveView.classList.remove('visible');
 
     // restore transition on next frame
     onNextFrame(() => {
