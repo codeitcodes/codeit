@@ -19,7 +19,6 @@ let manifest = {
       "purpose": "any"
     }
   ],
-
   "file_handlers": [
     {
       "action": window.location.origin + "/full?upload=true",
