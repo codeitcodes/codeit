@@ -624,7 +624,7 @@ if (isMobile) {
 
     });
     
-    liveViewWindow.addEventListener('onbeforeunload' => () => {
+    liveViewWindow.addEventListener('beforeunload' => () => {
       
       liveViewWindow.window.location.href = liveViewURL;
             
