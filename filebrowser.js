@@ -2119,15 +2119,7 @@ function createNewFileInHTML() {
 
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
-        if (modifiedFiles[tempSHA]) {
-
-          onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
-
-        } else {
-
-          onFileEclipsedInCache(false, newSHA, selectedFile);
-
-        }
+        onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
 
 
         // remove push listener
