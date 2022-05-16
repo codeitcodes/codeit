@@ -112,30 +112,29 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   
   let fileToUpdate;
   
-  // if old sha exists
-  if (oldSha) {
-
-    // store the updated file under old sha as key
+  // if old sha and old sha eclipsed file exist
+  if (oldSha && modifiedFiles[oldSha]) {
 
     // find the eclipsed file
     fileToUpdate = modifiedFiles[oldSha];
-    
+
+    // update the eclipsed file to point to updated file
     if (fileToUpdate) {
       
-      // update old file to new sha
+      // update old file sha to point to new file sha
       fileToUpdate.sha = newSha;
       
       // set old file to eclipsed mode
       fileToUpdate.eclipsed = true;
   
-      // if file to update is selected
+      // if eclipsed file is selected
       if (selectedFile.sha === oldSha) {
   
-        // update its content
-        // to the selected file contents
+        // update old file content
+        // to the current file content
         fileToUpdate.content = selectedFile.content;
   
-        // update selected file to new sha
+        // change selected file sha to new file sha
         selectedFile.sha = newSha;
         
         // set selected file to eclipsed mode
@@ -169,8 +168,8 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   // set 1 minute timeout to remove updated files
   window.setTimeout(() => {
     
-    // if old sha exists
-    if (oldSha) {
+    // if old sha and old sha eclipsed file exist
+    if (oldSha && eclipsedFiles[oldSha]) {
 
       // remove the updated file under old sha as key
       // from modifiedFiles
