@@ -169,7 +169,7 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   window.setTimeout(() => {
     
     // if old sha and old sha eclipsed file exist
-    if (oldSha && eclipsedFiles[oldSha]) {
+    if (oldSha && modifiedFiles[oldSha]) {
 
       // remove the updated file under old sha as key
       // from modifiedFiles
