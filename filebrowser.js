@@ -971,9 +971,22 @@ async function pushFileFromHTML(fileEl, commitMessage) {
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
 
+
+  // if the current file hasn't been pushed yet,
+  // await file creation
+  
+  const newFilePendingPromise = newFilePendingPromises[getAttr(fileEl, 'sha')];
+  
+  if (newFilePendingPromise) {
+    
+    await newFilePendingPromise;
+    
+  }
+  
+  
   // get file selected status
   const fileSelected = fileEl.classList.contains('selected');
-
+  
   // create commit
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
@@ -981,7 +994,7 @@ async function pushFileFromHTML(fileEl, commitMessage) {
     message: commitMessage,
     file: commitFile
   };
-
+  
   // push file asynchronously
   const newSha = await git.push(commit);
 
@@ -1867,6 +1880,9 @@ function createNewRepoInHTML() {
 
 // create new file
 // on click of button
+
+const newFilePendingPromises = {};
+
 function createNewFileInHTML() {
 
   // if not already adding new file
@@ -2093,7 +2109,12 @@ function createNewFileInHTML() {
         
 
         // push file asynchronously
-        const newSHA = await git.push(commit);
+        
+        newFilePendingPromises[tempSHA] = git.push(commit);
+        
+        const newSHA = await newFilePendingPromises[tempSHA];
+        
+        delete newFilePendingPromises[tempSHA];
         
         
         // update file sha in HTML with new sha from git
