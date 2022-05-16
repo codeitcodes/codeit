@@ -125,9 +125,6 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
       // update old file to new sha
       fileToUpdate.sha = newSha;
       
-      // update old file caret pos
-      fileToUpdate.caretPos = [0, 0];
-      
       // set old file to eclipsed mode
       fileToUpdate.eclipsed = true;
   
