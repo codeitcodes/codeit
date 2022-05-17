@@ -174,24 +174,24 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   updateModFilesLS();
   
   
-  // set 1 minute timeout to remove updated files
+  // set 1 minute timeout to remove eclipsed files
   window.setTimeout(() => {
     
-    // if old sha and old sha eclipsed file exist
-    if (oldSha && modifiedFiles[oldSha]) {
+    // if old eclipsed file exists
+    if (modifiedFiles[oldSha]) {
 
-      // remove the updated file under old sha as key
+      // delete the old eclipsed file
       // from modifiedFiles
       deleteModFile(oldSha);
       
     }
     
-    // if not edited updated file under new sha as key
+    // if not edited eclipsed file under new sha as key
     // while in timeout (file is still eclipsed)
     if (modifiedFiles[newSha] &&
         modifiedFiles[newSha].eclipsed) {
       
-      // remove the updated file under new sha as key
+      // remove the eclipsed file under new sha as key
       // from modifiedFiles
       deleteModFile(newSha);
       
