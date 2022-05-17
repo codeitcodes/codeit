@@ -149,7 +149,6 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   }
   
   
-  
   function updateOldEclipsedFile(oldEclipsedFile, newSha) {
     
     // update old eclipsed file sha to point to new file sha
