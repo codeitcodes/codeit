@@ -160,8 +160,20 @@ function onFileEclipsedInCache(oldSha, newSha, newFile) {
   }
   
   
-  // store the file under new sha as key
-  modifiedFiles[newSha] = oldEclipsedFile;
+  // if old eclipsed file is modified
+  if (oldEclipsedFile) {
+  
+    // store the modified file under new sha as key
+    modifiedFiles[newSha] = oldEclipsedFile;
+  
+  } else if (selectedFile.sha === oldSha) {
+    
+    // if old eclipsed file is selected
+    
+    // store the selected file under new sha as key
+    modifiedFiles[newSha] = selectedFile;
+    
+  }
   
   
   // update modified files in local storage
