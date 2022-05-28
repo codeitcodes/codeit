@@ -81,8 +81,13 @@ window.onload = async () => {
     // hide intro screen
     sidebar.classList.remove('intro');
     
-    // change sidebar title
-    sidebarLogo.innerText = 'Repositories';
+    // if on Repositories page
+    if (treeLoc[1] === '') {
+      
+      // show sidebar title
+      sidebarLogo.innerText = 'Repositories';
+      
+    }
 
     // if on safari, refresh header color
     if (isSafari) {
@@ -114,8 +119,13 @@ window.onload = async () => {
     // hide intro screen
     sidebar.classList.remove('intro');
     
-    // change sidebar title
-    sidebarLogo.innerText = 'Repositories';
+    // if on Repositories page
+    if (treeLoc[1] === '') {
+      
+      // show sidebar title
+      sidebarLogo.innerText = 'Repositories';
+      
+    }
     
     // don't transition
     body.classList.add('notransition');
@@ -171,12 +181,17 @@ async function getGithubToken(gitCode) {
   saveGitTokenLS(gitToken);
 
 
-  // get logged user
-  loggedUser = await axios.get('https://api.github.com/user', gitToken);
-  loggedUser = loggedUser.login;
+  // if logged user dosen't exist
+  if (getStorage('loggedUser') === null) {
+
+    // get logged user
+    loggedUser = await axios.get('https://api.github.com/user', gitToken);
+    loggedUser = loggedUser.login;
   
-  // save logged user in local storage
-  setStorage('loggedUser', loggedUser);
+    // save logged user in local storage
+    setStorage('loggedUser', loggedUser);
+    
+  }
 
 }
 
