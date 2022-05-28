@@ -80,6 +80,9 @@ window.onload = async () => {
 
     // hide intro screen
     sidebar.classList.remove('intro');
+    
+    // change sidebar title
+    sidebarLogo.innerText = 'Repositories';
 
     // if on safari, refresh header color
     if (isSafari) {
@@ -105,14 +108,14 @@ window.onload = async () => {
   })
   
   
-  loadLS();
-  
-  
   // if git code exists in link
   if (linkData.gitCode) {
     
     // hide intro screen
     sidebar.classList.remove('intro');
+    
+    // change sidebar title
+    sidebarLogo.innerText = 'Repositories';
 
     // if on safari, refresh header color
     if (isSafari) {
@@ -133,9 +136,12 @@ window.onload = async () => {
     const gitCode = linkData.gitCode;
 
     // get git token from Github
-    getGithubToken(gitCode);
+    await getGithubToken(gitCode);
     
   }
+  
+  
+  loadLS();
 
 }
 
@@ -159,10 +165,6 @@ async function getGithubToken(gitCode) {
   
   // save logged user in local storage
   setStorage('loggedUser', loggedUser);
-
-
-  // render sidebar
-  renderSidebarHTML();
 
 }
 
