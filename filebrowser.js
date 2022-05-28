@@ -2775,7 +2775,7 @@ function setupSidebar() {
 
     } else if (isMobile) {
 
-      // update bottom floater
+      // update bottom float
       updateFloat();
 
     }
