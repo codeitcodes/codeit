@@ -1329,8 +1329,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item .push-wrapper {
-  display: none;
   position: absolute;
+  display: none;
   right: calc(20px - var(--spacing-1));
   z-index: 1000;
 }
