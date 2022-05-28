@@ -76,7 +76,7 @@ window.onload = async () => {
   })
 
 
-  window.addEventListener('message', (event) => {
+  window.addEventListener('message', async (event) => {
 
     // hide intro screen
     sidebar.classList.remove('intro');
@@ -108,7 +108,10 @@ window.onload = async () => {
     const gitCode = event.data;
 
     // get git token from Github
-    getGithubToken(gitCode);
+    await getGithubToken(gitCode);
+    
+    // render sidebar
+    renderSidebarHTML();
 
   })
   
