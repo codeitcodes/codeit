@@ -68,11 +68,20 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type, status) {
+function createResponse(data, type, status, noCache) {
+
+  let headers = {'Content-Type': type};
+  
+  if (noCache) {
+    
+    headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+    
+  }
+
 
   // create Response from data
   const response = new Response(data, {
-    headers: {'Content-Type': type},
+    headers: headers,
     status: status
   });
 
@@ -142,7 +151,7 @@ function sendRequestToClient(request, clientId) {
 
 
         // create Response from data
-        const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
+        const response = createResponse(event.data.resp, mimeType, event.data.respStatus, true);
 
         if (enableDevLogs) {
           console.debug('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
@@ -251,7 +260,7 @@ function handleFetchRequest(request, event) {
       const clientId = event.clientId;
       
       resolve(createResponse(
-        JSON.stringify({ clientId }), 'application/json', 200
+        JSON.stringify({ clientId }), 'application/json', 200, true
       ));
       
     } else { // if fetch is external
