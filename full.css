@@ -1238,7 +1238,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item .name {
-  max-width: calc(var(--sidebar-width) - 51px - 20px - 24px - 20px);
+  max-width: calc(var(--sidebar-width) - 40px - 24px - 7px - 38px - 7px);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1256,6 +1256,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   box-shadow: 0 0 0 2px hsl(223deg 85% 66% / 70%);
   transition: .18s .04s var(--ease-function);
   transition-property: background, box-shadow;
+}
+
+.sidebar .repo.focused .name {
+  max-width: calc(var(--sidebar-width) - 40px - 24px - 7px - 38px - 38px - 7px);
 }
 
 .sidebar .item.focused.hidden .name {
@@ -1325,10 +1329,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item .push-wrapper {
-  width: 53px;
-  position: absolute;
-  right: -2px;
   display: none;
+  position: absolute;
+  right: calc(20px - var(--spacing-1));
+  z-index: 1000;
 }
 
 .sidebar .item.modified .push-wrapper {
