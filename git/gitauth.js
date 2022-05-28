@@ -76,10 +76,18 @@ window.onload = async () => {
   })
 
 
-  window.addEventListener('message', (event) => {
-
+  window.addEventListener('message', async (event) => {
+    
     // hide intro screen
     sidebar.classList.remove('intro');
+    
+    // if on Repositories page
+    if (treeLoc[1] === '') {
+      
+      // show sidebar title
+      sidebarLogo.innerText = 'Repositories';
+      
+    }
 
     // if on safari, refresh header color
     if (isSafari) {
@@ -100,12 +108,12 @@ window.onload = async () => {
     const gitCode = event.data;
 
     // get git token from Github
-    getGithubToken(gitCode);
+    await getGithubToken(gitCode);
+    
+    // render sidebar
+    renderSidebarHTML();
 
   })
-  
-  
-  loadLS();
   
   
   // if git code exists in link
@@ -113,6 +121,26 @@ window.onload = async () => {
     
     // hide intro screen
     sidebar.classList.remove('intro');
+    
+    // if on Repositories page
+    if (treeLoc[1] === '') {
+      
+      // show sidebar title
+      sidebarLogo.innerText = 'Repositories';
+      
+    }
+    
+    // don't transition
+    body.classList.add('notransition');
+
+    toggleSidebar(true);
+
+    onNextFrame(() => {
+
+      body.classList.remove('notransition');
+
+    });
+
 
     // if on safari, refresh header color
     if (isSafari) {
@@ -133,9 +161,12 @@ window.onload = async () => {
     const gitCode = linkData.gitCode;
 
     // get git token from Github
-    getGithubToken(gitCode);
+    await getGithubToken(gitCode);
     
   }
+  
+  
+  loadLS();
 
 }
 
@@ -153,16 +184,17 @@ async function getGithubToken(gitCode) {
   saveGitTokenLS(gitToken);
 
 
-  // get logged user
-  loggedUser = await axios.get('https://api.github.com/user', gitToken);
-  loggedUser = loggedUser.login;
+  // if logged user dosen't exist
+  if (getStorage('loggedUser') === null) {
+
+    // get logged user
+    loggedUser = await axios.get('https://api.github.com/user', gitToken);
+    loggedUser = loggedUser.login;
   
-  // save logged user in local storage
-  setStorage('loggedUser', loggedUser);
-
-
-  // render sidebar
-  renderSidebarHTML();
+    // save logged user in local storage
+    setStorage('loggedUser', loggedUser);
+    
+  }
 
 }
 

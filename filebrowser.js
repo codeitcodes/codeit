@@ -971,9 +971,22 @@ async function pushFileFromHTML(fileEl, commitMessage) {
   fileEl.classList.remove('modified');
   bottomFloat.classList.remove('modified');
 
+
+  // if the current file hasn't been pushed yet,
+  // await file creation
+  
+  const newFilePendingPromise = newFilePendingPromises[getAttr(fileEl, 'sha')];
+  
+  if (newFilePendingPromise) {
+    
+    await newFilePendingPromise;
+    
+  }
+  
+  
   // get file selected status
   const fileSelected = fileEl.classList.contains('selected');
-
+  
   // create commit
   const commitFile = fileSelected ? selectedFile : modifiedFiles[getAttr(fileEl, 'sha')];
 
@@ -981,7 +994,7 @@ async function pushFileFromHTML(fileEl, commitMessage) {
     message: commitMessage,
     file: commitFile
   };
-
+  
   // push file asynchronously
   const newSha = await git.push(commit);
 
@@ -1867,6 +1880,9 @@ function createNewRepoInHTML() {
 
 // create new file
 // on click of button
+
+const newFilePendingPromises = {};
+
 function createNewFileInHTML() {
 
   // if not already adding new file
@@ -2093,27 +2109,17 @@ function createNewFileInHTML() {
         
 
         // push file asynchronously
-        const newSHA = await git.push(commit);
         
+        newFilePendingPromises[tempSHA] = git.push(commit);
         
-        // update file sha in HTML with new sha from git
-        setAttr(fileEl, 'sha', newSHA);
+        const newSHA = await newFilePendingPromises[tempSHA];
+        
+        delete newFilePendingPromises[tempSHA];
+        
 
-        // change selected file
-        changeSelectedFile(treeLoc.join(), newSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
-                           [0, 0], [0, 0], true);
-        
         // Git file is eclipsed (not updated) in browser private cache,
         // so store the updated file in modifiedFiles object for 1 minute after commit
-        if (modifiedFiles[tempSHA]) {
-
-          onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
-
-        } else {
-
-          onFileEclipsedInCache(false, newSHA, selectedFile);
-
-        }
+        onFileEclipsedInCache(tempSHA, newSHA, selectedFile);
 
 
         // remove push listener
@@ -2769,7 +2775,7 @@ function setupSidebar() {
 
     } else if (isMobile) {
 
-      // update bottom floater
+      // update bottom float
       updateFloat();
 
     }
