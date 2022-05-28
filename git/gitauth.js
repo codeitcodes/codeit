@@ -116,6 +116,18 @@ window.onload = async () => {
     
     // change sidebar title
     sidebarLogo.innerText = 'Repositories';
+    
+    // don't transition
+    body.classList.add('notransition');
+
+    toggleSidebar(true);
+
+    onNextFrame(() => {
+
+      body.classList.remove('notransition');
+
+    });
+
 
     // if on safari, refresh header color
     if (isSafari) {
