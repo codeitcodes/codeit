@@ -1104,7 +1104,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .header .search-screen .search-input {
-  width: calc(var(--sidebar-width) - 103px);
+  width: calc(var(--sidebar-width) - 103px - 7px);
   white-space: nowrap;
   line-height: 20px;
   color: #d4d5d7;
