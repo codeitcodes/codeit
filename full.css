@@ -1330,8 +1330,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .item .push-wrapper {
   position: absolute;
-  display: none;
   right: calc(20px - var(--spacing-1));
+  display: none;
 }
 
 .sidebar .item.modified .push-wrapper {
