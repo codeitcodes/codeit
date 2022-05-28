@@ -77,7 +77,7 @@ window.onload = async () => {
 
 
   window.addEventListener('message', async (event) => {
-
+    
     // hide intro screen
     sidebar.classList.remove('intro');
     
