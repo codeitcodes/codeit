@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v536';
+const WORKER_NAME = 'codeit-worker-v535';
 
 
 // internal paths
@@ -68,20 +68,11 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type, status, noCache) {
-
-  let headers = {'Content-Type': type};
-  
-  if (noCache) {
-    
-    headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
-    
-  }
-
+function createResponse(data, type, status) {
 
   // create Response from data
   const response = new Response(data, {
-    headers: headers,
+    headers: {'Content-Type': type},
     status: status
   });
 
@@ -151,7 +142,7 @@ function sendRequestToClient(request, clientId) {
 
 
         // create Response from data
-        const response = createResponse(event.data.resp, mimeType, event.data.respStatus, true);
+        const response = createResponse(event.data.resp, mimeType, event.data.respStatus);
 
         if (enableDevLogs) {
           console.debug('[ServiceWorker] Resolved live view request with client response', response, event.data.resp, event.data.respStatus);
@@ -260,7 +251,7 @@ function handleFetchRequest(request, event) {
       const clientId = event.clientId;
       
       resolve(createResponse(
-        JSON.stringify({ clientId }), 'application/json', 200, true
+        JSON.stringify({ clientId }), 'application/json', 200
       ));
       
     } else { // if fetch is external
