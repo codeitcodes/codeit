@@ -1058,7 +1058,8 @@ async function loadFileInHTML(fileEl, fileSha) {
 
 
   // if file is not modified; fetch from Git
-  if (!modifiedFiles[fileSha]) {
+  if (!modifiedFiles[fileSha]
+      || (modifiedFiles[fileSha] && modifiedFiles[fileSha].dir !== treeLoc.join(',')) {
     
     // if not already loading, start loading
     if (loader.style.opacity != '1') {
@@ -2477,6 +2478,13 @@ function protectUnsavedCode() {
   
       // if selected file isn't loaded
       if (selectedFile.sha !== getAttr(selectedElSha, 'sha')) {
+        
+        // load file
+        loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
+        
+      } else if (selBranch !== branch) {
+        
+        // if selected file is from another branch
         
         // load file
         loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
