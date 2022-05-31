@@ -390,8 +390,6 @@ async function renderSidebarHTML() {
 
     // show title
 
-    let titleAnimation;
-
     if (contents != '') {
 
       // if repo is owned by logged user
@@ -414,6 +412,14 @@ async function renderSidebarHTML() {
         //behavior: 'smooth'
       });
       
+      sidebarLogo.classList.add('notransition');
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
+      
+      scrolledSidebarTitle();
+      
     } else if (repo != '') {
 
       // if repo is owned by logged user
@@ -433,9 +439,9 @@ async function renderSidebarHTML() {
       sidebarLogo.scrollTo(0, 0);
       sidebarLogo.classList.add('notransition');
       
-      window.setTimeout(() => {
+      onNextFrame(() => {
         sidebarLogo.classList.remove('notransition');
-      }, 180);
+      });
       
       scrolledSidebarTitle();
 
@@ -451,9 +457,9 @@ async function renderSidebarHTML() {
       sidebarLogo.scrollTo(0, 0);
       sidebarLogo.classList.add('notransition');
       
-      window.setTimeout(() => {
+      onNextFrame(() => {
         sidebarLogo.classList.remove('notransition');
-      }, 180);
+      });
       
       scrolledSidebarTitle();
 
