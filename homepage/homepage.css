@@ -69,7 +69,8 @@ sup {
 }
 
 img {
-  border-style: none
+  border-style: none;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 button,
