@@ -410,8 +410,8 @@ async function renderSidebarHTML() {
 
       // scroll to end of title
       sidebarLogo.scrollTo({
-        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft,
-        behavior: 'smooth'
+        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft//,
+        //behavior: 'smooth'
       });
       
     } else if (repo != '') {
