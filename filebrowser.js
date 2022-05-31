@@ -120,9 +120,9 @@ async function renderSidebarHTML() {
     
     sidebarLogo.classList.add('notransition');
     
-    window.setTimeout(() => {
+    onNextFrame(() => {
       sidebarLogo.classList.remove('notransition');
-    }, 180);
+    });
     
     
     if (contents != '') {
