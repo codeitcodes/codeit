@@ -859,44 +859,6 @@ function addHTMLItemListeners() {
       }
 
     })
-    
-    // if item is a file
-    if (item.classList.contains('file')
-        && item.querySelector('.push-wrapper')) {
-
-      item.querySelector('.push-wrapper')
-        .addEventListener('contextmenu', () => {
-
-        let commitMessage;
-
-        // get selected branch
-        let selBranch = treeLoc[1].split(':')[1];
-
-        // open push screen
-        commitMessage = prompt('Push \''+ item.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                               'Type push description...');
-
-        // if canceled push, return
-        if (!commitMessage) return;
-
-        // if not specified message
-        if (commitMessage === 'Type push description...') {
-
-          // show default message
-          commitMessage = 'Update ' + item.innerText;
-
-        }
-
-
-        // play push animation
-        playPushAnimation(item.querySelector('.push-wrapper'));
-
-        // push file
-        pushFileFromHTML(item, commitMessage);
-
-      })
-      
-    }
 
   })
 
@@ -926,6 +888,32 @@ function clickedOnFileHTML(fileEl, event) {
     }
 
   } else {
+    
+    // if not logged in to git
+    if (gitToken == '') {
+      
+      function openLogin() {
+        
+        const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
+        if (isMobile) {
+          
+          window.location.href = authURL;
+          
+        } else {
+          
+          window.open(authURL, 'Login with Github', 'height=575,width=575');
+          
+        }
+        
+      }
+      
+      showDialog(openLogin, 'Login to save this file.', 'Login');
+      
+      return;
+      
+    }
+    
     
     let commitMessage;
     
