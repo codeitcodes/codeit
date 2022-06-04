@@ -68,7 +68,7 @@ const body = document.body,
 
 
 // version
-const version = '3.2.0';
+const version = '3.2.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -139,6 +139,22 @@ function showMessage(message, duration) {
 
   }, (duration ?? 2000));
 
+}
+
+
+// show dialog
+function showDialog(confirmHandler, headerText, confirmText) {
+  
+  // add dialog text to HTML
+  dialogHeader.textContent = headerText;
+  dialogConfirm.textContent = confirmText;
+  
+  // show dialog
+  dialogWrapper.classList.add('visible');
+  
+  // add confirm button click listener
+  dialogConfirm.onclick = confirmHandler;
+  
 }
 
 
