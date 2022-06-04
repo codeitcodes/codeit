@@ -62,7 +62,7 @@ const body = document.body,
       branchMenu = document.querySelector('.branch-menu'),
       
       dialog = document.querySelector('.dialog'),
-      dialogHeader = dialog.querySelector('.header'),
+      dialogTitle = dialog.querySelector('.title'),
       dialogCancel = dialog.querySelector('.cancel'),
       dialogConfirm = dialog.querySelector('.confirm'),
 
@@ -150,10 +150,10 @@ function showMessage(message, duration) {
 
 // show dialog
 
-function showDialog(confirmHandler, headerText, confirmText) {
+function showDialog(confirmHandler, titleText, confirmText) {
   
   // add dialog text to HTML
-  dialogHeader.textContent = headerText;
+  dialogTitle.textContent = titleText;
   dialogConfirm.textContent = confirmText;
   
   // show dialog
