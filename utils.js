@@ -60,6 +60,11 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
+      
+      dialog = document.querySelector('.dialog'),
+      dialogHeader = dialog.querySelector('.header'),
+      dialogCancel = dialog.querySelector('.cancel'),
+      dialogConfirm = dialog.querySelector('.confirm'),
 
       messageEl = document.querySelector('.message'),
 
@@ -142,7 +147,9 @@ function showMessage(message, duration) {
 }
 
 
+
 // show dialog
+
 function showDialog(confirmHandler, headerText, confirmText) {
   
   // add dialog text to HTML
@@ -152,10 +159,18 @@ function showDialog(confirmHandler, headerText, confirmText) {
   // show dialog
   dialogWrapper.classList.add('visible');
   
-  // add confirm button click listener
+  // add confirm button listener
   dialogConfirm.onclick = confirmHandler;
   
 }
+
+// add cancel button listener
+dialogCancel.addEventListener('click', () => {
+  
+  // hide dialog
+  dialogWrapper.classList.remove('visible');
+  
+});
 
 
 
