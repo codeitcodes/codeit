@@ -33,7 +33,7 @@ async function setupWorkerChannel() {
       console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
     }
     
-    if (numOfRequests < 500) {
+    if (numOfRequests < 100) {
       
       if (!resp || !resp.clientId) {
         
