@@ -1689,21 +1689,20 @@ body.mobile .menu .icon a {
   line-height: 1.5;
   max-width: 200px;
   width: 194px;
-  z-index: 100000;
-  padding: 2px;
-  transform: translate(-50%, -50%) scale(0.94);
-  opacity: 0;
   top: 50%;
   left: calc((var(--sidebar-width) - 1px) / 2);
+  opacity: 0;
+  padding: 2px;
+  transform: translate(-50%, -50%) scale(0.94);
   will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
-  opacity: 0;
+  z-index: 1000;
 }
 
-.dialog.shown {
+.dialog.visible {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
   padding: 7px;
+  transform: translate(-50%, -50%) scale(1);
   transition: .18s var(--bounce-function);
 }
 
@@ -1720,7 +1719,6 @@ body.mobile .menu .icon a {
   padding: 8px 14px;
   border-radius: 5.75px;
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 50%;
 }
