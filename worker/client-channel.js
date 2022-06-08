@@ -130,8 +130,8 @@ function sendRequestToClient(request, clientId) {
 
       // if response url matches
       if (event.data.type === 'response' &&
-          event.data.url === url /*&&
-          event.data.fromClient === clientId*/) {
+          event.data.url === url &&
+          event.data.fromClient === clientId) {
 
         if (enableDevLogs) {
           console.debug('[ServiceWorker] Recived response data from client', event.data);
