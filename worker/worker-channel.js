@@ -102,7 +102,7 @@ async function setupWorkerChannel() {
   
       }
       
-    /*}*/
+    }
 
   });
   
