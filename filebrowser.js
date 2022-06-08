@@ -889,6 +889,7 @@ function clickedOnFileHTML(fileEl, event) {
 
   } else {
     
+    /*
     // if not logged in to git
     if (gitToken == '') {
       
@@ -913,6 +914,7 @@ function clickedOnFileHTML(fileEl, event) {
       return;
       
     }
+    */
     
     
     let commitMessage;
