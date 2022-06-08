@@ -55,7 +55,7 @@ export default function handler(request, response) {
   
   
   if (isJSON) response.status(200).json(resp);
-  else response.status(200).html(resp);
+  else response.status(200).send(resp);
   
 }
 
