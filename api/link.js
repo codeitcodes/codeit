@@ -59,11 +59,11 @@ const html = `
   <meta name="description" content="Run JavaScript projects, code your ideas, and share it all with friends, family, and the world on Codeit.">
   
   <meta property="og:title" content="`+ title +`">
-  <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all with friends, family, and the world on Codeit.">
+  <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
-  <meta property="og:type" content="application">
-  <meta property="og:site_name" content="Codeit Code Editor">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Codeit">
   
   <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:site" content="@codeitcodes">
