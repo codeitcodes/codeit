@@ -71,7 +71,7 @@ async function setupWorkerChannel() {
   workerChannel.addEventListener('message', async (event) => {
         
     // if message is for current client
-    /*if (event.data.toClient === workerClientId) {*/
+    if (event.data.toClient === workerClientId) {
 
       // if recived request
       if (event.data.type === 'request') {
