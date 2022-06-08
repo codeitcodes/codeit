@@ -157,7 +157,7 @@ function showDialog(confirmHandler, titleText, confirmText) {
   dialogConfirm.textContent = confirmText;
   
   // show dialog
-  dialogWrapper.classList.add('visible');
+  dialog.classList.add('visible');
   
   // add confirm button listener
   dialogConfirm.onclick = confirmHandler;
@@ -168,7 +168,7 @@ function showDialog(confirmHandler, titleText, confirmText) {
 dialogCancel.addEventListener('click', () => {
   
   // hide dialog
-  dialogWrapper.classList.remove('visible');
+  dialog.classList.remove('visible');
   
 });
 
