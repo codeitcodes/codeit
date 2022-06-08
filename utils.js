@@ -60,6 +60,11 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
+      
+      dialog = document.querySelector('.dialog'),
+      dialogTitle = dialog.querySelector('.title'),
+      dialogCancel = dialog.querySelector('.cancel'),
+      dialogConfirm = dialog.querySelector('.confirm'),
 
       messageEl = document.querySelector('.message'),
 
@@ -68,7 +73,7 @@ const body = document.body,
 
 
 // version
-const version = '3.2.0';
+const version = '3.2.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -140,6 +145,32 @@ function showMessage(message, duration) {
   }, (duration ?? 2000));
 
 }
+
+
+
+// show dialog
+
+function showDialog(confirmHandler, titleText, confirmText) {
+  
+  // add dialog text to HTML
+  dialogTitle.textContent = titleText;
+  dialogConfirm.textContent = confirmText;
+  
+  // show dialog
+  dialog.classList.add('visible');
+  
+  // add confirm button listener
+  dialogConfirm.onclick = confirmHandler;
+  
+}
+
+// add cancel button listener
+dialogCancel.addEventListener('click', () => {
+  
+  // hide dialog
+  dialog.classList.remove('visible');
+  
+});
 
 
 

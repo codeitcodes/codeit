@@ -1680,6 +1680,69 @@ body.mobile .menu .icon a {
 }
 
 
+.dialog {
+  position: fixed;
+  background: var(--deep-midnight-blue);
+  color: #dcddde;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  border-radius: 11.5px;
+  line-height: 1.5;
+  max-width: 200px;
+  width: 194px;
+  top: 50%;
+  left: calc((var(--sidebar-width) - 1px) / 2);
+  opacity: 0;
+  padding: 2px;
+  transform: translate(-50%, -50%) scale(0.94);
+  will-change: transform;
+  transition: 0s .18s, .18s var(--bounce-function) opacity;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.dialog.visible {
+  opacity: 1;
+  padding: 7px;
+  transform: translate(-50%, -50%) scale(1);
+  transition: .18s var(--bounce-function);
+  pointer-events: auto;
+}
+
+.dialog .title {
+  padding: 8px 14px;
+}
+
+.dialog .button-wrapper {
+  display: flex;
+  margin-top: 7px;
+}
+
+.dialog .button {
+  padding: 8px 14px;
+  border-radius: 5.75px;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.dialog .cancel {
+  color: hsl(228deg 16% 37%);
+}
+
+.dialog .confirm {
+  color: var(--rosemary-lighter);
+  font-weight: 500;
+}
+
+.dialog .button:active {
+  background: rgba(255,255,255,0.1);
+}
+
+body:not(.mobile) .dialog .button:not(:active):hover {
+  background: rgba(255,255,255,0.05);
+}
+
+
 .message-wrapper {
   position: fixed;
   left: 0;
