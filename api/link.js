@@ -56,10 +56,10 @@ const html = `
   <meta name="apple-mobile-web-app-title" content="Codeit">
 
   <meta charset="utf-8">
-  <meta name="description" content="Run JavaScript projects, code your ideas, and share it all with friends, family, and the world on Codeit.">
+  <!-- <meta name="description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
   
   <meta property="og:title" content="`+ title +`">
-  <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
+  <!-- <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="website">
@@ -67,13 +67,9 @@ const html = `
   
   <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:site" content="@codeitcodes">
-  <meta property="twitter:site:id" content="@codeitcodes">
-  <meta property="twitter:creator" content="@codeitcodes">
-  <meta property="twitter:creator:id" content="@codeitcodes">
   <meta name="twitter:card" content="player">
-  <meta property="twitter:domain" content="codeit.codes">
-  <meta property="twitter:url" content="https://codeit.codes/">
-  <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
+  <meta property="twitter:domain" content="https://codeit.codes/">
+  <!-- <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
   <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
   <meta name="twitter:player" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta name="twitter:player:stream:content_type" content="text/html">
