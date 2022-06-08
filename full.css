@@ -1696,6 +1696,7 @@ body.mobile .menu .icon a {
   transform: translate(-50%, -50%) scale(0.94);
   will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
+  pointer-events: none;
   z-index: 1000;
 }
 
@@ -1704,6 +1705,7 @@ body.mobile .menu .icon a {
   padding: 7px;
   transform: translate(-50%, -50%) scale(1);
   transition: .18s var(--bounce-function);
+  pointer-events: auto;
 }
 
 .dialog .title {
