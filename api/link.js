@@ -82,6 +82,11 @@ const html = `
   <meta name="next-head-count" content="24">
   <meta name="robots" content="all">
   
+  <link rel="iframely player" type="text/html"
+        href="https://codeit.codes/api/link?url=`+ query.url +`"
+        media="(aspect-ratio: 1280/720)"
+   />
+  
   <link rel="shortcut icon" href="https://codeit.codes/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="https://codeit.codes/icons/iphone-app-180.png">
   
@@ -94,7 +99,7 @@ const html = `
   const url = new URL(window.location.href).searchParams;
   
   let link = url.get('url');
-  let embed = url.get('embed');
+  let oembed = url.get('oembed');
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
@@ -114,7 +119,7 @@ const html = `
   
   if (link) {
     
-    if (embed) link += '?embed=true';
+    if (oembed) link += '?oembed=true';
     
     const resp = decodeLink(link);
 
