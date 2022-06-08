@@ -70,11 +70,15 @@ const html = `
   <meta property="twitter:site:id" content="@codeitcodes">
   <meta property="twitter:creator" content="@codeitcodes">
   <meta property="twitter:creator:id" content="@codeitcodes">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="player">
   <meta property="twitter:domain" content="codeit.codes">
   <meta property="twitter:url" content="https://codeit.codes/">
   <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
   <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
+  <meta name="twitter:player" content="https://codeit.codes/api/link?url=`+ query.url +`">
+  <meta name="twitter:player:stream:content_type" content="text/html">
+  <meta name="twitter:player:width" content="800">
+  <meta name="twitter:player:height" content="600">
   
   <meta name="referrer" content="default">
   <meta name="keywords" content="code editor, version control tools, source code versioning, source code management tools, python, jquery demo, html, git, how to, bootstrap, jquery, javascript, javascript tutorial, javascript tutorial for beginners, javascript programming, html web form, create form in html, responsive web design, html web design, html design, responsive website development, html5 tutorial, html5 css3, html5 development, web design software, web development software, git tutorial, git howto, git repository, git command, git source code, top programming languages to learn, best programming language, best computer language, open source, open source code, open source applications, source code editor, software development tools, development tool, software developer tools list, programmer tool, web application development software">
