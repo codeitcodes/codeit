@@ -3,7 +3,7 @@ export default function handler(request, response) {
   
   const query = request.query;
   
-  const isJSON = query.format ? query.format === 'json' : false;
+  const isJSON = query.format ? query.format.toLowerCase() === 'json' : false;
   
   
   let resp;
