@@ -61,10 +61,10 @@ const body = document.body,
 
       branchMenu = document.querySelector('.branch-menu'),
       
-      dialog = document.querySelector('.dialog'),
-      dialogTitle = dialog.querySelector('.title'),
-      dialogCancel = dialog.querySelector('.cancel'),
-      dialogConfirm = dialog.querySelector('.confirm'),
+      dialogWrapper = document.querySelector('.dialog-wrapper'),
+      dialogTitle = dialogWrapper.querySelector('.title'),
+      dialogCancel = dialogWrapper.querySelector('.cancel'),
+      dialogConfirm = dialogWrapper.querySelector('.confirm'),
 
       messageEl = document.querySelector('.message'),
 
@@ -157,7 +157,7 @@ function showDialog(confirmHandler, titleText, confirmText) {
   dialogConfirm.textContent = confirmText;
   
   // show dialog
-  dialog.classList.add('visible');
+  dialogWrapper.classList.add('visible');
   
   // add confirm button listener
   dialogConfirm.onclick = confirmHandler;
@@ -168,7 +168,7 @@ function showDialog(confirmHandler, titleText, confirmText) {
 dialogCancel.addEventListener('click', () => {
   
   // hide dialog
-  dialog.classList.remove('visible');
+  dialogWrapper.classList.remove('visible');
   
 });
 
