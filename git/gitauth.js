@@ -78,41 +78,47 @@ window.onload = async () => {
 
   window.addEventListener('message', async (event) => {
     
-    // hide intro screen
-    sidebar.classList.remove('intro');
+    // if received a git code
+    if (event.origin === window.location.origin
+        && event.data.startsWith('gitCode=')) {
     
-    // if on Repositories page
-    if (treeLoc[1] === '') {
+      // hide intro screen
+      sidebar.classList.remove('intro');
       
-      // show sidebar title
-      sidebarLogo.innerText = 'Repositories';
+      // if on Repositories page
+      if (treeLoc[1] === '') {
+        
+        // show sidebar title
+        sidebarLogo.innerText = 'Repositories';
+        
+      }
+  
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        });
+  
+      }
+  
+      // start loading
+      startLoading();
+  
+      const gitCode = event.data.split('gitCode=')[1];
+  
+      // get git token from Github
+      await getGithubToken(gitCode);
+      
+      // render sidebar
+      renderSidebarHTML();
       
     }
-
-    // if on safari, refresh header color
-    if (isSafari) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
-      onNextFrame(() => {
-
-        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-      });
-
-    }
-
-    // start loading
-    startLoading();
-
-    const gitCode = event.data;
-
-    // get git token from Github
-    await getGithubToken(gitCode);
-    
-    // render sidebar
-    renderSidebarHTML();
-
+  
   })
   
   
