@@ -902,6 +902,20 @@ function clickedOnFileHTML(fileEl, event) {
           
         } else {
           
+          window.addEventListener('message', async (event) => {
+    
+            // if received a git code (succesfully logged in)
+            if (event.origin === window.location.origin
+                && event.data.startsWith('gitCode=')) {
+                
+              // hide dialog
+              dialogWrapper.classList.remove('visible');
+                
+            }
+            
+          }
+          
+          // open login window
           window.open(authURL, 'Login with Github', 'height=575,width=575');
           
         }
