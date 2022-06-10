@@ -913,7 +913,7 @@ function clickedOnFileHTML(fileEl, event) {
                 
             }
             
-          }
+          });
           
           // open login window
           window.open(authURL, 'Login with Github', 'height=575,width=575');
