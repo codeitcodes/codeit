@@ -65,6 +65,7 @@ const body = document.body,
       dialogTitle = dialogWrapper.querySelector('.title'),
       dialogCancel = dialogWrapper.querySelector('.cancel'),
       dialogConfirm = dialogWrapper.querySelector('.confirm'),
+      dialogBackground = dialogWrapper.querySelector('.dialog-background'),
 
       messageEl = document.querySelector('.message'),
 
@@ -164,8 +165,16 @@ function showDialog(confirmHandler, titleText, confirmText) {
   
 }
 
-// add cancel button listener
+// add cancel button click listener
 dialogCancel.addEventListener('click', () => {
+  
+  // hide dialog
+  dialogWrapper.classList.remove('visible');
+  
+});
+
+// add background click listener
+dialogBackground.addEventListener('click', () => {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
