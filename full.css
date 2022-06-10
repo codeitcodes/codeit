@@ -1680,6 +1680,16 @@ body.mobile .menu .icon a {
 }
 
 
+.dialog-wrapper {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.dialog-wrapper.visible {
+  pointer-events: auto;
+}
+
 .dialog {
   position: fixed;
   background: var(--deep-midnight-blue);
@@ -1696,16 +1706,13 @@ body.mobile .menu .icon a {
   transform: translate(-50%, -50%) scale(0.94);
   will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
-  pointer-events: none;
-  z-index: 1000;
 }
 
-.dialog.visible {
+.dialog-wrapper.visible .dialog {
   opacity: 1;
   padding: 7px;
   transform: translate(-50%, -50%) scale(1);
   transition: .18s var(--bounce-function);
-  pointer-events: auto;
 }
 
 .dialog .title {
@@ -1740,6 +1747,20 @@ body.mobile .menu .icon a {
 
 body:not(.mobile) .dialog .button:not(:active):hover {
   background: rgba(255,255,255,0.05);
+}
+
+.dialog-background {
+  position: fixed;
+  inset: 0;
+  background: #090e1152;
+  width: calc(var(--sidebar-width) - 1px);
+  opacity: 0;
+  transition: .18s var(--bounce-function);
+  z-index: -1;
+}
+
+.dialog-wrapper.visible .dialog-background {
+  opacity: 1;
 }
 
 
