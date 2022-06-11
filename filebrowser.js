@@ -971,17 +971,20 @@ async function clickedOnFileHTML(fileEl, event) {
         
         showMessage('Forking...', -1);
         
+        
         // change sidebar title
         sidebarLogo.innerText = repoName + contents;
         
+        
         // fork repo
         await git.forkRepo(treeLoc);
+        
         
         // run on modified files
         Object.values(modifiedFiles).forEach(modFile => {
         
           const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
-          const fileRepoName = fileRepo.split(':')[0];
+          const [fileRepoName, fileBranch] = fileRepo.split(':')[0];
           
           // if modified file is in repo
           // and is not eclipsed
@@ -991,7 +994,7 @@ async function clickedOnFileHTML(fileEl, event) {
             
             // change the modified file's dir
             // to the fork's dir
-            modifiedFiles[modFile.sha].dir = [loggedUser, repo, fileContents].join(',');
+            modifiedFiles[modFile.sha].dir = [loggedUser, (repoName + ':' + fileBranch), fileContents].join(',');
             
           }
           
@@ -1002,12 +1005,23 @@ async function clickedOnFileHTML(fileEl, event) {
         // as a modified file is required to push
         updateModFilesLS();
         
+        
         // update selected file dir
         
-        const selFileContents = selectedFile.dir.split(',')[2];
-        selectedFile.dir = [loggedUser, repo, selFileContents].join(',');
+        const [selFileUser, selFileRepo, selFileContents] = selectedFile.dir.split(',');
+        const [selFileRepoName, selFileBranch] = selFileRepo.split(':')[0];
         
-        updateSelectedFileLS();
+        // if selected file is in repo
+        if (selFileUser === user &&
+            selFileRepoName === repoName) {
+          
+          // update selected file dir
+          selectedFile.dir = [loggedUser, (repoName + ':' + selFileBranch), selFileContents].join(',');
+          
+          updateSelectedFileLS();
+          
+        }
+        
         
         // create a new repo obj
         // for fork
@@ -1018,9 +1032,11 @@ async function clickedOnFileHTML(fileEl, event) {
         
         updateModReposLS();
         
+        
         // change location
         treeLoc[0] = loggedUser;
         saveTreeLocLS(treeLoc);
+        
         
         hideMessage();
         
