@@ -1000,7 +1000,7 @@ async function clickedOnFileHTML(fileEl, event) {
         
       }
       
-      showDialog(forkRepo, 'Fork this repository to save your changes.', 'Fork');
+      await showDialog(forkRepo, 'Fork this repository to save your changes.', 'Fork');
       
     }
     
