@@ -138,12 +138,20 @@ function showMessage(message, duration) {
 
 
   if (messageTimeout) window.clearTimeout(messageTimeout);
-
-  messageTimeout = window.setTimeout(() => {
-
-    messageEl.classList.remove('visible');
-
-  }, (duration ?? 2000));
+  
+  if (duration !== -1) {
+    
+    messageTimeout = window.setTimeout(() => {
+  
+      messageEl.classList.remove('visible');
+  
+    }, (duration ?? 2000));
+    
+  } else {
+    
+    messageTimeout = null;
+    
+  }
 
 }
 
