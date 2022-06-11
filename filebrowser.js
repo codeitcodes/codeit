@@ -963,10 +963,13 @@ async function clickedOnFileHTML(fileEl, event) {
     if (!repoObj.pushAccess) {
       
       async function forkRepo() {
+                
+        // hide dialog
+        dialogWrapper.classList.remove('visible');
         
         startLoading();
         
-        showMessage('Forking...', 5000);
+        showMessage('Forking...');
         
         // change sidebar title
         sidebarLogo.innerText = repoName;
