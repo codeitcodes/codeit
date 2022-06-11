@@ -163,10 +163,19 @@ function showDialog(confirmHandler, titleText, confirmText) {
     dialogWrapper.classList.add('visible');
     
     // add confirm button listener
-    dialogConfirm.onclick = confirmHandler;
+    dialogConfirm.onclick = (e) => {
+      
+      e.stopPropagation();
+      
+      confirmHandler(e);
+      resolve(true);
+      
+    };
     
     // add dialog click listener
-    dialogWrapper.onclick = resolve;
+    dialogWrapper.onclick = () => {
+      resolve(false);
+    };
     
   });
   
