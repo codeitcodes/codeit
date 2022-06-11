@@ -1012,9 +1012,9 @@ async function clickedOnFileHTML(fileEl, event) {
         // create a new repo obj
         // for fork
         
-        const newRepoObj = createRepoObj((loggedUser + '/' + repo), repoObj.selBranch, repoObj.defaultBranch,
+        const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
                                          true, repoObj.branches, repoObj.private, true, false);
-        modifiedRepos[loggedUser + '/' + repo] = newRepoObj;
+        modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
         
         updateModReposLS();
         
