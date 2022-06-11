@@ -972,7 +972,7 @@ async function clickedOnFileHTML(fileEl, event) {
         showMessage('Forking...');
         
         // change sidebar title
-        sidebarLogo.innerText = repoName;
+        sidebarLogo.innerText = repoName + contents;
         
         // fork repo
         await git.forkRepo(treeLoc);
@@ -991,11 +991,23 @@ async function clickedOnFileHTML(fileEl, event) {
             
             // change the modified file's dir
             // to the fork's dir
-            modifiedFiles[modFile.sha].dir = [loggedUser, fileRepo, fileContents].join(',');
+            modifiedFiles[modFile.sha].dir = [loggedUser, repo, fileContents].join(',');
             
           }
           
         });
+        
+        // at least one modified file
+        // must have changed,
+        // as a modified file is required to push
+        updateModFilesLS();
+        
+        // update selected file dir
+        
+        const selFileContents = selectedFile.dir.split(',')[2];
+        selectedFile.dir = [loggedUser, repo, selFileContents].join(',');
+        
+        updateSelectedFileLS();
         
         // change location
         treeLoc[0] = loggedUser;
