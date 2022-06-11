@@ -866,7 +866,7 @@ function addHTMLItemListeners() {
 
 
 // when clicked on file in HTML
-function clickedOnFileHTML(fileEl, event) {
+async function clickedOnFileHTML(fileEl, event) {
   
   // if not clicked on push button
   let pushWrapper = fileEl.querySelector('.push-wrapper');
@@ -902,7 +902,7 @@ function clickedOnFileHTML(fileEl, event) {
           
         } else {
           
-          window.addEventListener('message', async (event) => {
+          window.addEventListener('message', (event) => {
     
             // if received a git code (succesfully logged in)
             if (event.origin === window.location.origin
@@ -929,9 +929,83 @@ function clickedOnFileHTML(fileEl, event) {
     }
     
     
+    // get repo obj from local storage
+    
+    const [user, repo] = [treeLoc[0], treeLoc[1]];
+    const repoName = repo.split(':')[0];
+    
+    let repoObj = modifiedRepos[user + '/' + repoName];
+    
+    // if repo obj isn't fetched yet
+    if (!repoObj || repoObj.pushAccess === null) {
+      
+      showMessage('Just a sec..');
+      
+      // await repo obj promise
+      if (repoPromise) {
+        
+        await repoPromise;
+        
+        repoObj = modifiedRepos[user + '/' + repoName];
+        
+      } else {
+        
+        return;
+        
+      }
+      
+    }
+    
+    
+    // if user dosen't have push access in repo
+    if (!repoObj.pushAccess) {
+      
+      async function forkRepo() {
+        
+        startLoading();
+        
+        showMessage('Forking...', 5000);
+        
+        // fork repo
+        await git.forkRepo(treeLoc);
+        
+        // run on modified files
+        Object.values(modifiedFiles).forEach(modFile => {
+        
+          const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
+          const fileRepoName = fileRepo.split(':')[0];
+          
+          // if modified file is in repo
+          // and is not eclipsed
+          if (fileUser === user &&
+              fileRepoName === repoName &&
+              modFile.eclipsed === false) {
+            
+            // change the modified file's dir
+            // to the fork's dir
+            modifiedFiles[modFile.sha].dir = [loggedUser, fileRepo, fileContents].join(',');
+            
+          }
+          
+        });
+        
+        // change location
+        treeLoc[0] = loggedUser;
+        saveTreeLocLS(treeLoc);
+        
+        stopLoading();
+        
+      }
+      
+      showDialog(forkRepo, 'Fork this repository to save your changes.', 'Fork');
+      
+    }
+    
+    
+    
     let commitMessage;
     
-    // if ctrl/meta/shift-clicked on push button
+    // if ctrl/cmd/shift-clicked on push button
     if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
       // get selected branch
