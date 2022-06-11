@@ -894,6 +894,8 @@ async function clickedOnFileHTML(fileEl, event) {
       
       function openLogin() {
         
+        showMessage('Logging in...');
+        
         const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
 
         if (isMobile) {
