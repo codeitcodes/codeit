@@ -155,6 +155,10 @@ function showMessage(message, duration) {
 
 }
 
+function hideMessage() {
+  messageEl.classList.remove('visible');
+}
+
 
 
 // show dialog
