@@ -966,6 +966,9 @@ async function clickedOnFileHTML(fileEl, event) {
         
         showMessage('Forking...', 5000);
         
+        // change sidebar title
+        sidebarLogo.innerText = repoName;
+        
         // fork repo
         await git.forkRepo(treeLoc);
         
