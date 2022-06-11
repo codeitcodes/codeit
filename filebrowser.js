@@ -1009,6 +1009,15 @@ async function clickedOnFileHTML(fileEl, event) {
         
         updateSelectedFileLS();
         
+        // create a new repo obj
+        // for fork
+        
+        const newRepoObj = createRepoObj((loggedUser + '/' + repo), repoObj.selBranch, repoObj.defaultBranch,
+                                         true, repoObj.branches, repoObj.private, true, false);
+        modifiedRepos[loggedUser + '/' + repo] = newRepoObj;
+        
+        updateModReposLS();
+        
         // change location
         treeLoc[0] = loggedUser;
         saveTreeLocLS(treeLoc);
