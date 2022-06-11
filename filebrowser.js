@@ -1009,7 +1009,7 @@ async function clickedOnFileHTML(fileEl, event) {
         // update selected file dir
         
         const [selFileUser, selFileRepo, selFileContents] = selectedFile.dir.split(',');
-        const [selFileRepoName, selFileBranch] = selFileRepo.split(':')[0];
+        const [selFileRepoName, selFileBranch] = selFileRepo.split(':');
         
         // if selected file is in repo
         if (selFileUser === user &&
