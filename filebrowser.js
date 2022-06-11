@@ -969,7 +969,7 @@ async function clickedOnFileHTML(fileEl, event) {
         
         startLoading();
         
-        showMessage('Forking...');
+        showMessage('Forking...', -1);
         
         // change sidebar title
         sidebarLogo.innerText = repoName + contents;
@@ -1012,6 +1012,8 @@ async function clickedOnFileHTML(fileEl, event) {
         // change location
         treeLoc[0] = loggedUser;
         saveTreeLocLS(treeLoc);
+        
+        hideMessage();
         
         stopLoading();
         
