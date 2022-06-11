@@ -153,15 +153,22 @@ function showMessage(message, duration) {
 
 function showDialog(confirmHandler, titleText, confirmText) {
   
-  // add dialog text to HTML
-  dialogTitle.textContent = titleText;
-  dialogConfirm.textContent = confirmText;
-  
-  // show dialog
-  dialogWrapper.classList.add('visible');
-  
-  // add confirm button listener
-  dialogConfirm.onclick = confirmHandler;
+  return new Promise(resolve => {
+    
+    // add dialog text to HTML
+    dialogTitle.textContent = titleText;
+    dialogConfirm.textContent = confirmText;
+    
+    // show dialog
+    dialogWrapper.classList.add('visible');
+    
+    // add confirm button listener
+    dialogConfirm.onclick = confirmHandler;
+    
+    // add dialog click listener
+    dialogWrapper.onclick = resolve;
+    
+  });
   
 }
 
