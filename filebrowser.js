@@ -984,7 +984,7 @@ async function clickedOnFileHTML(fileEl, event) {
         Object.values(modifiedFiles).forEach(modFile => {
         
           const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
-          const [fileRepoName, fileBranch] = fileRepo.split(':')[0];
+          const [fileRepoName, fileBranch] = fileRepo.split(':');
           
           // if modified file is in repo
           // and is not eclipsed
