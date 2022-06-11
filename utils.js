@@ -163,11 +163,11 @@ function showDialog(confirmHandler, titleText, confirmText) {
     dialogWrapper.classList.add('visible');
     
     // add confirm button listener
-    dialogConfirm.onclick = (e) => {
+    dialogConfirm.onclick = async (e) => {
       
       e.stopPropagation();
       
-      confirmHandler(e);
+      await confirmHandler(e);
       resolve(true);
       
     };
