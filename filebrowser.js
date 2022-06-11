@@ -933,7 +933,7 @@ async function clickedOnFileHTML(fileEl, event) {
     
     // get repo obj from local storage
     
-    const [user, repo] = [treeLoc[0], treeLoc[1]];
+    const [user, repo, contents] = treeLoc;
     const repoName = repo.split(':')[0];
     
     let repoObj = modifiedRepos[user + '/' + repoName];
