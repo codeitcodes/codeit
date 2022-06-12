@@ -960,7 +960,7 @@ async function clickedOnFileHTML(fileEl, event) {
     
     
     // if user dosen't have push access in repo
-    if (!repoObj.pushAccess) {
+    if (repoObj.pushAccess === false) {
       
       async function forkRepo() {
                 
