@@ -940,11 +940,11 @@ async function clickedOnFileHTML(fileEl, event) {
     
     // if repo obj isn't fetched yet
     if (!repoObj || repoObj.pushAccess === null) {
-      
-      showMessage('Just a sec..');
-      
+            
       // await repo obj promise
       if (repoPromise) {
+        
+        showMessage('Just a sec..');
         
         await repoPromise;
         
