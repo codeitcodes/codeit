@@ -1603,7 +1603,6 @@ body.mobile .sidebar .button {
   max-width: 375px;
   max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
-  will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
   overflow-y: auto;
