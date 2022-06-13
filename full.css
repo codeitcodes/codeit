@@ -1707,7 +1707,6 @@ body.mobile .menu .icon a {
 }
 
 .dialog {
-  position: fixed;
   background: var(--deep-midnight-blue);
   color: #dcddde;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
@@ -1715,8 +1714,6 @@ body.mobile .menu .icon a {
   line-height: 1.5;
   max-width: 200px;
   width: 194px;
-  top: 50%;
-  left: calc((var(--sidebar-width) - 1px) / 2);
   opacity: 0;
   padding: 2px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
