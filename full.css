@@ -773,7 +773,6 @@ body.notransition .sidebar {
   background: var(--rosemary-lighter);
   transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   overscroll-behavior: none;
-  will-change: transform;
   z-index: 1000;
 }
 
@@ -1306,7 +1305,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   stroke-linecap: round;
   transform: scaleX(-1);
   transform-origin: center;
-  will-change: transform;
 }
 
 .sidebar .repo .lock.locked #shackle {
@@ -1704,7 +1702,6 @@ body.mobile .menu .icon a {
   opacity: 0;
   padding: 2px;
   transform: translate(-50%, -50%) scale(0.94);
-  will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
 }
 
@@ -1850,7 +1847,6 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   transform: translateX(0);
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
-  will-change: transform;
 }
 
 .bottom-wrapper.expanded ~ .sidebar-background {
