@@ -967,6 +967,9 @@ async function clickedOnFileHTML(fileEl, event) {
         // hide dialog
         dialogWrapper.classList.remove('visible');
         
+        // disable push buttons
+        sidebar.classList.add('forking');
+        
         startLoading();
         
         showMessage('Forking...', -1);
@@ -1037,6 +1040,9 @@ async function clickedOnFileHTML(fileEl, event) {
         treeLoc[0] = loggedUser;
         saveTreeLocLS(treeLoc);
         
+        
+        // enable push buttons
+        sidebar.classList.remove('forking');
         
         hideMessage();
         
