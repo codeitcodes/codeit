@@ -1356,6 +1356,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   opacity: .5;
 }
 
+.sidebar.forking .item .push-wrapper {
+  pointer-events: none;
+}
+
 .sidebar .item .arrow {
   color: #828689;
 }
