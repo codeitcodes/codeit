@@ -1,45 +1,82 @@
 <!DOCTYPE html>
-<html style="background:#000;height: 100%;">
+<html>
+
 <head>
   <meta charset="utf-8">
-  <title>404 not found</title>
-  <meta name="theme-color" content="#000">
+  <title>Codeit - Page not found</title>
+  <meta name="theme-color" content="#1a1c24">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,shrink-to-fit=no">
   <link rel="shortcut icon" href="/icons/app-favicon.png">
   <style>
-    .quote::before {
-      content: '"';
-      color: gray;
-      opacity: 0.5;
-      font-size: 50px;
-      position: absolute;
-      top: -40px;
-      left: -8px;
+  
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('/fonts/Inter/Inter.var.woff2') format('woff2');
+      font-named-instance: 'Regular';
     }
+
+
+    html {
+      height: 100%;
+      background: #1a1c24;
+      color: #d4d5d7;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      height: 100%;
+      margin: 0;
+      max-width: 500px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      width: 70px;
+      border-radius: 22.5%;
+      border: 1px solid rgba(255,255,255,.1);
+      margin: 0 auto;
+      margin-bottom: 24px;
+    }
+    
+    .title {
+      font-size: 19px;
+      margin-bottom: 50px;
+      margin-top: 0;
+      margin-bottom: 0;
+      position: relative;
+      text-align: center;
+    }
+    
+    
+    html, body {
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern";
+      -webkit-font-feature-settings: "kern";
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+      -webkit-text-size-adjust: none;
+    }
+    
   </style>
 </head>
-<body style="
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 100%;
-  margin: 0;
-  color: #fff;
-  font-family: system-ui;
-  max-width: 500px;
-  margin: auto;
-  padding: 0 20px;
-" ontouchstart>
-<p style="
-  font-size: 19px;
-  line-height: 1.5;
-  margin-bottom: 40px;
-  margin-top: 0;
-  position: relative;
-" class="quote">Of course everything in the world has been thought of. But what about everything that's not yet in the world? There's way more of that, and none of it's been thought of.</p>
-<p style="text-align:right;font-style:italic;color:gray;margin-top: 0;margin-bottom: 0;"><a style="
-  color: hsl(0deg 0% 66%);
-">- Bill Wurtz</a><br><br>404 not found</p>
-</body>
-</html>
 
+<body ontouchstart>
+  <img class="logo" src="/icons/iphone-app-180.png" width="80" draggable="false" alt="Codeit">
+  <p class="title">Page not found</p>
+</body>
+
+</html>
