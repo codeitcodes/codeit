@@ -880,10 +880,19 @@ async function clickedOnFileHTML(fileEl, event) {
       // load file
       loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
 
-    } else if (isMobile) { // if on mobile device
+    } else { // if file is selected
 
-      // update bottom float
-      updateFloat();
+      if (isMobile) { // if on mobile device
+        
+        // update bottom float
+        updateFloat();
+        
+      } else {
+        
+        // hide sidebar
+        toggleSidebar(false);
+        
+      }
 
     }
 
