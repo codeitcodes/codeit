@@ -959,7 +959,7 @@ async function checkPushDialogs() {
             // hide dialog
             dialogWrapper.classList.remove('visible');
 
-            showMessage('Logging in...');
+            //showMessage('Logging in...');
 
           }
 
