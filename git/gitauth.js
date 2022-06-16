@@ -108,11 +108,15 @@ window.onload = async () => {
   
       // start loading
       startLoading();
+      
+      showMessage('Logging in...', -1);
   
       const gitCode = event.data.split('gitCode=')[1];
   
       // get git token from Github
       await getGithubToken(gitCode);
+      
+      hideMessage();
       
       // render sidebar
       renderSidebarHTML();
