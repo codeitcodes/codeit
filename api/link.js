@@ -62,7 +62,7 @@ const html = `
   <!-- <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
-  <meta property="og:type" content="video">
+  <meta property="og:type" content="video.other">
   <meta property="og:site_name" content="Codeit">
   <meta property="og:video:url" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta property="og:video:secure_url" content="https://codeit.codes/api/link?url=`+ query.url +`">
