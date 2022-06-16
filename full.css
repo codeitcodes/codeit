@@ -1704,6 +1704,11 @@ body.mobile .menu .icon a {
   transition: 0s .18s;
 }
 
+body.mobile .dialog-anim-wrapper,
+body.mobile .dialog-background {
+  width: var(--sidebar-width);
+}
+
 .dialog-wrapper.visible .dialog-anim-wrapper {
   transform: none;
   transition: .18s var(--bounce-function);
