@@ -992,11 +992,13 @@ async function checkPushDialogs() {
     // await repo obj promise
     if (repoPromise) {
 
-      showMessage('Just a sec..');
+      showMessage('Just a sec..', -1);
 
       await repoPromise;
 
       repoObj = modifiedRepos[user + '/' + repoName];
+      
+      hideMessage();
 
     } else {
 
