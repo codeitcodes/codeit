@@ -64,6 +64,11 @@ const html = `
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Codeit">
+  <meta property="og:video:url" content="https://codeit.codes/api/link?url=`+ query.url +`">
+  <meta property="og:video:secure_url" content="https://codeit.codes/api/link?url=`+ query.url +`">
+  <meta property="og:video:type" content="text/html">
+  <meta property="og:video:width" content="1280">
+  <meta property="og:video:height" content="720">
   
   <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:site" content="@codeitcodes">
