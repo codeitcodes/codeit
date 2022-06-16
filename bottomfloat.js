@@ -71,13 +71,18 @@ function playPushAnimation(element) {
 pushWrapper.innerHTML = pushIcon;
 
 // push when clicked on button
-pushWrapper.addEventListener('click', () => {
+pushWrapper.addEventListener('click', async () => {
   
   // get selected file element
   let selectedEl = fileWrapper.querySelector('.file.modified[sha="'+ selectedFile.sha +'"]');
   
   // if selected file element is modified
   if (selectedEl) {
+    
+    const dialogResp = await checkPushDialogs();
+    
+    if (dialogResp === 'return') return;
+    
     
     // play push animation
     playPushAnimation(pushWrapper);
