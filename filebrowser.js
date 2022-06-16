@@ -1028,6 +1028,7 @@ async function checkPushDialogs() {
 
       // disable push buttons
       sidebar.classList.add('forking');
+      if (isMobile) pushWrapper.classList.add('disabled');
 
       startLoading();
 
@@ -1102,6 +1103,7 @@ async function checkPushDialogs() {
 
       // enable push buttons
       sidebar.classList.remove('forking');
+      if (isMobile) pushWrapper.classList.remove('disabled');
 
       hideMessage();
 
