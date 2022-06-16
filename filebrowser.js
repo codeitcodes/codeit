@@ -935,7 +935,7 @@ async function clickedOnFileHTML(fileEl, event) {
 }
 
 
-async function checkPushDialogs(isNewFile) {
+async function checkPushDialogs() {
 
   // if not logged in to git
   if (gitToken == '') {
@@ -972,11 +972,7 @@ async function checkPushDialogs(isNewFile) {
 
     }
 
-    if (!isNewFile) {
-      showDialog(openLogin, 'Login to save this file.', 'Login');
-    } else {
-      showDialog(openLogin, 'Login to create this file.', 'Login');
-    }
+    showDialog(openLogin, 'Login to save this file.', 'Login');
 
     return 'return';
 
@@ -2104,7 +2100,7 @@ function createNewFileInHTML() {
 
       if (fileEl.classList.contains('focused')) {
         
-        const dialogResp = await checkPushDialogs(true);
+        const dialogResp = await checkPushDialogs();
         
         if (dialogResp === 'return') return;
         
