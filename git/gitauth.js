@@ -167,11 +167,15 @@ window.onload = async () => {
 
     // start loading
     startLoading();
+    
+    showMessage('Logging in...', -1);
 
     const gitCode = linkData.gitCode;
 
     // get git token from Github
     await getGithubToken(gitCode);
+    
+    hideMessage();
     
   }
   
