@@ -889,175 +889,9 @@ async function clickedOnFileHTML(fileEl, event) {
 
   } else {
     
-    // if not logged in to git
-    if (gitToken == '') {
-      
-      function openLogin() {
-                
-        const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-        if (isMobile) {
-          
-          window.location.href = authURL;
-          
-        } else {
-          
-          window.addEventListener('message', (event) => {
+    const resp = await checkPushButtonDialogs();
     
-            // if received a git code (succesfully logged in)
-            if (event.origin === window.location.origin
-                && event.data.startsWith('gitCode=')) {
-                
-              // hide dialog
-              dialogWrapper.classList.remove('visible');
-                
-              showMessage('Logging in...');
-
-            }
-            
-          });
-          
-          // open login window
-          window.open(authURL, 'Login with Github', 'height=575,width=575');
-          
-        }
-        
-      }
-      
-      showDialog(openLogin, 'Login to save this file.', 'Login');
-      
-      return;
-      
-    }
-    
-    
-    // get repo obj from local storage
-    
-    const [user, repo, contents] = treeLoc;
-    const repoName = repo.split(':')[0];
-    
-    let repoObj = modifiedRepos[user + '/' + repoName];
-    
-    // if repo obj isn't fetched yet
-    if (!repoObj || repoObj.pushAccess === null) {
-            
-      // await repo obj promise
-      if (repoPromise) {
-        
-        showMessage('Just a sec..');
-        
-        await repoPromise;
-        
-        repoObj = modifiedRepos[user + '/' + repoName];
-        
-      } else {
-        
-        return;
-        
-      }
-      
-    }
-    
-    
-    // if user dosen't have push access in repo
-    if (repoObj.pushAccess === false) {
-      
-      async function forkRepo() {
-                
-        // hide dialog
-        dialogWrapper.classList.remove('visible');
-        
-        // disable push buttons
-        sidebar.classList.add('forking');
-        
-        startLoading();
-        
-        showMessage('Forking...', -1);
-        
-        
-        // change sidebar title
-        sidebarLogo.innerText = repoName + contents;
-        
-        
-        // fork repo
-        await git.forkRepo(treeLoc);
-        
-        
-        // run on modified files
-        Object.values(modifiedFiles).forEach(modFile => {
-        
-          const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
-          const [fileRepoName, fileBranch] = fileRepo.split(':');
-          
-          // if modified file is in repo
-          // and is not eclipsed
-          if (fileUser === user &&
-              fileRepoName === repoName &&
-              modFile.eclipsed === false) {
-            
-            // change the modified file's dir
-            // to the fork's dir
-            modifiedFiles[modFile.sha].dir = [loggedUser, (repoName + ':' + fileBranch), fileContents].join(',');
-            
-          }
-          
-        });
-        
-        // at least one modified file
-        // must have changed,
-        // as a modified file is required to push
-        updateModFilesLS();
-        
-        
-        // update selected file dir
-        
-        const [selFileUser, selFileRepo, selFileContents] = selectedFile.dir.split(',');
-        const [selFileRepoName, selFileBranch] = selFileRepo.split(':');
-        
-        // if selected file is in repo
-        if (selFileUser === user &&
-            selFileRepoName === repoName) {
-          
-          // update selected file dir
-          selectedFile.dir = [loggedUser, (repoName + ':' + selFileBranch), selFileContents].join(',');
-          
-          updateSelectedFileLS();
-          
-        }
-        
-        
-        // create a new repo obj
-        // for fork
-        
-        const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
-                                         true, repoObj.branches, repoObj.private, true, false);
-        modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
-        
-        updateModReposLS();
-        
-        
-        // change location
-        treeLoc[0] = loggedUser;
-        saveTreeLocLS(treeLoc);
-        
-        
-        // enable push buttons
-        sidebar.classList.remove('forking');
-        
-        hideMessage();
-        
-        stopLoading();
-        
-      }
-      
-      const dialogResult = await showDialog(forkRepo,
-                                            'Fork this repository to save your changes.',
-                                            'Fork');
-      
-      if (dialogResult === false) return;
-      
-    }
-    
+    if (resp === 'return') return;
     
     
     let commitMessage;
@@ -1098,6 +932,180 @@ async function clickedOnFileHTML(fileEl, event) {
 
   }
   
+}
+
+
+async function checkPushDialogs() {
+
+  // if not logged in to git
+  if (gitToken == '') {
+
+    function openLogin() {
+
+      const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
+      if (isMobile) {
+
+        window.location.href = authURL;
+
+      } else {
+
+        window.addEventListener('message', (event) => {
+
+          // if received a git code (succesfully logged in)
+          if (event.origin === window.location.origin &&
+            event.data.startsWith('gitCode=')) {
+
+            // hide dialog
+            dialogWrapper.classList.remove('visible');
+
+            showMessage('Logging in...');
+
+          }
+
+        });
+
+        // open login window
+        window.open(authURL, 'Login with Github', 'height=575,width=575');
+
+      }
+
+    }
+
+    showDialog(openLogin, 'Login to save this file.', 'Login');
+
+    return 'return';
+
+  }
+
+
+  // get repo obj from local storage
+
+  const [user, repo, contents] = treeLoc;
+  const repoName = repo.split(':')[0];
+
+  let repoObj = modifiedRepos[user + '/' + repoName];
+
+  // if repo obj isn't fetched yet
+  if (!repoObj || repoObj.pushAccess === null) {
+
+    // await repo obj promise
+    if (repoPromise) {
+
+      showMessage('Just a sec..');
+
+      await repoPromise;
+
+      repoObj = modifiedRepos[user + '/' + repoName];
+
+    } else {
+
+      return 'return';
+
+    }
+
+  }
+
+
+  // if user dosen't have push access in repo
+  if (repoObj.pushAccess === false) {
+
+    async function forkRepo() {
+
+      // hide dialog
+      dialogWrapper.classList.remove('visible');
+
+      // disable push buttons
+      sidebar.classList.add('forking');
+
+      startLoading();
+
+      showMessage('Forking...', -1);
+
+
+      // change sidebar title
+      sidebarLogo.innerText = repoName + contents;
+
+
+      // fork repo
+      await git.forkRepo(treeLoc);
+
+
+      // run on modified files
+      Object.values(modifiedFiles).forEach(modFile => {
+
+        const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
+        const [fileRepoName, fileBranch] = fileRepo.split(':');
+
+        // if modified file is in repo
+        // and is not eclipsed
+        if (fileUser === user &&
+          fileRepoName === repoName &&
+          modFile.eclipsed === false) {
+
+          // change the modified file's dir
+          // to the fork's dir
+          modifiedFiles[modFile.sha].dir = [loggedUser, (repoName + ':' + fileBranch), fileContents].join(',');
+
+        }
+
+      });
+
+      // at least one modified file
+      // must have changed,
+      // as a modified file is required to push
+      updateModFilesLS();
+
+
+      // update selected file dir
+
+      const [selFileUser, selFileRepo, selFileContents] = selectedFile.dir.split(',');
+      const [selFileRepoName, selFileBranch] = selFileRepo.split(':');
+
+      // if selected file is in repo
+      if (selFileUser === user &&
+        selFileRepoName === repoName) {
+
+        // update selected file dir
+        selectedFile.dir = [loggedUser, (repoName + ':' + selFileBranch), selFileContents].join(',');
+
+        updateSelectedFileLS();
+
+      }
+
+
+      // create a new repo obj
+      // for fork
+
+      const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
+        true, repoObj.branches, repoObj.private, true, false);
+      modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
+
+      updateModReposLS();
+
+
+      // change location
+      treeLoc[0] = loggedUser;
+      saveTreeLocLS(treeLoc);
+
+
+      // enable push buttons
+      sidebar.classList.remove('forking');
+
+      hideMessage();
+
+      stopLoading();
+
+    }
+
+    const dialogResult = await showDialog(forkRepo,
+      'Fork this repository to save your changes.',
+      'Fork');
+
+    if (dialogResult === false) return 'return';
+
+  }
+
 }
 
 
