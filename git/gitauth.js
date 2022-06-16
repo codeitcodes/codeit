@@ -140,29 +140,48 @@ window.onload = async () => {
       
     }
     
-    // don't transition
-    body.classList.add('notransition');
-
-    toggleSidebar(true);
-
-    onNextFrame(() => {
-
-      body.classList.remove('notransition');
-
-    });
-
-
-    // if on safari, refresh header color
-    if (isSafari) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
+    if (getStorage('sidebar') === 'true') {
+      
+      // don't transition
+      body.classList.add('notransition');
+  
+      toggleSidebar(true);
+  
       onNextFrame(() => {
-
-        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
+  
+        body.classList.remove('notransition');
+  
       });
 
+
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        });
+        
+      }
+
+    } else {
+      
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        });
+        
+      }
+      
     }
 
     // start loading
