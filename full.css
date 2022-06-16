@@ -251,6 +251,10 @@ body.notransition .bottom-wrapper {
   display: none;
 }
 
+.bottom-float .push-wrapper.disabled {
+  pointer-events: none;
+}
+
 .bottom-float.modified .push-wrapper,
 .bottom-float .push-wrapper.checked {
   display: flex;
