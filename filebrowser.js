@@ -2104,7 +2104,7 @@ function createNewFileInHTML() {
 
       if (fileEl.classList.contains('focused')) {
         
-        const dialogResp = await checkPushDialogs();
+        const dialogResp = await checkPushDialogs(true);
         
         if (dialogResp === 'return') return;
         
