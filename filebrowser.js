@@ -935,7 +935,7 @@ async function clickedOnFileHTML(fileEl, event) {
 }
 
 
-async function checkPushDialogs() {
+async function checkPushDialogs(isNewFile) {
 
   // if not logged in to git
   if (gitToken == '') {
@@ -972,7 +972,11 @@ async function checkPushDialogs() {
 
     }
 
-    showDialog(openLogin, 'Login to save this file.', 'Login');
+    if (!isNewFile) {
+      showDialog(openLogin, 'Login to save this file.', 'Login');
+    } else {
+      showDialog(openLogin, 'Login to create this file.', 'Login');
+    }
 
     return 'return';
 
