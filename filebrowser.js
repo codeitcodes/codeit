@@ -2132,8 +2132,8 @@ function createNewFileInHTML() {
         // get file name
         let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
 
-        // if file name is empty, add a dash
-        if (fileName === '') fileName = '-';
+        // if file name is empty, use default name
+        if (fileName === '') fileName = 'new-file';
 
         // replace all special chars in name with dashes
         
