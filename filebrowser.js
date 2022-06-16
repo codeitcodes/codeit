@@ -889,9 +889,9 @@ async function clickedOnFileHTML(fileEl, event) {
 
   } else {
     
-    const resp = await checkPushDialogs();
+    const dialogResp = await checkPushDialogs();
     
-    if (resp === 'return') return;
+    if (dialogResp === 'return') return;
     
     
     let commitMessage;
@@ -2097,6 +2097,11 @@ function createNewFileInHTML() {
     async function pushNewFileInHTML() {
 
       if (fileEl.classList.contains('focused')) {
+        
+        const dialogResp = await checkPushDialogs();
+        
+        if (dialogResp === 'return') return;
+        
 
         // play push animation
         playPushAnimation(fileEl.querySelector('.push-wrapper'));
@@ -2120,6 +2125,9 @@ function createNewFileInHTML() {
 
         // get file name
         let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // if file name is empty, add a dash
+        if (fileName === '') fileName = '-';
 
         // replace all special chars in name with dashes
         
