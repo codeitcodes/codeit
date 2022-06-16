@@ -81,6 +81,8 @@ const html = `
   <meta name="twitter:player:width" content="800">
   <meta name="twitter:player:height" content="600">
   
+  <link rel="alternate" type="application/json+oembed" href="https://codeit.codes/api/oembed?url=`+ query.url +`&format=json" title="`+ title +`">
+  
   <meta name="referrer" content="default">
   <meta name="keywords" content="code editor, version control tools, source code versioning, source code management tools, python, jquery demo, html, git, how to, bootstrap, jquery, javascript, javascript tutorial, javascript tutorial for beginners, javascript programming, html web form, create form in html, responsive web design, html web design, html design, responsive website development, html5 tutorial, html5 css3, html5 development, web design software, web development software, git tutorial, git howto, git repository, git command, git source code, top programming languages to learn, best programming language, best computer language, open source, open source code, open source applications, source code editor, software development tools, development tool, software developer tools list, programmer tool, web application development software">
   <link rel="canonical" href="https://codeit.codes/">
