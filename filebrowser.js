@@ -889,7 +889,7 @@ async function clickedOnFileHTML(fileEl, event) {
 
   } else {
     
-    const resp = await checkPushButtonDialogs();
+    const resp = await checkPushDialogs();
     
     if (resp === 'return') return;
     
