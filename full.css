@@ -252,7 +252,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-float .push-wrapper.disabled {
-  pointer-events: none;
+  pointer-events: none
 }
 
 .bottom-float.modified .push-wrapper,
@@ -1404,7 +1404,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .intro {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 1px);
   height: 100%;
   display: flex;
   align-items: center;
@@ -1418,6 +1418,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .files .intro {
   height: calc(100% - 85px);
+  margin-top: -11px;
 }
 
 .sidebar .intro .picture {
