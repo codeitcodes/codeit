@@ -1417,7 +1417,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .files .intro {
-  height: calc(100% - 85px);
+  height: calc(100% - 74px);
   margin-top: -11px;
 }
 
