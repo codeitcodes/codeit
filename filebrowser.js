@@ -2474,7 +2474,14 @@ function toggleSidebar(open) {
   } else {
 
     body.classList.remove('expanded');
-    sidebarToggle.classList.remove('visible');
+    
+    window.setTimeout(() => {
+      
+      if (!body.classList.contains('expanded')) {
+        sidebarToggle.classList.remove('visible');
+      }
+      
+    }, 1500);
 
     if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = '#313744';
