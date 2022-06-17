@@ -1,5 +1,5 @@
 
-const hoveringSidebarToggle = false;
+let hoveringSidebarToggle = false;
 
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
