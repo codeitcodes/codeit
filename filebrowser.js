@@ -1,7 +1,11 @@
 
+const hoveringSidebarToggle = false;
+
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
-
+  
+  hoveringSidebarToggle = true;
+  
   if (!body.classList.contains('expanded')) {
 
     sidebarToggle.classList.add('visible');
@@ -13,11 +17,14 @@ sidebarToggle.addEventListener('mouseover', () => {
 // hide bookmark on mouse out
 sidebarToggle.addEventListener('mouseout', () => {
 
+  hoveringSidebarToggle = false;
+
   if (!body.classList.contains('expanded')) {
     
     window.setTimeout(() => {
       
-      if (!body.classList.contains('expanded')) {
+      if (!hoveringSidebarToggle &&
+          !body.classList.contains('expanded')) {
         sidebarToggle.classList.remove('visible');
       }
       
@@ -2494,7 +2501,8 @@ function toggleSidebar(open) {
     
     window.setTimeout(() => {
       
-      if (!body.classList.contains('expanded')) {
+      if (!hoveringSidebarToggle &&
+          !body.classList.contains('expanded')) {
         sidebarToggle.classList.remove('visible');
       }
       
