@@ -870,12 +870,15 @@ async function handleLiveViewRequest(requestPath) {
     
     
     // search modified files for file
-    const modFile = Object.values(modifiedFiles).filter(file =>
-                      (file.dir == liveFileDir.join(',')
-                       && file.name == fileName))[0];
+    let modFile = Object.values(modifiedFiles).filter(file =>
+                    (file.dir == liveFileDir.join(',')
+                     && file.name == fileName))[0];
     
     // if matching modified file exists
     if (modFile) {
+      
+      // get the file's latest version
+      modFile = getLatestVersion(modFile);
       
       // return modified file content
       respContent = modFile.content;
