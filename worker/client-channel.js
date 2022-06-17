@@ -68,12 +68,14 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type, status) {
+function createResponse(data, type, status, cache) {
 
   let headers = {
     'Content-Type': type
   };
   
+  if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+
   // create Response from data
   const response = new Response(data, {
     headers: headers,
