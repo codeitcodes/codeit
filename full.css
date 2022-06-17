@@ -569,6 +569,7 @@ body.scroll-enabled .bookmark {
   height: 100vh;
   width: 10px;
   cursor: text;
+  transition: 0s .18s;
   z-index: -1;
 }
 
@@ -577,6 +578,8 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible::after {
+  width: 0;
+  transition: none;
   pointer-events: none;
 }
 
