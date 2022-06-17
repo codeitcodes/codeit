@@ -10,6 +10,23 @@ sidebarToggle.addEventListener('mouseover', () => {
 
 })
 
+// hide bookmark on mouse out
+sidebarToggle.addEventListener('mouseout', () => {
+
+  if (!body.classList.contains('expanded')) {
+    
+    window.setTimeout(() => {
+      
+      if (!body.classList.contains('expanded')) {
+        sidebarToggle.classList.remove('visible');
+      }
+      
+    }, 1500);
+
+  }
+
+})
+
 // toggle sidebar on click of bookmark
 sidebarToggle.addEventListener('click', () => {
 
