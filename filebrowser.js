@@ -2491,10 +2491,12 @@ function toggleSidebar(open) {
     body.classList.add('expanded');
 
     if (isMobile) {
+            
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+      
+    } else {
       
       sidebarToggle.classList.add('visible');
-      
-      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
       
     }
 
@@ -2504,6 +2506,10 @@ function toggleSidebar(open) {
 
     if (isMobile) {
       
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+      
+    } else {
+      
       window.setTimeout(() => {
         
         if (!hoveringSidebarToggle &&
@@ -2512,8 +2518,6 @@ function toggleSidebar(open) {
         }
         
       }, 1500);
-      
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
       
     }
 
