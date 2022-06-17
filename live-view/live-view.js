@@ -877,9 +877,6 @@ async function handleLiveViewRequest(requestPath) {
     // if matching modified file exists
     if (modFile) {
       
-      // get the file's latest version
-      modFile = getLatestVersion(modFile);
-      
       // return modified file content
       respContent = modFile.content;
       
