@@ -2489,27 +2489,32 @@ function toggleSidebar(open) {
   if (open) {
 
     body.classList.add('expanded');
-    sidebarToggle.classList.add('visible');
 
     if (isMobile) {
+      
+      sidebarToggle.classList.add('visible');
+      
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+      
     }
 
   } else {
 
     body.classList.remove('expanded');
-    
-    window.setTimeout(() => {
-      
-      if (!hoveringSidebarToggle &&
-          !body.classList.contains('expanded')) {
-        sidebarToggle.classList.remove('visible');
-      }
-      
-    }, 1500);
 
     if (isMobile) {
+      
+      window.setTimeout(() => {
+        
+        if (!hoveringSidebarToggle &&
+            !body.classList.contains('expanded')) {
+          sidebarToggle.classList.remove('visible');
+        }
+        
+      }, 1500);
+      
       document.querySelector('meta[name="theme-color"]').content = '#313744';
+      
     }
 
   }
