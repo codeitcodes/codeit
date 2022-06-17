@@ -252,7 +252,7 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-float .push-wrapper.disabled {
-  pointer-events: none
+  pointer-events: none;
 }
 
 .bottom-float.modified .push-wrapper,
