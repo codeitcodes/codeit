@@ -113,7 +113,11 @@ window.onload = async () => {
   
       // get git token from Github
       await getGithubToken(gitCode);
-            
+      
+      if (messageEl.textContent === 'Logging in...') {
+        hideMessage();
+      }
+      
       // render sidebar
       renderSidebarHTML();
       
