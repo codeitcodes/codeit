@@ -985,14 +985,14 @@ async function checkPushDialogs() {
 
         window.addEventListener('message', (event) => {
 
-          // if received a git code (succesfully logged in)
+          // if received a git code
           if (event.origin === window.location.origin &&
             event.data.startsWith('gitCode=')) {
 
             // hide dialog
             dialogWrapper.classList.remove('visible');
 
-            showMessage('Logging in...');
+            showMessage('Logging in...', -1);
 
           }
 
