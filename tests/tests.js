@@ -63,8 +63,8 @@ let tests = {
     const nextFile = fileWrapper.querySelector('.file.selected').nextElementSibling;
     const prevFile = fileWrapper.querySelector('.file.selected').previousElementSibling;
 
-    if (prevFile) click(prevFile);
-    else if (nextFile) click(nextFile);
+    if (prevFile) tests.click(prevFile);
+    else if (nextFile) tests.click(nextFile);
   
   },
   
