@@ -174,6 +174,22 @@ function showDialog(confirmHandler, titleText, confirmText) {
     // show dialog
     dialogWrapper.classList.add('visible');
     
+    // if on mobile,
+    // change status bar color
+    if (isMobile) {
+      
+      if (body.classList.contains('expanded')) {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#040405';
+        
+      } else {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#07080a';
+        
+      }
+      
+    }
+    
     // add confirm button listener
     dialogConfirm.onclick = async (e) => {
       
