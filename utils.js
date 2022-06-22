@@ -215,6 +215,22 @@ dialogCancel.addEventListener('click', () => {
   // hide dialog
   dialogWrapper.classList.remove('visible');
   
+  // if on mobile,
+  // change status bar color
+  if (isMobile) {
+
+    if (body.classList.contains('expanded')) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+    } else {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+    }
+
+  }
+  
 });
 
 // add background click listener
@@ -222,6 +238,22 @@ dialogBackground.addEventListener('click', () => {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
+  
+  // if on mobile,
+  // change status bar color
+  if (isMobile) {
+
+    if (body.classList.contains('expanded')) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+    } else {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+    }
+
+  }
   
 });
 
