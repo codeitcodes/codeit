@@ -1678,9 +1678,16 @@ async function renderBranchMenuHTML(renderAll) {
           }
 
         } else if (branch.classList.contains('see-more')) { // if clicked on show more button
-
+          
           // render branch menu
           renderBranchMenuHTML(true);
+          
+          // if on mobile, reposition branch menu
+          if (isMobile) {
+            
+            moveElToEl(branchMenu, sidebarBranch, 13);
+            
+          }
 
         } else if (branch.classList.contains('new-branch')) { // if clicked on new branch button
 
