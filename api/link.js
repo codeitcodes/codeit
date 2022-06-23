@@ -1,10 +1,42 @@
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
   
   const query = request.query;
 
   let title = 'Codeit | Mobile code editor connected to Git';
-
+  let desc = 'Run JavaScript projects, code your ideas, and share it all on Codeit.';
+  let twitterTitle = false;
+  
+  
+    
+  function getRequest(url) {
+  
+    return new Promise(resolve => {
+      
+      const req = https.get(url, (resp) => {
+        
+        let data = '';
+        
+        resp.on('data', (chunk) => {
+          
+          data += chunk;
+          
+        });
+        
+        resp.on('end', () => {
+          
+          resolve({status: resp.statusCode, data: data});
+          
+        });
+        
+      });
+      
+    });
+    
+  }
+  
+  
+  
   if (query.url) {
     
     // parse URL
@@ -23,20 +55,34 @@ export default function handler(request, response) {
         
       }
       
+      
+      const repoName = url[0] + '/' + url[1].split(':')[0];
+      
+      
+      const {status, resp} = await getRequest('https://api.github.com/repos/' + repoName);
+      
+      const repoDesc = JSON.parse(resp).description;
+      
+      if (repoDesc) desc = repoDesc;
+      else desc = '';
+      
+      
       if (url[url.length-1].endsWith('.html')
           || url[url.length-1].endsWith('.svg')) {
             
-        title = 'Run ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
+        title = 'Run ' + repoName + ' on Codeit';
       
       } else {
         
-        title = 'Open ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
+        title = repoName + ' on Codeit';
         
       }
       
     }
     
   }
+  
+  if (!twitterTitle) twitterTitle = title;
 
 
 
@@ -56,10 +102,10 @@ const html = `
   <meta name="apple-mobile-web-app-title" content="Codeit">
 
   <meta charset="utf-8">
-  <!-- <meta name="description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta name="description" content="`+ desc +`">
   
   <meta property="og:title" content="`+ title +`">
-  <!-- <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta property="og:description" content="`+ desc +`">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="video.other">
@@ -67,14 +113,14 @@ const html = `
   <meta property="og:video:url" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta property="og:video:secure_url" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta property="og:video:type" content="text/html">
-  <meta property="og:video:width" content="1280">
+  <meta property="og:video:width" content="128'https://api.github.com/repos/' + 0">
   <meta property="og:video:height" content="720">
   
-  <meta property="twitter:title" content="`+ title +`">
+  <meta property="twitter:title" content="`+ twitterTitle +`">
   <meta property="twitter:site" content="@codeitcodes">
   <meta name="twitter:card" content="player">
   <meta property="twitter:domain" content="https://codeit.codes/">
-  <!-- <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta name="twitter:description" content="`+ desc +`">
   <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
   <meta name="twitter:player" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta name="twitter:player:stream:content_type" content="text/html">
