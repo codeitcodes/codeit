@@ -1685,7 +1685,9 @@ async function renderBranchMenuHTML(renderAll) {
           // if on mobile, reposition branch menu
           if (isMobile) {
             
-            moveElToEl(branchMenu, sidebarBranch, 13);
+            onNextFrame(() => {
+              moveElToEl(branchMenu, sidebarBranch, 13);
+            });
             
           }
 
