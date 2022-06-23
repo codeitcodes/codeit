@@ -32,7 +32,24 @@ export default function handler(request, response) {
       
       } else {
         
-        title = repoName + ' on Codeit';
+        let parsedDir = url.split('/');
+        
+        parsedDir[1] = repo.split(':')[0];
+        
+        if (query.url.startsWith('https://github.com') ||
+            query.url.startsWith('https:/github.com')) {
+          
+          if (parsedDir[2] === 'blob') {
+            
+            parsedDir.splice(2, 2);
+            
+          }
+          
+        }
+        
+        parsedDir = parsedDir.join('/');
+        
+        title = parsedDir + ' on Codeit';
         
       }
       
