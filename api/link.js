@@ -59,6 +59,8 @@ export default async function handler(request, response) {
       const repoName = url[0] + '/' + url[1].split(':')[0];
       
       
+      console.log('https://api.github.com/repos/' + repoName);
+      
       const {status, resp} = await getRequest('https://api.github.com/repos/' + repoName);
       
       console.log(resp);
