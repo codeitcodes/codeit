@@ -8,6 +8,7 @@ export default async function handler(request, response) {
   let twitterTitle = false;
   
   
+  const https = require('https');
     
   function getRequest(url) {
   
