@@ -49,6 +49,8 @@ export default function handler(request, response) {
         
         parsedDir = parsedDir.join('/');
         
+        if (parsedDir.endsWith('/')) parsedDir = parsedDir.slice(0, -1);
+        
         title = parsedDir + ' on Codeit';
         
       }
