@@ -1848,7 +1848,9 @@ sidebarBranch.addEventListener('click', () => {
   if (branchMenu.classList.contains('visible')) {
 
     // move branch menu to icon
-    moveElToEl(branchMenu, sidebarBranch, 13);
+    onNextFrame(() => {
+      moveElToEl(branchMenu, sidebarBranch, 13);
+    });
 
     branchMenu.classList.add('top-margin');
 
