@@ -1613,7 +1613,7 @@ body.mobile .sidebar .button {
   min-width: 170px;
   min-width: 135px;
   max-width: 375px;
-  max-height: calc(100vh - 80px - 6px);
+  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom));
   pointer-events: none;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
