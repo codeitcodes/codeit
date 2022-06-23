@@ -61,12 +61,12 @@ export default async function handler(request, response) {
       
       const {status, resp} = await getRequest('https://api.github.com/repos/' + repoName);
       
-      response.status(200).send(resp);
+      console.log(resp);
       
-      const repoDesc = JSON.parse(resp).description;
+      //const repoDesc = JSON.parse(resp).description;
       
-      if (repoDesc) desc = repoDesc;
-      else desc = '';
+      //if (repoDesc) desc = repoDesc;
+      //else desc = '';
       
       
       if (url[url.length-1].endsWith('.html')
