@@ -37,7 +37,6 @@ export default async function handler(request, response) {
   }
   
   
-  
   if (query.url) {
     
     // parse URL
