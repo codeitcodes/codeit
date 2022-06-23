@@ -12,25 +12,27 @@ export default function handler(request, response) {
                        .replace('https://dev.cde.run/', '')
                        .replace('https://github.com/', '')
                        .replace('https:/github.com/', '');
-    
-    url = url.split('/');
-    
-    if (url[0] && url[1]) {
-      
-      if (url[1].endsWith('.git')) {
         
-        url[1] = url[1].slice(0, -('.git'.length));
+    let [user, repo] = url.split('/');
+    
+    if (user && repo) {
+      
+      if (repo.endsWith('.git')) {
+        
+        repo = repo.slice(0, -('.git'.length));
         
       }
       
-      if (url[url.length-1].endsWith('.html')
-          || url[url.length-1].endsWith('.svg')) {
-            
-        title = 'Run ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
+      const repoName = user + '/' + repo.split(':')[0];
+      
+      if (url.endsWith('.html') ||
+          url.endsWith('.svg')) {
+        
+        title = 'Run ' + repoName + ' on Codeit';
       
       } else {
         
-        title = 'Open ' + url[0] + '/' + url[1].split(':')[0] + ' with Codeit';
+        title = repoName + ' on Codeit';
         
       }
       
@@ -56,10 +58,10 @@ const html = `
   <meta name="apple-mobile-web-app-title" content="Codeit">
 
   <meta charset="utf-8">
-  <!-- <meta name="description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta name="description" content="">
   
   <meta property="og:title" content="`+ title +`">
-  <!-- <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta property="og:description" content="">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="video.other">
@@ -74,7 +76,7 @@ const html = `
   <meta property="twitter:site" content="@codeitcodes">
   <meta name="twitter:card" content="player">
   <meta property="twitter:domain" content="https://codeit.codes/">
-  <!-- <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
+  <meta name="twitter:description" content="">
   <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
   <meta name="twitter:player" content="https://codeit.codes/api/link?url=`+ query.url +`">
   <meta name="twitter:player:stream:content_type" content="text/html">
