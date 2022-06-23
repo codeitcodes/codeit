@@ -1,10 +1,34 @@
 
+let hoveringSidebarToggle = false;
+
 // show bookmark on hover
 sidebarToggle.addEventListener('mouseover', () => {
-
+  
+  hoveringSidebarToggle = true;
+  
   if (!body.classList.contains('expanded')) {
 
     sidebarToggle.classList.add('visible');
+
+  }
+
+})
+
+// hide bookmark on mouse out
+sidebarToggle.addEventListener('mouseout', () => {
+
+  hoveringSidebarToggle = false;
+
+  if (!body.classList.contains('expanded')) {
+    
+    window.setTimeout(() => {
+      
+      if (!hoveringSidebarToggle &&
+          !body.classList.contains('expanded')) {
+        sidebarToggle.classList.remove('visible');
+      }
+      
+    }, 1500);
 
   }
 
@@ -866,7 +890,7 @@ function addHTMLItemListeners() {
 
 
 // when clicked on file in HTML
-function clickedOnFileHTML(fileEl, event) {
+async function clickedOnFileHTML(fileEl, event) {
   
   // if not clicked on push button
   let pushWrapper = fileEl.querySelector('.push-wrapper');
@@ -880,46 +904,32 @@ function clickedOnFileHTML(fileEl, event) {
       // load file
       loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
 
-    } else if (isMobile) { // if on mobile device
+    } else { // if file is selected
 
-      // update bottom float
-      updateFloat();
+      if (isMobile) { // if on mobile device
+        
+        // update bottom float
+        updateFloat();
+        
+      } else {
+        
+        // hide sidebar
+        toggleSidebar(false);
+        
+      }
 
     }
 
   } else {
     
-    /*
-    // if not logged in to git
-    if (gitToken == '') {
-      
-      function openLogin() {
-        
-        const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-        if (isMobile) {
-          
-          window.location.href = authURL;
-          
-        } else {
-          
-          window.open(authURL, 'Login with Github', 'height=575,width=575');
-          
-        }
-        
-      }
-      
-      showDialog(openLogin, 'Login to save this file.', 'Login');
-      
-      return;
-      
-    }
-    */
+    const dialogResp = await checkPushDialogs();
+    
+    if (dialogResp === 'return') return;
     
     
     let commitMessage;
     
-    // if ctrl/meta/shift-clicked on push button
+    // if ctrl/cmd/shift-clicked on push button
     if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
       // get selected branch
@@ -955,6 +965,200 @@ function clickedOnFileHTML(fileEl, event) {
 
   }
   
+}
+
+
+async function checkPushDialogs() {
+
+  // if not logged in to git
+  if (gitToken == '') {
+
+    function openLogin() {
+
+      const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
+      if (isMobile) {
+
+        window.location.href = authURL;
+
+      } else {
+
+        window.addEventListener('message', (event) => {
+
+          // if received a git code
+          if (event.origin === window.location.origin &&
+            event.data.startsWith('gitCode=')) {
+
+            // hide dialog
+            dialogWrapper.classList.remove('visible');
+
+            showMessage('Logging in...', -1);
+
+          }
+
+        });
+
+        // open login window
+        window.open(authURL, 'Login with Github', 'height=575,width=575');
+
+      }
+
+    }
+
+    showDialog(openLogin, 'Login to save this file.', 'Login');
+
+    return 'return';
+
+  }
+
+
+  // get repo obj from local storage
+
+  const [user, repo, contents] = treeLoc;
+  const repoName = repo.split(':')[0];
+
+  let repoObj = modifiedRepos[user + '/' + repoName];
+
+  // if repo obj isn't fetched yet
+  if (!repoObj || repoObj.pushAccess === null) {
+
+    // await repo obj promise
+    if (repoPromise) {
+
+      showMessage('Just a sec..', -1);
+
+      await repoPromise;
+
+      repoObj = modifiedRepos[user + '/' + repoName];
+      
+      hideMessage();
+
+    } else {
+
+      return 'return';
+
+    }
+
+  }
+
+
+  // if user dosen't have push access in repo
+  if (repoObj.pushAccess === false) {
+
+    async function forkRepo() {
+
+      // hide dialog
+      dialogWrapper.classList.remove('visible');
+      
+      // if on mobile,
+      // change status bar color
+      if (isMobile) {
+    
+        if (body.classList.contains('expanded')) {
+    
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+    
+        } else {
+    
+          document.querySelector('meta[name="theme-color"]').content = '#313744';
+    
+        }
+    
+      }
+
+      // disable push buttons
+      sidebar.classList.add('forking');
+      if (isMobile) pushWrapper.classList.add('disabled');
+
+      startLoading();
+
+      showMessage('Forking...', -1);
+
+
+      // change sidebar title
+      sidebarLogo.innerText = repoName + contents;
+
+
+      // fork repo
+      await git.forkRepo(treeLoc);
+
+
+      // run on modified files
+      Object.values(modifiedFiles).forEach(modFile => {
+
+        const [fileUser, fileRepo, fileContents] = modFile.dir.split(',');
+        const [fileRepoName, fileBranch] = fileRepo.split(':');
+
+        // if modified file is in repo
+        // and is not eclipsed
+        if (fileUser === user &&
+          fileRepoName === repoName &&
+          modFile.eclipsed === false) {
+
+          // change the modified file's dir
+          // to the fork's dir
+          modifiedFiles[modFile.sha].dir = [loggedUser, (repoName + ':' + fileBranch), fileContents].join(',');
+
+        }
+
+      });
+
+      // at least one modified file
+      // must have changed,
+      // as a modified file is required to push
+      updateModFilesLS();
+
+
+      // update selected file dir
+
+      const [selFileUser, selFileRepo, selFileContents] = selectedFile.dir.split(',');
+      const [selFileRepoName, selFileBranch] = selFileRepo.split(':');
+
+      // if selected file is in repo
+      if (selFileUser === user &&
+        selFileRepoName === repoName) {
+
+        // update selected file dir
+        selectedFile.dir = [loggedUser, (repoName + ':' + selFileBranch), selFileContents].join(',');
+
+        updateSelectedFileLS();
+
+      }
+
+
+      // create a new repo obj
+      // for fork
+
+      const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
+        true, repoObj.branches, repoObj.private, true, false);
+      modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
+
+      updateModReposLS();
+
+
+      // change location
+      treeLoc[0] = loggedUser;
+      saveTreeLocLS(treeLoc);
+
+
+      // enable push buttons
+      sidebar.classList.remove('forking');
+      if (isMobile) pushWrapper.classList.remove('disabled');
+
+      hideMessage();
+
+      stopLoading();
+
+    }
+
+    const dialogResult = await showDialog(forkRepo,
+      'Fork this repository to save your changes.',
+      'Fork');
+
+    if (dialogResult === false) return 'return';
+
+  }
+
 }
 
 
@@ -1946,6 +2150,11 @@ function createNewFileInHTML() {
     async function pushNewFileInHTML() {
 
       if (fileEl.classList.contains('focused')) {
+        
+        const dialogResp = await checkPushDialogs();
+        
+        if (dialogResp === 'return') return;
+        
 
         // play push animation
         playPushAnimation(fileEl.querySelector('.push-wrapper'));
@@ -1969,6 +2178,9 @@ function createNewFileInHTML() {
 
         // get file name
         let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // if file name is empty, use default name
+        if (fileName === '') fileName = 'new-file';
 
         // replace all special chars in name with dashes
         
@@ -2293,19 +2505,36 @@ function toggleSidebar(open) {
   if (open) {
 
     body.classList.add('expanded');
-    sidebarToggle.classList.add('visible');
 
     if (isMobile) {
+            
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+      
+    } else {
+      
+      sidebarToggle.classList.add('visible');
+      
     }
 
   } else {
 
     body.classList.remove('expanded');
-    sidebarToggle.classList.remove('visible');
 
     if (isMobile) {
+      
       document.querySelector('meta[name="theme-color"]').content = '#313744';
+      
+    } else {
+      
+      window.setTimeout(() => {
+        
+        if (!hoveringSidebarToggle &&
+            !body.classList.contains('expanded')) {
+          sidebarToggle.classList.remove('visible');
+        }
+        
+      }, 1500);
+      
     }
 
   }

@@ -62,8 +62,13 @@ const html = `
   <!-- <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit."> -->
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="video.other">
   <meta property="og:site_name" content="Codeit">
+  <meta property="og:video:url" content="https://codeit.codes/api/link?url=`+ query.url +`">
+  <meta property="og:video:secure_url" content="https://codeit.codes/api/link?url=`+ query.url +`">
+  <meta property="og:video:type" content="text/html">
+  <meta property="og:video:width" content="1280">
+  <meta property="og:video:height" content="720">
   
   <meta property="twitter:title" content="`+ title +`">
   <meta property="twitter:site" content="@codeitcodes">
@@ -75,6 +80,8 @@ const html = `
   <meta name="twitter:player:stream:content_type" content="text/html">
   <meta name="twitter:player:width" content="800">
   <meta name="twitter:player:height" content="600">
+  
+  <link rel="alternate" type="application/json+oembed" href="https://codeit.codes/api/oembed?url=`+ query.url +`&format=json" title="`+ title +`">
   
   <meta name="referrer" content="default">
   <meta name="keywords" content="code editor, version control tools, source code versioning, source code management tools, python, jquery demo, html, git, how to, bootstrap, jquery, javascript, javascript tutorial, javascript tutorial for beginners, javascript programming, html web form, create form in html, responsive web design, html web design, html design, responsive website development, html5 tutorial, html5 css3, html5 development, web design software, web development software, git tutorial, git howto, git repository, git command, git source code, top programming languages to learn, best programming language, best computer language, open source, open source code, open source applications, source code editor, software development tools, development tool, software developer tools list, programmer tool, web application development software">

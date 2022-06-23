@@ -20,15 +20,27 @@ if (!isMobile) {
     console.log(window.opener.location.href);
 
     // post login token to opening window
-    window.opener.postMessage(code, window.location);
+    window.opener.postMessage(('gitCode=' + code), window.location);
     window.close();
 
   } catch(e) {
-
-    // if cannot access opening window (window is cross-origin)
-    // redirect to dev version and try posting login token from there
-    window.location.href = window.location.protocol + '//' + 'dev.' + window.location.host + window.location.pathname + window.location.search;
-
+    
+    if (window.location.hostname !== 'dev.codeit.codes') {
+      
+      // if cannot access opening window (window is cross-origin)
+      // redirect to dev version and try posting login token from there
+      window.location.href = 'https://dev.codeit.codes' + window.location.pathname + window.location.search;
+    
+    } else {
+      
+      // if already on dev version
+      // and still cannot access opening window
+      
+      // redirect to retry page
+      window.location.href = 'https://codeit.codes/redirect?to='+ encodeURIComponent('https://codeit.codes' + window.location.pathname + window.location.search) +'&text=Couldn\'t login. Try again?';
+      
+    }
+    
   }
   
 } else {

@@ -251,6 +251,10 @@ body.notransition .bottom-wrapper {
   display: none;
 }
 
+.bottom-float .push-wrapper.disabled {
+  pointer-events: none;
+}
+
 .bottom-float.modified .push-wrapper,
 .bottom-float .push-wrapper.checked {
   display: flex;
@@ -565,6 +569,7 @@ body.scroll-enabled .bookmark {
   height: 100vh;
   width: 10px;
   cursor: text;
+  transition: 0s .18s;
   z-index: -1;
 }
 
@@ -573,6 +578,8 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible::after {
+  width: 0;
+  transition: none;
   pointer-events: none;
 }
 
@@ -773,7 +780,6 @@ body.notransition .sidebar {
   background: var(--rosemary-lighter);
   transform: translateX(calc(-100% - env(safe-area-inset-left, 0px)));
   overscroll-behavior: none;
-  will-change: transform;
   z-index: 1000;
 }
 
@@ -1306,7 +1312,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   stroke-linecap: round;
   transform: scaleX(-1);
   transform-origin: center;
-  will-change: transform;
 }
 
 .sidebar .repo .lock.locked #shackle {
@@ -1358,6 +1363,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   opacity: .5;
 }
 
+.sidebar.forking .item .push-wrapper {
+  pointer-events: none;
+}
+
 .sidebar .item .arrow {
   color: #828689;
 }
@@ -1398,7 +1407,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .intro {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 1px);
   height: 100%;
   display: flex;
   align-items: center;
@@ -1411,7 +1420,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .files .intro {
-  height: calc(100% - 85px);
+  height: calc(100% - 74px);
+  margin-top: -11px;
 }
 
 .sidebar .intro .picture {
@@ -1605,7 +1615,6 @@ body.mobile .sidebar .button {
   max-width: 375px;
   max-height: calc(100vh - 80px - 6px);
   pointer-events: none;
-  will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
   overflow-y: auto;
@@ -1680,30 +1689,56 @@ body.mobile .menu .icon a {
 }
 
 
-.dialog {
+.dialog-wrapper {
   position: fixed;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.dialog-wrapper.visible {
+  pointer-events: auto;
+}
+
+.dialog-anim-wrapper {
+  position: fixed;
+  inset: 0;
+  width: calc(var(--sidebar-width) - 1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: scale(0.94);
+  transform-origin: center;
+  transition: 0s .18s;
+}
+
+body.mobile .dialog-anim-wrapper,
+body.mobile .dialog-background {
+  width: var(--sidebar-width);
+}
+
+.dialog-wrapper.visible .dialog-anim-wrapper {
+  transform: none;
+  transition: .18s var(--bounce-function);
+}
+
+.dialog {
   background: var(--deep-midnight-blue);
   color: #dcddde;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%);
+  border: 1px solid rgb(32 34 37 / 60%);
   border-radius: 11.5px;
   line-height: 1.5;
   max-width: 200px;
   width: 194px;
-  top: 50%;
-  left: calc((var(--sidebar-width) - 1px) / 2);
   opacity: 0;
   padding: 2px;
-  transform: translate(-50%, -50%) scale(0.94);
-  will-change: transform;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
-  pointer-events: none;
-  z-index: 1000;
 }
 
-.dialog.visible {
+.dialog-wrapper.visible .dialog {
   opacity: 1;
   padding: 7px;
-  transform: translate(-50%, -50%) scale(1);
   transition: .18s var(--bounce-function);
   pointer-events: auto;
 }
@@ -1740,6 +1775,20 @@ body.mobile .menu .icon a {
 
 body:not(.mobile) .dialog .button:not(:active):hover {
   background: rgba(255,255,255,0.05);
+}
+
+.dialog-background {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  width: calc(var(--sidebar-width) - 1px);
+  opacity: 0;
+  transition: .18s var(--bounce-function);
+  z-index: -1;
+}
+
+.dialog-wrapper.visible .dialog-background {
+  opacity: 1;
 }
 
 
@@ -1829,7 +1878,6 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   transform: translateX(0);
   transition: .4s var(--cubic-function);
   transition-property: transform, opacity;
-  will-change: transform;
 }
 
 .bottom-wrapper.expanded ~ .sidebar-background {

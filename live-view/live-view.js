@@ -675,10 +675,13 @@ async function downloadSelFile() {
   } else {
 
     // show download message
-    showMessage('Downloading...');
+    showMessage('Downloading...', -1);
 
     // fetch selected file
     const resp = await git.getBlob(treeLoc, selectedFile.sha);
+    
+    // hide message
+    hideMessage();
 
     // download selected file
     downloadFile(resp.content, selectedFile.name);
@@ -867,9 +870,9 @@ async function handleLiveViewRequest(requestPath) {
     
     
     // search modified files for file
-    const modFile = Object.values(modifiedFiles).filter(file =>
-                      (file.dir == liveFileDir.join(',')
-                       && file.name == fileName))[0];
+    let modFile = Object.values(modifiedFiles).filter(file =>
+                    (file.dir == liveFileDir.join(',')
+                     && file.name == fileName))[0];
     
     // if matching modified file exists
     if (modFile) {

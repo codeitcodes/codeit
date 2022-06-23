@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v542';
+const WORKER_NAME = 'codeit-worker-v546';
 
 
 // internal paths
@@ -68,11 +68,17 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type, status) {
+function createResponse(data, type, status, cache) {
+
+  let headers = {
+    'Content-Type': type
+  };
+  
+  if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
 
   // create Response from data
   const response = new Response(data, {
-    headers: {'Content-Type': type},
+    headers: headers,
     status: status
   });
 

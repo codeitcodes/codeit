@@ -78,41 +78,51 @@ window.onload = async () => {
 
   window.addEventListener('message', async (event) => {
     
-    // hide intro screen
-    sidebar.classList.remove('intro');
+    // if received a git code
+    if (event.origin === window.location.origin
+        && event.data.startsWith('gitCode=')) {
     
-    // if on Repositories page
-    if (treeLoc[1] === '') {
+      // hide intro screen
+      sidebar.classList.remove('intro');
       
-      // show sidebar title
-      sidebarLogo.innerText = 'Repositories';
+      // if on Repositories page
+      if (treeLoc[1] === '') {
+        
+        // show sidebar title
+        sidebarLogo.innerText = 'Repositories';
+        
+      }
+  
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        });
+  
+      }
+  
+      // start loading
+      startLoading();
+        
+      const gitCode = event.data.split('gitCode=')[1];
+  
+      // get git token from Github
+      await getGithubToken(gitCode);
+      
+      if (messageEl.textContent === 'Logging in...') {
+        hideMessage();
+      }
+      
+      // render sidebar
+      renderSidebarHTML();
       
     }
-
-    // if on safari, refresh header color
-    if (isSafari) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
-      onNextFrame(() => {
-
-        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-      });
-
-    }
-
-    // start loading
-    startLoading();
-
-    const gitCode = event.data;
-
-    // get git token from Github
-    await getGithubToken(gitCode);
-    
-    // render sidebar
-    renderSidebarHTML();
-
+  
   })
   
   
@@ -130,38 +140,61 @@ window.onload = async () => {
       
     }
     
-    // don't transition
-    body.classList.add('notransition');
-
-    toggleSidebar(true);
-
-    onNextFrame(() => {
-
-      body.classList.remove('notransition');
-
-    });
-
-
-    // if on safari, refresh header color
-    if (isSafari) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
+    if (getStorage('sidebar') === 'true') {
+      
+      // don't transition
+      body.classList.add('notransition');
+  
+      toggleSidebar(true);
+  
       onNextFrame(() => {
-
-        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
+  
+        body.classList.remove('notransition');
+  
       });
 
+
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        });
+        
+      }
+
+    } else {
+      
+      // if on safari, refresh header color
+      if (isSafari) {
+  
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+  
+        onNextFrame(() => {
+  
+          document.querySelector('meta[name="theme-color"]').content = '#313744';
+  
+        });
+        
+      }
+      
     }
 
     // start loading
     startLoading();
+    
+    showMessage('Logging in...', -1);
 
     const gitCode = linkData.gitCode;
 
     // get git token from Github
     await getGithubToken(gitCode);
+    
+    hideMessage();
     
   }
   

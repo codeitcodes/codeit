@@ -349,8 +349,6 @@ let git = {
 
     return resp.full_name;
 
-    // change treeLoc to fork dir, change all the repo's modified files' dir to the fork's dir, and push modified files in dir.
-
   },
 
   // invite a user to a repository

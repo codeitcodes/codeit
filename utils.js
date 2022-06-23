@@ -61,10 +61,11 @@ const body = document.body,
 
       branchMenu = document.querySelector('.branch-menu'),
       
-      dialog = document.querySelector('.dialog'),
-      dialogTitle = dialog.querySelector('.title'),
-      dialogCancel = dialog.querySelector('.cancel'),
-      dialogConfirm = dialog.querySelector('.confirm'),
+      dialogWrapper = document.querySelector('.dialog-wrapper'),
+      dialogTitle = dialogWrapper.querySelector('.title'),
+      dialogCancel = dialogWrapper.querySelector('.cancel'),
+      dialogConfirm = dialogWrapper.querySelector('.confirm'),
+      dialogBackground = dialogWrapper.querySelector('.dialog-background'),
 
       messageEl = document.querySelector('.message'),
 
@@ -73,7 +74,7 @@ const body = document.body,
 
 
 // version
-const version = '3.2.5';
+const version = '3.3.0';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -137,13 +138,25 @@ function showMessage(message, duration) {
 
 
   if (messageTimeout) window.clearTimeout(messageTimeout);
+  
+  if (duration !== -1) {
+    
+    messageTimeout = window.setTimeout(() => {
+  
+      messageEl.classList.remove('visible');
+  
+    }, (duration ?? 2000));
+    
+  } else {
+    
+    messageTimeout = null;
+    
+  }
 
-  messageTimeout = window.setTimeout(() => {
+}
 
-    messageEl.classList.remove('visible');
-
-  }, (duration ?? 2000));
-
+function hideMessage() {
+  messageEl.classList.remove('visible');
 }
 
 
@@ -152,23 +165,95 @@ function showMessage(message, duration) {
 
 function showDialog(confirmHandler, titleText, confirmText) {
   
-  // add dialog text to HTML
-  dialogTitle.textContent = titleText;
-  dialogConfirm.textContent = confirmText;
-  
-  // show dialog
-  dialog.classList.add('visible');
-  
-  // add confirm button listener
-  dialogConfirm.onclick = confirmHandler;
+  return new Promise(resolve => {
+    
+    // add dialog text to HTML
+    dialogTitle.textContent = titleText;
+    dialogConfirm.textContent = confirmText;
+    
+    // show dialog
+    dialogWrapper.classList.add('visible');
+    
+    // if on mobile,
+    // change status bar color
+    if (isMobile) {
+      
+      if (body.classList.contains('expanded')) {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#040405';
+        
+      } else {
+        
+        document.querySelector('meta[name="theme-color"]').content = '#07080a';
+        
+      }
+      
+    }
+    
+    // add confirm button listener
+    dialogConfirm.onclick = async (e) => {
+      
+      e.stopPropagation();
+      
+      await confirmHandler(e);
+      resolve(true);
+      
+    };
+    
+    // add dialog click listener
+    dialogWrapper.onclick = () => {
+      resolve(false);
+    };
+    
+  });
   
 }
 
-// add cancel button listener
+// add cancel button click listener
 dialogCancel.addEventListener('click', () => {
   
   // hide dialog
-  dialog.classList.remove('visible');
+  dialogWrapper.classList.remove('visible');
+  
+  // if on mobile,
+  // change status bar color
+  if (isMobile) {
+
+    if (body.classList.contains('expanded')) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+    } else {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+    }
+
+  }
+  
+});
+
+// add background click listener
+dialogBackground.addEventListener('click', () => {
+  
+  // hide dialog
+  dialogWrapper.classList.remove('visible');
+  
+  // if on mobile,
+  // change status bar color
+  if (isMobile) {
+
+    if (body.classList.contains('expanded')) {
+
+      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+    } else {
+
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+    }
+
+  }
   
 });
 
