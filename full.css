@@ -236,6 +236,10 @@ body.notransition .bottom-wrapper {
   color: rgb(212 213 215 / 72%);
 }
 
+.bottom-float .download:active {
+  background: hsl(0deg 0% 100% / 7.5%);
+}
+
 .bottom-float.file-open .download {
   display: flex;
 }
