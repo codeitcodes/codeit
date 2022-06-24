@@ -911,7 +911,7 @@ async function clickedOnFileHTML(fileEl, event) {
         // update bottom float
         updateFloat();
         
-      } else {
+      } else if (!liveView.classList.contains('file-open')) {
         
         // hide sidebar
         toggleSidebar(false);
