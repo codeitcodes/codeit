@@ -1272,7 +1272,7 @@ async function loadFileInHTML(fileEl, fileSha) {
     
     
     // if file is over 1MB
-    if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+    if (resp.size >= 1000000 && resp.content === '') {
       
       // show file size prompt
       
