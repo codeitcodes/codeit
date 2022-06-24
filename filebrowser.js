@@ -1484,6 +1484,7 @@ function loadBinaryFileHTML(file, toggled) {
       
       if (fileType !== 'other') fileMessage = fileType[0].toUpperCase() + fileType.slice(1) + ' files aren\'t';
       if (fileType === 'pdf') fileMessage = 'PDF files aren\'t';
+      if (fileType === 'midi') fileMessage = 'MIDI files aren\'t';
       
       // show file supported prompt
       liveView.innerHTML = '<div class="prompt">' +
