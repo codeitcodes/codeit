@@ -1482,7 +1482,7 @@ function loadBinaryFileHTML(file, toggled) {
       
       let fileMessage = 'This file type isn\'t';
       
-      if (fileType !== 'other') fileMessage = fileType[0].toUpperCase() + fileType.slice(1) + 'files aren\'t';
+      if (fileType !== 'other') fileMessage = fileType[0].toUpperCase() + fileType.slice(1) + ' files aren\'t';
       if (fileType === 'pdf') fileMessage = 'PDF files aren\'t';
       
       // show file supported prompt
