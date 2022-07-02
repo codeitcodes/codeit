@@ -2566,6 +2566,20 @@ function toggleSidebar(open) {
 }
 
 
+function deleteModFileInHTML(sha) {
+  
+  const fileEl = fileWrapper.querySelector('.file.modified[sha="'+ sha +'"]');
+  
+  if (fileEl) {
+    
+    deleteModFile(sha);
+    fileEl.classList.remove('modified');
+    
+  }
+  
+}
+
+
 // when scrolled editor, save new scroll position
 
 let editorScrollTimeout;

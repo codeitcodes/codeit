@@ -114,6 +114,10 @@ window.onload = async () => {
       // get git token from Github
       await getGithubToken(gitCode);
       
+      // clear modified repos
+      modifiedRepos = {};
+      updateModReposLS();
+      
       if (messageEl.textContent === 'Logging in...') {
         hideMessage();
       }
@@ -193,6 +197,10 @@ window.onload = async () => {
 
     // get git token from Github
     await getGithubToken(gitCode);
+    
+    // clear modified repos
+    modifiedRepos = {};
+    updateModReposLS();
     
     hideMessage();
     
