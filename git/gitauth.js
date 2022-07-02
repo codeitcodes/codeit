@@ -114,20 +114,9 @@ window.onload = async () => {
       // get git token from Github
       await getGithubToken(gitCode);
       
-      
       // clear modified repos
       modifiedRepos = {};
       updateModReposLS();
-      
-      // if navigating in repo
-      if (treeLoc[1] !== '') {
-        
-        // get repo obj from git
-        // and save to modified repos
-        fetchRepoAndSaveToModRepos(treeLoc);
-        
-      }
-      
       
       if (messageEl.textContent === 'Logging in...') {
         hideMessage();
@@ -209,20 +198,9 @@ window.onload = async () => {
     // get git token from Github
     await getGithubToken(gitCode);
     
-    
     // clear modified repos
     modifiedRepos = {};
     updateModReposLS();
-
-    // if navigating in repo
-    if (treeLoc[1] !== '') {
-
-      // get repo obj from git
-      // and save to modified repos
-      fetchRepoAndSaveToModRepos(treeLoc);
-
-    }
-    
     
     hideMessage();
     
