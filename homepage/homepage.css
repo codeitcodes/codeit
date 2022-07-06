@@ -4788,6 +4788,7 @@ body {
 .ctas .btn.installed::before {
   content: 'Open';
   width: auto;
+  transition: none;
 }
 
 .ctas .btn.cookies {
