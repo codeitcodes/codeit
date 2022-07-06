@@ -118,17 +118,18 @@ document.querySelectorAll('.btn.install').forEach(button => {
   button.addEventListener('click', installPWA);
   
   button.classList.remove('loading');
+  button.classList.add('installed');
   
   if (!checkLocalStorage()) {
     
-    button.classList.add('installed');
+    //button.classList.add('installed');
     button.classList.add('cookies');
     
   } else {
   
     if (localStorage.getItem('installed')) {
 
-      button.classList.add('installed');
+      //button.classList.add('installed');
       
     }
     
