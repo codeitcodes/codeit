@@ -2070,6 +2070,8 @@ body.mobile.expanded .cube-loader::after {
   overflow: visible;
   width: 38px;
   height: 38px;
+  width: 60px;
+  height: 60px;
   pointer-events: none;
 }
 .push-svg #push, .push-svg #check {
