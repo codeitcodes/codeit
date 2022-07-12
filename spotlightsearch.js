@@ -75,7 +75,10 @@ searchInput.addEventListener('input', () => {
 searchInput.addEventListener('keydown', (e) => {
 
   if (e.key === 'Enter') {
+    
     e.preventDefault();
+    searchInput.blur();
+    
   }
 
 })
