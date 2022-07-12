@@ -71,6 +71,15 @@ searchInput.addEventListener('input', () => {
   
 })
 
+// disable enter key in search input
+searchInput.addEventListener('keydown', (e) => {
+
+  if (e.key === 'Enter') {
+    e.preventDefault();
+  }
+
+});
+
 // clear search input when clicked on button
 searchClear.addEventListener('click', () => {
   
