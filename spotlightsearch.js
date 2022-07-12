@@ -78,7 +78,7 @@ searchInput.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 
-});
+})
 
 // clear search input when clicked on button
 searchClear.addEventListener('click', () => {
