@@ -295,7 +295,7 @@ cd-el {
   z-index: 1;
   margin-right: -100%;
   transform: translateX(-100%);
-  padding-left: calc(13.5px + env(safe-area-inset-left));
+  padding-left: calc(13.5px + 0.2px + env(safe-area-inset-left));
   padding-right: 13.5px;
 }
 
