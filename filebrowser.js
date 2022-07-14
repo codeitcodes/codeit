@@ -1359,17 +1359,6 @@ async function loadFileInHTML(fileEl, fileSha) {
     }
     
   }
-  
-  // change tab character
-  if (cd.textContent.includes('\t')) {
-    
-    cd.options.tab = '\t';
-    
-  } else {
-    
-    cd.options.tab = '  ';
-    
-  }
 
   // if on desktop and file is modified
   if (!isMobile && modifiedFiles[fileSha]) {
