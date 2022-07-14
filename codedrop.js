@@ -122,17 +122,6 @@ function processFile(file) {
     if (!isMobile) cd.setSelection(0, 0);
     
     cd.focus();
-    
-    // change tab character
-    if (cd.textContent.includes('\t')) {
-
-      cd.options.tab = '\t';
-
-    } else {
-
-      cd.options.tab = '  ';
-
-    }
 
     cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
 

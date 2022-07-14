@@ -316,17 +316,6 @@ async function setupLiveView() {
 
     }
 
-    // change tab character
-    if (cd.textContent.includes('\t')) {
-
-      cd.options.tab = '\t';
-
-    } else {
-
-      cd.options.tab = '  ';
-
-    }
-
     // set scroll pos in codeit
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
