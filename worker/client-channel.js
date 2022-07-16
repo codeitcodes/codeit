@@ -293,7 +293,9 @@ function handleFetchRequest(request, event) {
         await storage.put(request.url, resp);
         
         // return success
-        resolve();
+        resolve(createResponse(
+          { type: 'success' }, 'application/json', 200
+        ));
         
       }
       
