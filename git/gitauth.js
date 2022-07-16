@@ -228,7 +228,7 @@ async function getGithubToken(gitCode) {
   
     // save logged user in storage
     axios.put('/worker/storage/loggedUser', '', loggedUser);
-    //setStorage('loggedUser', loggedUser);
+    //@@setStorage('loggedUser', loggedUser);
     
   }
 
