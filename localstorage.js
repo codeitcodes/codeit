@@ -1,12 +1,12 @@
 
 // load local storage
-function loadLS() {
+async function loadLS() {
 
   // if selected file exists in storage
   if (getStorage('selectedFile')) {
 
     // load selected file from storage
-    selectedFile = axios.get('/worker/storage/selectedFile');
+    selectedFile = await axios.get('/worker/storage/selectedFile');
     //@@selectedFile = JSON.parse(getStorage('selectedFile'));
 
   } else {
@@ -21,7 +21,7 @@ function loadLS() {
   // and not embed  
   if (!isEmbed) {
     
-    const modFilesStorage = axios.get('/worker/storage/modifiedFiles');
+    const modFilesStorage = await axios.get('/worker/storage/modifiedFiles');
     
     if (modFilesStorage) {
 
@@ -42,7 +42,7 @@ function loadLS() {
   }
 
 
-  const modReposStorage = axios.get('/worker/storage/modifiedRepos');
+  const modReposStorage = await axios.get('/worker/storage/modifiedRepos');
 
   // if modified repos exist in storage
   if (modReposStorage) {
