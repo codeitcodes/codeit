@@ -3,6 +3,7 @@
 
 window.onload = async () => {
   
+  /*
   // if service worker isn't installed yet
   if (workerInstallPromise) {
         
@@ -11,7 +12,7 @@ window.onload = async () => {
     
   }
   
-  if (!workerClientId) await workerInstallPromise;
+  if (!workerClientId) await workerInstallPromise;*/
   
 
   gitToken = (await axios.get('/worker/storage/gitToken')) ?? '';
