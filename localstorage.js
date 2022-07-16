@@ -6,7 +6,8 @@ function loadLS() {
   if (getStorage('selectedFile')) {
 
     // load selected file from storage
-    selectedFile = JSON.parse(getStorage('selectedFile'));
+    selectedFile = axios.get('/worker/storage/selectedFile');
+    //selectedFile = JSON.parse(getStorage('selectedFile'));
 
   } else {
 
@@ -15,30 +16,47 @@ function loadLS() {
 
   }
 
+
   // if modified files exist in storage
-  // and not embed
-  if (getStorage('modifiedFiles') && !isEmbed) {
+  // and not embed  
+  if (!isEmbed) {
+    
+    const modFilesStorage = axios.get('/worker/storage/modifiedFiles');
+    
+    if (modFilesStorage) {
 
-    // load modified files from storage
-    modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
-
+      // load modified files from storage
+      modifiedFiles = modFilesStorage;
+      //modifiedFiles = Object.fromEntries(JSON.parse(getStorage('modifiedFiles')));
+    
+    } else {
+      
+      modifiedFiles = {};
+      
+    }
+    
   } else {
 
     modifiedFiles = {};
 
   }
 
+
+  const modReposStorage = axios.get('/worker/storage/modifiedRepos');
+
   // if modified repos exist in storage
-  if (getStorage('modifiedRepos')) {
+  if (modReposStorage) {
 
     // load modified repos from storage
-    modifiedRepos = Object.fromEntries(JSON.parse(getStorage('modifiedRepos')));
+    modifiedRepos = modReposStorage;
+    //modifiedRepos = Object.fromEntries(JSON.parse(getStorage('modifiedRepos')));
 
   } else {
 
     modifiedRepos = {};
 
   }
+  
   
   setupLiveView();
   setupCodeitApp();
@@ -52,7 +70,8 @@ function updateSelectedFileLS() {
   
   if (!isEmbed) {
     
-    setStorage('selectedFile', JSON.stringify(selectedFile));
+    //setStorage('selectedFile', JSON.stringify(selectedFile));
+    axios.put('/worker/storage/selectedFile', '', selectedFile);
     
   }
 
@@ -62,7 +81,8 @@ function updateModFilesLS() {
   
   if (!isEmbed) {
     
-    setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+    //setStorage('modifiedFiles', JSON.stringify(Object.entries(modifiedFiles)));
+    axios.put('/worker/storage/modifiedFiles', '', modifiedFiles);
     
   }
 
@@ -73,7 +93,8 @@ function updateModFilesLS() {
 
 function updateModReposLS() {
   
-  setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
+  //setStorage('modifiedRepos', JSON.stringify(Object.entries(modifiedRepos)));
+  axios.put('/worker/storage/modifiedRepos', '', modifiedRepos);
   
 }
 
@@ -102,6 +123,7 @@ function saveSidebarStateLS() {
 
 function saveGitTokenLS(gitToken) {
 
-  setStorage('gitToken', gitToken);
+  //setStorage('gitToken', gitToken);
+  axios.put('/worker/storage/gitToken', '', gitToken);
 
 }
