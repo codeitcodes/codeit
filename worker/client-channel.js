@@ -6,6 +6,8 @@
 // update worker name when updating worker
 const WORKER_NAME = 'codeit-worker-v555';
 
+const WORKER_STORAGE_NAME = 'codeit-worker-storage';
+
 
 // internal paths
 const INTERNAL_PATHS = {
@@ -18,8 +20,14 @@ const INTERNAL_PATHS = {
   
   relLivePath: ('/run/' + '_/'.repeat(15)),
   
+  storage: 'https://codeit.codes/worker/storage/',
+  storage_: 'https://dev.codeit.codes/worker/storage/',
+  
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  
+  trustedURL: 'https://codeit.codes/full',
+  trustedURL_: 'https://dev.codeit.codes/full',
 
 }
 
@@ -68,18 +76,21 @@ const workerChannel = new BroadcastChannel('worker-channel');
 
 
 // create Response from data
-function createResponse(data, type, status, cache) {
+function createResponse(data, type, status, url) {
 
   let headers = {
     'Content-Type': type
   };
   
-  if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+  if (!url) url = '';
+  
+  //if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
 
   // create Response from data
   const response = new Response(data, {
     headers: headers,
-    status: status
+    status: status,
+    url: url
   });
 
   return response;
@@ -188,7 +199,7 @@ function handleFetchRequest(request, event) {
     const pathType = getPathType(request.url);
 
     // if fetch originated in codeit itself
-    if (pathType === 'internal'
+    if ((pathType === 'internal' || pathType === 'trustedURL')
         && (getPathType(request.referrer) !== 'run')) {
 
       let url = request.url;
@@ -260,6 +271,32 @@ function handleFetchRequest(request, event) {
         JSON.stringify({ clientId }), 'application/json', 200
       ));
       
+    } else if (pathType === 'storage'
+               && getPathType(request.referrer) === 'trustedURL') { // if accessing worker storage
+      
+      if (request.method === 'GET') {
+        
+        const resp = await caches.match(request.url);
+        
+        // return response from cache
+        resolve(resp);
+        
+      } else if (request.method === 'POST') {
+        
+        const storage = await caches.open(WORKER_STORAGE_NAME);
+        
+        const data = request.body;
+        const resp = createResponse(
+          data, 'application/json', 200, request.url
+        );
+        
+        await storage.put(request, resp);
+        
+        // return success
+        resolve();
+        
+      }
+      
     } else { // if fetch is external
       
       /*
@@ -296,5 +333,4 @@ self.addEventListener('fetch', (evt) => {
 
   evt.respondWith(handleFetchRequest(evt.request, evt));
 
-});
-
+})
