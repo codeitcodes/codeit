@@ -2,6 +2,17 @@
 // github login
 
 window.onload = async () => {
+  
+  // if service worker isn't installed yet
+  if (workerInstallPromise) {
+        
+    // wait until finished installing
+    await workerInstallPromise;
+            
+  }
+  
+  if (!workerClientId) await workerInstallPromise;
+  
 
   gitToken = (await axios.get('/worker/storage/gitToken')) ?? '';
 
