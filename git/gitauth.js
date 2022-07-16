@@ -8,7 +8,7 @@ window.onload = async () => {
         
     // wait until finished installing
     await workerInstallPromise;
-            
+    
   }
   
   if (!workerClientId) await workerInstallPromise;
