@@ -290,7 +290,7 @@ function handleFetchRequest(request, event) {
           data, 'application/json', 200, request.url
         );
         
-        await storage.put(request, resp);
+        await storage.put(request.url, resp);
         
         // return success
         resolve();
