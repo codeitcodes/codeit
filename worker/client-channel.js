@@ -281,7 +281,7 @@ function handleFetchRequest(request, event) {
         // return response from cache
         resolve(resp);
         
-      } else if (request.method === 'POST') {
+      } else if (request.method === 'PUT') {
         
         const storage = await caches.open(WORKER_STORAGE_NAME);
         
