@@ -67,7 +67,8 @@ self.addEventListener('activate', (evt) => {
   evt.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== WORKER_NAME) {
+        if (key !== WORKER_NAME &&
+            key !== WORKER_STORAGE_NAME) {
           return caches.delete(key);
         }
       }));
