@@ -276,7 +276,15 @@ function handleFetchRequest(request, event) {
       
       if (request.method === 'GET') {
         
-        const resp = await caches.match(request.url);
+        let resp = await caches.match(request.url);
+        
+        if (!resp) {
+          
+          resp = createResponse(
+            'false', 'text/plain', 200
+          );
+          
+        }
         
         // return response from cache
         resolve(resp);
