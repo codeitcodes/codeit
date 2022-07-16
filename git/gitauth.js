@@ -3,7 +3,7 @@
 
 window.onload = async () => {
 
-  gitToken = getStorage('gitToken') ?? '';
+  gitToken = (await axios.get('/worker/storage/gitToken')) ?? '';
 
   if (gitToken == 'undefined') {
     gitToken = '';
@@ -39,18 +39,12 @@ window.onload = async () => {
   }
 
 
-  if (getStorage('loggedUser')) {
-    
-    loggedUser = getStorage('loggedUser');
-    
-    try {
-      
-      loggedUser = JSON.parse(loggedUser);
+  const loggedUserStorage = await axios.get('/worker/storage/loggedUser');
 
-      // save logged user in local storage
-      setStorage('loggedUser', loggedUser.login);
-      
-    } catch(e) {}
+  if (loggedUserStorage) {
+    
+    loggedUser = loggedUserStorage;
+    //@@loggedUser = getStorage('loggedUser');
     
   } else {
     
@@ -232,8 +226,9 @@ async function getGithubToken(gitCode) {
     loggedUser = await axios.get('https://api.github.com/user', gitToken);
     loggedUser = loggedUser.login;
   
-    // save logged user in local storage
-    setStorage('loggedUser', loggedUser);
+    // save logged user in storage
+    axios.put('/worker/storage/loggedUser', '', loggedUser);
+    //setStorage('loggedUser', loggedUser);
     
   }
 
