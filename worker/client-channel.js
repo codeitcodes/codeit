@@ -74,7 +74,7 @@ function createResponse(data, type, status, cache) {
     'Content-Type': type
   };
   
-  if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+  //if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
 
   // create Response from data
   const response = new Response(data, {
