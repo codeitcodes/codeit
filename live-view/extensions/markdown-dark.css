@@ -164,6 +164,9 @@ body cd-el {
   white-space: pre;
   word-wrap: normal;
   font-size: inherit;
+  border-radius: 6px;
+  padding: 16px;
+  cursor: unset;
 }
 
 
