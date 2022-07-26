@@ -1109,12 +1109,12 @@ async function renderLiveViewMarkdown(file) {
   loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
   loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
   
-  if (frameDoc.body.querySelector('pre')) {
+  if (frameDoc.body.querySelector('pre code')) {
     
     loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
     loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
 
-    frameDoc.body.querySelector('pre').forEach(pre => {
+    frameDoc.body.querySelectorAll('pre').forEach(pre => {
       
       const codeEl = pre.querySelector('code');
       const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
