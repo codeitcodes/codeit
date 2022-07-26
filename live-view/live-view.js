@@ -1108,8 +1108,24 @@ async function renderLiveViewMarkdown(file) {
   
   loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
   loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
-  loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
   
+  if (frameDoc.body.querySelector('pre')) {
+    
+    loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
+    loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
+
+    frameDoc.body.querySelector('pre').forEach(pre => {
+      
+      const codeEl = pre.querySelector('code');
+      const lang = codeEl.classList[0] ?? codeEl.classList[0].replace('language-', '') : '';
+      
+      pre.outerHTML = '<cd-el lang="' + lang + '">' + codeEl.classListcodeEl.textContent + '</cd-el>';
+      
+    });
+    
+  }
+  
+  loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
   loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
   
   liveView.classList.add('loaded');
