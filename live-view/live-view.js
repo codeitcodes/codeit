@@ -1127,9 +1127,6 @@ async function renderLiveViewMarkdown(file) {
     
   }
   
-  loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
-  loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
-  
   liveView.classList.add('loaded');
 
 }
