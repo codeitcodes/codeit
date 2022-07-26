@@ -1090,25 +1090,27 @@ async function renderLiveViewMarkdown(file) {
   liveView.innerHTML = '<iframe src="" name="Live view" title="Live view" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
   const liveFrame = liveView.querySelector('.live-frame');
+  const frameDoc = liveFrame.contentDocument;
 
 
   // if markdown compiler isn't loaded
   if (typeof marked === 'undefined') {
     
     // load markdown compiler
-    await addScript('live-view/extensions/marked.min.js');
+    await loadScript('live-view/extensions/marked.min.js');
     
   }
   
   
   const html = marked.parse(decodeUnicode(file.content));
   
-  liveFrame.contentDocument.head.innerHTML = `<link rel="stylesheet" href="` + window.location.origin + `/live-view/extensions/markdown-dark.css">` +
-                                             `<link rel="stylesheet" href="` + window.location.origin + `/fonts/fonts.css">` +
-                                             `<link rel="stylesheet" href="` + window.location.origin + `/dark-theme.css">`;
+  frameDoc.body.innerHTML = html;
   
-  liveFrame.contentDocument.body.innerHTML = html;
+  loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
+  loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
+  loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
   
+  loadScript(window.location.origin + '/lib/codeit.js');
   
   liveView.classList.add('loaded');
 
@@ -1117,7 +1119,9 @@ async function renderLiveViewMarkdown(file) {
 
 
 // lazy load an external script
-function addScript(src) {
+function loadScript(src, inEl) {
+  
+  inEl = inEl ?? document.body;
   
   return new Promise((resolve, reject) => {
     
@@ -1135,7 +1139,35 @@ function addScript(src) {
       reject();
     };
     
-    document.body.appendChild(s);
+    inEl.appendChild(s);
+    
+  });
+  
+}
+
+
+// load a stylesheet
+function loadStyleSheet(href, inEl) {
+  
+  inEl = inEl ?? document.head;
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('link');
+    s.href = href;
+    s.rel = 'stylesheet';
+    
+    s.onload = () => {
+      document.body.removeChild(s);
+      resolve();
+    };
+    
+    s.onerror = () => {
+      document.body.removeChild(s);
+      reject();
+    };
+    
+    inEl.appendChild(s);
     
   });
   
