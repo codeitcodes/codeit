@@ -84,8 +84,9 @@ body li + li {
 body code, body tt {
   padding: 0.2em 0.4em;
   margin: 0;
-  font-size: 85%;
-  background-color: var(--color-neutral-muted);
+  font-size: inherit;
+  background: #313744;
+  color: #a6c3d4;
   border-radius: 6px;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
 }
