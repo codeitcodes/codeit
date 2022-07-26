@@ -1130,12 +1130,12 @@ function loadScript(src, inEl) {
     s.async = true;
     
     s.onload = () => {
-      document.body.removeChild(s);
+      inEl.removeChild(s);
       resolve();
     };
     
     s.onerror = () => {
-      document.body.removeChild(s);
+      inEl.removeChild(s);
       reject();
     };
     
@@ -1158,12 +1158,12 @@ function loadStyleSheet(href, inEl) {
     s.rel = 'stylesheet';
     
     s.onload = () => {
-      document.body.removeChild(s);
+      inEl.removeChild(s);
       resolve();
     };
     
     s.onerror = () => {
-      document.body.removeChild(s);
+      inEl.removeChild(s);
       reject();
     };
     
