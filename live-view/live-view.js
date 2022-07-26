@@ -1121,7 +1121,7 @@ async function renderLiveViewMarkdown(file) {
       const codeEl = pre.querySelector('code');
       const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
       
-      pre.outerHTML = '<cd-el lang="' + lang + '">' + codeEl.classListcodeEl.textContent + '</cd-el>';
+      pre.outerHTML = '<cd-el lang="' + lang + '">' + codeEl.textContent + '</cd-el>';
       
     });
     
