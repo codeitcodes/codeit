@@ -1118,7 +1118,7 @@ async function renderLiveViewMarkdown(file) {
       link.onclick = (e) => {
         
         e.preventDefault();
-        showMessage(link.href);
+        showMessage(link.getAttribute('href'));
         
       };
     
