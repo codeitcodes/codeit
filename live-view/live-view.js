@@ -1114,8 +1114,6 @@ async function renderLiveViewMarkdown(file) {
   if (frameDoc.body.querySelector('pre code')) {
     
     loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
-    loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
-    loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
 
     frameDoc.body.querySelectorAll('pre').forEach(pre => {
       
@@ -1129,6 +1127,9 @@ async function renderLiveViewMarkdown(file) {
       pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '" edit="false">' + code + '</cd-el>';
       
     });
+    
+    await loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
+    await loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
     
   }
   
