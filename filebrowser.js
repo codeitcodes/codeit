@@ -1534,40 +1534,46 @@ async function renderBranchMenuHTML(renderAll) {
   
   // if branch menu isn't already rendered
   if (getAttr(branchMenu, 'tree') !== [user, repoName, contents].join()) {
-    
-    setAttr(branchMenu, 'tree', [user, repoName, contents].join());
-    
+        
     // show loading message
     branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
     
-    // if branch resp isn't already stored
-    // in local storage
-    if (!repoObj || !repoObj.branches ||
-        repoObj.branchExpiration === undefined || 
-        repoObj.branchExpiration < currentTime) {
-      
-      // get branches for repository
-      branchResp = await git.getBranches(treeLoc);
-
-      // if repo dosen't exist, return
-      if (branchResp.message) {
-        return;
-      }
-      
-      // clean resp and save only relevant fields
-      const cleanedResp = branchResp.map(branch => {
-        return { name: branch.name, commit: { sha: branch.commit.sha } };
-      });
-      
-      // save branch resp in local storage
-      updateModRepoBranches(fullName, cleanedResp);
-      
-      // save branch expiration date
-      // in local storage
-      updateModRepoBranchExpiration(fullName, dayFromNow);
-      
+    setAttr(branchMenu, 'tree', [user, repoName, contents].join()); 
+    
+  }
+  
+  
+  // if branch resp isn't already stored
+  // in local storage
+  if (!repoObj || !repoObj.branches ||
+    repoObj.branchExpiration === undefined ||
+    repoObj.branchExpiration < currentTime) {
+  
+    // get branches for repository
+    branchResp = await git.getBranches(treeLoc);
+  
+    // if repo dosen't exist, return
+    if (branchResp.message) {
+      return;
     }
-      
+  
+    // clean resp and save only relevant fields
+    const cleanedResp = branchResp.map(branch => {
+      return {
+        name: branch.name,
+        commit: {
+          sha: branch.commit.sha
+        }
+      };
+    });
+  
+    // save branch resp in local storage
+    updateModRepoBranches(fullName, cleanedResp);
+  
+    // save branch expiration date
+    // in local storage
+    updateModRepoBranchExpiration(fullName, dayFromNow);
+  
   }
   
   
