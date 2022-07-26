@@ -1125,7 +1125,7 @@ async function renderLiveViewMarkdown(file) {
   });
   
   
-  let fetchPromises;
+  let fetchPromises = [];
   
   
   fetchPromises.push((async (i) => {
