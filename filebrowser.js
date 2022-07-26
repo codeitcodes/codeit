@@ -1564,7 +1564,7 @@ async function renderBranchMenuHTML(renderAll) {
       
       // save branch expiration date
       // in local storage
-      updateModRepoBranchExpiration(dayFromNow);
+      updateModRepoBranchExpiration(fullName, dayFromNow);
       
     }
       
