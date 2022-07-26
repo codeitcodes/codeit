@@ -778,7 +778,6 @@ body.notransition .sidebar {
   height: 2px;
   width: var(--sidebar-width);
   margin-bottom: -2px;
-  border-radius: 6px;
   pointer-events: none;
   background: #568af2;
   background: var(--rosemary-lighter);

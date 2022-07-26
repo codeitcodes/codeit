@@ -123,8 +123,12 @@ async function renderSidebarHTML() {
     }
     
     
+    const currentTime = new Date().getTime();
+    
     // if repo obj dosen't exist
-    if (!repoObj || !repoObj.defaultBranch) {
+    if (!repoObj || !repoObj.defaultBranch
+        || repoObj.repoDataExpiration === undefined || repoObj.branchExpiration === undefined
+        || repoObj.repoDataExpiration < currentTime) {
       
       // get repo obj from git
       // and save to modified repos
@@ -1506,8 +1510,20 @@ async function renderBranchMenuHTML(renderAll) {
   
   let branchResp;
   
+  
+  // get current time
+  
+  let currentDate = new Date();
+  const currentTime = currentDate.getTime();
+  
+  currentDate.setDate(currentDate.getDate() + 1);
+  const dayFromNow = currentDate.getTime();
+  
+  
   // if repo obj exists
-  if (repoObj && repoObj.branches) {
+  if (repoObj && repoObj.branches &&
+      repoObj.branchExpiration !== undefined &&
+      repoObj.branchExpiration >= currentTime) {
   
     // get repository branches
     // from repo obj
@@ -1518,34 +1534,46 @@ async function renderBranchMenuHTML(renderAll) {
   
   // if branch menu isn't already rendered
   if (getAttr(branchMenu, 'tree') !== [user, repoName, contents].join()) {
-    
-    setAttr(branchMenu, 'tree', [user, repoName, contents].join());
-    
+        
     // show loading message
     branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
     
-    // if branch resp isn't already stored
-    // in local storage
-    if (!repoObj || !repoObj.branches) {
-      
-      // get branches for repository
-      branchResp = await git.getBranches(treeLoc);
-
-      // if repo dosen't exist, return
-      if (branchResp.message) {
-        return;
-      }
-      
-      // clean resp and save only relevant fields
-      const cleanedResp = branchResp.map(branch => {
-        return { name: branch.name, commit: { sha: branch.commit.sha } };
-      });
-      
-      // save branch resp in local storage
-      updateModRepoBranches(fullName, cleanedResp);
-      
+    setAttr(branchMenu, 'tree', [user, repoName, contents].join()); 
+    
+  }
+  
+  
+  // if branch resp isn't already stored
+  // in local storage
+  if (!repoObj || !repoObj.branches ||
+    repoObj.branchExpiration === undefined ||
+    repoObj.branchExpiration < currentTime) {
+  
+    // get branches for repository
+    branchResp = await git.getBranches(treeLoc);
+  
+    // if repo dosen't exist, return
+    if (branchResp.message) {
+      return;
     }
-      
+  
+    // clean resp and save only relevant fields
+    const cleanedResp = branchResp.map(branch => {
+      return {
+        name: branch.name,
+        commit: {
+          sha: branch.commit.sha
+        }
+      };
+    });
+  
+    // save branch resp in local storage
+    updateModRepoBranches(fullName, cleanedResp);
+  
+    // save branch expiration date
+    // in local storage
+    updateModRepoBranchExpiration(fullName, dayFromNow);
+  
   }
   
   
