@@ -1106,6 +1106,8 @@ async function renderLiveViewMarkdown(file) {
   
   frameDoc.body.innerHTML = html;
   
+  frameDoc.head.innerHTML = '<base href="about:blank">';
+  
   loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
   loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
   
