@@ -1104,12 +1104,10 @@ async function renderLiveViewMarkdown(file) {
   
   const html = marked.parse(decodeUnicode(file.content));
   
+  frameDoc.body.style.display = 'none';
   frameDoc.body.innerHTML = html;
   
   frameDoc.head.innerHTML = '<base href="about:blank">';
-  
-  loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
-  loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
   
   frameDoc.body.querySelectorAll('a[href]').forEach(link => {
     
@@ -1126,28 +1124,67 @@ async function renderLiveViewMarkdown(file) {
     
   });
   
+  
+  const fetchPromises;
+  
+  
+  fetchPromises.push((async (i) => {
+    
+    await loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head)
+    
+    fetchPromises.splice(i, 1);
+  })(fetchPromises.length));
+  
+  fetchPromises.push((async (i) => {
+    
+    await loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
+    
+    fetchPromises.splice(i, 1);
+  })(fetchPromises.length));
+  
+  
   if (frameDoc.body.querySelector('pre code')) {
     
-    loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
+    fetchPromises.push((async (i) => {
+      
+      await loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
 
-    frameDoc.body.querySelectorAll('pre').forEach(pre => {
-      
-      const codeEl = pre.querySelector('code');
-      const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
-      
-      const code = codeEl.textContent.replace(/[\u00A0-\u9999<>\&]/g, (i) => {
-        return '&#'+i.charCodeAt(0)+';';
+      frameDoc.body.querySelectorAll('pre').forEach(pre => {
+        
+        const codeEl = pre.querySelector('code');
+        const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
+        
+        const code = codeEl.textContent.replace(/[\u00A0-\u9999<>\&]/g, (i) => {
+          return '&#'+i.charCodeAt(0)+';';
+        });
+        
+        pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '" edit="false">' + code + '</cd-el>';
+        
       });
       
-      pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '" edit="false">' + code + '</cd-el>';
-      
-    });
+      fetchPromises.splice(i, 1);
+    })(fetchPromises.length));
     
-    await loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
-    await loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
+    (async (i) => {
+      
+      await loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
+      await loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
+      
+      fetchPromises.splice(i, 1);
+    })(fetchPromises.length);
     
   }
   
+  
+  await asyncForEach(fetchPromises, async (promise) => {
+    
+    if (fetchPromises.length === 0) return;
+    
+    if (promise) await promise;
+    
+  });
+  
+  frameDoc.body.style.display = '';
   liveView.classList.add('loaded');
 
 }
