@@ -1111,6 +1111,12 @@ async function renderLiveViewMarkdown(file) {
   loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head);
   loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
   
+  frameDoc.body.querySelectorAll('a[href]').forEach(link => {
+    
+    link.onclick = (e) => { e.preventDefault(); };
+    
+  });
+  
   if (frameDoc.body.querySelector('pre code')) {
     
     loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
