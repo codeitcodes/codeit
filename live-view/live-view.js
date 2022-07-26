@@ -1143,7 +1143,7 @@ function loadScript(src, inEl) {
     
     let s = document.createElement('script');
     s.src = src;
-    s.async = true;
+    //s.async = true;
     
     s.onload = () => {
       inEl.removeChild(s);
