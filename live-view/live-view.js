@@ -1113,7 +1113,11 @@ async function renderLiveViewMarkdown(file) {
   
   frameDoc.body.querySelectorAll('a[href]').forEach(link => {
     
-    link.onclick = (e) => { e.preventDefault(); };
+    if (!link.href.startsWith('#')) {
+      
+      link.onclick = (e) => { e.preventDefault(); };
+    
+    }
     
   });
   
