@@ -1126,7 +1126,7 @@ async function renderLiveViewMarkdown(file) {
         return '&#'+i.charCodeAt(0)+';';
       });
       
-      pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '">' + code + '</cd-el>';
+      pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '" edit="false">' + code + '</cd-el>';
       
     });
     
