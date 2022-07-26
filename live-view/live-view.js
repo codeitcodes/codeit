@@ -1113,7 +1113,7 @@ async function renderLiveViewMarkdown(file) {
   
   frameDoc.body.querySelectorAll('a[href]').forEach(link => {
     
-    if (!link.href.startsWith('#')) {
+    if (!link.getAttribute('href').startsWith('#')) {
       
       link.onclick = (e) => {
         
