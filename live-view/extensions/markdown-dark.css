@@ -157,6 +157,15 @@ body blockquote {
   border-left: 0.25em solid var(--color-border-default);
 }
 
+body cd-el {
+  padding: 10.5px 13.5px;
+  display: block;
+  box-sizing: border-box;
+  white-space: pre;
+  word-wrap: normal;
+  font-size: inherit;
+}
+
 
 html, body {
   text-rendering: optimizeLegibility;
