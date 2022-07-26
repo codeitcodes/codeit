@@ -173,7 +173,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
                                   
                                   twoMonthsTime,
                                   
-                                  (tempRepo.branchExpiration ?? 0);
+                                  (tempRepo.branchExpiration ?? 0));
 
     // add repo object
     // to modified repos
