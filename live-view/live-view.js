@@ -1096,7 +1096,7 @@ async function renderLiveViewMarkdown(file) {
   if (typeof marked === 'undefined') {
     
     // load markdown compiler
-    await addScript('./extensions/marked.min.js');
+    await addScript('live-view/extensions/marked.min.js');
     
   }
   
