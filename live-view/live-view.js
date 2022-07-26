@@ -1122,7 +1122,11 @@ async function renderLiveViewMarkdown(file) {
       const codeEl = pre.querySelector('code');
       const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
       
-      pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '">' + codeEl.textContent + '</cd-el>';
+      const code = codeEl.textContent.replace(/[\u00A0-\u9999<>\&]/g, (i) => {
+        return '&#'+i.charCodeAt(0)+';';
+      });
+      
+      pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '">' + code + '</cd-el>';
       
     });
     
