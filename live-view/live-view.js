@@ -729,11 +729,11 @@ function toggleLiveView(file) {
 
       renderLiveViewHTML(file);
 
-    } /* else if (file.lang == 'python') {
-
-      renderLiveViewPython(file);
-
-    } */ else {
+    } else if (file.lang === 'markdown') {
+      
+      renderLiveViewMarkdown(file);
+      
+    } else {
       
       // hide loader
       liveView.classList.add('loaded');
@@ -1074,8 +1074,8 @@ async function renderLiveViewHTML(file) {
 
 
 
-// render live view for Python files
-async function renderLiveViewPython(file) {
+// render live view for Markdown files
+async function renderLiveViewMarkdown(file) {
 
   if (!isDev) {
 
@@ -1086,89 +1086,55 @@ async function renderLiveViewPython(file) {
   }
 
 
-  liveView.innerHTML = '<iframe name="Python Context" class="python-frame" style="display: none"></iframe>'
-                       + '<div class="console"></div>';
+  liveView.innerHTML = '<iframe src="" name="Live view" title="Live view" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
+  const liveFrame = liveView.querySelector('.live-frame');
+
+
+  // if markdown compiler isn't loaded
+  if (typeof marked === 'undefined') {
+    
+    // load markdown compiler
+    await addScript('extensions/marked.min.js');
+    
+  }
+  
+  
+  const html = marked.parse(decodeUnicode(file.content));
+  
+  liveFrame.contentDocument.body.innerHTML = html;
+  
+  
   liveView.classList.add('loaded');
-
-  const consoleEl = liveView.querySelector('.console');
-  const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
-
-
-  await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
-
-
-  function logMessage(msg, options) {
-
-    if (msg) {
-
-      if (options && options.color) {
-
-        if (options.color === 'gray') {
-
-          consoleEl.innerHTML += '<div class="message" style="color:gray;font-style:italic">'+msg+'<br></div>';
-
-        } else if (options.color === 'purplepink') {
-
-          consoleEl.innerHTML += '<div class="message" style="color:hsl(302,100%,72.5%)">'+msg+'<br></div>';
-
-        }
-
-      } else {
-
-        consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
-
-      }
-
-    }
-
-  }
-
-  function clearOutput() {
-
-    consoleEl.innerHTML = '';
-    logMessage('Console was cleared', { color: 'gray' });
-
-  }
-
-
-  logMessage('Loading Python...', { color: 'gray' });
-
-  // load pyodide in python frame
-  pythonFrame.pyodide = await pythonFrame.loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
-  });
-
-  logMessage('Loaded!', { color: 'gray' });
-
-
-  // override logs in python context
-  pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
-  pythonFrame.console.logs = [];
-  pythonFrame.console.log = function() {
-    pythonFrame.console.logs = [];
-    pythonFrame.console.logs.push(Array.from(arguments));
-    pythonFrame.console.logs.forEach(msg => addToOutput(msg));
-    pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
-  }
-
-
-  // run file
-
-  try {
-
-    let output = pythonFrame.pyodide.runPython(decodeUnicode(file.content));
-
-    //addToOutput(output);
-
-  } catch (err) {
-
-    logMessage(err, { color: 'purplepink' });
-
-  }
 
 }
 
+
+
+// lazy load an external script
+function addScript(src) {
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    
+    s.onload = () => {
+      document.body.removeChild(s);
+      resolve();
+    };
+    
+    s.onerror = () => {
+      document.body.removeChild(s);
+      reject();
+    };
+    
+    document.body.appendChild(s);
+    
+  });
+  
+}
 
 
 async function asyncForEach(array, callback) {
