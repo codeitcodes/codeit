@@ -2,7 +2,8 @@
 // create a repository object
 function createRepoObj(fullName, selBranch, defaultBranch,
                        pushAccess, branches, private,
-                       isFork, empty) {
+                       isFork, empty,
+                       repoDataExpiration, branchExpiration) {
 
   return {
     fullName,
@@ -12,7 +13,9 @@ function createRepoObj(fullName, selBranch, defaultBranch,
     branches,
     private,
     isFork,
-    empty
+    empty,
+    repoDataExpiration,
+    branchExpiration,
   }
 
 }
@@ -86,6 +89,22 @@ function updateModRepoEmptyStatus(fullName, empty) {
   
 }
 
+function updateModRepoDataExpiration(fullName, time) {
+
+  modifiedRepos[fullName].repoDataExpiration = time;
+  
+  updateModReposLS();
+  
+}
+
+function updateModRepoBranchExpiration(fullName, time) {
+
+  modifiedRepos[fullName].branchExpiration = time;
+  
+  updateModReposLS();
+  
+}
+
 
 
 // get repo obj from git
@@ -102,7 +121,7 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
   
   // create temporary repo object
   const tempRepoObj = createRepoObj(fullName, selBranch, null,
-                                    null, null, null, null, null);
+                                    null, null, null, null, null, 0, 0);
   
   // add temp repo object
   // to modified repos
@@ -127,6 +146,16 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
     // check temp repo changed
     const tempRepo = modifiedRepos[fullName];
     
+    
+    // get repo data expiration time
+    // (two months from now)
+    
+    let expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + (2 * 4 * 7));
+    
+    const twoMonthsTime = expirationDate.getTime();
+    
+    
     // create repo obj
     const repoObj = createRepoObj(fullName,
                                   
@@ -140,7 +169,11 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
                                   
                                   repo.private, repo.fork,
                                   
-                                  (tempRepo.empty ?? false));
+                                  (tempRepo.empty ?? false),
+                                  
+                                  twoMonthsTime,
+                                  
+                                  (tempRepo.branchExpiration ?? 0);
 
     // add repo object
     // to modified repos
