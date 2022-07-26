@@ -127,7 +127,7 @@ async function renderSidebarHTML() {
     
     // if repo obj dosen't exist
     if (!repoObj || !repoObj.defaultBranch
-        || !repoObj.repoDataExpiration || !repoObj.branchExpiration
+        || repoObj.repoDataExpiration === undefined || repoObj.branchExpiration === undefined
         || repoObj.repoDataExpiration < currentTime) {
       
       // get repo obj from git
@@ -1522,7 +1522,7 @@ async function renderBranchMenuHTML(renderAll) {
   
   // if repo obj exists
   if (repoObj && repoObj.branches &&
-      repoObj.branchExpiration &&
+      repoObj.branchExpiration !== undefined &&
       repoObj.branchExpiration >= currentTime) {
   
     // get repository branches
@@ -1543,7 +1543,7 @@ async function renderBranchMenuHTML(renderAll) {
     // if branch resp isn't already stored
     // in local storage
     if (!repoObj || !repoObj.branches ||
-        !repoObj.branchExpiration || 
+        repoObj.branchExpiration === undefined || 
         repoObj.branchExpiration < currentTime) {
       
       // get branches for repository
