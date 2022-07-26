@@ -1115,7 +1115,12 @@ async function renderLiveViewMarkdown(file) {
     
     if (!link.href.startsWith('#')) {
       
-      link.onclick = (e) => { e.preventDefault(); };
+      link.onclick = (e) => {
+        
+        e.preventDefault();
+        showMessage(link.href);
+        
+      };
     
     }
     
