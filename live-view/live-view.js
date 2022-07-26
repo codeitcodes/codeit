@@ -1104,6 +1104,7 @@ async function renderLiveViewMarkdown(file) {
   const html = marked.parse(decodeUnicode(file.content));
   
   liveFrame.contentDocument.head.innerHTML = `<link rel="stylesheet" href="` + window.location.origin + `/fonts/fonts.css">` +
+                                             `<link rel="stylesheet" href="` + window.location.origin + `/dark-theme.css">` +
                                              `<link rel="stylesheet" href="` + window.location.origin + `/live-view/extensions/markdown-dark.css">`;
   
   liveFrame.contentDocument.body.innerHTML = html;
