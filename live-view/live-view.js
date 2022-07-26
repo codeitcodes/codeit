@@ -549,7 +549,8 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup') {
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup' ||
+      selectedFile.lang == 'markdown') {
 
     liveToggle.classList.add('visible');
 
