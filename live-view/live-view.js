@@ -1113,7 +1113,7 @@ async function renderLiveViewMarkdown(file) {
   
   if (frameDoc.body.querySelector('pre code')) {
     
-    loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.head);
+    loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
     loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
     loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
 
