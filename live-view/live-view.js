@@ -1158,12 +1158,10 @@ function loadStyleSheet(href, inEl) {
     s.rel = 'stylesheet';
     
     s.onload = () => {
-      inEl.removeChild(s);
       resolve();
     };
     
     s.onerror = () => {
-      inEl.removeChild(s);
       reject();
     };
     
