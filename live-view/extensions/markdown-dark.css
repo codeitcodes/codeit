@@ -51,12 +51,14 @@ body h1, body h2, body h3, body h4, body h5, body h6 {
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
+  color: var(--heading-color);
 }
 
 body h1 {
   padding-bottom: 0.3em;
   font-size: 2em;
   border-bottom: 1px solid var(--color-border-muted);
+  color: var(--title-color);
 }
 
 body h2 {
