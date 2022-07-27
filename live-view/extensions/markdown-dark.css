@@ -137,6 +137,10 @@ body code, body tt {
   font-family: var(--code-font-family);
 }
 
+body a[href] code, body a[href] tt {
+  color: var(--link-color);
+}
+
 body pre code {
   padding: unset;
   margin: unset;
