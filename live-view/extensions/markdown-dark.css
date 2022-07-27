@@ -176,6 +176,10 @@ body img {
   background-color: var(--color-canvas-default);
 }
 
+body form {
+  display: none;
+}
+
 body table {
   border-spacing: 0;
   border-collapse: collapse;
