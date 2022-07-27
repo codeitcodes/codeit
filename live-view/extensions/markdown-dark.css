@@ -89,7 +89,7 @@ body b, body strong {
 }
 
 body a {
-  color: #0969da;
+  color: var(--link-color);
   text-decoration: none;
 }
 
