@@ -644,7 +644,8 @@ body.expanded .sidebar-toggle svg .left {
   transition-delay: .22s;
 }
 
-.live-view.file-open ~ .live-toggle:hover {
+.live-view.file-open ~ .live-toggle:hover,
+.live-view.visible ~ .live-toggle.popout-hidden:hover {
   width: 97px;
   transition-delay: .22s;
 }
@@ -695,6 +696,10 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle.file-open svg:not(.share, .download) {
+  display: none;
+}
+
+.live-toggle.popout-hidden .popout {
   display: none;
 }
 
