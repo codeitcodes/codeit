@@ -110,6 +110,11 @@ body ul, body ol {
   padding-left: 2em;
 }
 
+body ul ul, body ul ol, body ol ol, body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 body li::marker {
   color: #828689;
 }
