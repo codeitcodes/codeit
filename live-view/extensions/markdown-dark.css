@@ -193,6 +193,7 @@ body table {
   color: inherit;
   border-radius: 10px;
   border: 1px solid var(--table-border-color);
+  overflow: auto;
 }
 
 body thead {
