@@ -1120,7 +1120,16 @@ async function renderLiveViewMarkdown(file) {
       link.onclick = (e) => {
         
         e.preventDefault();
-        showMessage(link.getAttribute('href'));
+        
+        if (event.ctrlKey || event.metaKey) {
+          
+          window.open(link.getAttribute('href'), '_blank');
+        
+        } else {
+        
+          showMessage(link.getAttribute('href'));
+          
+        }
         
       };
     
