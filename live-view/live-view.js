@@ -723,18 +723,29 @@ function toggleLiveView(file) {
   if (liveViewToggle) {
 
     if (isMobile) {
+    
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+    
+    } else {
+      
+      liveToggle.classList.remove('popout-hidden');
+      
     }
-
+    
     if (file.lang == 'html' || file.lang == 'markup') {
 
       renderLiveViewHTML(file);
 
     } else if (file.lang === 'markdown') {
       
+      liveToggle.classList.add('popout-hidden');
+      
       renderLiveViewMarkdown(file);
       
     } else {
+
+      // clear live view
+      liveView.innerHTML = '';
       
       // hide loader
       liveView.classList.add('loaded');
