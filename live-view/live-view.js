@@ -1109,10 +1109,14 @@ async function renderLiveViewMarkdown(file) {
   
   frameDoc.head.innerHTML = '<base href="about:blank">';
   
+  if (isMobile) frameDoc.body.classList.add('mobile');
+  
   frameDoc.body.querySelectorAll('a[href]').forEach(link => {
     
     if (!link.getAttribute('href').startsWith('#')) {
       
+      link.title = isMac ? '⌘ + click to open link' : 'Ctrl + click to open link';
+
       link.onclick = (e) => {
         
         e.preventDefault();
