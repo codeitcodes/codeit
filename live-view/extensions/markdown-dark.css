@@ -166,6 +166,12 @@ body hr {
   border: 0;
 }
 
+body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: var(--color-canvas-default);
+}
+
 body table {
   border-spacing: 0;
   border-collapse: collapse;
