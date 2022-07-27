@@ -214,6 +214,10 @@ body cd-el {
   cursor: unset;
 }
 
+body cd-el::-webkit-scrollbar-track {
+  border-radius: 10px 10px 0 0;
+}
+
 
 html, body {
   text-rendering: optimizeLegibility;
