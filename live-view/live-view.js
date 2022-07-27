@@ -1094,7 +1094,8 @@ async function renderLiveViewMarkdown(file) {
 
 
   // if markdown compiler isn't loaded
-  if (typeof marked === 'undefined') {
+  if (typeof marked === 'undefined' ||
+      typeof DOMPurify === 'undefined') {
     
     // load markdown compiler
     await loadScript('live-view/extensions/marked.min.js');
@@ -1102,7 +1103,8 @@ async function renderLiveViewMarkdown(file) {
   }
   
   
-  const html = marked.parse(decodeUnicode(file.content));
+  let html = marked.parse(decodeUnicode(file.content));
+  html = DOMPurify.sanitize(html);
   
   frameDoc.body.style.display = 'none';
   frameDoc.body.innerHTML = html;
