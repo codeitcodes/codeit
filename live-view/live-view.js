@@ -1102,10 +1102,6 @@ async function renderLiveViewMarkdown(file) {
   }
   
   
-  marked.setOptions({
-    baseUrl: 'https://raw.githubusercontent.com/' + (selectedFile.dir.split(',').join('/').replace(':', '/') + '/')
-  });
-  
   const html = marked.parse(decodeUnicode(file.content));
   
   frameDoc.body.style.display = 'none';
