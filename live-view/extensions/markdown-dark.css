@@ -106,6 +106,10 @@ body ul, body ol {
   padding-left: 2em;
 }
 
+body li::marker {
+  color: #828689;
+}
+
 body li + li {
   margin-top: 0.25em;
 }
