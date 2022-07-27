@@ -1110,10 +1110,11 @@ async function renderLiveViewMarkdown(file) {
   frameDoc.head.innerHTML = '<base href="about:blank">';
   
   if (isMobile) frameDoc.body.classList.add('mobile');
+  setAttr(frameDoc.body, 'dir', 'auto');
   
   frameDoc.body.querySelectorAll('a[href]').forEach(link => {
     
-    if (!link.getAttribute('href').startsWith('#')) {
+    if (!getAttr(link, 'href').startsWith('#')) {
       
       link.title = isMac ? '⌘ + click to open link' : 'Ctrl + click to open link';
 
@@ -1123,11 +1124,11 @@ async function renderLiveViewMarkdown(file) {
         
         if (event.ctrlKey || event.metaKey) {
           
-          window.open(link.getAttribute('href'), '_blank');
+          window.open(getAttr(link, 'href'), '_blank');
         
         } else {
         
-          showMessage(link.getAttribute('href'));
+          showMessage(getAttr(link, 'href'));
           
         }
         
