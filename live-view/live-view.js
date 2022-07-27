@@ -1087,7 +1087,7 @@ async function renderLiveViewMarkdown(file) {
   }
 
 
-  liveView.innerHTML = '<iframe src="" name="Live view" title="Live view" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe src="" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
   const liveFrame = liveView.querySelector('.live-frame');
   const frameDoc = liveFrame.contentDocument;
