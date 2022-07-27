@@ -3,7 +3,7 @@
  */
 
 :root {
-  --text-color: #d4d5d7;
+  --font-color: #d4d5d7;
   --title-color: rgba(241,241,242,0.92);
   --heading-color: hsl(240deg 5% 89% / 92%);
   --bg-color: hsl(228deg 16% 12%); 
@@ -30,7 +30,7 @@ body {
   line-height: 1.5;
   word-wrap: break-word;
   background: var(--bg-color);
-  color: var(--text-color);
+  color: var(--font-color);
 }
 
 body > *:first-child {
