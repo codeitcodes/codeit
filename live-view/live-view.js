@@ -1125,9 +1125,11 @@ async function renderLiveViewMarkdown(file) {
   if (isMobile) frameDoc.body.classList.add('mobile');
   setAttr(frameDoc.body, 'dir', 'auto');
   
-  frameDoc.body.querySelectorAll('a[href]').forEach(link => {
+  frameDoc.body.querySelectorAll('a[href]:not([target="_blank"])').forEach(link => {
     
-    if (!getAttr(link, 'href').startsWith('#')) {
+    const href = getAttr(link, 'href');
+
+    if (!href.startsWith('#')) {
       
       link.title = isMac ? '⌘ + click to open link' : 'Ctrl + click to open link';
 
@@ -1137,16 +1139,27 @@ async function renderLiveViewMarkdown(file) {
         
         if (event.ctrlKey || event.metaKey) {
           
-          window.open(getAttr(link, 'href'), '_blank');
+          window.open(href, '_blank');
         
         } else {
         
-          showMessage(getAttr(link, 'href'));
+          showMessage(href);
           
         }
         
       };
     
+    } else {
+      
+      link.onclick = (e) => {
+        
+        e.preventDefault();
+        
+        const target = document.querySelector(href);
+        target.scrollIntoView();
+        
+      };
+      
     }
     
   });
