@@ -195,6 +195,8 @@ body table {
   border-radius: 10px;
   border: 1px solid var(--table-border-color);
   overflow: auto;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 body thead {
