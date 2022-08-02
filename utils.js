@@ -559,7 +559,61 @@ let generateSHA = (len) => {
 }
 
 
+// load a script
+let loadScript = (src, inEl = document.body) => {
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('script');
+    s.src = src;
+    
+    s.onload = () => {
+      inEl.removeChild(s);
+      resolve();
+    };
+    
+    s.onerror = () => {
+      inEl.removeChild(s);
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
+  });
+  
+}
+
+// load a stylesheet
+let loadStyleSheet = (href, inEl = document.head) => {
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('link');
+    s.href = href;
+    s.rel = 'stylesheet';
+    
+    s.onload = () => {
+      resolve();
+    };
+    
+    s.onerror = () => {
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
+  });
+  
+}
+
+
 // asynchronous thread
+
+let onNextFrame = (callback) => {
+
+  window.requestAnimationFrame(callback);
+
+}
 
 let asyncThread = (callback, time) => {
 
@@ -567,10 +621,14 @@ let asyncThread = (callback, time) => {
 
 }
 
-let onNextFrame = (callback) => {
-
-  window.requestAnimationFrame(callback);
-
+let asyncForEach = async (array, callback) => {
+  
+  for (let index = 0; index < array.length; index++) {
+    
+    await callback(array[index], index, array);
+    
+  }
+  
 }
 
 
