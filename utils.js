@@ -163,13 +163,16 @@ function hideMessage() {
 
 // show dialog
 
-function showDialog(confirmHandler, titleText, confirmText) {
+function showDialog(confirmHandler, titleText, confirmText, showOneButton = false) {
   
   return new Promise(resolve => {
     
     // add dialog text to HTML
     dialogTitle.textContent = titleText;
     dialogConfirm.textContent = confirmText;
+    
+    // toggle button visibility
+    dialogWrapper.classList.toggle('show-one-button', showOneButton);
     
     // show dialog
     dialogWrapper.classList.add('visible');
