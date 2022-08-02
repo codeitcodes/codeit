@@ -69,7 +69,7 @@ window.onload = async () => {
       
     } else {
       
-      window.open(authURL, 'Login with Github', 'height=575,width=575');
+      window.open(authURL, 'Login with GitHub', 'height=575,width=575');
       
     }
 
