@@ -2228,16 +2228,6 @@ function createNewFileInHTML() {
 
         // if file name is empty, use default name
         if (fileName === '') fileName = 'new-file';
-
-        // replace all special chars in name with dashes
-        
-        const specialChars = validateString(fileName);
-        
-        if (specialChars) {
-          
-          specialChars.forEach(char => { fileName = fileName.replaceAll(char, '-') });
-          
-        }
         
         
         // if another file in the current directory
