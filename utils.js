@@ -172,7 +172,7 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
     dialogConfirm.textContent = confirmText;
     
     // toggle button visibility
-    dialogWrapper.classList.toggle('show-one-button', showOneButton);
+    dialogWrapper.classList.toggle('one-button', showOneButton);
     
     // show dialog
     dialogWrapper.classList.add('visible');
