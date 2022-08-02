@@ -2558,7 +2558,9 @@ function toggleSidebar(open) {
 
     if (isMobile) {
       
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
+      if (!liveView.classList.contains('visible')) {
+        document.querySelector('meta[name="theme-color"]').content = '#313744';
+      }
       
     } else {
       

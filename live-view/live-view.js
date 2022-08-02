@@ -549,7 +549,8 @@ function addBottomSwipeListener() {
 
 function updateLiveViewArrow() {
 
-  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup') {
+  if (selectedFile.lang == 'html' || selectedFile.lang == 'markup' ||
+      selectedFile.lang == 'markdown') {
 
     liveToggle.classList.add('visible');
 
@@ -722,18 +723,29 @@ function toggleLiveView(file) {
   if (liveViewToggle) {
 
     if (isMobile) {
+    
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+    
+    } else {
+      
+      liveToggle.classList.remove('popout-hidden');
+      
     }
-
+    
     if (file.lang == 'html' || file.lang == 'markup') {
 
       renderLiveViewHTML(file);
 
-    } /* else if (file.lang == 'python') {
+    } else if (file.lang === 'markdown') {
+      
+      liveToggle.classList.add('popout-hidden');
+      
+      renderLiveViewMarkdown(file);
+      
+    } else {
 
-      renderLiveViewPython(file);
-
-    } */ else {
+      // clear live view
+      liveView.innerHTML = '';
       
       // hide loader
       liveView.classList.add('loaded');
@@ -1074,8 +1086,8 @@ async function renderLiveViewHTML(file) {
 
 
 
-// render live view for Python files
-async function renderLiveViewPython(file) {
+// render live view for Markdown files
+async function renderLiveViewMarkdown(file) {
 
   if (!isDev) {
 
@@ -1086,87 +1098,201 @@ async function renderLiveViewPython(file) {
   }
 
 
-  liveView.innerHTML = '<iframe name="Python Context" class="python-frame" style="display: none"></iframe>'
-                       + '<div class="console"></div>';
+  liveView.innerHTML = '<iframe srcdoc="<!DOCTYPE html><html><head></head><body></body></html>" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
+  const liveFrame = liveView.querySelector('.live-frame');
+  
+  await new Promise(resolve => { liveFrame.onload = resolve; });
+
+  const frameDoc = liveFrame.contentDocument;
+
+
+  // if markdown compiler isn't loaded
+  if (typeof marked === 'undefined' ||
+      typeof DOMPurify === 'undefined') {
+    
+    // load markdown compiler
+    await loadScript('live-view/extensions/marked.min.js');
+    
+  }
+  
+  
+  let html = marked.parse(decodeUnicode(file.content));
+  html = DOMPurify.sanitize(html);
+  
+  frameDoc.head.innerHTML = '<base href="about:blank">';
+  
+  frameDoc.body.style.display = 'none';
+  frameDoc.body.innerHTML = html;
+    
+  if (isMobile) frameDoc.body.classList.add('mobile');
+  setAttr(frameDoc.body, 'dir', 'auto');
+  
+  frameDoc.body.querySelectorAll('a[href]:not([target="_blank"])').forEach(link => {
+    
+    const href = getAttr(link, 'href');
+
+    if (!href.startsWith('#')) {
+      
+      link.title = isMac ? '⌘ + click to open link' : 'Ctrl + click to open link';
+
+      link.onclick = (e) => {
+        
+        e.preventDefault();
+        
+        if (event.ctrlKey || event.metaKey) {
+          
+          window.open(href, '_blank');
+        
+        } else {
+        
+          showMessage(href);
+          
+        }
+        
+      };
+    
+    } else {
+      
+      link.onclick = (e) => {
+        
+        e.preventDefault();
+        
+        const target = frameDoc.querySelector(href);
+        target.scrollIntoView();
+        
+      };
+      
+    }
+    
+  });
+  
+  
+  let fetchPromises = [];
+  
+  
+  fetchPromises.push((async (i) => {
+    
+    await loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head)
+    
+    fetchPromises.splice(i, 1);
+  })(fetchPromises.length));
+  
+  fetchPromises.push((async (i) => {
+    
+    await loadStyleSheet(window.location.origin + '/fonts/fonts.css', frameDoc.head);
+    
+    fetchPromises.splice(i, 1);
+  })(fetchPromises.length));
+  
+  
+  if (frameDoc.body.querySelector('pre code')) {
+    
+    fetchPromises.push((async (i) => {
+      
+      await loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
+
+      frameDoc.body.querySelectorAll('pre').forEach(pre => {
+        
+        const codeEl = pre.querySelector('code');
+        const lang = codeEl.classList[0] ? codeEl.classList[0].replace('language-', '') : '';
+        
+        const code = codeEl.textContent.replace(/[\u00A0-\u9999<>\&]/g, (i) => {
+          return '&#'+i.charCodeAt(0)+';';
+        });
+        
+        pre.outerHTML = '<cd-el lang="' + lang.toLowerCase() + '" edit="false">' + code + '</cd-el>';
+        
+      });
+      
+      fetchPromises.splice(i, 1);
+    })(fetchPromises.length));
+    
+    (async (i) => {
+      
+      await loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
+      
+      let s = document.createElement('script');
+      s.appendChild(document.createTextNode(`Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/'`));
+      onNextFrame(() => {
+        frameDoc.body.removeChild(s);
+      });
+      frameDoc.body.appendChild(s);
+      
+      await loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
+      
+      fetchPromises.splice(i, 1);
+    })(fetchPromises.length);
+    
+  }
+  
+  
+  await asyncForEach(fetchPromises, async (promise) => {
+    
+    if (fetchPromises.length === 0) return;
+    
+    if (promise) await promise;
+    
+  });
+  
+  frameDoc.body.style.display = '';
   liveView.classList.add('loaded');
 
-  const consoleEl = liveView.querySelector('.console');
-  const pythonFrame = liveView.querySelector('.python-frame').contentWindow;
+}
 
 
-  await addScript(pythonFrame.document, false, 'live-view/extensions/pyodide.min.js');
 
-
-  function logMessage(msg, options) {
-
-    if (msg) {
-
-      if (options && options.color) {
-
-        if (options.color === 'gray') {
-
-          consoleEl.innerHTML += '<div class="message" style="color:gray;font-style:italic">'+msg+'<br></div>';
-
-        } else if (options.color === 'purplepink') {
-
-          consoleEl.innerHTML += '<div class="message" style="color:hsl(302,100%,72.5%)">'+msg+'<br></div>';
-
-        }
-
-      } else {
-
-        consoleEl.innerHTML += '<div class="message"><span style="color:#8be9fd">&gt;</span> '+msg+'<br></div>';
-
-      }
-
-    }
-
-  }
-
-  function clearOutput() {
-
-    consoleEl.innerHTML = '';
-    logMessage('Console was cleared', { color: 'gray' });
-
-  }
-
-
-  logMessage('Loading Python...', { color: 'gray' });
-
-  // load pyodide in python frame
-  pythonFrame.pyodide = await pythonFrame.loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.19.0/full/'
+// lazy load an external script
+function loadScript(src, inEl) {
+  
+  inEl = inEl ?? document.body;
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('script');
+    s.src = src;
+    //s.async = true;
+    
+    s.onload = () => {
+      inEl.removeChild(s);
+      resolve();
+    };
+    
+    s.onerror = () => {
+      inEl.removeChild(s);
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
   });
-
-  logMessage('Loaded!', { color: 'gray' });
-
-
-  // override logs in python context
-  pythonFrame.console.stdlog = pythonFrame.console.log.bind(pythonFrame.console);
-  pythonFrame.console.logs = [];
-  pythonFrame.console.log = function() {
-    pythonFrame.console.logs = [];
-    pythonFrame.console.logs.push(Array.from(arguments));
-    pythonFrame.console.logs.forEach(msg => addToOutput(msg));
-    pythonFrame.console.stdlog.apply(pythonFrame.console, arguments);
-  }
+  
+}
 
 
-  // run file
-
-  try {
-
-    let output = pythonFrame.pyodide.runPython(decodeUnicode(file.content));
-
-    //addToOutput(output);
-
-  } catch (err) {
-
-    logMessage(err, { color: 'purplepink' });
-
-  }
-
+// load a stylesheet
+function loadStyleSheet(href, inEl) {
+  
+  inEl = inEl ?? document.head;
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('link');
+    s.href = href;
+    s.rel = 'stylesheet';
+    
+    s.onload = () => {
+      resolve();
+    };
+    
+    s.onerror = () => {
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
+  });
+  
 }
 
 

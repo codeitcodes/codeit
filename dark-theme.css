@@ -141,6 +141,7 @@ cd-el {
 
   -webkit-font-smoothing: antialiased;
   border-radius: 0;
+  display: block;
 }
 
 .token.prolog,
