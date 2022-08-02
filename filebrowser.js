@@ -946,13 +946,13 @@ async function clickedOnFileHTML(fileEl, event) {
 
       // open push screen
       commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                             'Type push description...');
+                             'Type commit message...');
 
       // if canceled push, return
       if (!commitMessage) return;
 
       // if not specified message
-      if (commitMessage === 'Type push description...') {
+      if (commitMessage === 'Type commit message...') {
 
         // show default message
         commitMessage = 'Update ' + fileEl.innerText;
