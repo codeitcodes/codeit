@@ -1120,6 +1120,8 @@ async function renderLiveViewMarkdown(file) {
   let html = marked.parse(decodeUnicode(file.content));
   html = DOMPurify.sanitize(html);
   
+  frameDoc.head.innerHTML = '<base href="about:blank">';
+  
   frameDoc.body.style.display = 'none';
   frameDoc.body.innerHTML = html;
     
