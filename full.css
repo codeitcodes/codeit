@@ -1753,6 +1753,7 @@ body.mobile .dialog-background {
 
 .dialog .title {
   padding: 8px 14px;
+  white-space: pre-wrap;
 }
 
 .dialog .button-wrapper {
@@ -1770,6 +1771,10 @@ body.mobile .dialog-background {
 
 .dialog .cancel {
   color: hsl(228deg 16% 37%);
+}
+
+.dialog-wrapper.one-button .dialog .cancel {
+  display: none;
 }
 
 .dialog .confirm {
