@@ -205,15 +205,17 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
     
     // add dialog click listener
     dialogWrapper.onclick = () => {
+      
+      // if clicked anywhere else other than confirm button
       resolve(false);
+      
     };
     
   });
   
 }
 
-// add cancel button click listener
-dialogCancel.addEventListener('click', () => {
+function hideDialog() {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
@@ -234,31 +236,13 @@ dialogCancel.addEventListener('click', () => {
 
   }
   
-});
+}
+
+// add cancel button click listener
+dialogCancel.addEventListener('click', hideDialog);
 
 // add background click listener
-dialogBackground.addEventListener('click', () => {
-  
-  // hide dialog
-  dialogWrapper.classList.remove('visible');
-  
-  // if on mobile,
-  // change status bar color
-  if (isMobile) {
-
-    if (body.classList.contains('expanded')) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-    } else {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
-    }
-
-  }
-  
-});
+dialogBackground.addEventListener('click', hideDialog);
 
 
 
