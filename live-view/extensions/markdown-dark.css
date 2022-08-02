@@ -28,7 +28,6 @@ html {
 body {
   font-family: var(--font-family);
   padding: 32px;
-  padding-left: calc(32px + env(safe-area-inset-left, 0px));
   max-width: 1012px;
   margin: auto;
   font-size: 16px;
