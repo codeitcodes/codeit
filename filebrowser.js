@@ -241,11 +241,11 @@ async function renderSidebarHTML() {
     // if not logged in
     if (gitToken == '') {
     
-      await showDialog(openGitHubLogin, 'Hmm... we can\'t find that repo. Try logging in.', 'Login');
+      await showDialog(openGitHubLogin, 'Hmm... we can\'t find\nthat repo. Try logging in.', 'Login');
       
     } else { // if logged in
       
-      await showDialog(false, 'Hmm... we can\'t find that repo.', 'Close', true);
+      await showDialog(false, 'Hmm... we can\'t\nfind that repo.', 'OK', true);
       
     }
     
@@ -1162,7 +1162,7 @@ async function checkPushDialogs() {
     }
 
     const dialogResult = await showDialog(forkRepo,
-      'Fork this repository to save your changes.',
+      'Fork this repository\nto save your changes.',
       'Fork');
 
     if (dialogResult === false) return 'return';
