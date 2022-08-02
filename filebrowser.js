@@ -225,8 +225,6 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
-    
     
     // get repo obj from local storage
     const repoObj = modifiedRepos[user + '/' + repoName];
@@ -236,6 +234,18 @@ async function renderSidebarHTML() {
       
       // delete repo obj from modified repos
       deleteModRepo(user + '/' + repoName);
+      
+    }
+    
+    
+    // if not logged in
+    if (gitToken == '') {
+    
+      await showDialog(openGitHubLogin, 'Hmm... we can\'t find that repo. Try logging in.', 'Login');
+      
+    } else { // if logged in
+      
+      await showDialog(false, 'Hmm... we can\'t find that repo.', 'Close', true);
       
     }
     
@@ -967,44 +977,45 @@ async function clickedOnFileHTML(fileEl, event) {
 }
 
 
+function openGitHubLogin() {
+
+  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
+  if (isMobile) {
+
+    window.location.href = authURL;
+
+  } else {
+
+    window.addEventListener('message', (event) => {
+
+      // if received a git code
+      if (event.origin === window.location.origin &&
+        event.data.startsWith('gitCode=')) {
+
+        // hide dialog
+        hideDialog();
+
+        showMessage('Logging in...', -1);
+
+      }
+
+    });
+
+    // open login window
+    window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+
+  }
+
+}
+
+
 async function checkPushDialogs() {
 
   // if not logged in to git
   if (gitToken == '') {
 
-    function openLogin() {
-
-      const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-      if (isMobile) {
-
-        window.location.href = authURL;
-
-      } else {
-
-        window.addEventListener('message', (event) => {
-
-          // if received a git code
-          if (event.origin === window.location.origin &&
-            event.data.startsWith('gitCode=')) {
-
-            // hide dialog
-            dialogWrapper.classList.remove('visible');
-
-            showMessage('Logging in...', -1);
-
-          }
-
-        });
-
-        // open login window
-        window.open(authURL, 'Login with Github', 'height=575,width=575');
-
-      }
-
-    }
-
-    showDialog(openLogin, 'Login to save this file.', 'Login');
+    showDialog(openGitHubLogin, 'Login to save this file.', 'Login');
 
     return 'return';
 
@@ -1047,7 +1058,7 @@ async function checkPushDialogs() {
     async function forkRepo() {
 
       // hide dialog
-      dialogWrapper.classList.remove('visible');
+      hideDialog();
       
       // if on mobile,
       // change status bar color
