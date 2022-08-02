@@ -1101,6 +1101,9 @@ async function renderLiveViewMarkdown(file) {
   liveView.innerHTML = '<iframe srcdoc="<!DOCTYPE html><html><head></head><body></body></html>" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
   const liveFrame = liveView.querySelector('.live-frame');
+  
+  await new Promise(resolve => { liveFrame.onload = resolve; });
+
   const frameDoc = liveFrame.contentDocument;
 
 
@@ -1119,9 +1122,7 @@ async function renderLiveViewMarkdown(file) {
   
   frameDoc.body.style.display = 'none';
   frameDoc.body.innerHTML = html;
-  
-  frameDoc.head.innerHTML = '<base href="about:blank">';
-  
+    
   if (isMobile) frameDoc.body.classList.add('mobile');
   setAttr(frameDoc.body, 'dir', 'auto');
   
