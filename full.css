@@ -1765,7 +1765,7 @@ body.mobile .dialog-background {
   border-radius: 5.75px;
   display: flex;
   justify-content: center;
-  width: 50%;
+  flex: 1;
 }
 
 .dialog .cancel {
