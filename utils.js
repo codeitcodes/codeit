@@ -198,7 +198,7 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
       
       e.stopPropagation();
       
-      await confirmHandler(e);
+      if (confirmHandler) await confirmHandler(e);
       resolve(true);
       
     };
