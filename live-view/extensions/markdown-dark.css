@@ -199,6 +199,12 @@ body table {
   -webkit-appearance: none;
 }
 
+body table::-webkit-scrollbar-track {
+  border-radius: 0 0 10px 10px;
+  background-color: var(--color-canvas-default) !important;
+  box-shadow: inset 0px 1px 0 0 var(--color-border-default) !important;
+}
+
 body thead {
   border-bottom: 1px solid var(--color-border-default);
 }
