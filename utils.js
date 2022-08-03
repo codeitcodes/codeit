@@ -198,18 +198,24 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
     
     // add confirm button listener
     dialogConfirm.onclick = async (e) => {
-      
-      e.stopPropagation();
-      
+            
       if (confirmHandler) await confirmHandler(e);
       resolve(true);
       
     };
     
-    // add dialog click listener
-    dialogWrapper.onclick = () => {
+    // add cancel button listener
+    dialogCancel.onclick = () => {
       
-      // if clicked anywhere else other than confirm button
+      hideDialog();
+      resolve(false);
+      
+    };
+
+    // add dialog background click listener
+    dialogBackground.onclick = () => {
+      
+      hideDialog();
       resolve(false);
       
     };
@@ -243,12 +249,6 @@ function hideDialog() {
   }
   
 }
-
-// add cancel button click listener
-dialogCancel.addEventListener('click', hideDialog);
-
-// add background click listener
-dialogBackground.addEventListener('click', hideDialog);
 
 
 
