@@ -241,7 +241,7 @@ async function renderSidebarHTML() {
     // if not logged in
     if (gitToken == '') {
     
-      await showDialog(openGitHubLogin, 'Hmm... we can\'t find\nthat repo. Try logging in.', 'Login');
+      await showDialog(openGitHubLogin, 'Hmm... we can\'t find\nthat repo. Try logging in.', 'Login', true);
       
     } else { // if logged in
       
