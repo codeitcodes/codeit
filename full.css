@@ -562,7 +562,8 @@ body.scroll-enabled .bookmark {
   will-change: transform;
   transition: .18s var(--ease-function) left,
               .4s var(--cubic-function) transform,
-              .4s var(--cubic-function) padding;
+              .4s var(--cubic-function) padding,
+              .18s var(--bounce-function) opacity;
 }
 
 .sidebar-toggle::after {
@@ -590,6 +591,11 @@ body.scroll-enabled .bookmark {
 .live-toggle.file-open + .sidebar-toggle,
 body.embed .sidebar-toggle {
   display: none;
+}
+
+.sidebar-toggle.dialog-visible {
+  opacity: 0;
+  pointer-events: none;
 }
 
 body.expanded .sidebar-toggle {
@@ -1737,8 +1743,6 @@ body.mobile .dialog-background {
   border: 1px solid rgb(32 34 37 / 60%);
   border-radius: 11.5px;
   line-height: 1.5;
-  max-width: 200px;
-  width: 194px;
   opacity: 0;
   padding: 2px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
@@ -1753,6 +1757,7 @@ body.mobile .dialog-background {
 
 .dialog .title {
   padding: 8px 14px;
+  white-space: pre-wrap;
 }
 
 .dialog .button-wrapper {
@@ -1765,11 +1770,15 @@ body.mobile .dialog-background {
   border-radius: 5.75px;
   display: flex;
   justify-content: center;
-  width: 50%;
+  flex: 1;
 }
 
 .dialog .cancel {
   color: hsl(228deg 16% 37%);
+}
+
+.dialog-wrapper.one-button .dialog .cancel {
+  display: none;
 }
 
 .dialog .confirm {

@@ -74,7 +74,7 @@ const body = document.body,
 
 
 // version
-const version = '3.3.0';
+const version = '3.3.5';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -163,7 +163,7 @@ function hideMessage() {
 
 // show dialog
 
-function showDialog(confirmHandler, titleText, confirmText) {
+function showDialog(confirmHandler, titleText, confirmText, showOneButton = false) {
   
   return new Promise(resolve => {
     
@@ -171,8 +171,14 @@ function showDialog(confirmHandler, titleText, confirmText) {
     dialogTitle.textContent = titleText;
     dialogConfirm.textContent = confirmText;
     
+    // toggle button visibility
+    dialogWrapper.classList.toggle('one-button', showOneButton);
+    
     // show dialog
     dialogWrapper.classList.add('visible');
+    
+    // if on desktop, hide sidebar toggle
+    if (!isMobile) sidebarToggle.classList.add('dialog-visible');
     
     // if on mobile,
     // change status bar color
@@ -192,28 +198,39 @@ function showDialog(confirmHandler, titleText, confirmText) {
     
     // add confirm button listener
     dialogConfirm.onclick = async (e) => {
-      
-      e.stopPropagation();
-      
-      await confirmHandler(e);
+            
+      if (confirmHandler) await confirmHandler(e);
       resolve(true);
       
     };
     
-    // add dialog click listener
-    dialogWrapper.onclick = () => {
+    // add cancel button listener
+    dialogCancel.onclick = () => {
+      
+      hideDialog();
       resolve(false);
+      
+    };
+
+    // add dialog background click listener
+    dialogBackground.onclick = () => {
+      
+      hideDialog();
+      resolve(false);
+      
     };
     
   });
   
 }
 
-// add cancel button click listener
-dialogCancel.addEventListener('click', () => {
+function hideDialog() {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
+  
+  // if on desktop, show sidebar toggle
+  if (!isMobile) sidebarToggle.classList.remove('dialog-visible');
   
   // if on mobile,
   // change status bar color
@@ -231,31 +248,7 @@ dialogCancel.addEventListener('click', () => {
 
   }
   
-});
-
-// add background click listener
-dialogBackground.addEventListener('click', () => {
-  
-  // hide dialog
-  dialogWrapper.classList.remove('visible');
-  
-  // if on mobile,
-  // change status bar color
-  if (isMobile) {
-
-    if (body.classList.contains('expanded')) {
-
-      document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
-
-    } else {
-
-      document.querySelector('meta[name="theme-color"]').content = '#313744';
-
-    }
-
-  }
-  
-});
+}
 
 
 
@@ -556,7 +549,61 @@ let generateSHA = (len) => {
 }
 
 
+// load a script
+let loadScript = (src, inEl = document.body) => {
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('script');
+    s.src = src;
+    
+    s.onload = () => {
+      inEl.removeChild(s);
+      resolve();
+    };
+    
+    s.onerror = () => {
+      inEl.removeChild(s);
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
+  });
+  
+}
+
+// load a stylesheet
+let loadStyleSheet = (href, inEl = document.head) => {
+  
+  return new Promise((resolve, reject) => {
+    
+    let s = document.createElement('link');
+    s.href = href;
+    s.rel = 'stylesheet';
+    
+    s.onload = () => {
+      resolve();
+    };
+    
+    s.onerror = () => {
+      reject();
+    };
+    
+    inEl.appendChild(s);
+    
+  });
+  
+}
+
+
 // asynchronous thread
+
+let onNextFrame = (callback) => {
+
+  window.requestAnimationFrame(callback);
+
+}
 
 let asyncThread = (callback, time) => {
 
@@ -564,10 +611,14 @@ let asyncThread = (callback, time) => {
 
 }
 
-let onNextFrame = (callback) => {
-
-  window.requestAnimationFrame(callback);
-
+let asyncForEach = async (array, callback) => {
+  
+  for (let index = 0; index < array.length; index++) {
+    
+    await callback(array[index], index, array);
+    
+  }
+  
 }
 
 

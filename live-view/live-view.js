@@ -177,13 +177,17 @@ async function setupLiveView() {
 
           // don't transition live view
           liveView.classList.add('notransition');
-
-          // hide live view
-          liveView.classList.remove('visible');
-
-          // restore transition on next frame
+          
           onNextFrame(() => {
-            liveView.classList.remove('notransition');
+            
+            // hide live view
+            liveView.classList.remove('visible');
+  
+            // restore transition on next frame
+            onNextFrame(() => {
+              liveView.classList.remove('notransition');
+            });
+            
           });
 
         }
@@ -1240,65 +1244,3 @@ async function renderLiveViewMarkdown(file) {
 
 }
 
-
-
-// lazy load an external script
-function loadScript(src, inEl) {
-  
-  inEl = inEl ?? document.body;
-  
-  return new Promise((resolve, reject) => {
-    
-    let s = document.createElement('script');
-    s.src = src;
-    //s.async = true;
-    
-    s.onload = () => {
-      inEl.removeChild(s);
-      resolve();
-    };
-    
-    s.onerror = () => {
-      inEl.removeChild(s);
-      reject();
-    };
-    
-    inEl.appendChild(s);
-    
-  });
-  
-}
-
-
-// load a stylesheet
-function loadStyleSheet(href, inEl) {
-  
-  inEl = inEl ?? document.head;
-  
-  return new Promise((resolve, reject) => {
-    
-    let s = document.createElement('link');
-    s.href = href;
-    s.rel = 'stylesheet';
-    
-    s.onload = () => {
-      resolve();
-    };
-    
-    s.onerror = () => {
-      reject();
-    };
-    
-    inEl.appendChild(s);
-    
-  });
-  
-}
-
-
-
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
-}

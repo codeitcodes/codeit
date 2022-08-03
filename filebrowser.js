@@ -225,8 +225,6 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    alert('Hmm... we can\'t find that repo.\nIf it\'s private, try double checking you\'re on the account with access.');
-    
     
     // get repo obj from local storage
     const repoObj = modifiedRepos[user + '/' + repoName];
@@ -236,6 +234,21 @@ async function renderSidebarHTML() {
       
       // delete repo obj from modified repos
       deleteModRepo(user + '/' + repoName);
+      
+    }
+    
+    
+    // if not logged in
+    if (gitToken == '') {
+    
+      const dialogResp = await showDialog(openGitHubLogin, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
+      
+      // if chosen to log in, return
+      if (dialogResp == true) return;
+      
+    } else { // if logged in
+      
+      await showDialog(hideDialog, 'Hmm... the repo you\'re\nlooking for can\'t be found.', 'OK', true);
       
     }
     
@@ -681,10 +694,20 @@ async function renderSidebarHTML() {
           // if repo obj dosen't already exist
           if (!modifiedRepos[item.full_name]) {
             
+            // get repo data expiration time
+            // (two months from now)
+            
+            let expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + (2 * 4 * 7));
+            
+            const twoMonthsTime = expirationDate.getTime();
+            
+            
             // create repo obj
             repoObj = createRepoObj(item.full_name, item.default_branch, item.default_branch,
                                     (item.permissions.push ?? false),
-                                    null, item.private, item.fork, false);
+                                    null, item.private, item.fork, false,
+                                    twoMonthsTime, 0);
             
           } else {
             
@@ -936,13 +959,13 @@ async function clickedOnFileHTML(fileEl, event) {
 
       // open push screen
       commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                             'Type push description...');
+                             'Type commit message...');
 
       // if canceled push, return
       if (!commitMessage) return;
 
       // if not specified message
-      if (commitMessage === 'Type push description...') {
+      if (commitMessage === 'Type commit message...') {
 
         // show default message
         commitMessage = 'Update ' + fileEl.innerText;
@@ -967,44 +990,45 @@ async function clickedOnFileHTML(fileEl, event) {
 }
 
 
+function openGitHubLogin() {
+
+  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+
+  if (isMobile) {
+
+    window.location.href = authURL;
+
+  } else {
+
+    window.addEventListener('message', (event) => {
+
+      // if received a git code
+      if (event.origin === window.location.origin &&
+        event.data.startsWith('gitCode=')) {
+
+        // hide dialog
+        hideDialog();
+
+        showMessage('Logging in...', -1);
+
+      }
+
+    });
+
+    // open login window
+    window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+
+  }
+
+}
+
+
 async function checkPushDialogs() {
 
   // if not logged in to git
   if (gitToken == '') {
 
-    function openLogin() {
-
-      const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-      if (isMobile) {
-
-        window.location.href = authURL;
-
-      } else {
-
-        window.addEventListener('message', (event) => {
-
-          // if received a git code
-          if (event.origin === window.location.origin &&
-            event.data.startsWith('gitCode=')) {
-
-            // hide dialog
-            dialogWrapper.classList.remove('visible');
-
-            showMessage('Logging in...', -1);
-
-          }
-
-        });
-
-        // open login window
-        window.open(authURL, 'Login with Github', 'height=575,width=575');
-
-      }
-
-    }
-
-    showDialog(openLogin, 'Login to save this file.', 'Login');
+    showDialog(openGitHubLogin, 'Login to save this file.', 'Login');
 
     return 'return';
 
@@ -1047,7 +1071,7 @@ async function checkPushDialogs() {
     async function forkRepo() {
 
       // hide dialog
-      dialogWrapper.classList.remove('visible');
+      hideDialog();
       
       // if on mobile,
       // change status bar color
@@ -1129,12 +1153,14 @@ async function checkPushDialogs() {
       // for fork
 
       const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
-        true, repoObj.branches, repoObj.private, true, false);
+        true, repoObj.branches, repoObj.private, true, false,
+        repoObj.repoDataExpiration, repoObj.branchExpiration);
+      
       modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
 
       updateModReposLS();
-
-
+      
+      
       // change location
       treeLoc[0] = loggedUser;
       saveTreeLocLS(treeLoc);
@@ -1151,7 +1177,7 @@ async function checkPushDialogs() {
     }
 
     const dialogResult = await showDialog(forkRepo,
-      'Fork this repository to save your changes.',
+      'Fork this repository\nto save your changes.',
       'Fork');
 
     if (dialogResult === false) return 'return';
@@ -2076,7 +2102,7 @@ function createNewRepoInHTML() {
         
         // create new repo obj
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
-                                      true, null, repoPrivate, false, true);
+                                      true, null, repoPrivate, false, true, 0, 0);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
@@ -2217,16 +2243,6 @@ function createNewFileInHTML() {
 
         // if file name is empty, use default name
         if (fileName === '') fileName = 'new-file';
-
-        // replace all special chars in name with dashes
-        
-        const specialChars = validateString(fileName);
-        
-        if (specialChars) {
-          
-          specialChars.forEach(char => { fileName = fileName.replaceAll(char, '-') });
-          
-        }
         
         
         // if another file in the current directory
