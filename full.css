@@ -562,7 +562,8 @@ body.scroll-enabled .bookmark {
   will-change: transform;
   transition: .18s var(--ease-function) left,
               .4s var(--cubic-function) transform,
-              .4s var(--cubic-function) padding;
+              .4s var(--cubic-function) padding,
+              .18s var(--bounce-function) opacity;
 }
 
 .sidebar-toggle::after {
@@ -590,6 +591,11 @@ body.scroll-enabled .bookmark {
 .live-toggle.file-open + .sidebar-toggle,
 body.embed .sidebar-toggle {
   display: none;
+}
+
+.sidebar-toggle.dialog-open {
+  opacity: 0;
+  pointer-events: none;
 }
 
 body.expanded .sidebar-toggle {
