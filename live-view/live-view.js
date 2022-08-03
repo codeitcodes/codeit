@@ -177,13 +177,17 @@ async function setupLiveView() {
 
           // don't transition live view
           liveView.classList.add('notransition');
-
-          // hide live view
-          liveView.classList.remove('visible');
-
-          // restore transition on next frame
+          
           onNextFrame(() => {
-            liveView.classList.remove('notransition');
+            
+            // hide live view
+            liveView.classList.remove('visible');
+  
+            // restore transition on next frame
+            onNextFrame(() => {
+              liveView.classList.remove('notransition');
+            });
+            
           });
 
         }
