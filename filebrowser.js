@@ -248,7 +248,7 @@ async function renderSidebarHTML() {
       
     } else { // if logged in
       
-      await showDialog(hideDialog, 'Hmm... we can\'t\nfind that repo.', 'OK', true);
+      await showDialog(hideDialog, 'Hmm... we can\'t find\nthat repo.', 'OK', true);
       
     }
     
