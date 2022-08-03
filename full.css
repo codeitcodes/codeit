@@ -593,7 +593,7 @@ body.embed .sidebar-toggle {
   display: none;
 }
 
-.sidebar-toggle.dialog-open {
+.sidebar-toggle.dialog-visible {
   opacity: 0;
   pointer-events: none;
 }
