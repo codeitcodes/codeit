@@ -691,10 +691,20 @@ async function renderSidebarHTML() {
           // if repo obj dosen't already exist
           if (!modifiedRepos[item.full_name]) {
             
+            // get repo data expiration time
+            // (two months from now)
+            
+            let expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + (2 * 4 * 7));
+            
+            const twoMonthsTime = expirationDate.getTime();
+            
+            
             // create repo obj
             repoObj = createRepoObj(item.full_name, item.default_branch, item.default_branch,
                                     (item.permissions.push ?? false),
-                                    null, item.private, item.fork, false);
+                                    null, item.private, item.fork, false,
+                                    twoMonthsTime, 0);
             
           } else {
             
@@ -1140,7 +1150,9 @@ async function checkPushDialogs() {
       // for fork
 
       const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
-        true, repoObj.branches, repoObj.private, true, false, repoObj.repoDataExpiration, repoObj.branchExpiration);
+        true, repoObj.branches, repoObj.private, true, false,
+        repoObj.repoDataExpiration, repoObj.branchExpiration);
+      
       modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
 
       updateModReposLS();
@@ -2087,7 +2099,7 @@ function createNewRepoInHTML() {
         
         // create new repo obj
         const repoObj = createRepoObj((loggedUser + '/' + repoName), 'main', 'main',
-                                      true, null, repoPrivate, false, true);
+                                      true, null, repoPrivate, false, true, 0, 0);
 
         // add repo obj to modified repos
         addRepoToModRepos(repoObj);
