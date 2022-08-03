@@ -1140,7 +1140,7 @@ async function checkPushDialogs() {
       // for fork
 
       const newRepoObj = createRepoObj((loggedUser + '/' + repoName), repoObj.selBranch, repoObj.defaultBranch,
-        true, repoObj.branches, repoObj.private, true, false);
+        true, repoObj.branches, repoObj.private, true, false, repoObj.repoDataExpiration, repoObj.branchExpiration);
       modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
 
       updateModReposLS();
