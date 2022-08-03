@@ -241,14 +241,14 @@ async function renderSidebarHTML() {
     // if not logged in
     if (gitToken == '') {
     
-      const dialogResp = await showDialog(openGitHubLogin, 'Hmm... we can\'t find\nthat repo. Try logging in.', 'Login', true);
+      const dialogResp = await showDialog(openGitHubLogin, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
       
       // if chosen to log in, return
       if (dialogResp == true) return;
       
     } else { // if logged in
       
-      await showDialog(hideDialog, 'Hmm... we can\'t find\nthat repo.', 'OK', true);
+      await showDialog(hideDialog, 'Hmm... the repo you\'re\nlooking for can\'t be found.', 'OK', true);
       
     }
     
