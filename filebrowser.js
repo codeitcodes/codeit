@@ -1100,10 +1100,6 @@ async function checkPushDialogs() {
 
       // change sidebar title
       sidebarLogo.innerText = repoName + contents;
-      
-      // change location
-      treeLoc[0] = loggedUser;
-      saveTreeLocLS(treeLoc);
 
 
       // fork repo
@@ -1163,6 +1159,11 @@ async function checkPushDialogs() {
       modifiedRepos[loggedUser + '/' + repoName] = newRepoObj;
 
       updateModReposLS();
+      
+      
+      // change location
+      treeLoc[0] = loggedUser;
+      saveTreeLocLS(treeLoc);
 
 
       // enable push buttons
