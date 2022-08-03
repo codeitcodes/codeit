@@ -177,6 +177,9 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
     // show dialog
     dialogWrapper.classList.add('visible');
     
+    // if on desktop, hide sidebar toggle
+    if (!isMobile) sidebarToggle.classList.add('dialog-visible');
+    
     // if on mobile,
     // change status bar color
     if (isMobile) {
@@ -219,6 +222,9 @@ function hideDialog() {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
+  
+  // if on desktop, show sidebar toggle
+  if (!isMobile) sidebarToggle.classList.remove('dialog-visible');
   
   // if on mobile,
   // change status bar color
