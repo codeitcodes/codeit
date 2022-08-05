@@ -34,6 +34,9 @@ searchBack.addEventListener('click', () => {
 // search when typed in input
 searchInput.addEventListener('input', () => {
   
+  // remove newlines from query
+  searchInput.textContent = searchInput.textContent.replaceAll('\n', '');
+  
   let query = searchInput.textContent.toLowerCase();
   let files = fileWrapper.querySelectorAll('.item');
   
@@ -56,16 +59,23 @@ searchInput.addEventListener('input', () => {
 
   })
   
+  
   // if search query exists
-  if (searchInput.innerText != '') {
+  if (searchInput.textContent != '') {
     
     // show clear button
     searchClear.classList.add('visible');
+    
+    // update add button
+    addButton.classList.add('clear-button-visible');
     
   } else {
     
     // hide clear button
     searchClear.classList.remove('visible');
+    
+    // update add button
+    addButton.classList.remove('clear-button-visible');
     
   }
   
