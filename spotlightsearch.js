@@ -8,6 +8,9 @@ searchButton.addEventListener('click', () => {
   // hide clear button
   searchClear.classList.remove('visible');
   
+  // update add button
+  addButton.classList.remove('clear-button-visible');
+  
   // focus search input
   searchInput.focus();
   
@@ -66,10 +69,16 @@ searchInput.addEventListener('input', () => {
     // show clear button
     searchClear.classList.add('visible');
     
+    // rotate add button
+    addButton.classList.add('clear-button-visible');
+    
   } else {
     
     // hide clear button
     searchClear.classList.remove('visible');
+    
+    // update add button
+    addButton.classList.remove('clear-button-visible');
     
   }
   
@@ -99,6 +108,9 @@ searchClear.addEventListener('click', () => {
   
   // hide clear button
   searchClear.classList.remove('visible');
+  
+  // update add button
+  addButton.classList.remove('clear-button-visible');
   
   // focus search input
   searchInput.focus();
