@@ -979,7 +979,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   position: absolute;
   right: 0;
   z-index: 2;
-  transition: .18s var(--ease-function) opacity;
+  transition: .18s var(--ease-function);
+  transition-property: opacity, transform;
 }
 
 /*
@@ -1163,6 +1164,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .header.searching .title-screen {
   opacity: 0;
   pointer-events: none;
+}
+
+.sidebar .header.searching .roundbutton.add.clear-button-visible {
+  transform: rotate(45deg);
 }
 
 .sidebar .header.searching .logo {
