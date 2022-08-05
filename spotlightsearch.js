@@ -67,7 +67,7 @@ searchInput.addEventListener('input', () => {
     searchClear.classList.add('visible');
     
     // update add button
-    addButton.classList.add('clear-button-visible');
+    addButton.classList.add('search-clear-visible');
     
   } else {
     
@@ -75,7 +75,7 @@ searchInput.addEventListener('input', () => {
     searchClear.classList.remove('visible');
     
     // update add button
-    addButton.classList.remove('clear-button-visible');
+    addButton.classList.remove('search-clear-visible');
     
   }
   
