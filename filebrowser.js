@@ -2864,7 +2864,7 @@ function setupEditor() {
     "indent_size": "2",
     "indent_char": " ",
     "max_preserve_newlines": "5",
-    "preserve_newlines": false,
+    "preserve_newlines": true,
     "keep_array_indentation": false,
     "break_chained_methods": false,
     "indent_scripts": "normal",
