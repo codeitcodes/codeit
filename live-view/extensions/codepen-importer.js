@@ -18,12 +18,16 @@ let codepenImporter = {
 
     // parse project URL
     
-    if (!projectURL.startsWith('https://codepen.io')) return;
+    if (!projectURL.startsWith('https://codepen.io')) return {
+      error: 'That dosen\'t seem to be a CodePen link.\nCan you double check?'
+    };
     
     projectURL = projectURL.replace('https://codepen.io/', '');
     projectURL = projectURL.split('/');
   
-    if (projectURL.length < 3) return;
+    if (projectURL.length < 3) return {
+      error: 'That dosen\'t seem to be a project link.\nCan you double check?'
+    };
   
     
     const projectUser = projectURL[0];
@@ -32,7 +36,11 @@ let codepenImporter = {
     
   
     const resp = await codepenImporter.fetchProject(projectUser, projectId);
-  
+    
+    if (resp.errorCode) return {
+      error: 'There\'s been an error fetching the project: Code ' + resp.errorCode
+    };
+    
     let html = codepenImporter.parseIframeCode(resp);
     html = codepenImporter.decodeEntities(html);
     
@@ -63,7 +71,9 @@ let codepenImporter = {
     // if received an error
     if (String(resp.status).startsWith('4')) {
       
-      return 'Error ' + resp.status;
+      return {
+        errorCode: resp.status
+      };
       
     }
     
