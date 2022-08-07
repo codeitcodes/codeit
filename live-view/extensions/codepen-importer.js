@@ -1,4 +1,17 @@
 
+// CodePen project importer
+
+// API:
+// const projectTitle = await codepenImporter.import(projectURL);
+
+// Works for any project, any imports and any precompiler
+// Uses fetch API and ArrayBuffer for uncapped project size and error handling
+// Cleans the resulting code
+// 'projectURL' can be any CodePen project URL
+
+// Note: The special CodePen GreenSock plugins
+//       won't load unless their URLs are swapped with the standard plugin URLs
+
 let codepenImporter = {
 
   'import': async (projectURL) => {
