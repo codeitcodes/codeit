@@ -38,7 +38,7 @@ let codepenImporter = {
   
   'fetchProject': async (projectUser, projectId) => {
     
-    return await axios.get('https://codeit.codes/api/cors?url=' + 'https://cdpn.io/'+ projectUser +'/fullembedgrid/'+ projectId +'?animations=run&type=embed', '', true);
+    return await axios.get(window.location.origin + '/api/cors?url=' + 'https://cdpn.io/'+ projectUser +'/fullembedgrid/'+ projectId +'?animations=run&type=embed', '', true);
     
   },
   
