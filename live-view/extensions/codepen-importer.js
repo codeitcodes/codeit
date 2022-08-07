@@ -38,7 +38,50 @@ let codepenImporter = {
   
   'fetchProject': async (projectUser, projectId) => {
     
-    return await axios.get(window.location.origin + '/api/cors?url=' + 'https://cdpn.io/'+ projectUser +'/fullembedgrid/'+ projectId +'?animations=run&type=embed', '', true);
+    const query = window.location.origin + '/api/cors?url=' + 'https://cdpn.io/'+ projectUser +'/fullembedgrid/'+ projectId +'?animations=run&type=embed';
+    
+    
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return 'Error ' + resp.status;
+      
+    }
+    
+    
+    // get data from response
+    
+    const reader = resp.body.getReader();
+    let buffer = [];
+    
+    async function readChunk() {
+      
+      const chunk = await reader.read();
+      
+      // if finished reading, return
+      if (chunk.done) return;
+      
+      // add new chunk to buffer
+      buffer = new Uint8Array([...buffer, ...chunk.value]);
+      
+      // read next chunk
+      return readChunk();
+      
+    }
+    
+    await readChunk();
+    
+    
+    // decode ArrayBuffer
+    
+    const decoder = new TextDecoder();
+    
+    const decodedCode = decoder.decode(buffer);
+    
+    return decodedCode;
     
   },
   
