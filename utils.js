@@ -640,12 +640,22 @@ let copy = async (text) => {
   await navigator.clipboard.writeText(text);
 }
 
-// paste
-let paste = async () => {
+// read clipboard
+let readClipboard = async () => {
+  
+  try {
+    
+    const text = await navigator.clipboard.readText();
 
-  const text = await navigator.clipboard.readText();
-
-  return text;
+    return text;
+    
+  } catch(e) {
+    
+    return {
+      error: 'Permission declined'
+    };
+    
+  }
 
 }
 
