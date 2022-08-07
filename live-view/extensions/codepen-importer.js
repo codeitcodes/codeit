@@ -38,7 +38,7 @@ let codepenImporter = {
     const resp = await codepenImporter.fetchProject(projectUser, projectId);
     
     if (resp.errorCode) return {
-      error: 'There\'s been an error fetching the project: Code ' + resp.errorCode
+      error: 'There\'s been an error fetching that project. (code ' + resp.errorCode + ')'
     };
     
     let html = codepenImporter.parseIframeCode(resp);
