@@ -2,11 +2,11 @@
 // CodePen project importer
 
 // API:
-// const projectTitle = await codepenImporter.import(projectURL);
+// const { html, projectTitle } = await codepenImporter.import(projectURL);
 
 // Works for any project, any imports and any precompiler
 // Uses fetch API and ArrayBuffer for uncapped project size and error handling
-// Cleans the resulting code
+// Cleans + beautifies the resulting code
 // 'projectURL' can be any CodePen project URL
 
 // Note: The special CodePen GreenSock plugins
@@ -45,7 +45,10 @@ let codepenImporter = {
     cd.textContent = html;
     cd.dispatchTypeEvent();
     
-    return projectTitle;
+    return {
+      html,
+      projectTitle
+    };
     
   },
   
