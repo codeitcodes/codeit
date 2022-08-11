@@ -2847,17 +2847,6 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   });
-
-  // disable context menu
-  if (!isMobile) {
-
-    window.addEventListener('contextmenu', (e) => {
-
-      e.preventDefault();
-
-    });
-
-  }
   
   
   let beautifierOptions = {
