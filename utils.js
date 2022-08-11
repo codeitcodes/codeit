@@ -55,7 +55,7 @@ const body = document.body,
 
       branchMenu = document.querySelector('.branch-menu'),
       
-      contextMenu = document.querySelector('.context-menu'),
+      contextMenuEl = document.querySelector('.context-menu'),
       
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
