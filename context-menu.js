@@ -1,13 +1,15 @@
 
 let contextMenu = {
   
+  el: document.querySelector('.context-menu'),
+  
   addFileListener: (file) => {
     
     if (!isMobile) {
       
       file.addEventListener('contextmenu', (e) => {
         
-        contextMenuEl.classList.add('visible');
+        contextMenu.el.classList.add('visible');
         
       });
       
