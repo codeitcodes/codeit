@@ -54,9 +54,7 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
-      
-      contextMenuEl = document.querySelector('.context-menu'),
-      
+            
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
       dialogCancel = dialogWrapper.querySelector('.cancel'),
