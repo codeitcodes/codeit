@@ -37,7 +37,7 @@ document.addEventListener('mousedown', (e) => {
   
   if (contextMenu.el.classList.contains('visible')) {
     
-    if (e.target.parentElement !== contextMenu.el ||
+    if (e.target.parentElement !== contextMenu.el &&
         e.target.parentElement.parentElement !== contextMenu.el) {
       
       contextMenu.el.classList.remove('visible');
