@@ -430,15 +430,15 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
+let moveElToEl = (originEl, destEl, boundryMargin = null, boundryEl = null) => {
 
   // get bounding box of dest element
-  const rect = dest.getBoundingClientRect(),
-        destHeight = dest.clientHeight;
+  const rect = destEl.getBoundingClientRect(),
+        destHeight = destEl.clientHeight;
 
   // get bounding box of origin element
-  const originHeight = origin.clientHeight,
-        originWidth = origin.clientWidth;
+  const originHeight = originEl.clientHeight,
+        originWidth = originEl.clientWidth;
 
 
   // define window constraints
@@ -483,8 +483,8 @@ let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
   if (minLeft > destLeft) destLeft = minLeft;
 
 
-  origin.style.top = destTop + 'px';
-  origin.style.left = destLeft + 'px';
+  originEl.style.top = destTop + 'px';
+  originEl.style.left = destLeft + 'px';
 
 }
 
