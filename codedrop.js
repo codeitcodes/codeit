@@ -213,14 +213,14 @@ body.addEventListener('dragleave', (ev) => {
 if ('launchQueue' in window) {
 
   window.launchQueue.setConsumer(async (launchParams) => {
-    
-    console.log('Launched with: ', launchParams);
-    
+        
     if (!launchParams.files.length) {
       return;
     }
     
     const launchFile = launchParams.files[0];
+    
+    console.log('[launchQueue] Launched with: ', launchFile);
     
     
     // if logged into git
