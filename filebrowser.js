@@ -2849,7 +2849,7 @@ function setupEditor() {
   });
 
   // disable context menu
-  if (!isMobile && !isDev) {
+  if (!isMobile) {
 
     window.addEventListener('contextmenu', (e) => {
 
