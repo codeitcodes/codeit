@@ -23,6 +23,24 @@ let contextMenu = {
 }
 
 
+sidebar.addEventListener('scroll', () => {
+
+  if (contextMenu.el.classList.contains('visible')) {
+
+    contextMenu.el.classList.remove('visible');
+
+  }
+
+});
+
+document.addEventListener('mousedown', () => {
+  
+  contextMenu.el.classList.remove('visible');
+  
+});
+
+
+
 // disable context menu
 if (!isMobile) {
 
