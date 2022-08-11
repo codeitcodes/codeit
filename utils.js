@@ -30,7 +30,6 @@ const body = document.body,
       header = contentWrapper.querySelector('.header'),
 
       titleScreen = header.querySelector('.title-screen'),
-      //optionsScreen = header.querySelector('.options-screen'),
       searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
@@ -38,11 +37,6 @@ const body = document.body,
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
       addButton = header.querySelector('.add'),
-
-      /* newRepoButton = optionsScreen.querySelector('.new-repo'),
-      newFileButton = optionsScreen.querySelector('.new-file'),
-      branchButton = optionsScreen.querySelector('.branch'),
-      repoShareButton = optionsScreen.querySelector('.share'), */
 
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
@@ -60,6 +54,8 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
+      
+      contextMenu = document.querySelector('.context-menu'),
       
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
