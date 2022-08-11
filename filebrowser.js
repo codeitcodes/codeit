@@ -910,6 +910,14 @@ function addHTMLItemListeners() {
       }
 
     })
+    
+    
+    // add context menu listeners
+    if (item.classList.contains('file')) {
+      
+      contextMenu.addFileListener(item);
+      
+    }
 
   })
 
