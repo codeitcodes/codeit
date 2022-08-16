@@ -960,7 +960,7 @@ async function clickedOnFileHTML(fileEl, event) {
     // if ctrl/cmd/shift-clicked on push button
     if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
-      pushFileWithCommitMessageHTML();
+      pushFileWithCommitMessageHTML(fileEl);
       
     } else {
       
