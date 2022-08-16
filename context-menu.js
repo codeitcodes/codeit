@@ -1,4 +1,5 @@
 
+// fix browser object parsing
 let contextMenu = {
   el: document.querySelector('.context-menu')
 };
