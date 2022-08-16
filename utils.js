@@ -476,7 +476,64 @@ let moveElToEl = (originEl, destEl, boundryMargin = null, boundryEl = null) => {
   let destTop = rect.top + destHeight,
       destLeft = rect.left;
 
-  // check if menu is outside window
+  // check if element is outside window
+  if (maxTop < destTop) destTop = maxTop;
+  if (minTop > destTop) destTop = minTop;
+  if (maxLeft < destLeft) destLeft = maxLeft;
+  if (minLeft > destLeft) destLeft = minLeft;
+
+
+  originEl.style.top = destTop + 'px';
+  originEl.style.left = destLeft + 'px';
+
+}
+
+
+// move element to mouse (when element has 'position: fixed')
+
+let moveElToMouse = (originEl, mouseEvent, boundryMargin = null, boundryEl = null) => {
+
+  // get bounding box of origin element
+  const originHeight = originEl.clientHeight,
+        originWidth = originEl.clientWidth;
+
+
+  // define window constraints
+  // (stop moving element when it goes offscreen)
+  let maxTop = window.innerHeight,
+      minTop = -originHeight,
+      maxLeft = window.innerWidth,
+      minLeft = -originWidth;
+
+
+  // if defined boundry element,
+  // update constraints
+  if (boundryEl) {
+
+    maxTop = boundryEl.clientHeight;
+    maxLeft = boundryEl.clientWidth;
+
+  }
+
+
+  // add margin from boundry edges
+  if (boundryMargin && !isNaN(boundryMargin)) {
+
+    // add vertical margin from screen edges
+    maxTop -= originHeight + boundryMargin;
+    minTop = boundryMargin;
+
+    // add horizontal margin from screen edges
+    maxLeft -= originWidth + boundryMargin;
+    minLeft = boundryMargin;
+
+  }
+
+
+  let destTop = mouseEvent.clientY,
+      destLeft = mouseEvent.clientX;
+
+  // check if element is outside window
   if (maxTop < destTop) destTop = maxTop;
   if (minTop > destTop) destTop = minTop;
   if (maxLeft < destLeft) destLeft = maxLeft;
