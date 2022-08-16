@@ -3,19 +3,41 @@ let contextMenu = {
   
   el: document.querySelector('.context-menu'),
   
+  contextEl: null,
+  
+  addButtonListeners: () => {
+    
+    const push = contextMenu.el.querySelector('.push'),
+          rename = contextMenu.el.querySelector('.rename'),
+          addToNewFolder = contextMenu.el.querySelector('.add-to-new-folder'),
+          discard = contextMenu.el.querySelector('.discard'),
+          deleteItem = contextMenu.el.querySelector('.delete');
+          
+    push.addEventListener('click', async () => {
+      
+      const dialogResp = await checkPushDialogs();
+    
+      if (dialogResp === 'return') return;
+      
+      pushFileWithCommitMessageHTML(contextMenu.contextEl);
+      
+    });
+    
+    discard.addEventListener('click', () => {
+      
+      deleteModFileInHTML(contextMenu.contextEl);
+      
+    });
+    
+  },
+  
   addFileListener: (file) => {
     
     if (!isMobile) {
       
       file.addEventListener('contextmenu', async (e) => {
         
-        if (contextMenu.el.classList.contains('visible')) {
-          
-          contextMenu.el.classList.remove('visible');
-          
-          await new Promise(resolve => { window.setTimeout(resolve, 180) });
-          
-        }
+        contextMenu.contextEl = file;
         
         contextMenu.el.style.top = e.clientY + 'px';
         contextMenu.el.style.left = e.clientX + 'px';
