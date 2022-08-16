@@ -2588,7 +2588,10 @@ function toggleSidebar(open) {
 function deleteModFileInHTML(fileEl) {
   
   deleteModFile(getAttr(fileEl, 'sha'));
+  
   fileEl.classList.remove('modified');
+  
+  loadFileInHTML(fileEl,getAttr(fileEl, 'sha'));
   
 }
 
