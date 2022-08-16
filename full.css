@@ -1730,6 +1730,11 @@ body.mobile .menu .icon a {
   pointer-events: none;
 }
 
+.context-menu:not(.modified) .push,
+.context-menu:not(.modified) .discard-changes, {
+  display: none;
+}
+
 
 .dialog-wrapper {
   position: fixed;
