@@ -7,7 +7,15 @@ let contextMenu = {
     
     if (!isMobile) {
       
-      file.addEventListener('contextmenu', (e) => {
+      file.addEventListener('contextmenu', async (e) => {
+        
+        if (contextMenu.el.classList.includes('visible')) {
+          
+          contextMenu.el.classList.remove('visible');
+          
+          await new Promise(resolve => { window.setTimeout(resolve, 180) });
+          
+        }
         
         contextMenu.el.style.top = e.clientY + 'px';
         contextMenu.el.style.left = e.clientX + 'px';
