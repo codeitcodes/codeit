@@ -1204,7 +1204,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
-.sidebar .item:hover, .sidebar .item.file:not(.focused):active {
+.sidebar .item:hover, .sidebar .item.file:not(.focused):active,
+.sidebar.item.active {
   background: hsl(227deg 11% 16%);
 }
 
