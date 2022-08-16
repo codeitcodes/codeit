@@ -53,7 +53,7 @@ contextMenu = {
         
         contextMenu.el.classList.add('visible', 'animating');
         
-        contextMenu.classList.toggle('modified', file.classList.contains('modified'));
+        contextMenu.el.classList.toggle('modified', file.classList.contains('modified'));
         
         window.setTimeout(() => {
           
