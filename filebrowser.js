@@ -2239,6 +2239,33 @@ function createNewFileInHTML() {
         if (dialogResp === 'return') return;
         
         
+        // validate file name
+
+        // get file name
+        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // if file name is empty, use default name
+        if (fileName === '') fileName = 'new-file';
+        
+        // if another file in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+
+          if (fileElem !== fileEl
+              && (fileName === fileElem.querySelector('.name').textContent)) {
+
+            // split extension from file name
+            fileName = splitFileName(fileName);
+
+            // add a differentiating number
+            // and reconstruct file name
+            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
+
+          }
+
+        });
+        
+        
         let commitMessage = 'Create ' + fileName;
         
         // if ctrl/cmd/shift-clicked on push button
@@ -2248,7 +2275,7 @@ function createNewFileInHTML() {
           let selBranch = treeLoc[1].split(':')[1];
         
           // open push screen
-          commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+          commitMessage = prompt('Push \''+ fileName + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
                                  'Type commit message...');
         
           // if canceled push, return
@@ -2282,34 +2309,8 @@ function createNewFileInHTML() {
         const randomNum = Math.floor(Math.random() * 100) + 1;
         const fileContent = '\r\n'.padEnd(randomNum, '\r');
 
-
+        
         // validate file name
-
-        // get file name
-        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
-
-        // if file name is empty, use default name
-        if (fileName === '') fileName = 'new-file';
-        
-        
-        // if another file in the current directory
-        // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
-
-          if (fileElem !== fileEl
-              && (fileName === fileElem.querySelector('.name').textContent)) {
-
-            // split extension from file name
-            fileName = splitFileName(fileName);
-
-            // add a differentiating number
-            // and reconstruct file name
-            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
-
-          }
-
-        });
-
         fileEl.querySelector('.name').textContent = fileName;
         
         
