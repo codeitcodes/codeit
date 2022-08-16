@@ -11,6 +11,7 @@ contextMenu = {
   options: {
     push: contextMenu.el.querySelector('.push'),
     rename: contextMenu.el.querySelector('.rename'),
+    share: contextMenu.el.querySelector('.share'),
     addToNewFolder: contextMenu.el.querySelector('.add-to-new-folder'),
     discardChanges: contextMenu.el.querySelector('.discard-changes'),
     deleteItem: contextMenu.el.querySelector('.delete')
@@ -29,6 +30,22 @@ contextMenu = {
       if (dialogResp === 'return') return;
       
       pushFileWithCommitMessageHTML(contextMenu.activeEl);
+      
+    });
+    
+    options.share.addEventListener('click', async () => {
+      
+      const activeFileName = contextMenu.activeEl.querySelector('.name').textContent
+                              .replaceAll('\n','');
+      
+      const link = createLink({
+        dir: treeLoc,
+        file: { name: activeFileName }
+      });
+      
+      copy(link).then(() => {
+        showMessage('Copied link!');
+      });
       
     });
     
