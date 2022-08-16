@@ -1736,7 +1736,7 @@ body.mobile .menu .icon a {
   display: none;
 }
 
-.context-menu .icon:not(.push, .discard-changes) {
+.context-menu .icon:not(.push, .discard-changes, .share) {
   display: none;
 }
 
