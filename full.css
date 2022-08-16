@@ -1735,6 +1735,10 @@ body.mobile .menu .icon a {
   display: none;
 }
 
+.context-menu.icon:not(.push, .discard-changes) {
+  display: none;
+}
+
 
 .dialog-wrapper {
   position: fixed;
