@@ -2585,16 +2585,10 @@ function toggleSidebar(open) {
 }
 
 
-function deleteModFileInHTML(sha) {
+function deleteModFileInHTML(fileEl) {
   
-  const fileEl = fileWrapper.querySelector('.file.modified[sha="'+ sha +'"]');
-  
-  if (fileEl) {
-    
-    deleteModFile(sha);
-    fileEl.classList.remove('modified');
-    
-  }
+  deleteModFile(getAttr(fileEl, 'sha'));
+  fileEl.classList.remove('modified');
   
 }
 
