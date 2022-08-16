@@ -1722,10 +1722,8 @@ body.mobile .menu .icon a {
 .menu.context-menu {
   margin-top: -4px;
   margin-left: -2px;
-}
-
-.menu.context-menu .icon .bigger-icon {
-  opacity: 1;
+  margin-top: -7px;
+  margin-left: -7px;
 }
 
 
