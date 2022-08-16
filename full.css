@@ -1205,7 +1205,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 .sidebar .item:hover, .sidebar .item.file:not(.focused):active,
-.sidebar.item.active {
+.sidebar .item.active {
   background: hsl(227deg 11% 16%);
 }
 
