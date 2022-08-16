@@ -12,7 +12,13 @@ let contextMenu = {
         contextMenu.el.style.top = e.clientY + 'px';
         contextMenu.el.style.left = e.clientX + 'px';
         
-        contextMenu.el.classList.add('visible');
+        contextMenu.el.classList.add('visible', 'animating');
+        
+        window.setTimeout(() => {
+          
+          contextMenu.el.classList.remove('animating');
+          
+        }, 180);
         
       });
       
