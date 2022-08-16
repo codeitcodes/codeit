@@ -66,8 +66,7 @@ contextMenu = {
         contextMenu.activeEl = file;
         file.classList.add('active');
         
-        contextMenu.el.style.top = e.clientY + 'px';
-        contextMenu.el.style.left = e.clientX + 'px';
+        moveElToMouse(contextMenu.el, e, 10);
         
         contextMenu.el.classList.add('visible', 'animating');
         
