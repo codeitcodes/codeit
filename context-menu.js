@@ -5,6 +5,8 @@ let contextMenu = {
 
 contextMenu = {
   
+  el: document.querySelector('.context-menu'),
+  
   options: {
     push: contextMenu.el.querySelector('.push'),
     rename: contextMenu.el.querySelector('.rename'),
