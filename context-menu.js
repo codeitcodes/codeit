@@ -9,7 +9,7 @@ let contextMenu = {
       
       file.addEventListener('contextmenu', async (e) => {
         
-        if (contextMenu.el.classList.includes('visible')) {
+        if (contextMenu.el.classList.contains('visible')) {
           
           contextMenu.el.classList.remove('visible');
           
