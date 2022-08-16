@@ -9,13 +9,15 @@ let contextMenu = {
     push: contextMenu.el.querySelector('.push'),
     rename: contextMenu.el.querySelector('.rename'),
     addToNewFolder: contextMenu.el.querySelector('.add-to-new-folder'),
-    discard: contextMenu.el.querySelector('.discard'),
+    discardChanges: contextMenu.el.querySelector('.discard-changes'),
     deleteItem: contextMenu.el.querySelector('.delete')
   },
   
   addOptionListeners: () => {
-               
-    contextMenu.options.push.addEventListener('click', async () => {
+    
+    const options = contextMenu.options;
+    
+    options.push.addEventListener('click', async () => {
       
       const dialogResp = await checkPushDialogs();
     
@@ -25,7 +27,7 @@ let contextMenu = {
       
     });
     
-    contextMenu.options.discard.addEventListener('click', () => {
+    options.discardChanges.addEventListener('click', () => {
       
       deleteModFileInHTML(contextMenu.contextEl);
       
