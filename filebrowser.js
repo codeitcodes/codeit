@@ -979,7 +979,7 @@ async function clickedOnFileHTML(fileEl, event) {
 }
 
 
-function pushFileWithCommitMessageHTML() {
+function pushFileWithCommitMessageHTML(fileEl) {
 
   let commitMessage;
 
