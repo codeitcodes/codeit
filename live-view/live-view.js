@@ -430,8 +430,7 @@ function addBottomSwipeListener() {
         // create a link
         const link = createLink({
           dir: treeLoc,
-          file: selectedFile,
-          openLive: true
+          file: selectedFile
         });
         
         navigator.share({
@@ -590,8 +589,7 @@ if (isMobile) {
 
     const link = createLink({
       dir: selectedFile.dir.split(','),
-      file: selectedFile,
-      openLive: true
+      file: selectedFile
     });
 
     copy(link).then(() => {
@@ -640,8 +638,7 @@ if (isMobile) {
       // get live view link
       const link = createLink({
         dir: selectedFile.dir.split(','),
-        file: selectedFile,
-        openLive: true
+        file: selectedFile
       });
       
       // open a new window with live view link
