@@ -66,7 +66,9 @@ contextMenu = {
         contextMenu.activeEl = file;
         file.classList.add('active');
         
-        moveElToMouse(contextMenu.el, e, 10);
+        onNextFrame(() => {
+          moveElToMouse(contextMenu.el, e, 8);
+        });
         
         contextMenu.el.classList.add('visible', 'animating');
         
