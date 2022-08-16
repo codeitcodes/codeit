@@ -1732,7 +1732,7 @@ body.mobile .menu .icon a {
 }
 
 .context-menu:not(.modified) .push,
-.context-menu:not(.modified) .discard-changes, {
+.context-menu:not(.modified) .discard-changes {
   display: none;
 }
 
