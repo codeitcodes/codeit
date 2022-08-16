@@ -5,15 +5,17 @@ let contextMenu = {
   
   contextEl: null,
   
-  addButtonListeners: () => {
-    
-    const push = contextMenu.el.querySelector('.push'),
-          rename = contextMenu.el.querySelector('.rename'),
-          addToNewFolder = contextMenu.el.querySelector('.add-to-new-folder'),
-          discard = contextMenu.el.querySelector('.discard'),
-          deleteItem = contextMenu.el.querySelector('.delete');
-          
-    push.addEventListener('click', async () => {
+  options: {
+    push: contextMenu.el.querySelector('.push'),
+    rename: contextMenu.el.querySelector('.rename'),
+    addToNewFolder: contextMenu.el.querySelector('.add-to-new-folder'),
+    discard: contextMenu.el.querySelector('.discard'),
+    deleteItem: contextMenu.el.querySelector('.delete')
+  },
+  
+  addOptionListeners: () => {
+               
+    contextMenu.options.push.addEventListener('click', async () => {
       
       const dialogResp = await checkPushDialogs();
     
@@ -23,7 +25,7 @@ let contextMenu = {
       
     });
     
-    discard.addEventListener('click', () => {
+    contextMenu.options.discard.addEventListener('click', () => {
       
       deleteModFileInHTML(contextMenu.contextEl);
       
@@ -44,6 +46,8 @@ let contextMenu = {
         
         contextMenu.el.classList.add('visible', 'animating');
         
+        contextMenu.classList.toggle('modified', file.classList.contains('modified'));
+        
         window.setTimeout(() => {
           
           contextMenu.el.classList.remove('animating');
@@ -57,6 +61,8 @@ let contextMenu = {
   }
   
 }
+
+contextMenu.addOptionListeners();
 
 
 sidebar.addEventListener('scroll', () => {
