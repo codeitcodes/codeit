@@ -2591,7 +2591,7 @@ function deleteModFileInHTML(fileEl) {
   
   fileEl.classList.remove('modified');
   
-  loadFileInHTML(fileEl,getAttr(fileEl, 'sha'));
+  loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
   
 }
 
