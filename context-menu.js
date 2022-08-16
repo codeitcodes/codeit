@@ -16,7 +16,7 @@ contextMenu = {
     deleteItem: contextMenu.el.querySelector('.delete')
   },
     
-  contextEl: null,
+  activeEl: null,
   
   addOptionListeners: () => {
     
@@ -28,13 +28,13 @@ contextMenu = {
     
       if (dialogResp === 'return') return;
       
-      pushFileWithCommitMessageHTML(contextMenu.contextEl);
+      pushFileWithCommitMessageHTML(contextMenu.activeEl);
       
     });
     
     options.discardChanges.addEventListener('click', () => {
       
-      deleteModFileInHTML(contextMenu.contextEl);
+      deleteModFileInHTML(contextMenu.activeEl);
       
     });
     
@@ -46,7 +46,8 @@ contextMenu = {
       
       file.addEventListener('contextmenu', async (e) => {
         
-        contextMenu.contextEl = file;
+        contextMenu.activeEl = file;
+        file.classList.add('active');
         
         contextMenu.el.style.top = e.clientY + 'px';
         contextMenu.el.style.left = e.clientX + 'px';
@@ -77,6 +78,7 @@ sidebar.addEventListener('scroll', () => {
   if (contextMenu.el.classList.contains('visible')) {
 
     contextMenu.el.classList.remove('visible');
+    contextMenu.activeEl.classList.remove('active');
 
   }
 
@@ -90,6 +92,7 @@ document.addEventListener('mousedown', (e) => {
         e.target.parentElement.parentElement !== contextMenu.el) {
       
       contextMenu.el.classList.remove('visible');
+      contextMenu.activeEl.classList.remove('active');
       
     }
     
@@ -100,6 +103,7 @@ document.addEventListener('mousedown', (e) => {
 contextMenu.el.addEventListener('click', () => {
   
   contextMenu.el.classList.remove('visible');
+  contextMenu.activeEl.classList.remove('active');
   
 });
 
