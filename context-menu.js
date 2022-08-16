@@ -1,9 +1,9 @@
 
 let contextMenu = {
-  
-  el: document.querySelector('.context-menu'),
-  
-  contextEl: null,
+  el: document.querySelector('.context-menu')
+};
+
+contextMenu = {
   
   options: {
     push: contextMenu.el.querySelector('.push'),
@@ -12,6 +12,8 @@ let contextMenu = {
     discardChanges: contextMenu.el.querySelector('.discard-changes'),
     deleteItem: contextMenu.el.querySelector('.delete')
   },
+    
+  contextEl: null,
   
   addOptionListeners: () => {
     
