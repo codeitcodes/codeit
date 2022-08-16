@@ -957,44 +957,57 @@ async function clickedOnFileHTML(fileEl, event) {
     if (dialogResp === 'return') return;
     
     
-    let commitMessage;
-    
     // if ctrl/cmd/shift-clicked on push button
     if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
-      // get selected branch
-      let selBranch = treeLoc[1].split(':')[1];
-
-      // open push screen
-      commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                             'Type commit message...');
-
-      // if canceled push, return
-      if (!commitMessage) return;
-
-      // if not specified message
-      if (commitMessage === 'Type commit message...') {
-
-        // show default message
-        commitMessage = 'Update ' + fileEl.innerText;
-
-      }
+      pushFileWithCommitMessageHTML();
       
     } else {
       
-      commitMessage = 'Update ' + fileEl.innerText;
+      const commitMessage = 'Update ' + fileEl.innerText;
+      
+      // play push animation
+      playPushAnimation(fileEl.querySelector('.push-wrapper'));
+  
+      // push file
+      pushFileFromHTML(fileEl, commitMessage);
       
     }
-      
-    
-    // play push animation
-    playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-    // push file
-    pushFileFromHTML(fileEl, commitMessage);
 
   }
   
+}
+
+
+function pushFileWithCommitMessageHTML() {
+
+  let commitMessage;
+
+  // get selected branch
+  let selBranch = treeLoc[1].split(':')[1];
+
+  // open push screen
+  commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+                         'Type commit message...');
+
+  // if canceled push, return
+  if (!commitMessage) return;
+
+  // if not specified message
+  if (commitMessage === 'Type a commit message...') {
+
+    // show default message
+    commitMessage = 'Update ' + fileEl.innerText;
+
+  }
+
+
+  // play push animation
+  playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+  // push file
+  pushFileFromHTML(fileEl, commitMessage);
+
 }
 
 
@@ -2399,38 +2412,6 @@ function createNewFileInHTML() {
           
           clickedOnFileHTML(fileEl, e);
 
-        })
-        
-        fileEl.querySelector('.push-wrapper')
-          .addEventListener('contextmenu', () => {
-          
-          let commitMessage;
-
-          // get selected branch
-          let selBranch = treeLoc[1].split(':')[1];
-
-          // open push screen
-          commitMessage = prompt('Push '+ fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
-                                 'Type a push description...');
-
-          // if canceled push, return
-          if (!commitMessage) return;
-
-          // if not specified message
-          if (commitMessage === 'Type a push description...') {
-
-            // show default message
-            commitMessage = 'Update ' + fileEl.innerText;
-
-          }
-
-
-          // play push animation
-          playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-          // push file
-          pushFileFromHTML(fileEl, commitMessage);
-          
         })
 
       }
