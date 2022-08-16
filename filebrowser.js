@@ -2413,6 +2413,9 @@ function createNewFileInHTML() {
           clickedOnFileHTML(fileEl, e);
 
         })
+        
+        // add context menu listeners
+        contextMenu.addFileListener(fileEl);
 
       }
 
