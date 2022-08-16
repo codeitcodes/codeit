@@ -2230,13 +2230,39 @@ function createNewFileInHTML() {
     });
 
 
-    async function pushNewFileInHTML() {
+    async function pushNewFileInHTML(event) {
 
       if (fileEl.classList.contains('focused')) {
         
         const dialogResp = await checkPushDialogs();
         
         if (dialogResp === 'return') return;
+        
+        
+        let commitMessage = 'Create ' + fileName;
+        
+        // if ctrl/cmd/shift-clicked on push button
+        if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
+
+          // get selected branch
+          let selBranch = treeLoc[1].split(':')[1];
+        
+          // open push screen
+          commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+                                 'Type commit message...');
+        
+          // if canceled push, return
+          if (!commitMessage) return;
+        
+          // if not specified message
+          if (commitMessage === 'Type a commit message...') {
+        
+            // show default message
+            commitMessage = 'Create ' + fileName;
+        
+          }
+          
+        }
         
 
         // play push animation
@@ -2375,7 +2401,6 @@ function createNewFileInHTML() {
 
 
         // create commit
-        const commitMessage = 'Create ' + fileName;
 
         const commitFile = {
           name: fileName,
@@ -2949,7 +2974,7 @@ function setupEditor() {
 
     }
     
-    // show beautify message on Ctrl/Cmd + B/D
+    // show beautify message on Ctrl/Cmd + B/P
     if (((e.key === 'b' || e.keyCode === 66)
         || (e.key === 'p' || e.keyCode === 80))
         && isKeyEventMeta(e)) {
