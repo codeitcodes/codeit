@@ -44,12 +44,13 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 }
 
 
-.cd-wrapper .menu {
+.cd-wrapper .menu.autocomplete {
   position: fixed;
   top: 0;
   left: 0;
   background: hsl(218deg 23% 35%);
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%);
   color: #a6c3d4;
   padding: 6px;
   scroll-padding: 6px;
