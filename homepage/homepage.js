@@ -129,7 +129,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
   
     if (localStorage.getItem('installed')) {
       
-      if ((new URL('https://codeit.codes/?p').search) !== '?p') {
+      if ((new URL(window.location.href).search) !== '?p') {
         
         window.location.href = window.location.origin + '/full';
         
