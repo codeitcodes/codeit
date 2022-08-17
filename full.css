@@ -979,7 +979,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   position: absolute;
   right: 0;
   z-index: 2;
-  transition: .18s var(--ease-function) opacity;
+  transition: .18s var(--ease-function);
+  transition-property: opacity, transform;
 }
 
 /*
@@ -1165,6 +1166,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   pointer-events: none;
 }
 
+.sidebar .header.searching .roundbutton.add.clear-button-visible {
+  transform: rotate(45deg);
+}
+
 .sidebar .header.searching .logo {
   padding-left: 7px;
   max-width: calc(var(--sidebar-width) - 140px - 16px - 7px - 7px - 7px);
@@ -1199,7 +1204,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
-.sidebar .item:hover, .sidebar .item.file:not(.focused):active {
+.sidebar .item:hover, .sidebar .item.file:not(.focused):active,
+.sidebar .item.active {
   background: hsl(227deg 11% 16%);
 }
 
@@ -1648,6 +1654,27 @@ body.mobile .sidebar .button {
   transition-property: transform, padding, opacity;
 }
 
+body:not(.mobile) .menu::-webkit-scrollbar {
+  width: 10px;
+}
+
+body:not(.mobile) .menu::-webkit-scrollbar-corner,
+body:not(.mobile) .menu::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+body:not(.mobile) .menu::-webkit-scrollbar-thumb {
+  border-top-width: 9px;
+  border-bottom-width: 9px;
+  background-color: rgb(130 134 137 / 50%);
+}
+
+body:not(.mobile) .menu::-webkit-scrollbar-thumb:not(:active):hover {
+  background-color: rgb(130 134 137 / 65%);
+}
+
 .menu .icon {
   padding: 10px 15px;
   padding: 8px 13px;
@@ -1693,13 +1720,22 @@ body.mobile .menu .icon a {
   transform: scale(1.35) translateX(-0.1px);
 }
 
-.menu.context-menu {
-  margin-top: -4px;
-  margin-left: -2px;
+.context-menu {
+  margin-top: -7px;
+  margin-left: -6px;
 }
 
-.menu.context-menu .icon .bigger-icon {
-  opacity: 1;
+.context-menu.animating {
+  pointer-events: none;
+}
+
+.context-menu:not(.modified) .push,
+.context-menu:not(.modified) .discard-changes {
+  display: none;
+}
+
+.context-menu .icon:not(.push, .discard-changes, .share) {
+  display: none;
 }
 
 
@@ -1746,6 +1782,7 @@ body.mobile .dialog-background {
   opacity: 0;
   padding: 2px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
+  min-width: 170px;
 }
 
 .dialog-wrapper.visible .dialog {

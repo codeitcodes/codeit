@@ -29,6 +29,7 @@ const FILES_TO_CACHE = [
   '/spotlightsearch.js',
   '/localstorage.js',
   '/bottomfloat.js',
+  '/context-menu.js',
 
   '/live-view/live-view.js',
   

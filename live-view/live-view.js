@@ -430,8 +430,7 @@ function addBottomSwipeListener() {
         // create a link
         const link = createLink({
           dir: treeLoc,
-          file: selectedFile,
-          openLive: true
+          file: selectedFile
         });
         
         navigator.share({
@@ -590,8 +589,7 @@ if (isMobile) {
 
     const link = createLink({
       dir: selectedFile.dir.split(','),
-      file: selectedFile,
-      openLive: true
+      file: selectedFile
     });
 
     copy(link).then(() => {
@@ -640,8 +638,7 @@ if (isMobile) {
       // get live view link
       const link = createLink({
         dir: selectedFile.dir.split(','),
-        file: selectedFile,
-        openLive: true
+        file: selectedFile
       });
       
       // open a new window with live view link
@@ -722,6 +719,16 @@ function toggleLiveView(file) {
   liveViewToggle = !liveViewToggle;
 
   window.clearTimeout(liveViewTimeout);
+  
+  
+  if (!isDev) {
+
+    // clear console
+    console.clear();
+    logVersion();
+
+  }
+
 
   // if live view is visible
   if (liveViewToggle) {
@@ -757,7 +764,7 @@ function toggleLiveView(file) {
     }
 
   } else {
-
+    
     if (isMobile) {
 
       // show loader
@@ -1015,15 +1022,6 @@ async function handleLiveViewRequest(requestPath) {
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
 
-  if (!isDev) {
-
-    // clear console
-    console.clear();
-    logVersion();
-
-  }
-  
-  
   // if iOS version is lower than minimum
   
   const isSafariWithMac = (navigator.userAgent.toLowerCase().includes('safari')
@@ -1092,15 +1090,6 @@ async function renderLiveViewHTML(file) {
 
 // render live view for Markdown files
 async function renderLiveViewMarkdown(file) {
-
-  if (!isDev) {
-
-    // clear console
-    console.clear();
-    logVersion();
-
-  }
-
 
   liveView.innerHTML = '<iframe srcdoc="<!DOCTYPE html><html><head></head><body></body></html>" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 

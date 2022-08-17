@@ -128,8 +128,12 @@ document.querySelectorAll('.btn.install').forEach(button => {
   } else {
   
     if (localStorage.getItem('installed')) {
-
-      //button.classList.add('installed');
+      
+      if ((new URL(window.location.href).search) !== '?p') {
+        
+        window.location.href = window.location.origin + '/full';
+        
+      }
       
     }
     

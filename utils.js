@@ -30,7 +30,6 @@ const body = document.body,
       header = contentWrapper.querySelector('.header'),
 
       titleScreen = header.querySelector('.title-screen'),
-      //optionsScreen = header.querySelector('.options-screen'),
       searchScreen = header.querySelector('.search-screen'),
 
       sidebarTitle = titleScreen.querySelector('.title'),
@@ -38,11 +37,6 @@ const body = document.body,
       sidebarBranch = sidebarTitle.querySelector('.branch-icon'),
 
       addButton = header.querySelector('.add'),
-
-      /* newRepoButton = optionsScreen.querySelector('.new-repo'),
-      newFileButton = optionsScreen.querySelector('.new-file'),
-      branchButton = optionsScreen.querySelector('.branch'),
-      repoShareButton = optionsScreen.querySelector('.share'), */
 
       searchButton = titleScreen.querySelector('.search'),
       searchBack = searchScreen.querySelector('.back'),
@@ -56,11 +50,12 @@ const body = document.body,
       versionEl = learnWrapper.querySelector('.version'),
       learnTitle = learnWrapper.querySelector('.title'),
       logoutButton = learnWrapper.querySelector('.logout'),
+      learnAbout = learnWrapper.querySelector('.about'),
       learnShare = learnWrapper.querySelector('.share'),
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
-      
+            
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
       dialogCancel = dialogWrapper.querySelector('.cancel'),
@@ -436,15 +431,15 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
+let moveElToEl = (originEl, destEl, boundryMargin = null, boundryEl = null) => {
 
   // get bounding box of dest element
-  const rect = dest.getBoundingClientRect(),
-        destHeight = dest.clientHeight;
+  const rect = destEl.getBoundingClientRect(),
+        destHeight = destEl.clientHeight;
 
   // get bounding box of origin element
-  const originHeight = origin.clientHeight,
-        originWidth = origin.clientWidth;
+  const originHeight = originEl.clientHeight,
+        originWidth = originEl.clientWidth;
 
 
   // define window constraints
@@ -482,15 +477,72 @@ let moveElToEl = (origin, dest, boundryMargin, boundryEl) => {
   let destTop = rect.top + destHeight,
       destLeft = rect.left;
 
-  // check if menu is outside window
+  // check if element is outside window
   if (maxTop < destTop) destTop = maxTop;
   if (minTop > destTop) destTop = minTop;
   if (maxLeft < destLeft) destLeft = maxLeft;
   if (minLeft > destLeft) destLeft = minLeft;
 
 
-  origin.style.top = destTop + 'px';
-  origin.style.left = destLeft + 'px';
+  originEl.style.top = destTop + 'px';
+  originEl.style.left = destLeft + 'px';
+
+}
+
+
+// move element to mouse (when element has 'position: fixed')
+
+let moveElToMouse = (originEl, mouseEvent, boundryMargin = null, boundryEl = null) => {
+
+  // get bounding box of origin element
+  const originHeight = originEl.clientHeight,
+        originWidth = originEl.clientWidth;
+
+
+  // define window constraints
+  // (stop moving element when it goes offscreen)
+  let maxTop = window.innerHeight,
+      minTop = -originHeight,
+      maxLeft = window.innerWidth,
+      minLeft = -originWidth;
+
+
+  // if defined boundry element,
+  // update constraints
+  if (boundryEl) {
+
+    maxTop = boundryEl.clientHeight;
+    maxLeft = boundryEl.clientWidth;
+
+  }
+
+
+  // add margin from boundry edges
+  if (boundryMargin && !isNaN(boundryMargin)) {
+
+    // add vertical margin from screen edges
+    maxTop -= originHeight + boundryMargin;
+    minTop = boundryMargin;
+
+    // add horizontal margin from screen edges
+    maxLeft -= originWidth + boundryMargin;
+    minLeft = boundryMargin;
+
+  }
+
+
+  let destTop = mouseEvent.clientY,
+      destLeft = mouseEvent.clientX;
+
+  // check if element is outside window
+  if (maxTop < destTop) destTop = maxTop;
+  if (minTop > destTop) destTop = minTop;
+  if (maxLeft < destLeft) destLeft = maxLeft;
+  if (minLeft > destLeft) destLeft = minLeft;
+
+
+  originEl.style.top = destTop + 'px';
+  originEl.style.left = destLeft + 'px';
 
 }
 
@@ -640,12 +692,22 @@ let copy = async (text) => {
   await navigator.clipboard.writeText(text);
 }
 
-// paste
-let paste = async () => {
+// read clipboard
+let readClipboard = async () => {
+  
+  try {
+    
+    const text = await navigator.clipboard.readText();
 
-  const text = await navigator.clipboard.readText();
-
-  return text;
+    return text;
+    
+  } catch(e) {
+    
+    return {
+      error: 'Permission declined'
+    };
+    
+  }
 
 }
 

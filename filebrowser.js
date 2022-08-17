@@ -910,6 +910,14 @@ function addHTMLItemListeners() {
       }
 
     })
+    
+    
+    // add context menu listeners
+    if (item.classList.contains('file')) {
+      
+      contextMenu.addFileListener(item);
+      
+    }
 
   })
 
@@ -949,44 +957,57 @@ async function clickedOnFileHTML(fileEl, event) {
     if (dialogResp === 'return') return;
     
     
-    let commitMessage;
-    
     // if ctrl/cmd/shift-clicked on push button
     if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
       
-      // get selected branch
-      let selBranch = treeLoc[1].split(':')[1];
-
-      // open push screen
-      commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                             'Type commit message...');
-
-      // if canceled push, return
-      if (!commitMessage) return;
-
-      // if not specified message
-      if (commitMessage === 'Type commit message...') {
-
-        // show default message
-        commitMessage = 'Update ' + fileEl.innerText;
-
-      }
+      pushFileWithCommitMessageHTML(fileEl);
       
     } else {
       
-      commitMessage = 'Update ' + fileEl.innerText;
+      const commitMessage = 'Update ' + fileEl.innerText;
+      
+      // play push animation
+      playPushAnimation(fileEl.querySelector('.push-wrapper'));
+  
+      // push file
+      pushFileFromHTML(fileEl, commitMessage);
       
     }
-      
-    
-    // play push animation
-    playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-    // push file
-    pushFileFromHTML(fileEl, commitMessage);
 
   }
   
+}
+
+
+function pushFileWithCommitMessageHTML(fileEl) {
+
+  let commitMessage;
+
+  // get selected branch
+  let selBranch = treeLoc[1].split(':')[1];
+
+  // open push screen
+  commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+                         'Commit message...');
+
+  // if canceled push, return
+  if (!commitMessage) return;
+
+  // if not specified message
+  if (commitMessage === 'Commit message...') {
+
+    // show default message
+    commitMessage = 'Update ' + fileEl.innerText;
+
+  }
+
+
+  // play push animation
+  playPushAnimation(fileEl.querySelector('.push-wrapper'));
+
+  // push file
+  pushFileFromHTML(fileEl, commitMessage);
+
 }
 
 
@@ -2209,13 +2230,66 @@ function createNewFileInHTML() {
     });
 
 
-    async function pushNewFileInHTML() {
+    async function pushNewFileInHTML(event) {
 
       if (fileEl.classList.contains('focused')) {
         
         const dialogResp = await checkPushDialogs();
         
         if (dialogResp === 'return') return;
+        
+        
+        // validate file name
+
+        // get file name
+        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
+
+        // if file name is empty, use default name
+        if (fileName === '') fileName = 'new-file';
+        
+        // if another file in the current directory
+        // has the same name, add a differentiating number
+        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+
+          if (fileElem !== fileEl
+              && (fileName === fileElem.querySelector('.name').textContent)) {
+
+            // split extension from file name
+            fileName = splitFileName(fileName);
+
+            // add a differentiating number
+            // and reconstruct file name
+            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
+
+          }
+
+        });
+        
+        
+        let commitMessage = 'Create ' + fileName;
+        
+        // if ctrl/cmd/shift-clicked on push button
+        if (!isMobile && (isKeyEventMeta(event) || event.shiftKey)) {
+
+          // get selected branch
+          let selBranch = treeLoc[1].split(':')[1];
+        
+          // open push screen
+          commitMessage = prompt('Push \''+ fileName + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
+                                 'Commit message...');
+        
+          // if canceled push, return
+          if (!commitMessage) return;
+        
+          // if not specified message
+          if (commitMessage === 'Commit message...') {
+        
+            // show default message
+            commitMessage = 'Create ' + fileName;
+        
+          }
+          
+        }
         
 
         // play push animation
@@ -2235,34 +2309,8 @@ function createNewFileInHTML() {
         const randomNum = Math.floor(Math.random() * 100) + 1;
         const fileContent = '\r\n'.padEnd(randomNum, '\r');
 
-
+        
         // validate file name
-
-        // get file name
-        let fileName = fileEl.querySelector('.name').textContent.replaceAll('\n', '');
-
-        // if file name is empty, use default name
-        if (fileName === '') fileName = 'new-file';
-        
-        
-        // if another file in the current directory
-        // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
-
-          if (fileElem !== fileEl
-              && (fileName === fileElem.querySelector('.name').textContent)) {
-
-            // split extension from file name
-            fileName = splitFileName(fileName);
-
-            // add a differentiating number
-            // and reconstruct file name
-            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
-
-          }
-
-        });
-
         fileEl.querySelector('.name').textContent = fileName;
         
         
@@ -2354,7 +2402,6 @@ function createNewFileInHTML() {
 
 
         // create commit
-        const commitMessage = 'Create ' + fileName;
 
         const commitFile = {
           name: fileName,
@@ -2393,37 +2440,8 @@ function createNewFileInHTML() {
 
         })
         
-        fileEl.querySelector('.push-wrapper')
-          .addEventListener('contextmenu', () => {
-          
-          let commitMessage;
-
-          // get selected branch
-          let selBranch = treeLoc[1].split(':')[1];
-
-          // open push screen
-          commitMessage = prompt('Push '+ fileEl.innerText + (selBranch ? ' to branch ' + selBranch + '?' : '?'),
-                                 'Type a push description...');
-
-          // if canceled push, return
-          if (!commitMessage) return;
-
-          // if not specified message
-          if (commitMessage === 'Type a push description...') {
-
-            // show default message
-            commitMessage = 'Update ' + fileEl.innerText;
-
-          }
-
-
-          // play push animation
-          playPushAnimation(fileEl.querySelector('.push-wrapper'));
-
-          // push file
-          pushFileFromHTML(fileEl, commitMessage);
-          
-        })
+        // add context menu listeners
+        contextMenu.addFileListener(fileEl);
 
       }
 
@@ -2519,10 +2537,17 @@ repoShareButton.addEventListener('click', () => {
 */
 
 
+// show about page on click of button
+learnAbout.addEventListener('click', () => {
+  
+  window.location.href = window.location.origin + '/?p';
+  
+});
+
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hi, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
   if (isMobile) {
     
@@ -2596,16 +2621,13 @@ function toggleSidebar(open) {
 }
 
 
-function deleteModFileInHTML(sha) {
+function deleteModFileInHTML(fileEl) {
   
-  const fileEl = fileWrapper.querySelector('.file.modified[sha="'+ sha +'"]');
+  deleteModFile(getAttr(fileEl, 'sha'));
   
-  if (fileEl) {
-    
-    deleteModFile(sha);
-    fileEl.classList.remove('modified');
-    
-  }
+  fileEl.classList.remove('modified');
+  
+  loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
   
 }
 
@@ -2847,17 +2869,6 @@ function setupEditor() {
     updateLineNumbersHTML();
 
   });
-
-  // disable context menu
-  if (!isMobile && !isDev) {
-
-    window.addEventListener('contextmenu', (e) => {
-
-      e.preventDefault();
-
-    });
-
-  }
   
   
   let beautifierOptions = {
@@ -2971,7 +2982,7 @@ function setupEditor() {
 
     }
     
-    // show beautify message on Ctrl/Cmd + B/D
+    // show beautify message on Ctrl/Cmd + B/P
     if (((e.key === 'b' || e.keyCode === 66)
         || (e.key === 'p' || e.keyCode === 80))
         && isKeyEventMeta(e)) {
