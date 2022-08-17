@@ -1729,6 +1729,10 @@ body.mobile .menu .icon a {
   pointer-events: none;
 }
 
+body.mobile .context-menu {
+  display: none;
+}
+
 .context-menu:not(.modified) .push,
 .context-menu:not(.modified) .discard-changes {
   display: none;
