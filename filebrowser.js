@@ -2537,10 +2537,17 @@ repoShareButton.addEventListener('click', () => {
 */
 
 
+// show about page on click of button
+learnAbout.addEventListener('click', () => {
+  
+  window.location.href = window.location.origin + '/?p';
+  
+});
+
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hey, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hi, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
   if (isMobile) {
     
