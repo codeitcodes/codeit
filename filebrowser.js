@@ -988,13 +988,13 @@ function pushFileWithCommitMessageHTML(fileEl) {
 
   // open push screen
   commitMessage = prompt('Push \''+ fileEl.innerText + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                         'Type commit message...');
+                         'Commit message...');
 
   // if canceled push, return
   if (!commitMessage) return;
 
   // if not specified message
-  if (commitMessage === 'Type a commit message...') {
+  if (commitMessage === 'Commit message...') {
 
     // show default message
     commitMessage = 'Update ' + fileEl.innerText;
@@ -2276,13 +2276,13 @@ function createNewFileInHTML() {
         
           // open push screen
           commitMessage = prompt('Push \''+ fileName + (selBranch ? '\' to branch \'' + selBranch + '\'?' : '\'?'),
-                                 'Type commit message...');
+                                 'Commit message...');
         
           // if canceled push, return
           if (!commitMessage) return;
         
           // if not specified message
-          if (commitMessage === 'Type a commit message...') {
+          if (commitMessage === 'Commit message...') {
         
             // show default message
             commitMessage = 'Create ' + fileName;
