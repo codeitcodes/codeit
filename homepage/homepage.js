@@ -128,8 +128,12 @@ document.querySelectorAll('.btn.install').forEach(button => {
   } else {
   
     if (localStorage.getItem('installed')) {
-
-      //button.classList.add('installed');
+      
+      if ((new URL('https://codeit.codes/?p').search) !== '?p') {
+        
+        window.location.href = window.location.origin + '/full';
+        
+      }
       
     }
     
