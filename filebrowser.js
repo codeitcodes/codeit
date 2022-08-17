@@ -2561,7 +2561,7 @@ learnShare.addEventListener('click', () => {
     
     // copy invite to clipboard
     copy(invite).then(() => {
-      showMessage('Copied to clipboard!');
+      showMessage('Copied invite!');
     });
     
   }
