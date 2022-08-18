@@ -34,7 +34,7 @@ let codepenImporter = {
     
     const projectUser = projectURL[0];
     
-    const projectId = projectURL[2];
+    const projectId = projectURL[2] + '/' + (projectURL[3] ?? '');
     
   
     const resp = await codepenImporter.fetchProject(projectUser, projectId);
