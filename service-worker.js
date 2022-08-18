@@ -42,7 +42,10 @@ const FILES_TO_CACHE = [
   '/fonts/Mono-Sans/MonoSans-Regular.woff2',
   '/fonts/Mono-Sans/MonoSans-Bold.woff2',
 
-  '/fonts/Inter/Inter.var.woff2',
+  '/fonts/Inter/Inter-Regular.woff2',
+  '/fonts/Inter/Inter-Medium.woff2',
+  '/fonts/Inter/Inter-SemiBold.woff2',
+  '/fonts/Inter/Inter-Bold.woff2',
 
   'https://plausible.io/js/plausible.js',
 
