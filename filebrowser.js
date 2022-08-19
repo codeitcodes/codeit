@@ -2547,7 +2547,7 @@ learnAbout.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hi, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hi, I use Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
   if (isMobile) {
     
