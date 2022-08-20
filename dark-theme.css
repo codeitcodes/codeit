@@ -47,7 +47,8 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 .cd-wrapper .autocomplete {
   background: hsl(218deg 23% 35%);
   color: #a6c3d4;
-  margin-top: 20px;
+  margin-top: 22.5px;
+  margin-top: 23px;
   margin-left: -3px;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
   line-height: 1.5;
