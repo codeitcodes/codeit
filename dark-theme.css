@@ -48,6 +48,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   background: hsl(218deg 23% 35%);
   color: #a6c3d4;
   margin-top: 20px;
+  margin-left: -3px;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
   line-height: 1.5;
   padding: 0;
@@ -81,6 +82,16 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   background: hsl(218deg 27% 50%);
 }
 
+.cd-wrapper .top-hit {
+  position: fixed;
+  color: #a6c3d4;
+  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  pointer-events: none;
+  opacity: .5;
+}
+
+
+/*
 .cd-wrapper .autocomplete::-webkit-scrollbar {
   width: 0;
 }
@@ -107,6 +118,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 .cd-wrapper .autocomplete .icon::-webkit-scrollbar-thumb:active {
   background-color: rgb(249 249 249 / 17%);
 }
+*/
 
 
 cd-el {
