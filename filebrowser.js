@@ -1913,6 +1913,24 @@ function scrolledSidebarTitle() {
   
 }
 
+sidebarLogo.addEventListener('scroll', () => {
+
+  sidebarTitle.classList.add('scrolling');
+  
+});
+
+sidebarLogo.addEventListener('mouseup', () => {
+
+  sidebarTitle.classList.remove('scrolling');
+  
+});
+
+sidebarLogo.addEventListener('touchend', () => {
+
+  sidebarTitle.classList.remove('scrolling');
+  
+});
+
 
 // if clicked on branch icon,
 // toggle branch menu
