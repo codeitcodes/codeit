@@ -882,11 +882,11 @@ body.notransition .sidebar {
   margin-left: -18px;
 }
 
-.sidebar .header .title-screen .title:hover {
+.sidebar .header .title-screen .title:not(.scrolling):hover {
   color: #fff;
 }
 
-.sidebar .header .title-screen .title:active {
+.sidebar .header .title-screen .title:not(.scrolling):active {
   opacity: .5;
   transition: none;
 }
