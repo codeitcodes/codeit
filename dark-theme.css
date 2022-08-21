@@ -83,18 +83,18 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   background: hsl(218deg 27% 50%);
 }
 
-body:not(.mobile) .menu::-webkit-scrollbar {
+body:not(.mobile) .autocomplete::-webkit-scrollbar {
   width: 10px;
 }
 
-body:not(.mobile) .menu::-webkit-scrollbar-corner,
-body:not(.mobile) .menu::-webkit-scrollbar-track {
+body:not(.mobile) .autocomplete::-webkit-scrollbar-corner,
+body:not(.mobile) .autocomplete::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
   border-radius: 0;
 }
 
-body:not(.mobile) .menu::-webkit-scrollbar-thumb {
+body:not(.mobile) .autocomplete::-webkit-scrollbar-thumb {
   border-top-width: 9px;
   border-bottom-width: 9px;
   background-color: rgb(249 249 249 / 15%);
