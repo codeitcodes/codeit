@@ -108,6 +108,10 @@ body:not(.mobile) .autocomplete::-webkit-scrollbar-thumb {
   opacity: .5;
 }
 
+.cd-wrapper .top-hit b {
+  opacity: 0;
+}
+
 
 cd-el {
   background: #313744;
