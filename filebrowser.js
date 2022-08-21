@@ -146,13 +146,6 @@ async function renderSidebarHTML() {
   // if sidebar title is empty
   if (sidebarLogo.innerText === '') {
     
-    sidebarLogo.classList.add('notransition');
-    
-    onNextFrame(() => {
-      sidebarLogo.classList.remove('notransition');
-    });
-    
-    
     if (contents != '') {
 
       // if repo is owned by logged user
@@ -169,12 +162,18 @@ async function renderSidebarHTML() {
       }
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to end of title
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
       
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     } else if (repo != '') {
 
@@ -192,9 +191,15 @@ async function renderSidebarHTML() {
       }
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to start of title
       sidebarLogo.scrollTo(0, 0);
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     } else {
 
@@ -205,9 +210,15 @@ async function renderSidebarHTML() {
       sidebarBranch.classList.remove('visible');
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to start of title
       sidebarLogo.scrollTo(0, 0);
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     }
     
