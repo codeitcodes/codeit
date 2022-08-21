@@ -1284,7 +1284,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transition-property: background, box-shadow;
 }
 
-.sidebar .repo.focused .name {
+.sidebar .repo.focused .name,
+.sidebar .repo .name.lock-button-width {
   max-width: calc(var(--sidebar-width) - 40px - 24px - 7px - 38px - 38px - 7px);
 }
 
