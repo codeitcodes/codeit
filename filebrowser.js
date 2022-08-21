@@ -2082,6 +2082,7 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
         repoEl.querySelector('.name').scrollTo(0, 0);
+        repoEl.querySelector('.name').classList.add('lock-button-width');
         
         // disable lock button
         lockButton.style.pointerEvents = 'none';
