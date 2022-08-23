@@ -143,42 +143,37 @@ function processFile(file) {
 }
 
 body.addEventListener('drop', (ev) => {
-
+  
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
-
-  // if not logged into git
-  if (gitToken == '') {
-
-    // remove drop indication
-    cd.classList.remove('focus');
-
-    if (ev.dataTransfer.items) {
-
-      // use DataTransferItemList interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-
-        // if dropped items aren't files, reject them
-        if (ev.dataTransfer.items[i].kind === 'file') {
-
-          var file = ev.dataTransfer.items[i].getAsFile();
-          processFile(file);
-
-        }
-
+  
+  // remove drop indication
+  cd.classList.remove('focus');
+  
+  if (ev.dataTransfer.items) {
+  
+    // use DataTransferItemList interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+  
+      // if dropped items aren't files, reject them
+      if (ev.dataTransfer.items[i].kind === 'file') {
+  
+        var file = ev.dataTransfer.items[i].getAsFile();
+        processFile(file);
+  
       }
-
-    } else {
-
-      // use DataTransfer interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-
-        processFile(ev.dataTransfer.files[i]);
-
-      }
-
+  
     }
-
+  
+  } else {
+  
+    // use DataTransfer interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+  
+      processFile(ev.dataTransfer.files[i]);
+  
+    }
+    
   }
 
 })
@@ -188,25 +183,15 @@ body.addEventListener('dragover', (ev) => {
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
 
-  // if not logged into git
-  if (gitToken == '') {
-
-    // show drop indication
-    cd.classList.add('focus');
-
-  }
+  // show drop indication
+  cd.classList.add('focus');
 
 })
 
 body.addEventListener('dragleave', (ev) => {
 
-  // if not logged into git
-  if (gitToken == '') {
-
-    // remove drop indication
-    cd.classList.remove('focus');
-
-  }
+  // remove drop indication
+  cd.classList.remove('focus');
 
 })
 
@@ -221,14 +206,6 @@ if ('launchQueue' in window) {
     const launchFile = launchParams.files[0];
     
     console.log('[launchQueue] Launched with: ', launchFile);
-    
-    
-    // if logged into git
-    if (gitToken) {
-      
-      return;
-      
-    }
     
     
     // handle the file
