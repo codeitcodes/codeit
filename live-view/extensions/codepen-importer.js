@@ -6,7 +6,7 @@
  * const { html, projectTitle, ?error } = await codepenImporter.import(projectURL);
  *
  * Works for any project, any imports and any precompiler
- * Uses fetch API and ArrayBuffer for uncapped project size and error handling
+ * Uses fetch API with ArrayBuffer for uncapped project size and error handling
  * Cleans + beautifies the resulting code
  * 'projectURL' can be any CodePen project URL
  *
