@@ -5,10 +5,10 @@
  * API:
  * const { html, projectTitle, ?error } = await codepenImporter.import(projectURL);
  *
- * Works for any project, any imports and any precompiler
+ * Works with any project (private or public), any imports and any precompiler
  * Uses fetch API with ArrayBuffer for uncapped project size and error handling
  * Cleans + beautifies the resulting code
- * 'projectURL' can be any CodePen project URL
+ * [projectURL] can be any CodePen project URL
  *
  * Note: The special CodePen GreenSock plugins
  *       won't load unless their URLs are swapped with the standard plugin URLs
