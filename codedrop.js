@@ -104,6 +104,8 @@ function getFileLang(src) {
 
 function processFile(file) {
 
+  if (liveView.classList.contains('file-open')) return;
+
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
