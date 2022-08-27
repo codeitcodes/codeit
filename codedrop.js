@@ -177,12 +177,9 @@ function processFile(file) {
     
     cd.lang = getFileLang(file.name);
     
+    cd.blur();
+    
     cd.scrollTo(0, 0);
-    
-    // set caret pos in codeit
-    if (!isMobile) cd.setSelection(0, 0);
-    
-    cd.focus();
 
     cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
     cd.history.pos = 0;
