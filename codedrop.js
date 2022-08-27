@@ -117,12 +117,56 @@ function getFileLang(src) {
 
 function processFile(file) {
 
-  if (liveView.classList.contains('file-open')) return;
-
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
     
+    // clear existing selections in HTML
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
+    }
+    
+    // if adding a new file, remove it
+    if (fileWrapper.querySelector('.focused')) {
+      
+      fileWrapper.querySelector('.focused').classList.add('hidden');
+      
+      window.setTimeout(() => {
+        fileWrapper.querySelector('.focused').remove();
+      }, 180);
+      
+    }
+    
+  
+    // show all files in HTML
+    let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+    files.forEach(file => { file.style.display = '' });
+  
+    header.classList.remove('searching');
+  
+  
+    // if previous file selection exists
+    if (selectedFile.sha) {
+  
+      // get previous selection in modifiedFiles array
+      let selectedItem = modifiedFiles[selectedFile.sha];
+  
+      // if previous selection was modified
+      if (selectedItem) {
+  
+        // save previous selection in localStorage
+        updateModFileContent(selectedFile.sha, selectedFile.content);
+        updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+        updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+  
+      }
+  
+    }
+    
+
+    changeSelectedFile('', '', file.name, encodeUnicode(event.target.result), getFileLang(file.name), [0, 0], [0, 0], false);
+
+
     if (hashCode(event.target.result) !== hashCode(cd.textContent)) {
       
       cd.textContent = event.target.result;
@@ -141,9 +185,22 @@ function processFile(file) {
     cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
     cd.history.pos = 0;
     
-    changeSelectedFile('', '', file.name, encodeUnicode(event.target.result), cd.lang, [0, 0], [0, 0], false);
-
-    showMessage('Loaded ' + file.name + '!', 5000);
+    // update line numbers
+    updateLineNumbersHTML();
+    
+    if (liveView.classList.contains('file-open')) {
+  
+      liveView.classList.add('notransition');
+      liveView.classList.remove('file-open');
+  
+      onNextFrame(() => {
+        liveView.classList.remove('notransition');
+      });
+      
+    }
+    
+    
+    showMessage('Loaded ' + file.name + '!');
 
   });
 
