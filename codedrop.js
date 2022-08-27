@@ -116,7 +116,9 @@ function getFileLang(src) {
 
 
 function processFile(file) {
-
+  
+  showMessage('Opening file...', -1);
+  
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
@@ -200,7 +202,7 @@ function processFile(file) {
     }
     
     
-    showMessage('Loaded ' + file.name + '!');
+    showMessage('Opened ' + file.name + '!');
 
   });
 
