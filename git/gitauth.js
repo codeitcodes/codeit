@@ -1,7 +1,7 @@
 
 // github login
 
-window.onload = async () => {
+window.addEventListener('load', async () => {
 
   gitToken = getStorage('gitToken') ?? '';
 
@@ -209,7 +209,7 @@ window.onload = async () => {
   
   loadLS();
 
-}
+});
 
 async function getGithubToken(gitCode) {
 
