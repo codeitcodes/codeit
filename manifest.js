@@ -23,10 +23,10 @@ let manifest = {
   "file_handlers": [
     {
       "action": window.location.origin + "/full",
-      "name": "file",
+      "name": "File",
       "accept": {
-        "text/*": [".*"],
-        "application/json": [".*"]
+        "text/*": [".js, .html, .css, .c, .cs, .py, .jsx, .atom, .xss, .do, .action, .xml, .svg, .md, .gitignore, .json, .aspx, .kt, .sass, .less, .asp, .axd, .asx, .asmx, .ashx, .sh, .bash, .sh, .shell, .bat, .cmd, .dotnet, .csharp, .ejs, .editorconfig, .java, .webmanifest, .mathml, .ssml, .php, .perl, .pug, .scss, .rb, .ruby, .swift, .turtle, .trig, .ts, .tsconfig, .uscript, .uc, .wasm, .yaml, .ps1, .ps2, .objc, .kt, .kts, .emacs, .elisp, .lisp, .cgi, .dll, .lua, .makefile, .hs, .go, .git, .haml, .hbs, .mustache, .graphql, .haml, .erl, .hrl, .tex, .h, .m, .mm, .cpp, .xls, .xlsx, .csv, .coffee, .cmake, .basic, .adoc, .ino"],
+        "application/json": [".json"]
       }
     }
   ],
@@ -44,6 +44,7 @@ let manifest = {
     }
   },
   "handle_links": "preferred",
+  "launch_type": "multiple-clients",
   "launch_handler": {
     "route_to": "new-client"
   },
