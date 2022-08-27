@@ -23,7 +23,7 @@ let manifest = {
   "file_handlers": [
     {
       "action": window.location.origin + "/full",
-      "name": "code",
+      "name": "file",
       "accept": {
         "text/*": [".*"],
         "application/json": [".*"]
