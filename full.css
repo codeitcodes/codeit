@@ -9,16 +9,8 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-.focus::before {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+.focus {
   box-shadow: inset 0 0 0 2px rgb(104 187 228 / 50%);
-  pointer-events: none;
-  z-index: 1000;
-  content: '';
 }
 
 ::selection {
