@@ -324,7 +324,8 @@ async function setupLiveView() {
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
     // clear codeit history
-    cd.history = [];
+    cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+    cd.history.pos = 0;
 
     // update line numbers
     updateLineNumbersHTML();
