@@ -308,9 +308,18 @@ if ('launchQueue' in window) {
     
     // handle the file
     const fileData = await launchFile.getFile();
-
-    processFile(fileData);
+    
+    if (typeof selectedFile === 'undefined') {
+      
+      window.addEventListener('load', () => {
+        
+        processFile(fileData);
+        
+      });
+      
+    }
         
   });
   
 }
+
