@@ -125,8 +125,9 @@ function processFile(file) {
     
     cd.focus();
 
-    cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+    cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+    cd.history.pos = 0;
+    
     changeSelectedFile('', '', file.name, encodeUnicode(event.target.result), cd.lang, [0, 0], [0, 0], false);
 
     showMessage('Loaded ' + file.name + '!', 5000);
