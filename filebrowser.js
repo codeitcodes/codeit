@@ -1436,8 +1436,9 @@ async function loadFileInHTML(fileEl, fileSha) {
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
   // clear codeit history
-  cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+  cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+  cd.history.pos = 0;
+  
   // update line numbers
   updateLineNumbersHTML();
   
@@ -2394,8 +2395,9 @@ function createNewFileInHTML() {
         cd.lang = getFileLang(fileName);
 
         // clear codeit history
-        cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
         // update line numbers
         updateLineNumbersHTML();
 
@@ -2790,8 +2792,9 @@ function protectUnsavedCode() {
         cd.lang = '';
 
         // clear codeit history
-        cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
         // update line numbers
         updateLineNumbersHTML();
 
