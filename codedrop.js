@@ -202,7 +202,7 @@ function processFile(file) {
     }
     
     
-    showMessage('Opened ' + file.name + '!');
+    hideMessage();
 
   });
 
