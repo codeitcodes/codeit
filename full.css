@@ -9,7 +9,11 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-.focus {
+.focus::after {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
   box-shadow: inset 0 0 0 2px rgb(104 187 228 / 50%);
 }
 
