@@ -190,6 +190,12 @@ function processFile(file) {
     // update line numbers
     updateLineNumbersHTML();
     
+    if (liveToggle.classList.contains('visible')) {
+      
+      liveToggle.classList.remove('visible');
+      
+    }
+    
     if (liveView.classList.contains('file-open')) {
   
       liveView.classList.add('notransition');
