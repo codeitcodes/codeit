@@ -208,13 +208,24 @@ function processFile(file) {
 
 }
 
+
 body.addEventListener('drop', (ev) => {
   
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
   
   // remove drop indication
-  cd.classList.remove('focus');
+  
+  if (!liveView.classList.contains('file-open')) {
+    
+    cd.classList.remove('focus');
+    
+  } else {
+    
+    liveView.classList.remove('focus');
+    
+  }
+  
   
   if (ev.dataTransfer.items) {
   
@@ -248,18 +259,37 @@ body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
-
+  
   // show drop indication
-  cd.classList.add('focus');
+  
+  if (!liveView.classList.contains('file-open')) {
+    
+    cd.classList.add('focus');
+    
+  } else {
+    
+    liveView.classList.add('focus');
+    
+  }
 
 })
 
 body.addEventListener('dragleave', (ev) => {
 
   // remove drop indication
-  cd.classList.remove('focus');
+  
+  if (!liveView.classList.contains('file-open')) {
+    
+    cd.classList.remove('focus');
+    
+  } else {
+    
+    liveView.classList.remove('focus');
+    
+  }
 
 })
+
 
 if ('launchQueue' in window) {
 
