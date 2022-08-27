@@ -89,6 +89,14 @@ if (!isMobile) {
 }
 
 
+if (isDev) {
+  
+  manifest.name = 'Codeit [DEV]';
+  manifest.short_name = 'Codeit [DEV]';
+  
+}
+
+
 
 // apply dynamic manifest
 
