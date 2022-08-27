@@ -21,10 +21,11 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": window.location.origin + "/full?upload=true",
+      "action": window.location.origin + "/full",
       "name": "code",
       "accept": {
-        "text/plain": [".js", ".css", ".html", ".json"]
+        "text/*": ["*"],
+        "application/json": ["*"]
       }
     }
   ],
