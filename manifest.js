@@ -25,8 +25,8 @@ let manifest = {
       "action": window.location.origin + "/full",
       "name": "code",
       "accept": {
-        "text/*": ["*"],
-        "application/json": ["*"]
+        "text/*": [".*"],
+        "application/json": [".*"]
       }
     }
   ],
