@@ -2659,7 +2659,11 @@ function deleteModFileInHTML(fileEl) {
   
   fileEl.classList.remove('modified');
   
-  loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+  if (fileEl.classList.contains('selected')) {
+    
+    loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+    
+  }
   
 }
 
