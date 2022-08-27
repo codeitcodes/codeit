@@ -306,13 +306,16 @@ if ('launchQueue' in window) {
     console.log('[launchQueue] Launched with: ', launchFile);
     
     
-    // handle the file
+    // get the file
     const fileData = await launchFile.getFile();
     
+    // if localStorage not loaded yet
     if (typeof selectedFile === 'undefined') {
       
+      // wait until localStorage is loaded
       window.addEventListener('load', () => {
         
+        // handle the file
         processFile(fileData);
         
       });
