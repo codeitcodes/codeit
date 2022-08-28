@@ -21,6 +21,11 @@
 }
 
 
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
 html {
   background: var(--bg-color);
   scroll-padding: 16px;
