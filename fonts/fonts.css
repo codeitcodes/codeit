@@ -51,3 +51,15 @@
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
 }
+
+
+/* Roboto Mono */
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('Roboto-Mono/RobotoMono-Regular.woff2') format('woff2');
+}
+
