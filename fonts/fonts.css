@@ -59,7 +59,7 @@
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: optional;
   src: url('Roboto-Mono/RobotoMono-Regular.woff2') format('woff2');
 }
 
