@@ -107,7 +107,6 @@ const html = `
   const url = new URL(window.location.href).searchParams;
   
   let link = url.get('url');
-  let oembed = url.get('oembed');
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
@@ -132,8 +131,6 @@ const html = `
   }
   
   if (link) {
-    
-    if (oembed) link += '?oembed=true';
     
     const resp = decodeLink(link);
 
