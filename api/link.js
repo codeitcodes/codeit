@@ -133,11 +133,11 @@ const html = `
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    window.location.href = resp;
+    //window.location.href = resp;
     
   } else {
     
-    window.location.href = window.location.origin;
+    //window.location.href = window.location.origin;
     
   }
 
