@@ -104,7 +104,11 @@ const html = `
 
   // decode link
   
-  let link = decodeURIComponent(window.location.href.split('?url=')[1]);
+  const url = new URL(window.location.href).searchParams;
+    
+  let link = url.get('url');
+
+  const notLiveView = (url.get('live') === 'false' || url.get('l') === 'f'));
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
@@ -128,16 +132,22 @@ const html = `
     
   }
   
+  if (link && notLiveView) {
+    
+    link += '?live=false';
+    
+  }
+  
   if (link) {
     
     const resp = decodeLink(link);
 
     // redirect to decoded URL
-    //window.location.href = resp;
+    window.location.href = resp;
     
   } else {
     
-    //window.location.href = window.location.origin;
+    window.location.href = window.location.origin;
     
   }
 
