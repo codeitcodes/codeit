@@ -12,6 +12,12 @@ async function setupLiveView() {
     changeSelectedFile(treeLoc.join(), generateSHA(), fileName, '', getFileLang(fileName),
                        [0, 0], [0, 0], false);
     
+    if (isEmbed && !linkData.openLive) {
+      
+      liveToggle.classList.add('file-embed');
+      
+    }
+    
 
     // if URL has a live view flag
     if (linkData.openLive) {
