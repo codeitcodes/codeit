@@ -633,7 +633,8 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle.visible,
-.live-toggle.file-open {
+.live-toggle.file-open,
+.live-toggle.file-embed {
   display: flex;
 }
 
@@ -648,23 +649,27 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-view.file-open ~ .live-toggle:hover,
-.live-view.visible ~ .live-toggle.popout-hidden:hover {
+.live-view.visible ~ .live-toggle.popout-hidden:hover,
+.live-toggle.file-embed:hover {
   width: 97px;
   transition-delay: .22s;
 }
 
 .live-view.visible ~ .live-toggle:active,
-.live-view.file-open ~ .live-toggle:active {
+.live-view.file-open ~ .live-toggle:active,
+.live-toggle.file-embed:active {
   background: #1a1c24;
 }
 
 .live-view.visible ~ .live-toggle svg:hover,
-.live-view.file-open ~ .live-toggle svg:hover {
+.live-view.file-open ~ .live-toggle svg:hover,
+.live-toggle.file-embed svg:hover {
   opacity: 1;
 }
 
 .live-view.visible ~ .live-toggle svg:active,
-.live-view.file-open ~ .live-toggle svg:active {
+.live-view.file-open ~ .live-toggle svg:active,
+.live-toggle.file-embed svg:active {
   opacity: .5;
   transition: none;
 }
@@ -699,6 +704,14 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle.file-open svg:not(.share, .download) {
+  display: none;
+}
+
+.live-toggle.file-embed svg.popout {
+  display: block;
+}
+
+.live-toggle.file-embed svg:not(.share, .popout) {
   display: none;
 }
 
