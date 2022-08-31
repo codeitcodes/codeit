@@ -108,7 +108,7 @@ const html = `
     
   let link = url.get('url');
 
-  const notLiveView = (url.get('live') === 'false' || url.get('l') === 'f'));
+  const notLiveView = (url.get('live') === 'false' || url.get('l') === 'f');
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
