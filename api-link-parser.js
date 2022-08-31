@@ -10,10 +10,18 @@ function decodeLink(url) {
 
   // save link data
 
-  url = decodeURIComponent(url);
+  const urlQuery = new URL(url).searchParams;
 
-  const isEmbed = url.endsWith('?embed=true');
-  if (isEmbed) url = url.slice(0, -('?embed=true'.length));
+  url = decodeURIComponent(url);
+  
+
+  const isEmbed = urlQuery.has('embed');
+  
+  const isLiveViewDisabled = (urlQuery.get('live') === 'false' || urlQuery.get('l') === 'f');
+
+  // remove query from URL
+  url = url.replace(urlQuery.toString(), '');
+  
 
   const isDev = url.startsWith('https://dev.cde.run/');
 
@@ -22,6 +30,7 @@ function decodeLink(url) {
   
   const isGithub = url.startsWith('https://github.com/');
   if (isGithub) url = url.slice('https://github.com/'.length);
+  
   
   // if link is a Git URL
   if (isGithub && url.endsWith('.git')) {
@@ -82,8 +91,10 @@ function decodeLink(url) {
       linkData.contents = linkData.contents.slice(0, (-lastEntry.length - 1));
 
       // if linked file can be viewed live
-      if (lastEntry.endsWith('.html') || lastEntry.endsWith('.svg') ||
-          lastEntry.endsWith('.md')) {
+      // and live view not disabled
+      if ((lastEntry.endsWith('.html') || lastEntry.endsWith('.svg') ||
+          lastEntry.endsWith('.md'))
+          && (isLiveViewDisabled === false)) {
 
         // show file in live view
         linkData.openLive = true;
