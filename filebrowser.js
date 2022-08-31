@@ -357,7 +357,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    showMessage('Hmm... we can\'t find that branch.', 5000);
+    showMessage('Hmm... that branch can\'t be found.', 5000);
     
     // add branch to tree
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
@@ -365,7 +365,10 @@ async function renderSidebarHTML() {
     
     // update selected branch in local storage
     updateModRepoSelectedBranch((user + '/' + repoName), defaultBranch);
-
+    
+    // update branches in local storage
+    updateModRepoBranchExpiration((user + '/' + repoName), 0);
+    
     renderSidebarHTML();
 
     return;
