@@ -689,7 +689,31 @@ Element.prototype.on = (events, callback, passive) => {
 
 // copy
 let copy = async (text) => {
-  await navigator.clipboard.writeText(text);
+  
+  try {
+    
+    await navigator.clipboard.writeText(text);
+    
+  } catch(e) {
+    
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    
+    // avoid scrolling to bottom
+    textarea.style.top = 0;
+    textarea.style.left = 0;
+    textarea.style.position = 'fixed';
+  
+    body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    
+    document.execCommand('copy');
+    
+    body.removeChild(textarea);
+    
+  }
+  
 }
 
 // read clipboard
