@@ -20,7 +20,7 @@ function decodeLink(url) {
   const isLiveViewDisabled = (urlQuery.get('live') === 'false' || urlQuery.get('l') === 'f');
 
   // remove query from URL
-  url = url.replace(urlQuery.toString(), '');
+  url = url.replace('?' + urlQuery.toString(), '');
   
 
   const isDev = url.startsWith('https://dev.cde.run/');
