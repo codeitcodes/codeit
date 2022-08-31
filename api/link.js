@@ -104,9 +104,7 @@ const html = `
 
   // decode link
   
-  const url = new URL(window.location.href).searchParams;
-  
-  let link = url.get('url');
+  let link = decodeURIComponent(window.location.href.split('?url=')[1]);
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
