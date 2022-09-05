@@ -80,11 +80,10 @@ logVersion();
 
 
 // dev build
-let isDev = false;
+const isDev = (window.location.hostname === 'dev.codeit.codes');
 
-if (window.location.href.includes('dev')) {
+if (isDev) {
 
-  isDev = true;
   learnTitle.innerHTML += '<sup>dev</sup>';
 
 }
