@@ -2,6 +2,9 @@
 const isMobile = navigator.userAgent.match('Mobile') || false;
 const isMac = navigator.platform.indexOf('Mac') > -1;
 const isSafari = navigator.userAgent.toLowerCase().indexOf('safari') != -1;
+
+const isDev = (window.location.hostname === 'dev.codeit.codes');
+
 /*
 window.addEventListener('appinstalled', logAppInstalled);
 
