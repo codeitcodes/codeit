@@ -3032,8 +3032,8 @@ function setupEditor() {
       // if codeit is active
       if (document.activeElement === cd) {
         
-        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
-        else showMessage('You can beautify with ⌘ + D', 5000);
+        if (!isMac) showMessage('Try beautifying with Ctrl + D', 5000);
+        else showMessage('Try beautifying with ⌘ + D', 5000);
         
       }
       
