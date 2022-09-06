@@ -1909,6 +1909,12 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   transition: none;
 }
 
+.message svg {
+  width: 16px;
+  margin-right: 7px;
+  color: #828689;
+}
+
 
 .base-spacing-left {
   margin-left: var(--spacing-1);
