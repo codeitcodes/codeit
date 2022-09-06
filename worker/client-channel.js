@@ -1,10 +1,9 @@
 
-// worker-side
-// service worker/client communication channel
+// client communication (service worker-side)
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v574';
+const WORKER_NAME = 'codeit-worker-v575';
 
 
 // internal paths
@@ -61,6 +60,18 @@ function workerLog(log) {
   });
 
 }
+
+let client = {
+  
+  send: async (message, clientId) => {
+    
+    const selClient = await this.clients.get(clientId);
+    
+    selClient.postMessage(message);
+    
+  }
+  
+};
 
 
 // create worker channel
