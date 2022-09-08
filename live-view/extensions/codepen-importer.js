@@ -20,7 +20,7 @@ let codepenImporter = {
 
     // parse project URL
     
-    if (!projectURL.startsWith('https://codepen.io')) return {
+    if (!projectURL.startsWith('https://codepen.io/')) return {
       error: 'That dosen\'t seem to be a CodePen link.\nCan you double check?'
     };
     
