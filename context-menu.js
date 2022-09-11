@@ -46,7 +46,7 @@ contextMenu = {
       copy(link).then(() => {
       
         const [user, repo] = treeLoc;
-        const repoObj = modRepos[user + '/' + repo.split(':')[0]];
+        const repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
         
         if (!repoObj.private) {
           
