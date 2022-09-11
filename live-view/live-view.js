@@ -610,7 +610,10 @@ if (isMobile) {
         
       } else {
         
-        showMessage([lockIcon, 'Copied link!']);
+        showMessage({
+          icon: lockIcon,
+          message: 'Copied private link!'
+        });
         
       }
       
