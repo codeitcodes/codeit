@@ -49,7 +49,15 @@ function createLink(linkData) {
       if (linkData.file) {
         
         link += '/' + encodeURI(linkData.file.name);
-  
+        
+        if (linkData.openLive === false &&
+            (lastEntry.endsWith('.html') || lastEntry.endsWith('.svg') ||
+             lastEntry.endsWith('.md'))) {
+          
+          link += '?l=f';
+          
+        }
+        
       }
       
     }
@@ -114,22 +122,6 @@ function decodeLink(url) {
     if (link.get('gitCode')) {
       
       linkData.gitCode = link.get('gitCode');
-      
-    }
-    
-    
-    
-    // legacy link type
-    if (link.get('q')) {
-      
-      linkData.dir = link.get('q').split('+')[0].split(',');
-      linkData.dir[1] = linkData.dir[1] + ':main';
-      
-      const [name] = link.get('q').split('+')[1].split(',');
-      
-      linkData.file = name;
-      
-      linkData.openLive = true;
       
     }
 
