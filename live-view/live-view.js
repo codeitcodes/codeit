@@ -661,7 +661,8 @@ if (isMobile) {
       // get live view link
       const link = createLink({
         dir: selectedFile.dir.split(','),
-        file: selectedFile
+        file: selectedFile,
+        openLive: (liveView.classList.contains('open'))
       });
       
       // open a new window with live view link
