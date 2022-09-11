@@ -29,7 +29,7 @@ let codepenImporter = {
   
     if (projectURL.length < 3) return {
       error: 'That dosen\'t seem to be a project link.\nCan you double check?'
-    };
+    }; 
   
     
     const projectUser = projectURL[0];
