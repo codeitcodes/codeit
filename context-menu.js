@@ -45,23 +45,23 @@ contextMenu = {
       
       copy(link).then(() => {
       
-      const [user, repo] = treeLoc;
-      const repoObj = modRepos[user + '/' + repo.split(':')[0]];
-      
-      if (!repoObj.private) {
+        const [user, repo] = treeLoc;
+        const repoObj = modRepos[user + '/' + repo.split(':')[0]];
         
-        showMessage('Copied link!');
+        if (!repoObj.private) {
+          
+          showMessage('Copied link!');
+          
+        } else {
+          
+          showMessage({
+            icon: lockIcon,
+            message: 'Copied private link!'
+          });
+          
+        }
         
-      } else {
-        
-        showMessage({
-          icon: lockIcon,
-          message: 'Copied private link!'
-        });
-        
-      }
-      
-    });
+      });
       
     });
     
