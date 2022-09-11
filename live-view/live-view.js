@@ -596,7 +596,8 @@ if (isMobile) {
 
     const link = createLink({
       dir: selectedFile.dir.split(','),
-      file: selectedFile
+      file: selectedFile,
+      openLive: (liveView.classList.contains('visible'))
     });
 
     copy(link).then(() => {
