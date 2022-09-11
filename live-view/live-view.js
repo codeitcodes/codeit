@@ -600,7 +600,20 @@ if (isMobile) {
     });
 
     copy(link).then(() => {
-      showMessage('Copied link!');
+      
+      const [user, repo] = selectedFile.dir.split(',');
+      const repoObj = modRepos[user + '/' + repo.split(':')[0]];
+      
+      if (!repoObj.private) {
+        
+        showMessage('Copied link!');
+        
+      } else {
+        
+        showMessage([lockIcon, 'Copied link!']);
+        
+      }
+      
     });
 
   });
