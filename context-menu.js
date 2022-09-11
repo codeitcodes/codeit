@@ -40,7 +40,8 @@ contextMenu = {
       
       const link = createLink({
         dir: treeLoc,
-        file: { name: activeFileName }
+        file: { name: activeFileName },
+        openLive: false
       });
       
       copy(link).then(() => {
