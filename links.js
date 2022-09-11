@@ -48,11 +48,13 @@ function createLink(linkData) {
       
       if (linkData.file) {
         
-        link += '/' + encodeURI(linkData.file.name);
+        const fileName = linkData.file.name;
+        
+        link += '/' + encodeURI(fileName);
         
         if (linkData.openLive === false &&
-            (lastEntry.endsWith('.html') || lastEntry.endsWith('.svg') ||
-             lastEntry.endsWith('.md'))) {
+            (fileName.endsWith('.html') || fileName.endsWith('.svg') ||
+             fileName.endsWith('.md'))) {
           
           link += '?l=f';
           
