@@ -36,11 +36,8 @@ searchBack.addEventListener('click', () => {
 
 // search when typed in input
 searchInput.addEventListener('input', () => {
-  
-  // remove newlines from query
-  searchInput.textContent = searchInput.textContent.replaceAll('\n', '');
-  
-  let query = searchInput.textContent.toLowerCase();
+    
+  let query = searchInput.textContent.toLowerCase().replaceAll('\n', '');
   let files = fileWrapper.querySelectorAll('.item');
   
   // search files
@@ -116,3 +113,4 @@ searchClear.addEventListener('click', () => {
   searchInput.focus();
     
 })
+
