@@ -94,10 +94,11 @@ function installPWA(evt) {
     
   } else { // open in the browser
     */
-    window.location.href = (window.location.origin + '/full');
     
     // save installation in local storage
     localStorage.setItem('installed', 'true');
+    
+    window.location.replace(window.location.origin + '/full');
     
   /*}*/
   
@@ -134,7 +135,7 @@ document.querySelectorAll('.btn.install').forEach(button => {
       
       if ((new URL(window.location.href).search) !== '?p') {
         
-        window.location.href = window.location.origin + '/full';
+        window.location.replace(window.location.origin + '/full');
         
       }
       
@@ -212,3 +213,4 @@ function checkScrollAnimations() {
 
 window.addEventListener('scroll', checkScrollAnimations);
 checkScrollAnimations();
+
