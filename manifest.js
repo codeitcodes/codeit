@@ -30,18 +30,28 @@ let manifest = {
     }
   ],
   "share_target": {
-    "action": window.location.origin + "/full?upload=true",
+    "action": window.location.origin + "/full",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "files": [
         {
-          "name": "code",
+          "name": "file",
           "accept": ["text/*", "application/json"]
         }
       ]
     }
   },
+  "protocol_handlers": [
+    {
+      "protocol": "https://cde.run",
+      "url": window.location.origin + "/api/link?url=%s"
+    },
+    {
+      "protocol": "https://codeit.codes",
+      "url": window.location.origin + "/full?url=%s"
+    }
+  ],
   "handle_links": "preferred",
   "launch_type": "multiple-clients",
   "launch_handler": {
