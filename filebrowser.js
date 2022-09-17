@@ -2691,13 +2691,15 @@ function toggleSidebar(open) {
 
 function deleteModFileInHTML(fileEl) {
   
-  deleteModFile(getAttr(fileEl, 'sha'));
+  const fileSha = getAttr(fileEl, 'sha');
+  
+  deleteModFile(fileSha);
   
   fileEl.classList.remove('modified');
   
   if (fileEl.classList.contains('selected')) {
     
-    loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+    loadFileInHTML(fileEl, fileSha);
     
   }
   
