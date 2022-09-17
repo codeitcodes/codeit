@@ -288,14 +288,15 @@ async function setupLiveView() {
       const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
       
       
-      // if not logged in
-      // or repository is public,
+      // if repository is public,
       // file is not modified,
-      // and the file is HTML
-      if ((gitToken === ''
-          || (repoObj && !repoObj.private))
-          && !modFile
-          && getFileType(fileName) === 'html') {
+      // and file is HTML
+      
+      const repoIsPublic = ((gitToken === '') || (repoObj && !repoObj.private));
+      
+      if (repoIsPublic &&
+          !modFile &&
+          getFileType(fileName) === 'html') {
         
         // get public file from git
         fileContent = await git.getPublicFile(treeLoc, fileName);
