@@ -2,11 +2,15 @@
 // setup live view
 async function setupLiveView() {
 
+  const prevSelectedFile;
+
   // if URL has a file
   if (linkData.file) {
     
     // get file from URL
     const fileName = linkData.file;
+    
+    prevSelectedFile = selectedFile;
     
     // change selected file
     changeSelectedFile(treeLoc.join(), generateSHA(), fileName, '', getFileLang(fileName),
@@ -209,12 +213,12 @@ async function setupLiveView() {
     // and is modified
     // note: this fixes a bug where the modified file
     //       isn't updated yet as it's still selected
-    if (selectedFile.dir === treeLoc.join() &&
-        selectedFile.name === fileName &&
-        modifiedFiles[selectedFile.sha]) {
+    if (prevSelectedFile.dir === treeLoc.join() &&
+        prevSelectedFile.name === fileName &&
+        modifiedFiles[prevSelectedFile.sha]) {
     
       // set file to selected file
-      modFile = selectedFile;
+      modFile = prevSelectedFile;
     
     } else {
 
