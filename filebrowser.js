@@ -1917,7 +1917,13 @@ function scrolledSidebarTitle() {
   
 }
 
-sidebarLogo.addEventListener('scroll', () => {
+sidebarLogo.addEventListener('mousemove', () => {
+
+  sidebarTitle.classList.add('scrolling');
+  
+});
+
+sidebarLogo.addEventListener('touchmove', () => {
 
   sidebarTitle.classList.add('scrolling');
   
@@ -1930,6 +1936,12 @@ sidebarLogo.addEventListener('mouseup', () => {
 });
 
 sidebarLogo.addEventListener('touchend', () => {
+
+  sidebarTitle.classList.remove('scrolling');
+  
+});
+
+sidebarLogo.addEventListener('touchcancel', () => {
 
   sidebarTitle.classList.remove('scrolling');
   
