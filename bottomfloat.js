@@ -20,12 +20,12 @@ function updateFloat() {
     
     bottomFloat.classList.remove('modified');
     
-    if (pushWrapper.classList.contains('checked')) {
+  }
+  
+  if (pushWrapper.classList.contains('checked')) {
       
-      pushWrapper.classList.remove('checked');
+    pushWrapper.classList.remove('checked');
       
-    }
-    
   }
 
   // show selected file name
