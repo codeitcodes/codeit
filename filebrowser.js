@@ -2625,7 +2625,7 @@ if (isDev) {
     
     learnDebug.counter++;
     
-    if (learnDebug.counter === 10) {
+    if (learnDebug.counter === 2) {
       
       showDialog(loadGitToken, 'Paste Git token?', 'OK');
       
