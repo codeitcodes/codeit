@@ -1917,9 +1917,16 @@ function scrolledSidebarTitle() {
   
 }
 
-sidebarLogo.addEventListener('mousemove', () => {
 
-  sidebarTitle.classList.add('scrolling');
+sidebarLogo.mouseDown = false;
+
+sidebarLogo.addEventListener('mousemove', () => {
+  
+  if (sidebarLogo.mouseDown) {
+    
+    sidebarTitle.classList.add('scrolling');
+    
+  }
   
 });
 
@@ -1929,14 +1936,22 @@ sidebarLogo.addEventListener('touchmove', () => {
   
 });
 
-sidebarLogo.addEventListener('mouseup', () => {
+sidebarLogo.addEventListener('mousedown', () => {
+  
+  sidebarLogo.mouseDown = true;
 
+});
+
+sidebarLogo.addEventListener('mouseup', () => {
+  
+  sidebarLogo.mouseDown = false;
+  
   sidebarTitle.classList.remove('scrolling');
   
 });
 
 sidebarLogo.addEventListener('mouseout', () => {
-
+  
   sidebarTitle.classList.remove('scrolling');
   
 });
