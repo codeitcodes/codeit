@@ -1946,18 +1946,6 @@ if (!isMobile) {
     
   });
   
-  sidebarLogo.addEventListener('mouseout', () => {
-    
-    sidebarLogo.mouseDown = false;
-      
-  });
-  
-  sidebarLogo.addEventListener('mouseenter', () => {
-    
-    sidebarTitle.classList.remove('scrolling');
-    
-  });
-  
 } else {
 
   sidebarLogo.addEventListener('touchmove', () => {
