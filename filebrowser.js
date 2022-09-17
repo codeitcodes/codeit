@@ -1956,6 +1956,12 @@ sidebarLogo.addEventListener('mouseout', () => {
     
 });
 
+sidebarLogo.addEventListener('mouseenter', () => {
+  
+  sidebarTitle.classList.remove('scrolling');
+  
+});
+
 sidebarLogo.addEventListener('touchend', () => {
 
   sidebarTitle.classList.remove('scrolling');
