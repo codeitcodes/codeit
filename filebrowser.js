@@ -1918,61 +1918,67 @@ function scrolledSidebarTitle() {
 }
 
 
-sidebarLogo.mouseDown = false;
-
-sidebarLogo.addEventListener('mousemove', () => {
+if (!isMobile) {
   
-  if (sidebarLogo.mouseDown) {
+  sidebarLogo.mouseDown = false;
+  
+  sidebarLogo.addEventListener('scroll', () => {
     
+    if (sidebarLogo.mouseDown) {
+      
+      sidebarTitle.classList.add('scrolling');
+      
+    }
+    
+  });
+  
+  sidebarLogo.addEventListener('mousedown', () => {
+    
+    sidebarLogo.mouseDown = true;
+  
+  });
+  
+  sidebarLogo.addEventListener('mouseup', () => {
+    
+    sidebarLogo.mouseDown = false;
+    
+    sidebarTitle.classList.remove('scrolling');
+    
+  });
+  
+  sidebarLogo.addEventListener('mouseout', () => {
+    
+    sidebarLogo.mouseDown = false;
+      
+  });
+  
+  sidebarLogo.addEventListener('mouseenter', () => {
+    
+    sidebarTitle.classList.remove('scrolling');
+    
+  });
+  
+} else {
+
+  sidebarLogo.addEventListener('touchmove', () => {
+  
     sidebarTitle.classList.add('scrolling');
     
-  }
+  });
   
-});
-
-sidebarLogo.addEventListener('touchmove', () => {
-
-  sidebarTitle.classList.add('scrolling');
+  sidebarLogo.addEventListener('touchend', () => {
   
-});
-
-sidebarLogo.addEventListener('mousedown', () => {
-  
-  sidebarLogo.mouseDown = true;
-
-});
-
-sidebarLogo.addEventListener('mouseup', () => {
-  
-  sidebarLogo.mouseDown = false;
-  
-  sidebarTitle.classList.remove('scrolling');
-  
-});
-
-sidebarLogo.addEventListener('mouseout', () => {
-  
-  sidebarLogo.mouseDown = false;
+    sidebarTitle.classList.remove('scrolling');
     
-});
-
-sidebarLogo.addEventListener('mouseenter', () => {
+  });
   
-  sidebarTitle.classList.remove('scrolling');
+  sidebarLogo.addEventListener('touchcancel', () => {
   
-});
-
-sidebarLogo.addEventListener('touchend', () => {
-
-  sidebarTitle.classList.remove('scrolling');
+    sidebarTitle.classList.remove('scrolling');
+    
+  });
   
-});
-
-sidebarLogo.addEventListener('touchcancel', () => {
-
-  sidebarTitle.classList.remove('scrolling');
-  
-});
+}
 
 
 // if clicked on branch icon,
