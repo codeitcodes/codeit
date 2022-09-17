@@ -16,7 +16,7 @@ const FILES_TO_CACHE = [
   '/full',
   '/full.css',
   
-  '/',
+  '/index.html',
 
   '/worker/worker-channel.js',
 
