@@ -203,10 +203,28 @@ async function setupLiveView() {
     }
     
 
-    // search modified files for file
-    const modFile = Object.values(modifiedFiles).filter(file =>
-                      (file.dir == treeLoc
-                       && file.name == fileName))[0];
+    let modFile;
+
+    // if selected file is the file we're looking for
+    // and is modified
+    // note: this fixes a bug where the modified file
+    //       isn't updated yet as it's still selected
+    if (selectedFile.dir === treeLoc &&
+        selectedFile.name === fileName &&
+        modifiedFiles[selectedFile.sha]) {
+    
+      // set file to selected file
+      modFile = selectedFile;
+    
+    } else {
+
+      // search modified files for file
+      modFile = Object.values(modifiedFiles).filter(file =>
+                 (file.dir == treeLoc &&
+                  file.name == fileName))[0];
+      
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modFile) {
