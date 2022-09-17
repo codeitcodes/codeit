@@ -44,7 +44,7 @@ let manifest = {
   },
   "protocol_handlers": [
     {
-      "protocol": "https://cde.run",
+      "protocol": "cde.run",
       "url": window.location.origin + "/api/link?url=%s"
     },
     {
