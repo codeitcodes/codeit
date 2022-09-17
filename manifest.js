@@ -42,28 +42,6 @@ let manifest = {
       ]
     }
   },
-  "protocol_handlers": [
-    {
-      "protocol": "codeit",
-      "url": window.location.origin + "/api/link?url=%s"
-    },
-    {
-      "protocol": "code",
-      "url": window.location.origin + "/api/link?url=%s"
-    },
-    {
-      "protocol": "cd",
-      "url": window.location.origin + "/api/link?url=%s"
-    },
-    {
-      "protocol": "cde",
-      "url": window.location.origin + "/api/link?url=%s"
-    },
-    {
-      "protocol": "https://cde.run",
-      "url": window.location.origin + "/api/link?url=%s"
-    }
-  ],
   "handle_links": "preferred",
   "launch_type": "multiple-clients",
   "launch_handler": {
