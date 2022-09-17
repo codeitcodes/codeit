@@ -2613,6 +2613,45 @@ repoShareButton.addEventListener('click', () => {
 */
 
 
+// open debug page on click of button
+
+if (isDev) {
+  
+  const learnDebug = learnWrapper.querySelector('.picture-wrapper');
+  
+  learnDebug.counter = 0;
+  
+  learnDebug.addEventListener('click', () => {
+    
+    learnDebug.counter++;
+    
+    if (learnDebug.counter === 10) {
+      
+      showDialog(loadGitToken, 'Paste Git token?', 'OK');
+      
+      // load git token from clipboard
+      async function loadGitToken() {
+        
+        gitToken = await readClipboard();
+        
+        saveGitTokenLS(gitToken);
+        
+        // clear modified repos
+        modifiedRepos = {};
+        updateModReposLS();
+        
+        // render sidebar
+        renderSidebarHTML();
+        
+      }
+      
+    }
+    
+  });
+  
+}
+
+
 // show about page on click of button
 learnAbout.addEventListener('click', () => {
   
