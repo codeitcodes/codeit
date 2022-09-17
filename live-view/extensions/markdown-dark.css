@@ -21,6 +21,11 @@
 }
 
 
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
 html {
   background: var(--bg-color);
   scroll-padding: 16px;
@@ -257,7 +262,7 @@ html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
-  touch-action: manipulation;
+  touch-action: none;
   overscroll-behavior: none;
   -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;

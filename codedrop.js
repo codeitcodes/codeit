@@ -1,7 +1,7 @@
 
 function getFileLang(src) {
-
-  var lang_aliases = /*aliases_placeholder[*/ {
+  
+  const lang_aliases = /*aliases_placeholder[*/ {
     "html": "markup",
     "xml": "markup",
     "svg": "markup",
@@ -12,9 +12,13 @@ function getFileLang(src) {
     "js": "javascript",
     "g4": "antlr4",
     "ino": "arduino",
+    "arm-asm": "armasm",
+    "art": "arturo",
     "adoc": "asciidoc",
     "avs": "avisynth",
     "avdl": "avro-idl",
+    "gawk": "awk",
+    "sh": "bash",
     "shell": "bash",
     "shortcode": "bbcode",
     "rbnf": "bnf",
@@ -22,6 +26,9 @@ function getFileLang(src) {
     "cs": "csharp",
     "dotnet": "csharp",
     "cfc": "cfscript",
+    "cilk-c": "cilkc",
+    "cilk-cpp": "cilkcpp",
+    "cilk": "cilkcpp",
     "coffee": "coffeescript",
     "conc": "concurnas",
     "jinja2": "django",
@@ -32,9 +39,12 @@ function getFileLang(src) {
     "xlsx": "excel-formula",
     "xls": "excel-formula",
     "gamemakerlanguage": "gml",
+    "po": "gettext",
     "gni": "gn",
+    "ld": "linker-script",
     "go-mod": "go-module",
     "hbs": "handlebars",
+    "mustache": "handlebars",
     "hs": "haskell",
     "idr": "idris",
     "gitignore": "ignore",
@@ -59,6 +69,7 @@ function getFileLang(src) {
     "objectpascal": "pascal",
     "px": "pcaxis",
     "pcode": "peoplecode",
+    "plantuml": "plant-uml",
     "pq": "powerquery",
     "mscript": "powerquery",
     "pbfasm": "purebasic",
@@ -68,6 +79,7 @@ function getFileLang(src) {
     "rkt": "racket",
     "razor": "cshtml",
     "rpy": "renpy",
+    "res": "rescript",
     "robot": "robotframework",
     "rb": "ruby",
     "sh-session": "shell-session",
@@ -76,6 +88,7 @@ function getFileLang(src) {
     "sol": "solidity",
     "sln": "solution-file",
     "rq": "sparql",
+    "sclang": "supercollider",
     "t4": "t4-cs",
     "trickle": "tremor",
     "troy": "tremor",
@@ -103,11 +116,59 @@ function getFileLang(src) {
 
 
 function processFile(file) {
-
+  
+  showMessage('Opening file...', -1);
+  
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
     
+    // clear existing selections in HTML
+    if (fileWrapper.querySelector('.selected')) {
+      fileWrapper.querySelector('.selected').classList.remove('selected');
+    }
+    
+    // if adding a new file, remove it
+    if (fileWrapper.querySelector('.focused')) {
+      
+      fileWrapper.querySelector('.focused').classList.add('hidden');
+      
+      window.setTimeout(() => {
+        fileWrapper.querySelector('.focused').remove();
+      }, 180);
+      
+    }
+    
+  
+    // show all files in HTML
+    let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+    files.forEach(file => { file.style.display = '' });
+  
+    header.classList.remove('searching');
+  
+  
+    // if previous file selection exists
+    if (selectedFile.sha) {
+  
+      // get previous selection in modifiedFiles array
+      let selectedItem = modifiedFiles[selectedFile.sha];
+  
+      // if previous selection was modified
+      if (selectedItem) {
+  
+        // save previous selection in localStorage
+        updateModFileContent(selectedFile.sha, selectedFile.content);
+        updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+        updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+  
+      }
+  
+    }
+    
+
+    changeSelectedFile('', '', file.name, encodeUnicode(event.target.result), getFileLang(file.name), [0, 0], [0, 0], false);
+
+
     if (hashCode(event.target.result) !== hashCode(cd.textContent)) {
       
       cd.textContent = event.target.result;
@@ -116,25 +177,35 @@ function processFile(file) {
     
     cd.lang = getFileLang(file.name);
     
+    cd.blur();
+    
     cd.scrollTo(0, 0);
+
+    cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+    cd.history.pos = 0;
     
-    // set caret pos in codeit
-    if (!isMobile) cd.setSelection(0, 0);
+    // update line numbers
+    updateLineNumbersHTML();
     
-    cd.focus();
-
-    cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
-    window.addEventListener('load', () => {
+    if (liveToggle.classList.contains('visible')) {
       
-      saveSelectedFileContent();
-      saveSelectedFileCaretPos();
-      saveSelectedFileScrollPos();
-      saveSelectedFileLang();
+      liveToggle.classList.remove('visible');
       
-    });
-
-    showMessage('Loaded ' + file.name + '!', 5000);
+    }
+    
+    if (liveView.classList.contains('file-open')) {
+  
+      liveView.classList.add('notransition');
+      liveView.classList.remove('file-open');
+  
+      onNextFrame(() => {
+        liveView.classList.remove('notransition');
+      });
+      
+    }
+    
+    
+    hideMessage();
 
   });
 
@@ -142,43 +213,49 @@ function processFile(file) {
 
 }
 
-body.addEventListener('drop', (ev) => {
 
+body.addEventListener('drop', (ev) => {
+  
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
-
-  // if not logged into git
-  if (gitToken == '') {
-
-    // remove drop indication
+  
+  // remove drop indication
+  
+  if (!liveView.classList.contains('file-open')) {
+    
     cd.classList.remove('focus');
-
-    if (ev.dataTransfer.items) {
-
-      // use DataTransferItemList interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-
-        // if dropped items aren't files, reject them
-        if (ev.dataTransfer.items[i].kind === 'file') {
-
-          var file = ev.dataTransfer.items[i].getAsFile();
-          processFile(file);
-
-        }
-
+    
+  } else {
+    
+    liveView.classList.remove('focus');
+    
+  }
+  
+  
+  if (ev.dataTransfer.items) {
+  
+    // use DataTransferItemList interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+  
+      // if dropped items aren't files, reject them
+      if (ev.dataTransfer.items[i].kind === 'file') {
+  
+        var file = ev.dataTransfer.items[i].getAsFile();
+        processFile(file);
+  
       }
-
-    } else {
-
-      // use DataTransfer interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-
-        processFile(ev.dataTransfer.files[i]);
-
-      }
-
+  
     }
-
+  
+  } else {
+  
+    // use DataTransfer interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+  
+      processFile(ev.dataTransfer.files[i]);
+  
+    }
+    
   }
 
 })
@@ -187,28 +264,37 @@ body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
-
-  // if not logged into git
-  if (gitToken == '') {
-
-    // show drop indication
+  
+  // show drop indication
+  
+  if (!liveView.classList.contains('file-open')) {
+    
     cd.classList.add('focus');
-
+    
+  } else {
+    
+    liveView.classList.add('focus');
+    
   }
 
 })
 
 body.addEventListener('dragleave', (ev) => {
 
-  // if not logged into git
-  if (gitToken == '') {
-
-    // remove drop indication
+  // remove drop indication
+  
+  if (!liveView.classList.contains('file-open')) {
+    
     cd.classList.remove('focus');
-
+    
+  } else {
+    
+    liveView.classList.remove('focus');
+    
   }
 
 })
+
 
 if ('launchQueue' in window) {
 
@@ -223,19 +309,23 @@ if ('launchQueue' in window) {
     console.log('[launchQueue] Launched with: ', launchFile);
     
     
-    // if logged into git
-    if (gitToken) {
+    // get the file
+    const fileData = await launchFile.getFile();
+    
+    // if localStorage not loaded yet
+    if (typeof selectedFile === 'undefined') {
       
-      return;
+      // wait until localStorage is loaded
+      window.addEventListener('load', () => {
+        
+        // handle the file
+        processFile(fileData);
+        
+      });
       
     }
-    
-    
-    // handle the file
-    const fileData = await launchFile.getFile();
-
-    processFile(fileData);
         
   });
   
 }
+

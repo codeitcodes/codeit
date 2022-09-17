@@ -40,11 +40,28 @@ contextMenu = {
       
       const link = createLink({
         dir: treeLoc,
-        file: { name: activeFileName }
+        file: { name: activeFileName },
+        openLive: false
       });
       
       copy(link).then(() => {
-        showMessage('Copied link!');
+      
+        const [user, repo] = treeLoc;
+        const repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+        
+        if (!repoObj.private) {
+          
+          showMessage('Copied link!');
+          
+        } else {
+          
+          showMessage({
+            icon: lockIcon,
+            message: 'Copied private link!'
+          });
+          
+        }
+        
       });
       
     });

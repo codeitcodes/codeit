@@ -146,13 +146,6 @@ async function renderSidebarHTML() {
   // if sidebar title is empty
   if (sidebarLogo.innerText === '') {
     
-    sidebarLogo.classList.add('notransition');
-    
-    onNextFrame(() => {
-      sidebarLogo.classList.remove('notransition');
-    });
-    
-    
     if (contents != '') {
 
       // if repo is owned by logged user
@@ -169,12 +162,18 @@ async function renderSidebarHTML() {
       }
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to end of title
       sidebarLogo.scrollTo({
         left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
       
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     } else if (repo != '') {
 
@@ -192,9 +191,15 @@ async function renderSidebarHTML() {
       }
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to start of title
       sidebarLogo.scrollTo(0, 0);
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     } else {
 
@@ -205,9 +210,15 @@ async function renderSidebarHTML() {
       sidebarBranch.classList.remove('visible');
       
       
+      sidebarLogo.classList.add('notransition');
+      
       // scroll to start of title
       sidebarLogo.scrollTo(0, 0);
       scrolledSidebarTitle();
+      
+      onNextFrame(() => {
+        sidebarLogo.classList.remove('notransition');
+      });
 
     }
     
@@ -346,7 +357,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    showMessage('Hmm... we can\'t find that branch.', 5000);
+    showMessage('Hmm... that branch can\'t be found.', 5000);
     
     // add branch to tree
     treeLoc[1] = repo.split(':')[0] + ':' + defaultBranch;
@@ -354,7 +365,10 @@ async function renderSidebarHTML() {
     
     // update selected branch in local storage
     updateModRepoSelectedBranch((user + '/' + repoName), defaultBranch);
-
+    
+    // update branches in local storage
+    updateModRepoBranchExpiration((user + '/' + repoName), 0);
+    
     renderSidebarHTML();
 
     return;
@@ -1425,8 +1439,9 @@ async function loadFileInHTML(fileEl, fileSha) {
   cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
   // clear codeit history
-  cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+  cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+  cd.history.pos = 0;
+  
   // update line numbers
   updateLineNumbersHTML();
   
@@ -1903,6 +1918,65 @@ function scrolledSidebarTitle() {
 }
 
 
+if (!isMobile) {
+  
+  sidebarLogo.mouseDown = false;
+  
+  sidebarLogo.addEventListener('scroll', () => {
+    
+    if (sidebarLogo.mouseDown) {
+      
+      sidebarTitle.classList.add('scrolling');
+      
+    }
+    
+  });
+  
+  sidebarLogo.addEventListener('mousedown', () => {
+    
+    sidebarLogo.mouseDown = true;
+  
+  });
+  
+  sidebarLogo.addEventListener('mouseup', () => {
+    
+    sidebarLogo.mouseDown = false;
+    
+    sidebarTitle.classList.remove('scrolling');
+    
+  });
+  
+} else {
+
+  sidebarLogo.touchDown = false;
+  
+  sidebarLogo.addEventListener('scroll', () => {
+    
+    if (sidebarLogo.touchDown) {
+      
+      sidebarTitle.classList.add('scrolling');
+      
+    }
+    
+  });
+  
+  sidebarLogo.addEventListener('touchstart', () => {
+    
+    sidebarLogo.touchDown = true;
+  
+  });
+  
+  sidebarLogo.addEventListener('touchend', () => {
+    
+    sidebarLogo.touchDown = false;
+    
+    sidebarTitle.classList.remove('scrolling');
+    
+  });
+  
+}
+
+
 // if clicked on branch icon,
 // toggle branch menu
 sidebarBranch.addEventListener('click', () => {
@@ -2012,7 +2086,7 @@ function createNewRepoInHTML() {
       `+ repoIcon +`
       <a class="name" contenteditable="plaintext-only" spellcheck="false" autocorrect="off" autocomplete="off" aria-autocomplete="list" autocapitalize="off" dir="auto"></a>
     </div>
-    `+ lockIcon +`
+    `+ animLockIcon +`
     <div class="push-wrapper">
       `+ pushIcon +`
     </div>
@@ -2082,6 +2156,7 @@ function createNewRepoInHTML() {
         repoEl.querySelector('.name').setAttribute('contenteditable', 'false');
         repoEl.querySelector('.name').blur();
         repoEl.querySelector('.name').scrollTo(0, 0);
+        repoEl.querySelector('.name').classList.add('lock-button-width');
         
         // disable lock button
         lockButton.style.pointerEvents = 'none';
@@ -2364,8 +2439,9 @@ function createNewFileInHTML() {
         cd.lang = getFileLang(fileName);
 
         // clear codeit history
-        cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
         // update line numbers
         updateLineNumbersHTML();
 
@@ -2537,6 +2613,52 @@ repoShareButton.addEventListener('click', () => {
 */
 
 
+// open debug page on click of button
+
+if (isDev) {
+  
+  const learnDebug = introWrapper.querySelector('.picture-wrapper');
+  
+  learnDebug.counter = 0;
+  
+  learnDebug.addEventListener('click', () => {
+    
+    learnDebug.counter++;
+    
+    if (learnDebug.counter === 2) {
+      
+      learnDebug.counter = 0;
+      
+      showDialog(loadGitToken, 'Paste Git token?', 'OK');
+      
+      // load git token from clipboard
+      async function loadGitToken() {
+        
+        gitToken = await readClipboard();
+        
+        saveGitTokenLS(gitToken);
+        
+        hideDialog();
+        
+        // close intro and learn pages
+        sidebar.classList.remove('intro', 'learn');
+        
+        // clear modified repos
+        modifiedRepos = {};
+        updateModReposLS();
+        
+        // render sidebar
+        renderSidebarHTML();
+        
+      }
+      
+    }
+    
+  });
+  
+}
+
+
 // show about page on click of button
 learnAbout.addEventListener('click', () => {
   
@@ -2547,7 +2669,7 @@ learnAbout.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hi, I\'m using Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hi, I use Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
   
   if (isMobile) {
     
@@ -2623,11 +2745,17 @@ function toggleSidebar(open) {
 
 function deleteModFileInHTML(fileEl) {
   
-  deleteModFile(getAttr(fileEl, 'sha'));
+  const fileSha = getAttr(fileEl, 'sha');
+  
+  deleteModFile(fileSha);
   
   fileEl.classList.remove('modified');
   
-  loadFileInHTML(fileEl, getAttr(fileEl, 'sha'));
+  if (fileEl.classList.contains('selected')) {
+    
+    loadFileInHTML(fileEl, fileSha);
+    
+  }
   
 }
 
@@ -2760,8 +2888,9 @@ function protectUnsavedCode() {
         cd.lang = '';
 
         // clear codeit history
-        cd.history = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
         // update line numbers
         updateLineNumbersHTML();
 
@@ -2992,8 +3121,8 @@ function setupEditor() {
       // if codeit is active
       if (document.activeElement === cd) {
         
-        if (!isMac) showMessage('You can beautify with Ctrl + D', 5000);
-        else showMessage('You can beautify with ⌘ + D', 5000);
+        if (!isMac) showMessage('Try beautifying with Ctrl + D', 5000);
+        else showMessage('Try beautifying with ⌘ + D', 5000);
         
       }
       
@@ -3096,3 +3225,4 @@ function setupCodeitApp() {
   setTimeoutForEclipsedFiles();
 
 }
+

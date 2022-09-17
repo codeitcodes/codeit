@@ -13,10 +13,10 @@
   <meta name="apple-mobile-web-app-title" content="Codeit">
 
   <meta charset="utf-8">
-  <meta name="description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
+  <meta name="description" content="Run projects, code your ideas, and share it all on Codeit.">
   
   <meta property="og:title" content="Codeit | Mobile code editor connected to Git">
-  <meta property="og:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
+  <meta property="og:description" content="Run projects, code your ideas, and share it all on Codeit.">
   <meta property="og:url" content="https://codeit.codes">
   <meta property="og:image" content="https://codeit.codes/images/banner-og.png">
   <meta property="og:type" content="website">
@@ -30,7 +30,7 @@
   <meta name="twitter:card" content="summary">
   <meta property="twitter:domain" content="codeit.codes">
   <meta property="twitter:url" content="https://codeit.codes/">
-  <meta name="twitter:description" content="Run JavaScript projects, code your ideas, and share it all on Codeit.">
+  <meta name="twitter:description" content="Run projects, code your ideas, and share it all on Codeit.">
   <meta name="twitter:image" content="https://codeit.codes/images/banner-og.png">
   
   <meta name="referrer" content="default">
@@ -57,6 +57,8 @@
 
   <div class="cd-wrapper">
     <cd-el class="line-numbers" lang="none" tabindex="0"></cd-el>
+    <div class="autocomplete"></div>
+    <div class="top-hit"></div>
   </div>
 
   <div class="bottom-wrapper">
@@ -307,7 +309,7 @@
 
   <script src="lib/prism.js" data-manual></script>
   <script>
-  Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/';
+  Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
   </script>
 
 
@@ -331,6 +333,7 @@
   <script src="git/gitauth.js"></script>
 
   <script src="codedrop.js"></script>
+  
   <script src="filebrowser.js"></script>
 
   <script src="live-view/live-view.js"></script>
@@ -343,6 +346,8 @@
   
   <script src="context-menu.js"></script>
 
+  <script src="lib/plugins/codeit-autocomplete.js" async></script>
+  
   <script src="live-view/extensions/beautifier.min.js" async></script>
 
 

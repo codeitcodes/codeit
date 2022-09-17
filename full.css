@@ -9,16 +9,13 @@ html, body {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-.focus::before {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow: inset 0 0 0 2px rgb(104 187 228 / 50%);
-  pointer-events: none;
-  z-index: 1000;
+.focus::after {
   content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2px rgb(104 187 228 / 50%);
 }
 
 ::selection {
@@ -636,7 +633,8 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle.visible,
-.live-toggle.file-open {
+.live-toggle.file-open,
+.live-toggle.file-embed {
   display: flex;
 }
 
@@ -651,23 +649,27 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-view.file-open ~ .live-toggle:hover,
-.live-view.visible ~ .live-toggle.popout-hidden:hover {
+.live-view.visible ~ .live-toggle.popout-hidden:hover,
+.live-toggle.file-embed:hover {
   width: 97px;
   transition-delay: .22s;
 }
 
 .live-view.visible ~ .live-toggle:active,
-.live-view.file-open ~ .live-toggle:active {
+.live-view.file-open ~ .live-toggle:active,
+.live-toggle.file-embed:active {
   background: #1a1c24;
 }
 
 .live-view.visible ~ .live-toggle svg:hover,
-.live-view.file-open ~ .live-toggle svg:hover {
+.live-view.file-open ~ .live-toggle svg:hover,
+.live-toggle.file-embed svg:hover {
   opacity: 1;
 }
 
 .live-view.visible ~ .live-toggle svg:active,
-.live-view.file-open ~ .live-toggle svg:active {
+.live-view.file-open ~ .live-toggle svg:active,
+.live-toggle.file-embed svg:active {
   opacity: .5;
   transition: none;
 }
@@ -702,6 +704,14 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 .live-toggle.file-open svg:not(.share, .download) {
+  display: none;
+}
+
+.live-toggle.file-embed svg.popout {
+  display: block;
+}
+
+.live-toggle.file-embed svg:not(.share, .popout) {
   display: none;
 }
 
@@ -882,11 +892,11 @@ body.notransition .sidebar {
   margin-left: -18px;
 }
 
-.sidebar .header .title-screen .title:hover {
+.sidebar .header .title-screen .title:not(.scrolling):hover {
   color: #fff;
 }
 
-.sidebar .header .title-screen .title:active {
+.sidebar .header .title-screen .title:not(.scrolling):active {
   opacity: .5;
   transition: none;
 }
@@ -1284,7 +1294,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   transition-property: background, box-shadow;
 }
 
-.sidebar .repo.focused .name {
+.sidebar .repo.focused .name,
+.sidebar .repo .name.lock-button-width {
   max-width: calc(var(--sidebar-width) - 40px - 24px - 7px - 38px - 38px - 7px);
 }
 
@@ -1729,6 +1740,10 @@ body.mobile .menu .icon a {
   pointer-events: none;
 }
 
+body.mobile .context-menu {
+  display: none;
+}
+
 .context-menu:not(.modified) .push,
 .context-menu:not(.modified) .discard-changes {
   display: none;
@@ -1892,6 +1907,12 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   border-radius: 8px;
   padding: 0;
   transition: none;
+}
+
+.message svg {
+  width: 16px;
+  margin-right: 7px;
+  color: #828689;
 }
 
 
@@ -2511,7 +2532,7 @@ html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
-  touch-action: manipulation;
+  touch-action: none;
   overscroll-behavior: none;
   user-select: none;
   -webkit-user-select: none;

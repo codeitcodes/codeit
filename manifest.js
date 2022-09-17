@@ -10,6 +10,7 @@ let manifest = {
   "display": "standalone",
   "scope": window.location.origin,
   "start_url": window.location.origin + "/full",
+  "id": "/full",
   "orientation": "any",
   "icons": [
     {
@@ -21,27 +22,28 @@ let manifest = {
   ],
   "file_handlers": [
     {
-      "action": window.location.origin + "/full?upload=true",
-      "name": "code",
+      "action": window.location.origin + "/full",
+      "name": "file",
       "accept": {
-        "text/plain": [".js", ".css", ".html", ".json"]
+        "text/plain": [".js",".html",".css",".c",".cs",".py",".jsx",".atom",".xss",".do",".action",".xml",".svg",".md",".gitignore",".json",".aspx",".kt",".sass",".less",".asp",".axd",".asx",".asmx",".ashx",".sh",".bash",".sh",".shell",".bat",".cmd",".dotnet",".csharp",".ejs",".editorconfig",".java",".webmanifest",".mathml",".ssml",".php",".perl",".pug",".scss",".rb",".ruby",".swift",".turtle",".trig",".ts",".tsconfig",".uscript",".uc",".wasm",".yaml",".ps1",".ps2",".objc",".kt",".kts",".emacs",".elisp",".lisp",".cgi",".dll",".lua",".makefile",".hs",".go",".git",".haml",".hbs",".mustache",".graphql",".haml",".erl",".hrl",".tex",".h",".m",".mm",".cpp",".xls",".xlsx",".csv",".coffee",".cmake",".basic",".adoc",".ino"]
       }
     }
   ],
   "share_target": {
-    "action": window.location.origin + "/full?upload=true",
+    "action": window.location.origin + "/full",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "files": [
         {
-          "name": "code",
+          "name": "file",
           "accept": ["text/*", "application/json"]
         }
       ]
     }
   },
   "handle_links": "preferred",
+  "launch_type": "multiple-clients",
   "launch_handler": {
     "route_to": "new-client"
   },
@@ -87,6 +89,14 @@ if (!isMobile) {
 }
 
 
+if (isDev) {
+  
+  manifest.name = 'Codeit [DEV]';
+  manifest.short_name = 'Codeit [DEV]';
+  
+}
+
+
 
 // apply dynamic manifest
 
@@ -95,3 +105,4 @@ linkElem.setAttribute('rel', 'manifest');
 linkElem.setAttribute('href', 'data:application/json,' + encodeURIComponent(JSON.stringify(manifest)));
 
 document.head.appendChild(linkElem);
+

@@ -2,15 +2,25 @@
 // setup live view
 async function setupLiveView() {
 
+  let prevSelectedFile;
+
   // if URL has a file
   if (linkData.file) {
     
     // get file from URL
     const fileName = linkData.file;
     
+    prevSelectedFile = selectedFile;
+    
     // change selected file
     changeSelectedFile(treeLoc.join(), generateSHA(), fileName, '', getFileLang(fileName),
                        [0, 0], [0, 0], false);
+    
+    if (isEmbed && !linkData.openLive && !isMobile) {
+      
+      liveToggle.classList.add('file-embed');
+      
+    }
     
 
     // if URL has a live view flag
@@ -197,10 +207,28 @@ async function setupLiveView() {
     }
     
 
-    // search modified files for file
-    const modFile = Object.values(modifiedFiles).filter(file =>
-                      (file.dir == treeLoc
-                       && file.name == fileName))[0];
+    let modFile;
+
+    // if selected file is the file we're looking for
+    // and is modified
+    // note: this fixes a bug where the modified file
+    //       isn't updated yet as it's still selected
+    if (prevSelectedFile.dir === treeLoc.join() &&
+        prevSelectedFile.name === fileName &&
+        modifiedFiles[prevSelectedFile.sha]) {
+    
+      // set file to selected file
+      modFile = prevSelectedFile;
+    
+    } else {
+
+      // search modified files for file
+      modFile = Object.values(modifiedFiles).filter(file =>
+                 (file.dir == treeLoc.join() &&
+                  file.name == fileName))[0];
+      
+    }
+    
 
     // if file is not modified; fetch from Git
     if (!modFile) {
@@ -251,7 +279,7 @@ async function setupLiveView() {
     } else { // else, load file from modifiedFiles object
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
-                         modFile.caretPos, modFile.scrollPos, false);
+                         modFile.caretPos, modFile.scrollPos, modFile.eclipsed);
 
     }
 
@@ -282,12 +310,15 @@ async function setupLiveView() {
       const repoObj = modifiedRepos[treeLoc[0] + '/' + treeLoc[1].split(':')[0]];
       
       
-      // if not logged in
-      // or repository is public
-      // and fetching an HTML file
-      if ((gitToken === ''
-          || (repoObj && !repoObj.private))
-          && getFileType(fileName) === 'html') {
+      // if repository is public,
+      // file is not modified,
+      // and file is HTML
+      
+      const repoIsPublic = ((gitToken === '') || (repoObj && !repoObj.private));
+      
+      if (repoIsPublic &&
+          !modFile &&
+          getFileType(fileName) === 'html') {
         
         // get public file from git
         fileContent = await git.getPublicFile(treeLoc, fileName);
@@ -324,7 +355,8 @@ async function setupLiveView() {
     cd.scrollTo(selectedFile.scrollPos[0], selectedFile.scrollPos[1]);
 
     // clear codeit history
-    cd.history = [];
+    cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+    cd.history.pos = 0;
 
     // update line numbers
     updateLineNumbersHTML();
@@ -589,11 +621,28 @@ if (isMobile) {
 
     const link = createLink({
       dir: selectedFile.dir.split(','),
-      file: selectedFile
+      file: selectedFile,
+      openLive: (liveView.classList.contains('visible'))
     });
 
     copy(link).then(() => {
-      showMessage('Copied link!');
+      
+      const [user, repo] = selectedFile.dir.split(',');
+      const repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+      
+      if (!repoObj.private) {
+        
+        showMessage('Copied link!');
+        
+      } else {
+        
+        showMessage({
+          icon: lockIcon,
+          message: 'Copied private link!'
+        });
+        
+      }
+      
     });
 
   });
@@ -638,7 +687,8 @@ if (isMobile) {
       // get live view link
       const link = createLink({
         dir: selectedFile.dir.split(','),
-        file: selectedFile
+        file: selectedFile,
+        openLive: (liveView.classList.contains('visible'))
       });
       
       // open a new window with live view link

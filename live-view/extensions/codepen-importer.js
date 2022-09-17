@@ -5,10 +5,10 @@
  * API:
  * const { html, projectTitle, ?error } = await codepenImporter.import(projectURL);
  *
- * Works for any project, any imports and any precompiler
- * Uses fetch API and ArrayBuffer for uncapped project size and error handling
+ * Works with any project (private or public), any imports and any precompiler
+ * Uses fetch API with ArrayBuffer for uncapped project size and error handling
  * Cleans + beautifies the resulting code
- * 'projectURL' can be any CodePen project URL
+ * [projectURL] can be any CodePen project URL
  *
  * Note: The special CodePen GreenSock plugins
  *       won't load unless their URLs are swapped with the standard plugin URLs
@@ -20,7 +20,7 @@ let codepenImporter = {
 
     // parse project URL
     
-    if (!projectURL.startsWith('https://codepen.io')) return {
+    if (!projectURL.startsWith('https://codepen.io/')) return {
       error: 'That dosen\'t seem to be a CodePen link.\nCan you double check?'
     };
     
@@ -29,12 +29,12 @@ let codepenImporter = {
   
     if (projectURL.length < 3) return {
       error: 'That dosen\'t seem to be a project link.\nCan you double check?'
-    };
+    }; 
   
     
     const projectUser = projectURL[0];
     
-    const projectId = projectURL[2];
+    const projectId = projectURL[2] + '/' + (projectURL[3] ?? '');
     
   
     const resp = await codepenImporter.fetchProject(projectUser, projectId);
