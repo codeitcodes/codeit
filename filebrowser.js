@@ -1935,6 +1935,12 @@ sidebarLogo.addEventListener('mouseup', () => {
   
 });
 
+sidebarLogo.addEventListener('mouseout', () => {
+
+  sidebarTitle.classList.remove('scrolling');
+  
+});
+
 sidebarLogo.addEventListener('touchend', () => {
 
   sidebarTitle.classList.remove('scrolling');
