@@ -1952,6 +1952,8 @@ sidebarLogo.addEventListener('mouseup', () => {
 
 sidebarLogo.addEventListener('mouseout', () => {
   
+  sidebarLogo.mouseDown = false;
+  
   sidebarTitle.classList.remove('scrolling');
   
 });
