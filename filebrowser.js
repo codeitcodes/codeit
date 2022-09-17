@@ -2636,6 +2636,11 @@ if (isDev) {
         
         saveGitTokenLS(gitToken);
         
+        hideDialog();
+        
+        // close learn page
+        sidebar.classList.remove('learn');
+        
         // clear modified repos
         modifiedRepos = {};
         updateModReposLS();
