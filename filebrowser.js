@@ -1948,20 +1948,28 @@ if (!isMobile) {
   
 } else {
 
-  sidebarLogo.addEventListener('touchmove', () => {
+  sidebarLogo.touchDown = false;
   
-    sidebarTitle.classList.add('scrolling');
+  sidebarLogo.addEventListener('scroll', () => {
     
+    if (sidebarLogo.touchDown) {
+      
+      sidebarTitle.classList.add('scrolling');
+      
+    }
+    
+  });
+  
+  sidebarLogo.addEventListener('touchstart', () => {
+    
+    sidebarLogo.touchDown = true;
+  
   });
   
   sidebarLogo.addEventListener('touchend', () => {
-  
-    sidebarTitle.classList.remove('scrolling');
     
-  });
-  
-  sidebarLogo.addEventListener('touchcancel', () => {
-  
+    sidebarLogo.touchDown = false;
+    
     sidebarTitle.classList.remove('scrolling');
     
   });
