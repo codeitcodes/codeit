@@ -2617,7 +2617,7 @@ repoShareButton.addEventListener('click', () => {
 
 if (isDev) {
   
-  const learnDebug = learnWrapper.querySelector('.picture-wrapper');
+  const learnDebug = introWrapper.querySelector('.picture-wrapper');
   
   learnDebug.counter = 0;
   
@@ -2626,6 +2626,8 @@ if (isDev) {
     learnDebug.counter++;
     
     if (learnDebug.counter === 2) {
+      
+      learnDebug.counter = 0;
       
       showDialog(loadGitToken, 'Paste Git token?', 'OK');
       
