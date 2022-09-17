@@ -257,7 +257,7 @@ async function setupLiveView() {
     } else { // else, load file from modifiedFiles object
 
       changeSelectedFile(modFile.dir, modFile.sha, modFile.name, modFile.content, modFile.lang,
-                         modFile.caretPos, modFile.scrollPos, false);
+                         modFile.caretPos, modFile.scrollPos, modFile.eclipsed);
 
     }
 
@@ -289,10 +289,12 @@ async function setupLiveView() {
       
       
       // if not logged in
-      // or repository is public
-      // and fetching an HTML file
+      // or repository is public,
+      // file is not modified,
+      // and the file is HTML
       if ((gitToken === ''
           || (repoObj && !repoObj.private))
+          && !modFile
           && getFileType(fileName) === 'html') {
         
         // get public file from git
