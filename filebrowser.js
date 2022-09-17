@@ -2640,8 +2640,8 @@ if (isDev) {
         
         hideDialog();
         
-        // close learn page
-        sidebar.classList.remove('learn');
+        // close intro and learn pages
+        sidebar.classList.remove('intro', 'learn');
         
         // clear modified repos
         modifiedRepos = {};
