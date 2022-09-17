@@ -209,7 +209,7 @@ async function setupLiveView() {
     // and is modified
     // note: this fixes a bug where the modified file
     //       isn't updated yet as it's still selected
-    if (selectedFile.dir === treeLoc.join(',') &&
+    if (selectedFile.dir === treeLoc.join() &&
         selectedFile.name === fileName &&
         modifiedFiles[selectedFile.sha]) {
     
@@ -220,7 +220,7 @@ async function setupLiveView() {
 
       // search modified files for file
       modFile = Object.values(modifiedFiles).filter(file =>
-                 (file.dir == treeLoc.join(',') &&
+                 (file.dir == treeLoc.join() &&
                   file.name == fileName))[0];
       
     }
