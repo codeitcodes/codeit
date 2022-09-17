@@ -2,7 +2,7 @@
 // setup live view
 async function setupLiveView() {
 
-  const prevSelectedFile;
+  let prevSelectedFile;
 
   // if URL has a file
   if (linkData.file) {
