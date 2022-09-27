@@ -51,6 +51,19 @@ function getPathType(path) {
 }
 
 
+let client = {
+
+  send: async (message, clientId) => {
+
+    const selClient = await this.clients.get(clientId);
+
+    selClient.postMessage(message);
+
+  }
+
+};
+
+
 // worker log
 function workerLog(log) {
 
