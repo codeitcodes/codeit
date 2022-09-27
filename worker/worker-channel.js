@@ -1,148 +1,165 @@
 
-// client-side
-// service worker/client communication channel
+// service worker communication (client-side)
 
-
-let workerChannel;
-let workerInstallPromise;
-
-let workerClientId;
-
-
-// setup worker channel
-async function setupWorkerChannel() {
-
-  // register service worker
+let worker = {
   
-  workerInstallPromise = navigator.serviceWorker.register('/service-worker.js');
+  clientId: null,
+  clientIdRequests: 0,
   
-  await workerInstallPromise;
+  installPromise: null,
   
-  
-  let numOfRequests = 0;
-  
-  async function pingWorkerForClientId() {
+  init: async () => {
+    
+    // register service worker
+    
+    worker.installPromise = worker.register();
+    
+    await worker.installPromise;
+    
     
     // get client ID from worker
-    let resp = await axios.get('/worker/getClientId', '', true);
     
-    try {
-      resp = JSON.parse(resp);
-    } catch(e) {
-      resp = '';
-      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
-    }
+    worker.installPromise = worker.getClientId();
     
-    if (numOfRequests < 100) {
+    worker.clientId = await worker.installPromise;
+    
+    worker.installPromise = null;
+
+
+    // listen for worker messages
+    worker.listen(handleWorkerMessage);
+    
+    
+    // add additional worker handlers
+    window.addEventListener('load', () => {
       
-      if (!resp || !resp.clientId) {
+      if (getStorage('workerDebugLogs')) {
         
-        numOfRequests++;
-        return await pingWorkerForClientId();
-        
-      } else {
-        
-        return resp.clientId;
+        // enable debug logs
+        worker.send({
+          type: 'enableDebugLogs'
+        });
         
       }
       
-    } else {
+      // if on dev version
+      if (window.location.hostname === 'dev.codeit.codes') {
+        
+        // update service worker
+        worker.send({
+          type: 'updateWorker'
+        });
+        
+      }
       
-      return null;
-      
+    });
+    
+  },
+  
+  handleWorkerMessage: async (message) => {
+
+    // if received request
+    if (message.type === 'request') {
+  
+      // send request to /live-view/live-view.js
+      // for handling
+      const {
+        fileContent,
+        respStatus
+      } =
+      await handleLiveViewRequest(message.url);
+  
+      // send response back to worker
+      worker.send({
+        url: data.url,
+        resp: fileContent,
+        respStatus: (respStatus ?? 200),
+        type: 'response'
+      });
+  
+    } else if (message.type === 'reload') { // if recived reload request
+  
+      // reload page
+      window.location.reload();
+  
+    } else if (message.type === 'message') { // if recived message
+  
+      // log message
+      console.debug(event.data.message);
+  
     }
+  
+  },
+  
+  register: () => {
+    
+    return navigator.serviceWorker.register('/service-worker.js');
+    
+  },
+  
+  getClientId: () => {
+
+    // get client ID from worker
+    let resp = await axios.get('/worker/getClientId', '', true);
+
+    try {
+      
+      resp = JSON.parse(resp);
+      
+    } catch (e) {
+      
+      resp = '';
+      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
+    
+    }
+
+    if (worker.clientIdRequests < 100) {
+
+      if (!resp || !resp.clientId) {
+
+        worker.clientIdRequests++;
+        return await worker.getClientId();
+
+      } else {
+
+        return resp.clientId;
+
+      }
+
+    } else {
+
+      return null;
+
+    }
+
+  },
+  
+  send: (message) => {
+    
+    navigator.serviceWorker.controller.postMessage(message);
+    
+  },
+  
+  listen: (callback) => {
+    
+    navigator.serviceWorker.addEventListener('message', (e) => { callback(e.data) });
+    
+  },
+  
+  enableDebugLogs: () => {
+    
+    setStorage('workerDebugLogs', 'true');
+    window.location.reload();
     
   }
   
-  // ping worker for client ID
-  
-  workerInstallPromise = pingWorkerForClientId();
-  
-  workerClientId = await workerInstallPromise;
-  
-  workerInstallPromise = null;
-  
-  
-  // create worker channel
-  workerChannel = new BroadcastChannel('worker-channel');
-  
-  
-  // add worker channel listener
-  workerChannel.addEventListener('message', async (event) => {
-        
-    // if message is for current client
-    if (event.data.toClient === workerClientId) {
-
-      // if recived request
-      if (event.data.type === 'request') {
-  
-        // send request to /live-view/live-view.js
-        // for handling
-        const {fileContent, respStatus} =
-              await handleLiveViewRequest(event.data.url);
-  
-        // send response back to worker
-        workerChannel.postMessage({
-          url: event.data.url,
-          resp: fileContent,
-          respStatus: (respStatus ?? 200),
-          fromClient: workerClientId,
-          type: 'response'
-        });
-  
-      } else if (event.data.type === 'reload') { // if recived reload request
-  
-        // reload page
-        window.location.reload();
-  
-      } else if (event.data.type === 'message') { // if recived message
-  
-        // log message
-        console.debug(event.data.message);
-  
-      }
-      
-    }
-
-  });
-  
-  
-  window.addEventListener('load', () => {
-    
-    if (getStorage('workerDevLogs')) {
-            
-      workerChannel.postMessage({
-        type: 'enableDevLogs'
-      });
-      
-    }
-    
-    if (window.location.hostname === 'dev.codeit.codes') {
-      
-      workerChannel.postMessage({
-        type: 'updateWorker'
-      });
-      
-    }
-    
-  });
-
-}
+};
 
 
-// enable service worker logs
-function enableWorkerLogs() {
+if (typeof axios === 'undefined') {
   
-  setStorage('workerDevLogs', 'true');
-  window.location.reload();
-  
-}
-
-
-try {
-  axios = axios;
-} catch(e) {
   window.axios = null;
+  
 }
 
 axios = {
@@ -191,6 +208,6 @@ axios = {
 };
 
 
-// setup worker channel
-setupWorkerChannel();
+// init worker
+worker.init();
 
