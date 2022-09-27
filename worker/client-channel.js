@@ -1,6 +1,5 @@
 
-// worker-side
-// service worker/client communication channel
+// client communication (service worker-side)
 
 
 // update worker name when updating worker
