@@ -654,7 +654,7 @@ if (isMobile) {
     if (!isEmbed) {
     
       // get live view URL
-      const liveViewURL = livePath +'?'+ workerClientId +'/';
+      const liveViewURL = livePath +'?'+ worker.clientId +'/';
       
       // open a new window with live view URL
       window.open(liveViewURL, '_blank');
@@ -1104,17 +1104,17 @@ async function renderLiveViewHTML(file) {
 
 
   // if service worker isn't installed yet
-  if (workerInstallPromise) {
+  if (worker.installPromise) {
         
     // wait until finished installing
-    await workerInstallPromise;
+    await worker.installPromise;
             
   }
   
-  if (!workerClientId) await workerInstallPromise;
+  if (!worker.clientId) await worker.installPromise;
 
 
-  liveView.innerHTML = '<iframe src="'+ livePath +'?'+ workerClientId +'/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe src="'+ livePath +'?'+ worker.clientId +'/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write" allowfullscreen="true" allowpaymentrequest="true" loading="lazy" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" frameborder="0"></iframe>';
 
 
   liveFile = file;
