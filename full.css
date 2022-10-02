@@ -1559,7 +1559,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 body.mobile .sidebar .button {
   transition: .1s var(--ease-function);
-  transition-property: background, color;
+  transition-property: background, color, box-shadow;
 }
 
 .sidebar .button.secondary {
