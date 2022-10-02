@@ -36,7 +36,13 @@ searchBack.addEventListener('click', () => {
 
 // search when typed in input
 searchInput.addEventListener('input', () => {
+  
+  if (searchInput.textContent === '\n') {
     
+    searchInput.textContent = '';
+    
+  }
+  
   let query = searchInput.textContent.toLowerCase().replaceAll('\n', '');
   let files = fileWrapper.querySelectorAll('.item');
   
