@@ -247,7 +247,7 @@ let client = {
   // send fetch request to client
   sendRequest: (request, clientId) => {
     
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       
       let url = request.url;
   
