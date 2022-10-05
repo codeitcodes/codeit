@@ -97,7 +97,7 @@ let worker = {
     
   },
   
-  getClientId: () => {
+  getClientId: async () => {
 
     // get client ID from worker
     let resp = await axios.get('/worker/getClientId', '', true);
