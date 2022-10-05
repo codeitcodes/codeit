@@ -61,17 +61,6 @@ const FILES_TO_CACHE = [
 
 
 /*
-  // remove previous cached data from disk
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== worker.NAME) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-  
   // precache static resources
   evt.waitUntil(
     caches.open(worker.NAME).then((cache) => {
@@ -83,13 +72,24 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (evt) => {
   
-  evt.waitUntil(self.skipWaiting());
+  self.skipWaiting();
   
 });
 
 self.addEventListener('activate', (evt) => {
   
-  evt.waitUntil(self.clients.claim());
+  // remove previous cached data
+  evt.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== worker.NAME) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  
+  self.clients.claim();
 
 });
 
