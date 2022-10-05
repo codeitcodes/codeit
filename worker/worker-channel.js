@@ -218,7 +218,7 @@ let client = {
             const conditions = Object.entries(options.forMsg);
             
             // check all conditions
-            conditions.forEach([name, value] => {
+            conditions.forEach(([name, value]) => {
               
               // if condition dosen't match, return
               if (data[name] !== value) return;
