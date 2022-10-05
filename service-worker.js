@@ -59,14 +59,19 @@ const FILES_TO_CACHE = [
 ];
 
 
-/*
-  // precache static resources
-  evt.waitUntil(
-    caches.open(worker.name).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
-*/
+// remove previous cached data
+caches.keys().then((keyList) => {
+  return Promise.all(keyList.map((key) => {
+    if (key !== worker.name) {
+      return caches.delete(key);
+    }
+  }));
+});
+
+// precache static resources
+caches.open(worker.name).then((cache) => {
+  return cache.addAll(FILES_TO_CACHE);
+});
 
 
 self.addEventListener('install', (evt) => {
@@ -76,18 +81,6 @@ self.addEventListener('install', (evt) => {
 });
 
 self.addEventListener('activate', (evt) => {
-  
-  /*
-  // remove previous cached data
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== worker.name) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );*/
   
   self.clients.claim();
 
