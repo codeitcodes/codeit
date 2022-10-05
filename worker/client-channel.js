@@ -93,7 +93,7 @@ let worker = {
   
   register: () => {
     
-    return navigator.serviceWorker.register('/worker/service-worker.js');
+    return navigator.serviceWorker.register('/service-worker.js');
     
   },
   
