@@ -5,7 +5,7 @@
 let worker = {
   
   // update worker name when updating worker
-  name: 'codeit-worker-v590',
+  name: 'codeit-worker-v591',
   
   // internal paths
   INTERNAL_PATHS: {
