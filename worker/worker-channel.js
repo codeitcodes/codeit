@@ -163,7 +163,7 @@ let worker = {
   // worker log
   log: async (log) => {
     
-    const targetClient = await clients.matchAll()[0];
+    const targetClient = (await clients.matchAll())[0];
     
     client.send({
       message: log,
