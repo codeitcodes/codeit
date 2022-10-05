@@ -61,11 +61,9 @@ const FILES_TO_CACHE = [
 
 
 /*
-
-
   // precache static resources
   evt.waitUntil(
-    caches.open(worker.NAME).then((cache) => {
+    caches.open(worker.name).then((cache) => {
       return cache.addAll(FILES_TO_CACHE);
     })
   );
@@ -84,7 +82,7 @@ self.addEventListener('activate', (evt) => {
   evt.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== worker.NAME) {
+        if (key !== worker.name) {
           return caches.delete(key);
         }
       }));
