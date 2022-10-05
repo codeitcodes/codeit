@@ -27,7 +27,7 @@ let worker = {
 
 
     // listen for worker messages
-    worker.listen(handleWorkerMessage);
+    worker.listen(worker.handleWorkerMessage);
     
     
     // add additional worker handlers
