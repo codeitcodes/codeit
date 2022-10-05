@@ -83,13 +83,13 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (evt) => {
   
-  self.skipWaiting();
+  evt.waitUntil(self.skipWaiting());
   
 });
 
 self.addEventListener('activate', (evt) => {
   
-  self.clients.claim();
+  evt.waitUntil(self.clients.claim());
 
 });
 
