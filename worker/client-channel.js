@@ -1,366 +1,213 @@
 
-// client communication (service worker-side)
-
+// service worker communication (client-side)
 
 let worker = {
   
-  // update worker name when updating worker
-  NAME: 'codeit-worker-v587',
+  clientId: null,
+  clientIdRequests: 0,
   
-  // internal paths
-  INTERNAL_PATHS: {
+  installPromise: null,
   
-    internal: 'https://codeit.codes/',
-    internal_: 'https://dev.codeit.codes/',
-  
-    run: 'https://codeit.codes/run',
-    run_: 'https://dev.codeit.codes/run',
+  init: async () => {
     
-    relLivePath: ('/run/' + '_/'.repeat(15)),
+    // register service worker
     
-    clientId: 'https://codeit.codes/worker/getClientId',
-    clientId_: 'https://dev.codeit.codes/worker/getClientId',
-  
-  },
-  
-  DEV_LOGS: false,
-  
-  // get path type  
-  getPathType: (path) => {
-  
-    let pathType = 'external';
-  
-    Object.entries(worker.INTERNAL_PATHS).forEach(type => {
-  
-      if (path.startsWith(type[1])) {
-  
-        pathType = type[0].replaceAll('_', '');
-  
-      }
-  
-    });
-  
-    return pathType;
-  
-  },
-  
-  // create Response from data
-  createResponse: (data, type, status, noCache = false) => {
+    worker.installPromise = worker.register();
     
-    let headers = {
-      'Content-Type': type
-    };
+    await worker.installPromise;
     
-    if (noCache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+    
+    // get client ID from worker
+    
+    worker.installPromise = worker.getClientId();
+    
+    worker.clientId = await worker.installPromise;
+    
+    worker.installPromise = null;
 
-    const response = new Response(data, {
-      headers: headers,
-      status: status
-    });
-  
-    return response;
-    
-  },
-  
-  // handle fetch request
-  handleFetchRequest: (request, event) => {
 
-    return new Promise(async (resolve, reject) => {
-  
-      let url = request.url,
-          clientId = event.clientId;
-          
+    // listen for worker messages
+    worker.listen(worker.handleMessage);
+    
+    
+    // add additional worker handlers
+    window.addEventListener('load', () => {
       
-      // get request type
-      const pathType = worker.getPathType(url);
-  
-  
-      // if request originated in a codeit client
-      if (pathType === 'internal' &&
-          (getPathType(request.referrer) !== 'run')) {
-    
-        const resp = await caches.match(url);
-  
-        // return response from cache
-        resolve(resp ?? fetch(request));
-      
-      } else if (pathType === 'run' ||
-                 (getPathType(request.referrer) === 'run')) {
+      if (getStorage('workerDebugLogs')) {
         
-        // if request originated in a live view client
-        
-        // send request to the live view's parent client
-        const resp = await worker.handleLiveViewRequest(request, event);
-        
-        // resolve with response from parent client
-        resolve(resp);
-  
-      } else if (pathType === 'clientId') { // if fetching client ID
-        
-        // return the ID of the client
-        // who sent the request
-        
-        resolve(worker.createResponse(
-          JSON.stringify({ clientId }), 'application/json', 200
-        ));
-        
-      } else { // if fetch is external
-        
-        // return response from network
-        resolve(fetch(request));
-  
-      }
-
-    });
-
-  },
-  
-  // handle live view request
-  handleLiveViewRequest: async (request, event) => {    
-    
-    // check if creating a new live view
-    
-    let requestUrl = request.url.split('?')[0];
-    let liveViewId = event.resultingClientId ?? event.targetClientId;
-    
-    const liveViewPath = worker.INTERNAL_PATHS.relLivePath;
-    
-    const creatingNewLiveView = (requestUrl.endsWith(liveViewPath) && liveViewId);
-    
-    
-    // find live view parent client ID
-    const parentId = client.liveView.getParentId(event, creatingNewLiveView);
-    
-    
-    // if creating a new live view
-    if (creatingNewLiveView) {
-  
-      // if on safari,
-      // parse live view id
-      if (client.isSafari) {
-        
-        liveViewId = client.liveView.parseSafariId(liveViewId, event);
-        
-      }
-      
-      // pair live view client
-      // with it's parent client
-      client.liveView.parent[liveViewId] = parentId;
-  
-    }
-    
-    
-    // send request to the live view's parent client
-    const resp = await client.sendRequest(request, parentId);
-
-    // return response from parent client
-    return resp;
-    
-  },
-  
-  // worker log
-  log: async (log) => {
-    
-    const targetClient = await clients.matchAll()[0];
-    
-    client.send({
-      message: log,
-      toClient: targetClient,
-      type: 'message'
-    });
-
-  }
-  
-};
-
-
-let client = {
-
-  isSafari: self.navigator.userAgent.toLowerCase().includes('safari'),
-
-  send: async (message) => {
-
-    let targetClient = message.toClient;
-
-    if (typeof message.toClient = 'string') {
-      
-      targetClient = await this.clients.get(targetClient);
-      
-    }
-
-    targetClient.postMessage(message);
-
-  },
-  
-  // listen for client messages
-  // options:
-  // forMsg - object with message conditions to listen for
-  // callback - defining this makes the function synchronous
-  //
-  listen: (options) => {
-
-    function createListener(cbk) {
-      
-      return self.addEventListener('message', (e) => { cbk(e.data) });
-      
-    }
-    
-    
-    if (!options.callback) {
-      
-      return new Promise(resolve => {
-
-        const listener = createListener((data) => {
-          
-          // if conditions exist
-          if (options.forMsg) {
-            
-            const conditions = Object.entries(options.forMsg);
-            
-            // check all conditions
-            conditions.forEach([name, value] => {
-              
-              // if condition dosen't match, return
-              if (data[name] !== value) return;
-              
-            });
-            
-          }
-          
-          // remove client listener
-          self.removeEventListener(listener);
-          
-          resolve(data);
-          
+        // enable debug logs
+        worker.send({
+          type: 'enableDebugLogs'
         });
-
-      });
+        
+      }
       
+      // if on dev version
+      if (window.location.hostname === 'dev.codeit.codes') {
+        
+        // update service worker
+        worker.send({
+          type: 'updateWorker'
+        });
+        
+      }
+      
+    });
+    
+  },
+  
+  handleMessage: async (message) => {
+
+    // if received request
+    if (message.type === 'request') {
+  
+      // send request to /live-view/live-view.js
+      // for handling
+      const {
+        fileContent,
+        respStatus
+      } =
+      await handleLiveViewRequest(message.url);
+  
+      // send response back to worker
+      worker.send({
+        url: data.url,
+        resp: fileContent,
+        respStatus: (respStatus ?? 200),
+        type: 'response'
+      });
+  
+    } else if (message.type === 'reload') { // if recived reload request
+  
+      // reload page
+      window.location.reload();
+  
+    } else if (message.type === 'message') { // if recived message
+  
+      // log message
+      console.debug(event.data.message);
+  
+    }
+  
+  },
+  
+  register: () => {
+    
+    return navigator.serviceWorker.register('/service-worker.js');
+    
+  },
+  
+  getClientId: async () => {
+
+    // get client ID from worker
+    let resp = await axios.get('/worker/getClientId', '', true);
+
+    try {
+      
+      resp = JSON.parse(resp);
+      
+    } catch (e) {
+      
+      resp = '';
+      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
+    
+    }
+
+    if (worker.clientIdRequests < 100) {
+
+      if (!resp || !resp.clientId) {
+
+        worker.clientIdRequests++;
+        return await worker.getClientId();
+
+      } else {
+
+        return resp.clientId;
+
+      }
+
     } else {
 
-      return createListener(callback);
+      return null;
 
     }
-    
-  },
-  
-  // send fetch request to client
-  sendRequest: (request, clientId) => {
-    
-    return new Promise((resolve, reject) => {
-      
-      let url = request.url;
-  
-      // append .html to url if navigating
-      if (request.mode === 'navigate'
-          && !url.endsWith('.html')
-          && !url.endsWith('/')) url += '.html';
-  
-      // set MIME type depending on request mode
-      let mimeType = 'application/octet-stream';
-  
-      if (request.mode === 'navigate'
-          || url.endsWith('.html')) mimeType = 'text/html';
-  
-      if (request.mode === 'script'
-          || url.endsWith('.js')) mimeType = 'text/javascript';
-  
-      if (request.mode === 'style'
-          || url.endsWith('.css')) mimeType = 'text/css';
-  
-      if (url.endsWith('.wasm')) mimeType = 'application/wasm';
-      
-  
-      // send request to client
-      client.send({
-        url: url,
-        toClient: clientId,
-        type: 'request'
-      });
-      
-      // await client response
-      const data = await client.listen({
-        forMsg: { type: 'response', url: url }
-      });
-      
-
-      // create Response from data
-      const response = worker.createResponse(data.resp, mimeType, data.respStatus);
-
-      // resolve promise with Response
-      resolve(response);
-
-    });
 
   },
   
-  liveView: {
+  send: (message) => {
     
-    // format:
-    // { [live view client ID]: [parent client ID] }
-    parent: {},
+    navigator.serviceWorker.controller.postMessage(message);
     
-    getParentId: (event, creatingNewLiveView) => {
-      
-      const url = event.request.url;      
-      const liveViewId = event.clientId;
-      
-      let parentId;
-      
-      if (creatingNewLiveView) {
-      
-        parentId = url.split('?')[1].slice(0,-1);
-      
-      } else {
-        
-        parentId = client.liveView.parent[liveViewId];
-      
-      }
-      
-      return parentId;
-      
-    },
+  },
+  
+  listen: (callback) => {
     
-    // parse live view ID for Safari
-    parseSafariId: (id, event) => {
-      
-      // double-check we're on Safari
-      if (event.targetClientId) {
+    navigator.serviceWorker.addEventListener('message', (e) => { callback(e.data) });
+    
+  },
   
-        // add 1 to live view ID
-        
-        let splitId = id.split('-');
-  
-        splitId[1] = Number(splitId[1]) + 1;
-  
-        id = splitId.join('-');
-  
-      }
-      
-      return id;
-      
-    }
+  enableDebugLogs: () => {
+    
+    setStorage('workerDebugLogs', 'true');
+    window.location.reload();
     
   }
   
 };
 
 
-client.listen({callback: (message) => {
+if (typeof axios === 'undefined') {
+  
+  window.axios = null;
+  
+}
 
-  if (message.type === 'updateWorker') self.registration.update();
-  if (message.type === 'enableDevLogs') worker.DEV_LOGS = true;
-  if (message.type === 'hello') worker.log('hello!');
+axios = {
+  'get': (url, token, noParse) => {
+    return new Promise((resolve, reject) => {
+      try {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && String(this.status).startsWith('2')) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {
+              resolve();
+            }
+          } else if (this.responseText) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {}
+          }
+        };
+        xmlhttp.onerror = function () {
+          if (this.responseText) {
+            try {
+              if (!noParse) {
+                resolve(JSON.parse(this.responseText));
+              } else {
+                resolve(this.responseText);
+              }
+            } catch(e) {}
+          }
+        };
 
-}});
+        xmlhttp.open('GET', url, true);
+        xmlhttp.send();
+      } catch(e) { reject(e) }
+    });
+  }
+};
 
 
-// add fetch listener
-self.addEventListener('fetch', (event) => {
-
-  const resp = worker.handleFetchRequest(event.request, event);
-
-  event.respondWith(resp);
-
-});
+// init worker
+worker.init();
 
