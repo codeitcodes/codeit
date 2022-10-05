@@ -56,7 +56,7 @@ let worker = {
     
   },
   
-  handleWorkerMessage: async (message) => {
+  handleMessage: async (message) => {
 
     // if received request
     if (message.type === 'request') {
