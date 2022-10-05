@@ -238,7 +238,7 @@ let client = {
       
     } else {
 
-      return createListener(callback);
+      return createListener(options.callback);
 
     }
     
