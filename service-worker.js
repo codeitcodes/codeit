@@ -78,6 +78,7 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
   
+  /*
   // remove previous cached data
   evt.waitUntil(
     caches.keys().then((keyList) => {
@@ -87,7 +88,7 @@ self.addEventListener('activate', (evt) => {
         }
       }));
     })
-  );
+  );*/
   
   self.clients.claim();
 
