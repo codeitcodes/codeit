@@ -65,6 +65,8 @@ let worker = {
   // handle fetch request
   handleFetchRequest: (request, event) => {
 
+    worker.log('[ServiceWorker]', request, event);
+
     return new Promise(async (resolve, reject) => {
   
       let url = request.url,
