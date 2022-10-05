@@ -182,7 +182,7 @@ let client = {
 
     let targetClient = message.toClient;
 
-    if (typeof message.toClient = 'string') {
+    if (typeof message.toClient == 'string') {
       
       targetClient = await this.clients.get(targetClient);
       
