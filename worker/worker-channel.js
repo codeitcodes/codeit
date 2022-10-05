@@ -74,12 +74,15 @@ let worker = {
           
       
       // get request type
+      
       const pathType = worker.getPathType(url);
+      
+      const referrerType = worker.getPathType(request.referrer);
   
   
       // if request originated in a codeit client
       if (pathType === 'internal' &&
-          (getPathType(request.referrer) !== 'run')) {
+          referrerType !== 'run') {
     
         const resp = await caches.match(url);
   
@@ -87,7 +90,7 @@ let worker = {
         resolve(resp ?? fetch(request));
       
       } else if (pathType === 'run' ||
-                 (getPathType(request.referrer) === 'run')) {
+                 referrerType === 'run') {
         
         // if request originated in a live view client
         
