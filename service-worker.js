@@ -1,6 +1,5 @@
-'use strict';
 
-self.importScripts('/worker/client-channel.js');
+self.importScripts('/worker/worker-channel.js');
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -16,7 +15,7 @@ const FILES_TO_CACHE = [
   '/full',
   '/full.css',
   
-  '/worker/worker-channel.js',
+  '/worker/client-channel.js',
 
   '/utils.js',
   '/manifest.js',
@@ -59,21 +58,13 @@ const FILES_TO_CACHE = [
 
 ];
 
-self.addEventListener('install', (evt) => {
-  
-  self.skipWaiting();
-  
-});
 
-self.addEventListener('activate', (evt) => {
-  
-  self.clients.claim();  
-  
+/*
   // remove previous cached data from disk
   evt.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== WORKER_NAME) {
+        if (key !== worker.NAME) {
           return caches.delete(key);
         }
       }));
@@ -82,15 +73,22 @@ self.addEventListener('activate', (evt) => {
   
   // precache static resources
   evt.waitUntil(
-    caches.open(WORKER_NAME).then((cache) => {
+    caches.open(worker.NAME).then((cache) => {
       return cache.addAll(FILES_TO_CACHE);
     })
-  );  
+  );
+*/
+
+
+self.addEventListener('install', (evt) => {
   
-  // send reload request to client
-  /*workerChannel.postMessage({
-    type: 'reload'
-  });*/
+  self.skipWaiting();
+  
+});
+
+self.addEventListener('activate', (evt) => {
+  
+  self.clients.claim();
 
 });
 
