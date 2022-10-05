@@ -191,6 +191,8 @@ let client = {
       
       targetClient = await this.clients.get(targetClient);
       
+      message.toClient = targetClient;
+      
     }
 
     targetClient.postMessage(message);
