@@ -119,7 +119,70 @@ function processFile(file) {
   
   showMessage('Opening file...', -1);
   
+  
   cd.style.display = 'none';
+  
+  if (liveToggle.classList.contains('visible')) {
+
+    liveToggle.classList.remove('visible');
+
+  }
+
+  if (liveView.classList.contains('file-open')) {
+
+    liveView.classList.add('notransition');
+    liveView.classList.remove('file-open');
+
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
+
+  }
+  
+  // clear existing selections in HTML
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+  
+  // if adding a new file, remove it
+  if (fileWrapper.querySelector('.focused')) {
+  
+    fileWrapper.querySelector('.focused').classList.add('hidden');
+  
+    window.setTimeout(() => {
+      fileWrapper.querySelector('.focused').remove();
+    }, 180);
+  
+  }
+  
+  
+  // show all files in HTML
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => {
+    file.style.display = ''
+  });
+  
+  header.classList.remove('searching');
+  
+
+  // if previous file selection exists
+  if (selectedFile.sha) {
+  
+    // get previous selection in modifiedFiles array
+    let selectedItem = modifiedFiles[selectedFile.sha];
+  
+    // if previous selection was modified
+    if (selectedItem) {
+  
+      // save previous selection in localStorage
+      updateModFileContent(selectedFile.sha, selectedFile.content);
+      updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+      updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+  
+    }
+  
+  }
+  
   
   const reader = new FileReader();
 
@@ -189,14 +252,12 @@ function processFile(file) {
     // update line numbers
     updateLineNumbersHTML();
     
-    cd.style.display = '';
-    
     if (liveToggle.classList.contains('visible')) {
-      
+  
       liveToggle.classList.remove('visible');
-      
+  
     }
-    
+  
     if (liveView.classList.contains('file-open')) {
   
       liveView.classList.add('notransition');
@@ -205,8 +266,10 @@ function processFile(file) {
       onNextFrame(() => {
         liveView.classList.remove('notransition');
       });
-      
+  
     }
+    
+    cd.style.display = '';
     
     
     hideMessage();
