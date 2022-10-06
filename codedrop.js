@@ -119,6 +119,8 @@ function processFile(file) {
   
   showMessage('Opening file...', -1);
   
+  cd.style.display = 'none';
+  
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
@@ -186,6 +188,8 @@ function processFile(file) {
     
     // update line numbers
     updateLineNumbersHTML();
+    
+    cd.style.display = '';
     
     if (liveToggle.classList.contains('visible')) {
       
