@@ -356,7 +356,7 @@ let client = {
 client.listen({callback: (message) => {
 
   if (message.type === 'updateWorker') self.registration.update();
-  if (message.type === 'enableDevLogs') worker.DEV_LOGS = true;
+  if (message.type === 'enableDebugLogs') worker.DEV_LOGS = true;
   if (message.type === 'hello') worker.log('hello!');
 
 }});
