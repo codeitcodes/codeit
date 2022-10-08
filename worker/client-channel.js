@@ -146,6 +146,15 @@ let worker = {
     
   },
   
+  update: () => {
+    
+    // update worker
+    worker.send({
+      type: 'updateWorker'
+    });
+    
+  },
+  
   enableDebugLogs: () => {
     
     // enable debug logs
