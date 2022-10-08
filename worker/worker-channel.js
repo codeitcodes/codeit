@@ -376,6 +376,8 @@ let client = {
   
 };
 
+client.initListeners();
+
 
 client.listen({callback: (message) => {
 
