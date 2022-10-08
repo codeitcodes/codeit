@@ -148,8 +148,12 @@ let worker = {
   
   enableDebugLogs: () => {
     
+    // enable debug logs
+    worker.send({
+      type: 'enableDebugLogs'
+    });
+    
     setStorage('workerDebugLogs', 'true');
-    window.location.reload();
     
   }
   
