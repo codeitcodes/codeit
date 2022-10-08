@@ -199,16 +199,26 @@ let client = {
 
   },
   
+  listeners: [],
+  
   // listen for client messages
   // options:
   // forMsg - object with message conditions to listen for
-  // callback - defining this makes the function synchronous
+  // [or] callback - defining this makes the function synchronous
   //
   listen: (options) => {
 
     function createListener(cbk) {
       
-      return self.addEventListener('message', (e) => { cbk(e.data) });
+      client.listeners.push(cbk);
+      
+      return (client.listeners.length - 1);
+      
+    }
+    
+    function removeListener(index) {
+      
+      client.listeners.splice(index, 1);
       
     }
     
@@ -235,7 +245,7 @@ let client = {
           }
           
           // remove client listener
-          self.removeEventListener('message', listener);
+          removeListener(listener);
           
           resolve(data);
           
@@ -248,6 +258,20 @@ let client = {
       return createListener(options.callback);
 
     }
+    
+  },
+  
+  initListeners: () => {
+    
+    self.addEventListener('message', (e) => {
+      
+      client.listeners.forEach(listener => {
+        
+        listener(e.data);
+        
+      });
+      
+    });
     
   },
   
