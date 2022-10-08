@@ -235,7 +235,7 @@ let client = {
           }
           
           // remove client listener
-          self.removeEventListener(listener);
+          self.removeEventListener('message', listener);
           
           resolve(data);
           
