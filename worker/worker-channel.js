@@ -161,8 +161,8 @@ let worker = {
     
   },
   
-  // worker log
-  log: async (log) => {
+  // worker debug log
+  debugLog: async (log) => {
     
     const targetClient = (await clients.matchAll())[0];
     
