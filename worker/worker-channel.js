@@ -189,11 +189,9 @@ let client = {
       
       targetClient = await this.clients.get(targetClient);
       
-    } else {
-      
-      message.toClient = targetClient.id;
-      
     }
+    
+    delete message.toClient;
 
     targetClient.postMessage(message);
 
