@@ -71,7 +71,7 @@ let worker = {
   
       // send response back to worker
       worker.send({
-        url: data.url,
+        url: message.url,
         resp: fileContent,
         respStatus: (respStatus ?? 200),
         type: 'response'
