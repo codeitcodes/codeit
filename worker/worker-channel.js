@@ -357,6 +357,7 @@ client.listen({callback: (message) => {
 
   if (message.type === 'updateWorker') self.registration.update();
   if (message.type === 'enableDebugLogs') worker.DEV_LOGS = true;
+  if (message.type === 'disableDebugLogs') worker.DEV_LOGS = false;
   if (message.type === 'hello') worker.log('hello!');
 
 }});
