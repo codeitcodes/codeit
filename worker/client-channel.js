@@ -33,7 +33,7 @@ let worker = {
     // add additional worker handlers
     window.addEventListener('load', () => {
       
-      if (getStorage('workerDebugLogs')) {
+      if (getStorage('workerDebugLogs') === 'true') {
         
         // enable debug logs
         worker.send({
@@ -154,6 +154,17 @@ let worker = {
     });
     
     setStorage('workerDebugLogs', 'true');
+    
+  },
+  
+  disableDebugLogs: () => {
+    
+    // enable debug logs
+    worker.send({
+      type: 'disableDebugLogs'
+    });
+    
+    setStorage('workerDebugLogs', 'false');
     
   }
   
