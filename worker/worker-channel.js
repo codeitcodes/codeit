@@ -179,8 +179,6 @@ let worker = {
 
 let client = {
 
-  isSafari: self.navigator.userAgent.toLowerCase().includes('safari'),
-
   send: async (message) => {
 
     let targetClient = message.toClient;
@@ -260,7 +258,7 @@ let client = {
   },
   
   initListeners: () => {
-    
+        
     self.addEventListener('message', (e) => {
       
       client.listeners.forEach(listener => {
@@ -270,6 +268,8 @@ let client = {
       });
       
     });
+    
+    client.checkSafari();
     
   },
   
@@ -369,6 +369,31 @@ let client = {
       return id;
       
     }
+    
+  },
+  
+  isSafari: false,
+  
+  checkSafari: () => {
+    
+    let isMobile = false;
+    
+    if (navigator.userAgentData
+        && navigator.userAgentData.mobile) isMobile = true;
+    
+    if (navigator.userAgent
+        && navigator.userAgent.includes('Mobile')) isMobile = true;
+    
+    let isSafari = false;
+    
+    if (navigator.userAgentData
+        && navigator.userAgentData.platform === 'iOS') isSafari = true;
+    
+    if (navigator.userAgent
+        && isMobile
+        && navigator.userAgent.toLowerCase().includes('safari')) isSafari = true;
+    
+    client.isSafari = isSafari; 
     
   }
   
