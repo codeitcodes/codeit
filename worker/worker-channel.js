@@ -209,6 +209,8 @@ let client = {
       // if callback dosen't exist, retrive callback from options
       if (!cbk && options.callback) cbk = options.callback;
       
+      if (options.callback) delete options.callback;
+      
       client.listeners.push({
         options: options,
         callback: cbk
