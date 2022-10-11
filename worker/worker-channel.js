@@ -204,9 +204,15 @@ let client = {
   //
   listen: (options) => {
 
-    function createListener(cbk) {
+    function createListener(options, cbk) {
       
-      client.listeners.push(cbk);
+      // if callback dosen't exist, retrive callback from options
+      if (!cbk && options.callback) cbk = options.callback;
+      
+      client.listeners.push({
+        options: options,
+        callback: cbk
+      });
       
       return (client.listeners.length - 1);
       
@@ -223,7 +229,7 @@ let client = {
       
       return new Promise(resolve => {
 
-        const listener = createListener((data) => {
+        const listener = createListener(options, (data) => {
           
           // if conditions exist
           if (options.forMsg) {
@@ -251,7 +257,7 @@ let client = {
       
     } else {
 
-      return createListener(options.callback);
+      return createListener(options);
 
     }
     
