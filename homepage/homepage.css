@@ -4900,12 +4900,16 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
+  font-synthesis: none;
+  user-select: text;
+  -webkit-user-select: text;
+  overscroll-behavior: none;
+  -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
-  overscroll-behavior-y: contain;
+  -webkit-text-size-adjust: none;
 }
 
 ::selection {
