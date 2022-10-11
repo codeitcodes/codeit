@@ -300,28 +300,28 @@ body.addEventListener('drop', (ev) => {
   
   
   if (ev.dataTransfer.items) {
+    
+    /*
+    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+    */
+    
+    // if dropped item isn't a file, reject it
+    if (ev.dataTransfer.items[0].kind === 'file') {
   
-    // use DataTransferItemList interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-  
-      // if dropped items aren't files, reject them
-      if (ev.dataTransfer.items[i].kind === 'file') {
-  
-        var file = ev.dataTransfer.items[i].getAsFile();
-        processFile(file);
-  
-      }
+      // process file
+      const file = ev.dataTransfer.items[0].getAsFile();
+      processFile(file);
   
     }
   
   } else {
   
-    // use DataTransfer interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-  
-      processFile(ev.dataTransfer.files[i]);
-  
-    }
+    /*
+    for (let i = 0; i < ev.dataTransfer.files.length; i++) {
+    */
+    
+    // process file
+    processFile(ev.dataTransfer.files[0]);
     
   }
 
