@@ -109,7 +109,7 @@ let worker = {
     } catch (e) {
       
       resp = '';
-      console.log('%c[Client] Pinged ServiceWorker for installation', 'color: #80868b');
+      console.log('%c[Client] Pinged Service Worker', 'color: #80868b');
     
     }
 
