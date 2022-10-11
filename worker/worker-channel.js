@@ -399,7 +399,7 @@ let client = {
     
     if (navigator.userAgent
         && isMobile
-        && navigator.userAgent.toLowerCase().includes('safari')) isSafari = true;
+        && /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) isSafari = true;
     
     client.isSafari = isSafari; 
     
