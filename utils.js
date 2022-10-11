@@ -273,7 +273,7 @@ if (navigator.userAgentData
 
 if (navigator.userAgent
     && isMobile
-    && navigator.userAgent.toLowerCase().includes('safari')) isSafari = true;
+    && /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) isSafari = true;
 
 const isMac = navigator.platform.includes('Mac');
 const isWindows = navigator.platform.includes('Win');
