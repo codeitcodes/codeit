@@ -269,7 +269,7 @@ let client = {
       
       client.listeners.forEach(listener => {
         
-        listener(e.data);
+        listener.callback(e.data);
         
       });
       
