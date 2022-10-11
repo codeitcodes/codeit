@@ -301,10 +301,6 @@ body.addEventListener('drop', (ev) => {
   
   if (ev.dataTransfer.items) {
     
-    /*
-    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
-    */
-    
     // if dropped item isn't a file, reject it
     if (ev.dataTransfer.items[0].kind === 'file') {
   
@@ -313,15 +309,21 @@ body.addEventListener('drop', (ev) => {
       processFile(file);
   
     }
+    
+    /*
+    // run on all files
+    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+    */
   
   } else {
-  
-    /*
-    for (let i = 0; i < ev.dataTransfer.files.length; i++) {
-    */
     
     // process file
     processFile(ev.dataTransfer.files[0]);
+    
+    /*
+    // run on all files
+    for (let i = 0; i < ev.dataTransfer.files.length; i++) {
+    */
     
   }
 
@@ -333,7 +335,7 @@ body.addEventListener('dragover', (ev) => {
   ev.preventDefault();
     
   // if dropping a file
-  if (ev.dataTransfer.types[0] === 'Files') {
+  if (ev.dataTransfer.items[0].kind === 'file') {
   
     // show drop indication
   
