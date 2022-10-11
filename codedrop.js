@@ -331,19 +331,24 @@ body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
+    
+  // if dropping a file
+  if (ev.dataTransfer.types[0] === 'Files') {
   
-  // show drop indication
+    // show drop indication
   
-  if (!liveView.classList.contains('file-open')) {
-    
-    cd.classList.add('focus');
-    
-  } else {
-    
-    liveView.classList.add('focus');
+    if (!liveView.classList.contains('file-open')) {
+      
+      cd.classList.add('focus');
+      
+    } else {
+      
+      liveView.classList.add('focus');
+      
+    }
     
   }
-
+  
 })
 
 body.addEventListener('dragleave', (ev) => {
