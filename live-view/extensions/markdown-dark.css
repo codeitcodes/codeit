@@ -265,6 +265,7 @@ html, body {
   -webkit-font-feature-settings: "kern";
   font-synthesis: none;
   user-select: text;
+  -webkit-user-select: text;
   overscroll-behavior: none;
   -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;
