@@ -2636,7 +2636,13 @@ if (isDev) {
         
         gitToken = await readClipboard();
         
+        // save git token in local storage
         saveGitTokenLS(gitToken);
+        
+        loggedUser = 'codeittestaccount';
+        
+        // save logged user in local storage
+        setStorage('loggedUser', loggedUser);
         
         hideDialog();
         
