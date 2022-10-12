@@ -10,7 +10,6 @@ const FILES_TO_CACHE = [
   '/lib/plugins/codeit-line-numbers.js',
   '/lib/plugins/codeit-match-braces.js',
   '/lib/plugins/codeit-autolinker.js',
-  '/lib/plugins/codeit-autocomplete.js',
 
   '/full',
   '/full.css',
