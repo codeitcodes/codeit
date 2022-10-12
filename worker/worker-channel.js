@@ -204,7 +204,6 @@ let client = {
   // listen for client messages
   // options:
   // forMsg - object with message conditions to listen for
-  // fromClient - client ID to listen for
   // [or] callback - defining this makes the function synchronous
   //
   listen: (options) => {
@@ -286,7 +285,7 @@ let client = {
       
       client.listeners.forEach(listener => {
         
-        if (listener.options.fromClient === e.source.id) {
+        if (listener.options.forMsg.fromClient === e.source.id) {
           
           listener.callback(e.data);
           
@@ -326,8 +325,11 @@ let client = {
       
       // await client response
       const data = await client.listen({
-        forMsg: { type: 'response', url: url },
-        fromClient: clientId
+        forMsg: {
+          url: url,
+          fromClient: clientId,
+          type: 'response'
+        }
       });
       
       if (worker.DEV_LOGS) {
