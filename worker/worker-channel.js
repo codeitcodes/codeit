@@ -320,6 +320,7 @@ let client = {
       // send request to client
       client.send({
         url: url,
+        toClient: clientId,
         type: 'request'
       });
       
