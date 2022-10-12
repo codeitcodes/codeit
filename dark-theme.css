@@ -62,8 +62,10 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   pointer-events: none;
   overflow-y: overlay;
   min-width: 62px;
-  /* max-width: 190px; */
-  max-height: 252px;
+  /* max-width: 190px;
+  max-height: 224px;
+  max-height: 129px; */
+  max-height: 140px;
   display: none;
 }
 
