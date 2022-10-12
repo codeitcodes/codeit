@@ -36,9 +36,7 @@ let worker = {
       if (getStorage('workerDebugLogs') === 'true') {
         
         // enable debug logs
-        worker.send({
-          type: 'enableDebugLogs'
-        });
+        worker.enableDebugLogs();
         
       }
       
@@ -46,9 +44,7 @@ let worker = {
       if (window.location.hostname === 'dev.codeit.codes') {
         
         // update service worker
-        worker.send({
-          type: 'updateWorker'
-        });
+        worker.update();
         
       }
       
