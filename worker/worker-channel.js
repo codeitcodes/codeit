@@ -92,6 +92,10 @@ let worker = {
         
         // if request originated in a live view client
         
+        if (worker.DEV_LOGS) {
+          console.debug('[ServiceWorker] Intercepted live fetch', event);
+        }
+        
         // send request to the live view's parent client
         const resp = await worker.handleLiveViewRequest(request, event);
         
@@ -292,7 +296,29 @@ let client = {
       if (request.mode === 'navigate'
           && !url.endsWith('.html')
           && !url.endsWith('/')) url += '.html';
-  
+      
+      if (worker.DEV_LOGS) {
+        console.warn('[ServiceWorker] Recived request', request.mode, request.url);
+      }
+      
+      
+      // send request to client
+      client.send({
+        url: url,
+        toClient: clientId,
+        type: 'request'
+      });
+      
+      // await client response
+      const data = await client.listen({
+        forMsg: { type: 'response', url: url }
+      });
+      
+      if (worker.DEV_LOGS) {
+        console.debug('[ServiceWorker] Recived response data from client', data);
+      }
+      
+
       // set MIME type depending on request mode
       let mimeType = 'application/octet-stream';
   
@@ -306,23 +332,14 @@ let client = {
           || url.endsWith('.css')) mimeType = 'text/css';
   
       if (url.endsWith('.wasm')) mimeType = 'application/wasm';
-      
-  
-      // send request to client
-      client.send({
-        url: url,
-        toClient: clientId,
-        type: 'request'
-      });
-      
-      // await client response
-      const data = await client.listen({
-        forMsg: { type: 'response', url: url }
-      });
-      
+
 
       // create Response from data
       const response = worker.createResponse(data.resp, mimeType, data.respStatus);
+
+      if (worker.DEV_LOGS) {
+        console.debug('[ServiceWorker] Resolved live view request with client response', response, data.resp, data.respStatus);
+      }
 
       // resolve promise with Response
       resolve(response);
