@@ -362,7 +362,7 @@ let client = {
       const response = worker.createResponse(data.resp, mimeType, data.respStatus);
 
       if (worker.DEV_LOGS) {
-        console.debug('[ServiceWorker] Resolved live view request with client response', response, data.resp, data.respStatus);
+        console.debug('[ServiceWorker] Resolved live view request with client response', url, data.resp, data.respStatus);
       }
 
       // resolve promise with Response
