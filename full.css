@@ -731,6 +731,7 @@ body.expanded .sidebar-toggle svg .left {
   transform: none;
   overflow-x: hidden;
   overflow-y: overlay;
+  overscroll-behavior-y: contain;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   padding-left: env(safe-area-inset-left);
