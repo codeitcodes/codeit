@@ -227,7 +227,7 @@ let client = {
       return client.listenerIndex;
       
     }
-    
+     
     function removeListener(index) {
       
       if (worker.DEV_LOGS) {
