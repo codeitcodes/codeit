@@ -37,7 +37,7 @@ searchBack.addEventListener('click', () => {
 // search when typed in input
 searchInput.addEventListener('input', () => {
   
-  if (searchInput.textContent === '\n') {
+  if (searchInput.innerHTML === '<br>') {
     
     searchInput.textContent = '';
     
