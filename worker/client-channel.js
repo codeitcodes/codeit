@@ -70,7 +70,6 @@ let worker = {
         url: message.url,
         resp: fileContent,
         respStatus: (respStatus ?? 200),
-        fromClient: worker.clientId,
         type: 'response'
       });
   
