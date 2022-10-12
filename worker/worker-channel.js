@@ -199,7 +199,7 @@ let client = {
 
   },
   
-  listeners: {},
+  listeners: [],
   
   // listen for client messages
   // options:
