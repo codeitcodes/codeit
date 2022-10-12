@@ -286,7 +286,7 @@ let client = {
       
       client.listeners.forEach(listener => {
         
-        if (listener.options.fromClient === e.clientId) {
+        if (listener.options.fromClient === e.source.id) {
           
           listener.callback(e.data);
           
