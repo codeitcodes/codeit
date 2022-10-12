@@ -199,7 +199,9 @@ let client = {
 
   },
   
-  listeners: [],
+  listeners: {},
+  
+  listenerIndex: 0,
   
   // listen for client messages
   // options:
@@ -215,18 +217,30 @@ let client = {
       
       if (options.callback) delete options.callback;
       
-      client.listeners.push({
+      listenerIndex++;
+      
+      client.listeners[listenerIndex] = {
         options: options,
         callback: cbk
-      });
+      };
       
-      return (client.listeners.length - 1);
+      return listenerIndex;
       
     }
     
     function removeListener(index) {
       
-      client.listeners.splice(index, 1);
+      if (worker.DEV_LOGS) {
+        console.debug('[ServiceWorker] Removing client listener', client.listeners[index]);
+      }
+      
+      delete client.listeners[index];
+      
+      listenerIndex--;
+      
+      if (worker.DEV_LOGS) {
+        console.debug('[ServiceWorker] Removed client listener', client.listeners[index]);
+      }
       
     }
     
