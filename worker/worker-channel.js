@@ -201,11 +201,10 @@ let client = {
   
   listeners: {},
   
-  listenerIndex: 0,
-  
   // listen for client messages
   // options:
   // forMsg - object with message conditions to listen for
+  // fromClient - client ID to listen for
   // [or] callback - defining this makes the function synchronous
   //
   listen: (options) => {
@@ -216,30 +215,26 @@ let client = {
       if (!cbk && options.callback) cbk = options.callback;
       
       if (options.callback) delete options.callback;
-      
-      client.listenerIndex++;
-      
-      client.listeners[client.listenerIndex] = {
+
+      client.listeners.push({
         options: options,
         callback: cbk
-      };
+      });
       
-      return client.listenerIndex;
+      return (client.listeners.length - 1);
       
     }
-     
+    
     function removeListener(index) {
       
       if (worker.DEV_LOGS) {
-        console.debug('[ServiceWorker] Removing client listener', client.listeners[index]);
+        console.debug('[ServiceWorker] Removing client listener', client.listeners[index].options.forMsg);
       }
       
-      delete client.listeners[index];
-      
-      client.listenerIndex--;
+      let removedListener = client.listeners.splice(index, 1);
       
       if (worker.DEV_LOGS) {
-        console.debug('[ServiceWorker] Removed client listener', client.listeners[index]);
+        console.debug('[ServiceWorker] Removed client listener', removedListener);
       }
       
     }
@@ -287,10 +282,16 @@ let client = {
         
     self.addEventListener('message', (e) => {
       
-      Object.values(client.listeners).forEach(listener => {
+      console.log(e);
+      
+      client.listeners.forEach(listener => {
         
-        listener.callback(e.data);
-        
+        if (listener.options.fromClient === e.clientId) {
+          
+          listener.callback(e.data);
+          
+        }
+                
       });
       
     });
@@ -319,13 +320,13 @@ let client = {
       // send request to client
       client.send({
         url: url,
-        toClient: clientId,
         type: 'request'
       });
       
       // await client response
       const data = await client.listen({
-        forMsg: { type: 'response', url: url }
+        forMsg: { type: 'response', url: url },
+        fromClient: clientId
       });
       
       if (worker.DEV_LOGS) {
