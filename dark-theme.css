@@ -66,7 +66,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   max-height: 224px;
   max-height: 129px; */
   max-height: 140px;
-  /* box-shadow: 0px 3px 6px 1px hsl(221deg 16% 22%); */
+  /* box-shadow: 0px 3px 6px 1px hsl(221deg 16% 20%); */
   box-shadow: 0px 3px 6px 1px hsl(221deg 16% 21%);
   display: none;
 }
