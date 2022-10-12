@@ -217,14 +217,14 @@ let client = {
       
       if (options.callback) delete options.callback;
       
-      listenerIndex++;
+      client.listenerIndex++;
       
-      client.listeners[listenerIndex] = {
+      client.listeners[client.listenerIndex] = {
         options: options,
         callback: cbk
       };
       
-      return listenerIndex;
+      return client.listenerIndex;
       
     }
     
@@ -236,7 +236,7 @@ let client = {
       
       delete client.listeners[index];
       
-      listenerIndex--;
+      client.listenerIndex--;
       
       if (worker.DEV_LOGS) {
         console.debug('[ServiceWorker] Removed client listener', client.listeners[index]);
