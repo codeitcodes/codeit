@@ -245,21 +245,6 @@ let client = {
 
         const listener = createListener(options, (data) => {
           
-          // if conditions exist
-          if (options.forMsg) {
-            
-            const conditions = Object.entries(options.forMsg);
-            
-            // check all conditions
-            conditions.forEach(([name, value]) => {
-              
-              // if condition dosen't match, return
-              if (data[name] !== value) return;
-              
-            });
-            
-          }
-          
           // remove client listener
           removeListener(listener);
           
@@ -285,12 +270,33 @@ let client = {
       
       client.listeners.forEach(listener => {
         
-        if (listener.options.forMsg.fromClient === e.source.id) {
+        // if conditions exist
+        if (listener.options.forMsg) {
+            
+          const conditions = Object.entries(listener.options.forMsg);
           
-          listener.callback(e.data);
-          
+          // check all conditions
+          conditions.forEach(([name, value]) => {
+            
+            // if condition dosen't match, return
+            
+            if (name !== 'fromClient') {
+            
+              if (e.data[name] !== value) return;
+              
+            } else {
+              
+              if (e.source.id !== value) return;
+              
+            }
+              
+          });
+            
         }
-                
+        
+        // callback listener
+        listener.callback(e.data);
+        
       });
       
     });
