@@ -287,7 +287,7 @@ let client = {
         
     self.addEventListener('message', (e) => {
       
-      client.listeners.forEach(listener => {
+      Object.values(client.listeners).forEach(listener => {
         
         listener.callback(e.data);
         
