@@ -1324,7 +1324,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
     // check if old modified file
     // with same name and directory exists
-    const oldModFile = Object.values(modifiedFiles).filter(modFile => (modFile.dir === treeLoc.join() && modFile.name === fileName))[0];
+    const oldModFile = Object.values(modifiedFiles).filter(modFile => (modFile.dir === treeLoc.join() && modFile.name === fileName && !modFile.eclipsed))[0];
     
     if (oldModFile) {
       
