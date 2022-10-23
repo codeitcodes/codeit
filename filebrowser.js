@@ -1341,6 +1341,9 @@ async function loadFileInHTML(fileEl, fileSha) {
       
       updateModFilesLS();
       
+      // show modified file in HTML
+      fileEl.classList.add('modified');
+      
     }
     
   }
