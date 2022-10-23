@@ -699,17 +699,22 @@ if (isMobile) {
   });
 
 
-  document.addEventListener('keydown', handleMetaP);
+  document.addEventListener('keydown', handleMetaR);
 
-  function handleMetaP(e) {
+  function handleMetaR(e) {
 
     // detect ctrl/cmd+R
     if ((e.key === 'r' || e.keyCode === 82) && isKeyEventMeta(e)) {
 
       e.preventDefault();
-
-      liveView.classList.toggle('visible');
-      toggleLiveView(selectedFile);
+      
+      if (file.lang == 'html' || file.lang == 'markup' ||
+          file.lang === 'markdown') {
+            
+        liveView.classList.toggle('visible');
+        toggleLiveView(selectedFile);
+        
+      }
 
     }
 
