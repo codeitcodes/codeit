@@ -1317,6 +1317,10 @@ async function loadFileInHTML(fileEl, fileSha) {
   }
 
 
+  // get all modfiedfiles in directory
+  eclipsedFiles = Object.values(modifiedFiles).filter(modFile => modFile.dir == treeLoc.join());
+  
+
   // if file is not modified; fetch from Git
   if (!modifiedFiles[fileSha]) {
     
