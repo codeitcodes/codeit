@@ -708,8 +708,8 @@ if (isMobile) {
 
       e.preventDefault();
       
-      if (file.lang == 'html' || file.lang == 'markup' ||
-          file.lang === 'markdown') {
+      if (selectedFile.lang == 'html' || selectedFile.lang == 'markup' ||
+          selectedFile.lang === 'markdown') {
             
         liveView.classList.toggle('visible');
         toggleLiveView(selectedFile);
