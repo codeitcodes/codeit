@@ -560,6 +560,8 @@ async function renderSidebarHTML() {
             }
 
 
+            protectModFileInSidebar(file.sha, file.name);
+  
             // add modified flag to file
             let modified = '';
             if (modifiedFiles[file.sha] &&
@@ -1316,35 +1318,17 @@ async function loadFileInHTML(fileEl, fileSha) {
 
   }
 
+
+  const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
+
+  protectModFileInSidebar(fileSha, fileName);
   
-  // if file is not modified
-  if (!modifiedFiles[fileSha]) {
-
-    const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
-
-    // check if old modified file
-    // with same name and directory exists
-    const oldModFile = Object.values(modifiedFiles).filter(modFile => (modFile.dir === treeLoc.join() && modFile.name === fileName && !modFile.eclipsed))[0];
+  // if file is modified
+  if (modifiedFiles[fileSha] && !modifiedFiles[fileSha].eclipsed &&
+      !fileEl.classList.contains('modified')) {
     
-    if (oldModFile) {
-      
-      const oldFileSha = oldModFile.sha;
-      
-      // update old modified file with new sha
-      oldModFile.sha = fileSha;
-      
-      // save new modified file in local storage
-      modifiedFiles[fileSha] = oldModFile;
-      
-      // delete old modified file
-      delete modifiedFiles[oldFileSha];
-      
-      updateModFilesLS();
-      
-      // show modified file in HTML
-      fileEl.classList.add('modified');
-      
-    }
+    // update file in HTML
+    fileEl.classList.add('modified');
     
   }
 
@@ -1357,8 +1341,6 @@ async function loadFileInHTML(fileEl, fileSha) {
       startLoading();
     }
     
-    const fileName = fileEl.querySelector('.name').textContent.replaceAll('\n','');
-
     // get file from git
     let resp = await git.getFile(treeLoc, fileName);
     
@@ -2963,6 +2945,36 @@ function protectUnsavedCode() {
 
   }
 
+}
+
+function protectModFileInSidebar(fileSha, fileName) {
+  
+  // if file is not modified
+  if (!modifiedFiles[fileSha]) {
+
+    // check if old modified file
+    // with same name and directory exists
+    const oldModFile = Object.values(modifiedFiles).filter(modFile => (modFile.dir === treeLoc.join() && modFile.name === fileName && !modFile.eclipsed))[0];
+    
+    if (oldModFile) {
+      
+      const oldFileSha = oldModFile.sha;
+      
+      // update old modified file with new sha
+      oldModFile.sha = fileSha;
+      
+      // save new modified file in local storage
+      modifiedFiles[fileSha] = oldModFile;
+      
+      // delete old modified file
+      delete modifiedFiles[oldFileSha];
+      
+      updateModFilesLS();
+      
+    }
+    
+  }
+  
 }
 
 function setupEditor() {
