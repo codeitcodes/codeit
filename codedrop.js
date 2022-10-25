@@ -336,7 +336,8 @@ body.addEventListener('dragover', (ev) => {
   ev.preventDefault();
     
   // if dropping a file
-  if (ev.dataTransfer.items[0].kind === 'file') {
+  if (ev.dataTransfer.items[0] &&
+      ev.dataTransfer.items[0].kind === 'file') {
   
     // show drop indication
   
