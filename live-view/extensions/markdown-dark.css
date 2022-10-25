@@ -103,7 +103,8 @@ body a {
   text-decoration: none;
 }
 
-body a:hover {
+body:not(.mobile) a:hover,
+body.mobile a:active {
   text-decoration: underline;
 }
 
