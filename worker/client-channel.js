@@ -24,7 +24,7 @@ const INTERNAL_PATHS = {
 }
 
 
-const isSafari = self.navigator.userAgent.toLowerCase().includes('safari');
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 
 // key                : value
