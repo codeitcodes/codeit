@@ -264,6 +264,8 @@ html, body {
   -webkit-font-feature-settings: "kern";
   font-synthesis: none;
   overscroll-behavior: none;
+  user-select: text;
+  -webkit-user-select: text;
   -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
