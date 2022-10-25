@@ -2648,10 +2648,20 @@ if (isDev) {
       // load git token from clipboard
       async function loadGitToken() {
         
-        gitToken = await readClipboard();
+        const clipboardText = (await readClipboard()).split(',');
         
+        if (clipboardText.length !== 2) return;
+        
+        gitToken = clipboardText[0];
+        
+        // save git token in local storage
         saveGitTokenLS(gitToken);
         
+        loggedUser = clipboardText[1];
+
+        // save logged user in local storage
+        setStorage('loggedUser', loggedUser);
+   
         hideDialog();
         
         // close intro and learn pages
