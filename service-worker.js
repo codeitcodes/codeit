@@ -1,6 +1,5 @@
-'use strict';
 
-self.importScripts('/worker/client-channel.js');
+self.importScripts('/worker/worker-channel.js');
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -11,12 +10,11 @@ const FILES_TO_CACHE = [
   '/lib/plugins/codeit-line-numbers.js',
   '/lib/plugins/codeit-match-braces.js',
   '/lib/plugins/codeit-autolinker.js',
-  '/lib/plugins/codeit-autocomplete.js',
 
   '/full',
   '/full.css',
   
-  '/worker/worker-channel.js',
+  '/worker/client-channel.js',
 
   '/utils.js',
   '/manifest.js',
@@ -63,23 +61,27 @@ const FILES_TO_CACHE = [
 // remove previous cached data
 caches.keys().then((keyList) => {
   return Promise.all(keyList.map((key) => {
-    if (key !== WORKER_NAME) {
+    if (key !== worker.name) {
       return caches.delete(key);
     }
   }));
 });
 
 // precache static resources
-caches.open(WORKER_NAME).then((cache) => {
+caches.open(worker.name).then((cache) => {
   return cache.addAll(FILES_TO_CACHE);
 });
 
 
 self.addEventListener('install', (evt) => {
+  
   self.skipWaiting();
+  
 });
 
 self.addEventListener('activate', (evt) => {
+  
   self.clients.claim();
+
 });
 
