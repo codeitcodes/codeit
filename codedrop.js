@@ -119,6 +119,71 @@ function processFile(file) {
   
   showMessage('Opening file...', -1);
   
+  
+  cd.style.display = 'none';
+  
+  if (liveToggle.classList.contains('visible')) {
+
+    liveToggle.classList.remove('visible');
+
+  }
+
+  if (liveView.classList.contains('file-open')) {
+
+    liveView.classList.add('notransition');
+    liveView.classList.remove('file-open');
+
+    onNextFrame(() => {
+      liveView.classList.remove('notransition');
+    });
+
+  }
+  
+  // clear existing selections in HTML
+  if (fileWrapper.querySelector('.selected')) {
+    fileWrapper.querySelector('.selected').classList.remove('selected');
+  }
+  
+  // if adding a new file, remove it
+  if (fileWrapper.querySelector('.focused')) {
+  
+    fileWrapper.querySelector('.focused').classList.add('hidden');
+  
+    window.setTimeout(() => {
+      fileWrapper.querySelector('.focused').remove();
+    }, 180);
+  
+  }
+  
+  
+  // show all files in HTML
+  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
+  files.forEach(file => {
+    file.style.display = ''
+  });
+  
+  header.classList.remove('searching');
+  
+
+  // if previous file selection exists
+  if (selectedFile.sha) {
+  
+    // get previous selection in modifiedFiles array
+    let selectedItem = modifiedFiles[selectedFile.sha];
+  
+    // if previous selection was modified
+    if (selectedItem) {
+  
+      // save previous selection in localStorage
+      updateModFileContent(selectedFile.sha, selectedFile.content);
+      updateModFileCaretPos(selectedFile.sha, selectedFile.caretPos);
+      updateModFileScrollPos(selectedFile.sha, selectedFile.scrollPos);
+  
+    }
+  
+  }
+  
+  
   const reader = new FileReader();
 
   reader.addEventListener('load', (event) => {
@@ -188,11 +253,11 @@ function processFile(file) {
     updateLineNumbersHTML();
     
     if (liveToggle.classList.contains('visible')) {
-      
+  
       liveToggle.classList.remove('visible');
-      
+  
     }
-    
+  
     if (liveView.classList.contains('file-open')) {
   
       liveView.classList.add('notransition');
@@ -201,8 +266,10 @@ function processFile(file) {
       onNextFrame(() => {
         liveView.classList.remove('notransition');
       });
-      
+  
     }
+    
+    cd.style.display = '';
     
     
     hideMessage();
@@ -233,28 +300,31 @@ body.addEventListener('drop', (ev) => {
   
   
   if (ev.dataTransfer.items) {
+    
+    // if dropped item isn't a file, reject it
+    if (ev.dataTransfer.items[0] &&
+        ev.dataTransfer.items[0].kind === 'file') {
   
-    // use DataTransferItemList interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-  
-      // if dropped items aren't files, reject them
-      if (ev.dataTransfer.items[i].kind === 'file') {
-  
-        var file = ev.dataTransfer.items[i].getAsFile();
-        processFile(file);
-  
-      }
+      // process file
+      const file = ev.dataTransfer.items[0].getAsFile();
+      processFile(file);
   
     }
+    
+    /*
+    // run on all files
+    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+    */
   
   } else {
-  
-    // use DataTransfer interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-  
-      processFile(ev.dataTransfer.files[i]);
-  
-    }
+    
+    // process file
+    processFile(ev.dataTransfer.files[0]);
+    
+    /*
+    // run on all files
+    for (let i = 0; i < ev.dataTransfer.files.length; i++) {
+    */
     
   }
 
@@ -264,19 +334,25 @@ body.addEventListener('dragover', (ev) => {
 
   // prevent default behavior (prevent file from being opened)
   ev.preventDefault();
+    
+  // if dropping a file
+  if (ev.dataTransfer.items[0] &&
+      ev.dataTransfer.items[0].kind === 'file') {
   
-  // show drop indication
+    // show drop indication
   
-  if (!liveView.classList.contains('file-open')) {
-    
-    cd.classList.add('focus');
-    
-  } else {
-    
-    liveView.classList.add('focus');
+    if (!liveView.classList.contains('file-open')) {
+      
+      cd.classList.add('focus');
+      
+    } else {
+      
+      liveView.classList.add('focus');
+      
+    }
     
   }
-
+  
 })
 
 body.addEventListener('dragleave', (ev) => {

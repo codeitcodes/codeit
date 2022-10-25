@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v584';
+const WORKER_NAME = 'codeit-worker-v586';
 
 
 // internal paths
@@ -24,7 +24,7 @@ const INTERNAL_PATHS = {
 }
 
 
-const isSafari = self.navigator.userAgent.toLowerCase().includes('safari');
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 
 // key                : value

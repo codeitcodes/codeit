@@ -29,7 +29,7 @@ export default function handler(request, response) {
         "width": 700,
         "height": 480,
         "html": embedHTML,
-        "version": "1.0",
+        "version": "2.0",
         "cache_age": 3600,
         "provider_name": "Codeit",
         "provider_url": "https://codeit.codes/"

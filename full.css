@@ -731,6 +731,7 @@ body.expanded .sidebar-toggle svg .left {
   transform: none;
   overflow-x: hidden;
   overflow-y: overlay;
+  overscroll-behavior-y: contain;
   pointer-events: none;
   box-shadow: inset -1px 0 0 0 #ffffff3d;
   padding-left: env(safe-area-inset-left);
@@ -1559,7 +1560,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 body.mobile .sidebar .button {
   transition: .1s var(--ease-function);
-  transition-property: background, color;
+  transition-property: background, color, box-shadow;
 }
 
 .sidebar .button.secondary {
@@ -2532,7 +2533,7 @@ html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
-  touch-action: none;
+  font-synthesis: none;
   overscroll-behavior: none;
   user-select: none;
   -webkit-user-select: none;

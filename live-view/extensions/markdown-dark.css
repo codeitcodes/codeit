@@ -103,7 +103,8 @@ body a {
   text-decoration: none;
 }
 
-body a:hover {
+body:not(.mobile) a:hover,
+body.mobile a:active {
   text-decoration: underline;
 }
 
@@ -262,8 +263,10 @@ html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
-  touch-action: none;
+  font-synthesis: none;
   overscroll-behavior: none;
+  user-select: text;
+  -webkit-user-select: text;
   -webkit-touch-callout: none;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;

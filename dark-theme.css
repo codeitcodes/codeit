@@ -47,8 +47,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 .cd-wrapper .autocomplete {
   background: hsl(218deg 23% 35%);
   color: #a6c3d4;
-  margin-top: 22.5px;
-  margin-top: 23px;
+  margin-top: 21px;
   margin-left: -3px;
   font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
   line-height: 1.5;
@@ -56,13 +55,19 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   box-shadow: none;
   position: fixed;
   z-index: 1000;
-  border-radius: 7px;
+  border-radius: 8px;
+  border-radius: 7.5px;
   border: 1px solid hsl(219deg 22% 38%);
+  border: 2.5px solid transparent;
   pointer-events: none;
   overflow-y: overlay;
   min-width: 62px;
-  /* max-width: 190px; */
-  max-height: 252px;
+  /* max-width: 190px;
+  max-height: 224px;
+  max-height: 129px; */
+  max-height: 140px;
+  /* box-shadow: 0px 3px 6px 1px hsl(221deg 16% 20%); */
+  box-shadow: 0px 3px 6px 1px hsl(221deg 16% 21%);
   display: none;
 }
 
@@ -72,7 +77,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
 
 .cd-wrapper .autocomplete .icon {
   padding: 2px;
-  border-radius: 4px;
+  border-radius: 5px;
   white-space: nowrap;
   overflow-x: overlay;
 }
@@ -94,9 +99,11 @@ body:not(.mobile) .autocomplete::-webkit-scrollbar-track {
 }
 
 body:not(.mobile) .autocomplete::-webkit-scrollbar-thumb {
-  border-top-width: 9px;
-  border-bottom-width: 9px;
   background-color: rgb(249 249 249 / 15%);
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+  border-left-width: 5px;
+  border-right-width: 3px;
 }
 
 .cd-wrapper .top-hit {
@@ -351,3 +358,4 @@ span.inline-color::after {
 span.inline-color-wrapper:hover span.inline-color::after {
   box-shadow: 0 0 0 1px hsl(221deg 12% 67%), inset 0 0 0 1px #313744;
 }
+
