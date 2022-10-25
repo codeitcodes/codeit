@@ -1,6 +1,5 @@
 
 let treeLoc, linkData, gitToken, authUser,
-
     selectedFile, modifiedFiles, modifiedRepos;
 
 
