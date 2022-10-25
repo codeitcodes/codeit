@@ -302,7 +302,8 @@ body.addEventListener('drop', (ev) => {
   if (ev.dataTransfer.items) {
     
     // if dropped item isn't a file, reject it
-    if (ev.dataTransfer.items[0].kind === 'file') {
+    if (ev.dataTransfer.items[0] &&
+        ev.dataTransfer.items[0].kind === 'file') {
   
       // process file
       const file = ev.dataTransfer.items[0].getAsFile();
