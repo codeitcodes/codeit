@@ -402,4 +402,3 @@ if ('launchQueue' in window) {
   });
   
 }
-
