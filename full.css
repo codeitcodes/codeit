@@ -92,7 +92,7 @@ body.notransition .bottom-wrapper {
 .bottom-float {
   position: relative;
   margin: 45px 0;
-  width: calc(100% - 45px - env(safe-area-inset-left));
+  width: calc(100% - 45px);
   max-width: 600px;
   display: flex;
   align-items: center;
