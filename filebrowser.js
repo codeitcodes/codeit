@@ -3039,7 +3039,7 @@ function setupEditor() {
 
   // update on screen resize
 
-  let lastWidth = undefined;
+  let lastWidth;
 
   window.addEventListener('resize', () => {
 
