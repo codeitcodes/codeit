@@ -727,7 +727,6 @@ body.expanded .sidebar-toggle svg .left {
   padding-left: env(safe-area-inset-left);
   padding-right: 1px;
   box-sizing: border-box;
-  will-change: transform;
   z-index: 998;
 }
 
@@ -744,6 +743,10 @@ body.expanded .sidebar-toggle svg .left {
   z-index: 100;
 }
 */
+
+.sidebar.transitioning {
+  will-change: transform;
+}
 
 body.expanded .sidebar {
   transform: translateX(calc(100% - 1px));
