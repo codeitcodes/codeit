@@ -1428,11 +1428,9 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 @media screen and (orientation: landscape) {
-  
   body.mobile .sidebar .picture-wrapper {
     display: none;
   }
-  
 }
 
 .sidebar .intro {
