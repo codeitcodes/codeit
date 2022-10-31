@@ -923,7 +923,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::before {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
-  left: 42.5px;
+  left: 41.5px;
 }
 
 .sidebar .header .logo::after {
