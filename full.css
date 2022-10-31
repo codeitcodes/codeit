@@ -2378,31 +2378,31 @@ body:not(.mobile) .sidebar::-webkit-scrollbar-track {
   box-shadow: none;
 }
 
-body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar {
+body .sidebar .header .logo::-webkit-scrollbar {
   height: 10px;
 }
 
-body.mobile .sidebar .header .logo::-webkit-scrollbar {
+body.mobile .sidebar .header .logo:not(:active)::-webkit-scrollbar {
   opacity: 0;
 }
 
-body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-track {
+body .sidebar .header .logo::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
 }
 
-body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb {
+body .sidebar .header .logo::-webkit-scrollbar-thumb {
   background-color: rgb(130 134 137 / 50%);
   border-left: 0;
   border-right: 0;
   border-radius: 0;
 }
 
-body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
+body .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
   background-color: rgb(130 134 137 / 65%);
 }
 
-body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:active {
+body .sidebar .header .logo::-webkit-scrollbar-thumb:active {
   background-color: rgb(130 134 137 / 50%);
 }
 
