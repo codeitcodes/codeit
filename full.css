@@ -2396,6 +2396,11 @@ body.mobile .sidebar .header .logo:not(:active)::-webkit-scrollbar {
   border-left: 0;
   border-right: 0;
   border-radius: 0;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  box-shadow: none;
+  min-height: 50px;
+  min-width: 50px;
 }
 
 body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
