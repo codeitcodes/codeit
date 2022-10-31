@@ -2731,8 +2731,29 @@ learnClose.addEventListener('click', () => {
 })
 
 
+sidebar.trTimeout = null;
+
 // toggle the sidebar
 function toggleSidebar(open) {
+  
+  if (sidebar.trTimeout) window.clearTimeout(sidebar.trTimeout);
+  
+  if (body.classList.contains('notransition')) {
+    
+    sidebar.classList.remove('transitioning');
+    
+  } else {
+  
+    sidebar.classList.add('transitioning');
+    
+    sidebar.trTimeout = window.setTimeout(() => {
+  
+      sidebar.classList.remove('transitioning');
+  
+    }, 400);
+    
+  }
+  
 
   if (open) {
 
@@ -2772,7 +2793,7 @@ function toggleSidebar(open) {
     }
 
   }
-
+  
 }
 
 
