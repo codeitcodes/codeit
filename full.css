@@ -2378,29 +2378,24 @@ body:not(.mobile) .sidebar::-webkit-scrollbar-track {
   box-shadow: none;
 }
 
-.sidebar .header .logo::-webkit-scrollbar {
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar {
   height: 10px;
 }
 
-body.mobile .sidebar .header .logo:not(:active)::-webkit-scrollbar {
+body.mobile .sidebar .header .logo::-webkit-scrollbar {
   opacity: 0;
 }
 
-.sidebar .header .logo::-webkit-scrollbar-track {
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
 }
 
-.sidebar .header .logo::-webkit-scrollbar-thumb {
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb {
   background-color: rgb(130 134 137 / 50%);
   border-left: 0;
   border-right: 0;
   border-radius: 0;
-  background-clip: padding-box;
-  border: 4px solid transparent;
-  box-shadow: none;
-  min-height: 50px;
-  min-width: 50px;
 }
 
 body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
