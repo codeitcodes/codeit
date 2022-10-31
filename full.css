@@ -2382,6 +2382,10 @@ body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar {
   height: 10px;
 }
 
+body.mobile .sidebar .header .logo::-webkit-scrollbar {
+  opacity: 0;
+}
+
 body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
