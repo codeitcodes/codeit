@@ -2378,7 +2378,7 @@ body:not(.mobile) .sidebar::-webkit-scrollbar-track {
   box-shadow: none;
 }
 
-body .sidebar .header .logo::-webkit-scrollbar {
+.sidebar .header .logo::-webkit-scrollbar {
   height: 10px;
 }
 
@@ -2386,12 +2386,12 @@ body.mobile .sidebar .header .logo:not(:active)::-webkit-scrollbar {
   opacity: 0;
 }
 
-body .sidebar .header .logo::-webkit-scrollbar-track {
+.sidebar .header .logo::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
 }
 
-body .sidebar .header .logo::-webkit-scrollbar-thumb {
+.sidebar .header .logo::-webkit-scrollbar-thumb {
   background-color: rgb(130 134 137 / 50%);
   border-left: 0;
   border-right: 0;
