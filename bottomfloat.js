@@ -153,13 +153,13 @@ function checkBottomFloat() {
     bottomWrapper.classList.add('hidden');
 
     // if scrolled to bottom of codeit
-    if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight)) {
+    if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 0.1)) {
 
       // set timeout
       window.setTimeout(() => {
 
         // if still on bottom of codeit
-        if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight)) {
+        if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 0.1)) {
 
           // show bottom float
           bottomWrapper.classList.remove('hidden');
