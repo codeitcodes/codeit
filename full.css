@@ -134,6 +134,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded .bottom-float .sidebar-open {
   padding: 11px 16px;
+  background: transparent;
 }
 
 .bottom-float .sidebar-open:active {
