@@ -59,7 +59,7 @@ body cd-el {
 
 .bottom-wrapper {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 0px);
+  bottom: 0;
   left: 0;
   right: 0;
   height: calc(45px + 56px + 45px);
@@ -81,19 +81,8 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 100% - env(safe-area-inset-top, 0px)));
+  transform: translateY(calc(-1 * var(--window-height, 100vh) + 44px + env(safe-area-inset-top, 0px)));
   height: 44px;
-}
-
-.bottom-wrapper.expanded.fromtop {
-  top: env(safe-area-inset-top, 0px);
-  bottom: auto;
-  transform: none;
-  transition: none;
-}
-
-.bottom-wrapper.expanded.fromtop * {
-  transition: none !important;
 }
 
 .bottom-wrapper.notransition, .bottom-wrapper.notransition * {
@@ -103,7 +92,7 @@ body.notransition .bottom-wrapper {
 .bottom-float {
   position: relative;
   margin: 45px 0;
-  width: calc(100% - 45px - env(safe-area-inset-left));
+  width: calc(100% - 45px);
   max-width: 600px;
   display: flex;
   align-items: center;
@@ -145,6 +134,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-wrapper.expanded .bottom-float .sidebar-open {
   padding: 11px 16px;
+  background: transparent;
 }
 
 .bottom-float .sidebar-open:active {
@@ -737,7 +727,6 @@ body.expanded .sidebar-toggle svg .left {
   padding-left: env(safe-area-inset-left);
   padding-right: 1px;
   box-sizing: border-box;
-  will-change: transform;
   z-index: 998;
 }
 
@@ -754,6 +743,10 @@ body.expanded .sidebar-toggle svg .left {
   z-index: 100;
 }
 */
+
+.sidebar.transitioning {
+  will-change: transform;
+}
 
 body.expanded .sidebar {
   transform: translateX(calc(100% - 1px));
@@ -795,7 +788,7 @@ body.notransition .sidebar {
 
 .sidebar .loader {
   position: sticky;
-  top: 0;
+  top: 0.5px;
   left: 0;
   height: 2px;
   width: var(--sidebar-width);
@@ -917,7 +910,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::after {
   content: '';
   position: absolute;
-  right: 0;
+  right: -0.5px;
   width: 28px;
   height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
@@ -930,7 +923,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::before {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
-  left: 42px;
+  left: 41.5px;
 }
 
 .sidebar .header .logo::after {
@@ -1437,6 +1430,12 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   background: hsl(228deg 59% 6% / 50%);
 }
 
+@media screen and (orientation: landscape) {
+  body.mobile .sidebar .picture-wrapper {
+    display: none;
+  }
+}
+
 .sidebar .intro {
   position: absolute;
   width: calc(100% - 1px);
@@ -1449,6 +1448,10 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   box-sizing: border-box;
   padding-right: 10px;
   padding-left: 10px;
+}
+
+body.mobile .sidebar .intro {
+  margin-left: calc(-1 * env(safe-area-inset-left, 0px));
 }
 
 .sidebar .files .intro {
@@ -1608,11 +1611,6 @@ body.mobile .sidebar .button {
   letter-spacing: -.004em;
   display: flex;
   align-items: center;
-}
-
-.sidebar .learn-wrapper .version {
-  user-select: text;
-  -webkit-user-select: text;
 }
 
 .sidebar .learn-wrapper .logout {
@@ -2384,6 +2382,10 @@ body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar {
   height: 10px;
 }
 
+body.mobile .sidebar .header .logo::-webkit-scrollbar {
+  opacity: 0;
+}
+
 body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-track {
   background: transparent;
   box-shadow: none;
@@ -2581,3 +2583,4 @@ html, body {
   }
 
 }
+

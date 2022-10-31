@@ -2690,6 +2690,15 @@ learnAbout.addEventListener('click', () => {
   
 });
 
+// copy version when clicked
+versionEl.addEventListener('click', () => {
+
+  copy(version).then(() => {
+    showMessage('Copied version!');
+  });
+
+});
+
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
@@ -2722,8 +2731,29 @@ learnClose.addEventListener('click', () => {
 })
 
 
+sidebar.trTimeout = null;
+
 // toggle the sidebar
 function toggleSidebar(open) {
+  
+  if (sidebar.trTimeout) window.clearTimeout(sidebar.trTimeout);
+  
+  if (body.classList.contains('notransition')) {
+    
+    sidebar.classList.remove('transitioning');
+    
+  } else {
+  
+    sidebar.classList.add('transitioning');
+    
+    sidebar.trTimeout = window.setTimeout(() => {
+  
+      sidebar.classList.remove('transitioning');
+  
+    }, 400);
+    
+  }
+  
 
   if (open) {
 
@@ -2763,7 +2793,7 @@ function toggleSidebar(open) {
     }
 
   }
-
+  
 }
 
 
@@ -3039,7 +3069,7 @@ function setupEditor() {
 
   // update on screen resize
 
-  let lastWidth = undefined;
+  let lastWidth;
 
   window.addEventListener('resize', () => {
 

@@ -38,9 +38,6 @@ async function setupLiveView() {
         // expand bottom float
         bottomWrapper.classList.add('expanded');
 
-        // fix bottom float on safari
-        if (isSafari) bottomWrapper.classList.add('fromtop');
-
         // restore transition on next frame
         onNextFrame(() => {
           bottomWrapper.classList.remove('notransition');
@@ -174,9 +171,6 @@ async function setupLiveView() {
 
           // close bottom float
           bottomWrapper.classList.remove('expanded');
-
-          // fix bottom float on safari
-          if (isSafari) bottomWrapper.classList.remove('fromtop');
 
           // restore transition on next frame
           onNextFrame(() => {
@@ -426,31 +420,8 @@ function addBottomSwipeListener() {
         e.preventDefault();
         e.stopPropagation();
 
-        // fix bottom float on safari
-        if (isSafari) {
-
-          bottomWrapper.classList.remove('fromtop');
-          bottomWrapper.classList.add('notransition');
-
-          onNextFrame(() => {
-
-            bottomWrapper.classList.remove('notransition');
-
-            onNextFrame(() => {
-
-              // retract bottom float
-              bottomWrapper.classList.remove('expanded');
-
-            });
-
-          });
-
-        } else {
-
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
-
-        }
+        // retract bottom float
+        bottomWrapper.classList.remove('expanded');
 
         toggleLiveView(selectedFile);
 
@@ -518,18 +489,6 @@ function addBottomSwipeListener() {
           // expand bottom float
           bottomWrapper.classList.add('expanded');
 
-          // fix bottom float on safari
-          // when finished transitioning
-          if (isSafari) {
-
-            window.setTimeout(() => {
-
-              bottomWrapper.classList.add('fromtop');
-
-            }, 400);
-
-          }
-
           // if live view is closed
           if (!liveViewToggle) toggleLiveView(selectedFile);
 
@@ -541,31 +500,8 @@ function addBottomSwipeListener() {
         if (swiped && bottomWrapper.classList.contains('expanded')
             && !bottomFloat.classList.contains('file-open')) {
 
-          // fix bottom float on safari
-          if (isSafari) {
-
-            bottomWrapper.classList.remove('fromtop');
-            bottomWrapper.classList.add('notransition');
-
-            onNextFrame(() => {
-
-              bottomWrapper.classList.remove('notransition');
-
-              onNextFrame(() => {
-
-                // retract bottom float
-                bottomWrapper.classList.remove('expanded');
-
-              });
-
-            });
-
-          } else {
-
-            // retract bottom float
-            bottomWrapper.classList.remove('expanded');
-
-          }
+          // retract bottom float
+          bottomWrapper.classList.remove('expanded');
 
           // if live view is open
           if (liveViewToggle) toggleLiveView(selectedFile);
@@ -1146,7 +1082,7 @@ async function renderLiveViewHTML(file) {
 // render live view for Markdown files
 async function renderLiveViewMarkdown(file) {
 
-  liveView.innerHTML = '<iframe srcdoc="<!DOCTYPE html><html><head></head><body></body></html>" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
+  liveView.innerHTML = '<iframe srcdoc="<!DOCTYPE html><html><head></head><body ontouchstart></body></html>" name="Live view" title="Live view" style="background: hsl(228deg 16% 12%);" class="live-frame" loading="lazy" scrolling="yes" frameborder="0"></iframe>';
 
   const liveFrame = liveView.querySelector('.live-frame');
   

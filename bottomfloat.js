@@ -115,6 +115,25 @@ if (isMobile) {
     bottomWrapper.classList.remove('hidden');
     
   });
+  
+  
+  // update on screen resize
+  
+  bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
+
+  bottomWrapper.lastHeight = 0;
+
+  window.addEventListener('resize', () => {
+
+    if (bottomWrapper.lastHeight === window.innerHeight) {
+      return;
+    }
+
+    bottomWrapper.lastHeight = window.innerHeight;
+    
+    bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
+
+  });
 
 }
 
@@ -134,13 +153,13 @@ function checkBottomFloat() {
     bottomWrapper.classList.add('hidden');
 
     // if scrolled to bottom of codeit
-    if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight)) {
+    if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
 
       // set timeout
       window.setTimeout(() => {
 
         // if still on bottom of codeit
-        if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight)) {
+        if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
 
           // show bottom float
           bottomWrapper.classList.remove('hidden');
