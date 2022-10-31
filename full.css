@@ -59,7 +59,7 @@ body cd-el {
 
 .bottom-wrapper {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 0px);
+  bottom: 0;
   left: 0;
   right: 0;
   height: calc(45px + 56px + 45px);
@@ -81,19 +81,8 @@ body.notransition .bottom-wrapper {
 }
 
 .bottom-wrapper.expanded {
-  transform: translateY(calc(-100vh + 100% - env(safe-area-inset-top, 0px)));
+  transform: translateY(calc(-1 * var(--window-height, 100vh) + 100% + env(safe-area-inset-top, 0px)));
   height: 44px;
-}
-
-.bottom-wrapper.expanded.fromtop {
-  top: env(safe-area-inset-top, 0px);
-  bottom: auto;
-  transform: none;
-  transition: none;
-}
-
-.bottom-wrapper.expanded.fromtop * {
-  transition: none !important;
 }
 
 .bottom-wrapper.notransition, .bottom-wrapper.notransition * {
