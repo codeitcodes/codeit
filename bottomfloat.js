@@ -115,6 +115,25 @@ if (isMobile) {
     bottomWrapper.classList.remove('hidden');
     
   });
+  
+  
+  // update on screen resize
+  
+  bottomFloat.style.setProperty('--window-height', window.innerHeight + 'px');
+
+  bottomWrapper.lastHeight = 0;
+
+  window.addEventListener('resize', () => {
+
+    if (bottomWrapper.lastHeight === window.innerHeight) {
+      return;
+    }
+
+    bottomWrapper.lastHeight = window.innerHeight;
+    
+    bottomFloat.style.setProperty('--window-height', window.innerHeight + 'px');
+
+  });
 
 }
 
