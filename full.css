@@ -2398,7 +2398,7 @@ body .sidebar .header .logo::-webkit-scrollbar-thumb {
   border-radius: 0;
 }
 
-body .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
   background-color: rgb(130 134 137 / 65%);
 }
 
