@@ -2402,7 +2402,7 @@ body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:hover {
   background-color: rgb(130 134 137 / 65%);
 }
 
-body .sidebar .header .logo::-webkit-scrollbar-thumb:active {
+body:not(.mobile) .sidebar .header .logo::-webkit-scrollbar-thumb:active {
   background-color: rgb(130 134 137 / 50%);
 }
 
