@@ -119,7 +119,7 @@ if (isMobile) {
   
   // update on screen resize
   
-  bottomFloat.style.setProperty('--window-height', window.innerHeight + 'px');
+  bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
 
   bottomWrapper.lastHeight = 0;
 
@@ -131,7 +131,7 @@ if (isMobile) {
 
     bottomWrapper.lastHeight = window.innerHeight;
     
-    bottomFloat.style.setProperty('--window-height', window.innerHeight + 'px');
+    bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
 
   });
 
