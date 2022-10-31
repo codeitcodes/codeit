@@ -910,7 +910,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::after {
   content: '';
   position: absolute;
-  right: 0;
+  right: -0.1px;
   width: 28px;
   height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
@@ -923,7 +923,7 @@ body.notransition .sidebar {
 .sidebar .header .logo::before {
   right: auto;
   background: linear-gradient(90deg, #1a1c24, #1a1c2400);
-  left: 42px;
+  left: 42.1px;
 }
 
 .sidebar .header .logo::after {
