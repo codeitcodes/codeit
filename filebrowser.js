@@ -2690,15 +2690,6 @@ learnAbout.addEventListener('click', () => {
   
 });
 
-// copy version when clicked
-versionEl.addEventListener('click', () => {
-  
-  copy(version).then(() => {
-    showMessage('Copied version!');
-  });
-  
-});
-
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
