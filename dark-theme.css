@@ -217,6 +217,11 @@ cd-el {
   color: #c1ffd5cc !important;
 }
 
+.token.doctype .token.string,
+.token.doctype .token.string * {
+  color: inherit !important;
+}
+
 .token.italic {
   font-style: normal;
 }
