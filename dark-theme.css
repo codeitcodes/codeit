@@ -134,12 +134,6 @@ cd-el {
   display: block;
 }
 
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: hsl(218deg 7% 64% / 72%);
-}
-
 .token.punctuation,
 .token.interpolation,
 .token.important,
@@ -207,6 +201,12 @@ cd-el {
 .token.comment,
 .token.comment * {
   color: hsl(218deg 7% 64% / 72%) !important;
+}
+
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: hsl(218deg 7% 64% / 72%);
 }
 
 .token.string,
