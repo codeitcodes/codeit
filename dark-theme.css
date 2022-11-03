@@ -134,12 +134,6 @@ cd-el {
   display: block;
 }
 
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: hsl(218deg 7% 64% / 72%);
-}
-
 .token.punctuation,
 .token.interpolation,
 .token.important,
@@ -209,12 +203,23 @@ cd-el {
   color: hsl(218deg 7% 64% / 72%) !important;
 }
 
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: hsl(218deg 7% 64% / 72%);
+}
+
 .token.string,
 .token.string *,
 .token.attr-value,
 .token.attr-value *:not(.attr-equals),
 .style .token.string {
   color: #c1ffd5cc !important;
+}
+
+.token.doctype .token.string,
+.token.doctype .token.string * {
+  color: inherit !important;
 }
 
 .token.italic {
