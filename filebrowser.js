@@ -245,7 +245,7 @@ async function renderSidebarHTML() {
     if (repoObj) {
       
       // delete repo obj from modified repos
-      deleteModRepo(user + '/' + repoName);
+      modRepos.removeRepo(user + '/' + repoName);
       
     }
     
