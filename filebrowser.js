@@ -3173,7 +3173,14 @@ function setupEditor() {
 
             // beautify
             beautifierOptions.indent_char = cd.options.tab[0];
-            const beautifiedText = beautifyLang(selText, beautifierOptions);
+            let beautifiedText = beautifyLang(selText, beautifierOptions);
+            
+            // prevent deleting ending newline when beautifying
+            if (selText.endsWith('\n') && !beautifiedText.endsWith('\n')) {
+              
+              beautifiedText += '\n';
+              
+            }
             
             // compare current code with new code
             // if the code is different, swap it
