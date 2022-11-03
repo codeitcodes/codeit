@@ -3307,6 +3307,8 @@ function setupCodeitApp() {
   setupSidebar();
 
   setTimeoutForEclipsedFiles();
+  
+  body.classList.add('loaded');
 
 }
 
