@@ -1972,7 +1972,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   flex-flow: column;
   z-index: 3000;
   overflow: hidden;
-  display: none;
+  /* display: none; */
 }
 
 body.loaded .splash-wrapper {
