@@ -1,19 +1,33 @@
 
 // change pushing state
 
-let pendingPromise;
+let pendingPromises = {
+  createRepo: null,
+  pushFile: null,
+  fetchRepoObj: null
+};
 
-function changePushingState(to, pendingPromise) {
+function changePushingState(to, promiseType, promise) {
 
   if (to === true) {
-
-    pendingPromise = pendingPromise ?? null;
+    
+    if (promiseType && promise) {
+      
+      pendingPromises[promiseType] = promise;
+      
+    }
 
     window.addEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
   } else {
-
-    pendingPromise = null;
+  
+    // clear pending promise
+    if (promiseType &&
+        promise === pendingPromises[promiseType]) {
+      
+      pendingPromises[promiseType] = null;
+      
+    }
 
     window.removeEventListener('beforeunload', beforeUnloadListener, {capture: true});
 
@@ -259,13 +273,13 @@ let git = {
 
 
     // change pushing state
-    changePushingState(true);
+    changePushingState(true, 'pushFile', postRequest);
 
     // put the query
     const resp = await axios.put(query, gitToken, commitData);
 
     // change pushing state
-    changePushingState(false);
+    changePushingState(false, 'pushFile', postRequest);
 
     return resp.content.sha;
 
@@ -287,13 +301,13 @@ let git = {
     const postRequest = axios.post(query, gitToken, repoData);
 
     // change pushing state
-    changePushingState(true, postRequest);
+    changePushingState(true, 'createRepo', postRequest);
 
     // await the request
     const resp = await postRequest;
 
     // change pushing state
-    changePushingState(false);
+    changePushingState(false, 'createRepo', postRequest);
 
     return resp.full_name;
 
