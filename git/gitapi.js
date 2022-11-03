@@ -5,7 +5,7 @@ let pendingPromises = {
   createRepo: null,
   fetchRepoObj: null,
   latestPushPendingFile: null,
-  newFile: {} // new file pending promises
+  newFile: {} // new file creation promises
 };
 
 function changePushingState(to, promiseType, promise) {
