@@ -3,7 +3,7 @@
 
 let pendingPromise = {
   createRepo: null,
-  repoObjFetching: null,
+  repoObjFetch: null,
   latestPushedFile: null,
   newFile: {} // new file creation promises
 };
