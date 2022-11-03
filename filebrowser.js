@@ -130,9 +130,9 @@ async function renderSidebarHTML() {
         || repoObj.repoDataExpiration === undefined || repoObj.branchExpiration === undefined
         || repoObj.repoDataExpiration < currentTime) {
       
-      // get repo obj from git
+      // fetch repo obj from git
       // and save to modified repos
-      fetchRepoAndSaveToModRepos(treeLoc);
+      modRepos.fetchAndAddRepoObj(treeLoc);
       
     }
     
