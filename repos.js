@@ -25,7 +25,7 @@ function createRepoObj(fullName, selBranch, defaultBranch,
 
 let modRepos = {
 
-  add: (repoObj) => {
+  addRepo: (repoObj) => {
 
     modifiedRepos[repoObj.fullName] = repoObj;
 
@@ -33,7 +33,7 @@ let modRepos = {
 
   },
 
-  remove: (fullName) => {
+  removeRepo: (fullName) => {
     
     delete modifiedRepos[fullName];
     
