@@ -2799,24 +2799,23 @@ function toggleSidebar(open) {
 
 async function deleteModFileInHTML(fileEl) {
   
-  const fileSha = getAttr(fileEl, 'sha');
-  
-  let modFile = modifiedFiles[fileSha];
-  
-  // if file is eclipsed
-  if (fileSha !== modFile.sha) {
+  let fileSha = getAttr(fileEl, 'sha');
+    
+  // if pushing file
+  if (pendingPromise) {
     
     showMessage('Discarding changes...', -1);
     
-    if (pendingPromise) await pendingPromise;
+    await pendingPromise;
     
     hideMessage();
     
-    modFile = getLatestVersion(modFile);
+    // get updated file sha
+    fileSha = getAttr(fileEl, 'sha');
     
   }
   
-  deleteModFile(modFile.sha);
+  deleteModFile(fileSha);
   
   
   fileEl.classList.remove('modified');
