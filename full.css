@@ -886,14 +886,16 @@ body.notransition .sidebar {
   margin-left: -18px;
 }
 
-.sidebar .header .title-screen .title:not(.scrolling):hover {
+body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:hover)):hover {
   color: #fff;
 }
 
-.sidebar .header .title-screen .title:not(.scrolling):active {
+.sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:active)):active {
   opacity: .5;
   transition: none;
 }
+
+
 
 .sidebar .header .logo {
   padding: 7px 0;
@@ -970,7 +972,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
 }
 
 body:not(.mobile) .sidebar .header .title .branch-icon:active {
-  opacity: 0.5 !important;
+  opacity: 0.27 !important;
 }
 
 .sidebar .header .title .branch-icon.active {
