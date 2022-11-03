@@ -868,7 +868,7 @@ function addHTMLItemListeners() {
         if (getAttr(item, 'repoObj')) {
 
           // add repo obj to modified repos
-          addRepoToModRepos(repoObj);
+          modRepos.addRepo(repoObj);
 
         }
         
@@ -2216,7 +2216,7 @@ function createNewRepoInHTML() {
                                       true, null, repoPrivate, false, true, 0, 0);
 
         // add repo obj to modified repos
-        addRepoToModRepos(repoObj);
+        modRepos.addRepo(repoObj);
         
         
         // wait for push animation to finish,
