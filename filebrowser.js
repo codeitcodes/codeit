@@ -1234,10 +1234,10 @@ async function pushFileFromHTML(fileEl, commitMessage) {
   bottomFloat.classList.remove('modified');
 
 
-  // if the current file hasn't been pushed yet,
-  // await file creation
+  // if the current file hasn't been created yet,
+  // await its creation
   
-  const newFilePendingPromise = newFilePendingPromises[getAttr(fileEl, 'sha')];
+  const newFilePendingPromise = pendingPromise.newFile[getAttr(fileEl, 'sha')];
   
   if (newFilePendingPromise) {
     
@@ -1884,7 +1884,7 @@ sidebarTitle.addEventListener('click', (e) => {
     // if there are no modified files
     // and no pending promises
     if (Object.values(modifiedFiles).length === 0
-        && !pendingPromise && !repoPromise) {
+        && !pendingPromise) {
       
       // enable logout
       learnWrapper.classList.add('logout-enabled');
@@ -2253,8 +2253,6 @@ function createNewRepoInHTML() {
 // create new file
 // on click of button
 
-const newFilePendingPromises = {};
-
 function createNewFileInHTML() {
 
   // if not already adding new file
@@ -2482,11 +2480,11 @@ function createNewFileInHTML() {
         }
         
         
-        // if a pending promise exists,
-        // await it
-        if (pendingPromise) {
+        // if the current repository is being created,
+        // await its creation
+        if (pendingPromise.createRepo) {
           
-          await pendingPromise;
+          await pendingPromise.createRepo;
           
         }
 
@@ -2507,11 +2505,13 @@ function createNewFileInHTML() {
 
         // push file asynchronously
         
-        newFilePendingPromises[tempSHA] = git.push(commit);
+        // save new file creation promise in object
+        pendingPromise.newFile[tempSHA] = git.push(commit);
         
-        const newSHA = await newFilePendingPromises[tempSHA];
+        const newSHA = await pendingPromise.newFile[tempSHA];
         
-        delete newFilePendingPromises[tempSHA];
+        // remove file creation promise from object
+        delete pendingPromise.newFile[tempSHA];
         
 
         // Git file is eclipsed (not updated) in browser private cache,
@@ -2802,12 +2802,12 @@ async function deleteModFileInHTML(fileEl) {
   let fileSha = getAttr(fileEl, 'sha');
     
   // if pushing file
-  if (pendingPromise) {
+  if (pendingPromise.latestPushedFile) {
     
     showMessage('Discarding changes...', -1);
     
     // await pending promise
-    await pendingPromise;
+    await pendingPromise.latestPushedFile;
     
     hideMessage();
     
