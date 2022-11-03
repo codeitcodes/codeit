@@ -126,7 +126,7 @@ async function renderSidebarHTML() {
     const currentTime = new Date().getTime();
     
     // if repo obj dosen't exist
-    // or repo data has expired
+    // or repo obj data has expired
     if (!repoObj || !repoObj.defaultBranch
         || repoObj.repoDataExpiration === undefined || repoObj.branchExpiration === undefined
         || repoObj.repoDataExpiration < currentTime) {
