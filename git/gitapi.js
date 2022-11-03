@@ -4,7 +4,7 @@
 let pendingPromises = {
   createRepo: null,
   latestPushFile: null,
-  newFiles: {},
+  newFile: {},
   fetchRepoObj: null
 };
 
