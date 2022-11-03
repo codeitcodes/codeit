@@ -2801,7 +2801,9 @@ async function deleteModFileInHTML(fileEl) {
   
   const fileSha = getAttr(fileEl, 'sha');
   
-  deleteModFile(fileSha);
+  const modFile = getLatestVersion(modifiedFiles[fileSha]);
+  
+  deleteModFile(modFile.sha);
   
   fileEl.classList.remove('modified');
   
