@@ -3,7 +3,8 @@
 
 let pendingPromises = {
   createRepo: null,
-  pushFile: null,
+  latestPushFile: null,
+  newFiles: {},
   fetchRepoObj: null
 };
 
@@ -272,14 +273,14 @@ let git = {
     }
 
 
-    // change pushing state
-    changePushingState(true, 'pushFile', postRequest);
+    // change pushing state and save latest push file
+    changePushingState(true, 'latestPushFile', postRequest);
 
     // put the query
     const resp = await axios.put(query, gitToken, commitData);
 
     // change pushing state
-    changePushingState(false, 'pushFile', postRequest);
+    changePushingState(false, 'latestPushFile', postRequest);
 
     return resp.content.sha;
 
