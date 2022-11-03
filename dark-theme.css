@@ -363,4 +363,3 @@ span.inline-color::after {
 span.inline-color-wrapper:hover span.inline-color::after {
   box-shadow: 0 0 0 1px hsl(221deg 12% 67%), inset 0 0 0 1px #313744;
 }
-
