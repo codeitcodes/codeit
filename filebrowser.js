@@ -2801,9 +2801,23 @@ async function deleteModFileInHTML(fileEl) {
   
   const fileSha = getAttr(fileEl, 'sha');
   
-  const modFile = getLatestVersion(modifiedFiles[fileSha]);
+  let modFile = modifiedFiles[fileSha];
+  
+  // if file is eclipsed
+  if (fileSha !== modFile.sha) {
+    
+    showMessage('Discarding changes...', -1);
+    
+    if (pendingPromise) await pendingPromise;
+    
+    hideMessage();
+    
+    modFile = getLatestVersion(modFile);
+    
+  }
   
   deleteModFile(modFile.sha);
+  
   
   fileEl.classList.remove('modified');
   
