@@ -1083,11 +1083,11 @@ async function checkPushDialogs() {
   if (!repoObj || repoObj.pushAccess === null) {
 
     // await repo obj promise
-    if (repoPromise) {
+    if (pendingPromise.repoObjFetch) {
 
       showMessage('Just a sec..', -1);
 
-      await repoPromise;
+      await pendingPromise.repoObjFetch;
 
       repoObj = modifiedRepos[user + '/' + repoName];
       
@@ -1679,10 +1679,10 @@ async function renderBranchMenuHTML(renderAll) {
     
     // if default branch isn't fetched yet
     if (!repoObj.selBranch) {
-        
+      
       // await fetch
-      await repoPromise;
-        
+      await pendingPromise.repoObjFetch;
+      
       repoObj = modifiedRepos[fullName];
               
     }
