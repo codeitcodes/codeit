@@ -2797,7 +2797,7 @@ function toggleSidebar(open) {
 }
 
 
-function deleteModFileInHTML(fileEl) {
+async function deleteModFileInHTML(fileEl) {
   
   const fileSha = getAttr(fileEl, 'sha');
   
@@ -2807,7 +2807,15 @@ function deleteModFileInHTML(fileEl) {
   
   if (fileEl.classList.contains('selected')) {
     
-    loadFileInHTML(fileEl, fileSha);
+    const scrollPos = selectedFile.scrollPos;
+    
+    await loadFileInHTML(fileEl, fileSha);
+    
+    // prevent bottom float disappearing on mobile
+    if (isMobile) lastScrollTop = scrollPos[1];
+    
+    // scroll to pos in code
+    cd.scrollTo(scrollPos[0], scrollPos[1]);
     
   }
   
