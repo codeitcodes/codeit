@@ -886,13 +886,12 @@ body.notransition .sidebar {
   margin-left: -18px;
 }
 
-body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:hover)):hover {
+body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:hover)):is(:hover, :active) {
   color: #fff;
 }
 
-.sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:active)):active {
+.sidebar .header .title-screen .title:not(.scrolling, :has(> .branch-icon:active)):active :is(.back, .logo) {
   opacity: .5;
-  transition: none;
 }
 
 .sidebar .header .logo {
