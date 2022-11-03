@@ -191,6 +191,8 @@ window.addEventListener('load', async () => {
     // start loading
     startLoading();
     
+    body.classList.add('loaded');
+    
     showMessage('Logging in...', -1);
 
     const gitCode = linkData.gitCode;
