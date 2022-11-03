@@ -2806,6 +2806,7 @@ async function deleteModFileInHTML(fileEl) {
     
     showMessage('Discarding changes...', -1);
     
+    // await pending promise
     await pendingPromise;
     
     hideMessage();
