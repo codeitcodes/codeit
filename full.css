@@ -895,8 +895,6 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
   transition: none;
 }
 
-
-
 .sidebar .header .logo {
   padding: 7px 0;
   font-weight: 600;
