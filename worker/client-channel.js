@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v603';
+const WORKER_NAME = 'codeit-worker-v604';
 
 
 // internal paths
