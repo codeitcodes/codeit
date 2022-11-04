@@ -1222,7 +1222,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   --arrow-placeholder: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2054%22%3E%20%3Cpath%20fill%3D%22%231a1c23%22%20d%3D%22M0%200h44v54H0z%22%2F%3E%20%3Cg%20opacity%3D%22.3%22%3E%20%3Cpath%20fill%3D%22none%22%20d%3D%22M0%2015h24v24H0z%22%2F%3E%20%3Cpath%20fill%3D%22%23828689%22%20d%3D%22M9.29%2021.71a.998.998%200%200%200%200%201.41L13.17%2027l-3.88%203.88a.998.998%200%200%200%201.41%201.41l4.59-4.59a.998.998%200%200%200%200-1.41L10.7%2021.7c-.38-.38-1.02-.38-1.41.01Z%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E');
 }
 
-.sidebar .header.out-of-repo + .files::after {
+.sidebar .header:not(.out-of-repo) + .files::after {
   content: unset;
 }
 
