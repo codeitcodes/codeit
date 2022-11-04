@@ -53,6 +53,9 @@ async function renderSidebarHTML() {
   if (loader.style.opacity != '1') {
     startLoading();
   }
+  
+  // clear sidebar items
+  fileWrapper.innerHTML = '';
 
   // hide search screen
   header.classList.remove('searching');
