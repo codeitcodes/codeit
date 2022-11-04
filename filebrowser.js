@@ -145,7 +145,7 @@ async function renderSidebarHTML() {
   
   
   // if sidebar title is empty
-  if (sidebarLogo.innerText === '') {
+  if (/* sidebarLogo.innerText === '' */ true) {
     
     if (contents != '') {
 
@@ -175,6 +175,10 @@ async function renderSidebarHTML() {
       onNextFrame(() => {
         sidebarLogo.classList.remove('notransition');
       });
+      
+      
+      // change header options
+      header.classList.remove('out-of-repo');
 
     } else if (repo != '') {
 
@@ -201,6 +205,10 @@ async function renderSidebarHTML() {
       onNextFrame(() => {
         sidebarLogo.classList.remove('notransition');
       });
+      
+      
+      // change header options
+      header.classList.remove('out-of-repo');
 
     } else {
 
@@ -220,6 +228,10 @@ async function renderSidebarHTML() {
       onNextFrame(() => {
         sidebarLogo.classList.remove('notransition');
       });
+      
+      
+      // change header options
+      header.classList.add('out-of-repo');
 
     }
     
