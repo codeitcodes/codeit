@@ -107,7 +107,7 @@ floatDownload.addEventListener('click', downloadSelFile);
 
 // if on mobile
 if (isMobile) {
-
+  
   cd.on('scroll', checkBottomFloat, false);
   
   cd.on('blur', () => {
@@ -176,7 +176,7 @@ function checkBottomFloat() {
 
     }
 
-  } else { // if scrolled up
+  } else if (document.activeElement !== cd) { // if scrolled up
 
     // if passed threshold
     if ((lastScrollTop - st) > 20) {
