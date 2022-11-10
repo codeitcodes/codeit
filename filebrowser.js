@@ -54,8 +54,8 @@ async function renderSidebarHTML() {
     startLoading();
   }
   
-  // show placeholder items
-  fileWrapper.classList.add('placeholder');
+  // show loading items
+  fileWrapper.classList.add('loading-items');
 
   // hide search screen
   header.classList.remove('searching');
