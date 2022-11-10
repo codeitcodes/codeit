@@ -284,7 +284,7 @@ async function renderSidebarHTML() {
       const nonExistentRepo = fileWrapper.querySelector('.item.repo[fullname="'+ (user + '/' + repoName) +'"], ' +
                                                         '.item.repo[repoobj^="%7B%22fullName%22:%22' + (user + '/' + repoName) + '%22"]');
       
-      nonExistentRepo.remove();
+      if (nonExistentRepo) nonExistentRepo.remove();
       
       
       // change sidebar title
