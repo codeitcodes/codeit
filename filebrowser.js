@@ -95,8 +95,8 @@ async function renderSidebarHTML() {
       // stop loading
       stopLoading();
           
-      // hide placeholder items
-      fileWrapper.classList.remove('placeholder');
+      // hide loading items
+      fileWrapper.classList.remove('loading-items');
       
       // show intro screen
       fileWrapper.innerHTML = fileIntroScreen;
@@ -255,8 +255,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    // hide placeholder items
-    fileWrapper.classList.remove('placeholder');
+    // hide loading items
+    fileWrapper.classList.remove('loading-items');
     
     
     // get repo obj from local storage
@@ -314,8 +314,8 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    // hide placeholder items
-    fileWrapper.classList.add('placeholder');
+    // hide loading items
+    fileWrapper.classList.add('loading-items');
 
     
     // get repo obj from local storage
@@ -832,8 +832,8 @@ async function renderSidebarHTML() {
   // stop loading
   stopLoading();
   
-  // hide placeholder items
-  fileWrapper.classList.remove('placeholder');
+  // hide loading items
+  fileWrapper.classList.remove('loading-items');
 
   // add item event listeners
   addHTMLItemListeners();
