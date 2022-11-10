@@ -247,6 +247,15 @@ async function renderSidebarHTML() {
   // get items in current tree from git
   resp = await git.getItems(treeLoc);
   
+  
+  // if switched directory while loading, return
+  if (user !== treeLoc[0] || repo !== treeLoc[1] ||
+      contents !== treeLoc[2]) {
+    
+    return;
+    
+  }
+  
 
   if (resp.message && resp.message == 'Not Found') {
 
