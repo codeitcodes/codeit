@@ -251,7 +251,8 @@ async function renderSidebarHTML() {
   
   
   // if switched directory while loading, return
-  if (user !== treeLoc[0] || repo !== treeLoc[1] ||
+  if (user !== treeLoc[0] ||
+      repoName !== treeLoc[1].split(':')[0] ||
       contents !== treeLoc[2]) {
     
     return;
