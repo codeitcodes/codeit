@@ -1202,9 +1202,9 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   position: absolute;
   top: calc(85px - 11px + var(--scroll-top, 0px));
   height: calc(100% - 85px + 11px);
+  background-position-y: 11px;
   background-color: #1a1c24;
   background-repeat-x: no-repeat;
-  background-position-y: 11px;
   z-index: 1;
 }
 
