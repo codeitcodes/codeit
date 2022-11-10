@@ -266,8 +266,32 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    // hide loading items
-    fileWrapper.classList.remove('loading-items');
+    // change location
+    treeLoc[1] = '';
+    treeLoc[2] = '';
+    saveTreeLocLS(treeLoc);
+    
+    
+    // if already viewing repositories page
+    if (fileWrapper.querySelector('.item.repo')) {
+      
+      // hide loading items
+      fileWrapper.classList.remove('loading-items');
+      
+      // change sidebar title
+      sidebarLogo.innerText = 'Repositories';
+      
+      // hide branch button
+      sidebarBranch.classList.remove('visible');
+      
+      // scroll to start of repo name
+      sidebarLogo.scrollTo(0, 0);
+      scrolledSidebarTitle();
+      
+      // change header options
+      header.classList.add('out-of-repo');
+      
+    }
     
     
     // get repo obj from local storage
@@ -297,22 +321,14 @@ async function renderSidebarHTML() {
     }
     
     
-    // change location
-    treeLoc[1] = '';
-    treeLoc[2] = '';
-    saveTreeLocLS(treeLoc);
+    // if not viewing repositories page
+    if (!fileWrapper.querySelector('.item.repo')) {
+      
+      // render sidebar
+      renderSidebarHTML();
+      
+    }
     
-    // change sidebar title
-    sidebarLogo.innerText = 'Repositories';
-    
-    // hide branch button
-    sidebarBranch.classList.remove('visible');
-    
-    // scroll to start of repo name
-    sidebarLogo.scrollTo(0, 0);
-    scrolledSidebarTitle();
-    
-    renderSidebarHTML();
     
     return;
 
