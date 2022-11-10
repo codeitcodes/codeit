@@ -761,7 +761,7 @@ body.notransition .sidebar {
   transition: none;
 }
 
-.sidebar:has(> .files.loading-items) {
+.sidebar.loading:has(> .content-wrapper .files.loading-items) {
   overflow-y: hidden;
 }
 
