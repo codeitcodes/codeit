@@ -1200,7 +1200,6 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   height: calc(100% - 85px);
   background-color: #1a1c24;
   background-repeat-x: no-repeat;
-  pointer-events: none;
   z-index: 1;
 }
 
