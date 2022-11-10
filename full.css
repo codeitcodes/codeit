@@ -1196,6 +1196,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 .sidebar .files.loading-items::after {
   content: '';
   position: absolute;
+  top: 85px;
   height: calc(100% - 85px);
   background-color: #1a1c24;
   background-repeat-x: no-repeat;
