@@ -56,6 +56,8 @@ async function renderSidebarHTML() {
   
   // show loading items
   fileWrapper.classList.add('loading-items');
+  
+  fileWrapper.style.setProperty('--scroll-top', sidebar.scrollTop + 'px');
 
   // hide search screen
   header.classList.remove('searching');
