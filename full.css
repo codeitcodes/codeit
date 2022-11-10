@@ -761,6 +761,10 @@ body.notransition .sidebar {
   transition: none;
 }
 
+.sidebar:has(> .files.loading-items) {
+  overflow-y: hidden;
+}
+
 .sidebar .wrapper {
   width: 100%;
   height: max-content;
