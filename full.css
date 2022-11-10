@@ -1192,8 +1192,8 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 }
 
 
-.sidebar.loading .files::before,
-.sidebar.loading .files::after {
+.sidebar .files.loading-items::before,
+.sidebar .files.loading-items::after {
   content: '';
   position: absolute;
   height: calc(100% - 85px);
