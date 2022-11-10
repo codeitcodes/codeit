@@ -54,8 +54,8 @@ async function renderSidebarHTML() {
     startLoading();
   }
   
-  // clear sidebar items
-  fileWrapper.innerHTML = '';
+  // show placeholder items
+  fileWrapper.classList.add('placeholder');
 
   // hide search screen
   header.classList.remove('searching');
@@ -94,6 +94,9 @@ async function renderSidebarHTML() {
       
       // stop loading
       stopLoading();
+          
+      // hide placeholder items
+      fileWrapper.classList.remove('placeholder');
       
       // show intro screen
       fileWrapper.innerHTML = fileIntroScreen;
@@ -252,6 +255,9 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
+    // hide placeholder items
+    fileWrapper.classList.remove('placeholder');
+    
     
     // get repo obj from local storage
     const repoObj = modifiedRepos[user + '/' + repoName];
@@ -307,6 +313,9 @@ async function renderSidebarHTML() {
     
     // stop loading
     stopLoading();
+    
+    // hide placeholder items
+    fileWrapper.classList.add('placeholder');
 
     
     // get repo obj from local storage
@@ -822,6 +831,9 @@ async function renderSidebarHTML() {
 
   // stop loading
   stopLoading();
+  
+  // hide placeholder items
+  fileWrapper.classList.remove('placeholder');
 
   // add item event listeners
   addHTMLItemListeners();
