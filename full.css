@@ -1179,6 +1179,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
 
 .sidebar .header.searching .logo {
   padding-left: 7px;
+  overflow-x: hidden;
   max-width: calc(var(--sidebar-width) - 140px - 16px - 7px - 7px - 7px);
 }
 
