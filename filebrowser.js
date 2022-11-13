@@ -2493,7 +2493,21 @@ function createNewFileInHTML() {
         // change selected file
         changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
+        
+        // close file view if open
+        if (liveView.classList.contains('file-open')) {
+          
+          liveView.classList.add('notransition');
+          liveView.classList.remove('file-open');
+          
+          onNextFrame(() => {
             
+            liveView.classList.remove('notransition');
+            
+          });
+          
+        }
+        
         // if on mobile device
         if (isMobile) {
           
