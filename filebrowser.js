@@ -2506,6 +2506,18 @@ function createNewFileInHTML() {
             
           });
           
+          // if on mobile device
+          if (isMobile) {
+      
+            // update bottom float
+            bottomFloat.classList.remove('file-open');
+      
+          } else {
+      
+            liveToggle.classList.remove('file-open');
+      
+          }
+          
         }
         
         // if on mobile device
