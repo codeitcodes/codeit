@@ -3104,19 +3104,9 @@ function setupEditor() {
 
   // update on screen resize
 
-  let lastWidth;
-
-  window.addEventListener('resize', () => {
-
-    if (lastWidth === window.innerWidth) {
-      return;
-    }
-
-    lastWidth = window.innerWidth;
-
-    updateLineNumbersHTML();
-
-  });
+  const portrait = window.matchMedia('(orientation: portrait)');
+  
+  portrait.addEventListener('change', updateLineNumbersHTML);
   
   
   let beautifierOptions = {
