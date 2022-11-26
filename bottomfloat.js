@@ -189,3 +189,4 @@ function checkBottomFloat() {
   lastScrollTop = st <= 0 ? 0 : st; // for mobile or negative scrolling
 
 }
+
