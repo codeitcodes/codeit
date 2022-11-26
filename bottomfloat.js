@@ -116,6 +116,12 @@ if (isMobile) {
     
   });
   
+  cd.on('focus', () => {
+
+    bottomWrapper.classList.add('hidden');
+
+  });
+  
   
   // update on screen resize
   
@@ -168,7 +174,7 @@ function checkBottomFloat() {
 
     }
 
-  } else { // if scrolled up
+  } else if (document.activeElement !== cd) { // if scrolled up
 
     // if passed threshold
     if ((lastScrollTop - st) > 20) {
