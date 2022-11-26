@@ -107,18 +107,12 @@ floatDownload.addEventListener('click', downloadSelFile);
 
 // if on mobile
 if (isMobile) {
-  
+
   cd.on('scroll', checkBottomFloat, false);
   
   cd.on('blur', () => {
     
     bottomWrapper.classList.remove('hidden');
-    
-  });
-  
-  cd.on('focus', () => {
-    
-    bottomWrapper.classList.add('hidden');
     
   });
   
@@ -176,7 +170,7 @@ function checkBottomFloat() {
 
     }
 
-  } else if (document.activeElement !== cd) { // if scrolled up
+  } else { // if scrolled up
 
     // if passed threshold
     if ((lastScrollTop - st) > 20) {
