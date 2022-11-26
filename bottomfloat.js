@@ -120,19 +120,17 @@ if (isMobile) {
   // update on screen resize
   
   bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
-
-  bottomWrapper.lastHeight = 0;
-
-  window.addEventListener('resize', () => {
-
-    if (bottomWrapper.lastHeight === window.innerHeight) {
-      return;
-    }
-
-    bottomWrapper.lastHeight = window.innerHeight;
+  
+  const landscape = window.matchMedia('(orientation: landscape)');
+  
+  landscape.addEventListener('change', () => {
     
     bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
-
+    
+    window.setTimeout(() => {  
+      bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
+    }, 50);
+    
   });
 
 }
