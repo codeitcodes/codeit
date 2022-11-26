@@ -125,9 +125,11 @@ if (isMobile) {
   
   landscape.addEventListener('change', () => {
     
-    onNextFrame(() => {
+    bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
+    
+    window.setTimeout(() => {  
       bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
-    });
+    }, 20);
     
   });
 
