@@ -311,9 +311,9 @@ if (isEmbed) {
   
 }
 
-window.addEventListener('resize', () => {
-
-  isLandscape = window.matchMedia('(orientation: landscape)').matches;
+window.matchMedia('(orientation: landscape)').addEventListener('change', (e) => {
+  
+  isLandscape = e.matches;
 
 });
 
