@@ -3106,7 +3106,9 @@ function setupEditor() {
 
   const landscape = window.matchMedia('(orientation: landscape)');
   
-  landscape.addEventListener('change', updateLineNumbersHTML);
+  landscape.addEventListener('change', () => {
+    onNextFrame(updateLineNumbersHTML);
+  });
   
   
   let beautifierOptions = {
