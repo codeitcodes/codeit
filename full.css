@@ -1283,7 +1283,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:active {
   text-overflow: clip;
   background: hsl(220deg 86% 64% / 9%);
   box-shadow: 0 0 0 2px hsl(223deg 85% 66% / 70%);
-  transition: .18s .04s var(--ease-function);
+  transition: .18s var(--ease-function);
   transition-property: background, box-shadow;
 }
 
