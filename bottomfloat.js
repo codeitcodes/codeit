@@ -121,9 +121,9 @@ if (isMobile) {
   
   bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
   
-  const portrait = window.matchMedia('(orientation: portrait)');
+  const landscape = window.matchMedia('(orientation: landscape)');
   
-  portrait.addEventListener('change', (event) => {
+  landscape.addEventListener('change', (event) => {
     
     bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
     
