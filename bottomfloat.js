@@ -123,7 +123,7 @@ if (isMobile) {
   
   const landscape = window.matchMedia('(orientation: landscape)');
   
-  landscape.addEventListener('change', (event) => {
+  landscape.addEventListener('change', () => {
     
     bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
     
