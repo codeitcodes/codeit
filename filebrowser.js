@@ -2431,7 +2431,33 @@ function createNewFileInHTML() {
         // change selected file
         changeSelectedFile(treeLoc.join(), tempSHA, fileName, encodeUnicode('\r\n'), getFileLang(fileName),
                            [0, 0], [0, 0], true);
-            
+        
+        // close file view if open
+        if (liveView.classList.contains('file-open')) {
+
+          liveView.classList.add('notransition');
+          liveView.classList.remove('file-open');
+
+          onNextFrame(() => {
+
+            liveView.classList.remove('notransition');
+
+          });
+
+          // if on mobile device
+          if (isMobile) {
+
+            // update bottom float
+            bottomFloat.classList.remove('file-open');
+
+          } else {
+
+            liveToggle.classList.remove('file-open');
+
+          }
+
+        }
+        
         // if on mobile device
         if (isMobile) {
           
@@ -2797,17 +2823,26 @@ function toggleSidebar(open) {
 }
 
 
-function deleteModFileInHTML(fileEl) {
+async function deleteModFileInHTML(fileEl) {
   
   const fileSha = getAttr(fileEl, 'sha');
   
   deleteModFile(fileSha);
   
+  
   fileEl.classList.remove('modified');
   
   if (fileEl.classList.contains('selected')) {
     
-    loadFileInHTML(fileEl, fileSha);
+    const scrollPos = selectedFile.scrollPos;
+
+    await loadFileInHTML(fileEl, fileSha);
+
+    // prevent bottom float disappearing on mobile
+    if (isMobile) lastScrollTop = scrollPos[1];
+
+    // scroll to pos in code
+    cd.scrollTo(scrollPos[0], scrollPos[1]);
     
   }
   
@@ -3155,6 +3190,7 @@ function setupEditor() {
           // get selection language
           let selLang = Prism.util.getLanguage(cursorEl);
           if (selLang == 'javascript') selLang = 'js';
+          if (selLang == 'json') selLang = 'js';
           if (selLang == 'markup') selLang = 'html';
 
           // find syntax for language
