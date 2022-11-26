@@ -3104,9 +3104,9 @@ function setupEditor() {
 
   // update on screen resize
 
-  const portrait = window.matchMedia('(orientation: portrait)');
+  const landscape = window.matchMedia('(orientation: landscape)');
   
-  portrait.addEventListener('change', updateLineNumbersHTML);
+  landscape.addEventListener('change', updateLineNumbersHTML);
   
   
   let beautifierOptions = {
