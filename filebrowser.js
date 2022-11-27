@@ -1612,7 +1612,7 @@ async function renderBranchMenuHTML(renderAll) {
   if (getAttr(branchMenu, 'tree') !== [user, repoName, contents].join()) {
         
     // show loading message
-    branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
+    branchMenu.innerHTML = '<div class="icon" style="pointer-events: none; opacity: .5; font-weight: 500;"><a>Loading...</a></div>';
     
     setAttr(branchMenu, 'tree', [user, repoName, contents].join()); 
     
@@ -1723,7 +1723,7 @@ async function renderBranchMenuHTML(renderAll) {
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
-    out += '<div class="icon see-more">' + moreIcon + '<a>see more</a></div>';
+    out += '<div class="icon see-more">' + moreIcon + '<a>more</a></div>';
     
   }
   
