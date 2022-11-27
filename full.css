@@ -1751,6 +1751,22 @@ body.mobile .context-menu {
   display: none;
 }
 
+.live-view-menu {
+  left: 11px;
+  top: 41px;
+  z-index: 1001;
+  margin-top: 7px;
+  padding: 0;
+}
+
+.live-view-menu:not(.visible) {
+  padding: 2px 2px 2px 0px;
+}
+
+.live-view-menu:not(.visible) .icon {
+  padding: 9.5px 13px;
+}
+
 
 .dialog-wrapper {
   position: fixed;
