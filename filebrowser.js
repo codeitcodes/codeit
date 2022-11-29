@@ -56,6 +56,9 @@ async function renderSidebarHTML() {
 
   // hide search screen
   header.classList.remove('searching');
+  
+  // hide branch menu
+  branchMenu.classList.remove('visible');
 
 
   // map tree location
