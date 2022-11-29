@@ -2945,7 +2945,7 @@ function codeChange() {
 // protect unsaved code
 // if selected file is in current directory
 // but does not exist in the HTML
-function protectUnsavedCode() {
+async function protectUnsavedCode() {
 
   // map tree location
   const [user, repo, contents] = treeLoc;
@@ -2977,8 +2977,16 @@ function protectUnsavedCode() {
       // if new version of selected file exists
       if (selectedElName !== null) {
 
+        const scrollPos = selectedFile.scrollPos;
+
         // load file
-        loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
+        await loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
+
+        // prevent bottom float disappearing on mobile
+        if (isMobile) lastScrollTop = scrollPos[1];
+    
+        // scroll to pos in code
+        cd.scrollTo(scrollPos[0], scrollPos[1]);
 
       } else {
 
@@ -3025,7 +3033,7 @@ function protectUnsavedCode() {
   
       // if selected file isn't loaded
       if (selectedFile.sha !== getAttr(selectedElSha, 'sha')) {
-        
+
         // load file
         loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
         
