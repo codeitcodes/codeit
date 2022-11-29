@@ -560,6 +560,7 @@ body.scroll-enabled .bookmark {
   bottom: 0;
   height: 100vh;
   width: 13.5px;
+  transition: 0s .18s width;
   cursor: text;
   z-index: -1;
 }
@@ -569,7 +570,9 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible::after {
-  display: none;
+  pointer-events: none;
+  width: 0;
+  transition: none;
 }
 
 .live-toggle.file-open + .sidebar-toggle,
