@@ -1368,6 +1368,9 @@ async function loadFileInHTML(fileEl, fileSha) {
       // stop loading
       stopLoading();
       
+      showMessage('Hmm... that file dosen\'t exist.', 5000);
+      
+      
       // remove file from HTML
       if (fileEl) fileEl.remove();
       
@@ -1382,11 +1385,57 @@ async function loadFileInHTML(fileEl, fileSha) {
           // load previous selected file
           loadFileInHTML(prevSelFileEl, selectedFile.sha);
           
+        } else {
+          
+          // clear editor to protect unsaved code
+          clearEditor();
+          
         }
         
+      } else {
+        
+        // clear editor to protect unsaved code
+        clearEditor();
+        
       }
+      
+      function clearEditor() {
 
-      showMessage('Hmm... that file dosen\'t exist.', 5000);
+        // clear codeit contents
+        cd.textContent = '\r\n';
+
+        // change codeit lang
+        cd.lang = '';
+
+        // clear codeit history
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
+        // update line numbers
+        updateLineNumbersHTML();
+
+        // if on mobile, show sidebar
+        if (isMobile) {
+
+          // don't transition
+          body.classList.add('notransition');
+
+          // show sidebar
+          toggleSidebar(true);
+          saveSidebarStateLS();
+
+          onNextFrame(() => {
+
+            body.classList.remove('notransition');
+
+          });
+
+        }
+
+        // change selected file to empty file
+        changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+        
+      }
 
       return;
 
