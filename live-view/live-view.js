@@ -1196,12 +1196,17 @@ async function renderLiveViewMarkdown(file) {
       
       await loadScript(window.location.origin + '/lib/prism.js', frameDoc.body);
       
+      
       let s = document.createElement('script');
+      
       s.appendChild(document.createTextNode(`Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/'`));
+      
+      frameDoc.body.appendChild(s);
+      
       onNextFrame(() => {
         frameDoc.body.removeChild(s);
       });
-      frameDoc.body.appendChild(s);
+      
       
       await loadScript(window.location.origin + '/lib/codeit.js', frameDoc.body);
       
