@@ -1351,12 +1351,45 @@ async function loadFileInHTML(fileEl, fileSha) {
     let resp = await git.getFile(treeLoc, fileName);
     
     
+    const currSelectedFileName = fileWrapper.querySelector('.selected .name').textContent.replaceAll('\n','');
+    
     // if switched file or directory while loading, return
-    if (selectedFile.name !== fileName ||
-        selectedFile.dir !== fileDir) {
+    if (treeLoc.join() !== fileDir ||
+        currSelectedFileName !== fileName) {
       
       return;
       
+    }
+    
+    
+    // if file dosen't exist
+    if (resp.message && resp.message === 'Not Found') {
+
+      // stop loading
+      stopLoading();
+      
+      // remove file from HTML
+      if (fileEl) fileEl.remove();
+      
+      // if previous file selection exists
+      if (selectedFile.sha) {
+        
+        const prevSelFileEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+        
+        // if previous file selection exists in HTML
+        if (prevSelFileEl) {
+          
+          // load previous selected file
+          loadFileInHTML(prevSelFileEl, selectedFile.sha);
+          
+        }
+        
+      }
+
+      showMessage('Hmm... that file dosen\'t exist.', 5000);
+
+      return;
+
     }
     
     
@@ -2987,45 +3020,6 @@ async function protectUnsavedCode() {
     
         // scroll to pos in code
         cd.scrollTo(scrollPos[0], scrollPos[1]);
-
-      } else {
-
-        // if the selected file was deleted,
-        // protect unsaved code by clearing codeit
-
-        // clear codeit contents
-        cd.textContent = '\r\n';
-
-        // change codeit lang
-        cd.lang = '';
-
-        // clear codeit history
-        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-        cd.history.pos = 0;
-  
-        // update line numbers
-        updateLineNumbersHTML();
-
-        // if on mobile, show sidebar
-        if (isMobile) {
-
-          // don't transition
-          body.classList.add('notransition');
-
-          // show sidebar
-          toggleSidebar(true);
-          saveSidebarStateLS();
-
-          onNextFrame(() => {
-
-            body.classList.remove('notransition');
-
-          });
-
-        }
-
-        // change selected file to empty file
-        changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
 
       }
       
