@@ -79,8 +79,8 @@ window.addEventListener('load', async () => {
   window.addEventListener('message', async (event) => {
     
     // if received a git code
-    if (event.origin === window.location.origin
-        && event.data.startsWith('gitCode=')) {
+    if (event.origin === window.location.origin &&
+        event.data && event.data.startsWith('gitCode=')) {
     
       // hide intro screen
       sidebar.classList.remove('intro');
