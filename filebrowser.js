@@ -2109,8 +2109,8 @@ sidebarBranch.addEventListener('click', () => {
       moveElToEl(branchMenu, sidebarBranch, 23);
       
     }
-
-    branchMenu.classList.add('top-margin');
+    
+    branchMenu.scrollTo(0, 0);
 
   }
   
