@@ -398,38 +398,6 @@ async function renderSidebarHTML() {
   
   // if navigating in repository
   if (repo != '') {
-
-    // legacy modified file dir
-    
-    let modFilesChanged = false;
-
-    Object.values(modifiedFiles).forEach(modFile => {
-
-      if (modFile.dir) {
-
-        // map modified file location
-        let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
-
-        // if modified file dosen't have a branch
-        // and is in current repo
-        if (!fileRepo.includes(':')
-            && fileUser === user
-            && fileRepo === repoName) {
-
-          // append default branch to file
-          fileRepo = fileRepo + ':' + branch;
-          modFile.dir = [fileUser, fileRepo, fileDir].join();
-
-          modFilesChanged = true;
-
-        }
-
-      }
-
-    });
-
-    if (modFilesChanged) updateModFilesLS();
-    
     
     // get all eclipsed files in directory
     eclipsedFiles = Object.values(modifiedFiles).filter(modFile => modFile.dir == treeLoc.join());
@@ -463,8 +431,7 @@ async function renderSidebarHTML() {
 
       // scroll to end of title
       sidebarLogo.scrollTo({
-        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft//,
-        //behavior: 'smooth'
+        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
       
       sidebarLogo.classList.add('notransition');
@@ -832,6 +799,11 @@ async function renderSidebarHTML() {
     protectUnsavedCode();
     
   }
+  
+  
+  // hide branch menu
+  branchMenu.classList.remove('visible');
+  sidebarBranch.classList.remove('active');
 
 }
 
@@ -1341,8 +1313,102 @@ async function loadFileInHTML(fileEl, fileSha) {
       startLoading();
     }
     
+    
+    const fileDir = treeLoc.join();
+    
     // get file from git
     let resp = await git.getFile(treeLoc, fileName);
+    
+    
+    const currSelectedFileName = fileWrapper.querySelector('.selected .name').textContent.replaceAll('\n','');
+    
+    // if switched file or directory while loading, return
+    if (treeLoc.join() !== fileDir ||
+        currSelectedFileName !== fileName) {
+      
+      return;
+      
+    }
+    
+    
+    // if file dosen't exist
+    if (resp.message && resp.message === 'Not Found') {
+
+      // stop loading
+      stopLoading();
+      
+      showMessage('Hmm... that file dosen\'t exist.', 5000);
+      
+      
+      // remove file from HTML
+      if (fileEl) fileEl.remove();
+      
+      // if previous file selection exists
+      if (selectedFile.sha) {
+        
+        const prevSelFileEl = fileWrapper.querySelector('.item[sha="'+ selectedFile.sha +'"]');
+        
+        // if previous file selection exists in HTML
+        if (prevSelFileEl) {
+          
+          // load previous selected file
+          loadFileInHTML(prevSelFileEl, selectedFile.sha);
+          
+        } else {
+          
+          // clear editor to protect unsaved code
+          clearEditor();
+          
+        }
+        
+      } else {
+        
+        // clear editor to protect unsaved code
+        clearEditor();
+        
+      }
+      
+      function clearEditor() {
+
+        // clear codeit contents
+        cd.textContent = '\r\n';
+
+        // change codeit lang
+        cd.lang = '';
+
+        // clear codeit history
+        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
+        cd.history.pos = 0;
+  
+        // update line numbers
+        updateLineNumbersHTML();
+
+        // if on mobile, show sidebar
+        if (isMobile) {
+
+          // don't transition
+          body.classList.add('notransition');
+
+          // show sidebar
+          toggleSidebar(true);
+          saveSidebarStateLS();
+
+          onNextFrame(() => {
+
+            body.classList.remove('notransition');
+
+          });
+
+        }
+
+        // change selected file to empty file
+        changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+        
+      }
+
+      return;
+
+    }
     
     
     // if file is over 1MB
@@ -1612,7 +1678,7 @@ async function renderBranchMenuHTML(renderAll) {
   if (getAttr(branchMenu, 'tree') !== [user, repoName, contents].join()) {
         
     // show loading message
-    branchMenu.innerHTML = '<div class="icon selected"><a>Loading...</a></div>';
+    branchMenu.innerHTML = '<div class="icon" style="pointer-events: none; opacity: .5; font-weight: 500;"><a>Loading...</a></div>';
     
     setAttr(branchMenu, 'tree', [user, repoName, contents].join()); 
     
@@ -1723,7 +1789,7 @@ async function renderBranchMenuHTML(renderAll) {
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
-    out += '<div class="icon see-more">' + moreIcon + '<a>see more</a></div>';
+    out += '<div class="icon see-more">' + moreIcon + '<a>more</a></div>';
     
   }
   
@@ -2011,8 +2077,8 @@ sidebarBranch.addEventListener('click', () => {
       moveElToEl(branchMenu, sidebarBranch, 23);
       
     }
-
-    branchMenu.classList.add('top-margin');
+    
+    branchMenu.scrollTo(0, 0);
 
   }
   
@@ -2930,7 +2996,7 @@ function codeChange() {
 // protect unsaved code
 // if selected file is in current directory
 // but does not exist in the HTML
-function protectUnsavedCode() {
+async function protectUnsavedCode() {
 
   // map tree location
   const [user, repo, contents] = treeLoc;
@@ -2962,47 +3028,16 @@ function protectUnsavedCode() {
       // if new version of selected file exists
       if (selectedElName !== null) {
 
+        const scrollPos = selectedFile.scrollPos;
+
         // load file
-        loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
+        await loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
 
-      } else {
-
-        // if the selected file was deleted,
-        // protect unsaved code by clearing codeit
-
-        // clear codeit contents
-        cd.textContent = '\r\n';
-
-        // change codeit lang
-        cd.lang = '';
-
-        // clear codeit history
-        cd.history.records = [{ html: cd.innerHTML, pos: cd.getSelection() }];
-        cd.history.pos = 0;
-  
-        // update line numbers
-        updateLineNumbersHTML();
-
-        // if on mobile, show sidebar
-        if (isMobile) {
-
-          // don't transition
-          body.classList.add('notransition');
-
-          // show sidebar
-          toggleSidebar(true);
-          saveSidebarStateLS();
-
-          onNextFrame(() => {
-
-            body.classList.remove('notransition');
-
-          });
-
-        }
-
-        // change selected file to empty file
-        changeSelectedFile('', '', '', '', '', [0, 0], [0, 0], false);
+        // prevent bottom float disappearing on mobile
+        if (isMobile) lastScrollTop = scrollPos[1];
+    
+        // scroll to pos in code
+        cd.scrollTo(scrollPos[0], scrollPos[1]);
 
       }
       
@@ -3010,7 +3045,7 @@ function protectUnsavedCode() {
   
       // if selected file isn't loaded
       if (selectedFile.sha !== getAttr(selectedElSha, 'sha')) {
-        
+
         // load file
         loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
         
