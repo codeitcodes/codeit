@@ -800,6 +800,7 @@ async function renderSidebarHTML() {
     
   }
   
+  
   // hide branch menu
   branchMenu.classList.remove('visible');
   sidebarBranch.classList.remove('active');
