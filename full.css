@@ -1759,6 +1759,10 @@ body.mobile .context-menu {
   padding: 0;
 }
 
+body:not(.mobile) .live-view-menu {
+  display: none;
+}
+
 .live-view-menu:not(.visible) {
   padding: 2px 2px 2px 0px;
 }
