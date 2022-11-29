@@ -556,12 +556,11 @@ body.scroll-enabled .bookmark {
 .sidebar-toggle::after {
   content: '';
   position: absolute;
-  left: 45px;
+  left: 49px;
   bottom: 0;
   height: 100vh;
-  width: 10px;
+  width: 13.5px;
   cursor: text;
-  transition: 0s .18s;
   z-index: -1;
 }
 
@@ -570,9 +569,7 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible::after {
-  width: 0;
-  transition: none;
-  pointer-events: none;
+  display: none;
 }
 
 .live-toggle.file-open + .sidebar-toggle,
