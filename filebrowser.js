@@ -1344,8 +1344,20 @@ async function loadFileInHTML(fileEl, fileSha) {
       startLoading();
     }
     
+    
+    const fileDir = treeLoc.join();
+    
     // get file from git
     let resp = await git.getFile(treeLoc, fileName);
+    
+    
+    // if switched file or directory while loading, return
+    if (selectedFile.name !== fileName ||
+        selectedFile.dir !== fileDir) {
+      
+      return;
+      
+    }
     
     
     // if file is over 1MB
