@@ -56,10 +56,6 @@ async function renderSidebarHTML() {
 
   // hide search screen
   header.classList.remove('searching');
-  
-  // hide branch menu
-  branchMenu.classList.remove('visible');
-  sidebarBranch.classList.remove('active');
 
 
   // map tree location
@@ -402,38 +398,6 @@ async function renderSidebarHTML() {
   
   // if navigating in repository
   if (repo != '') {
-
-    // legacy modified file dir
-    
-    let modFilesChanged = false;
-
-    Object.values(modifiedFiles).forEach(modFile => {
-
-      if (modFile.dir) {
-
-        // map modified file location
-        let [fileUser, fileRepo, fileDir] = modFile.dir.split(',');
-
-        // if modified file dosen't have a branch
-        // and is in current repo
-        if (!fileRepo.includes(':')
-            && fileUser === user
-            && fileRepo === repoName) {
-
-          // append default branch to file
-          fileRepo = fileRepo + ':' + branch;
-          modFile.dir = [fileUser, fileRepo, fileDir].join();
-
-          modFilesChanged = true;
-
-        }
-
-      }
-
-    });
-
-    if (modFilesChanged) updateModFilesLS();
-    
     
     // get all eclipsed files in directory
     eclipsedFiles = Object.values(modifiedFiles).filter(modFile => modFile.dir == treeLoc.join());
@@ -467,8 +431,7 @@ async function renderSidebarHTML() {
 
       // scroll to end of title
       sidebarLogo.scrollTo({
-        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft//,
-        //behavior: 'smooth'
+        left: sidebarLogo.scrollWidth - sidebarLogo.offsetLeft
       });
       
       sidebarLogo.classList.add('notransition');
@@ -836,6 +799,10 @@ async function renderSidebarHTML() {
     protectUnsavedCode();
     
   }
+  
+  // hide branch menu
+  branchMenu.classList.remove('visible');
+  sidebarBranch.classList.remove('active');
 
 }
 
