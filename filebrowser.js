@@ -2246,7 +2246,10 @@ function createNewRepoInHTML() {
 
         // get repo name
         let repoName = repoEl.querySelector('.name').textContent.replaceAll('\n', '');
-
+        
+        // if repo name is empty, use default name
+        if (repoName === '') repoName = 'new-repo';
+        
         // replace all special chars in name with dashes
         
         const specialChars = validateString(repoName);
