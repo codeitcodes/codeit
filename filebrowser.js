@@ -3227,7 +3227,7 @@ function setupEditor() {
     onNextFrame(updateLineNumbersHTML);
   });
   
-  
+  /*
   let shownMessages = getStorage('shownMessages');
   
   if (shownMessages) {
@@ -3413,7 +3413,7 @@ function setupEditor() {
       
     }
 
-  });
+  });*/
 
 }
 
