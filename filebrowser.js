@@ -2264,6 +2264,11 @@ function createNewRepoInHTML() {
         
         while (repoNameExists(repoName)) {
           
+          // if repo already has
+          // a differentiating number,
+          // remove it
+          if (nameIndex !== 1) repoName = repoName.slice(0, -('-' + nameIndex).length);
+          
           // add a differentiating number
           // to repo name
           repoName = repoName + '-' + nameIndex;
@@ -2433,6 +2438,11 @@ function createNewFileInHTML() {
           
           // split extension from file name
           fileName = splitFileName(fileName);
+          
+          // if file already has
+          // a differentiating number,
+          // remove it
+          if (nameIndex !== 1) fileName[0] = fileName[0].slice(0, -('-' + nameIndex).length);
 
           // add a differentiating number
           // and reconstruct file name
