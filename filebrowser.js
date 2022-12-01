@@ -3385,7 +3385,13 @@ function setupEditor() {
         || ((e.key === 'f' || e.keyCode === 70) && e.shiftKey && e.altKey)
         || ((e.key === 'i' || e.keyCode === 73) && e.shiftKey && (isKeyEventMeta(e) || e.altKey))) {
       
-      e.preventDefault();
+      // if pressed ctrl/cmd key
+      if (isKeyEventMeta(e)) {
+        
+        // prevent default behavior
+        e.preventDefault();
+        
+      }
       
       // if codeit is active
       if (document.activeElement === cd) {
