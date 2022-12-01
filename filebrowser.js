@@ -900,12 +900,8 @@ function addHTMLItemListeners() {
     })
     
     
-    // add context menu listeners
-    if (item.classList.contains('file')) {
-      
-      contextMenu.addFileListener(item);
-      
-    }
+    // add context menu listener
+    contextMenu.addItemListener(item);
 
   })
 
@@ -2625,8 +2621,8 @@ function createNewFileInHTML() {
 
         })
         
-        // add context menu listeners
-        contextMenu.addFileListener(fileEl);
+        // add context menu listener
+        contextMenu.addItemListener(fileEl);
 
       }
 
