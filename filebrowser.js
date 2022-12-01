@@ -3247,6 +3247,16 @@ function setupEditor() {
   }
   
   
+  // legacy save message
+  let legacyMessageShown = getStorage('saveMessageShown');
+  
+  if (legacyMessageShown) {
+    
+    shownMessages.save = Number(legacyMessageShown);
+    localStorage.removeItem('saveMessageShown');
+    
+  }
+  
   document.addEventListener('keydown', (e) => {
 
     // disable Ctrl/Cmd + S
