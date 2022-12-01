@@ -1845,7 +1845,7 @@ async function renderBranchMenuHTML(renderAll) {
           if (isMobile) {
             
             onNextFrame(() => {
-              moveElToEl(branchMenu, sidebarBranch, 13, { top: -32 });
+              moveElToEl(branchMenu, sidebarBranch, 13, { top: -16 });
             });
             
           }
@@ -2068,12 +2068,12 @@ sidebarBranch.addEventListener('click', () => {
     if (!isSafari) {
       
       // move branch menu to icon
-      moveElToEl(branchMenu, sidebarBranch, 13, { top: -32 });
+      moveElToEl(branchMenu, sidebarBranch, 13, { top: -16 });
       
     } else {
       
       // move branch menu to icon
-      moveElToEl(branchMenu, sidebarBranch, 23, { top: -32 });
+      moveElToEl(branchMenu, sidebarBranch, 23, { top: -16 });
       
     }
     
