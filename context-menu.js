@@ -56,7 +56,17 @@ contextMenu = {
         
       } else {
         
-        const [user, repo] = activeItemName.split('/');
+        let fullName = getAttr(contextMenu.activeEl, 'fullname');
+        
+        if (!fullName) {
+          
+          fullName = getAttr(contextMenu.activeEl, 'repoobj');
+          
+          fullName = JSON.parse(tree).fullName;
+          
+        }
+        
+        [user, repo] = fullName.split('/');
         
         link = createLink({
           dir: [user, repo, '']
