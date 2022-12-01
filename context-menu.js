@@ -62,7 +62,7 @@ contextMenu = {
           
           fullName = getAttr(contextMenu.activeEl, 'repoobj');
           
-          fullName = JSON.parse(tree).fullName;
+          fullName = JSON.parse(fullName).fullName;
           
         }
         
