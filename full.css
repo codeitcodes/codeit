@@ -944,6 +944,7 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
 
 .sidebar .header .title .branch-icon {
   padding: 5px;
+  height: calc(100% - 10px);
   opacity: .5;
   position: absolute;
   right: -26px;
