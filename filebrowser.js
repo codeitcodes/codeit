@@ -3149,28 +3149,24 @@ function setupEditor() {
   });
   
   
-  let beautifierOptions = {
-    "indent_size": "2",
-    "indent_char": " ",
-    "max_preserve_newlines": "5",
-    "preserve_newlines": true,
-    "keep_array_indentation": false,
-    "break_chained_methods": false,
-    "indent_scripts": "normal",
-    "brace_style": "collapse",
-    "space_before_conditional": true,
-    "unescape_strings": false,
-    "jslint_happy": false,
-    "end_with_newline": false,
-    "wrap_line_length": "0",
-    "indent_inner_html": false,
-    "comma_first": false,
-    "e4x": false,
-    "indent_empty_lines": false
-  };
+  let shownMessages = getStorage('shownMessages');
   
+  if (shownMessages) {
+    
+    shownMessages = JSON.parse(shownMessages);
+    
+  } else {
+    
+    shownMessages = {};
+    
+  }
   
-  let saveMessageShown = getStorage('saveMessageShown') ?? false;
+  function saveShownMessagesLS() {
+    
+    setStorage('shownMessages', JSON.stringify(shownMessages));
+    
+  }
+  
   
   document.addEventListener('keydown', (e) => {
 
@@ -3179,25 +3175,42 @@ function setupEditor() {
 
       e.preventDefault();
       
-      if (!saveMessageShown || saveMessageShown === '1') {
+      // if shown message less than two times
+      if (shownMessages.save <= 2) {
         
+        // show message
         showMessage('We autosave :D');
-        
-        if (saveMessageShown === '1') {
-          
-          saveMessageShown = '2';
-          
-        } else {
-          
-          saveMessageShown = '1';
 
-        }
+        // bump counter
+        if (!shownMessages.save) shownMessages.save = 1;
+        else shownMessages.save++;
         
-        setStorage('saveMessageShown', saveMessageShown);
+        saveShownMessagesLS();
         
       }
       
     }
+    
+    
+    let beautifierOptions = {
+      "indent_size": "2",
+      "indent_char": " ",
+      "max_preserve_newlines": "5",
+      "preserve_newlines": true,
+      "keep_array_indentation": false,
+      "break_chained_methods": false,
+      "indent_scripts": "normal",
+      "brace_style": "collapse",
+      "space_before_conditional": true,
+      "unescape_strings": false,
+      "jslint_happy": false,
+      "end_with_newline": false,
+      "wrap_line_length": "0",
+      "indent_inner_html": false,
+      "comma_first": false,
+      "e4x": false,
+      "indent_empty_lines": false
+    };
     
     
     // beautify on Ctrl/Cmd + D
@@ -3262,16 +3275,34 @@ function setupEditor() {
             
           }
 
+        } else {
+          
+          // if shown message less than two times
+          if (shownMessages.beautifySelect <= 2) {
+          
+            // show beautify select message
+            showMessage('Try selecting some text.', 3500);
+            
+            // bump counter
+            if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 1;
+            else shownMessages.beautifySelect++;
+            
+            saveShownMessagesLS();
+            
+          }
+          
         }
         
       }
 
     }
     
-    // show beautify message on Ctrl/Cmd + B/P
-    if (((e.key === 'b' || e.keyCode === 66)
-        || (e.key === 'p' || e.keyCode === 80))
-        && isKeyEventMeta(e)) {
+    // show beautify message on common keyboard shortcuts
+    if ((((e.key === 'b' || e.keyCode === 66)
+        || (e.key === 'p' || e.keyCode === 80)))
+        && isKeyEventMeta(e))
+        || ((e.key === 'f' || e.keyCode === 70) && e.shiftKey && e.altKey)
+        || ((e.key === 'i' || e.keyCode === 73) && e.shiftKey && (isKeyEventMeta(e) || e.altKey))) {
       
       e.preventDefault();
       
