@@ -3175,6 +3175,8 @@ function setupEditor() {
 
       e.preventDefault();
       
+      if (!shownMessages.save) shownMessages.save = 0;
+      
       // if shown message less than two times
       if (shownMessages.save <= 2) {
         
@@ -3182,8 +3184,7 @@ function setupEditor() {
         showMessage('We autosave :D');
 
         // bump counter
-        if (!shownMessages.save) shownMessages.save = 1;
-        else shownMessages.save++;
+        shownMessages.save++;
         
         saveShownMessagesLS();
         
@@ -3277,6 +3278,8 @@ function setupEditor() {
 
         } else {
           
+          if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 0;
+          
           // if shown message less than two times
           if (shownMessages.beautifySelect <= 2) {
           
@@ -3284,8 +3287,7 @@ function setupEditor() {
             showMessage('Try selecting some text.', 3500);
             
             // bump counter
-            if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 1;
-            else shownMessages.beautifySelect++;
+            shownMessages.beautifySelect++;
             
             saveShownMessagesLS();
             
