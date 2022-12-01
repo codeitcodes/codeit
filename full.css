@@ -2564,7 +2564,6 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: none;
 }
 
 @media print {
