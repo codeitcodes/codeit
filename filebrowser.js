@@ -852,6 +852,9 @@ function addHTMLItemListeners() {
           
         } else {
           
+          // hide search screen
+          header.classList.remove('searching');
+          
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
 
