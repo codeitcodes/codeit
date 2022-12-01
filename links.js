@@ -33,6 +33,10 @@ function createLink(linkData) {
         
         branch = ':' + branch;
         
+      } else {
+        
+        branch = '';
+        
       }
       
       
