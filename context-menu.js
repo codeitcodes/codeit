@@ -44,7 +44,7 @@ contextMenu = {
         
         link = createLink({
           dir: treeLoc,
-          file: { name: activeFileName },
+          file: { name: activeItemName },
           openLive: false
         });
         
