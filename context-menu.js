@@ -35,23 +35,25 @@ contextMenu = {
     
     options.share.addEventListener('click', async () => {
       
-      const activeItemName = contextMenu.activeEl.querySelector('.name').textContent
-                              .replaceAll('\n','');
+      const itemName = contextMenu.activeEl.querySelector('.name').textContent
+                       .replaceAll('\n','');
       
       let link;
+      
+      let repoObj;
       
       if (contextMenu.activeEl.classList.contains('file')) {
         
         link = createLink({
           dir: treeLoc,
-          file: { name: activeItemName },
+          file: { name: itemName },
           openLive: false
         });
         
       } else if (contextMenu.activeEl.classList.contains('folder')) {
         
         link = createLink({
-          dir: [treeLoc[0], treeLoc[1], treeLoc[2] + '/' + activeItemName]
+          dir: [treeLoc[0], treeLoc[1], treeLoc[2] + '/' + itemName]
         });
         
       } else {
@@ -60,9 +62,15 @@ contextMenu = {
         
         if (!fullName) {
           
-          fullName = getAttr(contextMenu.activeEl, 'repoObj');
+          repoObj = getAttr(contextMenu.activeEl, 'repoObj');
           
-          fullName = JSON.parse(decodeURI(fullName)).fullName;
+          repoObj = JSON.parse(decodeURI(repoObj));
+          
+          fullName = repoObj.fullName;
+          
+        } else {
+          
+          repoObj = modifiedRepos[fullName];
           
         }
         
@@ -75,9 +83,13 @@ contextMenu = {
       }
       
       copy(link).then(() => {
-      
-        const [user, repo] = treeLoc;
-        const repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+        
+        if (!repoObj) {
+          
+          const [user, repo] = treeLoc;
+          repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+        
+        }
         
         if (!repoObj.private) {
           
