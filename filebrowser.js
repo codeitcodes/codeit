@@ -2274,7 +2274,11 @@ function createNewRepoInHTML() {
         
         function repoNameExists(name) {
           
-          fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
+          const repos = fileWrapper.querySelectorAll('.item.repo');
+          
+          for (let i = 0; i < repos.length; i++) {
+            
+            const repoElem = repos[i];
   
             const currRepoName = repoElem.querySelector('.name').textContent;
   
@@ -2285,7 +2289,7 @@ function createNewRepoInHTML() {
   
             }
   
-          });
+          }
           
           return false;
           
@@ -2440,7 +2444,11 @@ function createNewFileInHTML() {
         
         function fileNameExists(name) {
           
-          fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+          const files = fileWrapper.querySelectorAll('.item.file');
+          
+          for (let i = 0; i < files.length; i++) {
+            
+            const fileElem = files[i];
   
             const currFileName = fileElem.querySelector('.name').textContent;
   
@@ -2451,7 +2459,7 @@ function createNewFileInHTML() {
   
             }
   
-          });
+          }
           
           return false;
           
