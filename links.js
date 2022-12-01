@@ -29,7 +29,7 @@ function createLink(linkData) {
         
         branch = '';
         
-      } else {
+      } else if (branch) {
         
         branch = ':' + branch;
         
