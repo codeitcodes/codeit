@@ -2259,18 +2259,37 @@ function createNewRepoInHTML() {
         
         // if another repo in the current directory
         // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
-
-          if (repoElem !== repoEl
-              && (repoName === repoElem.querySelector('.name').textContent)) {
-
-            // add a differentiating number
-            // to repo name
-            repoName = repoName + '-1';
-
-          }
-
-        });
+        
+        let nameIndex = 1;
+        
+        while (repoNameExists(repoName)) {
+          
+          // add a differentiating number
+          // to repo name
+          repoName = repoName + '-' + nameIndex;
+          
+          nameIndex++;
+          
+        }
+        
+        function repoNameExists(name) {
+          
+          fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
+  
+            const currRepoName = repoElem.querySelector('.name').textContent;
+  
+            if (repoEl !== repoElem &&
+                name === currRepoName) {
+  
+              return true;
+  
+            }
+  
+          });
+          
+          return false;
+          
+        }
 
         repoEl.querySelector('.name').textContent = repoName;
         
@@ -2403,21 +2422,40 @@ function createNewFileInHTML() {
         
         // if another file in the current directory
         // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+        
+        let nameIndex = 1;
+        
+        while (fileNameExists(fileName)) {
+          
+          // split extension from file name
+          fileName = splitFileName(fileName);
 
-          if (fileElem !== fileEl
-              && (fileName === fileElem.querySelector('.name').textContent)) {
+          // add a differentiating number
+          // and reconstruct file name
+          fileName = fileName[0] + '-' + nameIndex + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
 
-            // split extension from file name
-            fileName = splitFileName(fileName);
-
-            // add a differentiating number
-            // and reconstruct file name
-            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
-
-          }
-
-        });
+          nameIndex++;
+          
+        }
+        
+        function fileNameExists(name) {
+          
+          fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+  
+            const currFileName = fileElem.querySelector('.name').textContent;
+  
+            if (fileEl !== fileElem &&
+                name === currFileName) {
+  
+              return true;
+  
+            }
+  
+          });
+          
+          return false;
+          
+        }
         
         
         let commitMessage = 'Create ' + fileName;
