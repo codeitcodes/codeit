@@ -3178,7 +3178,7 @@ function setupEditor() {
       if (!shownMessages.save) shownMessages.save = 0;
       
       // if shown message less than two times
-      if (shownMessages.save <= 2) {
+      if (shownMessages.save < 2) {
         
         // show message
         showMessage('We autosave :D');
@@ -3281,7 +3281,7 @@ function setupEditor() {
           if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 0;
           
           // if shown message less than two times
-          if (shownMessages.beautifySelect <= 2) {
+          if (shownMessages.beautifySelect < 2) {
           
             // show beautify select message
             showMessage('Try selecting some text.', 3500);
