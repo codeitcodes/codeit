@@ -35,14 +35,34 @@ contextMenu = {
     
     options.share.addEventListener('click', async () => {
       
-      const activeFileName = contextMenu.activeEl.querySelector('.name').textContent
+      const activeItemName = contextMenu.activeEl.querySelector('.name').textContent
                               .replaceAll('\n','');
       
-      const link = createLink({
-        dir: treeLoc,
-        file: { name: activeFileName },
-        openLive: false
-      });
+      let link;
+      
+      if (contextMenu.activeEl.classList.contains('file')) {
+        
+        link = createLink({
+          dir: treeLoc,
+          file: { name: activeFileName },
+          openLive: false
+        });
+        
+      } else if (contextMenu.activeEl.classList.contains('folder')) {
+        
+        link = createLink({
+          dir: [treeLoc[0], treeLoc[1], treeLoc[2] + '/' + activeItemName]
+        });
+        
+      } else {
+        
+        const [user, repo] = activeItemName.split('/');
+        
+        link = createLink({
+          dir: [user, repo, '']
+        });
+        
+      }
       
       copy(link).then(() => {
       
@@ -61,7 +81,7 @@ contextMenu = {
           });
           
         }
-        
+          
       });
       
     });
@@ -74,14 +94,14 @@ contextMenu = {
     
   },
   
-  addFileListener: (file) => {
+  addItemListener: (item) => {
     
     if (!isMobile) {
       
-      file.addEventListener('contextmenu', async (e) => {
+      item.addEventListener('contextmenu', async (e) => {
         
-        contextMenu.activeEl = file;
-        file.classList.add('active');
+        contextMenu.activeEl = item;
+        item.classList.add('active');
         
         onNextFrame(() => {
           moveElToMouse(contextMenu.el, e, 13);
@@ -89,7 +109,15 @@ contextMenu = {
         
         contextMenu.el.classList.add('visible', 'animating');
         
-        contextMenu.el.classList.toggle('modified', file.classList.contains('modified'));
+        if (item.classList.contains('file')) {
+          
+          contextMenu.el.classList.toggle('modified', item.classList.contains('modified'));
+        
+        } else {
+          
+          contextMenu.el.classList.remove('modified');
+          
+        }
         
         window.setTimeout(() => {
           
