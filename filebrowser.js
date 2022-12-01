@@ -2202,6 +2202,18 @@ function createNewRepoInHTML() {
 
         onNextFrame(pushNewRepoInHTML);
 
+      } else if (e.key === 'Escape') {
+        
+        e.preventDefault();
+        
+        repoEl.blur();
+        
+        repoEl.classList.add('hidden');
+    
+        window.setTimeout(() => {
+          repoEl.remove();
+        }, 180);
+        
       }
 
     });
@@ -2396,6 +2408,18 @@ function createNewFileInHTML() {
 
         onNextFrame(pushNewFileInHTML);
 
+      } else if (e.key === 'Escape') {
+        
+        e.preventDefault();
+        
+        fileEl.blur();
+        
+        fileEl.classList.add('hidden');
+    
+        window.setTimeout(() => {
+          fileEl.remove();
+        }, 180);
+        
       }
 
     });
