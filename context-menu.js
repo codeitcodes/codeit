@@ -56,13 +56,13 @@ contextMenu = {
         
       } else {
         
-        let fullName = getAttr(contextMenu.activeEl, 'fullname');
+        let fullName = getAttr(contextMenu.activeEl, 'fullName');
         
         if (!fullName) {
           
-          fullName = getAttr(contextMenu.activeEl, 'repoobj');
+          fullName = getAttr(contextMenu.activeEl, 'repoObj');
           
-          fullName = JSON.parse(fullName).fullName;
+          fullName = JSON.parse(decodeURI(fullName)).fullName;
           
         }
         
