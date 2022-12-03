@@ -3411,9 +3411,9 @@ function setupEditor() {
         
       }
       
-    }*/
+    }
 
-  });
+  });@@*/
 
 }
 
