@@ -3391,8 +3391,7 @@ function setupEditor() {
     if ((((e.key === 'b' || e.keyCode === 66)
         || (e.key === 'p' || e.keyCode === 80))
         && isKeyEventMeta(e))
-        || ((e.key === 'f' || e.keyCode === 70) && e.shiftKey && e.altKey)
-        || ((e.key === 'i' || e.keyCode === 73) && e.shiftKey && (isKeyEventMeta(e) || e.altKey))) {
+        || ((e.key === 'f' || e.keyCode === 70) && e.shiftKey && e.altKey)) {
       
       // if pressed ctrl/cmd key
       if (isKeyEventMeta(e)) {
