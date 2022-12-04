@@ -852,6 +852,9 @@ function addHTMLItemListeners() {
           
         } else {
           
+          // hide search screen
+          header.classList.remove('searching');
+          
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
 
@@ -900,12 +903,8 @@ function addHTMLItemListeners() {
     })
     
     
-    // add context menu listeners
-    if (item.classList.contains('file')) {
-      
-      contextMenu.addFileListener(item);
-      
-    }
+    // add context menu listener
+    contextMenu.addItemListener(item);
 
   })
 
@@ -1846,7 +1845,7 @@ async function renderBranchMenuHTML(renderAll) {
           if (isMobile) {
             
             onNextFrame(() => {
-              moveElToEl(branchMenu, sidebarBranch, 13);
+              moveElToEl(branchMenu, sidebarBranch, 13, { top: -16 });
             });
             
           }
@@ -2069,12 +2068,12 @@ sidebarBranch.addEventListener('click', () => {
     if (!isSafari) {
       
       // move branch menu to icon
-      moveElToEl(branchMenu, sidebarBranch, 13);
+      moveElToEl(branchMenu, sidebarBranch, 13, { top: -16 });
       
     } else {
       
       // move branch menu to icon
-      moveElToEl(branchMenu, sidebarBranch, 23);
+      moveElToEl(branchMenu, sidebarBranch, 23, { top: -16 });
       
     }
     
@@ -2206,6 +2205,18 @@ function createNewRepoInHTML() {
 
         onNextFrame(pushNewRepoInHTML);
 
+      } else if (e.key === 'Escape') {
+        
+        e.preventDefault();
+        
+        repoEl.blur();
+        
+        repoEl.classList.add('hidden');
+    
+        window.setTimeout(() => {
+          repoEl.remove();
+        }, 180);
+        
       }
 
     });
@@ -2246,7 +2257,10 @@ function createNewRepoInHTML() {
 
         // get repo name
         let repoName = repoEl.querySelector('.name').textContent.replaceAll('\n', '');
-
+        
+        // if repo name is empty, use default name
+        if (repoName === '') repoName = 'new-repo';
+        
         // replace all special chars in name with dashes
         
         const specialChars = validateString(repoName);
@@ -2260,18 +2274,46 @@ function createNewRepoInHTML() {
         
         // if another repo in the current directory
         // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.repo').forEach(repoElem => {
-
-          if (repoElem !== repoEl
-              && (repoName === repoElem.querySelector('.name').textContent)) {
-
-            // add a differentiating number
-            // to repo name
-            repoName = repoName + '-1';
-
+        
+        let nameIndex = 1;
+        
+        while (repoNameExists(repoName)) {
+          
+          // if repo already has
+          // a differentiating number,
+          // remove it
+          if (nameIndex !== 1) repoName = repoName.slice(0, -('-' + nameIndex).length);
+          
+          // add a differentiating number
+          // to repo name
+          repoName = repoName + '-' + nameIndex;
+          
+          nameIndex++;
+          
+        }
+        
+        function repoNameExists(name) {
+          
+          const repos = fileWrapper.querySelectorAll('.item.repo');
+          
+          for (let i = 0; i < repos.length; i++) {
+            
+            const repoElem = repos[i];
+  
+            const currRepoName = repoElem.querySelector('.name').textContent;
+  
+            if (repoEl !== repoElem &&
+                name === currRepoName) {
+  
+              return true;
+  
+            }
+  
           }
-
-        });
+          
+          return false;
+          
+        }
 
         repoEl.querySelector('.name').textContent = repoName;
         
@@ -2369,6 +2411,18 @@ function createNewFileInHTML() {
 
         onNextFrame(pushNewFileInHTML);
 
+      } else if (e.key === 'Escape') {
+        
+        e.preventDefault();
+        
+        fileEl.blur();
+        
+        fileEl.classList.add('hidden');
+    
+        window.setTimeout(() => {
+          fileEl.remove();
+        }, 180);
+        
       }
 
     });
@@ -2404,21 +2458,49 @@ function createNewFileInHTML() {
         
         // if another file in the current directory
         // has the same name, add a differentiating number
-        fileWrapper.querySelectorAll('.item.file').forEach(fileElem => {
+        
+        let nameIndex = 1;
+        
+        while (fileNameExists(fileName)) {
+          
+          // split extension from file name
+          fileName = splitFileName(fileName);
+          
+          // if file already has
+          // a differentiating number,
+          // remove it
+          if (nameIndex !== 1) fileName[0] = fileName[0].slice(0, -('-' + nameIndex).length);
 
-          if (fileElem !== fileEl
-              && (fileName === fileElem.querySelector('.name').textContent)) {
+          // add a differentiating number
+          // and reconstruct file name
+          fileName = fileName[0] + '-' + nameIndex + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
 
-            // split extension from file name
-            fileName = splitFileName(fileName);
-
-            // add a differentiating number
-            // and reconstruct file name
-            fileName = fileName[0] + '-1' + (fileName[1] !== 'none' ? ('.' + fileName[1]) : '');
-
+          nameIndex++;
+          
+        }
+        
+        function fileNameExists(name) {
+          
+          const files = fileWrapper.querySelectorAll('.item.file');
+          
+          for (let i = 0; i < files.length; i++) {
+            
+            const fileElem = files[i];
+  
+            const currFileName = fileElem.querySelector('.name').textContent;
+  
+            if (fileEl !== fileElem &&
+                name === currFileName) {
+  
+              return true;
+  
+            }
+  
           }
-
-        });
+          
+          return false;
+          
+        }
         
         
         let commitMessage = 'Create ' + fileName;
@@ -2622,8 +2704,8 @@ function createNewFileInHTML() {
 
         })
         
-        // add context menu listeners
-        contextMenu.addFileListener(fileEl);
+        // add context menu listener
+        contextMenu.addItemListener(fileEl);
 
       }
 
@@ -3146,28 +3228,34 @@ function setupEditor() {
   });
   
   
-  let beautifierOptions = {
-    "indent_size": "2",
-    "indent_char": " ",
-    "max_preserve_newlines": "5",
-    "preserve_newlines": true,
-    "keep_array_indentation": false,
-    "break_chained_methods": false,
-    "indent_scripts": "normal",
-    "brace_style": "collapse",
-    "space_before_conditional": true,
-    "unescape_strings": false,
-    "jslint_happy": false,
-    "end_with_newline": false,
-    "wrap_line_length": "0",
-    "indent_inner_html": false,
-    "comma_first": false,
-    "e4x": false,
-    "indent_empty_lines": false
-  };
+  let shownMessages = getStorage('shownMessages');
+  
+  if (shownMessages) {
+    
+    shownMessages = JSON.parse(shownMessages);
+    
+  } else {
+    
+    shownMessages = {};
+    
+  }
+  
+  function saveShownMessagesLS() {
+    
+    setStorage('shownMessages', JSON.stringify(shownMessages));
+    
+  }
   
   
-  let saveMessageShown = getStorage('saveMessageShown') ?? false;
+  // legacy save message
+  let legacyMessageShown = getStorage('saveMessageShown');
+  
+  if (legacyMessageShown) {
+    
+    shownMessages.save = Number(legacyMessageShown);
+    localStorage.removeItem('saveMessageShown');
+    
+  }
   
   document.addEventListener('keydown', (e) => {
 
@@ -3176,26 +3264,43 @@ function setupEditor() {
 
       e.preventDefault();
       
-      if (!saveMessageShown || saveMessageShown === '1') {
+      if (!shownMessages.save) shownMessages.save = 0;
+      
+      // if shown message less than two times
+      if (shownMessages.save < 2) {
         
+        // show message
         showMessage('We autosave :D');
-        
-        if (saveMessageShown === '1') {
-          
-          saveMessageShown = '2';
-          
-        } else {
-          
-          saveMessageShown = '1';
 
-        }
+        // bump counter
+        shownMessages.save++;
         
-        setStorage('saveMessageShown', saveMessageShown);
+        saveShownMessagesLS();
         
       }
       
     }
     
+    
+    let beautifierOptions = {
+      "indent_size": "2",
+      "indent_char": " ",
+      "max_preserve_newlines": "5",
+      "preserve_newlines": true,
+      "keep_array_indentation": false,
+      "break_chained_methods": false,
+      "indent_scripts": "normal",
+      "brace_style": "collapse",
+      "space_before_conditional": true,
+      "unescape_strings": false,
+      "jslint_happy": false,
+      "end_with_newline": false,
+      "wrap_line_length": "0",
+      "indent_inner_html": false,
+      "comma_first": false,
+      "e4x": false,
+      "indent_empty_lines": false
+    };
     
     // beautify on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
@@ -3259,18 +3364,42 @@ function setupEditor() {
             
           }
 
+        } else {
+          
+          if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 0;
+          
+          // if shown message less than two times
+          if (shownMessages.beautifySelect < 2) {
+          
+            // show beautify select message
+            showMessage('Try selecting some text.', 3500);
+            
+            // bump counter
+            shownMessages.beautifySelect++;
+            
+            saveShownMessagesLS();
+            
+          }
+          
         }
         
       }
 
     }
     
-    // show beautify message on Ctrl/Cmd + B/P
-    if (((e.key === 'b' || e.keyCode === 66)
+    // show beautify message on common keyboard shortcuts
+    if ((((e.key === 'b' || e.keyCode === 66)
         || (e.key === 'p' || e.keyCode === 80))
-        && isKeyEventMeta(e)) {
+        && isKeyEventMeta(e))
+        || ((e.key === 'f' || e.keyCode === 70) && e.shiftKey && e.altKey)) {
       
-      e.preventDefault();
+      // if pressed ctrl/cmd key
+      if (isKeyEventMeta(e)) {
+        
+        // prevent default behavior
+        e.preventDefault();
+        
+      }
       
       // if codeit is active
       if (document.activeElement === cd) {

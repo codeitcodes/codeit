@@ -556,12 +556,12 @@ body.scroll-enabled .bookmark {
 .sidebar-toggle::after {
   content: '';
   position: absolute;
-  left: 45px;
+  left: 49px;
   bottom: 0;
   height: 100vh;
-  width: 10px;
+  width: 13.5px;
+  transition: 0s .18s width;
   cursor: text;
-  transition: 0s .18s;
   z-index: -1;
 }
 
@@ -570,9 +570,9 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible::after {
+  pointer-events: none;
   width: 0;
   transition: none;
-  pointer-events: none;
 }
 
 .live-toggle.file-open + .sidebar-toggle,
@@ -944,6 +944,7 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
 
 .sidebar .header .title .branch-icon {
   padding: 5px;
+  height: calc(100% - 10px);
   opacity: .5;
   position: absolute;
   right: -26px;
@@ -2563,7 +2564,6 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: none;
 }
 
 @media print {

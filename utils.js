@@ -68,7 +68,7 @@ const body = document.body,
 
 
 // version
-const version = '3.4.2';
+const version = '3.4.3';
 versionEl.innerText = version;
 
 let logVersion = () => {
@@ -439,7 +439,7 @@ let setStorage = (item, value) => {
 
 // move element to element (when origin element has 'position: fixed')
 
-let moveElToEl = (originEl, destEl, boundryMargin = null, boundryEl = null) => {
+let moveElToEl = (originEl, destEl, boundryMargin = null, margin = null, boundryEl = null) => {
 
   // get bounding box of dest element
   const rect = destEl.getBoundingClientRect(),
@@ -484,13 +484,24 @@ let moveElToEl = (originEl, destEl, boundryMargin = null, boundryEl = null) => {
 
   let destTop = rect.top + destHeight,
       destLeft = rect.left;
+      
+      
+  // add margin
+  if (margin) {
+    
+    if (margin.top) destTop = destTop + margin.top;
+    
+    if (margin.left) destLeft = destLeft + margin.left;
+    
+  }
+  
 
   // check if element is outside window
   if (maxTop < destTop) destTop = maxTop;
   if (minTop > destTop) destTop = minTop;
   if (maxLeft < destLeft) destLeft = maxLeft;
   if (minLeft > destLeft) destLeft = minLeft;
-
+  
 
   originEl.style.top = destTop + 'px';
   originEl.style.left = destLeft + 'px';

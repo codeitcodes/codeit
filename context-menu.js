@@ -35,19 +35,61 @@ contextMenu = {
     
     options.share.addEventListener('click', async () => {
       
-      const activeFileName = contextMenu.activeEl.querySelector('.name').textContent
-                              .replaceAll('\n','');
+      const itemName = contextMenu.activeEl.querySelector('.name').textContent
+                       .replaceAll('\n','');
       
-      const link = createLink({
-        dir: treeLoc,
-        file: { name: activeFileName },
-        openLive: false
-      });
+      let link;
+      
+      let repoObj;
+      
+      if (contextMenu.activeEl.classList.contains('file')) {
+        
+        link = createLink({
+          dir: treeLoc,
+          file: { name: itemName },
+          openLive: false
+        });
+        
+      } else if (contextMenu.activeEl.classList.contains('folder')) {
+        
+        link = createLink({
+          dir: [treeLoc[0], treeLoc[1], treeLoc[2] + '/' + itemName]
+        });
+        
+      } else {
+        
+        let fullName = getAttr(contextMenu.activeEl, 'fullName');
+        
+        if (!fullName) {
+          
+          repoObj = getAttr(contextMenu.activeEl, 'repoObj');
+          
+          repoObj = JSON.parse(decodeURI(repoObj));
+          
+          fullName = repoObj.fullName;
+          
+        } else {
+          
+          repoObj = modifiedRepos[fullName];
+          
+        }
+        
+        [user, repo] = fullName.split('/');
+        
+        link = createLink({
+          dir: [user, repo, '']
+        });
+        
+      }
       
       copy(link).then(() => {
-      
-        const [user, repo] = treeLoc;
-        const repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+        
+        if (!repoObj) {
+          
+          const [user, repo] = treeLoc;
+          repoObj = modifiedRepos[user + '/' + repo.split(':')[0]];
+        
+        }
         
         if (!repoObj.private) {
           
@@ -61,7 +103,7 @@ contextMenu = {
           });
           
         }
-        
+          
       });
       
     });
@@ -74,14 +116,14 @@ contextMenu = {
     
   },
   
-  addFileListener: (file) => {
+  addItemListener: (item) => {
     
     if (!isMobile) {
       
-      file.addEventListener('contextmenu', async (e) => {
+      item.addEventListener('contextmenu', async (e) => {
         
-        contextMenu.activeEl = file;
-        file.classList.add('active');
+        contextMenu.activeEl = item;
+        item.classList.add('active');
         
         onNextFrame(() => {
           moveElToMouse(contextMenu.el, e, 13);
@@ -89,7 +131,15 @@ contextMenu = {
         
         contextMenu.el.classList.add('visible', 'animating');
         
-        contextMenu.el.classList.toggle('modified', file.classList.contains('modified'));
+        if (item.classList.contains('file')) {
+          
+          contextMenu.el.classList.toggle('modified', item.classList.contains('modified'));
+        
+        } else {
+          
+          contextMenu.el.classList.remove('modified');
+          
+        }
         
         window.setTimeout(() => {
           
