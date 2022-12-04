@@ -3299,9 +3299,8 @@ function setupEditor() {
       "indent_inner_html": false,
       "comma_first": false,
       "e4x": false,
-      "indent_empty_lines": true
+      "indent_empty_lines": false
     };
-    
     
     // beautify on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
