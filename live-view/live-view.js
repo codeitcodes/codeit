@@ -1088,12 +1088,6 @@ async function renderLiveViewHTML(file) {
 
   const liveFrame = liveView.querySelector('.live-frame');
 
-  liveFrame.contentWindow.addEventListener('DOMContentLoaded', () => {
-
-    liveFrame.contentWindow.history.replaceState({}, 'Live view', livePath);
-    
-  });
-
   liveFrame.contentWindow.addEventListener('load', () => {
     
     liveView.classList.add('loaded');
