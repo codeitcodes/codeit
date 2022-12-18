@@ -1051,34 +1051,7 @@ async function renderLiveViewHTML(file) {
   if (!workerClientId) await workerInstallPromise;
 
 
-  liveView.innerHTML = `<iframe srcdoc="` +
-  
-  escapeHTML(
-  
-  `
-  <html>
-  <head>
-  <style>
-  html, body {
-    margin: 0;
-    height: 100%;
-  }
-  .live-frame {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    border: 0;
-  }
-  </style>
-  <body>
-  
-  <iframe src="`+ livePath +`?`+ workerClientId +`/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts allow-same-origin"></iframe>
-  
-  </body>
-  </html>
-  `
-  
-  )
+  liveView.innerHTML = `<iframe src="/live-view/live-buffer?` + workerClientId
   
   + `" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts"></iframe>`;
 
