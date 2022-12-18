@@ -1055,7 +1055,7 @@ async function renderLiveViewHTML(file) {
   if (!workerClientId) await workerInstallPromise;
 
 
-  liveView.innerHTML = '<iframe src="'+ livePath +'?'+ worker.clientId +'/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowpaymentrequest="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts"></iframe>';
+  liveView.innerHTML = '<iframe src="'+ livePath +'?'+ workerClientId +'/" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowpaymentrequest="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts"></iframe>';
 
 
   liveFile = file;
