@@ -1053,7 +1053,7 @@ async function renderLiveViewHTML(file) {
 
   liveView.innerHTML = `<iframe src="/live-view/live-buffer?` + workerClientId
   
-  + `" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts allow-same-origin"></iframe>`;
+  + `" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; fullscreen; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts"></iframe>`;
 
 
   liveFile = file;
