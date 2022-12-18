@@ -1014,11 +1014,8 @@ async function handleLiveViewRequest(requestPath) {
 async function renderLiveViewHTML(file) {
 
   // if iOS version is lower than minimum
-  
-  const isSafariWithMac = (navigator.userAgent.toLowerCase().includes('safari')
-                           && !navigator.userAgent.toLowerCase().includes('chrome'));
-  
-  if (isSafariWithMac) {
+
+  if (isSafari) {
     
     const safariVersion = Number(navigator.userAgent.split('Version/')[1].split(' Safari')[0]);
     
