@@ -345,13 +345,16 @@ let checkPersistStorage = async () => {
 checkPersistStorage();
 
 
-// escape HTML (dosen't escape quotes '")
+// escape HTML
 let escapeHTML = (str) => {
   
   const p = document.createElement('p');
   p.appendChild(document.createTextNode(str));
   
-  return p.innerHTML;
+  let resp = p.innerHTML;
+  resp = resp.replaceAll(/"/g, "&quot;").replaceAll(/'/g, "&#039;");
+  
+  return resp;
   
 }
 
