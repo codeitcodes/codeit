@@ -347,9 +347,12 @@ checkPersistStorage();
 
 // escape HTML
 let escapeHTML = (str) => {
+  
   const p = document.createElement('p');
   p.appendChild(document.createTextNode(str));
+  
   return p.innerHTML;
+  
 }
 
 
