@@ -345,7 +345,7 @@ let checkPersistStorage = async () => {
 checkPersistStorage();
 
 
-// escape HTML
+// escape HTML (dosen't escape quotes '")
 let escapeHTML = (str) => {
   
   const p = document.createElement('p');
