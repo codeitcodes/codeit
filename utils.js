@@ -109,7 +109,7 @@ function stopLoading() {
 
 let messageTimeout;
 
-function showMessage(message, duration) {
+let showMessage = (message, duration) => {
   
   // if message includes an icon
   if (message.icon) {
@@ -158,7 +158,7 @@ function showMessage(message, duration) {
 
 }
 
-function hideMessage() {
+let hideMessage = () => {
   messageEl.classList.remove('visible');
 }
 
@@ -166,7 +166,7 @@ function hideMessage() {
 
 // show dialog
 
-function showDialog(confirmHandler, titleText, confirmText, showOneButton = false) {
+let showDialog = (confirmHandler, titleText, confirmText, showOneButton = false) => {
   
   return new Promise(resolve => {
     
@@ -227,7 +227,7 @@ function showDialog(confirmHandler, titleText, confirmText, showOneButton = fals
   
 }
 
-function hideDialog() {
+let hideDialog = () => {
   
   // hide dialog
   dialogWrapper.classList.remove('visible');
@@ -325,7 +325,7 @@ window.addEventListener('offline', () => { isOffline = true });
 
 let isPersistStorage = false;
 
-async function checkPersistStorage() {
+let checkPersistStorage = async () => {
   
   if (navigator.storage && navigator.storage.persist) {
 
@@ -343,6 +343,14 @@ async function checkPersistStorage() {
 }
 
 checkPersistStorage();
+
+
+// escape HTML
+let escapeHTML = (str) => {
+  const p = document.createElement('p');
+  p.appendChild(document.createTextNode(str));
+  return p.innerHTML;
+}
 
 
 // base64 encode/decode
