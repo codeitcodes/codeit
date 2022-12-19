@@ -3010,7 +3010,10 @@ function onEditorScroll() {
 
 }
 
+
 function updateScrollbarArrow() {
+
+  console.log('[Scrollbar arrows] Updated');
 
   // if codeit is horizontally scrollable
   if (cd.scrollWidth > cd.clientWidth) {
@@ -3026,6 +3029,10 @@ function updateScrollbarArrow() {
   }
 
 }
+
+// when codeit resizes, update
+new ResizeObserver(updateScrollbarArrow).observe(cd);
+
 
 // check for meta key (Ctrl/Command)
 function isKeyEventMeta(event) {
