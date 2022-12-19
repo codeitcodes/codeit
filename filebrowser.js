@@ -1422,7 +1422,7 @@ async function loadFileInHTML(fileEl, fileSha) {
 
       resp = { content: fileSizeText };
 
-      cd.textContent = fileSizeText;
+      cd.textContent = '';
 
       // if on mobile device
       if (isMobile) {
