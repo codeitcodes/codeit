@@ -1422,6 +1422,8 @@ async function loadFileInHTML(fileEl, fileSha) {
 
       resp = { content: fileSizeText };
 
+      cd.textContent = fileSizeText;
+
       // if on mobile device
       if (isMobile) {
 
