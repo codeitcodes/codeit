@@ -3013,8 +3013,6 @@ function onEditorScroll() {
 
 function updateScrollbarArrow() {
 
-  console.log('[Scrollbar arrows] Updated');
-
   // if codeit is horizontally scrollable
   if (cd.scrollWidth > cd.clientWidth) {
 
