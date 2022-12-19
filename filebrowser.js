@@ -1438,7 +1438,6 @@ async function loadFileInHTML(fileEl, fileSha) {
       } else {
 
         liveToggle.classList.add('file-open');
-        updateScrollbarArrow();
 
         onNextFrame(() => {
           liveView.classList.remove('notransition');
@@ -1583,7 +1582,6 @@ function loadBinaryFileHTML(file, toggled) {
     if (!isMobile) {
       
       liveToggle.classList.add('file-open');
-      updateScrollbarArrow();
       
     }
     
@@ -3224,8 +3222,6 @@ function setupEditor() {
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
 
-  if (!isMobile) cd.on('type', updateScrollbarArrow);
-
   // update on screen resize
 
   const landscape = window.matchMedia('(orientation: landscape)');
@@ -3447,7 +3443,6 @@ function updateLineNumbersHTML() {
 
   if (!isMobile) {
 
-    updateScrollbarArrow();
     updateLiveViewArrow();
 
   }
