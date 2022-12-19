@@ -355,14 +355,6 @@ async function setupLiveView() {
     // update line numbers
     updateLineNumbersHTML();
 
-    // if on desktop
-    if (!isMobile) {
-
-      // update scrollbar arrow
-      updateScrollbarArrow();
-
-    }
-
   }
 
 }
