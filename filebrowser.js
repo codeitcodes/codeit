@@ -1440,7 +1440,6 @@ async function loadFileInHTML(fileEl, fileSha) {
       } else {
 
         liveToggle.classList.add('file-open');
-        updateScrollbarArrow();
 
         onNextFrame(() => {
           liveView.classList.remove('notransition');
@@ -1585,7 +1584,6 @@ function loadBinaryFileHTML(file, toggled) {
     if (!isMobile) {
       
       liveToggle.classList.add('file-open');
-      updateScrollbarArrow();
       
     }
     
