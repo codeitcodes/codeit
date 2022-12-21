@@ -1945,6 +1945,18 @@ sidebarTitle.addEventListener('click', (e) => {
 
     sidebar.classList.add('learn');
     
+    
+    // if adding a repository
+    
+    const focusedRepo = fileWrapper.querySelector('.repo.focused');
+    
+    if (focusedRepo) {
+      
+      // remove it
+      focusedRepo.remove();
+      
+    }
+    
     /*
     // if there are no modified files
     // and no pending promises
