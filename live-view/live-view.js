@@ -284,6 +284,10 @@ async function setupLiveView() {
       // if on mobile device
       if (isMobile) {
 
+        // close sidebar
+        toggleSidebar(false);
+        saveSidebarStateLS();
+      
         // update bottom float
         updateFloat();
 
