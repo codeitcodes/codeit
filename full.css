@@ -1864,6 +1864,10 @@ body.mobile .dialog .button-wrapper::before {
   flex: 1;
 }
 
+body.mobile .dialog .button {
+  border-radius: 0;
+}
+
 .dialog .cancel {
   color: hsl(228deg 16% 37%);
 }
