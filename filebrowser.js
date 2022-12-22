@@ -3387,7 +3387,7 @@ function setupEditor() {
           if (shownMessages.beautifySelect < 2) {
           
             // show beautify select message
-            showMessage('Try selecting some text.', 3500);
+            showMessage('Try selecting some text first.', 4100);
             
             // bump counter
             shownMessages.beautifySelect++;
