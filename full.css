@@ -1856,7 +1856,7 @@ body.mobile .dialog .button-wrapper::before {
   pointer-events: none;
 }
 
-body.mobile .dialog-wrapper.hidden .button-wrapper::before {
+body.mobile .dialog-wrapper:not(.visible) .button-wrapper::before {
   left: -2px;
   right: -2px;
 }
@@ -1894,7 +1894,7 @@ body.mobile .dialog .cancel::after {
   pointer-events: none;
 }
 
-body.mobile .dialog-wrapper.hidden .button.cancel::after {
+body.mobile .dialog-wrapper:not(.visible) .button.cancel::after {
   bottom: -2px;
 }
 
