@@ -1818,6 +1818,7 @@ body.mobile .dialog-background {
   padding: 9px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   min-width: 170px;
+  overflow: hidden;
 }
 
 .dialog-wrapper.visible .dialog {
