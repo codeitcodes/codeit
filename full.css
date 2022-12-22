@@ -1829,7 +1829,7 @@ body.mobile .dialog-background {
 }
 
 .dialog .title {
-  padding: 8px 14px;
+  padding: 10px 14px;
   white-space: pre-wrap;
 }
 
@@ -1863,6 +1863,7 @@ body.mobile .dialog-wrapper:not(.visible) .button-wrapper::before {
 
 .dialog .button {
   padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 5.75px;
   display: flex;
   justify-content: center;
