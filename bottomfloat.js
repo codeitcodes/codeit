@@ -116,12 +116,6 @@ if (isMobile) {
     
   });
   
-  cd.on('focus', () => {
-
-    bottomWrapper.classList.add('hidden');
-
-  });
-  
   
   // update on screen resize
   
