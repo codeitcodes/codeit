@@ -930,10 +930,6 @@ async function clickedOnFileHTML(fileEl, event) {
 
       if (isMobile) { // if on mobile device
         
-        // close sidebar
-        toggleSidebar(false);
-        saveSidebarStateLS();
-        
         // update bottom float
         updateFloat();
         
@@ -1353,7 +1349,7 @@ async function loadFileInHTML(fileEl, fileSha) {
         
         // if previous file selection exists in HTML
         if (prevSelFileEl) {
-                    
+          
           // load previous selected file
           loadFileInHTML(prevSelFileEl, selectedFile.sha);
           
@@ -1434,10 +1430,6 @@ async function loadFileInHTML(fileEl, fileSha) {
         onNextFrame(() => {
 
           liveView.classList.remove('notransition');
-        
-          // close sidebar
-          toggleSidebar(false);
-          saveSidebarStateLS();
 
           // update bottom float
           bottomFloat.classList.add('file-open');
@@ -1490,16 +1482,8 @@ async function loadFileInHTML(fileEl, fileSha) {
     // change codeit lang
     cd.lang = selectedFile.lang;
     
-    if (isMobile) {
-      
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
-      
-      // update bottom float
-      updateFloat();
-      
-    }
+    // update bottom float
+    if (isMobile) updateFloat();
     
   } catch(e) { // if file is binary
     
@@ -1588,11 +1572,6 @@ function loadBinaryFileHTML(file, toggled) {
       
       liveView.classList.remove('notransition');
       
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
-      
-      // update bottom float
       updateFloat();
       
     })
@@ -2646,10 +2625,6 @@ function createNewFileInHTML() {
           // then open new file
           window.setTimeout(() => {
             
-            // close sidebar
-            toggleSidebar(false);
-            saveSidebarStateLS();
-            
             // update bottom float
             updateFloat();
             
@@ -3018,20 +2993,10 @@ async function deleteModFileInHTML(fileEl) {
   fileEl.classList.remove('modified');
   
   if (fileEl.classList.contains('selected')) {
-
-    const sidebarOpen = body.classList.contains('expanded');
     
     const scrollPos = selectedFile.scrollPos;
 
     await loadFileInHTML(fileEl, fileSha);
-    
-    if (!sidebarOpen) {
-
-      // close sidebar
-      toggleSidebar(false);
-      saveSidebarStateLS();
-      
-    }
 
     // prevent bottom float disappearing on mobile
     if (isMobile) lastScrollTop = scrollPos[1];
@@ -3162,20 +3127,10 @@ async function protectUnsavedCode() {
       // if new version of selected file exists
       if (selectedElName !== null) {
 
-        const sidebarOpen = body.classList.contains('expanded');
-
         const scrollPos = selectedFile.scrollPos;
 
         // load file
         await loadFileInHTML(selectedElName, getAttr(selectedElName, 'sha'));
-
-        if (!sidebarOpen) {
-    
-          // close sidebar
-          toggleSidebar(false);
-          saveSidebarStateLS();
-          
-        }
 
         // prevent bottom float disappearing on mobile
         if (isMobile) lastScrollTop = scrollPos[1];
@@ -3190,18 +3145,8 @@ async function protectUnsavedCode() {
       // if selected file isn't loaded
       if (selectedFile.sha !== getAttr(selectedElSha, 'sha')) {
 
-        const sidebarOpen = body.classList.contains('expanded');
-
         // load file
         loadFileInHTML(selectedElSha, getAttr(selectedElSha, 'sha'));
-        
-        if (!sidebarOpen) {
-    
-          // close sidebar
-          toggleSidebar(false);
-          saveSidebarStateLS();
-          
-        }
         
       }
 
@@ -3543,14 +3488,13 @@ function setupSidebar() {
     // render sidebar
     renderSidebarHTML();
 
-    // if sidebar is open in local storage
+    // if sidebar is open
     if (getStorage('sidebar') == 'true'
         && !isEmbed) {
 
       // don't transition
       body.classList.add('notransition');
 
-      // open sidebar
       toggleSidebar(true);
 
       onNextFrame(() => {
@@ -3560,9 +3504,6 @@ function setupSidebar() {
       });
 
     } else if (isMobile) {
-
-      // close sidebar
-      toggleSidebar(false);
 
       // update bottom float
       updateFloat();
