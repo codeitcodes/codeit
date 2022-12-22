@@ -1882,6 +1882,10 @@ body.mobile .dialog .cancel::after {
   pointer-events: none;
 }
 
+body.mobile .dialog-wrapper.one-button .dialog .cancel::after {
+  display: none;
+}
+
 .dialog .confirm {
   color: var(--rosemary-lighter);
   font-weight: 500;
