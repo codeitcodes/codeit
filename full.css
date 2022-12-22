@@ -63,6 +63,7 @@ body cd-el {
   left: 0;
   right: 0;
   height: calc(45px + 56px + 45px);
+  height: calc(35px + 56px + 35px);
   display: none;
   justify-content: center;
   transition: .4s var(--cubic-function);
@@ -91,7 +92,7 @@ body.notransition .bottom-wrapper {
 
 .bottom-float {
   position: relative;
-  margin: 45px 0;
+  margin: 35px 0;
   width: calc(100% - 45px);
   max-width: 600px;
   display: flex;
