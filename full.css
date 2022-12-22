@@ -1860,6 +1860,7 @@ body.mobile .dialog .button-wrapper::before {
   border-radius: 5.75px;
   display: flex;
   justify-content: center;
+  position: relative;
   flex: 1;
 }
 
