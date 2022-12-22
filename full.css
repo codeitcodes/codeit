@@ -1834,8 +1834,25 @@ body.mobile .dialog-background {
 }
 
 .dialog .button-wrapper {
+  position: relative;
   display: flex;
   margin-top: 7px;
+}
+
+body.mobile .dialog .button-wrapper {
+  margin: -7px;
+  margin-top: 8px;
+}
+
+body.mobile .dialog .button-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgb(32 34 37 / 60%);
+  pointer-events: none;
 }
 
 .dialog .button {
@@ -1852,6 +1869,17 @@ body.mobile .dialog-background {
 
 .dialog-wrapper.one-button .dialog .cancel {
   display: none;
+}
+
+body.mobile .dialog .cancel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -0.5px;
+  width: 1px;
+  background: rgb(32 34 37 / 60%);
+  pointer-events: none;
 }
 
 .dialog .confirm {
