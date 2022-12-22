@@ -1792,7 +1792,8 @@ body:not(.mobile) .live-view-menu {
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transform: scale(0.94);
+  transform: scale(1.08);
+  transform: scale(1.075);
   transform-origin: center;
   transition: 0s .18s;
 }
@@ -1815,7 +1816,7 @@ body.mobile .dialog-background {
   border-radius: 11.5px;
   line-height: 1.5;
   opacity: 0;
-  padding: 2px;
+  padding: 9px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   min-width: 170px;
 }
@@ -1869,7 +1870,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
 .dialog-background {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: hsl(227deg 11% 16% / 40%);
   width: calc(var(--sidebar-width) - 1px);
   opacity: 0;
   transition: .18s var(--bounce-function);
