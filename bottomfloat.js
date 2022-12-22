@@ -2,7 +2,7 @@
 // function runs in loadFile() in gitsidebar.js
 // if isMobile
 function updateFloat() {
-
+  
   // close sidebar
   toggleSidebar(false);
   saveSidebarStateLS();
@@ -114,12 +114,6 @@ if (isMobile) {
     
     bottomWrapper.classList.remove('hidden');
     
-  });
-  
-  cd.on('focus', () => {
-
-    bottomWrapper.classList.add('hidden');
-
   });
   
   
