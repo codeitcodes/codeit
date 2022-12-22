@@ -3488,13 +3488,14 @@ function setupSidebar() {
     // render sidebar
     renderSidebarHTML();
 
-    // if sidebar is open
+    // if sidebar is open in local storage
     if (getStorage('sidebar') == 'true'
         && !isEmbed) {
 
       // don't transition
       body.classList.add('notransition');
-
+      
+      // open sidebar
       toggleSidebar(true);
 
       onNextFrame(() => {
