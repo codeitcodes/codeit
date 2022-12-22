@@ -467,6 +467,7 @@ body.notransition .live-view.file-open {
   width: 100%;
   height: 100%;
   background: #fff;
+  border: 0;
   max-width: unset;
 }
 
@@ -1791,7 +1792,8 @@ body:not(.mobile) .live-view-menu {
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transform: scale(0.94);
+  transform: scale(1.08);
+  transform: scale(1.075);
   transform-origin: center;
   transition: 0s .18s;
 }
@@ -1809,14 +1811,14 @@ body.mobile .dialog-background {
 .dialog {
   background: var(--deep-midnight-blue);
   color: #dcddde;
-  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%);
-  border: 1px solid rgb(32 34 37 / 60%);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   border-radius: 11.5px;
   line-height: 1.5;
   opacity: 0;
-  padding: 2px;
+  padding: 9px;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   min-width: 170px;
+  overflow: hidden;
 }
 
 .dialog-wrapper.visible .dialog {
@@ -1832,8 +1834,31 @@ body.mobile .dialog-background {
 }
 
 .dialog .button-wrapper {
+  position: relative;
   display: flex;
   margin-top: 7px;
+}
+
+body.mobile .dialog .button-wrapper {
+  margin: -7px;
+  margin-top: 8px;
+}
+
+body.mobile .dialog .button-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgb(32 34 37 / 60%);
+  transition: inherit;
+  pointer-events: none;
+}
+
+body.mobile .dialog-wrapper:not(.visible) .button-wrapper::before {
+  left: -2px;
+  right: -2px;
 }
 
 .dialog .button {
@@ -1841,14 +1866,39 @@ body.mobile .dialog-background {
   border-radius: 5.75px;
   display: flex;
   justify-content: center;
+  position: relative;
   flex: 1;
+}
+
+body.mobile .dialog .button {
+  border-radius: 0;
 }
 
 .dialog .cancel {
   color: hsl(228deg 16% 37%);
 }
 
-.dialog-wrapper.one-button .dialog .cancel {
+.dialog-wrapper.one-button .button.cancel {
+  display: none;
+}
+
+body.mobile .dialog .cancel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -0.5px;
+  width: 1px;
+  background: rgb(32 34 37 / 60%);
+  transition: inherit;
+  pointer-events: none;
+}
+
+body.mobile .dialog-wrapper:not(.visible) .button.cancel::after {
+  bottom: -2px;
+}
+
+body.mobile .dialog-wrapper.one-button .button.cancel::after {
   display: none;
 }
 
@@ -1868,7 +1918,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
 .dialog-background {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: hsl(227deg 11% 16% / 40%);
   width: calc(var(--sidebar-width) - 1px);
   opacity: 0;
   transition: .18s var(--bounce-function);

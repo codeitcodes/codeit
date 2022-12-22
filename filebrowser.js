@@ -1422,6 +1422,8 @@ async function loadFileInHTML(fileEl, fileSha) {
 
       resp = { content: fileSizeText };
 
+      cd.textContent = '';
+
       // if on mobile device
       if (isMobile) {
 
@@ -1438,7 +1440,6 @@ async function loadFileInHTML(fileEl, fileSha) {
       } else {
 
         liveToggle.classList.add('file-open');
-        updateScrollbarArrow();
 
         onNextFrame(() => {
           liveView.classList.remove('notransition');
@@ -1583,7 +1584,6 @@ function loadBinaryFileHTML(file, toggled) {
     if (!isMobile) {
       
       liveToggle.classList.add('file-open');
-      updateScrollbarArrow();
       
     }
     
@@ -1944,6 +1944,18 @@ sidebarTitle.addEventListener('click', (e) => {
   } else { // show learn page
 
     sidebar.classList.add('learn');
+    
+    
+    // if adding a repository
+    
+    const focusedRepo = fileWrapper.querySelector('.repo.focused');
+    
+    if (focusedRepo) {
+      
+      // remove it
+      focusedRepo.remove();
+      
+    }
     
     /*
     // if there are no modified files
@@ -3010,6 +3022,7 @@ function onEditorScroll() {
 
 }
 
+
 function updateScrollbarArrow() {
 
   // if codeit is horizontally scrollable
@@ -3026,6 +3039,10 @@ function updateScrollbarArrow() {
   }
 
 }
+
+// when codeit resizes, update
+new ResizeObserver(updateScrollbarArrow).observe(cd);
+
 
 // check for meta key (Ctrl/Command)
 function isKeyEventMeta(event) {
@@ -3217,8 +3234,6 @@ function setupEditor() {
   cd.on('scroll', onEditorScroll);
   cd.on('caretmove', saveSelectedFileCaretPos);
 
-  if (!isMobile) cd.on('type', updateScrollbarArrow);
-
   // update on screen resize
 
   const landscape = window.matchMedia('(orientation: landscape)');
@@ -3372,7 +3387,7 @@ function setupEditor() {
           if (shownMessages.beautifySelect < 2) {
           
             // show beautify select message
-            showMessage('Try selecting some text.', 3500);
+            showMessage('Try selecting some text first.', 4100);
             
             // bump counter
             shownMessages.beautifySelect++;
@@ -3440,7 +3455,6 @@ function updateLineNumbersHTML() {
 
   if (!isMobile) {
 
-    updateScrollbarArrow();
     updateLiveViewArrow();
 
   }
