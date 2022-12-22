@@ -189,11 +189,11 @@ let showDialog = (confirmHandler, titleText, confirmText, showOneButton = false)
       
       if (body.classList.contains('expanded')) {
         
-        document.querySelector('meta[name="theme-color"]').content = '#040405';
+        document.querySelector('meta[name="theme-color"]').content = '#1e2028';
         
       } else {
         
-        document.querySelector('meta[name="theme-color"]').content = '#07080a';
+        document.querySelector('meta[name="theme-color"]').content = '#2b303b';
         
       }
       
