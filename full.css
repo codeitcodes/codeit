@@ -973,6 +973,11 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
   opacity: 0.3 !important;
 }
 
+body.mobile .sidebar .header .title .branch-icon:not(.active):active,
+body.mobile .sidebar .header .title .branch-icon.active {
+  opacity: 0.3 !important;
+}
+
 .sidebar .header .roundbutton.add {
   margin: 0;
   margin-right: calc(20px - var(--spacing-1));
