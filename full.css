@@ -975,7 +975,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
 
 body.mobile .sidebar .header .title .branch-icon:not(.active):active,
 body.mobile .sidebar .header .title .branch-icon.active {
-  opacity: 0.3 !important;
+  opacity: 0.27 !important;
 }
 
 .sidebar .header .roundbutton.add {
