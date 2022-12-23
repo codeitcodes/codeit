@@ -968,7 +968,7 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
   opacity: 0.72;
 }
 
-.sidebar .header .title .branch-icon:active,
+.sidebar .header .title .branch-icon:not(.active):active,
 .sidebar .header .title .branch-icon.active {
   opacity: 0.3 !important;
 }
