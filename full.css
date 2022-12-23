@@ -969,15 +969,11 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
 }
 
 .sidebar .header .title .branch-icon:active {
-  opacity: 1;
-}
-
-body:not(.mobile) .sidebar .header .title .branch-icon:active {
-  opacity: 0.27 !important;
+  opacity: 0.27;
 }
 
 .sidebar .header .title .branch-icon.active {
-  opacity: 1 !important;
+  opacity: 0.27 !important;
 }
 
 .sidebar .header .roundbutton.add {
