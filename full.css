@@ -334,7 +334,8 @@ body.safari .live-buttons .live-button.share path.ios {
   bottom: 0;
   left: -1px;
   top: 44px;
-  transform: translateY(calc(100% - 28px - 45px - env(safe-area-inset-bottom, 0px)));
+  transform: translateY(calc(100% - 28px - 35px - env(safe-area-inset-bottom, 0px)));
+  transform: translateY(calc(100% - 28px - 63px - env(safe-area-inset-bottom, 0px)));
   padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
   background: #0e0e0e;
