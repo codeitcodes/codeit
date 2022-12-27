@@ -148,10 +148,10 @@ async function fetchRepoAndSaveToModRepos(treeLoc) {
     
     
     // get repo data expiration time
-    // (two months from now)
+    // (two days from now)
     
     let expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + (2 * 4 * 7));
+    expirationDate.setDate(expirationDate.getDate() + 2);
     
     const twoMonthsTime = expirationDate.getTime();
     
