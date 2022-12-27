@@ -435,6 +435,14 @@ function addBottomSwipeListener() {
 
       }
 
+    } else { // if clicked and bottom float not expanded
+      
+      if (e.target === bottomWrapper) {
+        
+        console.log('click');
+        
+      }
+      
     }
 
     yOffset = 0;
