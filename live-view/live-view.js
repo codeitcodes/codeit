@@ -453,7 +453,7 @@ function addBottomSwipeListener() {
           
           const sel = window.getSelection();
           
-          sel.addRange(range);
+          sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
           
         }
         
