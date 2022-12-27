@@ -1752,7 +1752,7 @@ body.mobile .menu .icon:not(:last-of-type)::after {
 }
 
 body.mobile .menu .icon a {
-  max-width: calc(100vw - 16px - 7px - 147px - 21.5px);
+  max-width: calc(100vw - 16px - 7px - 147px - 19.5px);
 }
 
 .menu .icon:not(.selected) .branch-icon {
