@@ -441,9 +441,29 @@ function addBottomSwipeListener() {
 
     } else { // if clicked and bottom float not expanded
       
+      // if clicked the bottom float's swipe hitbox
+      // but not the bottom float itself
       if (e.target === bottomWrapper) {
         
         console.log('click', e);
+        
+        // get caret range from point
+        
+        const pointX = e.touches[0].clientX,
+              pointY = e.touches[0].clientY;
+        
+        const range = document.caretRangeFromPoint(pointX, pointY);
+        
+        // if range exists
+        if (range) {
+          
+          // select range
+          
+          const sel = window.getSelection();
+          
+          sel.addRange(range);
+          
+        }
         
       }
       
