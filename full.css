@@ -62,8 +62,7 @@ body cd-el {
   bottom: env(safe-area-inset-bottom, 0px);
   left: 0;
   right: 0;
-  height: calc(45px + 56px + 45px);
-  height: calc(35px + 56px + 35px);
+  height: calc(45px + 56px + 45px); /* 35px */
   display: none;
   justify-content: center;
   transition: .4s var(--cubic-function);
