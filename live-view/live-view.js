@@ -442,33 +442,29 @@ function addBottomSwipeListener() {
         // disable bottom float hitbox
         bottomWrapper.style.pointerEvents = 'none';
         
-        onNextFrame(() => {
+        const pointX = e.changedTouches[0].clientX,
+              pointY = e.changedTouches[0].clientY;
+        
+        const range = document.caretRangeFromPoint(pointX, pointY);
+        
+        bottomWrapper.style.pointerEvents = '';
+        
+        // if range exists
+        if (range) {
           
-          const pointX = e.changedTouches[0].clientX,
-                pointY = e.changedTouches[0].clientY;
+          cd.focus();
           
-          const range = document.caretRangeFromPoint(pointX, pointY);
+          // on next frame, select range
           
-          bottomWrapper.style.pointerEvents = '';
-          
-          // if range exists
-          if (range) {
+          onNextFrame(() => {
+                          
+            const sel = window.getSelection();
             
-            // on next frame, select range
+            sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
             
-            onNextFrame(() => {
-              
-              cd.focus();
-              
-              const sel = window.getSelection();
-              
-              sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
-              
-            });
-            
-          }
+          });
           
-        });
+        }
         
       }
       
