@@ -373,15 +373,21 @@ function addBottomSwipeListener() {
   let swiped = false;
 
   let direction = 0;
-
-  bottomWrapper.addEventListener('touchstart', dragStart, false);
-  bottomWrapper.addEventListener('touchend', dragEnd, false);
-  bottomWrapper.addEventListener('touchmove', drag, false);
-
-  bottomWrapper.addEventListener('mousedown', dragStart, false);
-  bottomWrapper.addEventListener('mouseup', dragEnd, false);
-  bottomWrapper.addEventListener('mousemove', drag, false);
-
+  
+  if (isMobile) {
+    
+    bottomWrapper.addEventListener('touchstart', dragStart, false);
+    bottomWrapper.addEventListener('touchend', dragEnd, false);
+    bottomWrapper.addEventListener('touchmove', drag, false);
+  
+  } else {
+    
+    bottomWrapper.addEventListener('mousedown', dragStart, false);
+    bottomWrapper.addEventListener('mouseup', dragEnd, false);
+    bottomWrapper.addEventListener('mousemove', drag, false);
+  
+  }
+  
   function dragStart(e) {
 
     if (e.type === 'touchstart') {
