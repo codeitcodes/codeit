@@ -441,8 +441,8 @@ function addBottomSwipeListener() {
         
         // get caret range from point
         
-        const pointX = e.touches[0].clientX,
-              pointY = e.touches[0].clientY;
+        const pointX = e.changedTouches[0].clientX,
+              pointY = e.changedTouches[0].clientY;
         
         const range = document.caretRangeFromPoint(pointX, pointY);
         
