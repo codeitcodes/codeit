@@ -439,7 +439,7 @@ function addBottomSwipeListener() {
       
       if (e.target === bottomWrapper) {
         
-        console.log('click');
+        console.log('click', e);
         
       }
       
