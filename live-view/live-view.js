@@ -452,17 +452,13 @@ function addBottomSwipeListener() {
         // if range exists
         if (range) {
           
+          e.preventDefault();
+          
           cd.focus();
           
-          const sel = window.getSelection();
-            
-          sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
-        
           // on next frame, select range
           
           onNextFrame(() => {
-            
-            cd.focus();
             
             const sel = window.getSelection();
             
