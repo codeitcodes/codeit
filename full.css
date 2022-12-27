@@ -1733,7 +1733,7 @@ body.mobile .menu:not(.visible) .icon:last-of-type {
   padding-bottom: 5px;
 }
 
-.menu .icon:not(:last-of-type)::after {
+body.mobile .menu .icon:not(:last-of-type)::after {
   content: '';
   position: absolute;
   left: 0;
