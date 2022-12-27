@@ -1665,6 +1665,11 @@ body.mobile .sidebar .button {
   transition-property: transform, padding, opacity;
 }
 
+body.mobile .menu {
+  padding: 0;
+  min-width: 150px;
+}
+
 body:not(.mobile) .menu::-webkit-scrollbar {
   width: 10px;
 }
@@ -1697,6 +1702,12 @@ body:not(.mobile) .menu::-webkit-scrollbar-thumb:not(:active):hover {
   grid-gap: 8.75px;
 }
 
+body.mobile .menu .icon {
+  position: relative;
+  padding: 10px 21px;
+  border-radius: 0;
+}
+
 .menu .icon.selected {
   color: hsl(164deg 91% 33%);
   font-weight: 500;
@@ -1708,6 +1719,29 @@ body:not(.mobile) .menu .icon:not(:active):hover {
 
 .menu .icon:active {
   background: rgba(255,255,255,0.1);
+}
+
+body.mobile .menu:not(.visible) .icon {
+  padding: 10px 16px;
+}
+
+body.mobile .menu:not(.visible) .icon:first-of-type {
+  padding-top: 5px;
+}
+
+body.mobile .menu:not(.visible) .icon:last-of-type {
+  padding-bottom: 5px;
+}
+
+.menu .icon:not(:last-of-type)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5px;
+  height: 1px;
+  background: rgb(32 34 37 / 60%);
+  pointer-events: none;
 }
 
 .menu .icon a {
