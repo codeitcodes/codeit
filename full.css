@@ -1722,15 +1722,15 @@ body:not(.mobile) .menu .icon:not(:active):hover {
 }
 
 body.mobile .menu:not(.visible) .icon {
-  padding: 10px 12.75px;
+  padding: 10px 11.75px;
 }
 
 body.mobile .menu:not(.visible) .icon:first-of-type {
-  padding-top: 7px;
+  padding-top: 6px;
 }
 
 body.mobile .menu:not(.visible) .icon:last-of-type {
-  padding-bottom: 7px;
+  padding-bottom: 6px;
 }
 
 body.mobile .menu .icon:not(:last-of-type)::after {
