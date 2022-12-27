@@ -456,8 +456,6 @@ function addBottomSwipeListener() {
           
           // select range
           
-          cd.focus();
-
           const sel = window.getSelection();
           
           sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
