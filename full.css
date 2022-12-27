@@ -62,7 +62,7 @@ body cd-el {
   bottom: env(safe-area-inset-bottom, 0px);
   left: 0;
   right: 0;
-  height: calc(45px + 56px + 45px);
+  height: calc(45px + 56px + 45px); /* 35px */
   display: none;
   justify-content: center;
   transition: .4s var(--cubic-function);
@@ -966,16 +966,14 @@ body:not(.mobile) .sidebar .header .title .branch-icon:hover {
   opacity: 0.72;
 }
 
-.sidebar .header .title .branch-icon:active {
-  opacity: 1;
-}
-
-body:not(.mobile) .sidebar .header .title .branch-icon:active {
-  opacity: 0.27 !important;
-}
-
+.sidebar .header .title .branch-icon:not(.active):active,
 .sidebar .header .title .branch-icon.active {
-  opacity: 1 !important;
+  opacity: 0.3 !important;
+}
+
+body.mobile .sidebar .header .title .branch-icon:not(.active):active,
+body.mobile .sidebar .header .title .branch-icon.active {
+  opacity: 0.27 !important;
 }
 
 .sidebar .header .roundbutton.add {
@@ -1637,14 +1635,13 @@ body.mobile .sidebar .button {
   line-height: 1.5;
   margin-top: 4.5px;
   transform: translateY(-7px);
-  top: 64px;
-  left: 222px;
+  top: 20px;
+  left: 20px;
   /* right: 20px; */
   padding: 2px;
-  min-width: 170px;
-  min-width: 135px;
+  min-width: 136px;
   max-width: 375px;
-  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom));
+  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom, 0px));
   pointer-events: none;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
@@ -1663,6 +1660,13 @@ body.mobile .sidebar .button {
   opacity: 1;
   transition: .18s var(--bounce-function);
   transition-property: transform, padding, opacity;
+}
+
+body.mobile .menu {
+  padding: 0;
+  min-width: 150px;
+  max-width: 389px;
+  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom, 0px) + 7px * 2);
 }
 
 body:not(.mobile) .menu::-webkit-scrollbar {
@@ -1697,6 +1701,13 @@ body:not(.mobile) .menu::-webkit-scrollbar-thumb:not(:active):hover {
   grid-gap: 8.75px;
 }
 
+body.mobile .menu .icon {
+  position: relative;
+  padding: 10px 15.75px;
+  border-radius: 0;
+  transition: inherit;
+}
+
 .menu .icon.selected {
   color: hsl(164deg 91% 33%);
   font-weight: 500;
@@ -1710,6 +1721,29 @@ body:not(.mobile) .menu .icon:not(:active):hover {
   background: rgba(255,255,255,0.1);
 }
 
+body.mobile .menu:not(.visible) .icon {
+  padding: 10px 11.75px;
+}
+
+body.mobile .menu:not(.visible) .icon:first-of-type {
+  padding-top: 6px;
+}
+
+body.mobile .menu:not(.visible) .icon:last-of-type {
+  padding-bottom: 6px;
+}
+
+body.mobile .menu .icon:not(:last-of-type)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5px;
+  height: 1px;
+  background: rgb(32 34 37 / 60%);
+  pointer-events: none;
+}
+
 .menu .icon a {
   overflow: hidden;
   white-space: nowrap;
@@ -1718,7 +1752,7 @@ body:not(.mobile) .menu .icon:not(:active):hover {
 }
 
 body.mobile .menu .icon a {
-  max-width: calc(100vw - 16px - 7px - 147px - 11px);
+  max-width: calc(100vw - 16px - 7px - 147px - 19.5px);
 }
 
 .menu .icon:not(.selected) .branch-icon {

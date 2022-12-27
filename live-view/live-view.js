@@ -373,15 +373,11 @@ function addBottomSwipeListener() {
   let swiped = false;
 
   let direction = 0;
-
+  
   bottomWrapper.addEventListener('touchstart', dragStart, false);
   bottomWrapper.addEventListener('touchend', dragEnd, false);
   bottomWrapper.addEventListener('touchmove', drag, false);
-
-  bottomWrapper.addEventListener('mousedown', dragStart, false);
-  bottomWrapper.addEventListener('mouseup', dragEnd, false);
-  bottomWrapper.addEventListener('mousemove', drag, false);
-
+  
   function dragStart(e) {
 
     if (e.type === 'touchstart') {
@@ -435,6 +431,39 @@ function addBottomSwipeListener() {
 
       }
 
+    } else if (click) { // if clicked and bottom float not expanded
+      
+      // if clicked the bottom float's swipe hitbox
+      // but not the bottom float itself
+      if (e.target === bottomWrapper) {
+                
+        // get caret range from point
+        
+        // disable bottom float hitbox
+        bottomWrapper.style.pointerEvents = 'none';
+        
+        const pointX = e.changedTouches[0].clientX,
+              pointY = e.changedTouches[0].clientY;
+        
+        const range = document.caretRangeFromPoint(pointX, pointY);
+        
+        bottomWrapper.style.pointerEvents = '';
+        
+        // if range exists
+        if (range) {
+          
+          e.preventDefault();
+          
+          // select range
+          
+          const sel = window.getSelection();
+          
+          sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
+          
+        }
+        
+      }
+      
     }
 
     yOffset = 0;
@@ -1043,7 +1072,7 @@ async function renderLiveViewHTML(file) {
   if (!workerClientId) await workerInstallPromise;
 
 
-  liveView.innerHTML = `<iframe src="`+ livePath + '?' + workerClientId + '/' +`" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts allow-same-origin"></iframe>`;
+  liveView.innerHTML = `<iframe src="`+ livePath + '?' + workerClientId + '/' +`" name="Live view" title="Live view" class="live-frame" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; payment" allowfullscreen="true" allowtransparency="true" loading="eager" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-scripts allow-same-origin"></iframe>`;
 
 
   liveFile = file;

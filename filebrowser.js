@@ -2821,7 +2821,9 @@ if (isDev) {
   
   learnDebug.counter = 0;
   
-  learnDebug.addEventListener('click', () => {
+  learnDebug.addEventListener('click', (e) => {
+    
+    e.preventDefault();
     
     learnDebug.counter++;
     
