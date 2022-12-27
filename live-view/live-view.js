@@ -441,10 +441,15 @@ function addBottomSwipeListener() {
         
         // get caret range from point
         
+        // hide bottom float hitbox
+        bottomWrapper.style.pointerEvents = 'none';
+        
         const pointX = e.changedTouches[0].clientX,
               pointY = e.changedTouches[0].clientY;
         
         const range = document.caretRangeFromPoint(pointX, pointY);
+        
+        bottomWrapper.style.pointerEvents = '';
         
         // if range exists
         if (range) {
