@@ -15,7 +15,7 @@ function decodeLink(url) {
   url = decodeURIComponent(url);
   
 
-  const isEmbed = (window.top !== window);
+  const isEmbed = urlQuery.get('embed');
   
   const isLiveViewDisabled = (urlQuery.get('live') === 'false' || urlQuery.get('l') === 'f');
 
