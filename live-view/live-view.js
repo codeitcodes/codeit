@@ -454,17 +454,13 @@ function addBottomSwipeListener() {
           
           e.preventDefault();
           
+          // select range
+          
           cd.focus();
+
+          const sel = window.getSelection();
           
-          // on next frame, select range
-          
-          onNextFrame(() => {
-            
-            const sel = window.getSelection();
-            
-            sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
-            
-          });
+          sel.setBaseAndExtent(range.startContainer, range.startOffset, range.endContainer, range.endOffset);
           
         }
         
