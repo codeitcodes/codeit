@@ -377,14 +377,6 @@ function addBottomSwipeListener() {
   bottomWrapper.addEventListener('touchstart', dragStart, false);
   bottomWrapper.addEventListener('touchend', dragEnd, false);
   bottomWrapper.addEventListener('touchmove', drag, false);
-
-  if (isDev) {
-    
-    bottomWrapper.addEventListener('mousedown', dragStart, false);
-    bottomWrapper.addEventListener('mouseup', dragEnd, false);
-    bottomWrapper.addEventListener('mousemove', drag, false);
-  
-  }
   
   function dragStart(e) {
 
