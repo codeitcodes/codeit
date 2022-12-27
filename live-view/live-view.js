@@ -454,7 +454,7 @@ function addBottomSwipeListener() {
         // if range exists
         if (range) {
           
-          // select range
+          // on next frame, select range
           
           onNextFrame(() => {
             
