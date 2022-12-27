@@ -1703,7 +1703,6 @@ body:not(.mobile) .menu::-webkit-scrollbar-thumb:not(:active):hover {
 
 body.mobile .menu .icon {
   position: relative;
-  padding: 10px 21px;
   padding: 10px 15.75px;
   border-radius: 0;
   transition: inherit;
@@ -1723,7 +1722,6 @@ body:not(.mobile) .menu .icon:not(:active):hover {
 }
 
 body.mobile .menu:not(.visible) .icon {
-  padding: 10px 16px;
   padding: 10px 10.75px;
 }
 
@@ -1754,7 +1752,7 @@ body.mobile .menu .icon:not(:last-of-type)::after {
 }
 
 body.mobile .menu .icon a {
-  max-width: calc(100vw - 16px - 7px - 147px - 11px);
+  max-width: calc(100vw - 16px - 7px - 147px - 21.5px);
 }
 
 .menu .icon:not(.selected) .branch-icon {
