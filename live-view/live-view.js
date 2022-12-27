@@ -436,9 +436,7 @@ function addBottomSwipeListener() {
       // if clicked the bottom float's swipe hitbox
       // but not the bottom float itself
       if (e.target === bottomWrapper) {
-        
-        console.log('click', e);
-        
+                
         // get caret range from point
         
         // disable bottom float hitbox
