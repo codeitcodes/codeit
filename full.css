@@ -1637,14 +1637,13 @@ body.mobile .sidebar .button {
   line-height: 1.5;
   margin-top: 4.5px;
   transform: translateY(-7px);
-  top: 64px;
-  left: 222px;
+  top: 20px;
+  left: 20px;
   /* right: 20px; */
   padding: 2px;
-  min-width: 170px;
-  min-width: 135px;
+  min-width: 136px;
   max-width: 375px;
-  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom));
+  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom, 0px));
   pointer-events: none;
   transition: 0s .18s, .18s var(--bounce-function) opacity;
   opacity: 0;
@@ -1668,6 +1667,8 @@ body.mobile .sidebar .button {
 body.mobile .menu {
   padding: 0;
   min-width: 150px;
+  max-width: 389px;
+  max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom, 0px) + 7px * 2);
 }
 
 body:not(.mobile) .menu::-webkit-scrollbar {
