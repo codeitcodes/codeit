@@ -437,7 +437,7 @@ function addBottomSwipeListener() {
       // but not the bottom float itself
       if (e.target === bottomWrapper) {
         
-        console.log('click', e.touches);
+        console.log('click', e);
         
         // get caret range from point
         
