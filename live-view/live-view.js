@@ -431,7 +431,7 @@ function addBottomSwipeListener() {
 
       }
 
-    } else { // if clicked and bottom float not expanded
+    } else if (click) { // if clicked and bottom float not expanded
       
       // if clicked the bottom float's swipe hitbox
       // but not the bottom float itself
