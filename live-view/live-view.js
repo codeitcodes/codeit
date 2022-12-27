@@ -374,13 +374,11 @@ function addBottomSwipeListener() {
 
   let direction = 0;
   
-  if (isMobile) {
-    
-    bottomWrapper.addEventListener('touchstart', dragStart, false);
-    bottomWrapper.addEventListener('touchend', dragEnd, false);
-    bottomWrapper.addEventListener('touchmove', drag, false);
-  
-  } else {
+  bottomWrapper.addEventListener('touchstart', dragStart, false);
+  bottomWrapper.addEventListener('touchend', dragEnd, false);
+  bottomWrapper.addEventListener('touchmove', drag, false);
+
+  if (isDev) {
     
     bottomWrapper.addEventListener('mousedown', dragStart, false);
     bottomWrapper.addEventListener('mouseup', dragEnd, false);
