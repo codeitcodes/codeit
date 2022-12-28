@@ -41,14 +41,21 @@ const FILES_TO_CACHE = [
   '/fonts/fonts.css',
 
   '/fonts/Mono-Sans/MonoSans-Regular.woff2',
+  '/fonts/Mono-Sans/MonoSans-Italic.woff2',
   '/fonts/Mono-Sans/MonoSans-Bold.woff2',
+  '/fonts/Mono-Sans/MonoSans-BoldItalic.woff2',
 
   '/fonts/Inter/Inter-Regular.woff2',
+  '/fonts/Inter/Inter-Italic.woff2',
   '/fonts/Inter/Inter-Medium.woff2',
   '/fonts/Inter/Inter-SemiBold.woff2',
+  '/fonts/Inter/Inter-SemiBoldItalic.woff2',
   '/fonts/Inter/Inter-Bold.woff2',
   
   '/fonts/Roboto-Mono/RobotoMono-Regular.woff2',
+  '/fonts/Roboto-Mono/RobotoMono-Italic.woff2',
+  '/fonts/Roboto-Mono/RobotoMono-Bold.woff2',
+  '/fonts/Roboto-Mono/RobotoMono-BoldItalic.woff2',
 
   'https://plausible.io/js/plausible.js',
 
