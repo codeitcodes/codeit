@@ -11,6 +11,14 @@
 
 @font-face {
   font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('Inter/Inter-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
@@ -23,6 +31,14 @@
   font-weight: 600;
   font-display: swap;
   src: url('Inter/Inter-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('Inter/Inter-SemiBoldItalic.woff2') format('woff2');
 }
 
 @font-face {
@@ -46,10 +62,26 @@
 
 @font-face {
   font-family: 'Mono Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('Mono-Sans/MonoSans-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mono Sans';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url('Mono-Sans/MonoSans-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mono Sans';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('Mono-Sans/MonoSans-BoldItalic.woff2') format('woff2');
 }
 
 
@@ -63,3 +95,26 @@
   src: url('Roboto-Mono/RobotoMono-Regular.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('Roboto-Mono/RobotoMono-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('Roboto-Mono/RobotoMono-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('Roboto-Mono/RobotoMono-BoldItalic.woff2') format('woff2');
+}
