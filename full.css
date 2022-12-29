@@ -1788,23 +1788,13 @@ body.mobile .context-menu {
 }
 
 .live-view-menu {
-  left: 11px;
-  top: 41px;
-  z-index: 1001;
-  margin-top: 7px;
-  padding: 0;
+  left: 7px;
+  top: 44px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%), inset 0 0 0 1px hsl(228deg 13% 19%);
 }
 
 body:not(.mobile) .live-view-menu {
   display: none;
-}
-
-.live-view-menu:not(.visible) {
-  padding: 2px 2px 2px 0px;
-}
-
-.live-view-menu:not(.visible) .icon {
-  padding: 9.5px 13px;
 }
 
 
