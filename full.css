@@ -1798,7 +1798,7 @@ body:not(.mobile) .live-view-menu {
 }
 
 .live-view-menu .icon:active {
-  background: rgb(39 40 44);
+  background: hsl(228deg 6% 16%);
 }
 
 
