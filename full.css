@@ -1797,6 +1797,10 @@ body:not(.mobile) .live-view-menu {
   display: none;
 }
 
+.live-view-menu .icon:active {
+  background: rgb(39 40 44);
+}
+
 
 .dialog-wrapper {
   position: fixed;
