@@ -1842,7 +1842,7 @@ body:not(.mobile) .sheet {
 
 .sheet .header .close {
   color: #828689;
-  background: rgb(255 255 255 / 8%);
+  background: rgb(255 255 255 / 8%) !important;
   /* box-sizing: border-box; */
   padding: 4px;
   width: 20px;
