@@ -61,7 +61,7 @@ const body = document.body,
       liveMenuShare = liveViewMenu.querySelector('.share'),
       liveMenuConsole = liveViewMenu.querySelector('.console'),
       
-      liveConsoleSheet = document.querySelector('.sheet .live-console'),
+      liveConsoleSheet = document.querySelector('.sheet .live-console-sheet'),
             
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
