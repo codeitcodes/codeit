@@ -298,7 +298,7 @@ body.notransition .bottom-wrapper {
   margin: -7px;
 }
 
-.live-buttons .live-button:active,
+.live-buttons .live-button:not(.active):active,
 .live-buttons .live-button.active {
   opacity: .5;
 }
