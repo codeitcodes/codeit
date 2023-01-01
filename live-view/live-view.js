@@ -412,11 +412,11 @@ function addBottomSwipeListener() {
 
         toggleLiveView(selectedFile);
 
-      } else if (active) {
-
+      } else {
+        
         // if clicked on options button, toggle menu
-        liveViewMenu.classList.toggle('visible');
-        liveButtonOptions.classList.toggle('active');
+        liveViewMenu.classList.add('visible');
+        liveButtonOptions.classList.add('active');
         
       }
 
