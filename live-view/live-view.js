@@ -412,12 +412,6 @@ function addBottomSwipeListener() {
 
         toggleLiveView(selectedFile);
 
-      } else {
-        
-        // if clicked on options button, toggle menu
-        liveViewMenu.classList.add('visible');
-        liveButtonOptions.classList.add('active');
-        
       }
 
     } else if (click) { // if clicked and bottom float not expanded
@@ -550,6 +544,14 @@ if (isMobile) {
   
   
   // live view mobile menu
+  
+  liveButtonOptions.addEventListener('click', () => {
+
+    // if clicked on options button, toggle menu
+    liveViewMenu.classList.toggle('visible');
+    liveButtonOptions.classList.toggle('active');
+  
+  });
   
   liveMenuShare.addEventListener('click', () => {
 
