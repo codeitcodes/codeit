@@ -303,18 +303,6 @@ body.notransition .bottom-wrapper {
   opacity: .5;
 }
 
-.live-buttons .live-button.share path.ios {
-  opacity: 0;
-}
-
-body.safari .live-buttons .live-button.share path {
-  opacity: 0;
-}
-
-body.safari .live-buttons .live-button.share path.ios {
-  opacity: 1;
-}
-
 .bottom-wrapper.expanded .live-buttons {
   opacity: 1;
   pointer-events: auto;
@@ -1798,6 +1786,18 @@ body:not(.mobile) .live-view-menu {
   background: hsl(228deg 6% 16%);
 }
 
+.live-view-menu .icon.share path.ios {
+  opacity: 0;
+}
+
+body.safari .live-view-menu .icon.share path {
+  opacity: 0;
+}
+
+body.safari .live-view-menu .icon.share path.ios {
+  opacity: 1;
+}
+
 
 .sheet {
   position: fixed;
@@ -1811,7 +1811,7 @@ body:not(.mobile) .live-view-menu {
   z-index: 1001;
 }
 
-body.mobile .sheet {
+body:not(.mobile) .sheet {
   display: none;
 }
 
