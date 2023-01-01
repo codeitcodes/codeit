@@ -570,7 +570,7 @@ if (isMobile) {
   
   liveMenuConsole.addEventListener('click', () => {
     
-    consoleSheet.classList.add('visible');
+    liveConsoleSheet.classList.add('visible');
     
   });
   
