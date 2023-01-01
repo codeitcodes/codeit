@@ -396,14 +396,13 @@ function addBottomSwipeListener() {
 
     initialY = currentY;
 
-    const clickedOnShare = (e.target ===
-                            bottomWrapper.querySelector('.live-button.share'));
+    const clickedOnOptions = (e.target === liveButtonOptions);
 
     // if clicked and bottom float is expanded
     if (click && bottomWrapper.classList.contains('expanded')) {
 
-      // if did not click on share button
-      if (!clickedOnShare) {
+      // if did not click on options button
+      if (!clickedOnOptions) {
 
         e.preventDefault();
         e.stopPropagation();
@@ -413,11 +412,15 @@ function addBottomSwipeListener() {
 
         toggleLiveView(selectedFile);
 
-      } else if (active) {
+      } else {
 
-        // if clicked on share button,
+        // if clicked on options button, toggle menu
+        liveViewMenu.classList.toggle('visible');
+        liveButtonOptions.classList.toggle('active');
+        
+        
         // share live view link
-
+        /*
         // create a link
         const link = createLink({
           dir: treeLoc,
@@ -428,6 +431,7 @@ function addBottomSwipeListener() {
           title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
           url: link,
         });
+        */
 
       }
 
