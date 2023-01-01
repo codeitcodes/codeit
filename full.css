@@ -1808,7 +1808,15 @@ body.safari .live-view-menu .icon.share path.ios {
   background: var(--deep-midnight-blue);
   box-shadow: 0 -8px 16px rgb(0 0 0 / 24%);
   border-radius: 11.5px 11.5px 0 0;
+  transform: translateY(100%);
+  pointer-events: none;
+  transition: .18s var(--ease-function);
   z-index: 1001;
+}
+
+.sheet.visible {
+  transform: none;
+  pointer-events: auto;
 }
 
 body:not(.mobile) .sheet {
