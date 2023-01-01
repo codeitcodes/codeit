@@ -58,6 +58,8 @@ const body = document.body,
       branchMenu = document.querySelector('.branch-menu'),
       
       liveViewMenu = document.querySelector('.live-view-menu'),
+      liveMenuShare = liveViewMenu.querySelector('.share'),
+      liveMenuConsole = liveViewMenu.querySelector('.console'),
             
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
