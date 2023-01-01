@@ -14,6 +14,8 @@ const body = document.body,
       floatLogo = sidebarOpen.querySelector('.logo'),
       pushWrapper = bottomFloat.querySelector('.push-wrapper'),
       floatDownload = bottomFloat.querySelector('.download'),
+      
+      liveButtonOptions = bottomWrapper.querySelector('.live-button.options'),
 
       sidebarToggle = document.querySelector('.sidebar-toggle'),
       liveToggle = document.querySelector('.live-toggle'),
