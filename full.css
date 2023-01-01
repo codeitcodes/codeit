@@ -1799,6 +1799,47 @@ body:not(.mobile) .live-view-menu {
 }
 
 
+.sheet {
+  position: fixed;
+  bottom: env(safe-area-inset-bottom, 0px);
+  left: 0;
+  right: 0;
+  height: calc(100vh / 2 - 20px);
+  background: var(--deep-midnight-blue);
+  box-shadow: 0 -8px 16px rgb(0 0 0 / 24%);
+  border-radius: 11.5px 11.5px 0 0;
+  z-index: 1001;
+}
+
+body.mobile .sheet {
+  display: none;
+}
+
+.sheet .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  height: 59px;
+  box-sizing: border-box;
+}
+
+.sheet .header .close {
+  color: #828689;
+  background: rgb(255 255 255 / 8%);
+  /* box-sizing: border-box; */
+  padding: 4px;
+  width: 20px;
+  height: 20px;
+  margin: -4px;
+}
+
+.sheet .header .title {
+  font-weight: 600;
+  color: #dcddde;
+}
+
+
 .dialog-wrapper {
   position: fixed;
   pointer-events: none;
