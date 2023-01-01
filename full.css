@@ -1804,18 +1804,22 @@ body.safari .live-view-menu .icon.share path.ios {
   bottom: env(safe-area-inset-bottom, 0px);
   left: 0;
   right: 0;
-  height: calc(100vh / 2 - 20px);
+  height: calc(100vh / 2 - 20px + 40px);
+  bottom: -40px;
   background: var(--deep-midnight-blue);
-  box-shadow: 0 -8px 16px rgb(0 0 0 / 24%);
   border-radius: 11.5px 11.5px 0 0;
-  transform: translateY(100%);
+  transform: translateY(calc(100% + 40px));
   pointer-events: none;
-  transition: .18s var(--ease-function);
+  will-change: transform;
+  transition: .18s var(--ease-function),
+              .18s .09s var(--bounce-function) bottom;
   z-index: 1001;
 }
 
 .sheet.visible {
-  transform: none;
+  transform: translateY(40px);
+  bottom: 0;
+  box-shadow: 0 -8px 16px rgb(0 0 0 / 24%);
   pointer-events: auto;
 }
 
