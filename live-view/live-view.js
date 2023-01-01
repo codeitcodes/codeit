@@ -572,7 +572,8 @@ if (isMobile) {
   
   liveMenuConsole.addEventListener('click', () => {
     
-    liveConsoleSheet.classList.add('visible');
+    // show live view console
+    consoleSheet.classList.add('visible');
     
   });
   
@@ -598,6 +599,13 @@ if (isMobile) {
     liveViewMenu.classList.remove('visible');
     liveButtonOptions.classList.remove('active');
 
+  });
+  
+  consoleSheetClose.addEventListener('click', () => {
+    
+    // hide live view console
+    consoleSheet.classList.remove('visible');
+    
   });
 
 } else {
