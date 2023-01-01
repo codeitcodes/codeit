@@ -1812,7 +1812,8 @@ body.safari .live-view-menu .icon.share path.ios {
   pointer-events: none;
   will-change: transform;
   transition: .18s var(--ease-function),
-              .18s .09s var(--bounce-function) bottom;
+              .18s .09s var(--bounce-function) bottom,
+              .1s box-shadow var(--ease-function);
   z-index: 1001;
 }
 
@@ -1821,6 +1822,9 @@ body.safari .live-view-menu .icon.share path.ios {
   bottom: 0;
   box-shadow: 0 -8px 16px rgb(0 0 0 / 24%);
   pointer-events: auto;
+  transition: .18s var(--ease-function),
+              .18s .09s var(--bounce-function) bottom,
+              .1s .17s box-shadow var(--ease-function);
 }
 
 body:not(.mobile) .sheet {
