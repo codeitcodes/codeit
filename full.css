@@ -298,12 +298,9 @@ body.notransition .bottom-wrapper {
   margin: -7px;
 }
 
-.live-buttons .live-button:active {
+.live-buttons .live-button:active,
+.live-buttons .live-button.active {
   opacity: .5;
-}
-
-.live-buttons .live-button path {
-  pointer-events: none;
 }
 
 .live-buttons .live-button.share path.ios {
