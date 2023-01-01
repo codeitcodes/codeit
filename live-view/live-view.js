@@ -418,21 +418,6 @@ function addBottomSwipeListener() {
         liveViewMenu.classList.toggle('visible');
         liveButtonOptions.classList.toggle('active');
         
-        
-        // share live view link
-        /*
-        // create a link
-        const link = createLink({
-          dir: treeLoc,
-          file: selectedFile
-        });
-        
-        navigator.share({
-          title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
-          url: link,
-        });
-        */
-
       }
 
     } else if (click) { // if clicked and bottom float not expanded
@@ -562,6 +547,56 @@ function updateLiveViewArrow() {
 if (isMobile) {
 
   addBottomSwipeListener();
+  
+  
+  // live view mobile menu
+  
+  liveMenuShare.addEventListener('click', () => {
+
+    // share live view link
+
+    // create a link
+    const link = createLink({
+      dir: treeLoc,
+      file: selectedFile
+    });
+
+    navigator.share({
+      title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+      url: link,
+    });
+    
+  });
+  
+  liveMenuConsole.addEventListener('click', () => {
+    
+    consoleSheet.classList.add('visible');
+    
+  });
+  
+  document.addEventListener('touchstart', (e) => {
+    
+    // if live view menu is visible
+    if (liveViewMenu.classList.contains('visible')) {
+
+      if (e.target.parentElement !== liveViewMenu &&
+          e.target.parentElement.parentElement !== liveViewMenu) {
+
+        liveViewMenu.classList.remove('visible');
+        liveButtonOptions.classList.remove('active');
+
+      }
+
+    }
+
+  });
+
+  liveViewMenu.addEventListener('click', () => {
+
+    liveViewMenu.classList.remove('visible');
+    liveButtonOptions.classList.remove('active');
+
+  });
 
 } else {
 
