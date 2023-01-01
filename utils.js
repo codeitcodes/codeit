@@ -56,6 +56,8 @@ const body = document.body,
       learnClose = learnWrapper.querySelector('.close'),
 
       branchMenu = document.querySelector('.branch-menu'),
+      
+      liveViewMenu = document.querySelector('.live-view-menu'),
             
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
