@@ -572,7 +572,7 @@ body.embed .sidebar-toggle {
 }
 
 body.expanded .sidebar-toggle {
-  transform: translateX(calc(var(--sidebar-width) - 1px));
+  transform: translateX(var(--sidebar-width));
 }
 
 body.notransition :is(.sidebar-toggle, .sidebar-toggle *) {
@@ -698,20 +698,18 @@ body.expanded .sidebar-toggle svg .left {
 .sidebar {
   position: fixed;
   top: 0;
-  left: calc((var(--sidebar-width) + 1px) * -1);
+  left: calc(var(--sidebar-width) * -1);
   height: 100%;
   background: #1a1c24;
   color: #d4d5d7;
   transition: .4s var(--cubic-function) transform;
-  width: calc(var(--sidebar-width) + 1px);
+  width: var(--sidebar-width);
   transform: none;
   overflow-x: hidden;
   overflow-y: overlay;
   overscroll-behavior-y: contain;
   pointer-events: none;
-  box-shadow: inset -1px 0 0 0 #ffffff3d;
   padding-left: env(safe-area-inset-left);
-  padding-right: 1px;
   box-sizing: border-box;
   z-index: 998;
 }
