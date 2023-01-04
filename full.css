@@ -316,15 +316,13 @@ body.notransition .bottom-wrapper {
   top: 0;
   right: 0;
   bottom: 0;
-  left: -1px;
+  left: 0;
   top: 44px;
   transform: translateY(calc(100% - 28px - 45px - env(safe-area-inset-bottom, 0px)));
   padding-bottom: env(safe-area-inset-bottom);
   background: #1a1c24;
   background: #0e0e0e;
   color: #d4d5d7;
-  box-shadow: inset 1px 0 0 0 #ffffff3d;
-  padding-left: 1px;
   pointer-events: none;
   box-sizing: border-box;
   will-change: transform;
@@ -411,8 +409,6 @@ body.loaded:not(.mobile) .live-view {
   transform: none !important;
   pointer-events: auto;
   left: auto;
-  box-shadow: none;
-  padding-left: 0;
 }
 
 body.mobile .live-view.file-open {
