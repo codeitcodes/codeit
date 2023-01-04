@@ -493,7 +493,6 @@ body.notransition .live-view.file-open {
   border-radius: 0 500px 500px 0;
   padding: 7px 10px;
   border: 3px solid transparent;
-  border-left-width: 1px;
   transition: .18s var(--ease-function);
   transition-property: left, box-shadow;
   z-index: 999;
