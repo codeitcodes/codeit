@@ -552,7 +552,7 @@ body.scroll-enabled .bookmark {
 }
 
 .sidebar-toggle.visible {
-  left: -1px;
+  left: -2px;
 }
 
 .sidebar-toggle.visible::after {
