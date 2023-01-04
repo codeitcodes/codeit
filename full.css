@@ -728,7 +728,7 @@ body.expanded .sidebar-toggle svg .left {
 }
 
 body.expanded .sidebar {
-  transform: translateX(calc(100% - 1px));
+  transform: translateX(100%);
   pointer-events: auto;
 }
 
