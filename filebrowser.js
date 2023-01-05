@@ -2201,8 +2201,11 @@ function createNewRepoInHTML() {
       // toggle lock
       repoPrivate = lockButton.classList.toggle('locked');
       
-      // focus repo name
-      repoEl.querySelector('.name').focus();
+      // focus repo name and move cursor to end
+      
+      const repoName = repoEl.querySelector('.name');
+      
+      s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
       
     });
     
@@ -2364,7 +2367,11 @@ function createNewRepoInHTML() {
   } else {
 
     // if already adding a new repo, focus it
-    fileWrapper.querySelector('.item.focused .name').focus();
+    
+    const newRepoName = fileWrapper.querySelector('.item.focused .name');
+    
+    // move cursor to end
+    s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
 
   }
 
@@ -2727,7 +2734,11 @@ function createNewFileInHTML() {
   } else {
 
     // if already adding a new file, focus it
-    fileWrapper.querySelector('.item.focused .name').focus();
+    
+    const newFileName = fileWrapper.querySelector('.item.focused .name');
+    
+    // move cursor to end
+    s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
 
   }
 
