@@ -209,6 +209,11 @@ cd-el {
   color: hsl(218deg 7% 64% / 72%);
 }
 
+.language-markdown .token.list,
+.language-markdown .token.title .token.punctuation {
+  color: hsl(218deg 7% 64% / 72%);
+}
+
 .token.string,
 .token.string *,
 .token.attr-value,
