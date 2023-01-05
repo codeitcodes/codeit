@@ -59,7 +59,7 @@ window.addEventListener('load', async () => {
   }
 
 
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
+  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org,workflow';
 
   loginButton.addEventListener('click', () => {
     
