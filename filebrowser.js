@@ -2205,6 +2205,7 @@ function createNewRepoInHTML() {
       
       const repoName = repoEl.querySelector('.name');
       
+      const s = window.getSelection();
       s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
       
     });
@@ -2371,6 +2372,7 @@ function createNewRepoInHTML() {
     const newRepoName = fileWrapper.querySelector('.item.focused .name');
     
     // move cursor to end
+    const s = window.getSelection();
     s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
 
   }
@@ -2738,6 +2740,7 @@ function createNewFileInHTML() {
     const newFileName = fileWrapper.querySelector('.item.focused .name');
     
     // move cursor to end
+    const s = window.getSelection();
     s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
 
   }
