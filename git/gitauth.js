@@ -209,6 +209,9 @@ window.addEventListener('load', async () => {
 });
 
 
+let openGitHubLoginWindow;
+let openGitHubLoginListener;
+
 function openGitHubLogin() {
 
   return new Promise(resolve => {
@@ -221,30 +224,29 @@ function openGitHubLogin() {
 
     } else {
 
-      const listener = window.addEventListener('message', (event) => {
+      if (openGitHubLoginWindow) {
+        
+        openGitHubLoginWindow.close();
+        window.removeEventListener('message', openGitHubLoginListener);
+        
+      }
+      
+      openGitHubLoginListener = window.addEventListener('message', (event) => {
 
         // if received a git code
         if (event.origin === window.location.origin &&
             event.data.startsWith('gitCode=')) {
 
-          window.removeEventListener('message', listener);
-          
-          if (loginWindow.closed) {
-            
-            resolve(false);
-            
-          } else {
-            
-            resolve(true);
-            
-          }
+          window.removeEventListener('message', openGitHubLoginListener);
+
+          resolve();
 
         }
 
       });
 
       // open login window
-      const loginWindow = window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+      openGitHubLoginWindow = window.open(authURL, 'Login with GitHub', 'height=575,width=575');
 
     }
     
