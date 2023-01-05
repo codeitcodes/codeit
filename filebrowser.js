@@ -252,7 +252,16 @@ async function renderSidebarHTML() {
     // if not logged in
     if (gitToken == '') {
     
-      const dialogResp = await showDialog(openGitHubLogin, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
+      const dialogResp = await showDialog(async () => {
+        
+        const resp = await openGitHubLogin();
+        
+        if (resp) {
+          // hide dialog
+          hideDialog();
+        }
+        
+      }, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
       
       // if chosen to log in, return
       if (dialogResp == true) return;
@@ -1003,7 +1012,16 @@ async function checkPushDialogs() {
   // if not logged in to git
   if (gitToken == '') {
 
-    showDialog(openGitHubLogin, 'Login to save this file.', 'Login');
+    showDialog(async () => {
+
+      const resp = await openGitHubLogin();
+
+      if (resp) {
+        // hide dialog
+        hideDialog();
+      }
+
+    }, 'Login to save this file.', 'Login');
 
     return 'return';
 
@@ -1014,7 +1032,16 @@ async function checkPushDialogs() {
   // request additional permissions
   if (treeLoc[2] === '/.github/workflows') {
     
-    showDialog(openGitHubLogin, 'To push this file, request\nGit workflow access.', 'Open');
+    showDialog(async () => {
+
+      const resp = await openGitHubLogin();
+
+      if (resp) {
+        // hide dialog
+        hideDialog();
+      }
+
+    }, 'To push this file, request\nGit workflow access.', 'Open');
     
     return 'return';
     
