@@ -998,39 +998,6 @@ function pushFileWithCommitMessageHTML(fileEl) {
 }
 
 
-function openGitHubLogin() {
-
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-  if (isMobile) {
-
-    window.location.href = authURL;
-
-  } else {
-
-    window.addEventListener('message', (event) => {
-
-      // if received a git code
-      if (event.origin === window.location.origin &&
-        event.data.startsWith('gitCode=')) {
-
-        // hide dialog
-        hideDialog();
-
-        showMessage('Logging in...', -1);
-
-      }
-
-    });
-
-    // open login window
-    window.open(authURL, 'Login with GitHub', 'height=575,width=575');
-
-  }
-
-}
-
-
 async function checkPushDialogs() {
 
   // if not logged in to git
@@ -1040,6 +1007,17 @@ async function checkPushDialogs() {
 
     return 'return';
 
+  }
+  
+  
+  // if pushing a git workflow file,
+  // request additional permissions
+  if (treeLoc[2] === '/.github/workflows') {
+    
+    showDialog(openGitHubLogin, 'To push this file, request\nGit workflow access.', 'Open');
+    
+    return 'return';
+    
   }
 
 
