@@ -1026,26 +1026,6 @@ async function checkPushDialogs() {
     return 'return';
 
   }
-  
-  
-  // if pushing a git workflow file,
-  // request additional permissions
-  if (treeLoc[2] === '/.github/workflows') {
-    
-    showDialog(async () => {
-
-      const resp = await openGitHubLogin();
-
-      if (resp) {
-        // hide dialog
-        hideDialog();
-      }
-
-    }, 'To push this file, request\nGit workflow access.', 'Open');
-    
-    return 'return';
-    
-  }
 
 
   // get repo obj from local storage
@@ -1195,6 +1175,28 @@ async function checkPushDialogs() {
 
     if (dialogResult === false) return 'return';
 
+  } else { // if user has push access in repo
+    
+    // if pushing a git workflow file,
+    // request additional permissions
+    if (getStorage('hasWorkflowPermission') === null &&
+        treeLoc[2] === '/.github/workflows') {
+
+      showDialog(async () => {
+
+        const resp = await openGitHubLogin();
+
+        if (resp) {
+          // hide dialog
+          hideDialog();
+        }
+
+      }, 'To push this file, request\nGit workflow access.', 'Open');
+
+      return 'return';
+
+    }
+    
   }
 
 }
