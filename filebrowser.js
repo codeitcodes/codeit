@@ -254,12 +254,10 @@ async function renderSidebarHTML() {
     
       const dialogResp = await showDialog(async () => {
         
-        const resp = await openGitHubLogin();
+        await openGitHubLogin();
         
-        if (resp) {
-          // hide dialog
-          hideDialog();
-        }
+        // hide dialog
+        hideDialog();
         
       }, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
       
@@ -1014,12 +1012,10 @@ async function checkPushDialogs() {
 
     showDialog(async () => {
 
-      const resp = await openGitHubLogin();
+      await openGitHubLogin();
 
-      if (resp) {
-        // hide dialog
-        hideDialog();
-      }
+      // hide dialog
+      hideDialog();
 
     }, 'Login to save this file.', 'Login');
 
@@ -1184,12 +1180,10 @@ async function checkPushDialogs() {
 
       showDialog(async () => {
 
-        const resp = await openGitHubLogin();
+        await openGitHubLogin();
 
-        if (resp) {
-          // hide dialog
-          hideDialog();
-        }
+        // hide dialog
+        hideDialog();
 
       }, 'To push this file, request\nGit workflow access.', 'Open');
 
