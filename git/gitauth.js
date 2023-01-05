@@ -58,23 +58,7 @@ window.addEventListener('load', async () => {
     
   }
 
-
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org,workflow';
-
-  loginButton.addEventListener('click', () => {
-    
-    if (isMobile) {
-      
-      window.location.href = authURL;
-      
-    } else {
-      
-      window.open(authURL, 'Login with GitHub', 'height=575,width=575');
-      
-    }
-
-  })
-
+  loginButton.addEventListener('click', openGitHubLogin);
 
   window.addEventListener('message', async (event) => {
     
@@ -108,7 +92,9 @@ window.addEventListener('load', async () => {
   
       // start loading
       startLoading();
-        
+      
+      showMessage('Logging in...', -1);
+      
       const gitCode = event.data.split('gitCode=')[1];
   
       // get git token from Github
@@ -212,6 +198,38 @@ window.addEventListener('load', async () => {
   loadLS();
 
 });
+
+
+function openGitHubLogin() {
+
+  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org,workflow';
+
+  if (isMobile) {
+
+    window.location.href = authURL;
+
+  } else {
+
+    window.addEventListener('message', (event) => {
+
+      // if received a git code
+      if (event.origin === window.location.origin &&
+          event.data.startsWith('gitCode=')) {
+
+        // hide dialog
+        //hideDialog();@@
+
+      }
+
+    });
+
+    // open login window
+    window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+
+  }
+
+}
+
 
 async function getGithubToken(gitCode) {
 
