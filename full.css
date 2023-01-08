@@ -1616,7 +1616,7 @@ body.mobile .sidebar .button {
   top: 20px;
   left: 20px;
   /* right: 20px; */
-  padding: 2px;
+  padding: 3px;
   min-width: 136px;
   max-width: 375px;
   max-height: calc(100vh - 80px - 6px - env(safe-area-inset-bottom, 0px));
