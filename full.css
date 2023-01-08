@@ -1767,7 +1767,8 @@ body.mobile .context-menu {
   display: none;
 }
 
-.context-menu .icon:not(.push, .discard-changes, .share) {
+.context-menu .icon:not(.push, .discard-changes, .share),
+.context-menu hr {
   display: none;
 }
 
