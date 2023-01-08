@@ -2040,7 +2040,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   color: #dcddde;
   font-weight: 500;
   line-height: 1.5;
-  padding: 0;
+  padding: 6px 12px;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
   /* left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width)); */
@@ -2061,7 +2061,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
 .message.animating {
   color: transparent;
   border-radius: 8px;
-  padding: 0;
+  padding: 6px 12px;
   transition: none;
 }
 
