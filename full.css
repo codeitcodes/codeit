@@ -1743,6 +1743,12 @@ body.mobile .menu .icon a {
   transform: scale(1.35) translateX(-0.1px);
 }
 
+.menu hr {
+  border: 0;
+  border-bottom: 1px solid #f1f1f21c;
+  margin: 7px 14px;
+}
+
 .context-menu {
   margin-top: -7px;
   margin-left: -6px;
