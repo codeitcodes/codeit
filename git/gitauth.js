@@ -75,6 +75,9 @@ window.addEventListener('load', async () => {
         // show sidebar title
         sidebarLogo.innerText = 'Repositories';
         
+        // hide branch button
+        sidebarBranch.classList.remove('visible');
+        
       }
   
       // if on safari, refresh header color
