@@ -54,8 +54,6 @@ body cd-el {
   word-wrap: normal;
   padding-bottom: calc(41px + 10.5px);
   scroll-padding-bottom: calc(41px + 10.5px);
-  scroll-padding-top: 10.5px;
-  scroll-padding-left: 13.5px;
 }
 
 .bottom-wrapper {
