@@ -3319,7 +3319,7 @@ function setupEditor() {
     }
     
     
-    let beautifierOptions = {
+    let formatterOptions = {
       "indent_size": "2",
       "indent_char": " ",
       "max_preserve_newlines": "5",
@@ -3339,7 +3339,7 @@ function setupEditor() {
       "indent_empty_lines": false
     };
     
-    // beautify on Ctrl/Cmd + D
+    // format on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
         && isKeyEventMeta(e)) {
       
@@ -3363,36 +3363,36 @@ function setupEditor() {
           if (selLang == 'markup') selLang = 'html';
 
           // find syntax for language
-          const beautifyLang = beautifier[selLang];
+          const formatSyntax = beautifier[selLang];
 
           // if syntax exists
-          if (beautifyLang) {
+          if (formatSyntax) {
 
-            // beautify
-            beautifierOptions.indent_char = cd.options.tab[0];
-            let beautifiedText = beautifyLang(selText, beautifierOptions);
+            // format
+            formatterOptions.indent_char = cd.options.tab[0];
+            let formattedText = formatSyntax(selText, formatterOptions);
 
-            // prevent deleting ending newline when beautifying
-            if (selText.endsWith('\n') && !beautifiedText.endsWith('\n')) {
+            // prevent deleting ending newline when formatting
+            if (selText.endsWith('\n') && !formattedText.endsWith('\n')) {
 
-              beautifiedText += '\n';
+              formattedText += '\n';
 
             }
             
-            // compare current code with new code
+            // compare current code with formatted code
             // if the code is different, swap it
-            if (hashCode(selText) !== hashCode(beautifiedText)) {
+            if (hashCode(selText) !== hashCode(formattedText)) {
               
               // replace selection contents
-              // with beautified text
+              // with formatted text
               cd.deleteCurrentSelection();
-              cd.insert(beautifiedText, { moveToEnd: false });
+              cd.insert(formattedText, { moveToEnd: false });
               
               // get caret pos in text
               const pos = cd.getSelection();
     
               // select beautified text
-              cd.setSelection(pos.start, (pos.start + beautifiedText.length));
+              cd.setSelection(pos.start, (pos.start + formattedText.length));
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
@@ -3403,16 +3403,16 @@ function setupEditor() {
 
         } else {
           
-          if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 0;
+          if (!shownMessages.formatSelect) shownMessages.formatSelect = 0;
           
           // if shown message less than two times
-          if (shownMessages.beautifySelect < 2) {
+          if (shownMessages.formatSelect < 2) {
           
-            // show beautify select message
+            // show format select message
             showMessage('Try selecting some text first.', 4100);
             
             // bump counter
-            shownMessages.beautifySelect++;
+            shownMessages.formatSelect++;
             
             saveShownMessagesLS();
             
@@ -3441,8 +3441,8 @@ function setupEditor() {
       // if codeit is active
       if (document.activeElement === cd) {
         
-        if (!isMac) showMessage('Try beautifying with Ctrl + D', 5000);
-        else showMessage('Try beautifying with ⌘ + D', 5000);
+        if (!isMac) showMessage('Try formatting with Ctrl + D', 5000);
+        else showMessage('Try formatting with ⌘ + D', 5000);
         
       }
       
