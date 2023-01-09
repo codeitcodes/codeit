@@ -1996,7 +1996,7 @@ function scrolledSidebarTitle() {
 
   }
 
-  if (Math.round(sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
+  if ((sidebarLogo.offsetWidth + sidebarLogo.scrollLeft - 1)
       >= sidebarLogo.scrollWidth) {
 
     sidebarLogo.classList.add('scrolled-end');
