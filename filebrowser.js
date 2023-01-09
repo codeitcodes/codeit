@@ -548,6 +548,7 @@ async function renderSidebarHTML() {
             if (fileType === 'image') fileIconHTML = imageIcon;
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
+            if (fileType === 'markdown') fileIconHTML = markdownIcon;
 
             out += `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
@@ -605,6 +606,7 @@ async function renderSidebarHTML() {
             if (fileType === 'image') fileIconHTML = imageIcon;
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
+            if (fileType === 'markdown') fileIconHTML = markdownIcon;
 
             out = `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
