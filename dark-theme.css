@@ -266,6 +266,7 @@ cd-el {
 .line-numbers {
   position: relative;
   padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
+  scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
 }
 
