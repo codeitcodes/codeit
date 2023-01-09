@@ -78,6 +78,16 @@ window.addEventListener('load', async () => {
         // hide branch button
         sidebarBranch.classList.remove('visible');
         
+        sidebarLogo.classList.add('notransition');
+        
+        // scroll to start of title
+        sidebarLogo.scrollTo(0, 0);
+        scrolledSidebarTitle();
+        
+        onNextFrame(() => {
+          sidebarLogo.classList.remove('notransition');
+        });
+        
       }
   
       // if on safari, refresh header color
