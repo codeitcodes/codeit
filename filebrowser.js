@@ -1176,7 +1176,7 @@ async function checkPushDialogs() {
   } else { // if user has push access in repo
     
     // if pushing a git workflow file,
-    // request additional permissions
+    // request legacy additional permissions
     if (getStorage('hasWorkflowPermission') === null &&
         treeLoc[2] === '/.github/workflows') {
 
