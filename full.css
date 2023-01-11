@@ -891,7 +891,7 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
   width: 28px;
   height: 20px;
   background: linear-gradient(270deg, #1a1c24, #1a1c2400);
-  transition: .18s var(--ease-function) opacity;
+  transition: .1s var(--ease-function) opacity;
   pointer-events: none;
   opacity: 0;
   z-index: 1;
