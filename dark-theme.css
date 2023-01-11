@@ -1,5 +1,6 @@
 /*
  * Syntax highlighting
+ * Colors based on Base16 Ocean Dark
  */
 
 body:not(.mobile) ::-webkit-scrollbar {
@@ -9,10 +10,17 @@ body:not(.mobile) ::-webkit-scrollbar {
 
 body:not(.mobile) ::-webkit-scrollbar-track {
   background-color: #2B303B;
+  box-shadow: inset 1px 0 0 0 rgba(0,0,0,0.2);
+}
+
+body:not(.mobile) ::-webkit-scrollbar-track:horizontal {
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2);
 }
 
 body:not(.mobile) ::-webkit-scrollbar-corner {
   background-color: #2B303B;
+  box-shadow: inset -15px -15px 0 0 #2B303B,
+              inset 1px 1px 0 0 rgba(0,0,0,0.2);
 }
 
 body:not(.mobile) ::-webkit-scrollbar-thumb {
@@ -201,11 +209,6 @@ cd-el {
   color: hsl(218deg 7% 64% / 72%);
 }
 
-.language-markdown .token.list,
-.language-markdown .token.title .token.punctuation {
-  color: hsl(218deg 7% 64% / 72%);
-}
-
 .token.string,
 .token.string *,
 .token.attr-value,
@@ -266,7 +269,6 @@ cd-el {
 .line-numbers {
   position: relative;
   padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
-  scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
 }
 
@@ -361,3 +363,4 @@ span.inline-color::after {
 span.inline-color-wrapper:hover span.inline-color::after {
   box-shadow: 0 0 0 1px hsl(221deg 12% 67%), inset 0 0 0 1px #313744;
 }
+
