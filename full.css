@@ -1612,6 +1612,7 @@ body.mobile .sidebar .button {
   line-height: 1.5;
   margin-top: 4.5px;
   transform: translateY(-7px);
+  transform: translate(-1px, -1px);
   top: 20px;
   left: 20px;
   /* right: 20px; */
@@ -1637,6 +1638,7 @@ body.mobile .sidebar .button {
   opacity: 1;
   transition: .18s var(--bounce-function);
   transition-property: transform, padding, opacity;
+  transition-property: transform, padding;
 }
 
 body.mobile .menu {
