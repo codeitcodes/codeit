@@ -225,10 +225,6 @@ cd-el {
   color: inherit !important;
 }
 
-.token.italic {
-  font-style: normal;
-}
-
 .token.entity {
   cursor: unset;
 }
