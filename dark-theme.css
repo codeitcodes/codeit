@@ -199,13 +199,15 @@ cd-el {
 }
 
 .token.comment,
-.token.comment * {
-  color: hsl(218deg 7% 64% / 72%) !important;
-}
-
+.token.comment *,
 .token.prolog,
 .token.doctype,
 .token.cdata {
+  color: hsl(218deg 7% 64% / 72%) !important;
+}
+
+.language.markdown .token.title .token.punctuation,
+.language.markdown .token.list {
   color: hsl(218deg 7% 64% / 72%);
 }
 
