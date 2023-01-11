@@ -216,7 +216,7 @@ cd-el {
   font-style: normal;
 }
 
-.language-markdown .token.bold .token.punctuation {
+.language-markdown :is(.token.bold, .token.title) .token.punctuation {
   font-weight: normal;
 }
 
