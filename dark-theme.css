@@ -207,7 +207,8 @@ cd-el {
 }
 
 .language.markdown .token.title .token.punctuation,
-.language.markdown .token.list {
+.language.markdown .token.list,
+.language.markdown .token:is(.italic, .bold) .token.punctuation {
   color: hsl(218deg 7% 64% / 72%);
 }
 
