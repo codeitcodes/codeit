@@ -216,6 +216,10 @@ cd-el {
   font-style: normal;
 }
 
+.language-markdown .token.bold .token.punctuation {
+  font-weight: normal;
+}
+
 .token.string,
 .token.string *,
 .token.attr-value,
