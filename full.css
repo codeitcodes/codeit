@@ -167,10 +167,10 @@ body.notransition .bottom-wrapper {
 
 .bottom-float .badge {
   position: absolute;
-  bottom: 16px;
+  bottom: 17px;
   left: 35px;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   background: var(--rosemary-lighter);
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d25;
@@ -1217,8 +1217,8 @@ body.mobile .sidebar .header .title .branch-icon.active {
   position: absolute;
   bottom: 0;
   left: 15px;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   background: var(--rosemary-lighter);
   border-radius: 50%;
   box-shadow: 0 0 0 2px #191d24;
