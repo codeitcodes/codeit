@@ -427,8 +427,6 @@ let getFileType = (fileName) => {
 
   let fileType = 'other';
 
-  if (fileName.includes('README')) return 'readme';
-
   Object.entries(fileTypes).forEach(type => {
 
     if (type[1].includes(extension)) {
