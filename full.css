@@ -93,7 +93,7 @@ body.notransition .bottom-wrapper {
   margin: 45px 0;
   width: calc(100% - 45px);
   max-width: 600px;
-display: flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 20px;
