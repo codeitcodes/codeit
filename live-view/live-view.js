@@ -547,9 +547,25 @@ if (isMobile) {
   
   liveButtonOptions.addEventListener('click', () => {
 
+    // share live view link
+
+    // create a link
+    const link = createLink({
+      dir: treeLoc,
+      file: selectedFile
+    });
+
+    navigator.share({
+      title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+      url: link,
+    });
+
+
+    /*
     // if clicked on options button, toggle menu
     liveViewMenu.classList.toggle('visible');
     liveButtonOptions.classList.toggle('active');
+    */
   
   });
   
