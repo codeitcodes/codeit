@@ -206,10 +206,14 @@ cd-el {
   color: hsl(218deg 7% 64% / 72%) !important;
 }
 
-.language.markdown .token.title .token.punctuation,
-.language.markdown .token.list,
-.language.markdown .token:is(.italic, .bold) .token.punctuation {
+.language-markdown .token.title .token.punctuation,
+.language-markdown .token.list,
+.language-markdown .token:is(.italic, .bold) .token.punctuation {
   color: hsl(218deg 7% 64% / 72%);
+}
+
+.language-markdown .token.italic .token.punctuation {
+  font-style: normal;
 }
 
 .token.string,
