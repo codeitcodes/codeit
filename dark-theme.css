@@ -174,7 +174,8 @@ cd-el {
 .token.template-string,
 .token.regex,
 .token.string-property,
-.token.variable {
+.token.variable,
+.language-markdown .token.url .token.url {
   color: #c1ffd5cc;
 }
 
@@ -208,7 +209,7 @@ cd-el {
 }
 
 .language-markdown .token.list,
-.language-markdown .token.url:has(> .token.url),
+.language-markdown .token.url,
 .language-markdown .token.punctuation {
   color: hsl(218deg 7% 64% / 72%);
 }
