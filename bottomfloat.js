@@ -121,10 +121,20 @@ if (isMobile) {
   
   bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
   
-  const landscape = window.matchMedia('(orientation: landscape)');
-  
-  landscape.addEventListener('change', () => {
+  window.addEventListener('resize', () => {
     
+    // if the window's height changed
+    if (window.innerHeight != bottomWrapper.prevWindowHeight) {
+      
+      bottomWrapper.prevWindowHeight = window.innerHeight;
+      
+    } else {
+      
+      return;
+      
+    }
+    
+    // update bottom float
     bottomWrapper.style.setProperty('--window-height', window.innerHeight + 'px');
     
     window.setTimeout(() => {  

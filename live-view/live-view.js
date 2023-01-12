@@ -396,14 +396,13 @@ function addBottomSwipeListener() {
 
     initialY = currentY;
 
-    const clickedOnShare = (e.target ===
-                            bottomWrapper.querySelector('.live-button.share'));
+    const clickedOnOptions = (e.target === liveButtonOptions);
 
     // if clicked and bottom float is expanded
     if (click && bottomWrapper.classList.contains('expanded')) {
 
-      // if did not click on share button
-      if (!clickedOnShare) {
+      // if did not click on options button
+      if (!clickedOnOptions) {
 
         e.preventDefault();
         e.stopPropagation();
@@ -412,22 +411,6 @@ function addBottomSwipeListener() {
         bottomWrapper.classList.remove('expanded');
 
         toggleLiveView(selectedFile);
-
-      } else if (active) {
-
-        // if clicked on share button,
-        // share live view link
-
-        // create a link
-        const link = createLink({
-          dir: treeLoc,
-          file: selectedFile
-        });
-        
-        navigator.share({
-          title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
-          url: link,
-        });
 
       }
 
@@ -558,6 +541,88 @@ function updateLiveViewArrow() {
 if (isMobile) {
 
   addBottomSwipeListener();
+  
+  
+  // live view mobile menu
+  
+  liveButtonOptions.addEventListener('click', () => {
+
+    // share live view link
+
+    // create a link
+    const link = createLink({
+      dir: treeLoc,
+      file: selectedFile
+    });
+
+    navigator.share({
+      title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+      url: link,
+    });
+
+
+    /*
+    // if clicked on options button, toggle menu
+    liveViewMenu.classList.toggle('visible');
+    liveButtonOptions.classList.toggle('active');
+    */
+  
+  });
+  
+  liveMenuShare.addEventListener('click', () => {
+
+    // share live view link
+
+    // create a link
+    const link = createLink({
+      dir: treeLoc,
+      file: selectedFile
+    });
+
+    navigator.share({
+      title: 'Run ' + treeLoc[0] + '/' + treeLoc[1].split(':')[0] + ' with Codeit',
+      url: link,
+    });
+    
+  });
+  
+  liveMenuConsole.addEventListener('click', () => {
+    
+    // show live view console
+    consoleSheet.classList.add('visible');
+    
+  });
+  
+  document.addEventListener('touchstart', (e) => {
+    
+    // if live view menu is visible
+    if (liveViewMenu.classList.contains('visible')) {
+
+      if (e.target.parentElement !== liveViewMenu &&
+          e.target.parentElement.parentElement !== liveViewMenu) {
+
+        liveViewMenu.classList.remove('visible');
+        liveButtonOptions.classList.remove('active');
+
+      }
+
+    }
+
+  });
+
+  liveViewMenu.addEventListener('click', () => {
+
+    liveViewMenu.classList.remove('visible');
+    liveButtonOptions.classList.remove('active');
+
+  });
+  
+  consoleSheetClose.addEventListener('click', () => {
+    
+    // hide live view console
+    consoleSheet.classList.remove('visible');
+    
+  });
 
 } else {
 

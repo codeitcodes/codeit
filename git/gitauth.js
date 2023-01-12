@@ -58,23 +58,7 @@ window.addEventListener('load', async () => {
     
   }
 
-
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-  loginButton.addEventListener('click', () => {
-    
-    if (isMobile) {
-      
-      window.location.href = authURL;
-      
-    } else {
-      
-      window.open(authURL, 'Login with GitHub', 'height=575,width=575');
-      
-    }
-
-  })
-
+  loginButton.addEventListener('click', openGitHubLogin);
 
   window.addEventListener('message', async (event) => {
     
@@ -90,6 +74,19 @@ window.addEventListener('load', async () => {
         
         // show sidebar title
         sidebarLogo.innerText = 'Repositories';
+        
+        // hide branch button
+        sidebarBranch.classList.remove('visible');
+        
+        sidebarLogo.classList.add('notransition');
+        
+        // scroll to start of title
+        sidebarLogo.scrollTo(0, 0);
+        scrolledSidebarTitle();
+        
+        onNextFrame(() => {
+          sidebarLogo.classList.remove('notransition');
+        });
         
       }
   
@@ -108,16 +105,27 @@ window.addEventListener('load', async () => {
   
       // start loading
       startLoading();
-        
+      
+      // show message
+      showMessage('Logging in...', -1);
+      
+      
+      // update legacy workflow permission
+      setStorage('hasWorkflowPermission', 'true');
+      
+      
       const gitCode = event.data.split('gitCode=')[1];
   
       // get git token from Github
       await getGithubToken(gitCode);
       
+      
       // clear modified repos
       modifiedRepos = {};
       updateModReposLS();
       
+      
+      // hide message
       if (messageEl.textContent === 'Logging in...') {
         hideMessage();
       }
@@ -212,6 +220,53 @@ window.addEventListener('load', async () => {
   loadLS();
 
 });
+
+
+let openGitHubLoginWindow;
+let openGitHubLoginListener;
+
+function openGitHubLogin() {
+
+  return new Promise(resolve => {
+
+    const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org,workflow';
+
+    if (isMobile) {
+
+      window.location.href = authURL;
+
+    } else {
+
+      if (openGitHubLoginWindow) {
+        
+        openGitHubLoginWindow.close();
+        window.removeEventListener('message', openGitHubLoginListener);
+        
+      }
+      
+      openGitHubLoginListener = window.addEventListener('message', (event) => {
+
+        // if received a git code
+        if (event.origin === window.location.origin &&
+            event.data.startsWith('gitCode=')) {
+
+          window.removeEventListener('message', openGitHubLoginListener);
+
+          resolve();
+
+        }
+
+      });
+
+      // open login window
+      openGitHubLoginWindow = window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+
+    }
+    
+  });
+
+}
+
 
 async function getGithubToken(gitCode) {
 

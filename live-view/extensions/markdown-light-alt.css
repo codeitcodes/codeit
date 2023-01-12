@@ -176,6 +176,25 @@ body blockquote {
   padding: 0 1em;
   color: var(--color-fg-muted);
   border-left: 0.25em solid var(--color-border-default);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+body dl {
+  padding: 0;
+}
+
+body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
 }
 
 body cd-el {

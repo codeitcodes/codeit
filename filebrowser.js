@@ -252,7 +252,14 @@ async function renderSidebarHTML() {
     // if not logged in
     if (gitToken == '') {
     
-      const dialogResp = await showDialog(openGitHubLogin, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
+      const dialogResp = await showDialog(async () => {
+        
+        await openGitHubLogin();
+        
+        // hide dialog
+        hideDialog();
+        
+      }, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
       
       // if chosen to log in, return
       if (dialogResp == true) return;
@@ -383,7 +390,7 @@ async function renderSidebarHTML() {
     // stop loading
     stopLoading();
     
-    showMessage('Whoops, your Git login expired.', 5000);
+    showMessage('Your Git login expired.', 4000);
 
     sidebar.classList.add('intro');
 
@@ -541,6 +548,7 @@ async function renderSidebarHTML() {
             if (fileType === 'image') fileIconHTML = imageIcon;
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
+            if (file.name.includes('README')) fileIconHTML = readmeIcon;
 
             out += `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
@@ -598,6 +606,7 @@ async function renderSidebarHTML() {
             if (fileType === 'image') fileIconHTML = imageIcon;
             if (fileType === 'video') fileIconHTML = videoIcon;
             if (fileType === 'audio') fileIconHTML = audioIcon;
+            if (file.name.includes('README')) fileIconHTML = readmeIcon;
 
             out = `
             <div class="item file`+ modified +`" sha="`+ file.sha +`">
@@ -998,45 +1007,19 @@ function pushFileWithCommitMessageHTML(fileEl) {
 }
 
 
-function openGitHubLogin() {
-
-  const authURL = 'https://github.com/login/oauth/authorize?client_id=7ede3eed3185e59c042d&scope=repo,user,write:org';
-
-  if (isMobile) {
-
-    window.location.href = authURL;
-
-  } else {
-
-    window.addEventListener('message', (event) => {
-
-      // if received a git code
-      if (event.origin === window.location.origin &&
-        event.data.startsWith('gitCode=')) {
-
-        // hide dialog
-        hideDialog();
-
-        showMessage('Logging in...', -1);
-
-      }
-
-    });
-
-    // open login window
-    window.open(authURL, 'Login with GitHub', 'height=575,width=575');
-
-  }
-
-}
-
-
 async function checkPushDialogs() {
 
   // if not logged in to git
   if (gitToken == '') {
 
-    showDialog(openGitHubLogin, 'Login to save this file.', 'Login');
+    showDialog(async () => {
+
+      await openGitHubLogin();
+
+      // hide dialog
+      hideDialog();
+
+    }, 'Login to save this file.', 'Login');
 
     return 'return';
 
@@ -1190,6 +1173,26 @@ async function checkPushDialogs() {
 
     if (dialogResult === false) return 'return';
 
+  } else { // if user has push access in repo
+    
+    // if pushing a git workflow file,
+    // request legacy additional permissions
+    if (getStorage('hasWorkflowPermission') === null &&
+        treeLoc[2] === '/.github/workflows') {
+
+      showDialog(async () => {
+
+        await openGitHubLogin();
+
+        // hide dialog
+        hideDialog();
+
+      }, 'To push this file, request\nGit workflow access.', 'Open');
+
+      return 'return';
+
+    }
+    
   }
 
 }
@@ -1995,7 +1998,7 @@ function scrolledSidebarTitle() {
 
   }
 
-  if (Math.round(sidebarLogo.offsetWidth + sidebarLogo.scrollLeft)
+  if ((sidebarLogo.offsetWidth + sidebarLogo.scrollLeft + 1)
       >= sidebarLogo.scrollWidth) {
 
     sidebarLogo.classList.add('scrolled-end');
@@ -2200,8 +2203,12 @@ function createNewRepoInHTML() {
       // toggle lock
       repoPrivate = lockButton.classList.toggle('locked');
       
-      // focus repo name
-      repoEl.querySelector('.name').focus();
+      // focus repo name and move cursor to end
+      
+      const repoName = repoEl.querySelector('.name');
+      
+      const s = window.getSelection();
+      s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
       
     });
     
@@ -2363,7 +2370,12 @@ function createNewRepoInHTML() {
   } else {
 
     // if already adding a new repo, focus it
-    fileWrapper.querySelector('.item.focused .name').focus();
+    
+    const newRepoName = fileWrapper.querySelector('.item.focused .name');
+    
+    // move cursor to end
+    const s = window.getSelection();
+    s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
 
   }
 
@@ -2726,7 +2738,12 @@ function createNewFileInHTML() {
   } else {
 
     // if already adding a new file, focus it
-    fileWrapper.querySelector('.item.focused .name').focus();
+    
+    const newFileName = fileWrapper.querySelector('.item.focused .name');
+    
+    // move cursor to end
+    const s = window.getSelection();
+    s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
 
   }
 
@@ -3287,7 +3304,10 @@ function setupEditor() {
       if (shownMessages.save < 2) {
         
         // show message
-        showMessage('We autosave :D');
+        showMessage({
+          icon: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.19 1.36l-7 3.11C3.47 4.79 3 5.51 3 6.3V11c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6.3c0-.79-.47-1.51-1.19-1.83l-7-3.11c-.51-.23-1.11-.23-1.62 0zm-1.9 14.93L6.7 13.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l5.88-5.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-6.59 6.59c-.38.39-1.02.39-1.41 0z" fill="currentColor"/></svg>',
+          message: 'There\'s autosave'
+        });
 
         // bump counter
         shownMessages.save++;
@@ -3299,7 +3319,7 @@ function setupEditor() {
     }
     
     
-    let beautifierOptions = {
+    let formatterOptions = {
       "indent_size": "2",
       "indent_char": " ",
       "max_preserve_newlines": "5",
@@ -3319,7 +3339,7 @@ function setupEditor() {
       "indent_empty_lines": false
     };
     
-    // beautify on Ctrl/Cmd + D
+    // format on Ctrl/Cmd + D
     if ((e.key === 'd' || e.keyCode === 68)
         && isKeyEventMeta(e)) {
       
@@ -3343,36 +3363,36 @@ function setupEditor() {
           if (selLang == 'markup') selLang = 'html';
 
           // find syntax for language
-          const beautifyLang = beautifier[selLang];
+          const formatSyntax = beautifier[selLang];
 
           // if syntax exists
-          if (beautifyLang) {
+          if (formatSyntax) {
 
-            // beautify
-            beautifierOptions.indent_char = cd.options.tab[0];
-            let beautifiedText = beautifyLang(selText, beautifierOptions);
+            // format
+            formatterOptions.indent_char = cd.options.tab[0];
+            let formattedText = formatSyntax(selText, formatterOptions);
 
-            // prevent deleting ending newline when beautifying
-            if (selText.endsWith('\n') && !beautifiedText.endsWith('\n')) {
+            // prevent deleting ending newline when formatting
+            if (selText.endsWith('\n') && !formattedText.endsWith('\n')) {
 
-              beautifiedText += '\n';
+              formattedText += '\n';
 
             }
             
-            // compare current code with new code
+            // compare current code with formatted code
             // if the code is different, swap it
-            if (hashCode(selText) !== hashCode(beautifiedText)) {
+            if (hashCode(selText) !== hashCode(formattedText)) {
               
               // replace selection contents
-              // with beautified text
+              // with formatted text
               cd.deleteCurrentSelection();
-              cd.insert(beautifiedText, { moveToEnd: false });
+              cd.insert(formattedText, { moveToEnd: false });
               
               // get caret pos in text
               const pos = cd.getSelection();
     
               // select beautified text
-              cd.setSelection(pos.start, (pos.start + beautifiedText.length));
+              cd.setSelection(pos.start, (pos.start + formattedText.length));
 
               // dispatch type event (simulate typing)
               cd.dispatchTypeEvent();
@@ -3383,16 +3403,16 @@ function setupEditor() {
 
         } else {
           
-          if (!shownMessages.beautifySelect) shownMessages.beautifySelect = 0;
+          if (!shownMessages.formatSelect) shownMessages.formatSelect = 0;
           
           // if shown message less than two times
-          if (shownMessages.beautifySelect < 2) {
+          if (shownMessages.formatSelect < 2) {
           
-            // show beautify select message
+            // show format select message
             showMessage('Try selecting some text first.', 4100);
             
             // bump counter
-            shownMessages.beautifySelect++;
+            shownMessages.formatSelect++;
             
             saveShownMessagesLS();
             
@@ -3421,8 +3441,8 @@ function setupEditor() {
       // if codeit is active
       if (document.activeElement === cd) {
         
-        if (!isMac) showMessage('Try beautifying with Ctrl + D', 5000);
-        else showMessage('Try beautifying with ⌘ + D', 5000);
+        if (!isMac) showMessage('Try formatting with Ctrl + D', 5000);
+        else showMessage('Try formatting with ⌘ + D', 5000);
         
       }
       

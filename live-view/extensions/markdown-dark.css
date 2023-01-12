@@ -179,6 +179,7 @@ body hr {
   margin: 24px 0;
   background-color: var(--color-border-default);
   border: 0;
+  border-radius: 10px;
 }
 
 body img {
@@ -240,7 +241,38 @@ body table tr:nth-child(2n) {
 body blockquote {
   padding: 0 1em;
   color: var(--color-fg-muted);
-  border-left: 0.25em solid var(--color-border-default);
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+  padding-left: calc(1em + 0.25em);
+}
+
+body blockquote::before {
+  content: '';
+  height: 100%;
+  width: 0.25em;
+  background: var(--color-border-default);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+body dl {
+  padding: 0;
+}
+
+body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
 }
 
 body cd-el {

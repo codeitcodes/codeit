@@ -10,17 +10,10 @@ body:not(.mobile) ::-webkit-scrollbar {
 
 body:not(.mobile) ::-webkit-scrollbar-track {
   background-color: #2B303B;
-  box-shadow: inset 1px 0 0 0 rgba(0,0,0,0.2);
-}
-
-body:not(.mobile) ::-webkit-scrollbar-track:horizontal {
-  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2);
 }
 
 body:not(.mobile) ::-webkit-scrollbar-corner {
   background-color: #2B303B;
-  box-shadow: inset -15px -15px 0 0 #2B303B,
-              inset 1px 1px 0 0 rgba(0,0,0,0.2);
 }
 
 body:not(.mobile) ::-webkit-scrollbar-thumb {
@@ -139,7 +132,8 @@ cd-el {
 .token.important,
 .token.atrule,
 .token.url .token.content,
-.token.url-reference .token.variable {
+.token.url-reference .token.variable,
+.language-markdown .token.code-block .token.punctuation {
   color: #a6c3d4;
 }
 
@@ -173,7 +167,8 @@ cd-el {
 .token.template-string,
 .token.regex,
 .token.string-property,
-.token.variable {
+.token.variable,
+.language-markdown .token.url .token.url {
   color: #c1ffd5cc;
 }
 
@@ -199,14 +194,25 @@ cd-el {
 }
 
 .token.comment,
-.token.comment * {
-  color: hsl(218deg 7% 64% / 72%) !important;
-}
-
+.token.comment *,
 .token.prolog,
 .token.doctype,
 .token.cdata {
+  color: hsl(218deg 7% 64% / 72%) !important;
+}
+
+.language-markdown .token.list,
+.language-markdown .token.url:not(.url-reference),
+.language-markdown .token.punctuation {
   color: hsl(218deg 7% 64% / 72%);
+}
+
+.language-markdown .token.italic .token.punctuation {
+  font-style: normal;
+}
+
+.language-markdown :is(.token.bold, .token.title) .token.punctuation {
+  font-weight: normal;
 }
 
 .token.string,
@@ -220,10 +226,6 @@ cd-el {
 .token.doctype .token.string,
 .token.doctype .token.string * {
   color: inherit !important;
-}
-
-.token.italic {
-  font-style: normal;
 }
 
 .token.entity {
@@ -269,6 +271,7 @@ cd-el {
 .line-numbers {
   position: relative;
   padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
+  scroll-padding-left: calc(var(--gutter-length) + env(safe-area-inset-left));
   --gutter-length: calc(1.2em + 30px + env(safe-area-inset-left));
 }
 
@@ -363,3 +366,4 @@ span.inline-color::after {
 span.inline-color-wrapper:hover span.inline-color::after {
   box-shadow: 0 0 0 1px hsl(221deg 12% 67%), inset 0 0 0 1px #313744;
 }
+
