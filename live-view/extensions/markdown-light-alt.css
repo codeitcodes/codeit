@@ -176,6 +176,8 @@ body blockquote {
   padding: 0 1em;
   color: var(--color-fg-muted);
   border-left: 0.25em solid var(--color-border-default);
+  margin-left: 0;
+  margin-right: 0;
 }
 
 body cd-el {
