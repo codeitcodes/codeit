@@ -209,7 +209,7 @@ cd-el {
 }
 
 .language-markdown .token.list,
-.language-markdown .token.url,
+.language-markdown .token.url:not(.url-reference),
 .language-markdown .token.punctuation {
   color: hsl(218deg 7% 64% / 72%);
 }
