@@ -241,6 +241,10 @@ cd-el {
   text-decoration: underline;
 }
 
+.token.strike .token.content {
+  text-decoration: line-through;
+}
+
 
 .token.brace.brace-active {
   position: relative;
