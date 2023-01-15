@@ -1665,8 +1665,12 @@ body:not(.mobile) .menu::-webkit-scrollbar-thumb {
   background-color: rgb(130 134 137 / 50%);
 }
 
-body:not(.mobile) .menu::-webkit-scrollbar-thumb:not(:active):hover {
+body:not(.mobile) .menu::-webkit-scrollbar-thumb:hover {
   background-color: rgb(130 134 137 / 65%);
+}
+
+body:not(.mobile) .menu::-webkit-scrollbar-thumb:active {
+  background-color: rgb(130 134 137 / 50%);
 }
 
 .menu .icon {
