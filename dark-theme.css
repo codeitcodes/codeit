@@ -133,7 +133,8 @@ cd-el {
 .token.atrule,
 .token.url .token.content,
 .token.url-reference .token.variable,
-.language-markdown .token.code-block .token.punctuation {
+.language-markdown .token.code-block .token.punctuation,
+.language-markdown .token.tag .token.punctuation {
   color: #a6c3d4;
 }
 
@@ -238,6 +239,10 @@ cd-el {
   color: inherit;
   caret-color: #fff;
   text-decoration: underline;
+}
+
+.token.strike .token.content {
+  text-decoration: line-through;
 }
 
 
