@@ -546,7 +546,7 @@ if (isMobile) {
   // live view mobile menu
   
   liveButtonOptions.addEventListener('click', () => {
-
+    
     // if clicked on options button, toggle menu
     liveViewMenu.classList.toggle('visible');
     liveButtonOptions.classList.toggle('active');
@@ -584,7 +584,8 @@ if (isMobile) {
       
       // if didn't click on live view menu
       if (e.target.parentElement !== liveViewMenu &&
-          e.target.parentElement.parentElement !== liveViewMenu) {
+          e.target.parentElement.parentElement !== liveViewMenu &&
+          e.target !== liveButtonOptions) {
         
         // hide live view menu
         liveViewMenu.classList.remove('visible');
