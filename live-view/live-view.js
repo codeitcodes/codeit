@@ -1304,4 +1304,3 @@ async function renderLiveViewMarkdown(file) {
   liveView.classList.add('loaded');
 
 }
-
