@@ -4807,7 +4807,7 @@ body {
 
 #features {
   background: #1a1c24 !important;
-  margin-top: -5px;
+  margin-top: calc(-5px - env(safe-area-inset-bottom));
 }
 
 #features .ftPoint {
