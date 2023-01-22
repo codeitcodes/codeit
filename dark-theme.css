@@ -42,7 +42,7 @@ body:not(.mobile) ::-webkit-scrollbar-thumb:active {
   color: #a6c3d4;
   margin-top: 21px;
   margin-left: -3px;
-  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  font-family: var(--mono-font-family);
   line-height: 1.5;
   padding: 0;
   box-shadow: none;
@@ -102,7 +102,7 @@ body:not(.mobile) .autocomplete::-webkit-scrollbar-thumb {
 .cd-wrapper .top-hit {
   position: fixed;
   color: #a6c3d4;
-  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  font-family: var(--mono-font-family);
   pointer-events: none;
   opacity: .5;
 }
@@ -117,7 +117,7 @@ cd-el {
   color: #a6c3d4;
   caret-color: #fff;
 
-  font-family: 'Mono Sans', 'Roboto Mono', consolas, lucida console, courier new, monospace;
+  font-family: var(--mono-font-family);
 
   font-size: 14px;
   line-height: 1.5;
