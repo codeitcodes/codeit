@@ -2000,7 +2000,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   inset: 0;
   background: hsl(227deg 11% 16% / 40%);
   /* transition: 0.24s var(--cubic-function) opacity; */
-  transition: 0.3s var(--cubic-function) opacity;
+  transition: .3s var(--cubic-function) opacity;
   opacity: 0;
   pointer-events: none;
   z-index: 1000;
@@ -2009,7 +2009,6 @@ body:not(.mobile) .sheet .items .item .action:hover {
 .sheet.visible ~ .sheet-background {
   opacity: 1;
   pointer-events: auto;
-  transition: .3s var(--cubic-function) opacity;
 }
 
 
