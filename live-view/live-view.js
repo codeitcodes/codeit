@@ -611,6 +611,13 @@ if (isMobile) {
     consoleSheet.classList.remove('visible');
     
   });
+  
+  sheetBackground.addEventListener('click', () => {
+    
+    // hide live view console
+    consoleSheet.classList.remove('visible');
+    
+  });
 
 } else {
 
