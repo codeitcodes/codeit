@@ -1830,6 +1830,7 @@ body.safari .live-view-menu .icon.share path.ios {
 .sheet.visible {
   transform: translateY(40px);
   bottom: 0;
+  box-shadow: 0 -1px 0 0 hsl(230deg 11% 12%);
   pointer-events: auto;
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
