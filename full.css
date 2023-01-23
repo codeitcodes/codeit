@@ -2011,6 +2011,10 @@ body:not(.mobile) .sheet .items .item .action:hover {
   pointer-events: auto;
 }
 
+body:not(.mobile) .sheet-background {
+  display: none;
+}
+
 
 .dialog-wrapper {
   position: fixed;
