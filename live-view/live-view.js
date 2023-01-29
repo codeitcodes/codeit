@@ -618,6 +618,17 @@ if (isMobile) {
     consoleSheet.classList.remove('visible');
     
   });
+  
+  bottomFloat.addEventListener('click', () => {
+    
+    if (consoleSheet.classList.contains('visible')) {
+      
+      // hide live view console
+      consoleSheet.classList.remove('visible');
+    
+    }
+    
+  });
 
 } else {
 
