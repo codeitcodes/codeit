@@ -619,7 +619,7 @@ if (isMobile) {
     
   });
   
-  bottomFloat.addEventListener('click', () => {
+  bottomWrapper.addEventListener('click', () => {
     
     if (consoleSheet.classList.contains('visible')) {
       
