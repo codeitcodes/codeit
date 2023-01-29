@@ -1970,6 +1970,8 @@ body:not(.mobile) .sheet .items .item .action:hover {
   scroll-padding: 14px 0;
   white-space: pre-wrap;
   position: relative;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .sheet .footer .input:empty::before {
