@@ -619,7 +619,7 @@ if (isMobile) {
     
   });
   
-  bottomWrapper.addEventListener('click', () => {
+  bottomWrapper.addEventListener('touchstart', () => {
     
     if (consoleSheet.classList.contains('visible')) {
       
