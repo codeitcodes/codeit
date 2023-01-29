@@ -1948,7 +1948,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   align-items: end;
   justify-content: center;
   padding: 10.5px 10.5px;
-  margin-bottom: 40px;
+  margin-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
   /* background: hsl(233deg 24% 13%); */
   /* background: hsl(229deg 30% 16% / 34%); */
 }
