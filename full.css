@@ -1783,6 +1783,7 @@ body.mobile .context-menu {
   left: 7px;
   top: 44px;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%), inset 0 0 0 1px hsl(228deg 13% 19%);
+  z-index: 1001;
 }
 
 body:not(.mobile) .live-view-menu {
