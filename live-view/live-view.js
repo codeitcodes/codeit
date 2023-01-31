@@ -638,25 +638,15 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      let prevScrollY = -1;
-      
       function checkScroll() {
         
-        window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
-        
         if (window.scrollY === 0) {
-          
-          window.scrollTo(0, 0);
-          
-          console.log('a', window.scrollY, prevScrollY);
           
           return;
           
         }
         
         consoleSheet.style.bottom = body.clientHeight - window.innerHeight + 'px';
-        
-        prevScrollY = window.scrollY;
         
         onNextFrame(checkScroll);
         
