@@ -631,13 +631,31 @@ if (isMobile) {
   });
   
   
-  consoleSheetInput.addEventListener('focus', () => {
+  const input = consoleSheetInput;
+
+  input.addEventListener('focus', () => {
     
+    // safari fix
     window.scrollTo({
       top: document.documentElement.clientHeight,
       left: 0,
       behavior: 'smooth'
     });
+    
+  });
+  
+  // toggle typed indicator on input
+  input.addEventListener('input', () => {
+      
+    if (input.innerHTML === '<br>') {
+  
+      input.textContent = '';
+  
+    }
+    
+    const typed = (input.textContent !== '');
+    
+    consoleSheetFooter.classList.toggle('typed', typed);
     
   });
 
