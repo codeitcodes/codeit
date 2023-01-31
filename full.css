@@ -1812,11 +1812,10 @@ body.safari .live-view-menu .icon.share path.ios {
   display: flex;
   flex-flow: column;
   overflow: hidden;
-  bottom: env(safe-area-inset-bottom, 0px);
   left: 0;
   right: 0;
   height: calc(100vh / 2 - 20px);
-  transform: translateY(100%);
+  transform: translateY(calc(100% - env(safe-area-inset-bottom, 0px));
   bottom: -40px;
   background: var(--deep-midnight-blue);
   border-radius: 11px 11px 0 0;
@@ -1829,7 +1828,7 @@ body.safari .live-view-menu .icon.share path.ios {
 }
 
 .sheet.visible {
-  transform: none;
+  transform: translateY(env(safe-area-inset-bottom, 0px));
   bottom: 0;
   box-shadow: 0 -1px 0 0 hsl(230deg 11% 12%);
   pointer-events: auto;
