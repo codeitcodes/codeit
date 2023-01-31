@@ -666,8 +666,7 @@ if (isMobile) {
         // visual viewport's offset from the layout viewport origin.
         const viewport = event.target;
         const offsetTop = viewport.height
-                    - document.body.clientHeight
-                    + viewport.offsetTop;
+                    - document.body.clientHeight;
         
         // You could also do this by setting style.left and style.top if you
         // use width: 100% instead.
@@ -680,7 +679,7 @@ if (isMobile) {
       });
     }
     
-    window.visualViewport.addEventListener('scroll', viewportHandler);
+    //window.visualViewport.addEventListener('scroll', viewportHandler);
     window.visualViewport.addEventListener('resize', viewportHandler);
     
   }
