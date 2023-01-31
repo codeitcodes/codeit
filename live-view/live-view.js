@@ -646,6 +646,8 @@ if (isMobile) {
           
           window.scrollTo(0, 0);
           
+          console.log('a');
+          
           return;
           
         }
