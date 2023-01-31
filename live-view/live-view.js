@@ -643,14 +643,14 @@ if (isMobile) {
       e.preventDefault();
       
       input.focus({preventScroll: true});
-      
+      /*
       const rect = input.getBoundingClientRect();
       
       window.scrollTo({
         top: (rect.bottom - 10.5), // container padding is 10.5
         left: 0,
         behavior: 'smooth'
-      });
+      });*/
       /*
       window.setTimeout(() => {
         
