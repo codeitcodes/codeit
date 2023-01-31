@@ -665,22 +665,15 @@ if (isMobile) {
       if (consoleSheet.pendingUpdate) return;
       consoleSheet.pendingUpdate = true;
       
-      const viewport = event.target;
-      const offsetBottom = window.innerHeight - viewport.height;
-      
-      consoleSheet.style.bottom = offsetBottom + 'px';
-      
       onNextFrame(() => {
         consoleSheet.pendingUpdate = false;
         
-        // Since the bar is position: fixed we need to offset it by the
+        // since the bar is position: fixed we need to offset it by the
         // visual viewport's offset from the layout viewport origin.
         const viewport = event.target;
         const offsetBottom = window.innerHeight - viewport.height;
-                    //- document.body.clientHeight
-                    //+ viewport.offsetTop;
         
-        // You could also do this by setting style.left and style.top if you
+        // you could also do this by setting style.left and style.top if you
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
           
