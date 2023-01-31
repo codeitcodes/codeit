@@ -638,13 +638,7 @@ if (isMobile) {
   if (isSafari) {
     
     // scroll to input on focus in safari
-    input.addEventListener('click', (e) => {
-      
-      // if input is already focused
-      if (document.activeElement === input) return;
-      
-      e.preventDefault();
-      e.preventPropagation();
+    input.addEventListener('focus', (e) => {
       
       const rect = consoleSheetInput.getBoundingClientRect();
       
@@ -653,14 +647,6 @@ if (isMobile) {
         left: 0,
         behavior: 'smooth'
       });
-      
-      input.focus();
-        
-    });
-      
-    input.addEventListener('focus', (e) => {
-        
-      e.preventDefault();
         
     });
     
