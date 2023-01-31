@@ -644,7 +644,11 @@ if (isMobile) {
       let scrollValue = 0;
       
       window.onscroll = () => {
-      
+        
+        if (window.scrollTop !== 0) {
+          console.log(window.scrollTop);
+        }
+        
         window.scrollTo(0, 0);
         
       };
