@@ -669,7 +669,8 @@ if (isMobile) {
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
           
-          window.scrollTo(0,0);
+          window.scrollTo({ left: 0, top: scrollY, behavior: 'smooth' });
+          //window.scrollTo(0,0);
           
           if (offsetBottom !== 0) {
             
