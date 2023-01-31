@@ -645,7 +645,7 @@ if (isMobile) {
       
       window.onscroll = () => {
       
-        window.scroll(0, scrollValue);
+        window.scrollTo(0, scrollValue);
         
         rect = input.getBoundingClientRect();
         scrollValue = (rect.bottom - 10.5);
