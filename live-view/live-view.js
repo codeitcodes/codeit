@@ -642,7 +642,7 @@ if (isMobile) {
         
         window.scrollTo(0, 0);
         
-        if (window.scrollY === 0) {
+        if (consoleSheet.positioned) {
           
           return;
           
@@ -661,6 +661,7 @@ if (isMobile) {
     input.addEventListener('blur', (e) => {
       
       consoleSheet.style.translate = '';
+      consoleSheet.positioned = false;
       
     });
     
@@ -686,6 +687,7 @@ if (isMobile) {
           if (offsetBottom !== 0) {
             
             consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
+            consoleSheet.positioned = true;
             
           } else {
             
