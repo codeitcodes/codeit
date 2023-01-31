@@ -644,7 +644,7 @@ if (isMobile) {
       
       window.onscroll = () => { window.scrollTo(0,0); };
       
-      window.onNextFrame(() => {
+      onNextFrame(() => {
         
         window.onscroll = oldScroll;
         
