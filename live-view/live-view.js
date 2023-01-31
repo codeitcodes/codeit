@@ -640,9 +640,7 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      consoleSheet.positioned = false;      
- 
-      window.scrollTo(0, 1);
+      consoleSheet.positioned = false;
       
       /*
 
