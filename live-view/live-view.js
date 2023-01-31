@@ -644,7 +644,8 @@ if (isMobile) {
         
         window.scrollTo(0, 0);
         
-        if (consoleSheet.positioned) {
+        if (consoleSheet.positioned ||
+            (body.clientHeight - window.innerHeight) == 0) {
           
           return;
           
