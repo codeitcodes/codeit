@@ -644,9 +644,20 @@ if (isMobile) {
       
       window.scrollTo({
         top: (rect.bottom - window.removePadding), // container padding is 10.5
-        left: 0,
-        behavior: 'smooth'
+        left: 0
       });
+      
+      window.setTimeout(() => {
+        
+        const rect = consoleSheetInput.getBoundingClientRect();
+        
+        window.scrollTo({
+          top: (rect.bottom - window.removePadding), // container padding is 10.5
+          left: 0,
+          behavior: 'smooth'
+        });
+        
+      }, 400);
         
     });
     
