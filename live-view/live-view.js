@@ -643,6 +643,7 @@ if (isMobile) {
       let rect;
       let scrollValue = 0;
       
+      const oldScroll = window.onscroll;
       window.onscroll = () => {
         
         if (window.scrollTop !== 0) {
