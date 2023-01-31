@@ -635,6 +635,8 @@ if (isMobile) {
 
   if (isSafari) {
     
+    //window.addEventListener('scroll', () => { 
+    
     consoleSheetItems.addEventListener('touchstart', (e) => {
       
       if (document.activeElement === input) {
