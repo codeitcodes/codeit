@@ -638,8 +638,10 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      window.scrollTo(0,0);
-        
+      const scrollY = (input.getBoundingClientRect().bottom - 10.5);
+      
+      window.scrollTo(0, scrollY);
+      
     });
     
     input.addEventListener('blur', (e) => {
