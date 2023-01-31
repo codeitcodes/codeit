@@ -650,7 +650,7 @@ if (isMobile) {
           console.log(window.scrollTop);
         }
         
-        window.scrollTo({left: 0, top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         
       };
       window.setTimeout(() => {
