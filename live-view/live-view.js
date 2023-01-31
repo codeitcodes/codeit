@@ -676,7 +676,7 @@ if (isMobile) {
       });
     }
     
-    window.visualViewport.addEventListener('scroll', viewportHandler);
+    //window.visualViewport.addEventListener('scroll', viewportHandler);
     window.visualViewport.addEventListener('resize', viewportHandler);
     
   }
