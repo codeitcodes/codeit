@@ -644,13 +644,11 @@ if (isMobile) {
       e.stopPropagation();
       e.stopImmediatePropagation();
       
-      consoleSheet.style.translate = '0 ' + -281.5 + 'px';
+      //consoleSheet.style.translate = '0 ' + -281.5 + 'px';
       
       input.focus({ preventScroll: true });
       
-      onNextFrame(() => {
-        window.scrollTo(0, 0.00001);
-      });
+      window.scrollTo(0, 1);
       
       /*
       consoleSheet.positioned = false;
