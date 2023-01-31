@@ -667,7 +667,7 @@ if (isMobile) {
         const viewport = event.target;
         const offsetTop = viewport.height
                     //- document.body.clientHeight
-                    + viewport.offsetTop;
+                    //+ viewport.offsetTop;
         
         // You could also do this by setting style.left and style.top if you
         // use width: 100% instead.
