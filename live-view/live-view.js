@@ -642,6 +642,21 @@ if (isMobile) {
       
       consoleSheet.positioned = false;
       
+      window.onscroll = () => {
+        
+        window.scrollTo(0, 0);
+
+        consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - window.magicNumber) + 'px';
+        
+      }
+      
+      window.setTimeout(() => {
+        
+        window.onscroll = null;
+        
+      }, 100);
+      
+      /*
       function checkScroll() {
         
         window.scrollTo(0, 0);
@@ -660,7 +675,7 @@ if (isMobile) {
       }
       
       onNextFrame(checkScroll);
-       
+       */
     });
     
     input.addEventListener('blur', (e) => {
