@@ -674,7 +674,7 @@ if (isMobile) {
             
           } else {
             
-            window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
+            //window.scrollTo(0, 0);
             
           }
           
@@ -683,7 +683,7 @@ if (isMobile) {
       });
     }
     
-    //window.visualViewport.addEventListener('scroll', viewportHandler);
+    window.visualViewport.addEventListener('scroll', viewportHandler);
     window.visualViewport.addEventListener('resize', viewportHandler);
     
   }
