@@ -641,6 +641,7 @@ if (isMobile) {
     input.addEventListener('click', (e) => {
       
       e.preventDefault();
+      e.preventPropagation();
       
       //input.focus({ preventScroll: true });
       
