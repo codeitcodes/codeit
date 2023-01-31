@@ -642,7 +642,11 @@ if (isMobile) {
       
       e.preventDefault();
       
-      input.focus({ preventScroll: true });
+      input.blur();
+      
+      onNextFrame(() => {
+        input.focus({ preventScroll: true });
+      });
       
       consoleSheet.positioned = false;
 
