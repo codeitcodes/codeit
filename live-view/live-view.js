@@ -638,7 +638,7 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      let prevScrollY = 0;
+      let prevScrollY = window.scrollY - 1;
       
       function checkScroll() {
         
