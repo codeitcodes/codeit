@@ -666,11 +666,15 @@ if (isMobile) {
         // you could also do this by setting style.left and style.top if you
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
-          
+
           if (offsetBottom !== 0) {
             
             window.scrollTo(0, 0);
             consoleSheet.style.bottom = offsetBottom + 'px';
+            
+          } else {
+            
+            window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
             
           }
           
