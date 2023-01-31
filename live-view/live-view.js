@@ -649,17 +649,9 @@ if (isMobile) {
       input.focus({ preventScroll: true });
       
       
-      consoleSheet.positioned = false;
-      
-      let i = 0;
-      
-      while (!consoleSheet.positioned) {
-        
-        window.scrollTo(0, i);
-        
-        i++;
-        
-      }
+      consoleSheet.positioned = false;      
+ 
+      window.scrollTo(0, 1);
       
       /*
 
