@@ -639,9 +639,9 @@ if (isMobile) {
       
       if (document.activeElement === input) {
         
-        if (truePos !== false) {
+        if (consoleSheet.truePos !== false) {
           
-          consoleSheet.style.translate = '0 ' + -truePos + 'px';
+          consoleSheet.style.translate = '0 ' + -consoleSheet.truePos + 'px';
           
           window.scrollTo(0, 0);
           
@@ -655,9 +655,9 @@ if (isMobile) {
       
       if (document.activeElement === input) {
         
-        if (truePos !== false) {
+        if (consoleSheet.truePos !== false) {
           
-          consoleSheet.style.translate = '0 ' + -truePos + 'px';
+          consoleSheet.style.translate = '0 ' + -consoleSheet.truePos + 'px';
           
           window.scrollTo(0, 0);
           
