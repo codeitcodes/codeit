@@ -653,14 +653,14 @@ if (isMobile) {
     });
     
     
-    let pendingUpdate = false;
+    consoleSheet.pendingUpdate = false;
     
     function viewportHandler(event) {
-      if (pendingUpdate) return;
-      pendingUpdate = true;
+      if (consoleSheet.pendingUpdate) return;
+      consoleSheet.pendingUpdate = true;
     
       onNextFrame(() => {
-        pendingUpdate = false;
+        consoleSheet.pendingUpdate = false;
         const layoutViewport = document.getElementById('layoutViewport');
     
         // Since the bar is position: fixed we need to offset it by the
