@@ -679,38 +679,25 @@ if (isMobile) {
     input.addEventListener('blur', (e) => {
       
       consoleSheet.style.translate = '';
-      consoleSheet.positioned = false;
       
     });
     
     
-    consoleSheet.pendingUpdate = false;
-    
     function viewportHandler(event) {
-      if (consoleSheet.pendingUpdate) return;
-      consoleSheet.pendingUpdate = true;
+
+      // since the bar is position: fixed we need to offset it by the
+      // visual viewport's offset from the layout viewport origin.
+      const viewport = event.target;
+      const offsetBottom = window.innerHeight - viewport.height;
       
-      onNextFrame(() => {
-        consoleSheet.pendingUpdate = false;
-        
-        // since the bar is position: fixed we need to offset it by the
-        // visual viewport's offset from the layout viewport origin.
-        const viewport = event.target;
-        const offsetBottom = window.innerHeight - viewport.height;
-        
-        // you could also do this by setting style.left and style.top if you
-        // use width: 100% instead.
-        if (document.activeElement === consoleSheetInput) {
+      // you could also do this by setting style.left and style.top if you
+      // use width: 100% instead.
+      if (document.activeElement === consoleSheetInput) {
 
-          window.scrollTo(0, 0);
-
-          consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
-          
-          consoleSheet.positioned = true;
-          
-        }
+        consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
         
-      });
+      }
+      
     }
     
     window.visualViewport.addEventListener('scroll', viewportHandler);
