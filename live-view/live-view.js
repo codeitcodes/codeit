@@ -640,11 +640,22 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      const rect = input.getBoundingClientRect();
-      const scrollValue = (rect.bottom - 10.5);
+      e.preventDefault();
+      e.preventPropagation();
       
-      window.onscroll = () => { 
-        window.scroll(0, 0); 
+      e.target.focus({ preventScroll: true });
+      
+      /*
+      let rect = input.getBoundingClientRect();
+      let scrollValue = (rect.bottom - 10.5);
+      
+      window.onscroll = () => {
+      
+        window.scroll(0, 0);
+        
+        let rect = input.getBoundingClientRect();
+        let scrollValue = (rect.bottom - 10.5);
+
       };
       setTimeout(() => {
         window.onscroll = oldScroll;
