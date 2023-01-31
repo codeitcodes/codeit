@@ -640,6 +640,8 @@ if (isMobile) {
       
       function checkScroll() {
         
+        window.scrollTo(0, 0);
+        
         if (window.scrollY === 0) {
           
           return;
