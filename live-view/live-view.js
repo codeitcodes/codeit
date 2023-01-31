@@ -633,7 +633,7 @@ if (isMobile) {
   
   const input = consoleSheetInput;
 
-  window.removePadding = 10.5;
+  window.waitDuration = 250;
 
   if (isSafari) {
     
@@ -643,7 +643,7 @@ if (isMobile) {
       const rect = consoleSheetInput.getBoundingClientRect();
       
       window.scrollTo({
-        top: (rect.bottom - window.removePadding), // container padding is 10.5
+        top: (rect.bottom - 10.5), // container padding is 10.5
         left: 0,
         behavior: 'smooth'
       });
@@ -653,12 +653,12 @@ if (isMobile) {
         const rect = consoleSheetInput.getBoundingClientRect();
         
         window.scrollTo({
-          top: (rect.bottom - window.removePadding), // container padding is 10.5
+          top: (rect.bottom - 10.5), // container padding is 10.5
           left: 0,
           behavior: 'smooth'
         });
         
-      }, 250);
+      }, window.waitDuration);
         
     });
     
