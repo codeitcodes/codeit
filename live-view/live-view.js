@@ -648,10 +648,20 @@ if (isMobile) {
       
       input.focus({ preventScroll: true });
       
-      window.scrollTo(0, 1);
+      
+      consoleSheet.positioned = false;
+      
+      let i = 0;
+      
+      while (!consoleSheet.positioned) {
+        
+        window.scrollTo(0, i);
+        
+        i++;
+        
+      }
       
       /*
-      consoleSheet.positioned = false;
 
       function checkScroll() {
         
@@ -677,6 +687,7 @@ if (isMobile) {
     input.addEventListener('blur', (e) => {
       
       consoleSheet.style.translate = '';
+      consoleSheet.positioned = false;
       
     });
     
@@ -691,6 +702,8 @@ if (isMobile) {
       // you could also do this by setting style.left and style.top if you
       // use width: 100% instead.
       if (document.activeElement === consoleSheetInput) {
+
+        consoleSheet.positioned = true;
 
         consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
         
