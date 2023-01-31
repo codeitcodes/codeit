@@ -643,7 +643,7 @@ if (isMobile) {
         const rect = input.getBoundingClientRect();
         
         window.scrollTo({
-          top: window.innerHeight,
+          top: (rect.bottom - 10.5),
           left: 0
         });
         
