@@ -644,7 +644,7 @@ if (isMobile) {
         
         window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
         
-        if (window.scrollY === prevScrollY) {
+        if (window.scrollY === 0) {
           
           window.scrollTo(0, 0);
           
