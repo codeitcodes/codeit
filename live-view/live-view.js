@@ -638,8 +638,28 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      //window.scrollTo(0, 0);
+      let prevScrollY = 0;
       
+      function checkScroll() {
+        
+        if (window.scrollY === prevScrollY) {
+          
+          window.scrollTo(0, 0);
+          
+          return;
+          
+        }
+        
+        consoleSheet.style.bottom = body.clientHeight - window.innerHeight + 'px';
+        
+        prevScrollY = window.scrollY;
+        
+        onNextFrame(checkScroll);
+        
+      }
+      
+      onNextFrame(checkScroll);
+       
     });
     
     input.addEventListener('blur', (e) => {
@@ -671,10 +691,6 @@ if (isMobile) {
             
             window.scrollTo(0, 0);
             consoleSheet.style.bottom = offsetBottom + 'px';
-            
-          } else {
-            
-            window.scrollTo(0, 0);
             
           }
           
