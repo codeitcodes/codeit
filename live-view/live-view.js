@@ -685,7 +685,7 @@ if (isMobile) {
 
           if (offsetBottom !== 0) {
             
-            consoleSheet.style.bottom = offsetBottom + 'px';
+            consoleSheet.style.top = -viewport.height + 'px';
             
           } else {
             
