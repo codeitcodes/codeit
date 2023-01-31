@@ -645,14 +645,17 @@ if (isMobile) {
       
       window.onscroll = () => {
       
-        window.scrollTo(0, scrollValue);
+        window.scrollTo(0, 0);
+        
+      };
+      setTimeout(() => {
+        window.onscroll = oldScroll;
         
         rect = input.getBoundingClientRect();
         scrollValue = (rect.bottom - 10.5);
 
-      };
-      setTimeout(() => {
-        window.onscroll = oldScroll;
+        window.scrollTo(0, scrollValue);
+        
       }, 100);
       
       /*
