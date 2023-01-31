@@ -636,7 +636,7 @@ if (isMobile) {
   if (isSafari) {
     
     // scroll to input on focus in safari
-    input.addEventListener('focus', () => {
+    input.addEventListener('click', () => {
       
       onNextFrame(() => {
         
