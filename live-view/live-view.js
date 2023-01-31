@@ -640,6 +640,8 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
+      consoleSheet.style.bottom = 281.5;
+      
       const oldScroll = window.onscroll;
       
       window.onscroll = () => { window.scrollTo(0,0); };
