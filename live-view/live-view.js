@@ -638,16 +638,7 @@ if (isMobile) {
     window.magicNumber = 59 - 10.5 - 10.5;
     
     // scroll to input on focus in safari
-    input.addEventListener('touchstart', (e) => {
-      
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      //consoleSheet.style.translate = '0 ' + -281.5 + 'px';
-      
-      input.focus({ preventScroll: true });
-      
+    input.addEventListener('focus', (e) => {
       
       consoleSheet.positioned = false;      
  
