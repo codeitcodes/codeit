@@ -693,8 +693,11 @@ if (isMobile) {
 
           if (offsetBottom !== 0) {
             
-            window.scrollTo(0, 0);
             consoleSheet.style.bottom = offsetBottom + 'px';
+            
+          } else {
+            
+            window.scrollTo(0, 0);
             
           }
           
