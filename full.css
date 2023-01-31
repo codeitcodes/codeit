@@ -1835,7 +1835,8 @@ body.safari .live-view-menu .icon.share path.ios {
   pointer-events: auto;
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
-              .1s var(--ease-function) box-shadow;
+              .1s var(--ease-function) box-shadow,
+              0s translate;
 }
 
 .sheet:has(> .footer .input:focus) {
