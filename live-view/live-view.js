@@ -674,7 +674,7 @@ if (isMobile) {
         // use width: 100% instead.
         if (document.activeElement === input) {
           
-          input.style.top = offsetTop + 'px';
+          consoleSheet.style.top = offsetTop + 'px';
           
         }
         
