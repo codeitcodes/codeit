@@ -648,11 +648,12 @@ if (isMobile) {
       
       window.scrollTo({
         top: (rect.bottom - 10.5), // container padding is 10.5
-        left: 0,
-        behavior: 'smooth'
+        left: 0
       });
       
-      input.focus();
+      onNextFrame(() => {
+        input.focus();
+      });
         
     });
       
