@@ -646,26 +646,15 @@ if (isMobile) {
       
       onNextFrame(() => {
         
-        const rect = input.getBoundingClientRect();
+        const rect = consoleSheetFooter.getBoundingClientRect();
         
         window.scrollTo({
-          top: (rect.bottom - 10.5),
-          left: 0
+          top: (rect.bottom), // container padding is 10.5
+          left: 0,
+          behavior: 'smooth'
         });
         
-        window.setTimeout(() => {
-          
-          const rect = input.getBoundingClientRect();
-          
-          window.scrollTo({
-            top: (rect.bottom - 10.5), // 10.5 is container padding
-            left: 0,
-            behavior: 'smooth'
-          });
-          
-          input.focus();
-          
-        }, 300);
+        input.focus();
         
       });
       
