@@ -636,7 +636,7 @@ if (isMobile) {
   if (isSafari) {
     
     //window.addEventListener('scroll', () => { 
-    
+    /*
     consoleSheetItems.addEventListener('touchstart', (e) => {
       
       if (document.activeElement === input) {
@@ -668,7 +668,7 @@ if (isMobile) {
       }
       
     });
-    
+    */
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
@@ -686,7 +686,7 @@ if (isMobile) {
       
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
       
-      consoleSheet.style.translate = '';
+      //consoleSheet.style.translate = '';
       consoleSheet.truePos = false;
       
     });
@@ -704,6 +704,8 @@ if (isMobile) {
       if (document.activeElement === consoleSheetInput) {
 
         consoleSheet.truePos = offsetBottom;
+        
+        window.scrollTo(0, 0);
         
       }
       
