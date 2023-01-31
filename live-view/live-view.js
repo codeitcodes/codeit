@@ -652,6 +652,38 @@ if (isMobile) {
       
     });
     
+    
+    let pendingUpdate = false;
+    
+    function viewportHandler(event) {
+      if (pendingUpdate) return;
+      pendingUpdate = true;
+    
+      onNextFrame(() => {
+        pendingUpdate = false;
+        const layoutViewport = document.getElementById('layoutViewport');
+    
+        // Since the bar is position: fixed we need to offset it by the
+        // visual viewport's offset from the layout viewport origin.
+        const viewport = event.target;
+        const offsetTop = viewport.height
+                    - layoutViewport.getBoundingClientRect().height
+                    + viewport.offsetTop;
+        
+        // You could also do this by setting style.left and style.top if you
+        // use width: 100% instead.
+        if (document.activeElement === input) {
+          
+          input.style.top = offsetTop + 'px';
+          
+        }
+        
+      });
+    }
+    
+    window.visualViewport.addEventListener('scroll', viewportHandler);
+    window.visualViewport.addEventListener('resize', viewportHandler);
+    
   }
   
   // toggle typed indicator on input
