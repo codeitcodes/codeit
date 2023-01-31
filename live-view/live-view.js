@@ -642,11 +642,13 @@ if (isMobile) {
       
       function checkScroll() {
         
+        window.scrollTo(0, 0);
+        
         if (window.scrollY === prevScrollY) {
           
           window.scrollTo(0, 0);
           
-          console.log('a');
+          console.log(window.scrollY, prevScrollY);
           
           return;
           
