@@ -669,6 +669,12 @@ if (isMobile) {
         
       });
       
+      input.addEventListener('focus', (e) => {
+        
+        e.preventDefault();
+        
+      });
+      
     });
     
   }
