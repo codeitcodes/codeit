@@ -638,6 +638,14 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', () => {
       
+      const rect = input.getBoundingClientRect();
+        
+      window.scrollTo({
+        top: (rect.top + rect.height - 10.5), // 10.5 is container padding
+        left: 0,
+        behavior: 'smooth'
+      });
+      
       window.setTimeout(() => {
         
         const rect = input.getBoundingClientRect();
