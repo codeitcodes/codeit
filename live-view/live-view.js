@@ -648,7 +648,7 @@ if (isMobile) {
           
         }
         
-        consoleSheet.style.top = -window.innerHeight - (10.5 * 2) + 'px';
+        consoleSheet.style.translate = '0 ' + body.clientHeight - window.innerHeight - (10.5 * 2) + 'px';
         
         onNextFrame(checkScroll);
         
@@ -660,7 +660,7 @@ if (isMobile) {
     
     input.addEventListener('blur', (e) => {
       
-      consoleSheet.style.top = '';
+      consoleSheet.style.translate = '';
       
     });
     
@@ -685,7 +685,7 @@ if (isMobile) {
 
           if (offsetBottom !== 0) {
             
-            consoleSheet.style.top = -viewport.height + 'px';
+            consoleSheet.style.translate = '0 ' + offsetBottom + 'px';
             
           } else {
             
