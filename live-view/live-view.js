@@ -638,6 +638,8 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
+      consoleSheet.positioned = false;
+      
       function checkScroll() {
         
         window.scrollTo(0, 0);
@@ -684,15 +686,9 @@ if (isMobile) {
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
 
-          if (offsetBottom !== 0) {
-            
-            consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
-                        
-          } else {
-            
-            window.scrollTo(0, 0);
-            
-          }
+          window.scrollTo(0, 0);
+
+          consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
           
           consoleSheet.positioned = true;
           
