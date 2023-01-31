@@ -665,7 +665,7 @@ if (isMobile) {
 
         window.scrollTo(0, scrollValue);
         
-      }, 100);
+      }, 200);
       
       /*
       const rect = input.getBoundingClientRect();
