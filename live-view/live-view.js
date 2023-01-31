@@ -633,16 +633,20 @@ if (isMobile) {
   
   const input = consoleSheetInput;
 
-  input.addEventListener('focus', () => {
-    
-    // safari fix
-    window.scrollTo({
-      top: document.documentElement.clientHeight,
-      left: 0,
-      behavior: 'smooth'
+  if (isSafari) {
+      
+    input.addEventListener('focus', () => {
+      
+      // safari fix
+      window.scrollTo({
+        top: (window.innerHeight + 10.5),
+        left: 0,
+        behavior: 'smooth'
+      });
+      
     });
     
-  });
+  }
   
   // toggle typed indicator on input
   input.addEventListener('input', () => {
