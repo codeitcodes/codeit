@@ -640,7 +640,7 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      const rect = consoleSheetInput.getBoundingClientRect();
+      const rect = input.getBoundingClientRect();
       
       window.scrollTo({
         top: (rect.bottom - 10.5), // container padding is 10.5
@@ -650,7 +650,7 @@ if (isMobile) {
       
       window.setTimeout(() => {
         
-        const rect = consoleSheetInput.getBoundingClientRect();
+        const rect = input.getBoundingClientRect();
         
         window.scrollTo({
           top: (rect.bottom - 10.5), // container padding is 10.5
