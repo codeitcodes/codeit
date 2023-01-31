@@ -664,14 +664,19 @@ if (isMobile) {
     function viewportHandler(event) {
       if (consoleSheet.pendingUpdate) return;
       consoleSheet.pendingUpdate = true;
-    
+      
+      const viewport = event.target;
+      const offsetBottom = window.innerHeight - viewport.height;
+      
+      consoleSheet.style.bottom = offsetBottom + 'px';
+      
       onNextFrame(() => {
         consoleSheet.pendingUpdate = false;
         
         // Since the bar is position: fixed we need to offset it by the
         // visual viewport's offset from the layout viewport origin.
         const viewport = event.target;
-        const offsetBottom = window.innerHeight - viewport.height
+        const offsetBottom = window.innerHeight - viewport.height;
                     //- document.body.clientHeight
                     //+ viewport.offsetTop;
         
