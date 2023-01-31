@@ -648,7 +648,7 @@ if (isMobile) {
           
         }
         
-        consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - (10.5 * 2)) + 'px';
+        consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - 59) + 'px';
         
         onNextFrame(checkScroll);
         
