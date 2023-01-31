@@ -643,7 +643,7 @@ if (isMobile) {
       const rect = consoleSheetInput.getBoundingClientRect();
       
       window.scrollTo({
-        top: (rect.bottom - window.removePadding), // container padding is 10.5
+        top: 0, // container padding is 10.5
         left: 0
       });
       
