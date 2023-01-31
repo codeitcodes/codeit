@@ -638,15 +638,11 @@ if (isMobile) {
     window.magicNumber = 59 - 10.5 - 10.5;
     
     // scroll to input on focus in safari
-    input.addEventListener('focus', (e) => {
+    input.addEventListener('click', (e) => {
       
       e.preventDefault();
       
-      input.blur();
-      
-      onNextFrame(() => {
-        input.focus({ preventScroll: true });
-      });
+      //input.focus({ preventScroll: true });
       
       consoleSheet.positioned = false;
 
