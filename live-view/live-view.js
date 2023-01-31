@@ -654,7 +654,7 @@ if (isMobile) {
         
       }
       
-      onNextFrame(checkScroll);
+      window.onscroll = checkScroll;
        
     });
     
@@ -686,6 +686,8 @@ if (isMobile) {
           if (offsetBottom !== 0) {
             
             consoleSheet.style.bottom = offsetBottom + 'px';
+            
+            window.onscroll = null;
             
           } else {
             
