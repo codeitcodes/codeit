@@ -638,6 +638,7 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
+      window.scrollTo(0, 0);
       
     });
     
