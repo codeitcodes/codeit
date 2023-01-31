@@ -640,7 +640,7 @@ if (isMobile) {
       
       const scrollY = (input.getBoundingClientRect().bottom - 10.5);
       
-      window.scrollTo(0, scrollY);
+      window.scrollTo({ left: 0, top: scrollY, behavior: 'smooth' });
       
     });
     
