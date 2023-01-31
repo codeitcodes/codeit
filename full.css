@@ -1818,6 +1818,7 @@ body.safari .live-view-menu .icon.share path.ios {
   transform: translateY(100%);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   bottom: -40px;
+  translate: 0 calc(-1 * env(keyboard-inset-height, 0px));
   background: var(--deep-midnight-blue);
   border-radius: 11px 11px 0 0;
   pointer-events: none;
