@@ -696,6 +696,8 @@ if (isMobile) {
 
         consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
         
+        window.scrollTo(0, 0);
+        
       }
       
     }
