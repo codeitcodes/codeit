@@ -640,6 +640,8 @@ if (isMobile) {
       
       onNextFrame(() => {
         
+        const rect = input.getBoundingClientRect();
+        
         window.scrollTo({
           top: 0,
           left: 0
@@ -650,7 +652,7 @@ if (isMobile) {
           const rect = input.getBoundingClientRect();
           
           window.scrollTo({
-            top: (rect.top + rect.height - 10.5), // 10.5 is container padding
+            top: (rect.bottom - 10.5), // 10.5 is container padding
             left: 0,
             behavior: 'smooth'
           });
