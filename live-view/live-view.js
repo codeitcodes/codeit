@@ -665,8 +665,7 @@ if (isMobile) {
         // Since the bar is position: fixed we need to offset it by the
         // visual viewport's offset from the layout viewport origin.
         const viewport = event.target;
-        const offsetTop = viewport.height
-                    - document.body.clientHeight;
+        const offsetTop = viewport.height;
         
         // You could also do this by setting style.left and style.top if you
         // use width: 100% instead.
