@@ -648,7 +648,9 @@ if (isMobile) {
 
       consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - window.magicNumber) + 'px';
       
-      window.scrollTo(0, 0);
+      onNextFrame(() => {
+        window.scrollTo(0, 0);
+      });
       
       /*
       consoleSheet.positioned = false;
