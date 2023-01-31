@@ -635,40 +635,51 @@ if (isMobile) {
 
   if (isSafari) {
     
-    window.magicNumber = 59 - 10.5 - 10.5;
+    consoleSheetItems.addEventListener('touchstart', (e) => {
+      
+      if (document.activeElement === input) {
+        
+        if (truePos !== false) {
+          
+          consoleSheet.style.translate = '0 ' + -truePos + 'px';
+          
+          window.scrollTo(0, 0);
+          
+        }
+        
+      }
+      
+    });
+    
+    consoleSheetItems.addEventListener('touchmove', (e) => {
+      
+      if (document.activeElement === input) {
+        
+        if (truePos !== false) {
+          
+          consoleSheet.style.translate = '0 ' + -truePos + 'px';
+          
+          window.scrollTo(0, 0);
+          
+        }
+        
+      }
+      
+    });
     
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      consoleSheet.positioned = false;
-      
-      /*
-
-      function checkScroll() {
-        
-        window.scrollTo(0, 0);
-        
-        if (consoleSheet.positioned ||
-            (body.clientHeight - window.innerHeight) == 0) {
-          
-          return;
-          
-        }
-        
-        consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - window.magicNumber) + 'px';
-        
-        onNextFrame(checkScroll);
-        
-      }
-      
-      checkScroll();*/
+      consoleSheet.truePos = false;      
+ 
+      window.scrollTo(0, 1);
       
     });
     
     input.addEventListener('blur', (e) => {
       
       consoleSheet.style.translate = '';
-      consoleSheet.positioned = false;
+      consoleSheet.truePos = false;
       
     });
     
@@ -684,11 +695,7 @@ if (isMobile) {
       // use width: 100% instead.
       if (document.activeElement === consoleSheetInput) {
 
-        consoleSheet.positioned = true;
-
-        consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
-        
-        window.scrollTo(0, 0);
+        consoleSheet.truePos = offsetBottom;
         
       }
       
