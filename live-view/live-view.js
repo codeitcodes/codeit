@@ -644,9 +644,9 @@ if (isMobile) {
       e.stopPropagation();
       e.stopImmediatePropagation();
       
+      consoleSheet.style.translate = '0 ' + -281.5 + 'px';
+      
       input.focus({ preventScroll: true });
-
-      consoleSheet.style.translate = '0 ' + -1 * (body.clientHeight - window.innerHeight - window.magicNumber) + 'px';
       
       onNextFrame(() => {
         window.scrollTo(0, 0);
