@@ -640,6 +640,16 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
+      const oldScroll = window.onscroll;
+      
+      window.onscroll = () => { window.scrollTo(0,0); };
+      
+      window.onNextFrame(() => {
+        
+        window.onscroll = oldScroll;
+        
+      });
+      
     });
     
   }
