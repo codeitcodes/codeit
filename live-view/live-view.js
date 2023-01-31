@@ -649,7 +649,7 @@ if (isMobile) {
       input.focus({ preventScroll: true });
       
       onNextFrame(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0.00001);
       });
       
       /*
