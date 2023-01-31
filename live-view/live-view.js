@@ -640,7 +640,7 @@ if (isMobile) {
       
       const scrollY = (input.getBoundingClientRect().bottom - 10.5);
       
-      window.scrollTo({ left: 0, top: scrollY, behavior: 'smooth' });
+      window.scrollTo({ left: 0, top: scrollY });
       
     });
     
@@ -669,7 +669,9 @@ if (isMobile) {
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
           
-          window.scrollTo({ left: 0, top: scrollY, behavior: 'smooth' });
+          const scrollY = (input.getBoundingClientRect().bottom - 10.5);
+          
+          window.scrollTo({ left: 0, top: scrollY });
           //window.scrollTo(0,0);
           
           if (offsetBottom !== 0) {
