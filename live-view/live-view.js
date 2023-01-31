@@ -692,6 +692,7 @@ if (isMobile) {
     });
     
     
+    /*
     function viewportHandler(event) {
 
       // since the bar is position: fixed we need to offset it by the
@@ -713,6 +714,7 @@ if (isMobile) {
     
     window.visualViewport.addEventListener('scroll', viewportHandler);
     window.visualViewport.addEventListener('resize', viewportHandler);
+    */
     
   }
   
