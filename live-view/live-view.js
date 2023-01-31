@@ -648,7 +648,7 @@ if (isMobile) {
           
         }
         
-        consoleSheet.style.bottom = body.clientHeight - window.innerHeight - (10.5 * 2) + 'px';
+        consoleSheet.style.top = -window.innerHeight - (10.5 * 2) + 'px';
         
         onNextFrame(checkScroll);
         
