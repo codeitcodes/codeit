@@ -1965,11 +1965,6 @@ body:not(.mobile) .sheet .items .item .action:hover {
   align-items: end;
   justify-content: center;
   padding: 10.5px 10.5px;
-  position: fixed;
-  bottom: env(safe-area-inset-bottom, 0px);
-  width: 100%;
-  box-sizing: border-box;
-  background: inherit;
   /* background: hsl(233deg 24% 13%); */
   /* background: hsl(229deg 30% 16% / 34%); */
 }
