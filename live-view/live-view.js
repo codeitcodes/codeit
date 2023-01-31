@@ -687,13 +687,14 @@ if (isMobile) {
           if (offsetBottom !== 0) {
             
             consoleSheet.style.translate = '0 ' + -offsetBottom + 'px';
-            consoleSheet.positioned = true;
-            
+                        
           } else {
             
             window.scrollTo(0, 0);
             
           }
+          
+          consoleSheet.positioned = true;
           
         }
         
