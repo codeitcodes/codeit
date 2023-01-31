@@ -644,7 +644,7 @@ if (isMobile) {
       e.stopPropagation();
       e.stopImmediatePropagation();
       
-      //input.focus({ preventScroll: true });
+      input.focus({ preventScroll: true });
       
       consoleSheet.positioned = false;
 
