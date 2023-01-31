@@ -644,26 +644,22 @@ if (isMobile) {
       e.preventDefault();
       e.preventPropagation();
       
-      onNextFrame(() => {
-        
-        const rect = consoleSheetFooter.getBoundingClientRect();
-        
-        window.scrollTo({
-          top: (rect.bottom), // container padding is 10.5
-          left: 0,
-          behavior: 'smooth'
-        });
-        
-        input.focus();
-        
+      const rect = consoleSheetFooter.getBoundingClientRect();
+      
+      window.scrollTo({
+        top: (rect.bottom - 10.5), // container padding is 10.5
+        left: 0,
+        behavior: 'smooth'
       });
       
-      input.addEventListener('focus', (e) => {
+      input.focus();
         
-        e.preventDefault();
-        
-      });
+    });
       
+    input.addEventListener('focus', (e) => {
+        
+      e.preventDefault();
+        
     });
     
   }
