@@ -646,6 +646,9 @@ if (isMobile) {
       
       input.focus({ preventScroll: true });
       
+      window.scrollTo(0, 0);
+      
+      /*
       consoleSheet.positioned = false;
 
       function checkScroll() {
@@ -665,7 +668,7 @@ if (isMobile) {
         
       }
       
-      checkScroll();
+      checkScroll();*/
       
     });
     
