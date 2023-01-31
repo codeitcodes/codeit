@@ -642,6 +642,8 @@ if (isMobile) {
       
       const rect = input.getBoundingClientRect();
       
+      window.scrollTo(0, 0);
+      
       window.scrollTo({
         top: (rect.bottom - 10.5), // container padding is 10.5
         left: 0,
