@@ -1246,19 +1246,6 @@ async function renderLiveViewHTML(file) {
     liveView.classList.add('loaded');
     
   });
-  
-  liveFrame.contentDocument.addEventListener('touchstart', (e) => {
-    
-    // if live view menu is visible
-    if (liveViewMenu.classList.contains('visible')) {
-
-      // hide live view menu
-      liveViewMenu.classList.remove('visible');
-      liveButtonOptions.classList.remove('active');
-
-    }
-
-  });
 
 }
 
