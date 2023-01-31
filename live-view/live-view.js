@@ -652,6 +652,12 @@ if (isMobile) {
       
     });
     
+    input.addEventListener('blur', (e) => {
+      
+      consoleSheet.style.bottom = '';
+      
+    });
+    
     
     consoleSheet.pendingUpdate = false;
     
