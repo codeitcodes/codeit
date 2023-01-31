@@ -638,9 +638,6 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      const scrollY = (input.getBoundingClientRect().bottom - 10.5);
-      
-      window.scrollTo({ left: 0, top: scrollY });
       
     });
     
@@ -669,14 +666,10 @@ if (isMobile) {
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
           
-          const scrollY = (input.getBoundingClientRect().bottom - 10.5);
-          
-          window.scrollTo({ left: 0, top: scrollY });
-          //window.scrollTo(0,0);
+          window.scrollTo({left:0, top:0, behavior:'smooth'});
           
           if (offsetBottom !== 0) {
             
-            window.scrollTo(0, 0);
             consoleSheet.style.bottom = offsetBottom + 'px';
             
           }
