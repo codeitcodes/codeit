@@ -638,23 +638,17 @@ if (isMobile) {
   if (isSafari) {
     
     // scroll to input on focus in safari
-    input.addEventListener('touchmove', (e) => {
+    input.addEventListener('focus', (e) => {
       
-      e.preventDefault();
-      e.preventPropagation();
-      
-      e.target.focus({ preventScroll: true });
-      
-      /*
-      let rect = input.getBoundingClientRect();
-      let scrollValue = (rect.bottom - 10.5);
+      let rect;
+      let scrollValue = 0;
       
       window.onscroll = () => {
       
-        window.scroll(0, 0);
+        window.scroll(0, scrollValue);
         
-        let rect = input.getBoundingClientRect();
-        let scrollValue = (rect.bottom - 10.5);
+        rect = input.getBoundingClientRect();
+        scrollValue = (rect.bottom - 10.5);
 
       };
       setTimeout(() => {
