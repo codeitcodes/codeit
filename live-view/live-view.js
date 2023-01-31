@@ -642,6 +642,11 @@ if (isMobile) {
       
       let rect;
       let scrollValue = 0;
+    
+      rect = input.getBoundingClientRect();
+      scrollValue = (rect.bottom - 10.5);
+
+      window.scrollTo(0, scrollValue);
       
       const oldScroll = window.onscroll;
       window.onscroll = () => {
@@ -650,7 +655,7 @@ if (isMobile) {
           console.log(window.scrollTop);
         }
         
-        window.scrollTo(0, 0);
+        window.scrollTo(0, scrollValue);
         
       };
       window.setTimeout(() => {
