@@ -658,7 +658,7 @@ if (isMobile) {
           behavior: 'smooth'
         });
         
-      }, 600);
+      }, 400);
         
     });
     
