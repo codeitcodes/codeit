@@ -634,10 +634,10 @@ if (isMobile) {
   const input = consoleSheetInput;
 
   if (isSafari) {
-      
+    
+    // scroll to input on focus in safari
     input.addEventListener('focus', () => {
       
-      // safari fix
       window.scrollTo({
         top: (window.innerHeight + 10.5),
         left: 0,
