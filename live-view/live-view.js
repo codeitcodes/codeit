@@ -642,11 +642,19 @@ if (isMobile) {
         
         window.scrollTo(0, 0);
         
+        if (window.scrollY === 0) {
+          
+          return;
+          
+        }
+        
         consoleSheet.style.bottom = body.clientHeight - window.innerHeight - 10.5 + 'px';
+        
+        onNextFrame(checkScroll);
         
       }
       
-      window.onscroll = checkScroll;
+      onNextFrame(checkScroll);
        
     });
     
@@ -678,8 +686,6 @@ if (isMobile) {
           if (offsetBottom !== 0) {
             
             consoleSheet.style.bottom = offsetBottom + 'px';
-            
-            window.onscroll = null;
             
           } else {
             
