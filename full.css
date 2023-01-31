@@ -1913,11 +1913,23 @@ body:not(.mobile) .sheet {
 }
 
 .sheet .items .item.warning {
-  color: #e5b09f;
+  color: hsl(15deg 57% 76%); /* #e5b09f */
+  background: hsl(15deg 57% 76% / 4%);
+  box-shadow: inset 0 0 0 1px hsl(15deg 57% 76% / 11%);
+  border-color: hsl(0deg 8% 17%);
+  box-shadow: 0 -1px 0 0 hsl(0deg 8% 17%);
 }
 
 .sheet .items .item.error {
-  color: #e49199;
+  color: hsl(354deg 61% 73%); /* #e49199 */
+  background: hsl(354deg 61% 73% / 4%);
+  box-shadow: inset 0 0 0 1px hsl(354deg 61% 73% / 11%);
+  border-color: hsl(337deg 16% 16%);
+  box-shadow: 0 -1px 0 0 hsl(337deg 16% 16%);
+}
+
+.sheet .items .item.debug {
+  color: hsl(220deg 100% 65%);
 }
 
 .sheet .items .item:is(.undefined, .null) {
