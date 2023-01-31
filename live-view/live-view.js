@@ -640,18 +640,6 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      consoleSheet.style.bottom = '281.5px';
-      
-      const oldScroll = window.onscroll;
-      
-      window.onscroll = () => { window.scrollTo(0,0); };
-      
-      window.setTimeout(() => {
-        
-        window.onscroll = oldScroll;
-        
-      }, 100);
-      
     });
     
     input.addEventListener('blur', (e) => {
@@ -678,6 +666,8 @@ if (isMobile) {
         // you could also do this by setting style.left and style.top if you
         // use width: 100% instead.
         if (document.activeElement === consoleSheetInput) {
+          
+          window.scrollTo(0,0);
           
           consoleSheet.style.bottom = offsetBottom + 'px';
           
