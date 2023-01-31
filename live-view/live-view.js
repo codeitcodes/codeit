@@ -638,7 +638,7 @@ if (isMobile) {
   if (isSafari) {
     
     // scroll to input on focus in safari
-    input.addEventListener('focus', (e) => {
+    input.addEventListener('touchmove', (e) => {
       
       e.preventDefault();
       e.preventPropagation();
