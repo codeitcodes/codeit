@@ -629,6 +629,17 @@ if (isMobile) {
     }
     
   });
+  
+  
+  consoleSheetInput.addEventListener('focus', () => {
+    
+    window.scrollTo({
+      top: document.documentElement.clientHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+    
+  });
 
 } else {
 
