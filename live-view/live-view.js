@@ -633,49 +633,21 @@ if (isMobile) {
   
   const input = consoleSheetInput;
 
-  window.waitDuration = 250;
+  window.waitDuration = 300;
 
   if (isSafari) {
     
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      let rect;
-      let scrollValue = 0;
-    
-      rect = input.getBoundingClientRect();
-      scrollValue = (rect.bottom - 10.5);
-
-      window.scrollTo(0, scrollValue);
-      
-      const oldScroll = window.onscroll;
-      window.onscroll = () => {
-        
-        window.scrollTo(0, scrollValue);
-          
-        rect = input.getBoundingClientRect();
-        scrollValue = (rect.bottom - 10.5);
-        
-      };
-      window.setTimeout(() => {
-        window.onscroll = oldScroll;
-        
-        rect = input.getBoundingClientRect();
-        scrollValue = (rect.bottom - 10.5);
-
-        window.scrollTo(0, scrollValue);
-        
-      }, 200);
-      
-      /*
       const rect = input.getBoundingClientRect();
       
       window.scrollTo({
         top: (rect.bottom - 10.5), // container padding is 10.5
         left: 0,
         behavior: 'smooth'
-      });*/
-      /*
+      });
+      
       window.setTimeout(() => {
         
         const rect = input.getBoundingClientRect();
@@ -687,7 +659,7 @@ if (isMobile) {
         });
         
       }, window.waitDuration);
-        */
+      
     });
     
   }
