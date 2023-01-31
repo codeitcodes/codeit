@@ -633,8 +633,6 @@ if (isMobile) {
   
   const input = consoleSheetInput;
 
-  window.waitDuration = 300;
-
   if (isSafari) {
     
     // scroll to input on focus in safari
