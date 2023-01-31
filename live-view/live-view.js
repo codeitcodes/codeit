@@ -644,7 +644,7 @@ if (isMobile) {
       const scrollValue = (rect.bottom - 10.5);
       
       window.onscroll = () => { 
-        window.scroll(0, scrollValue); 
+        window.scroll(0, 0); 
       };
       setTimeout(() => {
         window.onscroll = oldScroll;
