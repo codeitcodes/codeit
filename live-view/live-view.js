@@ -643,7 +643,7 @@ if (isMobile) {
         left: 0
       });
       
-      onNextFrame(() => {
+      window.setTimeout(() => {
         
         const rect = input.getBoundingClientRect();
         
@@ -653,7 +653,7 @@ if (isMobile) {
           behavior: 'smooth'
         });
         
-      });
+      }, 200);
       
     });
     
