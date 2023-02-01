@@ -2907,7 +2907,7 @@ versionEl.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hi, I use Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hey, I\'ve been using Codeit, a mobile code editor connected to Git. Check it out: ' + window.location.origin;
   
   if (isMobile) {
     
