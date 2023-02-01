@@ -2913,7 +2913,7 @@ learnShare.addEventListener('click', () => {
     
     // share invite
     navigator.share({
-      title: 'Share Codeit',
+      title: 'Codeit',
       text: invite
     });
     
