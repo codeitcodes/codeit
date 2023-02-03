@@ -682,6 +682,8 @@ if (isMobile) {
         document.querySelector('meta[name="theme-color"]').content = '#0f1014';
         body.style.background = '#0f1014';
         
+        input.focus();
+        
         //window.scrollTo(0, 1);
         
       });
