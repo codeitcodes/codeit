@@ -35,7 +35,9 @@ searchBack.addEventListener('click', () => {
 })
 
 // search when typed in input
-searchInput.addEventListener('input', () => {
+searchInput.addEventListener('input', searchInput.search);
+  
+searchInput.search = () => {
   
   if (searchInput.innerHTML === '<br>') {
 
@@ -85,7 +87,7 @@ searchInput.addEventListener('input', () => {
     
   }
   
-})
+}
 
 // disable enter key in search input
 searchInput.addEventListener('keydown', (e) => {
