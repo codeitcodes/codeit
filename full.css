@@ -1435,6 +1435,8 @@ body.mobile .sidebar .intro {
 .sidebar .files .intro {
   height: calc(100% - 74px);
   margin-top: -11px;
+  height: calc(100% - 11px);
+  margin-top: -74px;
 }
 
 .sidebar .intro .picture {
