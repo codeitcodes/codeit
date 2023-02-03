@@ -1755,6 +1755,7 @@ body.mobile .menu .icon a {
   color: #828689;
   opacity: .5;
   transform: scale(1.35);
+  transform-origin: center;
 }
 
 .menu hr {
