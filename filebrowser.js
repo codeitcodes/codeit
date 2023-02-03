@@ -2384,10 +2384,20 @@ function createNewRepoInHTML() {
     
     const newRepoName = fileWrapper.querySelector('.item.focused .name');
     
-    // move cursor to end
-    const s = window.getSelection();
-    s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
-
+    // if child nodes exist
+    if (newRepoName.childNodes.length !== 0) {
+      
+      // move cursor to end
+      const s = window.getSelection();
+      s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
+      
+    } else {
+      
+      // focus repo name
+      newRepoName.focus();
+      
+    }
+    
   }
 
 }
@@ -2752,10 +2762,20 @@ function createNewFileInHTML() {
     
     const newFileName = fileWrapper.querySelector('.item.focused .name');
     
-    // move cursor to end
-    const s = window.getSelection();
-    s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
-
+    // if child nodes exist
+    if (newFileName.childNodes.length !== 0) {
+      
+      // move cursor to end
+      const s = window.getSelection();
+      s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
+      
+    } else {
+      
+      // focus file name
+      newFileName.focus();
+      
+    }
+    
   }
 
 }
