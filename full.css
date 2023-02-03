@@ -1741,18 +1741,20 @@ body.mobile .menu .icon a {
   max-width: calc(100vw - 16px - 7px - 147px - 19.5px);
 }
 
-.menu .icon:not(.selected) .branch-icon {
+.menu .icon .branch-icon {
   color: #828689;
   opacity: .5;
 }
 
 .menu .icon.selected .branch-icon {
+  color: inherit;
   opacity: .72;
 }
 
 .menu .icon .bigger-icon {
   color: #828689;
-  transform: scale(1.35) translateX(-0.1px);
+  opacity: .5;
+  transform: scale(1.35);
 }
 
 .menu hr {
