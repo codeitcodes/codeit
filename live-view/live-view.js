@@ -640,7 +640,7 @@ if (isMobile) {
     
     input.addEventListener('touchend', (e) => {
       
-      if (e.target === input) {
+      if (e.targetTouches[0].target === input) {
       
         body.style.background = '#0f1014';
         
