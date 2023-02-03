@@ -33,9 +33,7 @@ searchBack.addEventListener('click', () => {
   header.classList.remove('searching');
   
 })
-
-// search when typed in input
-searchInput.addEventListener('input', searchInput.search);
+  
   
 searchInput.search = () => {
   
@@ -88,6 +86,10 @@ searchInput.search = () => {
   }
   
 }
+
+// search when typed in input
+searchInput.addEventListener('input', searchInput.search);
+
 
 // disable enter key in search input
 searchInput.addEventListener('keydown', (e) => {
