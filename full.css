@@ -1406,7 +1406,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
 
 .sidebar .picture-wrapper.faded {
   background: hsl(228deg 59% 6% / 50%);
-  color: hsl(232deg 34% 22%);
+  color: hsl(232deg 36% 19%);
 }
 
 @media screen and (orientation: landscape) {
