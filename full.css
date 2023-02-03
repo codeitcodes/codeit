@@ -1811,7 +1811,6 @@ body.safari .live-view-menu .icon.share path.ios {
   position: fixed;
   display: flex;
   flex-flow: column;
-  overflow: hidden;
   left: 0;
   right: 0;
   height: calc(100vh / 2 - 20px);
@@ -1848,6 +1847,17 @@ body:not(.mobile) .sheet {
   display: none;
 }
 
+.sheet::after {
+  content: '';
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  position: absolute;
+  background: inherit;
+  pointer-events: none;
+}
+
 .sheet .header {
   display: flex;
   align-items: center;
@@ -1856,7 +1866,7 @@ body:not(.mobile) .sheet {
   height: 59px;
   /* border-bottom: 1px solid rgb(130 134 137 / 25%); */
   background: hsl(226deg 13% 9%);
-  border-radius: 10px 10px 0 0;
+  border-radius: inherit;
   box-shadow: 0px 3px 6px 1px hsl(228deg 9% 6%);
 }
 
