@@ -672,21 +672,27 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      e.preventDefault();
-      e.stopPropagation();
-      
-      onNextFrame(() => {
+      if (!input.changedBg) {
         
-        input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
+        e.preventDefault();
+        e.stopPropagation();
         
-        document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-        body.style.background = '#0f1014';
+        onNextFrame(() => {
+          
+          input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
+          
+          document.querySelector('meta[name="theme-color"]').content = '#0f1014';
+          body.style.background = '#0f1014';
+          
+          input.changedBg = true;
+          
+          input.focus();
+          
+          //window.scrollTo(0, 1);
+          
+        });
         
-        input.focus();
-        
-        //window.scrollTo(0, 1);
-        
-      });
+      }
       
     });
     
@@ -694,6 +700,8 @@ if (isMobile) {
       
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
       body.style.background = '';
+      
+      input.changedBg = false;
 
       //consoleSheet.style.translate = '';
       
