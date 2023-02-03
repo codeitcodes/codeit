@@ -1695,6 +1695,7 @@ body.mobile .menu .icon {
 
 .menu .icon.selected {
   color: hsl(164deg 91% 33%);
+  color: var(--rosemary-lighter);
   font-weight: 500;
 }
 
@@ -1743,6 +1744,10 @@ body.mobile .menu .icon a {
 .menu .icon:not(.selected) .branch-icon {
   color: #828689;
   opacity: .5;
+}
+
+.menu .icon.selected .branch-icon {
+  opacity: .72;
 }
 
 .menu .icon .bigger-icon {
