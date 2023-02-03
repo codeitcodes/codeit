@@ -675,7 +675,8 @@ if (isMobile) {
       input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
       
       document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-       
+      body.style.background = '#0f1014';
+      
       //window.scrollTo(0, 1);
       
     });
@@ -683,7 +684,8 @@ if (isMobile) {
     input.addEventListener('blur', (e) => {
       
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
-      
+      body.style.background = '';
+
       //consoleSheet.style.translate = '';
       
     });
