@@ -813,6 +813,15 @@ async function renderSidebarHTML() {
   // hide branch menu
   branchMenu.classList.remove('visible');
   sidebarBranch.classList.remove('active');
+  
+  
+  // if searching
+  if (header.classList.contains('searching')) {
+    
+    // refresh search
+    searchInput.search();
+    
+  }
 
 }
 
