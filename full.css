@@ -1905,7 +1905,7 @@ body:not(.mobile) .sheet {
   margin-top: 3px;
 }
 
-.sheet .items .item:is(.warning, .error) .icon {
+.sheet .items .item:is(.warning, .error, .debug) .icon {
   color: inherit;
   opacity: .72;
 }
