@@ -638,12 +638,16 @@ if (isMobile) {
     // change background color to input wrapper
     // on safari
     
-    input.addEventListener('touchstart', (e) => {
+    input.addEventListener('touchend', (e) => {
+      
+      body.style.background = '#0f1014';
+      
+    });
+    
+    input.addEventListener('focus', (e) => {
     
       input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
-      
       document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-      body.style.background = '#0f1014';
       
     });
     
