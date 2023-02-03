@@ -2207,8 +2207,19 @@ function createNewRepoInHTML() {
       
       const repoName = repoEl.querySelector('.name');
       
-      const s = window.getSelection();
-      s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
+      // if child nodes exist
+      if (repoName.childNodes.length !== 0) {
+        
+        // move cursor to end
+        const s = window.getSelection();
+        s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
+        
+      } else {
+        
+        // focus repo name
+        repoName.focus();
+        
+      }
       
     });
     
