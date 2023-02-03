@@ -638,14 +638,9 @@ if (isMobile) {
     // change background color to input wrapper
     // on safari
     
-    input.addEventListener('touchend', (e) => {
+    input.addEventListener('click', (e) => {
       
-      if (e.targetTouches &&
-          e.targetTouches[0].target === input) {
-      
-        body.style.background = '#0f1014';
-        
-      }
+      body.style.background = '#0f1014';
       
     });
     
