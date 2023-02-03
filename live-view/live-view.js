@@ -635,64 +635,15 @@ if (isMobile) {
 
   if (isSafari) {
     
-    //window.addEventListener('scroll', () => { 
-    /*
-    consoleSheetItems.addEventListener('touchstart', (e) => {
-      
-      if (document.activeElement === input) {
-        
-        if (consoleSheet.truePos !== false) {
-          
-          consoleSheet.style.translate = '0 ' + -consoleSheet.truePos + 'px';
-          
-          window.scrollTo(0, 0);
-          
-        }
-        
-      }
-      
-    });
+    // change background color to input wrapper
+    // on safari
     
-    consoleSheetItems.addEventListener('touchmove', (e) => {
+    input.addEventListener('touchstart', (e) => {
+    
+      input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
       
-      if (document.activeElement === input) {
-        
-        if (consoleSheet.truePos !== false) {
-          
-          consoleSheet.style.translate = '0 ' + -consoleSheet.truePos + 'px';
-          
-          window.scrollTo(0, 0);
-          
-        }
-        
-      }
-      
-    });
-    */
-    // scroll to input on focus in safari
-    input.addEventListener('focus', (e) => {
-      
-      if (!input.changedBg) {
-        
-        e.preventDefault();
-        e.stopPropagation();
-        
-        onNextFrame(() => {
-          
-          input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
-          
-          document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-          body.style.background = '#0f1014';
-          
-          input.changedBg = true;
-          
-          input.focus();
-          
-          //window.scrollTo(0, 1);
-          
-        });
-        
-      }
+      document.querySelector('meta[name="theme-color"]').content = '#0f1014';
+      body.style.background = '#0f1014';
       
     });
     
@@ -701,36 +652,7 @@ if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
       body.style.background = '';
       
-      input.changedBg = false;
-
-      //consoleSheet.style.translate = '';
-      
     });
-    
-    
-    /*
-    function viewportHandler(event) {
-
-      // since the bar is position: fixed we need to offset it by the
-      // visual viewport's offset from the layout viewport origin.
-      const viewport = event.target;
-      const offsetBottom = window.innerHeight - viewport.height;
-      
-      // you could also do this by setting style.left and style.top if you
-      // use width: 100% instead.
-      if (document.activeElement === consoleSheetInput) {
-
-        consoleSheet.truePos = offsetBottom;
-        
-        window.scrollTo(0, 0);
-        
-      }
-      
-    }
-    
-    window.visualViewport.addEventListener('scroll', viewportHandler);
-    window.visualViewport.addEventListener('resize', viewportHandler);
-    */
     
   }
   
