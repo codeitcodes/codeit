@@ -672,12 +672,19 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
+      e.preventDefault();
+      e.stopPropagation();
       
-      document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-      body.style.background = '#0f1014';
-      
-      //window.scrollTo(0, 1);
+      onNextFrame(() => {
+        
+        input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
+        
+        document.querySelector('meta[name="theme-color"]').content = '#0f1014';
+        body.style.background = '#0f1014';
+        
+        //window.scrollTo(0, 1);
+        
+      });
       
     });
     
