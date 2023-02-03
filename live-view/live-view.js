@@ -672,8 +672,6 @@ if (isMobile) {
     // scroll to input on focus in safari
     input.addEventListener('focus', (e) => {
       
-      consoleSheet.truePos = false;
-      
       input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
       
       document.querySelector('meta[name="theme-color"]').content = '#0f1014';
@@ -687,7 +685,6 @@ if (isMobile) {
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
       
       //consoleSheet.style.translate = '';
-      consoleSheet.truePos = false;
       
     });
     
