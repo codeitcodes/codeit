@@ -639,11 +639,20 @@ if (isMobile) {
     // on safari
     
     input.addEventListener('focus', (e) => {
-    
+     
+      body.style.background = '#0f1014';
+          
       input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
       document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-      
-      body.style.background = '#0f1014';
+ 
+      /*
+      document.querySelector('meta[name="theme-color"]').content = '#313744';
+
+      onNextFrame(() => {
+
+        document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
+
+      });*/
       
     });
     
