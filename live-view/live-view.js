@@ -642,9 +642,13 @@ if (isMobile) {
      
       body.style.background = '#0f1014';
       
+      // refresh header color (for safari)
+      
+      input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
+      document.querySelector('meta[name="theme-color"]').content = '#0f1013';
+    
       onNextFrame(() => {
   
-        input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
         document.querySelector('meta[name="theme-color"]').content = '#0f1014';
       
       });
