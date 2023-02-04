@@ -1940,6 +1940,8 @@ body:not(.mobile) .sheet {
   margin-left: calc(10.5px + 18px);
   user-select: text;
   -webkit-user-select: text;
+  overflow-wrap: anywhere;
+  /* word-break: break-all;
 }
 
 .sheet .items .item.warning {
