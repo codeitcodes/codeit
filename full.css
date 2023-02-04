@@ -1941,7 +1941,7 @@ body:not(.mobile) .sheet {
   user-select: text;
   -webkit-user-select: text;
   overflow-wrap: anywhere;
-  /* word-break: break-all;
+  /* word-break: break-all; */
 }
 
 .sheet .items .item.warning {
