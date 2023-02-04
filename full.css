@@ -1986,6 +1986,25 @@ body:not(.mobile) .sheet .items .item .action:hover {
   color: #636d83;
 }
 
+.sheet .items .item .source {
+  position: relative;
+  /* opacity: .5; */
+  color: #636d83;
+  margin-left: 14px;
+  margin-left: 17.5px;
+  margin-bottom: 7px;
+  float: right;
+  text-align: right;
+  color: hsl(228deg 16% 37%);
+  max-width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* max-width: calc(130px + 15px); */
+  /* max-width: calc(130px + 76.8px); */
+  padding-right: 76.8px;
+}
+
 .sheet .footer {
   display: flex;
   align-items: end;
