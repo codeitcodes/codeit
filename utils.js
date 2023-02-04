@@ -1011,23 +1011,23 @@ const pushIcon = `
 
 
 const repoIntroScreen = `
-<div class="intro">
-  <div class="picture-wrapper faded">
-    <svg viewBox="0 0 356 415" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="picture" fill="currentColor" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M272.41 168.81c-40.867 0-73.996 33.129-73.996 74V479.6c0 40.867 33.129 73.996 73.996 73.996h14.797c8.176 0 14.801-6.625 14.801-14.801 0-8.172-6.625-14.797-14.801-14.797H272.41c-24.52 0-44.398-19.879-44.398-44.398 0-16.727 9.25-31.293 22.91-38.863 5.828-3 12.902-5.031 21.488-5.535H524v88.797h-29.598c-8.176 0-14.801 6.625-14.801 14.797 0 8.176 6.625 14.801 14.801 14.801h44.395c8.176 0 14.801-6.625 14.801-14.801v-117.06c.871-5.914 0-13.172 0-13.172v-195.35c0-24.52-19.875-44.398-44.398-44.398l-236.79-.006Z" transform="translate(-198.414 -168.81)"></path><path d="M331.6 479.6c0-8.176 6.629-14.801 14.801-14.801h88.797c8.172 0 14.801 6.625 14.801 14.801v88.797a14.797 14.797 0 0 1-7.816 13.047 14.808 14.808 0 0 1-15.195-.734L390.8 556.585l-36.188 24.125a14.804 14.804 0 0 1-23.012-12.313V479.6Z" transform="translate(-198.414 -168.81)"></path></svg>
+<div class="intro faded">
+  <div class="picture-wrapper">
+    <svg viewBox="0 0 16 16" class="picture" width="24" height="24"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8zM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25z" fill="currentColor"></path></svg>
   </div>
   <div class="subhead">
-    <div class="title" style="opacity: .5">No repos yet</div>
+    <div class="title">No repos yet</div>
   </div>
 </div>
 `;
 
 const fileIntroScreen = `
-<div class="intro">
-  <div class="picture-wrapper faded">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="picture"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(232deg 39% 14%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(232deg 34% 22%)"></path></svg>
+<div class="intro faded">
+  <div class="picture-wrapper">
+    <svg class="picture" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.83-4.83c-.37-.38-.88-.59-1.41-.59H6zm7 6V3.5L18.5 9H14c-.55 0-1-.45-1-1z" fill="currentColor"></path></svg>
   </div>
   <div class="subhead">
-    <div class="title" style="opacity: .5">No files yet</div>
+    <div class="title">No files yet</div>
   </div>
 </div>
 `;
