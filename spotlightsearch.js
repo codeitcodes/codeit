@@ -1,7 +1,6 @@
 
-// open search screen on click of button
-searchButton.addEventListener('click', () => {
-    
+searchInput.openSearch = () => {
+  
   // clear search input
   searchInput.innerText = '';
   
@@ -11,20 +10,33 @@ searchButton.addEventListener('click', () => {
   // update add button
   addButton.classList.remove('clear-button-visible');
   
+  header.classList.add('searching');
+  
   // focus search input
   searchInput.focus();
   
-})
+}
+
+// open search screen on click of button
+searchButton.addEventListener('click', searchInput.openSearch);
 
 // open search on focus
 searchInput.addEventListener('focus', () => {
   
-  header.classList.add('searching');
+  // if not already searching
+  if (!header.classList.contains('searching')) {
+    
+    // open search
+    searchInput.openSearch();
+    
+  }
   
 })
 
+
 // close search screen on click of button
-searchBack.addEventListener('click', () => {
+
+searchInput.closeSearch = () => {
   
   // show all files
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
@@ -32,9 +44,25 @@ searchBack.addEventListener('click', () => {
   
   header.classList.remove('searching');
   
+  searchInput.blur();
+  
+}
+
+searchBack.addEventListener('click', searchInput.closeSearch);
+
+searchInput.addEventListener('blur', () => {
+  
+  // if query is empty
+  if (searchInput.textContent === '') {
+    
+    // close search
+    searchInput.closeSearch();
+    
+  }
+  
 })
-  
-  
+
+
 searchInput.search = () => {
   
   if (searchInput.innerHTML === '<br>') {
@@ -67,7 +95,7 @@ searchInput.search = () => {
   
   
   // if search query exists
-  if (searchInput.textContent != '') {
+  if (searchInput.textContent !== '') {
     
     // show clear button
     searchClear.classList.add('visible');
@@ -105,14 +133,14 @@ searchInput.addEventListener('keydown', (e) => {
     
     // close search
     e.preventDefault();
-    searchBack.click();
+    searchInput.closeSearch();
     
   }
 
 })
 
-// clear search input when clicked on button
-searchClear.addEventListener('click', () => {
+
+searchInput.clearSearch = () => {
   
   // show all files
   let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
@@ -130,5 +158,8 @@ searchClear.addEventListener('click', () => {
   // focus search input
   searchInput.focus();
     
-})
+}
+
+// clear search input when clicked on button
+searchClear.addEventListener('click', searchInput.clearSearch);
 
