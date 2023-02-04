@@ -125,7 +125,13 @@ searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     
     e.preventDefault();
-    searchInput.blur();
+    
+    // if query exists
+    if (searchInput.textContent === '') {
+      
+      searchInput.blur();
+      
+    }
     
   }
   
