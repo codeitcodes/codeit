@@ -91,13 +91,21 @@ searchInput.search = () => {
 searchInput.addEventListener('input', searchInput.search);
 
 
-// disable enter key in search input
 searchInput.addEventListener('keydown', (e) => {
 
+  // disable enter key in search input
   if (e.key === 'Enter') {
     
     e.preventDefault();
     searchInput.blur();
+    
+  }
+  
+  if (e.key === 'Escape') {
+    
+    // close search
+    e.preventDefault();
+    searchBack.click();
     
   }
 
