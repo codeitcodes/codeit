@@ -1566,13 +1566,11 @@ body.mobile .sidebar .button {
 .sidebar .button.teritary {
   background: transparent;
   color: hsl(220deg 4% 84% / 92%);
-  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37%);
 }
 
 .sidebar .button.teritary:active {
-  color: hsl(220deg 4% 84% / 25%);
-  background: transparent !important;
-  box-shadow: inset 0 0 0 1px hsl(228deg 16% 37% / 50%);
+  color: hsl(220deg 4% 84% / 50%);
+  background: hsl(228deg 14% 14%) !important;
   transition: none;
 }
 
@@ -2806,7 +2804,7 @@ body:not(.mobile) .sidebar .button.secondary:hover {
 }
 
 body:not(.mobile) .sidebar .button.teritary:hover {
-  background: hsl(228deg 16% 37% / 12%);
+  background: hsl(228deg 16% 15%);
   transition: none;
 }
 
