@@ -1404,7 +1404,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   box-sizing: border-box;
 }
 
-.sidebar .picture-wrapper.faded {
+.sidebar .intro.faded .picture-wrapper {
   background: hsl(228deg 59% 6% / 50%);
   color: hsl(232deg 36% 19%);
 }
@@ -1455,6 +1455,11 @@ body.mobile .sidebar .intro {
   font-weight: 500;
   font-size: 21px;
   letter-spacing: -.002em;
+}
+
+.sidebar .intro.faded .title {
+  /* opacity: .5; */
+  color: hsl(231deg 6% 58%);
 }
 
 .sidebar .files .intro .title {
