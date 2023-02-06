@@ -116,7 +116,7 @@ body form {
   display: none;
 }
 
-body p, body blockquote, body ul, body ol, body dl, body table, body pre, body details, body cd-el {
+body p, body blockquote, body ul, body ol, body dl, body table, body pre, body details, body img, body cd-el {
   margin-top: 0;
   margin-bottom: 16px;
 }
