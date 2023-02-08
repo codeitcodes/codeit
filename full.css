@@ -1758,7 +1758,7 @@ body.mobile .menu .icon a {
 
 .menu .icon.selected .branch-icon {
   color: inherit;
-  opacity: .72;
+  opacity: 1;
 }
 
 .menu .icon .bigger-icon {
