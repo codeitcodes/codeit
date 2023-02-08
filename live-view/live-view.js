@@ -631,14 +631,21 @@ if (isMobile) {
   });
   
   
-  const input = consoleSheetInput;
-
+  // init input
+  let input = consoleSheetInput;
+  
+  input.outerHTML = '<cd-el lang="js"></cd-el>';
+  
+  consoleSheetInput = consoleSheetFooter.querySelector('.input');
+  input = consoleSheetInput;
+  
+  
   if (isSafari) {
     
     // change background color to input wrapper
     // on safari
     
-    input.addEventListener('focus', (e) => {
+    input.on('focus', (e) => {
      
       body.style.background = '#0f1014';
       
@@ -664,7 +671,7 @@ if (isMobile) {
       
     });
     
-    input.addEventListener('blur', (e) => {
+    input.on('blur', (e) => {
       
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
       body.style.background = '';
@@ -674,13 +681,7 @@ if (isMobile) {
   }
   
   // toggle typed indicator on input
-  input.addEventListener('input', () => {
-      
-    if (input.innerHTML === '<br>') {
-  
-      input.textContent = '';
-  
-    }
+  input.on('type', () => {
     
     const typed = (input.textContent !== '');
     
