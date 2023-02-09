@@ -682,9 +682,9 @@ if (isMobile) {
   // toggle typed indicator on input
   input.on('type', () => {
     
-    const typed = (input.textContent !== '' && input.textContent !== '\n');
+    const empty = (input.textContent === '' || input.textContent === '\n');
     
-    consoleSheetFooter.classList.toggle('typed', typed);
+    consoleSheetFooter.classList.toggle('empty', empty);
     
   });
 
