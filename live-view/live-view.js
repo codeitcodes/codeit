@@ -685,9 +685,14 @@ if (isMobile) {
     // if didn't type in input
     if (!input.typed(e)) return;
     
-    const empty = (input.textContent === '' || input.textContent === '\n');
-    
-    consoleSheetFooter.classList.toggle('empty', empty);
+    // wait until finished typing
+    onNextFrame(() => {
+  
+      const empty = (input.textContent === '' || input.textContent === '\n');
+      
+      consoleSheetFooter.classList.toggle('empty', empty);
+      
+    });
     
   });
 
