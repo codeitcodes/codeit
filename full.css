@@ -2039,8 +2039,6 @@ body:not(.mobile) .sheet .items .item .action:hover {
   word-break: break-all;
   overflow-wrap: anywhere;
   position: relative;
-  user-select: text;
-  -webkit-user-select: text;
 }
 
 .sheet .footer .input:empty::before {
