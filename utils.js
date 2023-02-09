@@ -65,7 +65,6 @@ const body = document.body,
       consoleSheetClose = consoleSheet.querySelector('.header .close'),
       consoleSheetItems = consoleSheet.querySelector('.items'),
       consoleSheetFooter = consoleSheet.querySelector('.footer'),
-      consoleSheetInput = consoleSheetFooter.querySelector('.input'),
       sheetBackground = document.querySelector('.sheet-background'),
             
       dialogWrapper = document.querySelector('.dialog-wrapper'),
