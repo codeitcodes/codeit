@@ -641,10 +641,10 @@ if (isMobile) {
   
   
   // toggle input empty indicator on type
-  input.on('keydown', (e) => {
+  input.on('input', (e) => {
     
     // if didn't type in input
-    if (!input.typed(e)) return;
+    //if (!input.typed(e)) return;
     
     // wait until finished typing
     onNextFrame(() => {
@@ -673,8 +673,6 @@ if (isMobile) {
     // on safari
     
     input.on('focus', (e) => {
-     
-      body.style.background = '#0f1014';
       
       // refresh header color (for safari)
       
@@ -701,7 +699,6 @@ if (isMobile) {
     input.on('blur', (e) => {
       
       document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
-      body.style.background = '';
       
     });
     
