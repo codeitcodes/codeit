@@ -2036,6 +2036,8 @@ body:not(.mobile) .sheet .items .item .action:hover {
   box-sizing: border-box;
   scroll-padding: 14px 0;
   white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: anywhere;
   position: relative;
   user-select: text;
   -webkit-user-select: text;
