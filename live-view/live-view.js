@@ -712,6 +712,8 @@ if (isMobile) {
     
     let codeToRun = input.textContent;
     
+    input.textContent = '';
+    
     logger.log(codeToRun, 'input');
     
     codeToRun = codeToRun.replaceAll('`', '\`');
@@ -736,6 +738,8 @@ if (isMobile) {
         <cd-el class="code" lang="js">`+ escapeHTML(code) +`</cd-el>
       </div>
       `;
+      
+      consoleSheetItems.innerHTML += logHTML;
       
     },
     
