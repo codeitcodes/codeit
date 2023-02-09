@@ -632,11 +632,32 @@ if (isMobile) {
   
   
   // init input
+  
   let input = consoleSheetFooter.querySelector('.input');
   
   input.outerHTML = '<cd-el class="input" lang="js"></cd-el>';
   
   input = consoleSheetFooter.querySelector('.input');
+  
+  
+  // toggle input empty indicator on type
+  input.on('keydown', (e) => {
+    
+    // if didn't type in input
+    if (!input.typed(e)) return;
+    
+    // wait until finished typing
+    onNextFrame(() => {
+  
+      // toggle input empty indicator
+      
+      const empty = (input.textContent === '' || input.textContent === '\n');
+      
+      consoleSheetFooter.classList.toggle('empty', empty);
+      
+    });
+    
+  });
   
   
   if (isSafari) {
@@ -678,23 +699,6 @@ if (isMobile) {
     });
     
   }
-  
-  // toggle input empty indicator on type
-  input.on('keydown', (e) => {
-    
-    // if didn't type in input
-    if (!input.typed(e)) return;
-    
-    // wait until finished typing
-    onNextFrame(() => {
-  
-      const empty = (input.textContent === '' || input.textContent === '\n');
-      
-      consoleSheetFooter.classList.toggle('empty', empty);
-      
-    });
-    
-  });
 
 } else {
 
