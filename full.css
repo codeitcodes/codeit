@@ -2037,6 +2037,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   white-space: pre-wrap;
   word-break: break-all;
   overflow-wrap: anywhere;
+  position: relative;
 }
 
 .sheet .footer.empty .input::before {
