@@ -634,7 +634,7 @@ if (isMobile) {
   // init input
   let input = consoleSheetFooter.querySelector('.input');
   
-  input.outerHTML = '<cd-el lang="js"></cd-el>';
+  input.outerHTML = '<cd-el class="input" lang="js"></cd-el>';
   
   input = consoleSheetFooter.querySelector('.input');
   
