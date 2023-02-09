@@ -679,8 +679,11 @@ if (isMobile) {
     
   }
   
-  // toggle typed indicator on input
-  input.on('type', () => {
+  // toggle input empty indicator on type
+  input.on('keydown', (e) => {
+    
+    // if didn't type in input
+    if (!input.typed(e)) return;
     
     const empty = (input.textContent === '' || input.textContent === '\n');
     
