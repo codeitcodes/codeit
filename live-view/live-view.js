@@ -736,7 +736,7 @@ if (isMobile) {
       const logHTML = `
       <div class="item">
         `+ icon +`
-        <cd-el class="code" lang="js">`+ escapeHTML(code) +`</cd-el>
+        <cd-el class="code" edit="false" lang="js">`+ escapeHTML(code) +`</cd-el>
       </div>
       `;
       
