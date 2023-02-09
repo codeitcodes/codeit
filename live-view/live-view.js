@@ -651,11 +651,16 @@ if (isMobile) {
   
       // toggle input empty indicator
       
-      const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
-      
-      const empty = (text === '');
+      const empty = (input.textContent === '');
       
       consoleSheetFooter.classList.toggle('empty', empty);
+      
+      
+      const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
+      
+      const returnEnabled = (text !== '');
+      
+      consoleSheetFooter.classList.toggle('return-enabled', returnEnabled);
       
     });
     
