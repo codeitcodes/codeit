@@ -2039,10 +2039,11 @@ body:not(.mobile) .sheet .items .item .action:hover {
   overflow-wrap: anywhere;
 }
 
-.sheet .footer .input:empty::before {
+.sheet .footer.empty .input::before {
   content: 'Type code...';
   color: #636d83;
   pointer-events: none;
+  position: absolute;
 }
 
 .sheet .footer .return {
