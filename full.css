@@ -2064,7 +2064,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   background: hsla(223deg 88% 52% / 50%) !important;
 }
 
-.sheet .footer.typed .return {
+.sheet .footer:not(.empty) .return {
   margin-left: 10.5px;
   opacity: 1;
   transform: none;
