@@ -636,8 +636,7 @@ if (isMobile) {
   
   input.outerHTML = '<cd-el lang="js"></cd-el>';
   
-  consoleSheetInput = consoleSheetFooter.querySelector('.input');
-  input = consoleSheetInput;
+  input = consoleSheetFooter.querySelector('.input');
   
   
   if (isSafari) {
