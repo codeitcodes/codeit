@@ -723,6 +723,8 @@ if (isMobile) {
     
     logger.log(resp, 'resp');
     
+    consoleSheetItems.scrollTo(0, consoleSheetItems.scrollHeight);
+    
   });
   
   
