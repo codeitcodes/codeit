@@ -2025,7 +2025,6 @@ body:not(.mobile) .sheet .items .item .action:hover {
   /* background: hsl(230deg 26% 15%); */
   background: hsl(230deg 27% 15%);
   flex: 1;
-  outline: none;
   padding: 7px 14px;
   border-radius: 19px;
   font-family: var(--mono-font-family);
