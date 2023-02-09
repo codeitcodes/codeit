@@ -713,6 +713,7 @@ if (isMobile) {
     let codeToRun = input.textContent;
     
     input.textContent = '';
+    consoleSheetFooter.classList.remove('empty', 'return-enabled');
     
     logger.log(codeToRun, 'input');
     
