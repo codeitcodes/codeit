@@ -2044,6 +2044,8 @@ body:not(.mobile) .sheet .items .item .action:hover {
   color: #636d83;
   pointer-events: none;
   position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .sheet .footer .return {
