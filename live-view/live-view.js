@@ -632,7 +632,7 @@ if (isMobile) {
   
   
   // init input
-  let input = consoleSheetInput;
+  let input = consoleSheetFooter.querySelector('.input');
   
   input.outerHTML = '<cd-el lang="js"></cd-el>';
   
