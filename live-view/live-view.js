@@ -651,7 +651,7 @@ if (isMobile) {
   
       // toggle input empty indicator
       
-      const empty = (input.textContent === '');
+      const empty = (input.textContent === '' || input.textContent === '\n');
       
       consoleSheetFooter.classList.toggle('empty', empty);
       
