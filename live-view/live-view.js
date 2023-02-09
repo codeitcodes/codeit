@@ -682,7 +682,7 @@ if (isMobile) {
   // toggle typed indicator on input
   input.on('type', () => {
     
-    const typed = (input.textContent !== '' || input.textContent !== '\n');
+    const typed = (input.textContent !== '' && input.textContent !== '\n');
     
     consoleSheetFooter.classList.toggle('typed', typed);
     
