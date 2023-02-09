@@ -2852,6 +2852,10 @@ body.mobile.expanded {
   background: #1a1c24;
 }
 
+body.mobile:has(> .console-sheet.visible) {
+  background: #0f1014;
+}
+
 body.mobile.expanded .cd-wrapper {
   width: 100%;
   height: 100%;
