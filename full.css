@@ -1774,6 +1774,10 @@ body.mobile .menu .icon a {
   margin: 7px 14px;
 }
 
+.menu.branch-menu {
+  max-height: 200px;
+}
+
 .context-menu {
   margin-top: -7px;
   margin-left: -6px;
