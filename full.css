@@ -1801,6 +1801,10 @@ body.mobile .context-menu {
   display: none;
 }
 
+.context-menu .icon.share .branch-icon {
+  height: 22.5px;
+}
+
 .live-view-menu {
   left: 7px;
   top: 44px;
