@@ -291,6 +291,34 @@ body:not(.mobile) cd-el::-webkit-scrollbar-track {
 }
 
 
+body:not(.mobile) ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: #5f6368;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb:hover {
+  background-color: #777c83;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-thumb:active {
+  background-color: #5f6368;
+}
+
+body:not(.mobile) ::-webkit-scrollbar-track,
+body:not(.mobile) ::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
 html, body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
