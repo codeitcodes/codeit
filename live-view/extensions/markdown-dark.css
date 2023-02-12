@@ -300,6 +300,7 @@ body:not(.mobile)::-webkit-scrollbar-thumb {
   background-clip: padding-box;
   border: 4px solid transparent;
   border-radius: 8px;
+  box-shadow: none;
   min-height: 50px;
   min-width: 50px;
   background-color: #5f6368;
