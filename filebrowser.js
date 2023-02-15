@@ -3328,7 +3328,7 @@ function setupEditor() {
   document.addEventListener('keydown', (e) => {
 
     // disable Ctrl/Cmd + S
-    if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
+    if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e) && !e.altKey) {
 
       e.preventDefault();
       
