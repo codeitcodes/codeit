@@ -126,7 +126,7 @@ let consoleSheet = {
         
         resp = e;
         
-        this.logger.log(resp, 'error');        
+        this.logger.log(resp, 'error', false);        
         
       }
       
