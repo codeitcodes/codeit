@@ -57,6 +57,15 @@ let consoleSheet = {
     // toggle input empty indicator on type
     input.on('keydown', (e) => {
       
+      if (e.key === 'Enter' && e.shiftKey) {
+        
+        e.preventDefault();
+        
+        this.runCode();
+        
+      }
+      
+      
       // if didn't type in input
       if (!input.typed(e)) return;
       
@@ -102,39 +111,41 @@ let consoleSheet = {
     }
     
     
-    this.el.return.addEventListener('click', () => {
+    this.el.return.addEventListener('click', this.runCode);
+    
+  },
       
-      let codeToRun = input.textContent;
+  runCode: function() {
+    
+    let codeToRun = input.textContent;
+    
+    input.textContent = '';
+    input.focus();
+    this.el.footer.classList.remove('return-enabled');
+    this.el.footer.classList.add('empty');
+    
+    this.logger.log(codeToRun, 'input');
+    
+    codeToRun = codeToRun.replaceAll('`', '\`');
+    
+    let resp = '';
+    
+    try {
       
-      input.textContent = '';
-      input.focus();
-      this.el.footer.classList.remove('return-enabled');
-      this.el.footer.classList.add('empty');
+      resp = new Function('return eval(`'+ codeToRun +'`)')();
       
-      this.logger.log(codeToRun, 'input');
+      this.logger.log(resp, 'resp');
       
-      codeToRun = codeToRun.replaceAll('`', '\`');
+    } catch(e) {
       
-      let resp = '';
+      resp = e;
       
-      try {
-        
-        resp = new Function('return eval(`'+ codeToRun +'`)')();
-        
-        this.logger.log(resp, 'resp');
-        
-      } catch(e) {
-        
-        resp = e;
-        
-        this.logger.log(resp, 'error', false);        
-        
-      }
+      this.logger.log(resp, 'error', false);        
       
-      this.el.items.scrollTo(0, this.el.items.scrollHeight);
-      
-    });
-  
+    }
+    
+    this.el.items.scrollTo(0, this.el.items.scrollHeight);
+    
   },
   
   logger: {
