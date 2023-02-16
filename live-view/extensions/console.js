@@ -120,13 +120,15 @@ let consoleSheet = {
         
         resp = new Function('return eval(`'+ codeToRun +'`)')();
         
+        this.logger.log(resp, 'resp');
+        
       } catch(e) {
         
         resp = e;
         
+        this.logger.log(resp, 'error');        
+        
       }
-      
-      this.logger.log(resp, 'resp');
       
       this.el.items.scrollTo(0, this.el.items.scrollHeight);
       
@@ -138,11 +140,13 @@ let consoleSheet = {
     
     log: function(code, type) {
       
+      if (!type) type = '';
+      
       let icon = this.icons[type];
       if (!icon) icon = '';
       
       const logHTML = `
-      <div class="item">
+      <div class="item `+ type +`">
         `+ icon +`
         <cd-el class="code" edit="false" lang="js">`+ escapeHTML(code) +`</cd-el>
       </div>
@@ -169,8 +173,15 @@ let consoleSheet = {
           <path d="M11.7,17.29L11.7,17.29c0.39-0.39,0.39-1.02,0-1.41L7.83,12l3.88-3.88c0.39-0.39,0.39-1.02,0-1.41l0,0 c-0.39-0.39-1.02-0.39-1.41,0l-4.59,4.59c-0.39,0.39-0.39,1.02,0,1.41l4.59,4.59C10.68,17.68,11.31,17.68,11.7,17.29z"></path>
         </g>
       </svg>
+      `,
+      
+      error: `
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor" class="icon">
+        <path d="M0 0h24v24H0V0z" fill="none"></path>
+        <path d="M13.89 8.7L12 10.59 10.11 8.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 8.7 13.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l1.89 1.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l1.89-1.89c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.38-1.41 0zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+      </svg>
       `
-        
+      
     }
     
   }
