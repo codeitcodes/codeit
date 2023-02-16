@@ -55,10 +55,10 @@ let consoleSheet = {
     
     
     // toggle input empty indicator on type
-    input.on('input', (e) => {
+    input.on('keydown', (e) => {
       
       // if didn't type in input
-      //if (!input.typed(e)) return;
+      if (!input.typed(e)) return;
       
       // wait until finished typing
       onNextFrame(() => {
