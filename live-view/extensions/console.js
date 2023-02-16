@@ -108,7 +108,8 @@ let consoleSheet = {
       
       input.textContent = '';
       input.focus();
-      this.el.footer.classList.remove('empty', 'return-enabled');
+      this.el.footer.classList.remove('return-enabled');
+      this.el.footer.classList.add('empty');
       
       this.logger.log(codeToRun, 'input');
       
