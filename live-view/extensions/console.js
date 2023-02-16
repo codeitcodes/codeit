@@ -138,17 +138,32 @@ let consoleSheet = {
   
   logger: {
     
-    log: function(code, type) {
+    log: function(code, type, highlight = true) {
       
       if (!type) type = '';
       
       let icon = this.icons[type];
       if (!icon) icon = '';
       
+      let codeEl;
+      let closingCodeEl;
+      
+      if (highlight) {
+        
+        codeEl = `<cd-el class="code" edit="false" lang="js">`;
+        closingCodeEl = `cd-el`;
+        
+      } else {
+        
+        codeEl = `<div class="code">`;
+        closingCodeEl = 'div';
+        
+      }
+      
       const logHTML = `
       <div class="item `+ type +`">
         `+ icon +`
-        <cd-el class="code" edit="false" lang="js">`+ escapeHTML(code) +`</cd-el>
+        <cd-el class="code" edit="false" lang="js">`+ escapeHTML(code) +`</`+ closingCodeEl +`>
       </div>
       `;
       
