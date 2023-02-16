@@ -138,7 +138,7 @@ let consoleSheet = {
     
     log: function(code, type) {
       
-      let icon = this.logger.icons[type];
+      let icon = this.icons[type];
       if (!icon) icon = '';
       
       const logHTML = `
