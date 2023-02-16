@@ -1775,7 +1775,16 @@ body.mobile .menu .icon a {
 }
 
 .menu.branch-menu {
+  max-height: 175px;
+}
+
+body.mobile .menu.branch-menu {
   max-height: 200px;
+  transition-property: transform, padding, max-height;
+}
+
+body.mobile .menu.branch-menu:not(.visible) {
+  max-height: calc(200px - 8px);
 }
 
 .context-menu {
