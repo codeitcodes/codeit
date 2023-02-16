@@ -124,10 +124,12 @@ let consoleSheet = {
     
     input.textContent = '';
     input.focus();
-    this.el.footer.classList.remove('return-enabled');
-    this.el.footer.classList.add('empty');
     
-    this.logger.log(codeToRun, 'input');
+    consoleSheet.el.footer.classList.remove('return-enabled');
+    consoleSheet.el.footer.classList.add('empty');
+    
+    
+    consoleSheet.logger.log(codeToRun, 'input');
     
     codeToRun = codeToRun.replaceAll('`', '\`');
     
@@ -137,17 +139,17 @@ let consoleSheet = {
       
       resp = new Function('return eval(`'+ codeToRun +'`)')();
       
-      this.logger.log(resp, 'resp');
+      consoleSheet.logger.log(resp, 'resp');
       
     } catch(e) {
       
       resp = e;
       
-      this.logger.log(resp, 'error', false);        
+      consoleSheet.logger.log(resp, 'error', false);        
       
     }
     
-    this.el.items.scrollTo(0, this.el.items.scrollHeight);
+    consoleSheet.el.items.scrollTo(0, consoleSheet.el.items.scrollHeight);
     
   },
   
