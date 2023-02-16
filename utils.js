@@ -60,14 +60,7 @@ const body = document.body,
       liveViewMenu = document.querySelector('.live-view-menu'),
       liveMenuShare = liveViewMenu.querySelector('.share'),
       liveMenuConsole = liveViewMenu.querySelector('.console'),
-      
-      consoleSheet = document.querySelector('.console-sheet'),
-      consoleSheetClose = consoleSheet.querySelector('.header .close'),
-      consoleSheetItems = consoleSheet.querySelector('.items'),
-      consoleSheetFooter = consoleSheet.querySelector('.footer'),
-      consoleSheetReturn = consoleSheetFooter.querySelector('.return'),
-      sheetBackground = document.querySelector('.sheet-background'),
-            
+                  
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
       dialogCancel = dialogWrapper.querySelector('.cancel'),
