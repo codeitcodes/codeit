@@ -118,7 +118,7 @@ let consoleSheet = {
       
   runCode: function() {
     
-    const input = this.el.input;
+    const input = consoleSheet.el.input;
     
     let codeToRun = input.textContent;
     
