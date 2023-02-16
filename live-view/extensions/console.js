@@ -1,9 +1,6 @@
 
 // mobile console
 
-if (!isMobile) return;
-
-
 let consoleSheet = {
 
   el: {
@@ -181,5 +178,9 @@ let consoleSheet = {
 }
 
 
-consoleSheet.init();
+if (isMobile) {
+  
+  consoleSheet.init();
+  
+}
 
