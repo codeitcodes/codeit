@@ -202,27 +202,17 @@ window.addEventListener('load', async () => {
     body.classList.add('loaded');
     
     showMessage('Logging in...', -1);
-    
-    
-    // update legacy workflow permission
-    setStorage('hasWorkflowPermission', 'true');
-
 
     const gitCode = linkData.gitCode;
 
     // get git token from Github
     await getGithubToken(gitCode);
     
-    
     // clear modified repos
     modifiedRepos = {};
     updateModReposLS();
     
-    
-    // hide message
-    if (messageEl.textContent === 'Logging in...') {
-      hideMessage();
-    }
+    hideMessage();
     
   }
   
