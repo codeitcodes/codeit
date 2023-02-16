@@ -151,19 +151,19 @@ let consoleSheet = {
       if (highlight) {
         
         codeEl = `<cd-el class="code" edit="false" lang="js">`;
-        closingCodeEl = `cd-el`;
+        closingCodeEl = `</cd-el>`;
         
       } else {
         
         codeEl = `<div class="code">`;
-        closingCodeEl = 'div';
+        closingCodeEl = '</div>';
         
       }
       
       const logHTML = `
       <div class="item `+ type +`">
         `+ icon +`
-        <cd-el class="code" edit="false" lang="js">`+ escapeHTML(code) +`</`+ closingCodeEl +`>
+        `+ codeEl + escapeHTML(code) + closingCodeEl +`
       </div>
       `;
       
