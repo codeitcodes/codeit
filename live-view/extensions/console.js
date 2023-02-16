@@ -8,7 +8,7 @@ let consoleSheet = {
     sheet: document.querySelector('.console-sheet'),
     
     close: document.querySelector('.console-sheet .header .close'),
-    itemWrapper: document.querySelector('.console-sheet .items'),
+    items: document.querySelector('.console-sheet .items'),
     footer: document.querySelector('.console-sheet .footer'),
     input: document.querySelector('.console-sheet .footer .input'),
     'return': document.querySelector('.console-sheet .footer .return'),
