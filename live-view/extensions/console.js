@@ -148,7 +148,7 @@ let consoleSheet = {
       </div>
       `;
       
-      this.el.items.innerHTML += logHTML;
+      consoleSheet.el.items.innerHTML += logHTML;
       
     },
     
