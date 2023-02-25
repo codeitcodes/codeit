@@ -2331,6 +2331,12 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   width: 16px;
   margin-right: 7px;
   color: #828689;
+  transition: inherit;
+}
+
+.message.animating svg {
+  opacity: 0;
+  transition: none;
 }
 
 
