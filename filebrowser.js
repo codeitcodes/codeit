@@ -808,9 +808,8 @@ async function renderSidebarHTML(pageNum = 1) {
   } else { // if rendering additional pages
     
     // don't show intro screen
-    // if additional page is empty
-    if (out === repoIntroScreen ||
-        out === fileIntroScreen) {
+    // if there's no results
+    if (resp.length > 0) {
       
       out = '';
       
