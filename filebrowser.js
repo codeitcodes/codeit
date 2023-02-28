@@ -869,7 +869,7 @@ function addHTMLItemListeners() {
   items.forEach(item => {
 
     // navigate on click
-    item.addEventListener('click', async (e) => {
+    item.addEventListener('click', (e) => {
 
       // if item is a repository
       if (item.classList.contains('repo')) {
@@ -957,7 +957,7 @@ function addHTMLItemListeners() {
         
         const nextPage = Number(getAttr(item, 'nextPage'));
         
-        await renderSidebarHTML(nextPage);
+        renderSidebarHTML(nextPage);
         
         // remove button
         item.remove();
