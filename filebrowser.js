@@ -761,6 +761,20 @@ async function renderSidebarHTML(pageNum = 1) {
 
         }
         
+        
+        // render 'more' button
+        
+        const nextPage = (pageNum + 1);
+        
+        out += `
+        <div class="item more" nextPage="`+ nextPage +`">
+          <div class="label">
+            `+ moreIcon +`
+            <a class="name">more</a>
+          </div>
+        </div>
+        `;
+        
       } else {
         
         // if no repositories exist,
@@ -932,10 +946,19 @@ function addHTMLItemListeners() {
         // render sidebar
         renderSidebarHTML();
 
-      } else { // if item is a file
+      } else if (item.classList.contains('file')) { // if item is a file
         
         clickedOnFileHTML(item, e);
 
+      } else if (item.classList.contains('more')) {
+        
+        // if item is a 'more' button,
+        // show more
+        
+        const nextPage = item.getAttr('nextPage');
+        
+        renderSidebarHTML(nextPage);
+        
       }
 
     })
