@@ -1378,7 +1378,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   color: #828689;
 }
 
-.sidebar .more {
+.sidebar .files .item:not([style="display: none;"]) ~ .sidebar .files .more {
   margin-top: 21px;
 }
 
