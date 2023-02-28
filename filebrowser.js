@@ -956,7 +956,7 @@ function addHTMLItemListeners() {
         // show more
         
         const nextPage = Number(getAttr(item, 'nextPage'));
-        
+        @@
         await renderSidebarHTML(nextPage);
         
         // remove button
