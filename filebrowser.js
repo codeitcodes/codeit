@@ -720,60 +720,70 @@ async function renderSidebarHTML(pageNum = 1) {
         });
         
         
-        // render eclipsed repos
-        for (const modRepoName in modifiedRepos) {
+        // if rendering first page
+        if (pageNum === 1) {
           
-          const modRepo = modifiedRepos[modRepoName];
-          
-          // if repo isn't rendered
-          // and user has push access in repo
-          if (!renderedRepos[modRepoName]
-              && modRepo.pushAccess) {
+          // render eclipsed repos
+          for (const modRepoName in modifiedRepos) {
             
-            // render repo
-
-            let fullName;
+            const modRepo = modifiedRepos[modRepoName];
+            
+            // if repo isn't rendered
+            // and user has push access in repo
+            if (!renderedRepos[modRepoName]
+                && modRepo.pushAccess) {
+              
+              // render repo
   
-            // if repo is owned by logged user
-            if (modRepoName.split('/')[0] === loggedUser) {
-  
-              // show repo name
-              fullName = modRepoName.split('/')[1];
-  
-            } else {
-  
-              // show username and repo name
-              fullName = modRepoName;
-  
+              let fullName;
+    
+              // if repo is owned by logged user
+              if (modRepoName.split('/')[0] === loggedUser) {
+    
+                // show repo name
+                fullName = modRepoName.split('/')[1];
+    
+              } else {
+    
+                // show username and repo name
+                fullName = modRepoName;
+    
+              }
+    
+              out += `
+              <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
+                <div class="label">
+                  `+ repoIcon +`
+                  <a class="name">`+ fullName +`</a>
+                </div>
+                `+ arrowIcon +`
+              </div>
+              `;
+              
             }
   
-            out += `
-            <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
-              <div class="label">
-                `+ repoIcon +`
-                <a class="name">`+ fullName +`</a>
-              </div>
-              `+ arrowIcon +`
-            </div>
-            `;
-            
           }
-
+          
         }
         
         
-        // render 'more' button
-        
-        const nextPage = (pageNum + 1);
-        
-        out += `
-        <div class="item more" nextPage="`+ nextPage +`">
-          <div class="label">
-            `+ moreIcon +`
-            <a class="name">more</a>
+        // if non-eclipsed repositories exist
+        if (resp.length > 0) {
+          
+          // render 'more' button
+          
+          const nextPage = (pageNum + 1);
+          
+          out += `
+          <div class="item more" nextPage="`+ nextPage +`">
+            <div class="label">
+              `+ moreIcon +`
+              <a class="name">more</a>
+            </div>
           </div>
-        </div>
-        `;
+          `;
+          
+        }
         
       } else {
         
