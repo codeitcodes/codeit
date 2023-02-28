@@ -786,6 +786,15 @@ async function renderSidebarHTML(pageNum = 1) {
     
   } else { // if rendering additional pages
     
+    // don't show intro screen
+    // if additional page is empty
+    if (out === repoIntroScreen ||
+        out === fileIntroScreen) {
+      
+      out = '';
+      
+    }
+    
     // don't override existing HTML items
     fileWrapper.innerHTML += out;
     
