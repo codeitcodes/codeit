@@ -802,7 +802,7 @@ async function renderSidebarHTML(pageNum = 1) {
 
   // add rendered HTML to DOM
   
-  // if on first page
+  // if rendering first page
   if (pageNum === 1) {  
   
     fileWrapper.innerHTML = out;
