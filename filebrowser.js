@@ -47,7 +47,7 @@ sidebarToggle.addEventListener('click', () => {
 // render sidebar
 // call this function when logged in to git
 // to render sidebar
-async function renderSidebarHTML() {
+async function renderSidebarHTML(pageNum = 1) {
 
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
@@ -226,7 +226,7 @@ async function renderSidebarHTML() {
 
 
   // get items in current tree from git
-  resp = await git.getItems(treeLoc);
+  resp = await git.getItems(treeLoc, pageNum);
   
 
   if (resp.message && resp.message == 'Not Found') {
@@ -777,8 +777,19 @@ async function renderSidebarHTML() {
   }
 
   // add rendered HTML to DOM
-  fileWrapper.innerHTML = out;
-  sidebar.scrollTo(0, 0);
+  
+  // if on first page
+  if (pageNum === 1) {  
+  
+    fileWrapper.innerHTML = out;
+    sidebar.scrollTo(0, 0);
+    
+  } else { // if rendering additional pages
+    
+    // don't override existing HTML items
+    fileWrapper.innerHTML += out;
+    
+  }
 
   // stop loading
   stopLoading();
