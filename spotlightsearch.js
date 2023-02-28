@@ -44,7 +44,11 @@ searchInput.closeSearch = () => {
   
   header.classList.remove('searching');
   
-  searchInput.blur();
+  if (document.activeElement === searchInput) {
+    
+    searchInput.blur();
+    
+  }
   
 }
 
