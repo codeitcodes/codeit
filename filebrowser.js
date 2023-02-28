@@ -1825,7 +1825,7 @@ async function renderBranchMenuHTML(renderAll) {
   }
   
   // render new branch button
-  // out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
+  // out += '<div class="icon new-branch">' + branchPlusIcon + '<a>new branch</a></div>';
   
   // wait for menu animation to finish
   window.setTimeout(() => {
