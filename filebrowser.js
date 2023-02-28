@@ -1335,11 +1335,9 @@ async function loadFileInHTML(fileEl, fileSha) {
     fileEl.scrollIntoViewIfNeeded();
   });
 
-  // show all files in HTML
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
 
-  header.classList.remove('searching');
+  // close search
+  searchInput.closeSearch();
 
 
   // if previous file selection exists
