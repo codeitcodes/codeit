@@ -1387,13 +1387,16 @@ body.mobile .sidebar .header .title .branch-icon.active {
 }
 
 .sidebar .files .more::before {
-  content: '';
   position: absolute;
   top: -11px;
   background: rgb(241 241 242 / 5%);
   width: calc(100% - 40px);
   height: 1px;
   pointer-events: none;
+}
+
+.sidebar .files .item:not([style="display: none;"]) ~ .sidebar .files .more::before {
+  content: '';
 }
 
 .sidebar .picture-wrapper {
