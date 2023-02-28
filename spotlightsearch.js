@@ -72,7 +72,9 @@ searchInput.search = () => {
   }
 
   let query = searchInput.textContent.toLowerCase().replaceAll('\n', '');
-  let files = fileWrapper.querySelectorAll('.item');
+  
+  // exclude 'more' button from search
+  let files = fileWrapper.querySelectorAll('.item:not(.more)');
   
   // search files
   files.forEach(file => {
