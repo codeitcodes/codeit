@@ -809,7 +809,7 @@ async function renderSidebarHTML(pageNum = 1) {
     
     // don't show intro screen
     // if there's no results
-    if (resp.length > 0) {
+    if (resp.length === 0) {
       
       out = '';
       
