@@ -1382,6 +1382,10 @@ body.mobile .sidebar .header .title .branch-icon.active {
   margin-top: 21px;
 }
 
+.sidebar.loading .more {
+  pointer-events: none;
+}
+
 .sidebar .files .more::before {
   content: '';
   position: absolute;
