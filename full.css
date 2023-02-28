@@ -1379,21 +1379,17 @@ body.mobile .sidebar .header .title .branch-icon.active {
 }
 
 .sidebar .more {
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  border-top: 1px solid #f1f1f21c;
-  margin-top: 8px;
-  height: 59px;
-  box-sizing: border-box;
+  margin-top: 21px;
 }
 
-.sidebar .more:hover {
-  background: hsl(227deg 11% 16%);
-}
-
-.sidebar .more .icon {
-  margin-right: var(--spacing-1);
+.sidebar .files .more::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  background: rgb(241 241 242 / 5%);
+  width: calc(100% - 40px);
+  height: 1px;
+  pointer-events: none;
 }
 
 .sidebar .picture-wrapper {
