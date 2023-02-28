@@ -1570,11 +1570,12 @@ body.mobile .sidebar .button {
 .sidebar .button.teritary {
   background: transparent;
   color: hsl(220deg 4% 84% / 92%);
+  background: hsl(228deg 16% 14%);
 }
 
 .sidebar .button.teritary:active {
   color: hsl(220deg 4% 84% / 50%);
-  background: hsl(228deg 14% 14%) !important;
+  background: hsl(228deg 16% 14%) !important;
   transition: none;
 }
 
