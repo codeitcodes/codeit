@@ -1378,6 +1378,10 @@ body.mobile .sidebar .header .title .branch-icon.active {
   color: #828689;
 }
 
+.sidebar .files .item.more {
+  transition: none;
+}
+
 .sidebar .files .item:not([style="display: none;"]) ~ .item.more {
   margin-top: 21px;
 }
