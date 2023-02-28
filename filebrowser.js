@@ -955,7 +955,7 @@ function addHTMLItemListeners() {
         // if item is a 'more' button,
         // show more
         
-        const nextPage = getAttr(item, 'nextPage');
+        const nextPage = Number(getAttr(item, 'nextPage'));
         
         renderSidebarHTML(nextPage);
         
