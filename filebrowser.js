@@ -54,9 +54,6 @@ async function renderSidebarHTML(pageNum = 1) {
     startLoading();
   }
 
-  // hide search screen
-  header.classList.remove('searching');
-
 
   // map tree location
   const [user, repo, contents] = treeLoc;
@@ -887,6 +884,10 @@ function addHTMLItemListeners() {
       // if item is a repository
       if (item.classList.contains('repo')) {
 
+        // close search
+        searchInput.closeSearch();
+        
+
         // parse repo obj from HTML
         const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
                                                    modifiedRepos[getAttr(item, 'fullName')];
@@ -916,9 +917,6 @@ function addHTMLItemListeners() {
           renderSidebarHTML();
           
         } else {
-          
-          // hide search screen
-          header.classList.remove('searching');
           
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
@@ -951,6 +949,9 @@ function addHTMLItemListeners() {
       } else if (item.classList.contains('folder')) {
 
         // if item is a folder
+      
+        // close search
+        searchInput.closeSearch();
 
         // change location
         treeLoc[2] += '/' + item.innerText.replaceAll('\n', '');
