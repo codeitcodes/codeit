@@ -1820,7 +1820,7 @@ async function renderBranchMenuHTML(renderAll) {
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
-    out += '<div class="icon see-more">' + moreIcon + '<a>more</a></div>';
+    out += '<div class="icon see-more">' + branchMoreIcon + '<a>more</a></div>';
     
   }
   
