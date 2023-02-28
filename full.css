@@ -1378,15 +1378,15 @@ body.mobile .sidebar .header .title .branch-icon.active {
   color: #828689;
 }
 
-.sidebar .files .item:not([style="display: none;"]) ~ .sidebar .files .more {
+.sidebar .files .item:not([style="display: none;"]) ~ .item.more {
   margin-top: 21px;
 }
 
-.sidebar.loading .more {
+.sidebar.loading .item.more {
   pointer-events: none;
 }
 
-.sidebar .files .more::before {
+.sidebar .files .item.more::before {
   position: absolute;
   top: -11px;
   background: rgb(241 241 242 / 5%);
@@ -1395,7 +1395,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   pointer-events: none;
 }
 
-.sidebar .files .item:not([style="display: none;"]) ~ .sidebar .files .more::before {
+.sidebar .files .item:not([style="display: none;"]) ~ .item.more::before {
   content: '';
 }
 
