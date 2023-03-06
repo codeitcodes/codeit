@@ -35,7 +35,6 @@ const FILES_TO_CACHE = [
   '/live-view/live-view.js',
   
   '/live-view/extensions/beautifier.min.js',
-  '/live-view/extensions/console.js',
   
   '/dark-theme.css',
 
