@@ -460,7 +460,7 @@ body.notransition .live-view.file-open {
 
 .live-view .prompt {
   text-align: center;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .live-view .prompt .file-svg {
