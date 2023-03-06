@@ -724,6 +724,26 @@ Element.prototype.on = (events, callback, passive) => {
 }
 
 
+// focus cursor to end of element
+let focusCursorToEnd = (el) => {
+  
+  // focus element
+  el.focus();
+
+  const nodes = el.childNodes;
+
+  // if child nodes exist
+  if (nodes.length !== 0) {
+
+    // move cursor to end of input
+    const s = window.getSelection();
+    s.setBaseAndExtent(nodes[0], nodes[0].length, nodes[0], nodes[0].length);
+
+  }
+  
+}
+
+
 // copy
 let copy = async (text) => {
   
