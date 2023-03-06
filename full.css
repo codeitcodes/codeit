@@ -1175,6 +1175,13 @@ body.mobile .sidebar .header .title .branch-icon.active {
 }
 
 
+.sidebar .files::after {
+  content: '';
+  display: block;
+  margin-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+
+
 .sidebar .item {
   display: flex;
   align-items: center;
@@ -1184,10 +1191,6 @@ body.mobile .sidebar .header .title .branch-icon.active {
   position: relative;
   scroll-margin: 75px;
   transition: .18s var(--ease-function) margin;
-}
-
-.sidebar .item:not([style="display: none;"]):last-of-type {
-  margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
 .sidebar .item:hover, .sidebar .item.file:not(.focused):active,
