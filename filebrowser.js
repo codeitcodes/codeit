@@ -815,6 +815,18 @@ async function renderSidebarHTML(pageNum = 1) {
       
     }
     
+    
+    // if there's a duplicate more button, remove it
+    
+    const moreButton = fileWrapper.querySelector('.item.more');
+    
+    if (moreButton) {
+    
+      moreButton.remove();
+      
+    }
+    
+    
     // don't override existing HTML items
     fileWrapper.innerHTML += out;
     
@@ -972,8 +984,8 @@ function addHTMLItemListeners() {
         
         renderSidebarHTML(nextPage);
         
-        // remove button
-        item.remove();
+        // disable button
+        item.style.pointerEvents = 'none';
         
       }
 
