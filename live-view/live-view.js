@@ -547,13 +547,17 @@ if (isMobile) {
   
   liveButtonOptions.addEventListener('click', () => {
     
+    shareLiveViewLink();
+    
+    /*
     // if clicked on options button, toggle menu
     liveViewMenu.classList.toggle('visible');
     liveButtonOptions.classList.toggle('active');
+    */
   
   });
   
-  liveMenuShare.addEventListener('click', () => {
+  function shareLiveViewLink() {
 
     // share live view link
 
@@ -568,7 +572,11 @@ if (isMobile) {
       url: link,
     });
     
-  });
+  }
+  
+  /*
+  
+  liveMenuShare.addEventListener('click', shareLiveViewLink);
   
   liveMenuConsole.addEventListener('click', () => {
     
@@ -604,6 +612,8 @@ if (isMobile) {
     liveButtonOptions.classList.remove('active');
     
   });
+  
+  */
 
 } else {
 
