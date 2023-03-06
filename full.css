@@ -1186,7 +1186,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   transition: .18s var(--ease-function) margin;
 }
 
-.sidebar .item:last-of-type {
+.sidebar .item:not([style="display: none;"]):last-of-type {
   margin-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
