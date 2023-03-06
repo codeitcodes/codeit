@@ -661,6 +661,21 @@ async function renderSidebarHTML(pageNum = 1) {
             
           }
           
+          
+          // if eclipsed repo already exists in HTML
+          // when rendering more pages, return
+          
+          const eclipsedRepoEl = fileWrapper
+                                   .querySelector(
+                                     '.repo[fullname="'+ item.full_name +'"]'
+                                   );
+          
+          if (eclipsedRepoEl) {
+            
+            return;
+            
+          }
+          
 
           let fullName;
 
