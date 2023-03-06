@@ -1710,11 +1710,13 @@ body.mobile .menu .icon {
   transition: inherit;
 }
 
+/*
 .menu .icon.selected {
   color: hsl(164deg 91% 33%);
   color: var(--rosemary-lighter);
   font-weight: 500;
 }
+*/
 
 body:not(.mobile) .menu .icon:not(:active):hover {
   background: rgba(255,255,255,0.05);
@@ -1761,6 +1763,7 @@ body.mobile .menu .icon a {
 .menu .icon .branch-icon {
   color: #828689;
   opacity: .5;
+  opacity: 0;
 }
 
 .menu .icon.selected .branch-icon {
