@@ -18,28 +18,35 @@
 
 <ul>
 
-  <li><b>Live view.</b> Run JavaScript, HTML and CSS projects with a tap.</li>
+  <li><b>Live view.</b> Run JavaScript, HTML, CSS and Markdown projects with a tap.</li>
   
-  <li><b>Share.</b> Live views, repos, and files.</li>
+  <li><b>+290 languages supported.</b> Syntax highlighting loaded dynamically.</li>
   
-  <li><b>Private.</b> Codeit dosen't collect data. Your code stays on your device.</li>
+  <li><b>Share.</b> Live views, repos, and files open instantly with a link.</li>
   
-  <li><b>PWA support.</b> Weighs 70% less than regular apps, can be installed and works offline.</li>
+  <li><b>Cross-platform.</b> Works on iOS, Android, Windows, macOS and Linux.</li>
+
+  <li><b>Autosave.</b> Say goodbye to Ctrl + S. Never lose a character.</li>
+    
+  <li><b>PWA magic.</b> Weighs 80% less than regular apps, can be installed and works offline.</li>  
   
-  <li><b>Autosaving.</b> Instant and down to the character.</li>
-  
-  <li><b>Cross-platform.</b> Codeit is built for Chrome on Android, Windows, macOS and Linux, as well as Safari on iOS.</li>
+  <li><b>Format.</b> Format selected code with Ctrl + D.</li>
+
+  <li><b>Private.</b> Codeit dosen't use cookies or collect any personal data. Your code stays on your device.</li>
 
 </ul>
-<h2>Technical</h2>
 
-<li>Supports <a href="https://codeit.codes/homepage/lang">+290 languages.</a></li>
+<h2>Technical</h2>
 
 <li>Uses blazing-fast Web APIs.</li>
 
 <li>Framework-free.</li>
 
+<li><a href="https://codeit.codes/homepage/lang">See supported languages.</a></li>
+
 <hr>
 
 <h4>Special Thanks</h4>
+
 Codeit's logo was created by <a href="https://twitter.com/sandorqi">@sandorqi</a>.
+
