@@ -362,7 +362,7 @@ function checkScrollAnimations() {
   
   const scrolled = window.scrollY || window.pageYOffset;
   
-  if (scrolled < (heroEl.clientHeight - 15)) {
+  if (scrolled <= (heroEl.clientHeight - 15)) {
     
     themeColorTag.content = '#0f1014';
     
