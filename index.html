@@ -37,15 +37,19 @@
   <script>if (top !== window) { window.location.href = '/redirect' }</script>
   <script>
   
-  if (localStorage.getItem('installed')) {
+  try {
     
-    if ((new URL(window.location.href).search) !== '?p') {
+    if (localStorage.getItem('installed')) {
       
-      window.location.replace(window.location.origin + '/full');
+      if ((new URL(window.location.href).search) !== '?p') {
+        
+        window.location.replace(window.location.origin + '/full');
+        
+      }
       
     }
     
-  }
+  } catch(e) { }
   
   </script>
   <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
@@ -306,8 +310,12 @@ function checkLocalStorage() {
 }
 
 
-// register service worker
-navigator.serviceWorker.register('/service-worker.js');
+try {
+  
+  // register service worker
+  navigator.serviceWorker.register('/service-worker.js');
+  
+} catch(e) { }
 
 
 // add scroll event listeners
