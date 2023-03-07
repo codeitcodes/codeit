@@ -119,6 +119,22 @@ searchInput.search = () => {
     
   }
   
+  
+  const moreButton = fileWrapper.querySelector('.item.more');
+  
+  // if more button exists
+  if (moreButton) {
+    
+    // if more button is in view
+    if (elInView(moreButton)) {
+      
+      // load more items
+      clickedOnMoreButtonHTML(moreButton);
+      
+    }
+    
+  }
+  
 }
 
 // search when typed in input
