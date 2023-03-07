@@ -833,6 +833,8 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
+    sidebar.scrollTo(0, (sidebar.scrollHeight - 54));
+    
     // don't override existing HTML items
     fileWrapper.innerHTML += out;
     
