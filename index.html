@@ -343,7 +343,7 @@ function isScrolledIntoView(el) {
 
   const height = 51.4; // el.clientHeight;
   
-  let isVisible = (elemTop + height) < window.innerHeight;
+  const isVisible = (elemTop + height) < window.innerHeight;
   
   return isVisible;
     
