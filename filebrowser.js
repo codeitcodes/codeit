@@ -890,8 +890,10 @@ sidebar.addEventListener('scroll', () => {
   
   const moreButton = fileWrapper.querySelector('.item.more');
   
-  // if 'more' button exists
-  if (moreButton) {
+  // if more button exists
+  // and is not disabled (loading more)
+  if (moreButton &&
+      !moreButton.classList.contains('disabled')) {
     
     const maxScroll = sidebar.scrollHeight - sidebar.clientHeight;
     
