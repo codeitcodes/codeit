@@ -898,7 +898,7 @@ sidebar.addEventListener('scroll', () => {
     const maxScroll = sidebar.scrollHeight - sidebar.clientHeight;
     
     // if scrolled to bottom of sidebar
-    if (sidebar.scrollTop => maxScroll) {
+    if (sidebar.scrollTop >= maxScroll) {
       
       // load more repos
       clickedOnMoreButtonHTML(moreButton);
