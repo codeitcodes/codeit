@@ -833,6 +833,7 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
+    // remove scroll momentum
     sidebar.style.overflow = 'hidden';
     
     onNextFrame(() => {
