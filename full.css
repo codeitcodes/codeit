@@ -1763,12 +1763,6 @@ body.mobile .menu .icon a {
 .menu .icon .branch-icon {
   color: #828689;
   opacity: .5;
-  opacity: 0;
-}
-
-.menu .icon.selected .branch-icon {
-  color: inherit;
-  opacity: 1;
 }
 
 .menu .icon .bigger-icon {
@@ -1795,6 +1789,15 @@ body.mobile .menu.branch-menu {
 
 body.mobile .menu.branch-menu:not(.visible) {
   max-height: calc(200px - 8px);
+}
+
+.menu.branch-menu .icon .branch-icon {
+  opacity: 0;
+}
+
+.menu.branch-menu .icon.selected .branch-icon {
+  color: inherit;
+  opacity: 1;
 }
 
 .context-menu {
