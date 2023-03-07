@@ -1031,6 +1031,8 @@ function clickedOnMoreButtonHTML(buttonEl) {
   // disable button
   buttonEl.classList.add('disabled');
   
+  buttonEl.querySelector('.name').textContent = 'loading more';
+  
 }
 
 
