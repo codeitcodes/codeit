@@ -1385,6 +1385,11 @@ body.mobile .sidebar .header .title .branch-icon.active {
   transition: none;
 }
 
+.sidebar .files .item.more.disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
 .sidebar .files .item:not([style="display: none;"]) ~ .item.more {
   margin-top: 21px;
 }
