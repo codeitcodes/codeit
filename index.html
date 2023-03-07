@@ -310,12 +310,8 @@ function checkLocalStorage() {
 }
 
 
-try {
-  
-  // register service worker
-  navigator.serviceWorker.register('/service-worker.js');
-  
-} catch(e) { }
+// register service worker
+navigator.serviceWorker.register('/service-worker.js');
 
 
 // add scroll event listeners
