@@ -887,6 +887,29 @@ async function renderSidebarHTML(pageNum = 1) {
 }
 
 
+// load more repos if scrolled to bottom of sidebar
+sidebar.addEventListener('scroll', () => {
+  
+  const moreButton = fileWrapper.querySelector('.item.more');
+  
+  // if 'more' button exists
+  if (moreButton) {
+    
+    const maxScroll = sidebar.scrollHeight - sidebar.clientHeight;
+    
+    // if scrolled to bottom of sidebar
+    if (sidebar.scrollTop => maxScroll) {
+      
+      // load more repos
+      clickedOnMoreButtonHTML(moreButton);
+      
+    }
+    
+  }
+  
+});
+
+
 // adds item event listeners
 function addHTMLItemListeners() {
 
@@ -984,14 +1007,8 @@ function addHTMLItemListeners() {
       } else if (item.classList.contains('more')) {
         
         // if item is a 'more' button,
-        // show more
-        
-        const nextPage = Number(getAttr(item, 'nextPage'));
-        
-        renderSidebarHTML(nextPage);
-        
-        // disable button
-        item.classList.add('disabled');
+        // load more items
+        clickedOnMoreButtonHTML(item);
         
       }
 
@@ -1003,6 +1020,20 @@ function addHTMLItemListeners() {
 
   })
 
+}
+
+
+// when clicked on more button in HTML,
+// load more items
+function clickedOnMoreButtonHTML(buttonEl) {
+  
+  const nextPage = Number(getAttr(buttonEl, 'nextPage'));
+  
+  renderSidebarHTML(nextPage);
+  
+  // disable button
+  buttonEl.classList.add('disabled');
+  
 }
 
 
