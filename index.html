@@ -325,6 +325,15 @@ const pointStaggerInterval = 34 + (7 * 5);
 
 function checkScrollAnimations() {
   
+  featurePoints.forEach(point => {
+    
+    const visible = isScrolledIntoView(point);
+    
+    point.classList.toggle('visible', visible);
+    
+  });
+  
+  /*
   // window scroll position
   const scrolled = window.scrollY || window.pageYOffset;  
   
@@ -340,7 +349,24 @@ function checkScrollAnimations() {
     }
     
   });
+  */
   
+}
+
+function isScrolledIntoView(el) {
+  
+  const rect = el.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemBottom = rect.bottom;
+
+  // Only completely visible elements return true:
+  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+  
+  // Partially visible elements return true:
+  // isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+  
+  return isVisible;
+    
 }
 
 window.addEventListener('scroll', checkScrollAnimations);
