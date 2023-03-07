@@ -780,7 +780,8 @@ async function renderSidebarHTML(pageNum = 1) {
         
         
         // if non-eclipsed repositories exist
-        if (resp.length > 0) {
+        // and resp length is equal to the max length
+        if (resp.length > 0 && resp.length === 100) {
           
           // render 'more' button
           
