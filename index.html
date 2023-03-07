@@ -345,12 +345,9 @@ navigator.serviceWorker.register('/service-worker.js');
 
 // add scroll event listeners
 
-const screenHeight = window.innerHeight;
-
 const featurePoints = document.querySelectorAll('#features .ftPoint');
-
-const startPointAnimation = screenHeight / 3;
-const pointStaggerInterval = 34 + (7 * 5);
+const themeColorTag = document.querySelector('meta[name="theme-color"]');
+const heroEl = document.querySelector('#hero');
 
 function checkScrollAnimations() {
   
@@ -361,6 +358,19 @@ function checkScrollAnimations() {
     point.classList.toggle('visible', visible);
     
   });
+  
+  
+  const scrolled = window.scrollY || window.pageYOffset;
+  
+  if (scrolled < (heroEl.clientHeight - 15)) {
+    
+    themeColorTag.content = '#0f1014';
+    
+  } else {
+    
+    themeColorTag.content = '#1a1c24';
+    
+  }
   
 }
 
