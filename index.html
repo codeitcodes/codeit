@@ -333,24 +333,6 @@ function checkScrollAnimations() {
     
   });
   
-  /*
-  // window scroll position
-  const scrolled = window.scrollY || window.pageYOffset;  
-  
-  // add staggered feature points animation
-  featurePoints.forEach((point, index) => {
-    
-    const pointAnimation = startPointAnimation + (pointStaggerInterval * index);
-    
-    if (scrolled >= pointAnimation) {
-      point.classList.add('visible');
-    } else {
-      point.classList.remove('visible');
-    }
-    
-  });
-  */
-  
 }
 
 function isScrolledIntoView(el) {
@@ -360,10 +342,10 @@ function isScrolledIntoView(el) {
   const elemBottom = rect.bottom;
 
   // Only completely visible elements return true:
-  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+  //const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
   
   // Partially visible elements return true:
-  // isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+  let isVisible = elemTop < window.innerHeight && elemBottom >= 0;
   
   return isVisible;
     
