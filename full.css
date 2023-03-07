@@ -1388,6 +1388,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
 .sidebar .files .item.more.disabled .label {
   opacity: .5;
   pointer-events: none;
+  background: hsl(228deg 16% 12%);
 }
 
 .sidebar .files .item:not([style="display: none;"]) ~ .item.more {
