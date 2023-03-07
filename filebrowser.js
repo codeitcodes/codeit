@@ -797,7 +797,7 @@ async function renderSidebarHTML(pageNum = 1) {
           
         }
         
-      } else {
+      } else if (pageNum === 1) { // if rendering first page
         
         // if no repositories exist,
         // show intro screen in HTML
