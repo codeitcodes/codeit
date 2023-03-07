@@ -833,7 +833,7 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
-    sidebar.scrollTo(0, (sidebar.scrollHeight - sidebar.clientHeight - 54));
+    sidebar.style.overflow = 'hidden';
     
     onNextFrame(() => {
       
@@ -842,6 +842,8 @@ async function renderSidebarHTML(pageNum = 1) {
       
       // scroll to end of additional page
       sidebar.scrollTo(0, (sidebar.scrollHeight - sidebar.clientHeight - 1));
+      
+      sidebar.style.overflow = '';
       
     });
     
