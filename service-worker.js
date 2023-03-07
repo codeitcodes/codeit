@@ -36,6 +36,9 @@ const FILES_TO_CACHE = [
   
   '/live-view/extensions/beautifier.min.js',
   
+  '/live-view/extensions/marked.min.js',
+  '/live-view/extensions/markdown-dark.css',
+  
   '/dark-theme.css',
 
   '/fonts/fonts.css',
