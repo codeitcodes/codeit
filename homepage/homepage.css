@@ -4696,7 +4696,7 @@ a[href]:not(.btn):hover {
 }
 
 body {
-  background: hsl(228deg 14% 7%);
+  background: #1a1c24;
 }
 
 #hero .pdxParent--smartphones::after {
