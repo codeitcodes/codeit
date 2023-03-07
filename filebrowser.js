@@ -822,15 +822,6 @@ async function renderSidebarHTML(pageNum = 1) {
     
   } else { // if rendering additional pages
     
-    // don't show intro screen
-    // if there's no results
-    if (resp.length === 0) {
-      
-      out = '';
-      
-    }
-    
-    
     // if there's a duplicate more button, remove it
     
     const moreButton = fileWrapper.querySelector('.item.more');
