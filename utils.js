@@ -584,6 +584,21 @@ let moveElToMouse = (originEl, mouseEvent, boundryMargin = null, boundryEl = nul
 }
 
 
+// check if element is in view
+let elInView = (el) => {
+  
+  const rect = el.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemLeft = rect.left;
+  
+  const isVisible = (elemTop < window.innerHeight &&
+                     elemLeft < window.innerWidth);
+  
+  return isVisible;
+  
+}
+
+
 // attributes
 
 let getAttr = (element, item) => {
