@@ -4681,6 +4681,7 @@ a[href]:not(.btn):hover {
 }
 
 #hero .ft--left {
+  height: calc(100vh - 100px - env(safe-area-inset-bottom));
   height: calc(100svh - 100px - env(safe-area-inset-bottom));
 }
 
