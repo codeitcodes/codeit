@@ -991,7 +991,7 @@ function addHTMLItemListeners() {
         renderSidebarHTML(nextPage);
         
         // disable button
-        item.style.pointerEvents = 'none';
+        item.classList.add('disabled');
         
       }
 
