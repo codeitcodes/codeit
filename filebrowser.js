@@ -833,13 +833,11 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
-    sidebar.scrollTo(0, (sidebar.scrollHeight - 54));
-    
     // don't override existing HTML items
     fileWrapper.innerHTML += out;
     
     // scroll to end of additional page
-    sidebar.scrollTo(0, (sidebar.scrollHeight - 54));
+    sidebar.scrollTo(0, (sidebar.scrollHeight - sidebar.clientHeight - 54));
     
   }
 
