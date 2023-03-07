@@ -348,7 +348,6 @@ navigator.serviceWorker.register('/service-worker.js');
 const featurePoints = document.querySelectorAll('#features .ftPoint');
 const themeColorTag = document.querySelector('meta[name="theme-color"]');
 const heroEl = document.querySelector('#hero');
-const footerEl = document.querySelector('#footer');
 
 function checkScrollAnimations() {
   
@@ -373,17 +372,6 @@ function checkScrollAnimations() {
     
   }
   
-  
-  if (isPartlyInView(footerEl)) {
-    
-    document.body.style.background = '#24262d';
-    
-  } else {
-    
-    document.body.style.background = '#1a1c24';
-    
-  }
-  
 }
 
 function isFullyInView(el) {
@@ -394,17 +382,6 @@ function isFullyInView(el) {
   const height = 51.4 / 2; // el.clientHeight;
   
   const isVisible = (elemTop + height + 20) < window.innerHeight;
-  
-  return isVisible;
-    
-}
-
-function isPartlyInView(el) {
-  
-  const rect = el.getBoundingClientRect();
-  const elemTop = rect.top;
-
-  const isVisible = elemTop < window.innerHeight;
   
   return isVisible;
     
