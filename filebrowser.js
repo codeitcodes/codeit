@@ -833,20 +833,11 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
-    // remove scroll momentum
-    sidebar.style.overflow = 'hidden';
-    
-    onNextFrame(() => {
-      
-      // don't override existing HTML items
-      fileWrapper.innerHTML += out;
-      
-      // scroll to end of additional page
-      sidebar.scrollTo(0, (sidebar.scrollHeight - sidebar.clientHeight - 1));
-      
-      sidebar.style.overflow = '';
-      
-    });
+    // don't override existing HTML items
+    fileWrapper.innerHTML += out;
+
+    // scroll to start of new page
+    sidebar.scrollTo(0, (sidebar.scrollTop + 54)); // more button height
     
   }
 
