@@ -61,6 +61,8 @@ const FILES_TO_CACHE = [
   '/fonts/Roboto-Mono/RobotoMono-BoldItalic.woff2',
 
   'https://plausible.io/js/plausible.js',
+  
+  '/',
 
   '/icons/android-app-512.png',
   '/icons/iphone-app-180.png',
