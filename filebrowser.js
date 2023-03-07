@@ -919,14 +919,10 @@ function addHTMLItemListeners() {
   items.forEach(item => {
 
     // navigate on click
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', async (e) => {
 
       // if item is a repository
       if (item.classList.contains('repo')) {
-
-        // close search
-        searchInput.closeSearch();
-        
 
         // parse repo obj from HTML
         const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
@@ -954,9 +950,16 @@ function addHTMLItemListeners() {
         if (!repoObj.empty) {
           
           // render sidebar
-          renderSidebarHTML();
+          await renderSidebarHTML();
+          
+          // close search
+          searchInput.closeSearch();
           
         } else {
+          
+          // close search
+          searchInput.closeSearch();
+          
           
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
@@ -989,16 +992,16 @@ function addHTMLItemListeners() {
       } else if (item.classList.contains('folder')) {
 
         // if item is a folder
-      
-        // close search
-        searchInput.closeSearch();
 
         // change location
         treeLoc[2] += '/' + item.innerText.replaceAll('\n', '');
         saveTreeLocLS(treeLoc);
 
         // render sidebar
-        renderSidebarHTML();
+        await renderSidebarHTML();
+
+        // close search
+        searchInput.closeSearch();
 
       } else if (item.classList.contains('file')) { // if item is a file
         
