@@ -1385,7 +1385,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   transition: none;
 }
 
-.sidebar .files .item.more.disabled {
+.sidebar .files .item.more.disabled .label {
   opacity: .5;
   pointer-events: none;
 }
