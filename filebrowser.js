@@ -837,7 +837,7 @@ async function renderSidebarHTML(pageNum = 1) {
     fileWrapper.innerHTML += out;
 
     // scroll to start of new page
-    sidebar.scrollTo(0, (sidebar.scrollTop + 54)); // more button height
+    //sidebar.scrollTo(0, (sidebar.scrollTop + 54)); // more button height
     
   }
 
