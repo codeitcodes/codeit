@@ -4682,6 +4682,7 @@ a[href]:not(.btn):hover {
 
 #hero .ft--left {
   height: calc(100vh - 100px - env(safe-area-inset-bottom));
+  height: calc(100svh - 100px - env(safe-area-inset-bottom));
 }
 
 #hero .pdxParent--smartphones {
@@ -4696,7 +4697,7 @@ a[href]:not(.btn):hover {
 }
 
 body {
-  background: hsl(228deg 14% 7%);
+  background: #1a1c24;
 }
 
 #hero .pdxParent--smartphones::after {
@@ -4807,7 +4808,7 @@ body {
 
 #features {
   background: #1a1c24 !important;
-  margin-top: calc(-5px - env(safe-area-inset-bottom));
+  margin-top: calc(-15px - env(safe-area-inset-bottom));
 }
 
 #features .ftPoint {

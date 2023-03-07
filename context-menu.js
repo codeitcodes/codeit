@@ -120,6 +120,9 @@ contextMenu = {
     
     if (!isMobile) {
       
+      // no context menu on 'more' button
+      if (item.classList.contains('more')) return;
+      
       item.addEventListener('contextmenu', async (e) => {
         
         contextMenu.activeEl = item;

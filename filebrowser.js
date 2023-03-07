@@ -47,15 +47,12 @@ sidebarToggle.addEventListener('click', () => {
 // render sidebar
 // call this function when logged in to git
 // to render sidebar
-async function renderSidebarHTML() {
+async function renderSidebarHTML(pageNum = 1) {
 
   // if not already loading, start loading
   if (loader.style.opacity != '1') {
     startLoading();
   }
-
-  // hide search screen
-  header.classList.remove('searching');
 
 
   // map tree location
@@ -226,7 +223,7 @@ async function renderSidebarHTML() {
 
 
   // get items in current tree from git
-  resp = await git.getItems(treeLoc);
+  resp = await git.getItems(treeLoc, pageNum);
   
 
   if (resp.message && resp.message == 'Not Found') {
@@ -664,6 +661,21 @@ async function renderSidebarHTML() {
             
           }
           
+          
+          // if eclipsed repo already exists in HTML
+          // when rendering more pages, return
+          
+          const eclipsedRepoEl = fileWrapper
+                                   .querySelector(
+                                     '.repo[fullname="'+ item.full_name +'"]'
+                                   );
+          
+          if (eclipsedRepoEl) {
+            
+            return;
+            
+          }
+          
 
           let fullName;
 
@@ -720,48 +732,73 @@ async function renderSidebarHTML() {
         });
         
         
-        // render eclipsed repos
-        for (const modRepoName in modifiedRepos) {
+        // if rendering first page
+        if (pageNum === 1) {
           
-          const modRepo = modifiedRepos[modRepoName];
-          
-          // if repo isn't rendered
-          // and user has push access in repo
-          if (!renderedRepos[modRepoName]
-              && modRepo.pushAccess) {
+          // render eclipsed repos
+          for (const modRepoName in modifiedRepos) {
             
-            // render repo
-
-            let fullName;
+            const modRepo = modifiedRepos[modRepoName];
+            
+            // if repo isn't rendered
+            // and user has push access in repo
+            if (!renderedRepos[modRepoName]
+                && modRepo.pushAccess) {
+              
+              // render repo
   
-            // if repo is owned by logged user
-            if (modRepoName.split('/')[0] === loggedUser) {
-  
-              // show repo name
-              fullName = modRepoName.split('/')[1];
-  
-            } else {
-  
-              // show username and repo name
-              fullName = modRepoName;
-  
+              let fullName;
+    
+              // if repo is owned by logged user
+              if (modRepoName.split('/')[0] === loggedUser) {
+    
+                // show repo name
+                fullName = modRepoName.split('/')[1];
+    
+              } else {
+    
+                // show username and repo name
+                fullName = modRepoName;
+    
+              }
+    
+              out += `
+              <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
+                <div class="label">
+                  `+ repoIcon +`
+                  <a class="name">`+ fullName +`</a>
+                </div>
+                `+ arrowIcon +`
+              </div>
+              `;
+              
             }
   
-            out += `
-            <div class="item repo" ` + ('fullName="' + modRepoName + '"') + `>
-              <div class="label">
-                `+ repoIcon +`
-                <a class="name">`+ fullName +`</a>
-              </div>
-              `+ arrowIcon +`
-            </div>
-            `;
-            
           }
-
+          
         }
         
-      } else {
+        
+        // if non-eclipsed repositories exist
+        // and resp length is equal to max length
+        if (resp.length > 0 && resp.length === 100) {
+          
+          // render 'more' button
+          
+          const nextPage = (pageNum + 1);
+          
+          out += `
+          <div class="item more" nextPage="`+ nextPage +`">
+            <div class="label">
+              `+ moreIcon +`
+              <a class="name">more</a>
+            </div>
+          </div>
+          `;
+          
+        }
+        
+      } else if (pageNum === 1) { // if rendering first page
         
         // if no repositories exist,
         // show intro screen in HTML
@@ -777,8 +814,30 @@ async function renderSidebarHTML() {
   }
 
   // add rendered HTML to DOM
-  fileWrapper.innerHTML = out;
-  sidebar.scrollTo(0, 0);
+  
+  // if rendering first page
+  if (pageNum === 1) {  
+  
+    fileWrapper.innerHTML = out;
+    sidebar.scrollTo(0, 0);
+    
+  } else { // if rendering additional pages
+    
+    // if there's a duplicate more button, remove it
+    
+    const moreButton = fileWrapper.querySelector('.item.more');
+    
+    if (moreButton) {
+    
+      moreButton.remove();
+      
+    }
+    
+    
+    // don't override existing HTML items
+    fileWrapper.innerHTML += out;
+
+  }
 
   // stop loading
   stopLoading();
@@ -813,8 +872,40 @@ async function renderSidebarHTML() {
   // hide branch menu
   branchMenu.classList.remove('visible');
   sidebarBranch.classList.remove('active');
+  
+  
+  // if searching
+  if (header.classList.contains('searching')) {
+    
+    // refresh search
+    searchInput.search();
+    
+  }
 
 }
+
+
+// load more repos if scrolled to bottom of sidebar
+sidebar.addEventListener('scroll', () => {
+  
+  const moreButton = fileWrapper.querySelector('.item.more');
+  
+  // if 'more' button exists
+  if (moreButton) {
+    
+    const maxScroll = sidebar.scrollHeight - sidebar.clientHeight;
+    
+    // if scrolled to bottom of sidebar
+    if (sidebar.scrollTop >= maxScroll) {
+      
+      // load more repos
+      clickedOnMoreButtonHTML(moreButton);
+      
+    }
+    
+  }
+  
+});
 
 
 // adds item event listeners
@@ -830,6 +921,10 @@ function addHTMLItemListeners() {
 
       // if item is a repository
       if (item.classList.contains('repo')) {
+
+        // close search
+        searchInput.closeSearch();
+        
 
         // parse repo obj from HTML
         const repoObj = getAttr(item, 'repoObj') ? JSON.parse(decodeURI(getAttr(item, 'repoObj'))) :
@@ -860,9 +955,6 @@ function addHTMLItemListeners() {
           renderSidebarHTML();
           
         } else {
-          
-          // hide search screen
-          header.classList.remove('searching');
           
           // show intro screen
           fileWrapper.innerHTML = fileIntroScreen;
@@ -895,6 +987,9 @@ function addHTMLItemListeners() {
       } else if (item.classList.contains('folder')) {
 
         // if item is a folder
+      
+        // close search
+        searchInput.closeSearch();
 
         // change location
         treeLoc[2] += '/' + item.innerText.replaceAll('\n', '');
@@ -903,10 +998,16 @@ function addHTMLItemListeners() {
         // render sidebar
         renderSidebarHTML();
 
-      } else { // if item is a file
+      } else if (item.classList.contains('file')) { // if item is a file
         
         clickedOnFileHTML(item, e);
 
+      } else if (item.classList.contains('more')) {
+        
+        // if item is a 'more' button,
+        // load more items
+        clickedOnMoreButtonHTML(item);
+        
       }
 
     })
@@ -917,6 +1018,22 @@ function addHTMLItemListeners() {
 
   })
 
+}
+
+
+// when clicked on more button in HTML,
+// load more items
+function clickedOnMoreButtonHTML(buttonEl) {
+  
+  const nextPage = Number(getAttr(buttonEl, 'nextPage'));
+  
+  renderSidebarHTML(nextPage);
+  
+  // disable button
+  buttonEl.classList.add('disabled');
+  
+  buttonEl.querySelector('.name').textContent = 'loading more';
+  
 }
 
 
@@ -1267,11 +1384,9 @@ async function loadFileInHTML(fileEl, fileSha) {
     fileEl.scrollIntoViewIfNeeded();
   });
 
-  // show all files in HTML
-  let files = fileWrapper.querySelectorAll('.item[style="display: none;"]');
-  files.forEach(file => { file.style.display = '' });
 
-  header.classList.remove('searching');
+  // close search
+  searchInput.closeSearch();
 
 
   // if previous file selection exists
@@ -1421,7 +1536,7 @@ async function loadFileInHTML(fileEl, fileSha) {
       liveView.classList.add('file-open', 'notransition');
       liveView.innerHTML = '<div class="prompt">' +
                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="file-svg"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g></g></svg>' +
-                           '<div class="title">This file is too big to view</div><div class="desc">You can download it below :D</div></div>';
+                           '<div class="title">This file is too big to view</div><div class="desc">You can download it below.</div></div>';
 
       resp = { content: fileSizeText };
 
@@ -1621,7 +1736,7 @@ function loadBinaryFileHTML(file, toggled) {
       // show file supported prompt
       liveView.innerHTML = '<div class="prompt">' +
                            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="file-svg"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g></g></svg>' +
-                           '<div class="title">' + fileMessage + ' supported yet</div><div class="desc">You can download it below :D</div></div>';
+                           '<div class="title">' + fileMessage + ' supported yet</div><div class="desc">You can download the file below.</div></div>';
 
     }
     
@@ -1630,7 +1745,7 @@ function loadBinaryFileHTML(file, toggled) {
     // show file size prompt
     liveView.innerHTML = '<div class="prompt">' +
                          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="file-svg"><clipPath id="a"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="b"><path d="m0 0h72v96h-72z"></path></clipPath><clipPath id="c"><path d="m12 36h48v48h-48z"></path></clipPath><g clip-path="url(#a)"><g clip-path="url(#b)"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(223deg 92% 87%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(223deg 85% 58%)" style=""></path></g></g></svg>' +
-                         '<div class="title">This file is too big to view</div><div class="desc">You can download it below :D</div></div>';
+                         '<div class="title">This file is too big to view</div><div class="desc">You can download it below.</div></div>';
 
   }
   
@@ -1791,12 +1906,12 @@ async function renderBranchMenuHTML(renderAll) {
   // render show more button
   if (!renderAll && branchResp.length > 1) {
     
-    out += '<div class="icon see-more">' + moreIcon + '<a>more</a></div>';
+    out += '<div class="icon see-more">' + branchMoreIcon + '<a>more</a></div>';
     
   }
   
   // render new branch button
-  // out += '<div class="icon new-branch">' + plusIcon + '<a>new branch</a></div>';
+  // out += '<div class="icon new-branch">' + branchPlusIcon + '<a>new branch</a></div>';
   
   // wait for menu animation to finish
   window.setTimeout(() => {
@@ -2203,12 +2318,11 @@ function createNewRepoInHTML() {
       // toggle lock
       repoPrivate = lockButton.classList.toggle('locked');
       
-      // focus repo name and move cursor to end
+      // focus repo name
       
       const repoName = repoEl.querySelector('.name');
       
-      const s = window.getSelection();
-      s.setBaseAndExtent(repoName.childNodes[0], repoName.childNodes[0].length, repoName.childNodes[0], repoName.childNodes[0].length);
+      focusCursorToEnd(repoName);
       
     });
     
@@ -2373,10 +2487,8 @@ function createNewRepoInHTML() {
     
     const newRepoName = fileWrapper.querySelector('.item.focused .name');
     
-    // move cursor to end
-    const s = window.getSelection();
-    s.setBaseAndExtent(newRepoName.childNodes[0], newRepoName.childNodes[0].length, newRepoName.childNodes[0], newRepoName.childNodes[0].length);
-
+    focusCursorToEnd(newRepoName);
+    
   }
 
 }
@@ -2741,10 +2853,8 @@ function createNewFileInHTML() {
     
     const newFileName = fileWrapper.querySelector('.item.focused .name');
     
-    // move cursor to end
-    const s = window.getSelection();
-    s.setBaseAndExtent(newFileName.childNodes[0], newFileName.childNodes[0].length, newFileName.childNodes[0], newFileName.childNodes[0].length);
-
+    focusCursorToEnd(newFileName);
+    
   }
 
 }
@@ -2907,13 +3017,13 @@ versionEl.addEventListener('click', () => {
 // share codeit on click of button
 learnShare.addEventListener('click', () => {
   
-  const invite = 'Hi, I use Codeit to code. It\'s a mobile code editor connected to Git. Join me! ' + window.location.origin;
+  const invite = 'Hey, I\'ve been using Codeit, a mobile code editor connected to Git. Check it out: ' + window.location.origin;
   
   if (isMobile) {
     
     // share invite
     navigator.share({
-      title: 'Share Codeit',
+      title: 'Codeit',
       text: invite
     });
     
@@ -3294,7 +3404,7 @@ function setupEditor() {
   document.addEventListener('keydown', (e) => {
 
     // disable Ctrl/Cmd + S
-    if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e)) {
+    if ((e.key === 's' || e.keyCode === 83) && isKeyEventMeta(e) && !e.altKey) {
 
       e.preventDefault();
       

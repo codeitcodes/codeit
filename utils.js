@@ -60,10 +60,7 @@ const body = document.body,
       liveViewMenu = document.querySelector('.live-view-menu'),
       liveMenuShare = liveViewMenu.querySelector('.share'),
       liveMenuConsole = liveViewMenu.querySelector('.console'),
-      
-      consoleSheet = document.querySelector('.console-sheet'),
-      consoleSheetClose = consoleSheet.querySelector('.header .close'),
-            
+                  
       dialogWrapper = document.querySelector('.dialog-wrapper'),
       dialogTitle = dialogWrapper.querySelector('.title'),
       dialogCancel = dialogWrapper.querySelector('.cancel'),
@@ -587,6 +584,21 @@ let moveElToMouse = (originEl, mouseEvent, boundryMargin = null, boundryEl = nul
 }
 
 
+// check if element is in view
+let elInView = (el) => {
+  
+  const rect = el.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemLeft = rect.left;
+  
+  const isVisible = (elemTop < window.innerHeight &&
+                     elemLeft < window.innerWidth);
+  
+  return isVisible;
+  
+}
+
+
 // attributes
 
 let getAttr = (element, item) => {
@@ -724,6 +736,26 @@ Element.prototype.on = (events, callback, passive) => {
 
   });
 
+}
+
+
+// focus cursor to end of element
+let focusCursorToEnd = (el) => {
+  
+  // focus element
+  el.focus();
+
+  const nodes = el.childNodes;
+
+  // if child nodes exist
+  if (nodes.length !== 0) {
+
+    // move cursor to end of input
+    const s = window.getSelection();
+    s.setBaseAndExtent(nodes[0], nodes[0].length, nodes[0], nodes[0].length);
+
+  }
+  
 }
 
 
@@ -935,7 +967,7 @@ axios = {
 
 const repoIcon = '<svg viewBox="0 0 16 16" class="icon" width="24" height="24" aria-hidden="true"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8zM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25z" fill="currentColor"></path></svg>';
 const fileIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.83-4.83c-.37-.38-.88-.59-1.41-.59H6zm7 6V3.5L18.5 9H14c-.55 0-1-.45-1-1z" fill="currentColor"></path></svg>';
-const folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M9.17 6l2 2H20v10H4V6h5.17M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" fill="currentColor"></path></svg>';
+const folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M8.75579 6C9.021 6 9.27536 6.10536 9.46289 6.29289L10.8771 7.70711C11.0646 7.89464 11.319 8 11.5842 8H19.4C19.7314 8 20 8.26863 20 8.6V17.4C20 17.7314 19.7314 18 19.4 18H4.6C4.26863 18 4 17.7314 4 17.4V6.6C4 6.26863 4.26863 6 4.6 6H8.75579ZM10.2929 4.29289C10.1054 4.10536 9.851 4 9.58579 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12.4142C12.149 6 11.8946 5.89464 11.7071 5.70711L10.2929 4.29289Z" fill="currentColor"></path></svg>';
 
 const imageIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.9 13.98l2.1 2.53 3.1-3.99c.2-.26.6-.26.8.01l3.51 4.68c.25.33.01.8-.4.8H6.02c-.42 0-.65-.48-.39-.81L8.12 14c.19-.26.57-.27.78-.02z" fill="currentColor"></path> </svg>';
 const videoIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M18 4v1h-2V4c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v1H6V4c0-.55-.45-1-1-1s-1 .45-1 1v16c0 .55.45 1 1 1s1-.45 1-1v-1h2v1c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-1h2v1c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1s-1 .45-1 1zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z" fill="currentColor"></path> </svg>';
@@ -943,8 +975,10 @@ const audioIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="
 const readmeIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" fill="currentColor"></path></svg>';
 
 const branchIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="branch-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M13,14C9.64,14 8.54,15.35 8.18,16.24C9.25,16.7 10,17.76 10,19A3,3 0 0,1 7,22A3,3 0 0,1 4,19C4,17.69 4.83,16.58 6,16.17V7.83C4.83,7.42 4,6.31 4,5A3,3 0 0,1 7,2A3,3 0 0,1 10,5C10,6.31 9.17,7.42 8,7.83V13.12C8.88,12.47 10.16,12 12,12C14.67,12 15.56,10.66 15.85,9.77C14.77,9.32 14,8.25 14,7A3,3 0 0,1 17,4A3,3 0 0,1 20,7C20,8.34 19.12,9.5 17.91,9.86C17.65,11.29 16.68,14 13,14M7,18A1,1 0 0,0 6,19A1,1 0 0,0 7,20A1,1 0 0,0 8,19A1,1 0 0,0 7,18M7,4A1,1 0 0,0 6,5A1,1 0 0,0 7,6A1,1 0 0,0 8,5A1,1 0 0,0 7,4M17,6A1,1 0 0,0 16,7A1,1 0 0,0 17,8A1,1 0 0,0 18,7A1,1 0 0,0 17,6Z" fill="currentColor"></path></svg>';
-const moreIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"></path></svg>';
-const plusIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" fill="currentColor"></path></svg>';
+const branchMoreIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"></path></svg>';
+const branchPlusIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" class="bigger-icon"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z" fill="currentColor"></path></svg>';
+
+const moreIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/></svg>';
 
 const arrowIcon = '<svg xmlns="http://www.w3.org/2000/svg" class="arrow" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" fill="currentColor"></path> </svg>';
 
@@ -1007,40 +1041,27 @@ const pushIcon = `
 
 
 const repoIntroScreen = `
-<div class="intro">
-  <div class="picture-wrapper faded">
-    <svg viewBox="0 0 356 415" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="picture" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M272.41 168.81c-40.867 0-73.996 33.129-73.996 74V479.6c0 40.867 33.129 73.996 73.996 73.996h14.797c8.176 0 14.801-6.625 14.801-14.801 0-8.172-6.625-14.797-14.801-14.797H272.41c-24.52 0-44.398-19.879-44.398-44.398 0-16.727 9.25-31.293 22.91-38.863 5.828-3 12.902-5.031 21.488-5.535H524v88.797h-29.598c-8.176 0-14.801 6.625-14.801 14.797 0 8.176 6.625 14.801 14.801 14.801h44.395c8.176 0 14.801-6.625 14.801-14.801v-117.06c.871-5.914 0-13.172 0-13.172v-195.35c0-24.52-19.875-44.398-44.398-44.398l-236.79-.006Z" fill="hsl(232deg 39% 14%)" transform="translate(-198.414 -168.81)"></path><path d="M331.6 479.6c0-8.176 6.629-14.801 14.801-14.801h88.797c8.172 0 14.801 6.625 14.801 14.801v88.797a14.797 14.797 0 0 1-7.816 13.047 14.808 14.808 0 0 1-15.195-.734L390.8 556.585l-36.188 24.125a14.804 14.804 0 0 1-23.012-12.313V479.6Z" fill="hsl(232deg 34% 22%)" transform="translate(-198.414 -168.81)"></path></svg>
+<div class="intro faded">
+  <div class="picture-wrapper">
+    <svg viewBox="0 0 16 16" class="picture" width="24" height="24"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8zM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25z" fill="currentColor"></path></svg>
   </div>
   <div class="subhead">
-    <div class="title" style="opacity: .5">Create a repository</div>
+    <div class="title">No repos yet</div>
   </div>
 </div>
 `;
 
 const fileIntroScreen = `
-<div class="intro">
-  <div class="picture-wrapper faded">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="96" viewBox="0 0 72 96" width="72" class="picture"><path d="m72 29.3v60.3c0 2.24 0 3.36-.44 4.22-.38.74-1 1.36-1.74 1.74-.86.44-1.98.44-4.22.44h-59.20002c-2.24 0-3.36 0-4.22-.44-.74-.38-1.359997-1-1.739996-1.74-.44000025-.86-.44000006-1.98-.43999967-4.22l.00001455-83.2c.00000039-2.24.00000059-3.36.44000112-4.22.38-.74 1-1.36 1.74-1.74.86-.43999947 1.98-.43999927 4.22-.43999888l36.3.00000635c1.96.00000034 2.94.00000051 3.86.22000053.5.12.98.28 1.44.5v16.879992c0 2.24 0 3.36.44 4.22.38.74 1 1.36 1.74 1.74.86.44 1.98.44 4.22.44h16.88c.22.46.38.94.5 1.44.22.92.22 1.9.22 3.86z" fill="hsl(232deg 39% 14%)"></path><path d="m68.26 20.26c1.38 1.38 2.06 2.06 2.56 2.88.18.28.32.56.46.86h-16.88c-2.24 0-3.36 0-4.22-.44-.74-.38-1.36-1-1.74-1.74-.44-.86-.44-1.98-.44-4.22v-16.880029c.3.14.58.28.86.459999.82.5 1.5 1.18 2.88 2.56z" fill="hsl(232deg 34% 22%)"></path></svg>
+<div class="intro faded">
+  <div class="picture-wrapper">
+    <svg class="picture" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"> <path d="M0 0h24v24H0z" fill="none"></path> <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.83-4.83c-.37-.38-.88-.59-1.41-.59H6zm7 6V3.5L18.5 9H14c-.55 0-1-.45-1-1z" fill="currentColor"></path></svg>
   </div>
   <div class="subhead">
-    <div class="title" style="opacity: .5">Create a file</div>
+    <div class="title">No files yet</div>
   </div>
 </div>
 `;
 
-
-const repoNotFoundScreen = `
-<div class="intro">
-  <div class="picture-wrapper" style="margin-bottom: 31.5px;/* margin-bottom: 33.25px; */">
-    <svg viewBox="0 0 356 415" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="picture" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M272.41 168.81c-40.867 0-73.996 33.129-73.996 74V479.6c0 40.867 33.129 73.996 73.996 73.996h14.797c8.176 0 14.801-6.625 14.801-14.801 0-8.172-6.625-14.797-14.801-14.797H272.41c-24.52 0-44.398-19.879-44.398-44.398 0-16.727 9.25-31.293 22.91-38.863 5.828-3 12.902-5.031 21.488-5.535H524v88.797h-29.598c-8.176 0-14.801 6.625-14.801 14.797 0 8.176 6.625 14.801 14.801 14.801h44.395c8.176 0 14.801-6.625 14.801-14.801v-117.06c.871-5.914 0-13.172 0-13.172v-195.35c0-24.52-19.875-44.398-44.398-44.398l-236.79-.006Z" fill="hsl(223deg 92% 87%)" transform="translate(-198.414 -168.81)"></path><path d="M331.6 479.6c0-8.176 6.629-14.801 14.801-14.801h88.797c8.172 0 14.801 6.625 14.801 14.801v88.797a14.797 14.797 0 0 1-7.816 13.047 14.808 14.808 0 0 1-15.195-.734L390.8 556.585l-36.188 24.125a14.804 14.804 0 0 1-23.012-12.313V479.6Z" fill="hsl(223deg 85% 58%)" transform="translate(-198.414 -168.81)"></path></svg>
-  </div>
-  <div class="subhead">
-    <div class="title" style="/* margin-bottom: 10.5px; */margin-bottom: 12.25px;">Hmm... we can't find that repo.</div>
-    <div class="subtitle">If it's private, try double checking you're on the account with access.</div>
-  </div>
-  <div class="button secondary large-spacing-top login" style="/* margin-top: 38.5px; */margin-top: 45.5px;">Close</div>
-</div>
-`;
 
 const pageErrorScreen = `
 <div class="intro">
@@ -1066,3 +1087,4 @@ const offlineScreen = `
   <div class="button teritary tiny-spacing-top login">Try again</div>
 </div>
 `;
+

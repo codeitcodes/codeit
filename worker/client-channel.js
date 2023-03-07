@@ -4,7 +4,7 @@
 
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v629';
+const WORKER_NAME = 'codeit-worker-v645';
 
 
 // internal paths
@@ -74,7 +74,7 @@ function createResponse(data, type, status, cache) {
     'Content-Type': type
   };
   
-  //if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
+  if (!cache) headers['Cache-Control'] = 'public, max-age=0, must-revalidate';
 
   // create Response from data
   const response = new Response(data, {
@@ -177,6 +177,8 @@ workerChannel.addEventListener('message', (event) => {
   if (event.data.type === 'hello') workerChannel.postMessage('hello!');
   
 });
+
+if (self.origin === 'https://dev.codeit.codes') self.registration.update();
 
 
 // handle fetch request

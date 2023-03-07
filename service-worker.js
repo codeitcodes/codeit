@@ -36,6 +36,9 @@ const FILES_TO_CACHE = [
   
   '/live-view/extensions/beautifier.min.js',
   
+  '/live-view/extensions/marked.min.js',
+  '/live-view/extensions/markdown-dark.css',
+  
   '/dark-theme.css',
 
   '/fonts/fonts.css',
@@ -58,6 +61,8 @@ const FILES_TO_CACHE = [
   '/fonts/Roboto-Mono/RobotoMono-BoldItalic.woff2',
 
   'https://plausible.io/js/plausible.js',
+  
+  '/',
 
   '/icons/android-app-512.png',
   '/icons/iphone-app-180.png',

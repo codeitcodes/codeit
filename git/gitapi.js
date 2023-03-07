@@ -153,7 +153,7 @@ let git = {
   },
 
   // get items in tree
-  'getItems': async (treeLoc) => {
+  'getItems': async (treeLoc, page = 1) => {
 
     // map tree location
     let query = 'https://api.github.com';
@@ -174,7 +174,7 @@ let git = {
 
     } else { // else, show all repositories
 
-      query += '/user/repos?visibility=all&sort=updated&per_page=100&page=1';
+      query += '/user/repos?visibility=all&sort=updated&per_page=100&page=' + page;
 
     }
 
