@@ -35,8 +35,21 @@
   <meta name="next-head-count" content="24">
   <meta name="robots" content="all">
   <script>if (top !== window) { window.location.href = '/redirect' }</script>
+  <script>
+  
+  if (localStorage.getItem('installed')) {
+    
+    if ((new URL(window.location.href).search) !== '?p') {
+      
+      window.location.replace(window.location.origin + '/full');
+      
+    }
+    
+  }
+  
+  </script>
   <script defer data-domain="codeit.codes" src="https://plausible.io/js/plausible.js"></script>
-
+  
   <link rel="shortcut icon" href="/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="/icons/iphone-app-180.png">
   
@@ -269,18 +282,6 @@ document.querySelectorAll('.btn.install').forEach(button => {
     
     button.classList.add('cookies');
     
-  } else {
-  
-    if (localStorage.getItem('installed')) {
-      
-      if ((new URL(window.location.href).search) !== '?p') {
-        
-        window.location.replace(window.location.origin + '/full');
-        
-      }
-      
-    }
-    
   }
 
 });
@@ -343,7 +344,7 @@ checkScrollAnimations();
 
 </script>
 
-  <script src="/manifest.js"></script>
+<script src="/manifest.js"></script>
 
 </body>
 
