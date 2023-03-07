@@ -837,7 +837,7 @@ async function renderSidebarHTML(pageNum = 1) {
     fileWrapper.innerHTML += out;
     
     // scroll to end of additional page
-    sidebar.scrollTo(0, sidebar.scrollHeight);
+    sidebar.scrollTo(0, (sidebar.scrollHeight - 1));
     
   }
 
