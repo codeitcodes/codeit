@@ -345,7 +345,7 @@ function isScrolledIntoView(el) {
   //const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
   
   // Partially visible elements return true:
-  let isVisible = (elemTop + (el.clientHeight / 2)) < window.innerHeight;
+  let isVisible = (elemTop - (el.clientHeight / 2)) < window.innerHeight;
   
   return isVisible;
     
