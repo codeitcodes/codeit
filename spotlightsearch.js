@@ -69,18 +69,6 @@ searchInput.addEventListener('blur', () => {
 
 searchInput.search = () => {
   
-  const moreButton = fileWrapper.querySelector('.item.more');
-  
-  // if more button is disabled (loading more items),
-  // don't search
-  if (moreButton &&
-      moreButton.classList.contains('disabled')) {
-      
-    return;
-    
-  }
-  
-  
   if (searchInput.innerHTML === '<br>') {
 
     searchInput.textContent = '';
@@ -132,8 +120,12 @@ searchInput.search = () => {
   }
   
   
+  const moreButton = fileWrapper.querySelector('.item.more');
+  
   // if more button exists
-  if (moreButton) {
+  // and is not disabled (loading more)
+  if (moreButton &&
+      !moreButton.classList.contains('disabled')) {
     
     // if more button is in view
     if (elInView(moreButton)) {
