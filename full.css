@@ -1158,7 +1158,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
 
 .sidebar .header.searching .logo {
   padding-left: 7px;
-  max-width: calc(var(--sidebar-width) - 139px - 16px - 7px - 7px - 7px);
+  max-width: calc(var(--sidebar-width) - 139px - 16px - 7px - 7px - 7px - env(safe-area-inset-left));
 }
 
 .sidebar .header.searching .title .branch {
