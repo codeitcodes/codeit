@@ -98,62 +98,82 @@ const html = `
   <link rel="shortcut icon" href="https://codeit.codes/icons/android-app-512.png">
   <link rel="apple-touch-icon" href="https://codeit.codes/icons/iphone-app-180.png">
   
-  <script src="/api-link-parser.js"></script>
-  
-  <script>
-
-  // decode link
-  
-  const url = new URL(window.location.href).searchParams;
-    
-  let link = url.get('url');
-
-  const notLiveView = (url.get('live') === 'false' || url.get('l') === 'f');
-  
-  const isDev = (window.location.hostname === 'dev.codeit.codes');
-  
-  if (link && link.startsWith('https://codeit.codes/api/link?url=')) {
-    
-    link = link.replace('https://codeit.codes/api/link?url=', 'https://cde.run/');
-    
-  }
-  
-  if (link && link.includes('https:/github.com')) {
-    
-    link = link.replace('https:/github.com', 'https://github.com');
-    
-  }
-  
-  if (link && !link.startsWith('https://cde.run')
-      && !link.startsWith('https://dev.cde.run')) {
-    
-    if (!isDev) link = 'https://cde.run/' + link;
-    else link = 'https://dev.cde.run/' + link;
-    
-  }
-  
-  if (link && notLiveView) {
-    
-    link += '?live=false';
-    
-  }
-  
-  if (link) {
-    
-    const resp = decodeLink(link);
-
-    // redirect to decoded URL
-    window.location.replace(resp);
-    
-  } else {
-    
-    window.location.replace(window.location.origin);
-    
-  }
-
-  </script>
-  
 </head>
+<body>
+
+<script src="/api-link-parser.js"></script>
+
+<script>
+
+// decode link
+
+const url = new URL(window.location.href).searchParams;
+  
+let link = url.get('url');
+
+const notLiveView = (url.get('live') === 'false' || url.get('l') === 'f');
+
+const isDev = (window.location.hostname === 'dev.codeit.codes');
+
+
+if (link && link.startsWith('https://codeit.codes/api/link?url=')) {
+  
+  link = link.replace('https://codeit.codes/api/link?url=', 'https://cde.run/');
+  
+}
+
+
+if (link && link.includes('https:/github.com')) {
+  
+  link = link.replace('https:/github.com', 'https://github.com');
+  
+}
+
+
+if (link && !link.startsWith('https://cde.run')
+    && !link.startsWith('https://dev.cde.run')) {
+  
+  if (!isDev) link = 'https://cde.run/' + link;
+  else link = 'https://dev.cde.run/' + link;
+  
+}
+
+
+if (link && link.startsWith('https://cde.run/github.com/')) {
+  
+  link = link.replace('https://cde.run/github.com/', 'https://cde.run/https://github.com/');
+  
+}
+
+if (link && link.startsWith('https://dev.cde.run/github.com/')) {
+  
+  link = link.replace('https://dev.cde.run/github.com/', 'https://dev.cde.run/https://github.com/');
+  
+}
+
+
+if (link && notLiveView) {
+  
+  link += '?live=false';
+  
+}
+
+if (link) {
+  
+  const resp = decodeLink(link);
+
+  // redirect to decoded URL
+  window.location.replace(resp);
+  
+} else {
+  
+  window.location.replace(window.location.origin);
+  
+}
+
+</script>
+
+</body>
 </html>
 `;
 

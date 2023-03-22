@@ -509,7 +509,8 @@ async function renderSidebarHTML(pageNum = 1) {
 
           // if item is a file
           if (item.type == 'file') {
-
+            
+            // get the file's latest version
             let file = getLatestVersion(item);
 
             // search for matching eclipsed files
@@ -3327,8 +3328,16 @@ function setupEditor() {
 
     // show file content in codeit
     try {
-
-      cd.textContent = decodeUnicode(selectedFile.content);
+      
+      const fileContent = decodeUnicode(selectedFile.content);
+      
+      // compare current code with new code
+      if (hashCode(cd.textContent) !== hashCode(fileContent)) {
+        
+        // if the code is different, swap it
+        cd.textContent = fileContent;
+        
+      }
 
       // change codeit lang
       cd.lang = selectedFile.lang;

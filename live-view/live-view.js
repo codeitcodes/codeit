@@ -221,6 +221,14 @@ async function setupLiveView() {
                  (file.dir == treeLoc.join() &&
                   file.name == fileName))[0];
       
+      // if modified file exists
+      if (modFile) {
+        
+        // get the file's latest version
+        modFile = getLatestVersion(modFile);
+        
+      }
+      
     }
     
 
@@ -557,6 +565,7 @@ if (isMobile) {
   
   });
   
+  
   function shareLiveViewLink() {
 
     // share live view link
@@ -573,9 +582,8 @@ if (isMobile) {
     });
     
   }
-  
+
   /*
-  
   liveMenuShare.addEventListener('click', shareLiveViewLink);
   
   liveMenuConsole.addEventListener('click', () => {
@@ -612,7 +620,6 @@ if (isMobile) {
     liveButtonOptions.classList.remove('active');
     
   });
-  
   */
 
 } else {
@@ -971,6 +978,9 @@ async function handleLiveViewRequest(requestPath) {
     
     // if matching modified file exists
     if (modFile) {
+      
+      // get the file's latest version
+      modFile = getLatestVersion(modFile);
       
       // return modified file content
       respContent = modFile.content;
