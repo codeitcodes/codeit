@@ -1146,7 +1146,7 @@ async function renderLiveViewHTML(file) {
 
   const liveFrame = liveView.querySelector('.live-frame');
 
-  liveFrame.contentWindow.addEventListener('load', () => {
+  liveFrame.contentWindow.addEventListener('DOMContentLoaded', () => {
     
     liveView.classList.add('loaded');
     
