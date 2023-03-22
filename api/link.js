@@ -141,13 +141,13 @@ if (link && !link.startsWith('https://cde.run')
 
 if (link && link.startsWith('https://cde.run/github.com/')) {
   
-  link = link.replace('https://cde.run/github.com/', 'https://cde.run/');
+  link = link.replace('https://cde.run/github.com/', 'https://cde.run/https://github.com/');
   
 }
 
 if (link && link.startsWith('https://dev.cde.run/github.com/')) {
   
-  link = link.replace('https://dev.cde.run/github.com/', 'https://dev.cde.run/');
+  link = link.replace('https://dev.cde.run/github.com/', 'https://dev.cde.run/https://github.com/');
   
 }
 
