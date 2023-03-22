@@ -705,7 +705,7 @@ body.expanded .sidebar-toggle svg .left {
   overflow-y: overlay;
   overscroll-behavior-y: contain;
   pointer-events: none;
-  padding-left: env(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left, 0px);
   box-sizing: border-box;
   z-index: 998;
 }
@@ -1158,7 +1158,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
 
 .sidebar .header.searching .logo {
   padding-left: 7px;
-  max-width: calc(var(--sidebar-width) - 139px - 16px - 7px - 7px - 7px - env(safe-area-inset-left));
+  max-width: calc(var(--sidebar-width) - 139px - 16px - 7px - 7px - 7px - env(safe-area-inset-left, 0px));
 }
 
 .sidebar .header.searching .title .branch {
