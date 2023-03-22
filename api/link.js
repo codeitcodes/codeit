@@ -132,6 +132,18 @@ const html = `
     
   }
   
+  if (link && link.startsWith('https://cde.run/github.com/')) {
+    
+    link = link.replace('https://cde.run/github.com/', 'https://cde.run/');
+    
+  }
+  
+  if (link && link.startsWith('https://dev.cde.run/github.com/')) {
+    
+    link = link.replace('https://dev.cde.run/github.com/', 'https://dev.cde.run/');
+    
+  }
+  
   if (link && notLiveView) {
     
     link += '?live=false';
