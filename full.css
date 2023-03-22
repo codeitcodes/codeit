@@ -2310,7 +2310,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  z-index: 1002;
+  z-index: 1003;
 }
 
 .message {
