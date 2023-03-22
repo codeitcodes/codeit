@@ -112,17 +112,20 @@ const html = `
   
   const isDev = (window.location.hostname === 'dev.codeit.codes');
   
+  
   if (link && link.startsWith('https://codeit.codes/api/link?url=')) {
     
     link = link.replace('https://codeit.codes/api/link?url=', 'https://cde.run/');
     
   }
   
+  
   if (link && link.includes('https:/github.com')) {
     
     link = link.replace('https:/github.com', 'https://github.com');
     
   }
+  
   
   if (link && !link.startsWith('https://cde.run')
       && !link.startsWith('https://dev.cde.run')) {
@@ -131,6 +134,7 @@ const html = `
     else link = 'https://dev.cde.run/' + link;
     
   }
+  
   
   if (link && link.startsWith('https://cde.run/github.com/')) {
     
@@ -143,6 +147,7 @@ const html = `
     link = link.replace('https://dev.cde.run/github.com/', 'https://dev.cde.run/');
     
   }
+  
   
   if (link && notLiveView) {
     
