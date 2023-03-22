@@ -3328,8 +3328,16 @@ function setupEditor() {
 
     // show file content in codeit
     try {
-
-      cd.textContent = decodeUnicode(selectedFile.content);
+      
+      const fileContent = decodeUnicode(selectedFile.content);
+      
+      // compare current code with new code
+      if (hashCode(cd.textContent) !== hashCode(fileContent)) {
+        
+        // if the code is different, swap it
+        cd.textContent = fileContent;
+        
+      }
 
       // change codeit lang
       cd.lang = selectedFile.lang;
