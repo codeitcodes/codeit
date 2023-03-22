@@ -221,8 +221,13 @@ async function setupLiveView() {
                  (file.dir == treeLoc.join() &&
                   file.name == fileName))[0];
       
-      // get the file's latest version
-      modFile = getLatestVersion(modFile);
+      // if modified file exists
+      if (modFile) {
+        
+        // get the file's latest version
+        modFile = getLatestVersion(modFile);
+        
+      }
       
     }
     
@@ -965,11 +970,11 @@ async function handleLiveViewRequest(requestPath) {
                     (file.dir == liveFileDir.join(',')
                      && file.name == fileName))[0];
     
-    // get the file's latest version
-    modFile = getLatestVersion(modFile);
-    
     // if matching modified file exists
     if (modFile) {
+      
+      // get the file's latest version
+      modFile = getLatestVersion(modFile);
       
       // return modified file content
       respContent = modFile.content;
