@@ -555,9 +555,13 @@ if (isMobile) {
   
   liveButtonOptions.addEventListener('click', () => {
     
+    shareLiveViewLink();
+    
+    /*
     // if clicked on options button, toggle menu
     liveViewMenu.classList.toggle('visible');
     liveButtonOptions.classList.toggle('active');
+    */
   
   });
   
@@ -579,6 +583,7 @@ if (isMobile) {
     
   }
 
+  /*
   liveMenuShare.addEventListener('click', shareLiveViewLink);
   
   liveMenuConsole.addEventListener('click', () => {
@@ -615,6 +620,7 @@ if (isMobile) {
     liveButtonOptions.classList.remove('active');
     
   });
+  */
 
 } else {
 
