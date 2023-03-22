@@ -163,7 +163,7 @@ if (link) {
   const resp = decodeLink(link);
 
   // redirect to decoded URL
-  //window.location.replace(resp);
+  window.location.replace(resp);
   
 } else {
   
