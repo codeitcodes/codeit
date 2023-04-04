@@ -1339,7 +1339,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
 
 @keyframes lock-click {
   50% {
-    transform: scaleX(-1) translateY(0.5px);
+    transform: scaleX(-1) translateY(0.35px);
   }
 }
 
