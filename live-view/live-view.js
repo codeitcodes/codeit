@@ -551,17 +551,21 @@ if (isMobile) {
   addBottomSwipeListener();
   
   
-  // live view mobile menu
-  
+  // when clicked on options button
   liveButtonOptions.addEventListener('click', () => {
     
-    shareLiveViewLink();
-    
-    /*
-    // if clicked on options button, toggle menu
-    liveViewMenu.classList.toggle('visible');
-    liveButtonOptions.classList.toggle('active');
-    */
+    // if options icon is visible
+    if (liveButtonOptions.classList.contains('options-visible')) {
+      
+      // toggle menu
+      liveViewMenu.classList.toggle('visible');
+      liveButtonOptions.classList.toggle('active');
+      
+    } else { // if share icon is visible
+      
+      shareLiveViewLink();
+      
+    }
   
   });
   
@@ -583,7 +587,9 @@ if (isMobile) {
     
   }
 
-  /*
+  
+  // live view mobile menu
+  
   liveMenuShare.addEventListener('click', shareLiveViewLink);
   
   liveMenuConsole.addEventListener('click', () => {
@@ -620,7 +626,6 @@ if (isMobile) {
     liveButtonOptions.classList.remove('active');
     
   });
-  */
 
 } else {
 
