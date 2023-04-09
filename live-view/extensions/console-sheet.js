@@ -22,14 +22,14 @@ let consoleSheet = {
     this.el.close.addEventListener('click', () => {
       
       // hide live view console
-      consoleSheet.el.sheet.classList.remove('visible');
+      this.el.sheet.classList.remove('visible');
       
     });
     
     this.el.bg.addEventListener('click', () => {
       
       // hide live view console
-      consoleSheet.el.sheet.classList.remove('visible');
+      this.el.sheet.classList.remove('visible');
       
     });
     
