@@ -822,11 +822,11 @@ function toggleLiveView(file) {
       // show popout option in live view options if opening HTML file
       if (file.lang == 'html' || file.lang == 'markup') {
         
-        liveToggle.classList.add('popout-hidden');
+        liveToggle.classList.remove('popout-hidden');
         
       } else {
         
-        liveToggle.classList.remove('popout-hidden');
+        liveToggle.classList.add('popout-hidden');
         
       }
       
