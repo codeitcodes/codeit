@@ -304,6 +304,18 @@ body.notransition .bottom-wrapper {
   opacity: .5;
 }
 
+.live-buttons .options path {
+  opacity: 0;
+}
+
+.live-buttons .options.options-visible .options-icon {
+  opacity: 1;
+}
+
+.live-buttons .options:not(.options-visible) .share-icon {
+  opacity: 1;
+}
+
 .bottom-wrapper.expanded .live-buttons {
   opacity: 1;
   pointer-events: auto;
