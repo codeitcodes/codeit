@@ -810,21 +810,47 @@ function toggleLiveView(file) {
 
     if (isMobile) {
     
+      // change status bar color
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     
-    } else {
+    }
+    
+    
+    // if on desktop
+    if (!isMobile) {
       
-      liveToggle.classList.remove('popout-hidden');
+      // show popout option in live view options if opening HTML file
+      if (file.lang == 'html' || file.lang == 'markup') {
+        
+        liveToggle.classList.add('popout-hidden');
+        
+      } else {
+        
+        liveToggle.classList.remove('popout-hidden');
+        
+      }
+      
+    } else { // if on mobile
+      
+      // show console option in live view options if opening HTML file
+      if (file.lang == 'html' || file.lang == 'markup') {
+        
+        liveButtonOptions.classList.add('options-visible');
+        
+      } else {
+        
+        liveButtonOptions.classList.remove('options-visible');
+        
+      }
       
     }
     
+    
     if (file.lang == 'html' || file.lang == 'markup') {
-
+      
       renderLiveViewHTML(file);
 
     } else if (file.lang === 'markdown') {
-      
-      liveToggle.classList.add('popout-hidden');
       
       renderLiveViewMarkdown(file);
       
@@ -844,7 +870,8 @@ function toggleLiveView(file) {
 
       // show loader
       liveView.classList.remove('loaded');
-
+      
+      // change status bar color
       document.querySelector('meta[name="theme-color"]').content = '#313744';
 
     }
