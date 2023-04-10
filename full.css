@@ -1902,7 +1902,7 @@ body.safari .live-view-menu .icon.share path.ios {
 }
 
 .sheet.visible {
-  transform: none;
+  transform: translateX(-50%);
   bottom: 0;
   box-shadow: 0 -1px 0 0 hsl(230deg 11% 12%);
   pointer-events: auto;
