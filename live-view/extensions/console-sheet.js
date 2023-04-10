@@ -55,7 +55,7 @@ let consoleSheet = {
     
     
     // toggle input empty indicator on type
-    input.on('keydown', (e) => {
+    input.on('beforeinput', (e) => {
       
       // run code on Shift+Enter
       if (e.key === 'Enter' && e.shiftKey) {
@@ -65,10 +65,6 @@ let consoleSheet = {
         this.runCode();
         
       }
-      
-      
-      // if didn't type in input
-      if (!input.typed(e)) return;
       
       // wait until finished typing
       onNextFrame(() => {
