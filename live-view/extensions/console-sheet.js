@@ -54,18 +54,9 @@ let consoleSheet = {
 
 
     // toggle input empty indicator on type
-    input.on('keydown', (e) => {
+    input.on('keyup', (e) => {
 
       if (!cd.typed(e)) return;
-
-      // run code on Shift+Enter
-      if (e.key === 'Enter' && e.shiftKey) {
-
-        e.preventDefault();
-
-        this.runCode();
-
-      }
 
       // wait until finished typing
       onNextFrame(() => {
@@ -86,6 +77,24 @@ let consoleSheet = {
       });
 
     });
+    
+    
+    if (isDev) {
+      
+      input.on('keydown', (e) => {
+        
+        // run code on Shift+Enter
+        if (e.key === 'Enter' && e.shiftKey) {
+  
+          e.preventDefault();
+  
+          this.runCode();
+  
+        }
+        
+      });
+      
+    }
 
 
     if (isSafari) {
