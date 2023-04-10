@@ -1875,10 +1875,10 @@ body.safari .live-view-menu .icon.share path.ios {
   position: fixed;
   display: flex;
   flex-flow: column;
-  left: 0;
-  right: 0;
+  left: 50%;
+  width: 100%;
   height: calc(100vh / 2 - 20px);
-  transform: translateY(100%);
+  transform: translateY(100%) translateX(-50%);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   bottom: -40px;
   translate: 0 calc(-1 * env(keyboard-inset-height, 0px));
@@ -1890,6 +1890,15 @@ body.safari .live-view-menu .icon.share path.ios {
               0s .3s var(--bounce-function) bottom,
               .1s .29s var(--ease-function) box-shadow;
   z-index: 1001;
+}
+
+@media (orientation: landscape) {
+  
+  .sheet {
+    max-width: 75%;
+    min-height: calc(100vh - 44px - 8px);
+  }
+  
 }
 
 .sheet.visible {
