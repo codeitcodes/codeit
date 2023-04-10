@@ -109,7 +109,7 @@ let consoleSheet = {
 
       });
 
-      consoleSheet.el.input.on('focusin', () => {
+      input.on('focus', () => { // focusin
 
         window.scrollTo(0, 0);
 
