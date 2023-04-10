@@ -55,7 +55,9 @@ let consoleSheet = {
     
     
     // toggle input empty indicator on type
-    input.on('beforeinput', (e) => {
+    input.on('keydown', (e) => {
+      
+      if (!cd.typed(e)) return;
       
       // run code on Shift+Enter
       if (e.key === 'Enter' && e.shiftKey) {
