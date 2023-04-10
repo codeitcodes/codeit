@@ -1896,7 +1896,7 @@ body.safari .live-view-menu .icon.share path.ios {
   
   .sheet {
     max-width: 75%;
-    min-height: calc(100vh - 44px - 8px);
+    min-height: calc(100% - 44px - 8px);
   }
   
 }
