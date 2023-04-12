@@ -3523,6 +3523,11 @@ function setupEditor() {
               
             }
             
+          } else {
+            
+            // show unsupported language message
+            showMessage('We don\'t support formatting this language yet.', 5000);
+            
           }
 
         } else {
@@ -3533,7 +3538,7 @@ function setupEditor() {
           if (shownMessages.formatSelect < 2) {
           
             // show format select message
-            showMessage('Try selecting some text first.', 4100);
+            showMessage('Try selecting some code to format.', 4500);
             
             // bump counter
             shownMessages.formatSelect++;
