@@ -369,60 +369,36 @@ async function setupLiveView() {
 
 // open live view when swiped up on bottom float
 function addBottomSwipeListener() {
-
-  let yBoundary = 30;
-
-  let currentY;
-  let initialY;
-  let yOffset = 0;
-
-  let active = false;
-  let click = false;
-  let swiped = false;
-
-  let direction = 0;
   
-  bottomWrapper.addEventListener('touchstart', dragStart, false);
-  bottomWrapper.addEventListener('touchend', dragEnd, false);
-  bottomWrapper.addEventListener('touchmove', drag, false);
+  // init draggable
+  const draggable = new Draggable(bottomWrapper);
   
-  function dragStart(e) {
-
-    if (e.type === 'touchstart') {
-      initialY = e.touches[0].clientY - yOffset;
-    } else {
-      initialY = e.clientY - yOffset;
-    }
-
-    active = true;
-    click = true;
-    swiped = false;
-
-  }
-
-  function dragEnd(e) {
-
-    initialY = currentY;
-
+  
+  // on click
+  bottomWrapper.addEventListener('click', (e) => {
+    
     const clickedOnOptions = (e.target === liveButtonOptions);
-
-    // if clicked and bottom float is expanded
-    if (click && bottomWrapper.classList.contains('expanded')) {
-
+    
+    const isExpanded = bottomWrapper.classList.contains('expanded');
+    
+    // if bottom float is expanded
+    if (isExpanded) {
+    
       // if did not click on options button
       if (!clickedOnOptions) {
-
+    
         e.preventDefault();
         e.stopPropagation();
-
+    
         // retract bottom float
         bottomWrapper.classList.remove('expanded');
-
-        toggleLiveView(selectedFile);
-
+        
+        // if live view is open, close it
+        if (liveViewToggle) toggleLiveView(selectedFile);
+    
       }
-
-    } else if (click) { // if clicked and bottom float not expanded
+    
+    } else { // if bottom float not expanded
       
       // if clicked the bottom float's swipe hitbox
       // but not the bottom float itself
@@ -456,76 +432,49 @@ function addBottomSwipeListener() {
       }
       
     }
-
-    yOffset = 0;
-    active = false;
-    swiped = false;
-
-  }
-
-  function drag(e) {
-
-    if (active) {
-
-      e.preventDefault();
-
-      if (e.type === 'touchmove') {
-        currentY = e.touches[0].clientY - initialY;
-      } else {
-        currentY = e.clientY - initialY;
+    
+  });
+  
+  
+  // on swipe
+  draggable.on('swipe', (e) => {
+    
+    const isMediaViewer = bottomWrapper.classList.contains('file-open');
+    
+    // if live view is in media viewer mode, return
+    if (isMediaViewer) return;
+    
+    
+    const isExpanded = bottomWrapper.classList.contains('expanded');
+    
+    if (e.direction == 'up') {
+    
+      // if swiped up and bottom float isn't expanded
+      if (!isExpanded) {
+        
+        // expand bottom float
+        bottomWrapper.classList.add('expanded');
+    
+        // if live view is closed, open it
+        if (!liveViewToggle) toggleLiveView(selectedFile);
+    
       }
-
-      yOffset = currentY;
-
-      // check swipe direction
-      if (yOffset < 0) {
-        direction = 'up';
-      } else {
-        direction = 'down';
+    
+    } else if (direction == 'down') {
+    
+      // if swiped down and bottom float is expanded
+      if (isExpanded) {
+        
+        // retract bottom float
+        bottomWrapper.classList.remove('expanded');
+        
+        // if live view is open, close it
+        if (liveViewToggle) toggleLiveView(selectedFile);
+        
       }
-
-      // check if passed swipe boundary
-      if (Math.abs(yOffset) > yBoundary
-          || swiped) {
-        swiped = true;
-      } else {
-        swiped = false;
-      }
-
-      if (direction == 'up') {
-
-        // if swiped up and bottom float isn't expanded
-        if (swiped && !bottomWrapper.classList.contains('expanded')
-            && !bottomFloat.classList.contains('file-open')) {
-
-          // expand bottom float
-          bottomWrapper.classList.add('expanded');
-
-          // if live view is closed
-          if (!liveViewToggle) toggleLiveView(selectedFile);
-
-        }
-
-      } else if (direction == 'down') {
-
-        // if swiped down and bottom float is expanded
-        if (swiped && bottomWrapper.classList.contains('expanded')
-            && !bottomFloat.classList.contains('file-open')) {
-
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
-
-          // if live view is open
-          if (liveViewToggle) toggleLiveView(selectedFile);
-          
-        }
-
-      }
-
-      click = false;
-
+    
     }
-
+    
   }
 
 }
