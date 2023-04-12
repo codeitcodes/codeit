@@ -3526,7 +3526,7 @@ function setupEditor() {
           } else {
             
             // show unsupported language message
-            showMessage('We don\'t support formatting this language yet.', 5000);
+            showMessage('We support formatting HTML, JS, JSON, CSS and SVG.', 5000);
             
           }
 
