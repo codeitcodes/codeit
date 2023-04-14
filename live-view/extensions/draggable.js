@@ -1,6 +1,6 @@
 
 /*
- * draggable.js
+ * Draggable.js
  *
  * To use, create a new instance:
  *
