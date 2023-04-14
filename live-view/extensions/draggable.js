@@ -154,7 +154,7 @@ class Draggable {
     
     const hooks = this.options.eventHooks;
     
-    if (type in hooks) hooks[type](data);
+    if (hooks[type]) hooks[type](data);
     
   }
   
