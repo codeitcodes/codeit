@@ -370,10 +370,10 @@ async function setupLiveView() {
 // open live view when swiped up on bottom float
 function addBottomSwipeListener() {
   
-  // init draggable
-  bottomWrapper.draggable = new Draggable(bottomWrapper);
+  // init Draggable
+  bottomWrapper.Draggable = new Draggable(bottomWrapper);
   
-  const draggable = bottomWrapper.draggable;
+  const draggable = bottomWrapper.Draggable;
   
   
   // on swipe
