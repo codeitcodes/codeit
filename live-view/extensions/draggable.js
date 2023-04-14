@@ -2,8 +2,22 @@
 /*
  * draggable.js
  *
- * to use, create a new instance: new Draggable(el, ?options) [options = { requiredMovement }]
- * and add listeners ('drag', 'swipe') with: instance.on(type, callback(event))
+ * To use, create a new instance:
+ *
+   const draggable = new Draggable(el, ?options);
+ *
+ * > options [object] - { requiredMovement [px] }
+ * 
+ * Then add event listeners:
+ *
+   draggable.on(type, callback(event));
+ * 
+ * > type [string] - 'drag' | 'swipe'
+ * < event [returned object] - {
+ * <   offset [px],
+ * <   direction [string] - 'up' | 'down'
+ * < }
+ *
  */
 
 class Draggable {
