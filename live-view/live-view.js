@@ -475,7 +475,7 @@ function addBottomSwipeListener() {
     
     }
     
-  }
+  });
 
 }
 
