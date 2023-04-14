@@ -460,7 +460,7 @@ function addBottomSwipeListener() {
     
       }
     
-    } else if (direction == 'down') {
+    } else if (e.direction == 'down') {
     
       // if swiped down and bottom float is expanded
       if (isExpanded) {
