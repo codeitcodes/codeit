@@ -67,7 +67,7 @@ class Draggable {
   
   touchStart(e) {
 
-    this.initialY = this.getCursorPos(e);
+    this.initialY = this.getPointerPos(e);
 
     this.swiped = false;
 
@@ -80,7 +80,7 @@ class Draggable {
     
     // get offset from initial pos
     
-    const currentY = this.getCursorPos(e);
+    const currentY = this.getPointerPos(e);
     
     this.offsetY = currentY - this.initialY;
     
@@ -103,7 +103,7 @@ class Draggable {
       
       const requiredMovement = this.options.requiredMovement;
       
-      // check if the cursor was dragged
+      // check if the pointer was dragged
       // enough to be counted as a swipe
       this.swiped = (Math.abs(this.offsetY) > requiredMovement);
     
@@ -136,7 +136,7 @@ class Draggable {
   }
   
   
-  getCursorPos(e) {
+  getPointerPos(e) {
     
     if (e.type.startsWith('touch')) {
       
