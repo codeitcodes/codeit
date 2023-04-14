@@ -6,17 +6,17 @@
  *
    const draggable = new Draggable(el, ?options);
  *
- * > options [object] - { requiredMovement [px] }
+   > options [object] - { requiredMovement [px] }
  * 
  * Then add event listeners:
  *
    draggable.on(type, callback(event));
  * 
- * > type [string] - 'drag' | 'swipe'
- * < event [returned object] - {
- * <   offset [px],
- * <   direction [string] - 'up' | 'down'
- * < }
+   > type [string] - 'drag' | 'swipe'
+   < event [object] - {
+   <   offset [px],
+   <   direction [string] - 'up' | 'down'
+   < }
  *
  */
 
