@@ -17,27 +17,49 @@ let consoleSheet = {
   },
 
   init: function() {
-
-    this.el.close.addEventListener('click', () => {
+    
+    // init draggable
+    consoleSheet.draggable = new Draggable(consoleSheet);
+    
+    const draggable = consoleSheet.draggable;
+    
+    
+    // if swiped down, hide
+    draggable.on('swipe', (e) => {
+      
+      if (e.direction === 'down' &&
+          consoleSheet.isVisible()) {
+        
+        // hide live view console
+        consoleSheet.hide();
+        
+      }
+      
+    });
+    
+    
+    // on click of close button, background, or live view header, hide
+    
+    consoleSheet.el.close.addEventListener('click', () => {
 
       // hide live view console
-      consoleSheet.el.sheet.classList.remove('visible');
+      consoleSheet.hide();
 
     });
 
-    this.el.bg.addEventListener('click', () => {
+    consoleSheet.el.bg.addEventListener('click', () => {
 
       // hide live view console
-      consoleSheet.el.sheet.classList.remove('visible');
+      consoleSheet.hide();
 
     });
-
+    
     bottomWrapper.addEventListener('touchstart', () => {
 
-      if (this.el.sheet.classList.contains('visible')) {
+      if (consoleSheet.isVisible()) {
 
         // hide live view console
-        consoleSheet.el.sheet.classList.remove('visible');
+        consoleSheet.hide();
 
       }
 
@@ -177,6 +199,24 @@ let consoleSheet = {
 
     consoleSheet.el.items.scrollTo(0, consoleSheet.el.items.scrollHeight);
 
+  },
+  
+  show: function() {
+    
+    consoleSheet.el.sheet.classList.add('visible');
+    
+  },
+  
+  hide: function() {
+    
+    consoleSheet.el.sheet.classList.remove('visible');
+    
+  },
+  
+  isVisible: function() {
+    
+    return consoleSheet.el.sheet.classList.contains('visible');    
+    
   },
 
   logger: {
