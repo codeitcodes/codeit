@@ -544,7 +544,7 @@ if (isMobile) {
   liveMenuConsole.addEventListener('click', () => {
     
     // show live view console
-    consoleSheet.el.sheet.classList.add('visible');
+    consoleSheet.show();
     
   });
   
