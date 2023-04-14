@@ -371,7 +371,9 @@ async function setupLiveView() {
 function addBottomSwipeListener() {
   
   // init draggable
-  const draggable = new Draggable(bottomWrapper);
+  bottomWrapper.draggable = new Draggable(bottomWrapper);
+  
+  const draggable = bottomWrapper.draggable;
   
   
   // on swipe
