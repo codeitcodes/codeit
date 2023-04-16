@@ -18,10 +18,10 @@ let consoleSheet = {
 
   init: function() {
     
-    // init draggable
-    consoleSheet.draggable = new Draggable(consoleSheet);
+    // init Draggable
+    consoleSheet.Draggable = new Draggable(consoleSheet);
     
-    const draggable = consoleSheet.draggable;
+    const draggable = consoleSheet.Draggable;
     
     
     // if swiped down, hide
@@ -54,8 +54,8 @@ let consoleSheet = {
 
     });
     
-    bottomWrapper.addEventListener('touchstart', () => {
-
+    bottomWrapper.Draggable.on('swipe', (e) => {
+      
       if (consoleSheet.isVisible()) {
 
         // hide live view console
