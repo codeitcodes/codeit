@@ -1,22 +1,29 @@
 
 /*
  * Draggable.js
+ * ------------
  *
- * To use, create a new instance:
+ * Usage
+ *
+ * 1. Create a new instance
  *
    const draggable = new Draggable(el, ?options);
  *
    > options [object] - { requiredMovement [px] }
  * 
- * Then add event listeners:
+ * 2. Add event listeners
  *
-   draggable.on(type, callback(event));
+   const listener = draggable.on(eventType, callback(event));
  * 
-   > type [string] - 'drag' | 'swipe'
+   > eventType [string] - 'drag' | 'swipe'
    < event [object] - {
    <   offset [px],
    <   direction [string] - 'up' | 'down'
    < }
+ *
+ * 2. Note. You can remove listeners with:
+ *
+   draggable.removeListener(eventType, listener);
  *
  */
 
@@ -29,8 +36,8 @@ class Draggable {
     this.options = {
       requiredMovement: 30, // to be counted as a swipe
       eventHooks: {
-        drag: null,
-        swipe: null
+        drag: [],
+        swipe: []
       }
     };
     
@@ -56,9 +63,18 @@ class Draggable {
   }
   
   
-  on(event, callback) {
+  on(eventType, callback) {
     
-    this.options.eventHooks[event] = callback;
+    this.options.eventHooks[eventType].push(callback);
+    
+    return this.options.eventHooks.length;
+    
+  }
+  
+  removeListener(eventType, index) {
+    
+    // pop item from array
+    this.options.eventHooks[eventType]
     
   }
   
@@ -164,17 +180,21 @@ class Draggable {
     
   }
   
-  callEventHook(type, data = null) {
+  callEventHook(eventType, data = null) {
     
     const hooks = this.options.eventHooks;
     
-    if (hooks[type]) hooks[type](data);
+    hooks[eventType].forEach(hook => {
+      
+      hook(data);
+      
+    });
     
   }
   
-  addElListener(type, callback) {
+  addElListener(eventType, callback) {
     
-    this.el.addEventListener(type, callback.bind(this));
+    this.el.addEventListener(eventType, callback.bind(this));
     
   }
   
