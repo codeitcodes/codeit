@@ -23,7 +23,7 @@
  *
  * 2. Note. You can remove listeners with:
  *
-   draggable.removeListener(eventType, listener);
+   draggable.removeListener(listener);
  *
  */
 
@@ -67,14 +67,16 @@ class Draggable {
     
     this.options.eventHooks[eventType].push(callback);
     
-    return this.options.eventHooks.length;
+    return [eventType, this.options.eventHooks.length];
     
   }
   
-  removeListener(eventType, index) {
+  removeListener(event) {
     
-    // pop item from array
-    this.options.eventHooks[eventType]
+    const [eventType, index] = event;
+    
+    // remove listener from array
+    this.options.eventHooks[eventType].splice(index, 1);
     
   }
   
