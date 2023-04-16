@@ -76,7 +76,7 @@ let consoleSheet = {
 
 
     // toggle input empty indicator on type
-    input.on('keyup', (e) => {
+    input.on('keydown', (e) => {
 
       if (!cd.typed(e)) return;
 
