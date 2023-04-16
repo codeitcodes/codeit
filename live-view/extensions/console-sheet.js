@@ -19,7 +19,7 @@ let consoleSheet = {
   init: function() {
     
     // init Draggable
-    consoleSheet.Draggable = new Draggable(consoleSheet);
+    consoleSheet.Draggable = new Draggable(consoleSheet.el.sheet);
     
     const draggable = consoleSheet.Draggable;
     
