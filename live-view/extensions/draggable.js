@@ -58,30 +58,33 @@ class Draggable {
     }
     
     
-    this.addDragListeners();
+    this.#addDragListeners();
     
   }
   
   
   on(eventType, callback) {
     
-    this.options.eventHooks[eventType].push(callback);
+    const hooks = this.options.eventHooks[eventType];
     
-    return [eventType, this.options.eventHooks.length];
+    hooks.push(callback);
+    
+    return [eventType, hooks.length];
     
   }
   
-  removeListener(event) {
+  removeListener(listener) {
     
-    const [eventType, index] = event;
+    const [eventType, index] = listener;
+    const hooks = this.options.eventHooks[eventType];
     
     // remove listener from array
-    this.options.eventHooks[eventType].splice(index, 1);
+    hooks.splice(index, 1);
     
   }
   
   
-  addDragListeners() {
+  #addDragListeners() {
       
     this.initialY = 0;
     this.offsetY = 0;
@@ -90,29 +93,29 @@ class Draggable {
 
     this.swiped = false;    
     
-    this.addElListener('touchstart', this.touchStart);
-    this.addElListener('touchmove', this.touchMove);
-    this.addElListener('touchend', this.touchEnd);
+    this.#addElListener('touchstart', this.touchStart);
+    this.#addElListener('touchmove', this.touchMove);
+    this.#addElListener('touchend', this.touchEnd);
     
   }
   
   
-  touchStart(e) {
+  #touchStart(e) {
 
-    this.initialY = this.getPointerPos(e);
+    this.initialY = this.#getPointerPos(e);
 
     this.swiped = false;
 
   }
 
-  touchMove(e) {
+  #touchMove(e) {
 
     e.preventDefault();
 
     
     // get offset from initial pos
     
-    const currentY = this.getPointerPos(e);
+    const currentY = this.#getPointerPos(e);
     
     this.offsetY = currentY - this.initialY;
     
@@ -141,7 +144,7 @@ class Draggable {
     
       if (this.swiped) {
         
-        this.callEventHook('swipe', {
+        this.#callEventHook('swipe', {
           offset: this.offsetY,
           direction: this.direction
         });
@@ -151,7 +154,7 @@ class Draggable {
     }
 
     
-    this.callEventHook('drag', {
+    this.#callEventHook('drag', {
       offset: this.offsetY,
       direction: this.direction,
       swiped: this.swiped
@@ -159,16 +162,21 @@ class Draggable {
 
   }
 
-  touchEnd(e) {
+  #touchEnd(e) {
     
     // reset values
+    
+    this.initialY = 0;
     this.offsetY = 0;
+    
+    this.direction = null;
+    
     this.swiped = false;
 
   }
   
   
-  getPointerPos(e) {
+  #getPointerPos(e) {
     
     if (e.type.startsWith('touch')) {
       
@@ -182,7 +190,7 @@ class Draggable {
     
   }
   
-  callEventHook(eventType, data = null) {
+  #callEventHook(eventType, data = null) {
     
     const hooks = this.options.eventHooks;
     
@@ -194,7 +202,7 @@ class Draggable {
     
   }
   
-  addElListener(eventType, callback) {
+  #addElListener(eventType, callback) {
     
     this.el.addEventListener(eventType, callback.bind(this));
     
