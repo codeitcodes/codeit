@@ -77,27 +77,20 @@ let consoleSheet = {
 
 
     // toggle input empty indicator on type
-    input.on('keydown', (e) => {
+    input.on('input', (e) => {
 
-      if (!cd.typed(e)) return;
+      // toggle input empty indicator
 
-      // wait until finished typing
-      onNextFrame(() => {
+      const empty = (input.textContent === '' || input.textContent === '\n');
 
-        // toggle input empty indicator
-
-        const empty = (input.textContent === '' || input.textContent === '\n');
-
-        this.el.footer.classList.toggle('empty', empty);
+      this.el.footer.classList.toggle('empty', empty);
 
 
-        const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
+      const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
 
-        const returnEnabled = (text !== '');
+      const returnEnabled = (text !== '');
 
-        this.el.footer.classList.toggle('return-enabled', returnEnabled);
-
-      });
+      this.el.footer.classList.toggle('return-enabled', returnEnabled);
 
     });
     
