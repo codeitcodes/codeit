@@ -5,7 +5,8 @@ let consoleSheet = {
   el: {
 
     sheet: document.querySelector('.console-sheet'),
-
+  
+    header: document.querySelector('.console-sheet .header'),
     close: document.querySelector('.console-sheet .header .close'),
     items: document.querySelector('.console-sheet .items'),
     footer: document.querySelector('.console-sheet .footer'),
@@ -19,7 +20,7 @@ let consoleSheet = {
   init: function() {
     
     // init Draggable
-    consoleSheet.Draggable = new Draggable(consoleSheet.el.sheet);
+    consoleSheet.Draggable = new Draggable(consoleSheet.el.header);
     
     const draggable = consoleSheet.Draggable;
     
