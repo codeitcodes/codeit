@@ -178,8 +178,6 @@ workerChannel.addEventListener('message', (event) => {
   
 });
 
-if (self.origin === 'https://dev.codeit.codes') self.registration.update();
-
 
 // handle fetch request
 function handleFetchRequest(request, event) {
