@@ -3,10 +3,6 @@
 // service worker/client communication channel
 
 
-// update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v661';
-
-
 // internal paths
 const INTERNAL_PATHS = {
 
@@ -25,6 +21,8 @@ const INTERNAL_PATHS = {
 
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+const isDev = (self.origin === 'https://dev.codeit.codes');
 
 
 // key                : value
