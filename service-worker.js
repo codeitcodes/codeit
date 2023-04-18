@@ -87,7 +87,7 @@ caches.keys().then((keyList) => {
   }));
 });
 
-if (!isDev) {
+if (isDev) {
   
   // precache static resources
   caches.open(WORKER_NAME).then((cache) => {
