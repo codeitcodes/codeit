@@ -1,6 +1,11 @@
-'use strict';
+
+
+// update worker name when updating worker
+const WORKER_NAME = 'codeit-worker-v661';
+
 
 self.importScripts('/worker/client-channel.js');
+
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -82,10 +87,14 @@ caches.keys().then((keyList) => {
   }));
 });
 
-// precache static resources
-caches.open(WORKER_NAME).then((cache) => {
-  return cache.addAll(FILES_TO_CACHE);
-});
+if (!isDev) {
+  
+  // precache static resources
+  caches.open(WORKER_NAME).then((cache) => {
+    return cache.addAll(FILES_TO_CACHE);
+  });
+  
+}
 
 
 self.addEventListener('install', (evt) => {
