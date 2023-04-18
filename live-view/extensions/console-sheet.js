@@ -79,19 +79,23 @@ let consoleSheet = {
     // toggle input empty indicator on type
     input.on('input', (e) => {
 
-      // toggle input empty indicator
-
-      const empty = (input.textContent === '' || input.textContent === '\n');
-
-      this.el.footer.classList.toggle('empty', empty);
-
-
-      const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
-
-      const returnEnabled = (text !== '');
-
-      this.el.footer.classList.toggle('return-enabled', returnEnabled);
-
+      onNextFrame(() => {
+  
+        // toggle input empty indicator
+  
+        const empty = (input.textContent === '' || input.textContent === '\n');
+  
+        this.el.footer.classList.toggle('empty', empty);
+  
+  
+        const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
+  
+        const returnEnabled = (text !== '');
+  
+        this.el.footer.classList.toggle('return-enabled', returnEnabled);
+      
+      });
+      
     });
     
     
