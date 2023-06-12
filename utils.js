@@ -739,8 +739,23 @@ Element.prototype.on = (events, callback, passive) => {
 }
 
 
-// focus cursor to end of element
-let focusCursorToEnd = (el) => {
+// caret
+
+// select all of element
+let selectAllCaret = (el) => {
+  
+  // focus element
+  el.focus();
+
+  const s = window.getSelection();
+  
+  // select all
+  s.selectAllChildren(el);
+  
+}
+
+// focus caret to end of element
+let focusCaretToEnd = (el) => {
   
   // focus element
   el.focus();
@@ -750,7 +765,7 @@ let focusCursorToEnd = (el) => {
   // if child nodes exist
   if (nodes.length !== 0) {
 
-    // move cursor to end of input
+    // move caret to end of input
     const s = window.getSelection();
     s.setBaseAndExtent(nodes[0], nodes[0].length, nodes[0], nodes[0].length);
 
