@@ -173,13 +173,11 @@ let consoleSheet = {
 
     consoleSheet.logger.log(codeToRun, 'input');
 
-    codeToRun = codeToRun.replaceAll('`', '\`');
-
     let resp = '';
 
     try {
 
-      resp = new Function('return eval(`' + codeToRun + '`)')();
+      resp = eval(codeToRun);
 
       consoleSheet.logger.log(resp, 'resp');
 
