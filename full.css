@@ -896,7 +896,7 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
   transition-property: padding-left, max-width;
 }
 
-body.mobile .sidebar .header .logo {
+body:not(.mobile) .sidebar .header .logo {
   overflow-x: scroll;
   padding-top: 10px;
 }
