@@ -2328,7 +2328,7 @@ function createNewRepoInHTML() {
       
       const repoName = repoEl.querySelector('.name');
       
-      focusCursorToEnd(repoName);
+      focusCaretToEnd(repoName);
       
     });
     
@@ -2493,7 +2493,7 @@ function createNewRepoInHTML() {
     
     const newRepoName = fileWrapper.querySelector('.item.focused .name');
     
-    focusCursorToEnd(newRepoName);
+    selectAllCaret(newRepoName);
     
   }
 
@@ -2859,7 +2859,7 @@ function createNewFileInHTML() {
     
     const newFileName = fileWrapper.querySelector('.item.focused .name');
     
-    focusCursorToEnd(newFileName);
+    selectAllCaret(newFileName);
     
   }
 
