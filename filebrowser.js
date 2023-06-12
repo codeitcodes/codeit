@@ -2490,10 +2490,12 @@ function createNewRepoInHTML() {
   } else {
 
     // if already adding a new repo, focus it
-    
-    const newRepoName = fileWrapper.querySelector('.item.focused .name');
+
+    const newRepo = fileWrapper.querySelector('.item.focused'),
+          newRepoName = newRepo.querySelector('.name');
     
     selectAllCaret(newRepoName);
+    newRepo.scrollIntoViewIfNeeded();
     
   }
 
@@ -2856,10 +2858,12 @@ function createNewFileInHTML() {
   } else {
 
     // if already adding a new file, focus it
-    
-    const newFileName = fileWrapper.querySelector('.item.focused .name');
+
+    const newFile = fileWrapper.querySelector('.item.focused'),
+          newFileName = newRepo.querySelector('.name');
     
     selectAllCaret(newFileName);
+    newFile.scrollIntoViewIfNeeded();
     
   }
 
