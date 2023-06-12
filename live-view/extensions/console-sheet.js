@@ -125,7 +125,7 @@ let consoleSheet = {
 
       });
 
-      input.on('focus', () => { // focusin
+      input.on('focus', () => {
 
         window.scrollTo(0, 0);
 
@@ -217,10 +217,7 @@ let consoleSheet = {
 
     log: function(code, type, highlight = true) {
 
-      if (!type) type = '';
-
       let icon = this.icons[type];
-      if (!icon) icon = '';
 
       let codeEl;
       let closingCodeEl;
