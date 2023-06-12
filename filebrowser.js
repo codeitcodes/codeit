@@ -2860,7 +2860,7 @@ function createNewFileInHTML() {
     // if already adding a new file, focus it
 
     const newFile = fileWrapper.querySelector('.item.focused'),
-          newFileName = newRepo.querySelector('.name');
+          newFileName = newFile.querySelector('.name');
     
     selectAllCaret(newFileName);
     newFile.scrollIntoViewIfNeeded();
