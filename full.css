@@ -887,14 +887,18 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
 }
 
 .sidebar .header .logo {
-  padding: 7px 0;
   font-weight: 600;
   color: rgba(241,241,242,0.92);
   max-width: calc(var(--sidebar-width) - 139px - 16px - 7px - 7px);
-  overflow-x: overlay;
+  overflow-x: auto;
   white-space: nowrap;
   transition: .18s var(--ease-function);
   transition-property: padding-left, max-width;
+}
+
+body.mobile .sidebar .header .logo {
+  overflow-x: scroll;
+  padding-top: 10px;
 }
 
 .sidebar .header .logo::before,
