@@ -92,7 +92,7 @@ let logger = {
       if (originURL.endsWith('/')) originURL = originURL.slice(0, -1);
       
       // remove all origin URL occurences from error message
-      errorMessage = errorMessage.replaceAll(href, '');
+      errorMessage = errorMessage.replaceAll(originURL, '');
       
       
       // escape message HTML
@@ -132,7 +132,7 @@ let logger = {
       
       // parse log argument data
       const arguments = logger.utils.parseLogData(rawData);
-      
+            
       // call log callback
       logger.log({
         type: funcName,
@@ -162,11 +162,11 @@ let logger = {
       data.forEach(argument => {
         
         // parse argument
-        let parsedArgument = logger.utils.stringify(item);
+        let parsedArgument = logger.utils.stringify(argument);
         parsedArgument = logger.utils.escapeHTML(parsedArgument);
         
         // get argument type
-        const argumentType = logger.utils.getType(argument);
+        const argumentType = logger.utils.typeOf(argument);
         
         const shouldHighlight = logger.utils.shouldHighlightType(argumentType);
         
@@ -195,33 +195,10 @@ let logger = {
       
     },
     
-    getType: (o) => {
+    // see https://stackoverflow.com/a/13926334
+    typeOf: (obj) => {
       
-      // get out fast with primitives that don't like toString
-      
-      if (o === null) {
-        return 'null';
-      }
-      
-      if (typeof o === 'undefined') {
-        return 'undefined';
-      }
-
-
-      // determine the type
-      
-      try {
-        
-        type = ({}).toString.call(o);
-        
-      } catch (e) { // only happens when typeof is protected (...randomly)
-      
-        type = '[object Object]';
-        
-      }
-      
-      
-      return type;
+      return ({}).toString.call(obj).match(/\s(\w+)/)[1].toLowerCase();
       
     },
     
