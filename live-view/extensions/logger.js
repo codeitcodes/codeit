@@ -8,18 +8,26 @@
  *
  * usage:
  * 
-   logger.init(logCallback, window);
+   logger.init(contextWindow, logCallback(e), ?options);
  *
  * definitions:
  *
- * logCallback(type, processedData, rawData)
+ * logCallback({ type, arguments: [{ data, shouldHighlight, dataType, rawData }] })
  *
- * > type [string] - one of the console message types. (function names)
-                     you can style ['warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
+ * > type [string] - the log type.
+                     you might like to style ['warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
                      see https://developer.mozilla.org/en-US/docs/Web/API/console for more info about the possible types.
- * > processedData [array of strings] - an array of escaped HTML containing the log data.
-                                        you can join(' ')
- * > rawData [array] - an array of the raw arguments that were passed to the console function.
+ *
+ * > arguments [array] - an array of the arguments passed to the console function.
+ *
+ * >> argument.data [string] - the stringified, HTML-escaped argument.
+ *
+ * >> argument.shouldHighlight [boolean] - specifies whether you should highlight the argument data using a syntax highlighter.
+                                           by default, options.shouldNotHighlightDataTypes = ['string'].
+ *
+ * >> argument.dataType [string] - the argument's type (eg. 'string', 'object', 'array').
+ *
+ * >> argument.rawData [argument.dataType] - the raw argument.
  *
  */
 
@@ -34,14 +42,13 @@ let logger = {
   overrides: {}, // original console functions before overriding
   
   options: {
-    shouldNotHighlightTypes: ['string'],
+    shouldNotHighlightDataTypes: ['string'],
     enableBrowserConsole: true
   },
   
-  init: (logCallback, contextWindow, options = {}) => {
+  init: (contextWindow, logCallback, options = {}) => {
 
     logger.cW = contextWindow;
-    
     logger.log = logCallback;
     
     // apply options
@@ -173,8 +180,9 @@ let logger = {
         // push parsed argument to array
         resp.push({
           data: parsedArgument,
+          shouldHighlight: shouldHighlight,
           dataType: argumentType,
-          shouldHighlight: shouldHighlight
+          rawData: argument
         });
         
       });
@@ -185,7 +193,7 @@ let logger = {
     
     shouldHighlightType: (type) => {
       
-      const notHighlightTypes = logger.options.shouldNotHighlightTypes;
+      const notHighlightTypes = logger.options.shouldNotHighlightDataTypes;
       
       const shouldNotHighlight = notHighlightTypes.includes(type);
       
