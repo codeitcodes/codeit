@@ -465,6 +465,7 @@ body.notransition .live-view.file-open {
   max-width: unset;
 }
 
+/* Todo */
 .live-view .console {
   height: 100%;
   background: #1a1c24;
@@ -1967,7 +1968,8 @@ body:not(.mobile) .sheet {
   overflow-y: scroll;
 }
 
-.sheet .items .item {
+
+.console-sheet .logs .log {
   display: flex;
   align-items: start;
   flex-flow: column;
@@ -1979,12 +1981,12 @@ body:not(.mobile) .sheet {
   border-bottom: 1px solid #f1f1f21c;
 }
 
-.sheet .items .item:last-of-type,
-.sheet .items .item.no-border-bottom {
+.console-sheet .logs .log:last-of-type,
+.console-sheet .logs .log.no-border-bottom {
   border-bottom: 0;
 }
 
-.sheet .items .item .icon {
+.console-sheet .logs .log .icon {
   color: #636d83;
   width: 18px;
   height: 18px;
@@ -1992,12 +1994,12 @@ body:not(.mobile) .sheet {
   margin-top: 3px;
 }
 
-.sheet .items .item:is(.warning, .error, .debug) .icon {
+.console-sheet .logs .log:is(.warning, .error, .debug) .icon {
   color: inherit;
   opacity: .72;
 }
 
-.sheet .items .item .code {
+.console-sheet .logs .log .data {
   white-space: pre-wrap;
   flex: 1;
   margin-left: calc(10.5px + 18px);
@@ -2013,7 +2015,7 @@ body:not(.mobile) .sheet {
   overflow: visible;
 }
 
-.sheet .items .item.warning {
+.console-sheet .logs .log.warning {
   color: hsl(15deg 57% 76%); /* #e5b09f */
   background: hsl(15deg 57% 76% / 4%);
   box-shadow: inset 0 0 0 1px hsl(15deg 57% 76% / 11%);
@@ -2021,7 +2023,7 @@ body:not(.mobile) .sheet {
   box-shadow: 0 -1px 0 0 hsl(0deg 8% 17%);
 }
 
-.sheet .items .item.error {
+.console-sheet .logs .log.error {
   color: hsl(354deg 61% 73%); /* #e49199 */
   background: hsl(354deg 61% 73% / 4%);
   box-shadow: inset 0 0 0 1px hsl(354deg 61% 73% / 11%);
@@ -2029,35 +2031,35 @@ body:not(.mobile) .sheet {
   box-shadow: 0 -1px 0 0 hsl(337deg 16% 16%);
 }
 
-.sheet .items .item.debug {
+.console-sheet .logs .log.debug {
   color: hsl(220deg 100% 65%);
 }
 
-.sheet .items .item:is(.undefined, .null) {
+.console-sheet .logs .log:is(.undefined, .null) {
   color: hsl(218deg 7% 64% / 72%);
 }
 
-.sheet .items .item .actions {
+.console-sheet .logs .log .actions {
   display: flex;
   margin-top: 7px;
   margin-left: calc(10.5px + 18px);
 }
 
-.sheet .items .item .action {
+.console-sheet .logs .log .action {
   color: var(--rosemary-lightness-deluxe);
 }
 
-.sheet .items .item .action:active,
-body:not(.mobile) .sheet .items .item .action:hover {
+.console-sheet .logs .log .action:active,
+body:not(.mobile) .console-sheet .logs .log .action:hover {
   text-decoration: underline;
 }
 
-.sheet .items .item .actions .seperator {
+.console-sheet .logs .log .actions .seperator {
   margin: 0 7px;
   color: #636d83;
 }
 
-.sheet .items .item .source {
+.console-sheet .logs .log .source {
   position: relative;
   /* opacity: .5; */
   color: #636d83;
@@ -2076,7 +2078,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   padding-right: 76.8px;
 }
 
-.sheet .footer {
+.console-sheet .footer {
   display: flex;
   align-items: end;
   justify-content: center;
@@ -2085,7 +2087,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   /* background: hsl(229deg 30% 16% / 34%); */
 }
 
-.sheet .footer .input {
+.console-sheet .footer .input {
   /* background: hsl(230deg 28% 18%); */
   /* background: hsl(230deg 26% 15%); */
   background: hsl(230deg 27% 15%);
@@ -2105,7 +2107,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   position: relative;
 }
 
-.sheet .footer.empty .input::before {
+.console-sheet .footer .input:empty::before {
   content: 'Type code...';
   color: #636d83;
   pointer-events: none;
@@ -2114,7 +2116,7 @@ body:not(.mobile) .sheet .items .item .action:hover {
   -webkit-user-select: none;
 }
 
-.sheet .footer .return {
+.console-sheet .footer .return {
   background: var(--rosemary-blue);
   color: #dcddde;
   margin: 0;
@@ -2126,18 +2128,18 @@ body:not(.mobile) .sheet .items .item .action:hover {
   transition-property: margin, transform, opacity; */
 }
 
-.sheet .footer .return:active {
+.console-sheet .footer .return:active {
   color: rgba(255,255,255,0.25);
   background: hsla(223deg 88% 52% / 50%) !important;
 }
 
-.sheet .footer.return-enabled .return {
+.console-sheet .footer.return-enabled .return {
   margin-left: 10.5px;
   opacity: 1;
   transform: none;
 }
 
-.sheet .footer .return path {
+.console-sheet .footer .return path {
   transition: none !important;
   opacity: 1 !important;
 }
