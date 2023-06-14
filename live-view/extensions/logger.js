@@ -31,9 +31,6 @@
  *
  */
 
-// next steps:
-// - custom Prism theme for objects & arrays
-
 let logger = {
 
   log: null, // log callback
