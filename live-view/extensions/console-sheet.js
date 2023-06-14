@@ -1,39 +1,24 @@
 
 // mobile console sheet
 
-let consoleSheet = {
-
-  el: {
-
-    sheet: document.querySelector('.console-sheet'),
+class ConsoleSheet {
   
-    header: document.querySelector('.console-sheet .header'),
-    close: document.querySelector('.console-sheet .header .close'),
-    items: document.querySelector('.console-sheet .items'),
-    footer: document.querySelector('.console-sheet .footer'),
-    input: document.querySelector('.console-sheet .footer .input'),
-    'return': document.querySelector('.console-sheet .footer .return'),
-
-    bg: document.querySelector('.sheet-background')
-
-  },
-
-  init: function() {
+  constructor() {
     
     // init Draggable
-    consoleSheet.Draggable = new Draggable(consoleSheet.el.header);
+    this.Draggable = new Draggable(this.el.header);
     
-    const draggable = consoleSheet.Draggable;
+    const draggable = this.Draggable;
     
     
     // if swiped down, hide
     draggable.on('swipe', (e) => {
       
       if (e.direction === 'down' &&
-          consoleSheet.isVisible()) {
+          this.isVisible()) {
         
         // hide live view console
-        consoleSheet.hide();
+        this.hide();
         
       }
       
@@ -42,26 +27,26 @@ let consoleSheet = {
     
     // on click of close button, background, or live view header, hide
     
-    consoleSheet.el.close.addEventListener('click', () => {
+    this.el.close.addEventListener('click', () => {
 
       // hide live view console
-      consoleSheet.hide();
+      this.hide();
 
     });
 
-    consoleSheet.el.bg.addEventListener('click', () => {
+    this.el.bg.addEventListener('click', () => {
 
       // hide live view console
-      consoleSheet.hide();
+      this.hide();
 
     });
     
     bottomWrapper.Draggable.on('swipe', (e) => {
       
-      if (consoleSheet.isVisible()) {
+      if (this.isVisible()) {
 
         // hide live view console
-        consoleSheet.hide();
+        this.hide();
 
       }
 
@@ -77,15 +62,17 @@ let consoleSheet = {
     const input = this.el.input;
 
 
-    // toggle input empty indicator on type
+    // change input state on type
     input.on('input', (e) => {
 
-      // toggle input empty indicator
+      // toggle input placeholder
 
       const empty = (input.textContent === '' || input.textContent === '\n');
 
       this.el.footer.classList.toggle('empty', empty);
 
+
+      // toggle input return button
 
       const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
 
@@ -157,22 +144,22 @@ let consoleSheet = {
 
     this.el.return.addEventListener('click', this.runCode);
 
-  },
+  }
 
-  runCode: function() {
+  runCode() {
 
-    const input = consoleSheet.el.input;
+    const input = this.el.input;
 
     let codeToRun = input.textContent;
 
     input.textContent = '';
     input.focus();
 
-    consoleSheet.el.footer.classList.remove('return-enabled');
-    consoleSheet.el.footer.classList.add('empty');
+    this.el.footer.classList.remove('return-enabled');
+    this.el.footer.classList.add('empty');
 
 
-    consoleSheet.logger.log(codeToRun, 'input');
+    this.logger.log(codeToRun, 'input');
 
     let resp = '';
 
@@ -180,67 +167,112 @@ let consoleSheet = {
 
       resp = eval(codeToRun);
 
-      consoleSheet.logger.log(resp, 'resp');
+      this.logger.log(resp, 'resp');
 
     } catch (e) {
 
       resp = e;
 
-      consoleSheet.logger.log(resp, 'error', false);
+      this.logger.log(resp, 'error', false);
 
     }
 
-    consoleSheet.el.items.scrollTo(0, consoleSheet.el.items.scrollHeight);
+    this.el.items.scrollTo(0, this.el.items.scrollHeight);
 
-  },
+  }
   
-  show: function() {
+  show() {
     
-    consoleSheet.el.sheet.classList.add('visible');
+    this.el.sheet.classList.add('visible');
     
-  },
+  }
   
-  hide: function() {
+  hide() {
     
-    consoleSheet.el.sheet.classList.remove('visible');
+    this.el.sheet.classList.remove('visible');
     
-  },
+  }
   
-  isVisible: function() {
+  isVisible() {
     
-    return consoleSheet.el.sheet.classList.contains('visible');    
+    return this.el.sheet.classList.contains('visible');    
     
-  },
+  }
+  
+  
+  logger = {
 
-  logger: {
-
-    log: function(code, type, highlight = true) {
-
-      let icon = this.icons[type];
-
-      let codeEl;
-      let closingCodeEl;
-
-      if (highlight) {
-
-        codeEl = `<cd-el class="code" edit="false" lang="js">`;
-        closingCodeEl = `</cd-el>`;
-
-      } else {
-
-        codeEl = `<div class="code">`;
-        closingCodeEl = '</div>';
-
-      }
-
-      const logHTML = `
-      <div class="item ` + type + `">
+    styledLogTypes: ['input', 'resp', 'warning', 'error', 'debug', 'clear'],
+    
+    renderLog(e) {
+      
+      const output = this.el.output;
+      
+      let out = '';
+      
+      e.arguments.forEach(argument => {
+        
+        let data = argument.data;
+        
+        if (argument.shouldHighlight) {
+          
+          data = cd.highlightText()
+          
+        }
+        
+        // add spaces between adjacent arguments
+        out += data + ' ';
+        
+      });
+      
+      // remove trailing space
+      out = out.slice(0, -1);
+      
+      
+      // wrap log data in element
+      // and add icon
+      
+      const icon = this.logger.getLogIcon(e.type);
+  
+      out = `
+      <div class="log ` + e.type + `">
         ` + icon + `
-        ` + codeEl + escapeHTML(code) + closingCodeEl + `
+        <div class="data">` + out + `</div>
       </div>
       `;
+      
+      
+      // place log in HTML
+      output.innerHTML += out;
+      
+    },
+   
+    getLogIcon(type) {
+      
+      let icon = this.logger.icons[type];
+      
+      if (!icon) icon = '';
+      
+      return icon;
+      
+    },
+    
+  }
 
-      consoleSheet.el.items.innerHTML += logHTML;
+  logger: {
+    
+    logCallback: function(type, arguments) {
+
+    if (e.type === 'clear') {
+      
+      
+      
+      output.innerHTML = '';
+      
+      return;
+      
+    }
+
 
     },
 
@@ -262,8 +294,6 @@ let consoleSheet = {
         </g>
       </svg>
       `,
-      
-      log: ``,
       
       warning: `
       <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -288,7 +318,22 @@ let consoleSheet = {
 
     }
 
-  }
+  };
+
+  el = {
+
+    sheet: document.querySelector('.console-sheet'),
+  
+    header: document.querySelector('.console-sheet .header'),
+    close: document.querySelector('.console-sheet .header .close'),
+    output: document.querySelector('.console-sheet .output'),
+    footer: document.querySelector('.console-sheet .footer'),
+    input: document.querySelector('.console-sheet .footer .input'),
+    'return': document.querySelector('.console-sheet .footer .return'),
+
+    bg: document.querySelector('.sheet-background')
+
+  };
 
 }
 
