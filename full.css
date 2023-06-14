@@ -2144,6 +2144,10 @@ body:not(.mobile) .console-sheet .logs .log .action:hover {
   opacity: 1 !important;
 }
 
+body.mobile:has(> .console-sheet.visible) {
+  background: #0f1014;
+}
+
 
 .sheet-background {
   position: fixed;
@@ -2917,10 +2921,6 @@ body.mobile {
 
 body.mobile.expanded {
   background: #1a1c24;
-}
-
-body.mobile:has(> .console-sheet.visible) {
-  background: #0f1014;
 }
 
 body.mobile.expanded .cd-wrapper {
