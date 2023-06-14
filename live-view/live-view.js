@@ -1083,39 +1083,12 @@ async function handleLiveViewRequest(requestPath) {
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
 
-  // if iOS version is lower than minimum
-
-  if (isSafari) {
-    
-    const safariVersion = Number(navigator.userAgent.split('Version/')[1].split(' Safari')[0]);
-    
-    if (safariVersion < 15.4) {
-    
-      // show message and return
-      
-      liveView.innerHTML = `
-      <div class="prompt">
-        <div class="title">Upgrade iOS to run this file</div>
-        <a class="desc link" href="https://support.apple.com/kb/HT204204" target="_blank">Here's how</a>
-      </div>
-      `;
-      
-      liveView.classList.add('centered-contents');
-      liveView.classList.add('loaded');
-      
-      return;
-      
-    }
-    
-  }
-
-
   // if service worker isn't installed yet
   if (workerInstallPromise) {
         
     // wait until finished installing
     await workerInstallPromise;
-            
+    
   }
   
   if (!workerClientId) await workerInstallPromise;
@@ -1128,8 +1101,16 @@ async function renderLiveViewHTML(file) {
   
 
   const liveFrame = liveView.querySelector('.live-frame');
+  const liveFrameWindow = liveFrame.contentWindow;
 
-  liveFrame.contentWindow.addEventListener('load', () => {
+  if (isMobile) {
+    
+    // setup live view console
+    Logger.init(liveFrameWindow, consoleSheet.logCallback);
+    
+  }
+
+  liveFrameWindow.addEventListener('load', () => {
     
     liveView.classList.add('loaded');
     
