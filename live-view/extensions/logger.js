@@ -40,7 +40,7 @@
 
 // next steps:
 // - custom Prism theme for objects & arrays
-// - promise parsing?
+// - expandable objects
 
 let logger = {
 
