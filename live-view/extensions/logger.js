@@ -2,20 +2,27 @@
 /*
  * logger
  * ------
- * override and display logs
+ * display logs and run code
  *
  * --- 
  *
  * usage:
  * 
+ * - init
+ *
    logger.init(contextWindow, logCallback(e), ?options);
+ *
+ * - run code with
+ * 
+   logger.run(code);
+ *
  *
  * definitions:
  *
  * logCallback({ type, arguments: [{ data, shouldHighlight, dataType, rawData }] })
  *
  * > type [string] - the log type.
-                     you might like to style ['warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
+                     you might like to style ['resp', 'warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
                      see https://developer.mozilla.org/en-US/docs/Web/API/console for more info about the possible types.
  *
  * > arguments [array] - an array of the arguments passed to the console function.
@@ -30,6 +37,10 @@
  * >> argument.rawData [argument.dataType] - the raw argument.
  *
  */
+
+// next steps:
+// - custom Prism theme for objects & arrays
+// - promise parsing?
 
 let logger = {
 
@@ -65,6 +76,37 @@ let logger = {
   },
   
   
+  // run code in context
+  run: (code) => {
+    
+    // if context window exists
+    if (logger.cW) {
+
+      // don't catch errors deliberately
+      // so they can be processed by the logger overrides
+
+      // run code in context
+      const resp = logger.cW.eval(code);
+      
+      
+      // place resp in an array
+      // for consistency with all other log types
+      const rawData = [resp];
+      
+      // parse log data
+      const arguments = logger.utils.parseLogData(rawData);
+      
+      // call log callback
+      logger.log({
+        type: 'resp',
+        arguments: arguments
+      });
+      
+    }
+    
+  },
+  
+  
   override: () => {
     
     // get console functions in context window
@@ -73,60 +115,23 @@ let logger = {
                           .filter(item => (typeof logger.cW.console[item] === 'function'));
     
     // run on all console functions
-    consoleFuncs.forEach(func => {
+    consoleFuncs.forEach(funcName => {
       
       // override console function
-      logger.overrideFunc(func, logger.cW.console);
+      logger.overrideFunc(funcName);
       
     });
     
     // override errors not created by console.error
-    logger.cW.addEventListener('error', (e) => {
-      
-      // get error message
-      let errorMessage = e.error.stack;
-      
-      
-      // replace absolute URLs with relative URLs in message
-      
-      // get origin URL
-      let originURL = logger.cW.location.href;
-      
-      // remove trailing '/' from origin URL
-      if (originURL.endsWith('/')) originURL = originURL.slice(0, -1);
-      
-      // remove all origin URL occurences from error message
-      errorMessage = errorMessage.replaceAll(originURL, '');
-      
-      
-      // escape message HTML
-      errorMessage = logger.utils.escapeHTML(errorMessage);
-      
-      // add 'Uncaught' to start of message
-      errorMessage = 'Uncaught ' + errorMessage;
-      
-      
-      // place error message in an array
-      // for consistency with all other log types
-      const rawData = [errorMessage];
-      
-      // parse log data
-      const arguments = logger.utils.parseLogData(rawData);
-      
-      // call log callback
-      logger.log({
-        type: 'error',
-        arguments: arguments
-      });
-      
-    });
+    logger.overrideErrorEvent();
     
   },
   
   
   // override console function
-  // currConsole is cW.console
-  overrideFunc: (funcName, currConsole) => {
+  overrideFunc: (funcName) => {
+    
+    const currConsole = logger.cW.console;
     
     // save original console function in array
     logger.overrides[funcName] = currConsole[funcName];
@@ -152,6 +157,49 @@ let logger = {
       }
       
     }
+    
+  },
+  
+  
+  // override errors not created by console.error
+  overrideErrorEvent: () => {
+    
+    logger.cW.addEventListener('error', (e) => {
+      
+      // get error message
+      let errorMessage = e.error.stack;
+      
+      
+      // replace absolute URLs with relative URLs in message
+      
+      // get origin URL
+      let originURL = logger.cW.location.href;
+      
+      // remove trailing '/' from origin URL
+      if (originURL.endsWith('/')) originURL = originURL.slice(0, -1);
+      
+      // remove all origin URL occurences from error message
+      errorMessage = errorMessage.replaceAll(originURL, '');
+      
+      
+      // add 'Uncaught' to start of message
+      errorMessage = 'Uncaught ' + errorMessage;
+      
+      
+      // place error message in an array
+      // for consistency with all other log types
+      const rawData = [errorMessage];
+      
+      // parse log data
+      const arguments = logger.utils.parseLogData(rawData);
+      
+      // call log callback
+      logger.log({
+        type: 'error',
+        arguments: arguments
+      });
+      
+    });
     
   },
   
