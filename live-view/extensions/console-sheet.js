@@ -62,17 +62,8 @@ class ConsoleSheet {
     const input = this.el.input;
 
 
-    // change input state on type
+    // toggle input return button on type
     input.on('input', (e) => {
-
-      // toggle input placeholder
-
-      const empty = (input.textContent === '' || input.textContent === '\n');
-
-      this.el.footer.classList.toggle('empty', empty);
-
-
-      // toggle input return button
 
       const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
 
