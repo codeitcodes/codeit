@@ -340,7 +340,7 @@ class ConsoleSheet {
 
 if (isMobile) {
 
-  consoleSheet.init();
+  window.consoleSheet = new ConsoleSheet();
 
 }
 
