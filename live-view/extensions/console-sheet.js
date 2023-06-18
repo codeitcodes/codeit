@@ -64,6 +64,13 @@ class ConsoleSheet {
 
     // toggle input return button on type
     input.on('input', (e) => {
+      
+      // safari empty input fix
+      if (input.innerHTML === '<br>') {
+    
+        input.textContent = '';
+    
+      }
 
       const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
 
