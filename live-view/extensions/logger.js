@@ -173,11 +173,9 @@ let logger = {
       // replace absolute URLs with relative URLs in message
       
       // get origin URL
-      let originURL = logger.cW.location.href;
-      
-      // remove trailing '/' from origin URL
-      if (originURL.endsWith('/')) originURL = originURL.slice(0, -1);
-      
+      const location = logger.cW.location;
+      let originURL = location.origin + location.pathname;
+            
       // remove all origin URL occurences from error message
       errorMessage = errorMessage.replaceAll(originURL, '');
       
