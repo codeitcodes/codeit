@@ -67,7 +67,7 @@ class ConsoleSheet {
           
         } else {
           
-          // escape argument data
+          // escape data
           data = escapeHTML(data);
           
         }
