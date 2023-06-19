@@ -79,14 +79,21 @@ let logger = {
   // run code in context
   run: (code) => {
     
+    const contextWindow = logger.cW;
+    
     // if context window exists
-    if (logger.cW) {
+    if (contextWindow) {
 
       // don't catch errors deliberately
       // so they can be processed by the logger overrides
 
       // run code in context
-      const resp = logger.cW.eval(code);
+            
+      // Function("Date", `"use strict";return (${obj});`)(Date);
+      
+      const evalFunc = contextWindow.eval;
+      
+      const resp = evalFunc(code);
       
       
       // place resp in an array
@@ -265,6 +272,7 @@ let logger = {
       return resp;
     
     },
+    
     
     /*
      * Stringify
