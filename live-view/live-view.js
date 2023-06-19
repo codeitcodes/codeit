@@ -1107,7 +1107,8 @@ async function renderLiveViewHTML(file) {
     
     // setup live view console
     logger.init(liveFrameWindow,
-                consoleSheet.logCallback.bind(consoleSheet));
+                consoleSheet.logCallback
+                  .bind(consoleSheet));
     
   }
 
