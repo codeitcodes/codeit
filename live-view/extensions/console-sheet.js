@@ -8,6 +8,7 @@
 // @@todo tapping on live view header to close it does not close console sheet
 // @@todo remove spaces from start and end of console input?
 // @@todo 'no-border-bottom' styling for subsequent input-resp logs
+// @@todo improve undefined + null highlighting color
 
 class ConsoleSheet {
 
