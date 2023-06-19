@@ -27,7 +27,7 @@
  *
  * > arguments [array] - an array of the arguments passed to the console function.
  *
- * >> argument.data [string] - the stringified, HTML-escaped argument.
+ * >> argument.data [string] - the stringified argument.
  *
  * >> argument.shouldHighlight [boolean] - specifies whether you should highlight argument.data using a syntax highlighter.
                                            by default, options.shouldNotHighlightArgTypes = ['string'].
@@ -46,6 +46,7 @@ let logger = {
 
   options: {
     shouldNotHighlightArgTypes: ['string'],
+    escapeArgHTML: false,
     browserConsoleEnabled: true
   },
   
@@ -261,7 +262,14 @@ let logger = {
         
         // parse argument
         let parsedArgument = logger.utils.stringify(argument);
-        parsedArgument = logger.utils.escapeHTML(parsedArgument);
+        
+        // if should escape argument HTML
+        if (logger.options.parseArgHTML) {
+          
+          // escape argument HTML
+          parsedArgument = logger.utils.escapeHTML(parsedArgument);
+          
+        }
         
         // get argument type
         const argumentType = logger.utils.typeOf(argument);
