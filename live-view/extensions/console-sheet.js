@@ -9,7 +9,7 @@
 
 class ConsoleSheet {
 
-  logCallback(log) {
+  async logCallback(log) {
     
     const logWrapper = this.el.logWrapper;
     
@@ -30,7 +30,7 @@ class ConsoleSheet {
       
     }
     
-    const logHTML = this.log.getHTML(log);
+    const logHTML = await this.log.getHTML(log);
     
     // add log to HTML
     logWrapper.innerHTML += logHTML;
