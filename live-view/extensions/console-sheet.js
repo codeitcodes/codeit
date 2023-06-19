@@ -9,6 +9,7 @@
 // @@todo remove spaces from start and end of console input?
 // @@todo 'no-border-bottom' styling for subsequent input-resp logs
 // @@todo improve undefined + null highlighting color
+// @@todo don't render logs without arguments
 
 class ConsoleSheet {
 
