@@ -39,7 +39,7 @@ class ConsoleSheet {
       
       let out = '';
       
-      log.arguments.forEach(argument => {
+      log.arguments.forEach(async (argument) => {
         
         let data = argument.data;
         
@@ -48,7 +48,7 @@ class ConsoleSheet {
           
           // highlight data
           
-          const highlightHTML = cd.highlightText('js', data);
+          const highlightHTML = await cd.highlightText('js', data);
           
           data = '<span class="highlight">' +
                  highlightHTML +
