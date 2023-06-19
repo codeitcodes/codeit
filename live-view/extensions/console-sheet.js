@@ -6,6 +6,7 @@
 //        disable highlighting on the expanded text (like in DevTools)?
 // @@todo in logger.js: make 'input' type 'shouldHighlight'
 // @@todo tapping on live view header to close it does not close console sheet
+// @@todo remove spaces from start and end of console input
 
 class ConsoleSheet {
 
