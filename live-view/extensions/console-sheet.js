@@ -305,7 +305,8 @@ class ConsoleSheet {
 
 
     this.el.return.addEventListener('click',
-                                    this.onReturnClick);
+                                    this.onReturnClick
+                                      .bind(this));
 
   }
   
