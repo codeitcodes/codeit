@@ -332,13 +332,9 @@ class ConsoleSheet {
 
 if (isMobile) {
   
-  (async () => {
-    
-    await loadScript('live-view/extensions/logger.js');
-  
-    window.consoleSheet = new ConsoleSheet();
-    
-  }());
+  await loadScript('live-view/extensions/logger.js');
+
+  window.consoleSheet = new ConsoleSheet();
 
 }
 
