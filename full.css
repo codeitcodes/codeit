@@ -2041,7 +2041,7 @@ body:not(.mobile) .sheet {
   color: #636d83;
 }
 
-.console-sheet .logs .log:is(.undefined, .null) {
+.console-sheet .logs .log:is(.undefined, .null) .token.keyword {
   color: hsl(218deg 7% 64% / 72%);
 }
 
