@@ -2035,6 +2035,12 @@ body:not(.mobile) .sheet {
   color: hsl(220deg 100% 65%);
 }
 
+.console-sheet .logs .log.clear .data::before {
+  content: 'Console was cleared';
+  font-style: italic;
+  color: #636d83;
+}
+
 .console-sheet .logs .log:is(.undefined, .null) {
   color: hsl(218deg 7% 64% / 72%);
 }
