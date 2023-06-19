@@ -14,7 +14,7 @@
  *
  * - run code with
  * 
-   logger.run(code);
+   logger.run(codeStr);
  *
  *
  * definitions:
@@ -29,10 +29,10 @@
  *
  * >> argument.data [string] - the stringified, HTML-escaped argument.
  *
- * >> argument.shouldHighlight [boolean] - specifies whether you should highlight the argument data using a syntax highlighter.
-                                           by default, options.shouldNotHighlightDataTypes = ['string'].
+ * >> argument.shouldHighlight [boolean] - specifies whether you should highlight argument.data using a syntax highlighter.
+                                           by default, options.shouldNotHighlightArgTypes = ['string'].
  *
- * >> argument.dataType [string] - the argument's type (eg. 'string', 'object', 'array').
+ * >> argument.dataType [string] - the argument's type (eg. 'string', 'object', 'array', ...).
  *
  * >> argument.rawData [argument.dataType] - the raw argument.
  *
@@ -44,20 +44,22 @@
 
 let logger = {
 
-  log: null, // log callback
+  options: {
+    shouldNotHighlightArgTypes: ['string'],
+    browserConsoleEnabled: true
+  },
+  
+  
+  logCallback: null,
   cW: null, // context window
   
-  overrides: {}, // original console functions before overriding
+  origFuncs: {}, // original console functions before overriding
   
-  options: {
-    shouldNotHighlightDataTypes: ['string'],
-    enableBrowserConsole: true
-  },
   
   init: (contextWindow, logCallback, options = {}) => {
 
     logger.cW = contextWindow;
-    logger.log = logCallback;
+    logger.logCallback = logCallback;
     
     // apply options
     for (option in options) {
@@ -77,69 +79,60 @@ let logger = {
   
   
   // run code in context
-  run: (code) => {
+  run: (codeStr) => {
     
     const contextWindow = logger.cW;
     
-    // if context window exists
-    if (contextWindow) {
+    // if context window isn't defined, return
+    if (!contextWindow) return;
+    
 
-      // don't catch errors deliberately
-      // so they can be processed by the logger overrides
+    // call 'input' log callback
+    logger.log('input', [codeStr]);
 
-      // run code in context
+
+    // run code in context
+    
+    const evalFunc = contextWindow.eval;
+    
+    let resp;
+    
+    try {
+    
+      resp = evalFunc(codeStr);
       
-      const evalFunc = contextWindow.eval;
+    } catch(e) {
       
-      let resp;
-      
-      try {
-      
-        resp = evalFunc(code);
-        
-      } catch(e) {
-        
-        // catch error to prevent stopping the code which ran this function
-        
-        
-        // get error message
-        
-        const errorTitle = e.toString();
-        
-        // +1 to remove additional \n at end of title
-        let stackTrace = e.stack.slice(errorTitle.length + 1);
-        
-        // get trace line and position
-        stackTrace = stackTrace
-                       .split(')\n')[0]
-                       .split('<anonymous>')[1];
-        
-        const errorMessage = errorTitle +
-                             '\n    at <anonymous>' +
-                             stackTrace;
-        
-        
-        // propagate error message back to console
-        // in a different way (using console.error instead of throw)
-        console.error(errorMessage);
-        
-      }
+      // catch error to prevent stopping the code which ran this function.
+      // use a different way to propagate the error to the console.
+      // (console.error instead of throw)
       
       
-      // place resp in an array
-      // for consistency with all other log types
-      const rawData = [resp];
+      // get error message
       
-      // parse log data
-      const arguments = logger.utils.parseLogData(rawData);
+      const errorTitle = e.toString();
       
-      // call log callback
-      logger.log({
-        type: 'resp',
-        arguments: arguments
-      });
+      // +1 to remove additional \n at end of title
+      let stackTrace = e.stack.slice(errorTitle.length + 1);
+      
+      // get trace line and position
+      stackTrace = stackTrace
+                     .split(')\n')[0]
+                     .split('<anonymous>')[1];
+      
+      const errorMessage = errorTitle +
+                           '\n    at <anonymous>' +
+                           stackTrace;
+      
+      
+      // propagate the error message back to the console
+      console.error(errorMessage);
       
     }
+    
+    
+    // call 'resp' log callback
+    logger.log('resp', [resp]);
     
   },
   
@@ -171,25 +164,23 @@ let logger = {
     const currConsole = logger.cW.console;
     
     // save original console function in array
-    logger.overrides[funcName] = currConsole[funcName];
+    logger.origFuncs[funcName] = currConsole[funcName];
     
     // override console function
-    currConsole[funcName] = (...rawData) => {
+    currConsole[funcName] = (...argArray) => {
       
-      // parse log argument data
-      const arguments = logger.utils.parseLogData(rawData);
-            
       // call log callback
-      logger.log({
-        type: funcName,
-        arguments: arguments
-      });
+      logger.log(funcName, argArray);
       
-      // if should show in browser console
-      if (logger.options.enableBrowserConsole) {
+      
+      // if browser console enabled
+      
+      const browserConsoleEnabled = logger.options.browserConsoleEnabled;
+      
+      if (browserConsoleEnabled) {
         
         // call original console function
-        logger.overrides[funcName].apply(currConsole, rawData);
+        logger.origFuncs[funcName].apply(currConsole, argArray);
         
       }
       
@@ -237,32 +228,36 @@ let logger = {
       
       const errorMessage = logger.errorEvent.getMessage(e);
       
-      // place error message in an array
-      // for consistency with all other log types
-      const rawData = [errorMessage];
-      
-      // parse log data
-      const arguments = logger.utils.parseLogData(rawData);
-      
-      // call log callback
-      logger.log({
-        type: 'error',
-        arguments: arguments
-      });
+      // call 'error' log callback
+      logger.log('error', [errorMessage]);
       
     }
     
   },
   
+  
+  log: (type, argArray) => {
+    
+    // parse log argument data
+    const parsedArgs = logger.utils.parseLogArgs(argArray);
+    
+    // call log callback
+    logger.logCallback({
+      type: type,
+      arguments: parsedArgs
+    });
+    
+  },
+
 
   utils: {
 
-    parseLogData: (data) => {
+    parseLogArgs: (argArray) => {
       
       const resp = [];
       
-      // parse every argument in data
-      data.forEach(argument => {
+      // run on all arguments
+      argArray.forEach(argument => {
         
         // parse argument
         let parsedArgument = logger.utils.stringify(argument);
@@ -271,7 +266,7 @@ let logger = {
         // get argument type
         const argumentType = logger.utils.typeOf(argument);
         
-        const shouldHighlight = logger.utils.shouldHighlightType(argumentType);
+        const shouldHighlight = logger.utils.shouldHlArgType(argumentType);
         
         // push parsed argument to array
         resp.push({
@@ -287,15 +282,15 @@ let logger = {
       
     },
     
-    shouldHighlightType: (type) => {
+    shouldHlArgType: (type) => {
       
-      const notHighlightTypes = logger.options.shouldNotHighlightDataTypes;
+      const notHlTypes = logger.options.shouldNotHighlightArgTypes;
       
-      const shouldNotHighlight = notHighlightTypes.includes(type);
+      const shouldNotHlArg = notHlTypes.includes(type);
       
-      const shouldHighlight = !shouldNotHighlight;
+      const shouldHlArg = !shouldNotHlArg;
       
-      return shouldHighlight;
+      return shouldHlArg;
       
     },
     
