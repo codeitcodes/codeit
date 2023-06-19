@@ -67,7 +67,7 @@ class ConsoleSheet {
       
       // get log icon
       
-      let icon = this.log.icons[log.type];
+      let icon = this.icons[log.type];
       
       if (!icon) icon = '';
       
