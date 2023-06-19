@@ -42,13 +42,15 @@ class ConsoleSheet {
   
   log = {
         
-    getHTML(log) {
+    async getHTML(log) {
       
       // parse log arguments
       
       let out = '';
       
-      log.arguments.forEach(async (argument) => {
+      for (let i = 0; i < log.arguments.length; i++) {
+        
+        const argument = log.arguments[i];
         
         let data = argument.data;
         
@@ -68,10 +70,19 @@ class ConsoleSheet {
         // add spaces between adjacent arguments
         out += data + ' ';
         
-      });
+      }
       
-      // remove trailing space
-      out = out.slice(0, -1);
+      
+      if (out !== '') {
+        
+        // remove trailing space
+        out = out.slice(0, -1);
+        
+      } else {
+        
+        out = '\n';
+        
+      }
       
       
       // get log icon
@@ -80,8 +91,6 @@ class ConsoleSheet {
       
       if (!icon) icon = '';
       
-      
-      console.log(out);
       
       const logHTML = `
       <div class="log ` + log.type + `">
