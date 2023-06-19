@@ -62,7 +62,20 @@ class ConsoleSheet {
           
           const highlightHTML = await cd.highlightText('js', data);
           
-          data = '<span class="highlight">' +
+          
+          // custom-highlight 'undefined' and 'null'
+          
+          let dataType = '';
+          
+          if (argument.dataType === 'undefined' ||
+              argument.dataType === 'null') {
+            
+            dataType = ' ' + argument.dataType;
+            
+          }
+          
+          
+          data = '<span class="highlight' + dataType + '">' +
                  highlightHTML +
                  '</span>';
           
