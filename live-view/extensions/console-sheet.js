@@ -9,22 +9,25 @@ class ConsoleSheet {
 
   logCallback(log) {
     
-    const output = this.el.output;
+    const logWrapper = this.el.logWrapper;
     
     if (log.type === 'clear') {
       
-      // clear output
-      output.innerHTML = '';
+      // clear logs
+      logWrapper.innerHTML = '';
+      
+      // don't show the 'clear' log's arguments
+      log.arguments = [];
       
     }
     
     const logHTML = this.log.getHTML(log);
     
-    // add log HTML to output
-    output.innerHTML += logHTML;
+    // add log to HTML
+    logWrapper.innerHTML += logHTML;
     
-    // scroll to bottom of output
-    output.scrollTo(0, output.scrollHeight);
+    // scroll to bottom of logs
+    logWrapper.scrollTo(0, logWrapper.scrollHeight);
 
   }
   
@@ -154,7 +157,7 @@ class ConsoleSheet {
   
     header: document.querySelector('.console-sheet .header'),
     close: document.querySelector('.console-sheet .header .close'),
-    output: document.querySelector('.console-sheet .output'),
+    logWrapper: document.querySelector('.console-sheet .logs'),
     footer: document.querySelector('.console-sheet .footer'),
     input: document.querySelector('.console-sheet .footer .input'),
     'return': document.querySelector('.console-sheet .footer .return'),
