@@ -81,6 +81,8 @@ class ConsoleSheet {
       if (!icon) icon = '';
       
       
+      console.log(out);
+      
       const logHTML = `
       <div class="log ` + log.type + `">
         ` + icon + `
