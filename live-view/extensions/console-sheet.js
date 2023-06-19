@@ -65,6 +65,11 @@ class ConsoleSheet {
                  highlightHTML +
                  '</span>';
           
+        } else {
+          
+          // escape argument HTML
+          data = escapeHTML(data);
+          
         }
         
         // add spaces between adjacent arguments
