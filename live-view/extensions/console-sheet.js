@@ -4,6 +4,7 @@
 // @@todo add 'clear' log styling in CSS
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds set length.
 //        disable highlighting on the expanded text (like in DevTools)?
+// @@todo in logger.js: make 'input' type 'shouldHighlight'
 
 class ConsoleSheet {
 
@@ -18,6 +19,13 @@ class ConsoleSheet {
       
       // don't show the 'clear' log's arguments
       log.arguments = [];
+      
+    }
+    
+    // @@temp
+    if (log.type === 'input') {
+      
+      log.arguments[0].shouldHighlight = true;
       
     }
     
