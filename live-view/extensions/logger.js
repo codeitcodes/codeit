@@ -88,12 +88,42 @@ let logger = {
       // so they can be processed by the logger overrides
 
       // run code in context
-            
-      // Function("Date", `"use strict";return (${obj});`)(Date);
       
       const evalFunc = contextWindow.eval;
       
-      const resp = evalFunc(code);
+      let resp;
+      
+      try {
+      
+        resp = evalFunc(code);
+        
+      } catch(e) {
+        
+        // catch error to prevent stopping the code which ran this function
+        
+        
+        // get error message
+        
+        const errorTitle = e.toString();
+        
+        // +1 to remove additional \n at end of title
+        let stackTrace = e.stack.slice(errorTitle.length + 1);
+        
+        // get trace line and position
+        stackTrace = stackTrace
+                       .split(')\n')[0]
+                       .split('<anonymous>')[1];
+        
+        const errorMessage = errorTitle +
+                             '\n    at <anonymous>' +
+                             stackTrace;
+        
+        
+        // propagate error message back to console
+        // in a different way (using console.error instead of throw)
+        console.error(errorMessage);
+        
+      }
       
       
       // place resp in an array
@@ -130,7 +160,7 @@ let logger = {
     });
     
     // override errors not created by console.error
-    logger.overrideErrorEvent();
+    logger.errorEvent.override();
     
   },
   
@@ -169,9 +199,17 @@ let logger = {
   
   
   // override errors not created by console.error
-  overrideErrorEvent: () => {
+  errorEvent: {
     
-    logger.cW.addEventListener('error', (e) => {
+    override: () => {
+      
+      const callback = logger.errorEvent.callback;
+      
+      logger.cW.addEventListener('error', callback);
+      
+    },
+    
+    getMessage: (e) => {
       
       // get error message
       let errorMessage = e.error.stack;
@@ -191,6 +229,14 @@ let logger = {
       errorMessage = 'Uncaught ' + errorMessage;
       
       
+      return errorMessage;
+      
+    },
+    
+    callback: (e) => {
+      
+      const errorMessage = logger.errorEvent.getMessage(e);
+      
       // place error message in an array
       // for consistency with all other log types
       const rawData = [errorMessage];
@@ -204,7 +250,7 @@ let logger = {
         arguments: arguments
       });
       
-    });
+    }
     
   },
   
