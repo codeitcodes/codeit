@@ -257,7 +257,7 @@ class ConsoleSheet {
     
   }
 
-  logger: {
+  logger = {
     
     logCallback: function(type, arguments) {
 
