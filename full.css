@@ -895,10 +895,12 @@ body:not(.mobile) .sidebar .header .title-screen .title:not(.scrolling, :has(> .
   white-space: nowrap;
   transition: .18s var(--ease-function);
   transition-property: padding-left, max-width;
+  padding: 7px 0;
 }
 
 body:not(.mobile) .sidebar .header .logo {
   overflow-x: scroll;
+  padding: 0;
   padding-top: 10px;
 }
 
