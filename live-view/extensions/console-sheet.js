@@ -22,7 +22,7 @@ class ConsoleSheet {
       // clear logs
       logWrapper.innerHTML = '';
       
-      // don't show the 'clear' log's arguments
+      // don't show 'clear' log arguments
       log.arguments = [];
       
     }
@@ -34,13 +34,18 @@ class ConsoleSheet {
       
     }
     
-    const logHTML = await this.log.getHTML(log);
-    
-    // add log to HTML
-    logWrapper.innerHTML += logHTML;
-    
-    // scroll to bottom of logs
-    logWrapper.scrollTo(0, logWrapper.scrollHeight);
+    if (log.arguments.length === 0
+        || log.type === 'clear') {
+      
+      const logHTML = await this.log.getHTML(log);
+      
+      // add log to HTML
+      logWrapper.innerHTML += logHTML;
+      
+      // scroll to bottom of logs
+      logWrapper.scrollTo(0, logWrapper.scrollHeight);
+      
+    }
 
   }
   
