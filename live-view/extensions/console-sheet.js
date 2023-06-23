@@ -20,7 +20,7 @@ class ConsoleSheet {
     if (log.type === 'clear') {
       
       // clear logs
-      logWrapper.innerHTML = '';
+      // @@@logWrapper.innerHTML = '';
       
       // don't show 'clear' log arguments
       log.arguments = [];
@@ -40,7 +40,7 @@ class ConsoleSheet {
       const logHTML = await this.log.getHTML(log);
       
       // add log to HTML
-      logWrapper.innerHTML += logHTML;
+      //@@@logWrapper.innerHTML += logHTML;
       
       // scroll to bottom of logs
       logWrapper.scrollTo(0, logWrapper.scrollHeight);
