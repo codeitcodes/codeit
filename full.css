@@ -2004,7 +2004,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   margin-top: 3px;
 }
 
-.console-sheet .logs .log:is(.warn, .error, .debug) .icon {
+.console-sheet .logs .log:is(.warning, .error, .debug) .icon {
   color: inherit;
   opacity: .72;
 }
@@ -2026,7 +2026,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   overflow: visible;
 }
 
-.console-sheet .logs .log.warn {
+.console-sheet .logs .log.warning {
   color: hsl(15deg 57% 76%); /* #e5b09f */
   background: hsl(15deg 57% 76% / 4%);
   box-shadow: inset 0 0 0 1px hsl(15deg 57% 76% / 11%);
