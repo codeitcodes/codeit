@@ -1888,7 +1888,6 @@ body.safari .live-view-menu .icon.share path.ios {
   transform: translateY(100%) translateX(-50%);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   bottom: -40px;
-  translate: 0 calc(-1 * env(keyboard-inset-height, 0px));
   background: var(--deep-midnight-blue);
   border-radius: 11px 11px 0 0;
   pointer-events: none;
@@ -1917,10 +1916,6 @@ body.safari .live-view-menu .icon.share path.ios {
               .3s .09s var(--bounce-function) bottom,
               .1s var(--ease-function) box-shadow,
               0s translate;
-}
-
-.sheet:has(> .footer .input:focus) {
-  padding-bottom: 0;
 }
 
 body:not(.mobile) .sheet {
@@ -1970,6 +1965,14 @@ body:not(.mobile) .sheet {
   overflow-y: scroll;
 }
 
+
+.console-sheet:has(> .footer .input:focus) {
+  padding-bottom: 0;
+}
+
+.console-sheet.transitioning-blur {
+  transition: translate .27s ease;
+}
 
 .console-sheet .logs .log {
   display: flex;
