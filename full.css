@@ -2016,6 +2016,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   user-select: text;
   -webkit-user-select: text;
   overflow-wrap: anywhere;
+  word-wrap: normal;
   /* word-break: break-all; */
   background: transparent;
   padding: 0;
