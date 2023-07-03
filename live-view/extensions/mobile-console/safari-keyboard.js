@@ -46,6 +46,8 @@ class SafariKeyboard {
   
   safariTimeoutDelay = 70;
 
+  lastBlurTime = 0;
+
   blurTransitionTimeout;
 
   
@@ -90,11 +92,27 @@ class SafariKeyboard {
     
     if (this.keyboardHeight) {
       
-      window.setTimeout(() => {
+      const currTime = new Date().getTime();
+      
+      const blurDelta = currTime - this.lastBlurTime;
+      
+      
+      // if blur delta was extremely quick
+      if (blurDelta < this.safariTimeoutDelay) {
         
+        // change wrapper bottom instantly
         this.changeWrapperBottom(this.keyboardHeight);
         
-      }, this.safariTimeoutDelay);
+      } else {
+        
+        // change wrapper bottom with delay
+        window.setTimeout(() => {
+          
+          this.changeWrapperBottom(this.keyboardHeight);
+          
+        }, this.safariTimeoutDelay);
+        
+      }
       
     }
     
@@ -122,7 +140,10 @@ class SafariKeyboard {
       
       this.keyboardHeight = this.smallestFromBottom;
     
-    } 
+    }
+    
+    
+    this.lastBlurTime = new Date().getTime();
     
   }
   
