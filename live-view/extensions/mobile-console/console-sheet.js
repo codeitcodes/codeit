@@ -78,7 +78,7 @@ class ConsoleSheet {
       
       let noBorderTop = '';
       
-      const lastLog = this.el.logWrapper.children.at(-1);
+      const lastLog = this.el.logWrapper.querySelector('.log:last-of-type');
       
       if (log.type === 'resp'
           && lastLog.classList.contains('input')) {
