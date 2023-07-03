@@ -347,6 +347,12 @@ if (isMobile) {
   (async () => {
     
     await loadScript('live-view/extensions/logger.js');
+
+    if (isSafari) {
+      
+      await loadScript('live-view/extensions/safari-keyboard.js');
+      
+    }
   
     window.consoleSheet = new ConsoleSheet();
     
