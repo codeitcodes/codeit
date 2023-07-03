@@ -7,7 +7,7 @@
 
 class ConsoleSheet {
 
-  async logCallback(log) {
+  logCallback(log) {
     
     const logWrapper = this.el.logWrapper;
     
