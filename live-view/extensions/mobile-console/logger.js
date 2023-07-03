@@ -94,7 +94,17 @@ let logger = {
     
     let resp;
     
-    resp = evalFunc(codeStr);
+    try {
+    
+      resp = evalFunc(codeStr);
+    
+    } catch(e) {
+      
+      // catch error and propagate to context window
+      contextWindow.console.error(e);
+      
+    }
+    
     
     // call 'resp' log callback
     logger.log('resp', [resp]);
