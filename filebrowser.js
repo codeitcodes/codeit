@@ -229,7 +229,7 @@ async function renderSidebarHTML(pageNum = 1) {
   resp = await git.getItems(treeLoc, pageNum);
   
   
-  // if treeLoc changed while fetching items, return
+  // if the directory changed while we were fetching the items, return
   if (treeLoc.join(',') !== prevTreeLoc) {
     
     return;
