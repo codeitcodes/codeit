@@ -112,7 +112,7 @@ class SafariKeyboard {
       
       window.setTimeout(() => {
         
-        this.wrapperEl.style.bottom = this.keyboardHeight + 'px';
+        this.wrapperEl.style.translate = '0 ' + this.keyboardHeight + 'px';
         
       }, this.safariTimeoutDelay);
       
