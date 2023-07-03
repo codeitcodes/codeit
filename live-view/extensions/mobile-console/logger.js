@@ -103,7 +103,7 @@ let logger = {
       let errorMessage = e.toString();
       
       // add line and column to message
-      errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
+      //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
       
       // add 'Uncaught' to start of message
       errorMessage = 'Uncaught ' + errorMessage;
