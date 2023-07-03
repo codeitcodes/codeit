@@ -295,18 +295,6 @@ let logger = {
     },
     
     
-    runScript: (scriptStr, contextWindow) => {
-
-      let s = contextWindow.document.createElement('script');
-      s.appendChild(contextWindow.document.createTextNode(scriptStr));
-
-      contextWindow.document.body.appendChild(s);
-      
-      contextWindow.document.body.removeChild(s);
-
-    },
-    
-    
     /*
      * Stringify
      * Inspects objects, functions, arrays, classes and other types
