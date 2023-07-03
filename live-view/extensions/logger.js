@@ -19,7 +19,7 @@
  *
  * definitions:
  *
- * logCallback({ type, arguments: [{ data, shouldHighlight, dataType, rawData }] })
+ * logCallback({ type, arguments: [{ data, dataType, rawData }] })
  *
  * > type [string] - the log type.
                      you might like to style ['resp', 'warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
@@ -28,9 +28,6 @@
  * > arguments [array] - an array of the arguments passed to the console function.
  *
  * >> argument.data [string] - the stringified argument.
- *
- * >> argument.shouldHighlight [boolean] - specifies whether you should highlight argument.data using a syntax highlighter.
-                                           by default, options.shouldNotHighlightArgTypes = ['string'].
  *
  * >> argument.dataType [string] - the argument's type (eg. 'string', 'object', 'array', ...).
  *
@@ -45,8 +42,7 @@
 let logger = {
 
   options: {
-    shouldNotHighlightArgTypes: ['string'],
-    escapeArgHTML: false,
+    escapeArgHTML: true,
     browserConsoleEnabled: true
   },
   
@@ -264,7 +260,7 @@ let logger = {
         let parsedArgument = logger.utils.stringify(argument);
         
         // if should escape argument HTML
-        if (logger.options.parseArgHTML) {
+        if (logger.options.escapeArgHTML) {
           
           // escape argument HTML
           parsedArgument = logger.utils.escapeHTML(parsedArgument);
@@ -273,13 +269,10 @@ let logger = {
         
         // get argument type
         const argumentType = logger.utils.typeOf(argument);
-        
-        const shouldHighlight = logger.utils.shouldHlArgType(argumentType);
-        
+                
         // push parsed argument to array
         resp.push({
           data: parsedArgument,
-          shouldHighlight: shouldHighlight,
           dataType: argumentType,
           rawData: argument
         });
@@ -287,18 +280,6 @@ let logger = {
       });
       
       return resp;
-      
-    },
-    
-    shouldHlArgType: (type) => {
-      
-      const notHlTypes = logger.options.shouldNotHighlightArgTypes;
-      
-      const shouldNotHlArg = notHlTypes.includes(type);
-      
-      const shouldHlArg = !shouldNotHlArg;
-      
-      return shouldHlArg;
       
     },
     
