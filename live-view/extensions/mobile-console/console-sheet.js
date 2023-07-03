@@ -137,7 +137,10 @@ class ConsoleSheet {
   };
   
   
-  onReturnClick() {
+  onReturnClick(e) {
+    
+    e.preventDefault();
+    
     
     const input = this.el.input;
     
@@ -147,7 +150,7 @@ class ConsoleSheet {
     // clear input
     
     input.textContent = '';
-    input.focus();
+    // input.focus();
 
     this.el.footer.classList.remove('return-enabled');
     this.el.footer.classList.add('empty');
