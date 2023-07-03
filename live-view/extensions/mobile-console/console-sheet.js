@@ -240,11 +240,11 @@ class ConsoleSheet {
       
       if (input.textContent === '\n') {
         
-        input.classList.add('empty');
+        this.el.footer.classList.add('input-empty');
         
       } else {
         
-        input.classList.remove('empty');
+        this.el.footer.classList.remove('input-empty');
         
       }
 
