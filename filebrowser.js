@@ -222,8 +222,19 @@ async function renderSidebarHTML(pageNum = 1) {
   }
 
 
+  const prevTreeLoc = treeLoc.join(',');
+
+
   // get items in current tree from git
   resp = await git.getItems(treeLoc, pageNum);
+  
+  
+  // if treeLoc changed while fetching items, return
+  if (treeLoc.join(',') !== prevTreeLoc) {
+    
+    return;
+    
+  }
   
 
   if (resp.message && resp.message == 'Not Found') {
