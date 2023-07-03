@@ -94,39 +94,7 @@ let logger = {
     
     let resp;
     
-    try {
-    
-      resp = evalFunc(codeStr);
-      
-    } catch(e) {
-      
-      // catch error to prevent stopping the code which ran this function.
-      // use a different way to propagate the error to the console.
-      // (console.error instead of throw)
-      
-      
-      // get error message
-      
-      const errorTitle = e.toString();
-      
-      // +1 to remove additional \n at end of title
-      let stackTrace = e.stack.slice(errorTitle.length + 1);
-      
-      // get trace line and position
-      stackTrace = stackTrace
-                     .split(')\n')[0]
-                     .split('<anonymous>')[1];
-      
-      const errorMessage = errorTitle +
-                           '\n    at <anonymous>' +
-                           stackTrace;
-      
-      
-      // propagate the error message back to the console
-      console.error(errorMessage);
-      
-    }
-    
+    resp = evalFunc(codeStr);
     
     // call 'resp' log callback
     logger.log('resp', [resp]);
