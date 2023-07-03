@@ -17,99 +17,60 @@ class ConsoleSheet {
     
     const logWrapper = this.el.logWrapper;
     
+    
     if (log.type === 'clear') {
       
       // clear logs
-      // @@@logWrapper.innerHTML = '';
+      logWrapper.innerHTML = getHTML({
+        type: 'clear',
+        arguments: []
+      });
       
-      // don't show 'clear' log arguments
-      log.arguments = [];
-      
-    }
-    
-    // @@temp
-    if (log.type === 'input') {
-      
-      log.arguments[0].shouldHighlight = true;
+      return;
       
     }
     
-    if (log.arguments.length === 0
-        || log.type === 'clear') {
-      
-      const logHTML = await this.log.getHTML(log);
-      
-      // add log to HTML
-      //@@@logWrapper.innerHTML += logHTML;
-      
-      // scroll to bottom of logs
-      logWrapper.scrollTo(0, logWrapper.scrollHeight);
-      
-    }
-
+    
+    // don't show empty logs
+    if (log.arguments.length === 0) return;
+    
+    
+    // get log HTML
+    const logHTML = this.log.getHTML(log);
+    
+    // add log to HTML
+    logWrapper.innerHTML += logHTML;
+    
+    // scroll to bottom of logs
+    logWrapper.scrollTo(0, logWrapper.scrollHeight);
+    
   }
   
   log = {
         
-    async getHTML(log) {
+    getHTML(log) {
       
       // parse log arguments
       
       let out = '';
       
-      for (let i = 0; i < log.arguments.length; i++) {
+      log.arguments.forEach(argument => {
         
-        const argument = log.arguments[i];
-        
-        let data = argument.data;
-        
-        // if should highlight data
-        if (argument.shouldHighlight) {
-          
-          // highlight data
-          
-          const highlightHTML = await cd.highlightText('js', data);
-          
-          
-          // custom-highlight 'undefined' and 'null'
-          
-          let dataType = '';
-          
-          if (argument.dataType === 'undefined' ||
-              argument.dataType === 'null') {
-            
-            dataType = ' ' + argument.dataType;
-            
-          }
-          
-          
-          data = '<span class="highlight' + dataType + '">' +
-                 highlightHTML +
-                 '</span>';
-          
-        } else {
-          
-          // escape data
-          data = escapeHTML(data);
-          
-        }
+        let argumentHTML = 
+        `<span class="argument ` + escapeHTML(argument.dataType) + `">` +
+          argument.data +
+        `</span>`;
         
         // add spaces between adjacent arguments
-        out += data + ' ';
+        argumentHTML += ' ';
         
-      }
+        // add argument HTML to log
+        out += argumentHTML;
+        
+      });
       
-      
-      if (out !== '') {
-        
-        // remove trailing space
-        out = out.slice(0, -1);
-        
-      } else {
-        
-        out = '\n';
-        
-      }
+      // remove trailing space
+      out = out.slice(0, -1);
       
       
       // get log icon
