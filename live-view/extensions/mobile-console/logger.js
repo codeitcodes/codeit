@@ -100,11 +100,17 @@ let logger = {
     
     } catch(e) {
       
-      // if context window isn't the current window,
-      // show error in console
-      if (contextWindow !== window) {
-      
-        logger.errorEvent.callback({error: e});
+      if (window !== contextWindow) {
+        
+        // catch error and propagate to context window
+        
+        const errorEvent = new ErrorEvent('error', {
+          bubbles: true,
+          cancelable: false,
+          error: e
+        });
+  
+        contextWindow.dispatchEvent(errorEvent);
         
       }
       
