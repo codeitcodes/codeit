@@ -162,5 +162,12 @@ class SafariKeyboard {
     
   }
   
+  
+  changeElBottom(bottom) {
+    
+    this.wrapperEl.style.translate = '0 ' + (bottom * -1) + 'px';
+    
+  }
+  
 }
 
