@@ -100,8 +100,15 @@ let logger = {
     
     } catch(e) {
       
-      // catch error and propagate to context window
-      contextWindow.console.error(e);
+      // if context window isn't the current window,
+      // show error in console
+      if (contextWindow !== window) {
+      
+        logger.errorEvent.callback({error: e});
+        
+      }
+      
+      throw e;
       
     }
     
@@ -279,6 +286,18 @@ let logger = {
     
       return resp;
     
+    },
+    
+    
+    runScript: (scriptStr, contextWindow) => {
+
+      let s = contextWindow.document.createElement('script');
+      s.appendChild(contextWindow.document.createTextNode(scriptStr));
+
+      contextWindow.document.body.appendChild(s);
+      
+      contextWindow.document.body.removeChild(s);
+
     },
     
     
