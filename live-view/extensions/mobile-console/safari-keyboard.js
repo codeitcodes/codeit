@@ -122,12 +122,6 @@ class SafariKeyboard {
       
       this.keyboardHeight = this.smallestFromBottom;
     
-      if (window.orientation === 0) {
-        
-        console.log('got safari keyboard height for 0 deg', this.keyboardHeight);
-        
-      }
-    
     } 
     
   }
