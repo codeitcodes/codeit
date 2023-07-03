@@ -81,7 +81,7 @@ class SafariKeyboard {
       }
       
       
-      this.changeElBottom(currFromBottom);
+      this.changeWrapperBottom(currFromBottom);
       
       
       if (this.smallestFromBottom === -1
@@ -114,7 +114,7 @@ class SafariKeyboard {
       
       window.setTimeout(() => {
         
-        this.changeElBottom(this.keyboardHeight);
+        this.changeWrapperBottom(this.keyboardHeight);
         
       }, this.safariTimeoutDelay);
       
@@ -136,7 +136,7 @@ class SafariKeyboard {
     }, 270);
     
     
-    this.changeElBottom(0);
+    this.changeWrapperBottom(0);
     
     
     if (!this.keyboardHeight
@@ -163,7 +163,7 @@ class SafariKeyboard {
   }
   
   
-  changeElBottom(bottom) {
+  changeWrapperBottom(bottom) {
     
     this.wrapperEl.style.translate = '0 ' + (bottom * -1) + 'px';
     
