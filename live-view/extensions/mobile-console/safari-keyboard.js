@@ -80,7 +80,7 @@ class SafariKeyboard {
         
       }
       
-      this.wrapperEl.style.bottom = currFromBottom + 'px';
+      this.wrapperEl.style.translate = '0 ' + currFromBottom + 'px';
       
       if (this.smallestFromBottom === -1
           || this.smallestFromBottom > currFromBottom) {
@@ -134,7 +134,7 @@ class SafariKeyboard {
     }, 270);
     
   
-    this.wrapperEl.style.bottom = 0;
+    this.wrapperEl.style.translate = '0 0';
     
     
     if (!this.keyboardHeight
