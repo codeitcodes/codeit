@@ -1,7 +1,6 @@
 
 // mobile console sheet
 
-// @@todo add 'clear' log styling in CSS
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds set length.
 // @@todo improve undefined + null highlighting color
 
