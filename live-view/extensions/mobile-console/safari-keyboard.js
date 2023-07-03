@@ -80,7 +80,9 @@ class SafariKeyboard {
         
       }
       
-      this.wrapperEl.style.translate = '0 ' + currFromBottom + 'px';
+      
+      this.changeElBottom(currFromBottom);
+      
       
       if (this.smallestFromBottom === -1
           || this.smallestFromBottom > currFromBottom) {
@@ -112,7 +114,7 @@ class SafariKeyboard {
       
       window.setTimeout(() => {
         
-        this.wrapperEl.style.translate = '0 ' + this.keyboardHeight + 'px';
+        this.changeElBottom(this.keyboardHeight);
         
       }, this.safariTimeoutDelay);
       
@@ -133,8 +135,8 @@ class SafariKeyboard {
       
     }, 270);
     
-  
-    this.wrapperEl.style.translate = '0 0';
+    
+    this.changeElBottom(0);
     
     
     if (!this.keyboardHeight
