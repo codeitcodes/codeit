@@ -431,14 +431,19 @@ function addBottomSwipeListener() {
       // if did not click on options button
       if (!clickedOnOptions) {
     
-        e.preventDefault();
-        e.stopPropagation();
-    
         // retract bottom float
         bottomWrapper.classList.remove('expanded');
         
         // if live view is open, close it
         if (liveViewToggle) toggleLiveView(selectedFile);
+        
+        
+        if (consoleSheet.isVisible()) {
+  
+          // hide live view console
+          consoleSheet.hide();
+  
+        }
     
       }
     
