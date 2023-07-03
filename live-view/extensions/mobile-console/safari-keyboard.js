@@ -41,11 +41,7 @@ class SafariKeyboard {
 
   keyboardHeight = null;
 
-  viewportChangeCount = 0;
-
   changedOrientation = false;
-  
-  safariInitialViewportOffset = 19.5;
   
   
   safariTimeoutDelay = 70;
@@ -63,31 +59,11 @@ class SafariKeyboard {
       if (currFromBottom === 0) return;
       
       
-      if (window.orientation === 0
-          && !this.changedOrientation) {
-        
-        this.viewportChangeCount++;
-        
-        if (this.viewportChangeCount === 1) {
-        
-          // currFromBottom -= this.safariInitialViewportOffset;
-          
-        } else if (this.viewportChangeCount === 2) {
-          
-          this.viewportChangeCount = 0;
-          
-        }
-        
-      }
-      
-      
       this.changeWrapperBottom(currFromBottom);
       
       
       if (this.smallestFromBottom === -1
           || this.smallestFromBottom > currFromBottom) {
-        
-        console.log(this.smallestFromBottom - currFromBottom);
         
         this.smallestFromBottom = currFromBottom;
         
@@ -145,6 +121,12 @@ class SafariKeyboard {
         && !this.changedOrientation) {
       
       this.keyboardHeight = this.smallestFromBottom;
+    
+      if (window.orientation === 0) {
+        
+        console.log('got safari keyboard height for 0 deg', this.keyboardHeight);
+        
+      }
     
     } 
     
