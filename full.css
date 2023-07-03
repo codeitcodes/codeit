@@ -465,7 +465,7 @@ body.notransition .live-view.file-open {
   max-width: unset;
 }
 
-/* Todo */
+/* Todo: desktop mobile console */
 .live-view .console {
   height: 100%;
   background: #1a1c24;
