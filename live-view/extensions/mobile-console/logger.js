@@ -22,7 +22,7 @@
  * logCallback({ type, arguments: [{ data, dataType, rawData }] })
  *
  * > type [string] - the log type.
-                     you might like to style ['resp', 'warning', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
+                     you might like to style ['resp', 'warn', 'error', 'debug', 'clear'] differently and display the rest as normal 'log's.
                      see https://developer.mozilla.org/en-US/docs/Web/API/console for more info about the possible types.
  *
  * > arguments [array] - an array of the arguments passed to the console function.
