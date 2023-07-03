@@ -251,8 +251,23 @@ class ConsoleSheet {
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
     
     });
+
     
+    // add return click listener
+    this.el.return.addEventListener('click',
+                                    this.onReturnClick
+                                      .bind(this));
+
     
+    if (isSafari) {
+      
+      // fix keyboard on safari
+      new SafariKeyboard(this.el.sheet, this.el.input);
+      
+    }
+
+    
+    // if on dev version
     if (isDev) {
       
       input.on('keydown', (e) => {
@@ -269,52 +284,6 @@ class ConsoleSheet {
       });
       
     }
-
-
-    if (isSafari) {
-
-      // change header color to input background color
-      // on safari
-
-      input.on('focus', (e) => {
-
-        input.prevThemeColor = document.querySelector('meta[name="theme-color"]').content;
-        document.querySelector('meta[name="theme-color"]').content = '#0f1014';
-
-      });
-
-      input.on('focus', () => {
-
-        window.scrollTo(0, 0);
-
-        onNextFrame(() => {
-
-          document.documentElement.style.paddingBottom = body.clientHeight + 'px';
-
-          onNextFrame(() => {
-
-            window.scrollTo(0, body.clientHeight);
-
-          });
-
-        });
-
-      });
-
-      input.on('blur', (e) => {
-
-        document.querySelector('meta[name="theme-color"]').content = input.prevThemeColor;
-
-        document.documentElement.style.paddingBottom = '';
-
-      });
-
-    }
-
-
-    this.el.return.addEventListener('click',
-                                    this.onReturnClick
-                                      .bind(this));
 
   }
   
