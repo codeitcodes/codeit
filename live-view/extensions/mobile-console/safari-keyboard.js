@@ -70,7 +70,7 @@ class SafariKeyboard {
         
         if (this.viewportChangeCount === 1) {
         
-          currFromBottom -= this.safariInitialViewportOffset;
+          // currFromBottom -= this.safariInitialViewportOffset;
           
         } else if (this.viewportChangeCount === 2) {
           
