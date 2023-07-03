@@ -315,11 +315,11 @@ if (isMobile) {
   
   (async () => {
     
-    await loadScript('live-view/extensions/logger.js');
+    await loadScript('live-view/extensions/mobile-console/logger.js');
 
     if (isSafari) {
       
-      await loadScript('live-view/extensions/safari-keyboard.js');
+      await loadScript('live-view/extensions/mobile-console/safari-keyboard.js');
       
     }
   
