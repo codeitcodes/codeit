@@ -100,17 +100,16 @@ let logger = {
     
     } catch(e) {
       
+      // propagate errors from context window
       if (window !== contextWindow) {
         
-        // catch error and propagate to context window
+        let errorMessage = e.toString();
         
-        const errorEvent = new ErrorEvent('error', {
-          bubbles: true,
-          cancelable: false,
-          error: e
-        });
-  
-        contextWindow.dispatchEvent(errorEvent);
+        // add 'Uncaught' to start of message
+        errorMessage = 'Uncaught ' + errorMessage;
+        
+        // call 'error' log callback
+        logger.log('error', [errorMessage]);
         
       }
       
