@@ -3,10 +3,6 @@
 
 // @@todo add 'clear' log styling in CSS
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds set length.
-//        disable highlighting on the expanded text (like in DevTools)?
-// @@todo in logger.js: make 'input' type 'shouldHighlight'
-// @@todo tapping on live view header to close it does not close console sheet
-// @@todo remove spaces from start and end of console input?
 // @@todo 'no-border-bottom' styling for subsequent input-resp logs
 // @@todo improve undefined + null highlighting color
 // @@todo don't render logs without arguments
@@ -80,8 +76,17 @@ class ConsoleSheet {
       if (!icon) icon = '';
       
       
+      let noBorderTop = '';
+      
+      if (logWrapper.children.at(-1).classList.contains('input')) {
+        
+        noBorderTop = ' no-border-top';
+        
+      }
+      
+      
       const logHTML = `
-      <div class="log ` + log.type + `">
+      <div class="log ` + log.type + noBorderTop + `">
         ` + icon + `
         <div class="data">` + out + `</div>
       </div>
