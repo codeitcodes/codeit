@@ -70,7 +70,7 @@ class SafariKeyboard {
         
         if (this.viewportChangeCount === 1) {
         
-          currFromBottom -= this.safariInitialViewportOffset;
+          // currFromBottom -= this.safariInitialViewportOffset;
           
         } else if (this.viewportChangeCount === 2) {
           
@@ -86,6 +86,8 @@ class SafariKeyboard {
       
       if (this.smallestFromBottom === -1
           || this.smallestFromBottom > currFromBottom) {
+        
+        console.log(this.smallestFromBottom - currFromBottom);
         
         this.smallestFromBottom = currFromBottom;
         
