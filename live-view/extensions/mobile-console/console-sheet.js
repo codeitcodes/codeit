@@ -3,9 +3,7 @@
 
 // @@todo add 'clear' log styling in CSS
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds set length.
-// @@todo 'no-border-bottom' styling for subsequent input-resp logs
 // @@todo improve undefined + null highlighting color
-// @@todo don't render logs without arguments
 
 class ConsoleSheet {
 
@@ -27,7 +25,7 @@ class ConsoleSheet {
     }
     
     
-    // don't show empty logs
+    // don't show logs without arguments
     if (log.arguments.length === 0) return;
     
     
