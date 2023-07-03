@@ -74,11 +74,14 @@ class ConsoleSheet {
       if (!icon) icon = '';
       
       
+      // no border top for subsequent input-resp logs
+      
       let noBorderTop = '';
       
       const lastLog = this.el.logWrapper.children.at(-1);
       
-      if (lastLog.classList.contains('input')) {
+      if (log.type === 'resp'
+          && lastLog.classList.contains('input')) {
         
         noBorderTop = ' no-border-top';
         
