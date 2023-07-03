@@ -1,6 +1,6 @@
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v697';
+const WORKER_NAME = 'codeit-worker-v698';
 
 
 self.importScripts('/worker/client-channel.js');
