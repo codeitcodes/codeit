@@ -140,7 +140,7 @@ class ConsoleSheet {
   onReturnClick(e) {
     
     e.preventDefault();
-    
+    e.stopPropagation();
     
     const input = this.el.input;
     
@@ -150,7 +150,16 @@ class ConsoleSheet {
     // clear input
     
     input.textContent = '';
-    // input.focus();
+    input.focus();
+    
+    
+    if (isSafari) {
+      
+      // restore keyboard height on Safari
+      console.log(this.el.sheet.style.translate);
+      
+    }
+    
 
     this.el.footer.classList.remove('return-enabled');
     this.el.footer.classList.add('empty');
