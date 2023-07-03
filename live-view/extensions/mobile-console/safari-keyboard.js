@@ -98,7 +98,7 @@ class SafariKeyboard {
       
       
       // if blur delta was extremely quick
-      if (false) {
+      if (blurDelta < this.safariTimeoutDelay) {
         
         // change wrapper bottom instantly
         this.changeWrapperBottom(this.keyboardHeight);
