@@ -76,7 +76,9 @@ class ConsoleSheet {
       
       let noBorderTop = '';
       
-      if (logWrapper.children.at(-1).classList.contains('input')) {
+      const lastLog = this.el.logWrapper.children.at(-1);
+      
+      if (lastLog.classList.contains('input')) {
         
         noBorderTop = ' no-border-top';
         
