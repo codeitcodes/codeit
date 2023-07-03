@@ -1966,12 +1966,16 @@ body:not(.mobile) .sheet {
 }
 
 
-body.safari .console-sheet:has(> .footer .input:focus) {
-  padding-bottom: 0;
+body.safari .console-sheet {
+  translate: 0 0;
 }
 
 body.safari .console-sheet.transitioning-blur {
   transition: translate .27s ease;
+}
+
+body.safari .console-sheet:has(> .footer .input:focus) {
+  padding-bottom: 0;
 }
 
 .console-sheet .logs .log {
