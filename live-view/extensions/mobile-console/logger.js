@@ -100,20 +100,25 @@ let logger = {
     
     } catch(e) {
       
+      let errorMessage = e.toString();
+      
+      // add line and column to message
+      errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
+      
+      // add 'Uncaught' to start of message
+      errorMessage = 'Uncaught ' + errorMessage;
+      
+      
       // propagate errors from context window
       if (window !== contextWindow) {
-        
-        let errorMessage = e.toString();
-        
-        // add 'Uncaught' to start of message
-        errorMessage = 'Uncaught ' + errorMessage;
         
         // call 'error' log callback
         logger.log('error', [errorMessage]);
         
       }
       
-      throw e;
+      
+      throw errorMessage;
       
     }
     
