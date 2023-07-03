@@ -236,13 +236,23 @@ class ConsoleSheet {
 
 
     // toggle input return button on type
-    input.on('input', (e) => {
+    input.on('type', () => {
       
       // fix empty input on Safari
       if (input.innerHTML === '<br>') {
     
         input.textContent = '';
     
+      }
+      
+      if (input.textContent === '\n') {
+        
+        input.classList.add('empty');
+        
+      } else {
+        
+        input.classList.remove('empty');
+        
       }
 
       const text = input.textContent.replaceAll(' ', '').replaceAll('\n', '').replaceAll('\r', '');
