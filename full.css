@@ -2124,7 +2124,7 @@ body:not(.mobile) .console-sheet .logs .log .action:hover {
   position: relative;
 }
 
-.console-sheet .footer .input.empty::before {
+.console-sheet .footer.input-empty .input::before {
   content: 'Type code...';
   color: #636d83;
   pointer-events: none;
