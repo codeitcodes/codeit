@@ -1222,7 +1222,7 @@ async function renderLiveViewMarkdown(file) {
     
     fetchPromises.push((async (i) => {
       
-      await loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
+      await loadStyleSheet(window.location.origin + '/editor-theme.css', frameDoc.body);
 
       frameDoc.body.querySelectorAll('pre').forEach(pre => {
         
