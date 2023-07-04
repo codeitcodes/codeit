@@ -2,8 +2,6 @@
 /*
  * Safari Keyboard Fixes
  *
- * Variables prefixed with 'safari' are Safari's '*magical* numbers
- *
  * Usage:
  * 1. Style your input's wrapper element with 'required-styling.css'
  * 2. Run:
