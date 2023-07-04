@@ -46,7 +46,7 @@ const FILES_TO_CACHE = [
   '/live-view/extensions/marked.min.js',
   '/live-view/extensions/markdown-dark.css',
   
-  '/dark-theme.css',
+  '/editor-theme.css',
 
   '/fonts/fonts.css',
 
