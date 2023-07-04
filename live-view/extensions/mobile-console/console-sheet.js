@@ -228,7 +228,7 @@ class ConsoleSheet {
   
           e.preventDefault();
   
-          this.runCode();
+          this.onReturnClick();
   
         }
         
