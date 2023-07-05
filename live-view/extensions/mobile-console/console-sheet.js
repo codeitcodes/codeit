@@ -4,6 +4,8 @@
 // @@todo fix error parsing on Safari
 // @@todo fix log text x-overflow on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
+// @@nextsteps display Regexp and Symbols properly in logger (by calling .toString() on them)
+// @@nextsteps group identical 'log' type console messages
 
 class ConsoleSheet {
 
@@ -29,14 +31,22 @@ class ConsoleSheet {
     if (log.arguments.length === 0) return;
     
     
+    const scrolledToBottom = (logWrapper.scrollTop >= logWrapper.scrollHeight);
+    
+    
     // get log HTML
     const logHTML = this.getLogHTML(log);
     
     // add log to HTML
     logWrapper.innerHTML += logHTML;
     
-    // scroll to bottom of logs
-    logWrapper.scrollTo(0, logWrapper.scrollHeight);
+    
+    if (scrolledToBottom) {
+      
+      // scroll to bottom of logs
+      logWrapper.scrollTo(0, logWrapper.scrollHeight);
+      
+    }
     
   }
      
@@ -262,11 +272,17 @@ class ConsoleSheet {
     
     this.el.sheet.classList.add('visible');
     
+    // scroll to bottom of logs
+    this.el.logWrapper.scrollTo(0, this.el.logWrapper.scrollHeight);
+    
   }
   
   hide() {
     
     this.el.sheet.classList.remove('visible');
+    
+    // blur input
+    this.el.input.blur();
     
   }
   
