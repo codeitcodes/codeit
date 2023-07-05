@@ -130,7 +130,7 @@ class ConsoleSheet {
 
     // clear input
     
-    input.textContent = '\n';
+    input.textContent = '';
     input.focus();
     
 
