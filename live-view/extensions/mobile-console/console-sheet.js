@@ -106,7 +106,11 @@ class ConsoleSheet {
   }
   
   
-  onReturnClick() {
+  onReturnClick(e) {
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
     
     const input = this.el.input;
     
@@ -257,7 +261,7 @@ class ConsoleSheet {
   
           e.preventDefault();
   
-          this.onReturnClick();
+          this.onReturnClick(e);
   
         }
         
