@@ -1890,6 +1890,7 @@ body.safari .live-view-menu .icon.share path.ios {
   bottom: -40px;
   background: var(--deep-midnight-blue);
   border-radius: 11px 11px 0 0;
+  overflow: hidden;
   pointer-events: none;
   will-change: transform;
   transition: .3s var(--cubic-function),
@@ -1911,7 +1912,7 @@ body.safari .live-view-menu .icon.share path.ios {
 .sheet.visible {
   transform: translateX(-50%);
   bottom: 0;
-  box-shadow: 0 -1px 0 0 hsl(230deg 11% 12%);
+  box-shadow: 0 -1px 0 0 hsl(230deg 11% 12%), 0px 3px 6px 1px hsl(228deg 9% 6%);
   pointer-events: auto;
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
@@ -1943,6 +1944,10 @@ body:not(.mobile) .sheet {
   /* border-bottom: 1px solid rgb(130 134 137 / 25%); */
   background: hsl(226deg 13% 9%);
   border-radius: inherit;
+  transition: box-shadow .18s var(--ease-function);
+}
+
+.sheet .header.scrolled {
   box-shadow: 0px 3px 6px 1px hsl(228deg 9% 6%);
 }
 
