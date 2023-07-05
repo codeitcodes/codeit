@@ -5,7 +5,6 @@
 // @@todo fix error parsing on Safari
 // @@todo fix log text x-overflow on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
-// @@todo improve undefined + null highlighting color
 
 class ConsoleSheet {
 
