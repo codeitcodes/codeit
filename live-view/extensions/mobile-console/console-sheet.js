@@ -5,6 +5,7 @@
 // @@todo fix error parsing on Safari
 // @@todo fix log text x-overflow on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
+// @@todo add highlighting to 'input' logs
 
 class ConsoleSheet {
 
@@ -102,6 +103,17 @@ class ConsoleSheet {
     const input = this.el.input;
     
     const codeStr = input.textContent;
+
+    
+    // show input in console
+    this.logCallback({
+      type: 'input',
+      arguments: [{
+        data: input.innerHTML,
+        dataType: 'input',
+        rawData: input.textContent
+      }]
+    });
 
 
     // clear input
