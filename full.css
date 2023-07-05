@@ -1934,7 +1934,7 @@ body:not(.mobile) .sheet {
   pointer-events: none;
 }
 
-.sheet .header-wrapper {
+.sheet .header-overflow-wrapper {
   overflow: hidden;
 }
 
