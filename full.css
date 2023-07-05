@@ -2060,6 +2060,7 @@ body.safari .console-sheet.transitioning-blur {
 .console-sheet .logs .log .data {
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  word-break: break-word;
   user-select: text;
   -webkit-user-select: text;
   /* overflow-wrap: anywhere; */
