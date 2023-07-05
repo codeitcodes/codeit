@@ -1951,7 +1951,7 @@ body:not(.mobile) .sheet {
   /* border-bottom: 1px solid rgb(130 134 137 / 25%); */
   background: hsl(226deg 13% 9%);
   border-radius: inherit;
-  transition: box-shadow .18s var(--ease-function);
+  transition: box-shadow .1s var(--ease-function);
 }
 
 .sheet .header.scrolled {
