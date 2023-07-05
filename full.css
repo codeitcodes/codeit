@@ -2014,14 +2014,8 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 .console-sheet .logs .log .data {
-  white-space: pre-wrap;
   flex: 1;
   margin-left: calc(10.5px + 18px);
-  user-select: text;
-  -webkit-user-select: text;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  /* word-break: break-all; */
   background: transparent;
   padding: 0;
   scroll-padding: 0;
@@ -2056,10 +2050,28 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   color: #636d83;
 }
 
-.console-sheet .logs .log .data .argument:is(.undefined, .null) {
+
+/* @@ add to "console-sheet/logger-token-styling.css" */
+
+.console-sheet .logs {
+  /* opt out of the browser's scroll anchoring */
+  overflow-anchor: none;
+}
+
+.console-sheet .logs .log .data {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  user-select: text;
+  -webkit-user-select: text;
+  /* overflow-wrap: anywhere; */
+  /* word-break: break-all; */
+}
+
+.console-sheet .logs .log .data .argument:is(.null, .undefined) {
   color: hsl(218deg 7% 64% / 72%);
   color: #7f838e;
 }
+
 
 .console-sheet .logs .log .actions {
   display: flex;
