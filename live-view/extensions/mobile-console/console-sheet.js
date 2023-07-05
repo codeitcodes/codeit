@@ -73,22 +73,20 @@ class ConsoleSheet {
     if (!icon) icon = '';
     
     
-    // no border top for subsequent input-resp logs
-    
-    let noBorderTop = '';
+    // no border between subsequent input-resp logs
     
     const lastLog = this.el.logWrapper.querySelector('.log:last-of-type');
     
     if (log.type === 'resp'
         && lastLog.classList.contains('input')) {
       
-      noBorderTop = ' no-border-top';
+      lastLog.classList.add('no-border-bottom');
       
     }
     
     
     const logHTML = `
-    <div class="log ` + escapeHTML(log.type) + noBorderTop + `">
+    <div class="log ` + escapeHTML(log.type) + `">
       ` + icon + `
       <div class="data">` + out + `</div>
     </div>
