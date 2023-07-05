@@ -162,7 +162,7 @@ class SafariKeyboard {
   
   changeWrapperBottom(bottom) {
     
-    this.wrapperEl.style.translate = '0 ' + (bottom * -1) + 'px';
+    this.wrapperEl.style.paddingBottom = bottom + 'px';
     
   }
   
