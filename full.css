@@ -1988,12 +1988,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   font-family: var(--mono-font-family);
   line-height: 1.5;
   color: #a6c3d4;
-  border-top: 1px solid #f1f1f21c;
+  border-bottom: 1px solid #f1f1f21c;
 }
 
-.console-sheet .logs .log:first-of-type,
-.console-sheet .logs .log.no-border-top {
-  border-top: 0;
+.console-sheet .logs .log.no-border-bottom {
+  border-bottom: 0;
 }
 
 .console-sheet .logs .log .icon {
