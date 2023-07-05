@@ -1936,6 +1936,10 @@ body:not(.mobile) .sheet {
 
 .sheet .header-overflow-wrapper {
   overflow: hidden;
+  position: relative;
+  border-radius: inherit;
+  padding-bottom: 12px;
+  margin-bottom: -12px;
 }
 
 .sheet .header {
