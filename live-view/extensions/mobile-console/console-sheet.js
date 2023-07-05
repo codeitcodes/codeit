@@ -118,7 +118,7 @@ class ConsoleSheet {
     
   
     // scroll to bottom of logs
-    logWrapper.scrollTo(0, logWrapper.scrollHeight);
+    this.el.logWrapper.scrollTo(0, this.el.logWrapper.scrollHeight);
 
     
     // show input in console
