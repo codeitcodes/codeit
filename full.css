@@ -1895,7 +1895,7 @@ body.safari .live-view-menu .icon.share path.ios {
   transition: .3s var(--cubic-function),
               0s .3s var(--bounce-function) bottom,
               .1s .29s var(--ease-function) box-shadow,
-              0s padding-bottom;
+              0s translate;
   z-index: 1001;
 }
 
@@ -1916,7 +1916,7 @@ body.safari .live-view-menu .icon.share path.ios {
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
               .1s var(--ease-function) box-shadow,
-              0s padding-bottom;
+              0s translate;
 }
 
 body:not(.mobile) .sheet {
@@ -1979,8 +1979,12 @@ body:not(.mobile) .sheet {
 }
 
 
+body.safari .console-sheet {
+  translate: 0 0;
+}
+
 body.safari .console-sheet.transitioning-blur {
-  transition: padding-bottom .27s ease;
+  transition: translate .27s ease;
 }
 
 .console-sheet .logs .log {
