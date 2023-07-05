@@ -115,6 +115,10 @@ class ConsoleSheet {
     const input = this.el.input;
     
     const codeStr = input.textContent;
+    
+  
+    // scroll to bottom of logs
+    logWrapper.scrollTo(0, logWrapper.scrollHeight);
 
     
     // show input in console
