@@ -168,6 +168,18 @@ class ConsoleSheet {
       }
 
     });
+    
+    
+    // add shadow to header on scroll
+    this.el.logWrapper.addEventListener('scroll', () => {
+      
+      const scrollTop = this.el.logWrapper.scrollTop;
+      
+      const scrolledLogs = (scrollTop > 0);
+      
+      this.el.header.classList.toggle('scrolled', scrolledLogs);
+      
+    });
 
 
     // init input
