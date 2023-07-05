@@ -1,6 +1,6 @@
 
 // update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v710';
+const WORKER_NAME = 'codeit-worker-v712';
 
 
 self.importScripts('/worker/client-channel.js');
@@ -46,7 +46,7 @@ const FILES_TO_CACHE = [
   '/live-view/extensions/marked.min.js',
   '/live-view/extensions/markdown-dark.css',
   
-  '/editor-theme.css',
+  '/dark-theme.css',
 
   '/fonts/fonts.css',
 
