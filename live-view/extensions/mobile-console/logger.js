@@ -82,10 +82,6 @@ let logger = {
     
     // if context window isn't defined, return
     if (!contextWindow) return;
-    
-
-    // call 'input' log callback
-    logger.log('input', [codeStr]);
 
 
     // run code in context
