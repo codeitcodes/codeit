@@ -1890,13 +1890,12 @@ body.safari .live-view-menu .icon.share path.ios {
   bottom: -40px;
   background: var(--deep-midnight-blue);
   border-radius: 11px 11px 0 0;
-  overflow: hidden;
   pointer-events: none;
   will-change: transform;
   transition: .3s var(--cubic-function),
               0s .3s var(--bounce-function) bottom,
               .1s .29s var(--ease-function) box-shadow,
-              0s translate;
+              0s padding-bottom;
   z-index: 1001;
 }
 
@@ -1917,7 +1916,7 @@ body.safari .live-view-menu .icon.share path.ios {
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
               .1s var(--ease-function) box-shadow,
-              0s translate;
+              0s padding-bottom;
 }
 
 body:not(.mobile) .sheet {
@@ -1933,6 +1932,10 @@ body:not(.mobile) .sheet {
   position: absolute;
   background: inherit;
   pointer-events: none;
+}
+
+.sheet .header-wrapper {
+  overflow: hidden;
 }
 
 .sheet .header {
@@ -1972,16 +1975,8 @@ body:not(.mobile) .sheet {
 }
 
 
-body.safari .console-sheet {
-  translate: 0 0;
-}
-
 body.safari .console-sheet.transitioning-blur {
-  transition: translate .27s ease;
-}
-
-body.safari .console-sheet:has(> .footer .input:focus) {
-  padding-bottom: 0;
+  transition: padding-bottom .27s ease;
 }
 
 .console-sheet .logs .log {
