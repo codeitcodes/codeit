@@ -3,8 +3,9 @@
 
 // @@todo fix error parsing on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
-// @@nextsteps display Regexp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
+// @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
 // @@nextsteps group identical 'log' type console messages
+// @@nextsteps expandable objects; JSON viewer?
 
 class ConsoleSheet {
 
