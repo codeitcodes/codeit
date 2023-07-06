@@ -550,8 +550,17 @@ if (isMobile) {
   
   liveMenuConsole.addEventListener('click', () => {
     
-    // show live view console
-    consoleSheet.show();
+    // toggle live view console
+    
+    if (!consoleSheet.isVisible()) {
+
+      consoleSheet.show();
+
+    } else {
+    
+      consoleSheet.hide();
+      
+    }
     
   });
   
