@@ -31,9 +31,7 @@ class ConsoleSheet {
     if (log.arguments.length === 0) return;
     
     
-    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
-    
-    const scrolledToBottom = (logWrapper.scrollTop >= maxScroll);
+    const scrolledToBottom = this.isScrolledToBottom();
     
     
     // get log HTML
@@ -43,10 +41,11 @@ class ConsoleSheet {
     logWrapper.innerHTML += logHTML;
     
     
+    // if was scrolled to bottom
     if (scrolledToBottom) {
       
       // scroll to bottom of logs
-      logWrapper.scrollTo(0, logWrapper.scrollHeight);
+      this.scrollToBottom();
       
     }
     
@@ -120,7 +119,7 @@ class ConsoleSheet {
     
   
     // scroll to bottom of logs
-    this.el.logWrapper.scrollTo(0, this.el.logWrapper.scrollHeight);
+    this.scrollToBottom();
 
     
     // show input in console
@@ -245,9 +244,9 @@ class ConsoleSheet {
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
       
       
-      // move text up if scrolled to bottom and input resized
+      // move text up if was scrolled to bottom and input resized
       //@@todo const scrolledToBottom = (logWrapper.scrollTop >= logWrapper.scrollHeight);
-          
+      
     });
 
     
@@ -286,12 +285,35 @@ class ConsoleSheet {
   }
   
   
+  isScrolledToBottom() {
+    
+    const logWrapper = this.el.logWrapper;
+    
+    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
+    
+    const scrolledToBottom = (logWrapper.scrollTop >= maxScroll);
+    
+    return scrolledToBottom;
+    
+  }
+  
+  scrollToBottom() {
+    
+    const logWrapper = this.el.logWrapper;
+    
+    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
+    
+    logWrapper.scrollTo(0, maxScroll);
+    
+  }
+  
+  
   show() {
     
     this.el.sheet.classList.add('visible');
     
     // scroll to bottom of logs
-    this.el.logWrapper.scrollTo(0, this.el.logWrapper.scrollHeight);
+    this.scrollToBottom();
     
   }
   
