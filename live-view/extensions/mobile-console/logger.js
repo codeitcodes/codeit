@@ -35,10 +35,6 @@
  *
  */
 
-// next steps:
-// - custom Prism theme for objects & arrays
-// - expandable objects
-
 let logger = {
 
   options: {
