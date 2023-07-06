@@ -2075,9 +2075,32 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   /* word-break: break-all; */
 }
 
-.console-sheet .logs .log .data .argument:is(.null, .undefined) {
+.console-sheet .log .argument.object-value-number,
+.console-sheet .log .argument.object-value-boolean {
+  color: #e5b09f;
+}
+
+.console-sheet .log .argument.object-value-bigint {
+  color: #ababab;
+}
+
+.console-sheet .log .argument.object-value-string,
+.console-sheet .log .argument.object-value-regexp,
+.console-sheet .log .argument.object-value-symbol {
+  color: #c1ffd5cc;
+  color: #a5d7b8;
+  word-break: break-all;
+  unicode-bidi: -webkit-isolate;
+}
+
+.console-sheet .log .argument.object-value-null,
+.console-sheet .log .argument.object-value-undefined {
   color: hsl(218deg 7% 64% / 72%);
   color: #7f838e;
+}
+
+.console-sheet .log .argument.object-value-function {
+  font-style: italic;
 }
 
 
