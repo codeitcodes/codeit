@@ -257,7 +257,7 @@ class ConsoleSheet {
     }
     
     // when input resizes, update
-    new ResizeObserver(onInputResize).observe(input);
+    new ResizeObserver(onInputResize.bind(this)).observe(input);
 
     
     // add return click listener
