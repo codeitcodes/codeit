@@ -246,11 +246,18 @@ class ConsoleSheet {
 
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
       
-      
-      // move text up if was scrolled to bottom and input resized
-      //@@todo const scrolledToBottom = (logWrapper.scrollTop >= logWrapper.scrollHeight);
-      
     });
+    
+    
+    // move text up if was scrolled to bottom and input resized
+    function onInputResize(e) {
+
+      console.log(e, this.isScrolledToBottom());
+      
+    }
+    
+    // when input resizes, update
+    new ResizeObserver(onInputResize).observe(input);
 
     
     // add return click listener
