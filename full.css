@@ -1984,10 +1984,13 @@ body.safari .console-sheet {
 }
 
 body.safari .console-sheet.transitioning-blur {
+  transition: translate .27s ease;
+}
+
+body.safari .console-sheet:not(.visible).transitioning-blur {
   transition: .3s var(--cubic-function),
               0s .3s var(--bounce-function) bottom,
-              .1s .29s var(--ease-function) box-shadow,
-              translate .27s ease;
+              .1s .29s var(--ease-function) box-shadow;
 }
 
 body.safari .console-sheet:has(> .footer .input:focus) {
