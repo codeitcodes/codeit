@@ -59,7 +59,7 @@ class ConsoleSheet {
     log.arguments.forEach(argument => {
       
       let argumentHTML = 
-      `<span class="argument ` + escapeHTML(argument.dataType) + `">` +
+      `<span class="argument object-value-` + escapeHTML(argument.dataType) + `">` +
         argument.data +
       `</span>`;
       
