@@ -245,15 +245,15 @@ cd-el {
 }
 
 
-.token.brace.brace-active {
+cd-el .token.brace.brace-active {
   position: relative;
   background: rgb(166 195 212 / 12%);
   border-radius: 2.5px 2.5px 0 0;
   box-shadow: 0 1px 0 0 rgb(166 195 212 / 12%);
 }
 
-.token.brace.brace-active::before,
-.token.brace.brace-active::after {
+cd-el .token.brace.brace-active::before,
+cd-el .token.brace.brace-active::after {
   content: '';
   bottom: -2.5px;
   left: 0;
@@ -266,7 +266,7 @@ cd-el {
   pointer-events: none;
 }
 
-.token.brace.brace-active::after {
+cd-el .token.brace.brace-active::after {
   left: 50%;
   transform: rotateZ(-25deg);
 }
