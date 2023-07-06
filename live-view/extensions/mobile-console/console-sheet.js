@@ -278,7 +278,7 @@ class ConsoleSheet {
 
     
     // add return click listener
-    this.el.return.addEventListener('click',
+    this.el.return.addEventListener('touchend',
                                     this.onReturnClick
                                       .bind(this));
 
