@@ -3,7 +3,6 @@
 
 // @@todo fix error parsing on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
-// @@todo move text up if scrolled to bottom and input resized
 // @@nextsteps display Regexp and Symbols properly in logger (by calling .toString() on them)
 // @@nextsteps group identical 'log' type console messages
 
