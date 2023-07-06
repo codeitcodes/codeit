@@ -348,7 +348,7 @@ class ConsoleSheet {
     
     this.el.sheet.classList.remove('visible');
     
-    // to make the sheet hiding animation plays
+    // make sure the sheet hiding animation plays
     onNextFrame(() => {
       
       // blur input
