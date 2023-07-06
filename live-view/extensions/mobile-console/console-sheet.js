@@ -115,36 +115,39 @@ class ConsoleSheet {
     
     const input = this.el.input;
     
-    const codeStr = input.textContent;
+    const hlInputText = input.innerHTML;
     
-  
+    const inputText = input.textContent;
+    
+
+    // clear input
+    
+    this.el.footer.classList.remove('return-enabled');
+
+    input.textContent = '\n';
+    
+    this.el.footer.classList.add('input-empty');
+    
+    input.focus();
+    
+    
     // scroll to bottom of logs
     this.scrollToBottom();
 
     
-    // show input in console
+    // show highlighted input in console
     this.logCallback({
       type: 'input',
       arguments: [{
-        data: input.innerHTML,
+        data: hlInputText,
         dataType: 'input',
-        rawData: input.textContent
+        rawData: inputText
       }]
     });
-
-
-    // clear input
-    
-    input.textContent = '\n';
-    input.focus();
-    
-
-    this.el.footer.classList.remove('return-enabled');
-    this.el.footer.classList.add('input-empty');
     
     
     // run code
-    logger.run(codeStr);
+    logger.run(inputText);
 
   }
   
