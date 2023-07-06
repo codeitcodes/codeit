@@ -2031,6 +2031,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   overflow: visible;
 }
 
+.console-sheet .logs .log:has(> .actions .action.more) .data::after {
+  content: '...';
+  color: #636d83;
+}
+
 .console-sheet .logs .log.warn {
   color: hsl(15deg 57% 76%); /* #e5b09f */
   background: hsl(15deg 57% 76% / 4%);
