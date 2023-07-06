@@ -295,13 +295,13 @@ class ConsoleSheet {
     }
 
     
-    // if on desktop dev version
-    if (isDev && !isMobile) {
+    // if on dev version
+    if (isDev) {
       
       input.on('keydown', (e) => {
         
-        // run code on Shift+Enter
-        if (e.key === 'Enter' && e.shiftKey) {
+        // run code on Ctrl/Cmd+Enter
+        if (e.key === 'Enter' && isKeyEventMeta(e)) {
   
           e.preventDefault();
   
