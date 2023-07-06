@@ -303,8 +303,6 @@ class ConsoleSheet {
         // run code on Ctrl/Cmd+Enter
         if (e.key === 'Enter' && isKeyEventMeta(e)) {
   
-          e.preventDefault();
-  
           this.onReturnClick(e);
   
         }
