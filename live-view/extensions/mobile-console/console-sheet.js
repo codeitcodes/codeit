@@ -258,8 +258,8 @@ class ConsoleSheet {
       const currInputHeight = input.clientHeight;
       
       const heightDelta = currInputHeight - prevInputHeight;
-        
-        
+      
+      
       const logWrapper = this.el.logWrapper;
       
       const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
@@ -272,6 +272,9 @@ class ConsoleSheet {
         this.scrollToBottom();
         
       }
+      
+      
+      prevInputHeight = currInputHeight;
       
     }
     
