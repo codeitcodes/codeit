@@ -2211,7 +2211,7 @@ body:not(.mobile) .console-sheet .logs .log .action:hover {
   opacity: 1 !important;
 }
 
-body.mobile:has(> .console-sheet.visible) {
+body.safari:has(> .console-sheet.visible) {
   background: #0f1014;
 }
 
