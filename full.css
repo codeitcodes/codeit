@@ -2166,8 +2166,8 @@ body:not(.mobile) .console-sheet .logs .log .action:hover {
   overflow-y: auto;
   box-sizing: border-box;
   scroll-padding: 14px 0;
-  white-space: pre-wrap;
-  word-break: break-all;
+  white-space: break-spaces;
+  word-break: break-word;
   overflow-wrap: anywhere;
   position: relative;
 }
