@@ -2084,7 +2084,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   color: #ababab;
 }
 
-.console-sheet .log .argument.object-value-string,
+/* .console-sheet .log .argument.object-value-string, */
 .console-sheet .log .argument.object-value-regexp,
 .console-sheet .log .argument.object-value-symbol {
   color: #c1ffd5cc;
