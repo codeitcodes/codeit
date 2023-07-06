@@ -250,9 +250,28 @@ class ConsoleSheet {
     
     
     // move text up if was scrolled to bottom and input resized
+    
+    let prevInputHeight = input.clientHeight;
+    
     function onInputResize(e) {
-
-      console.log(e, this.isScrolledToBottom());
+      
+      const currInputHeight = input.clientHeight;
+      
+      const heightDelta = currInputHeight - prevInputHeight;
+        
+        
+      const logWrapper = this.el.logWrapper;
+      
+      const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
+      
+      const wasScrolledToBottom = (logWrapper.scrollTop === (maxScroll - heightDelta));
+      
+      
+      if (heightDelta > 0 && wasScrolledToBottom) {
+        
+        this.scrollToBottom();
+        
+      }
       
     }
     
