@@ -295,8 +295,8 @@ class ConsoleSheet {
     }
 
     
-    // if on dev version
-    if (isDev) {
+    // if on desktop dev version
+    if (isDev && !isMobile) {
       
       input.on('keydown', (e) => {
         
