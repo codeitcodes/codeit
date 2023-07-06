@@ -2058,7 +2058,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 
-/* @@ add to "console-sheet/logger-token-styling.css" */
+/* logger token styling */
 
 .console-sheet .logs {
   /* opt out of the browser's scroll anchoring */
@@ -2080,11 +2080,13 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   color: #e5b09f;
 }
 
+/* @@todo */
 .console-sheet .log .argument.object-value-bigint {
   color: #ababab;
 }
 
 /* .console-sheet .log .argument.object-value-string, */
+/* @@todo */
 .console-sheet .log .argument.object-value-regexp,
 .console-sheet .log .argument.object-value-symbol {
   color: #c1ffd5cc;
