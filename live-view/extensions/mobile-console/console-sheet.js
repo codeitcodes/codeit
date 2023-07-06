@@ -134,12 +134,12 @@ class ConsoleSheet {
 
     // clear input
     
-    input.textContent = '';
+    input.textContent = '\n';
     input.focus();
     
 
     this.el.footer.classList.remove('return-enabled');
-    this.el.footer.classList.add('empty');
+    this.el.footer.classList.add('input-empty');
     
     
     // run code
