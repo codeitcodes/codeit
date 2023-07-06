@@ -264,7 +264,7 @@ class ConsoleSheet {
       
       const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
       
-      const wasScrolledToBottom = (Math.round(logWrapper.scrollTop) === (maxScroll - heightDelta));
+      const wasScrolledToBottom = (Math.floor(logWrapper.scrollTop) === (maxScroll - heightDelta));
       
       
       if (heightDelta > 0 && wasScrolledToBottom) {
