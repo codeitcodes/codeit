@@ -108,10 +108,6 @@ class ConsoleSheet {
   
   onReturnClick(e) {
     
-    e.preventDefault();
-    e.stopPropagation();
-    
-    
     const input = this.el.input;
     
     const hlInputText = input.innerHTML;
@@ -302,6 +298,8 @@ class ConsoleSheet {
         
         // run code on Ctrl/Cmd+Enter
         if (e.key === 'Enter' && isKeyEventMeta(e)) {
+  
+          e.preventDefault();
   
           this.onReturnClick(e);
   
