@@ -31,7 +31,9 @@ class ConsoleSheet {
     if (log.arguments.length === 0) return;
     
     
-    const scrolledToBottom = (logWrapper.scrollTop >= logWrapper.scrollHeight);
+    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
+    
+    const scrolledToBottom = (logWrapper.scrollTop >= maxScroll);
     
     
     // get log HTML
