@@ -222,11 +222,7 @@ class ConsoleSheet {
 
 
     // on type in input
-    input.on('keydown', (e) => {
-      
-      // if didn't type, return
-      if (!input.typed(e)) return;
-      
+    input.on('type', () => {
       
       // toggle placeholder
       if (input.textContent === '\n') {
