@@ -348,8 +348,13 @@ class ConsoleSheet {
     
     this.el.sheet.classList.remove('visible');
     
-    // blur input
-    this.el.input.blur();
+    // to make the sheet hiding animation plays
+    onNextFrame(() => {
+      
+      // blur input
+      this.el.input.blur();
+      
+    });
     
   }
   
