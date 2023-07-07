@@ -3,11 +3,18 @@
 
 // @@todo fix error parsing on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
-// @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
+// @@todo display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
+// @@todo check Android devices
+// @@todo truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
 // @@nextsteps group identical 'log' type console messages
+
 // @@nextsteps expandable objects; JSON viewer?
 
 class ConsoleSheet {
+  
+  options = {
+    maxLogLength: 1200
+  };
 
   logCallback(log) {
     
@@ -57,11 +64,55 @@ class ConsoleSheet {
     
     let out = '';
     
+    let rawLogText = '';
+    
+    let exceededMaxLength = false;
+    
     log.arguments.forEach(argument => {
+      
+      let data = argument.data;
+      
+      // add spaces between adjacent arguments
+      rawLogText += data + ' ';
+      
+      
+      if (exceededMaxLength) return;
+      
+      
+      const maxLogLength = this.options.maxLogLength;
+      
+      // if log length exceeded max
+      if (maxLogLength < rawLogText.length) {
+        
+        const totalLogLength = rawLogText.length;
+        
+        const overflowLength = totalLogLength - maxLogLength;
+
+        
+        // +1 to account for the separating space
+        const argLength = (data.length + 1);
+
+        
+        const notInOverflowLength = argLength - overflowLength;
+
+        // if the argument is completely hidden, return
+        if (notInOverflowLength === 0) {
+          
+          return;
+          
+        }
+        
+        // slice argument to overflow cap
+        data = data.slice(0, -overflowLength);
+        
+        exceededMaxLength = true;
+        
+      }
+      
       
       let argumentHTML = 
       `<span class="argument object-value-` + escapeHTML(argument.dataType) + `">` +
-        argument.data +
+        data +
       `</span>`;
       
       // add spaces between adjacent arguments
@@ -74,6 +125,7 @@ class ConsoleSheet {
     
     // remove trailing space
     out = out.slice(0, -1);
+    rawLogText = rawLogText.slice(0, -1);
     
     
     // get log icon
@@ -95,14 +147,72 @@ class ConsoleSheet {
     }
     
     
+    // add 'show more' buttons to HTML
+    
+    let moreButtons = '';
+    
+    if (exceededMaxLength) {
+      
+      const maxLogLength = this.options.maxLogLength;
+      
+      const remainingText = rawLogText.slice(maxLogLength);
+      
+      const logSize = this.utils.getStrSize(rawLogText);
+      
+      moreButtons = `
+      <div class="actions" remainingText="` + remainingText + `">
+        <div class="more action link-style" onclick="consoleSheet.onLogActionClick(this)">
+        Show more
+        </div>
+        <div class="seperator">·</div>
+        <div class="copy action link-style" onclick="consoleSheet.onLogActionClick(this)">
+        Copy all (` + logSize + `)
+        </div>
+      </div>
+      `;
+      
+    }
+    
+    
     const logHTML = `
     <div class="log ` + escapeHTML(log.type) + `">
       ` + icon + `
       <div class="data">` + out + `</div>
+      ` + moreButtons + `
     </div>
     `;
     
     return logHTML;
+    
+  }
+  
+  
+  // on click of 'show more' or 'copy all' log actions
+  onLogActionClick(actionEl) {
+    
+    const actionWrapper = actionEl.parentElement;
+    
+    const remainingText = getAttr(actionWrapper, 'remainingText');
+    
+    if (el.classList.contains('more')) {
+      
+      const maxLogLength = this.options.maxLogLength;
+      
+      
+      
+    } else if (el.classList.contains('copy')) {
+      
+      const logEl = actionWrapper.parentElement;
+      
+      const dataEl = logEl.querySelector('.data');
+      
+      const data = dataEl.textContent;
+      
+      copy(data).then(() => {
+        showMessage('Copied log!');
+      });
+      
+    }
     
   }
   
@@ -364,6 +474,37 @@ class ConsoleSheet {
     return this.el.sheet.classList.contains('visible');    
     
   }
+  
+  
+  utils = {
+    
+    getStrSize: (str) => {
+      
+      const bytes = (new TextEncoder().encode(str)).length;
+      
+      return this.formatBytes(bytes);
+      
+    },
+    
+    formatBytes: (bytes, decimals = 1) => {
+      
+      if (!+bytes) return 'Zero bytes';
+      
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      let resp = `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+      
+      if (resp === '1 bytes') resp = '1 byte';
+      
+      return resp;
+      
+    }
+  
+  };
   
   
   el = {
