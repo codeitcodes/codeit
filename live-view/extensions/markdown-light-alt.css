@@ -75,12 +75,12 @@ body b, body strong {
   --color-fg-muted: #57606a;
 }
 
-body a {
+body a[href] {
   color: #0969da;
   text-decoration: none;
 }
 
-body a:hover {
+body a[href]:hover {
   text-decoration: underline;
 }
 
