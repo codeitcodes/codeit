@@ -2573,19 +2573,6 @@ body.mobile.expanded .splash-wrapper::before {
   pointer-events: auto;
 }
 
-a.link[href] {
-  color: var(--rosemary-lightness-deluxe) !important;
-  text-decoration: none;
-}
-
-a.link[href]:active {
-  text-decoration: underline;
-}
-
-body:not(.mobile) a.link[href]:hover {
-  text-decoration: underline;
-}
-
 .splash-wrapper .logo {
   width: 175px;
   height: 175px;
@@ -2916,6 +2903,21 @@ body.safari .push-wrapper.checked .push-svg #check {
 
 svg path {
   pointer-events: none;
+}
+
+
+.link-style {
+  color: var(--rosemary-lightness-deluxe) !important;
+  text-decoration: none;
+}
+
+.link-style:active {
+  opacity: .5;
+}
+
+body:not(.mobile) .link-style:hover,
+.link-style:active {
+  text-decoration: underline;
 }
 
 
