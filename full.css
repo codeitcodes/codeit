@@ -2034,6 +2034,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 .console-sheet .logs .log:has(> .actions .action.more) .data::after {
   content: '...';
   color: #636d83;
+  white-space: nowrap;
 }
 
 .console-sheet .logs .log.warn {
