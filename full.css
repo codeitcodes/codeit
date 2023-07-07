@@ -2009,6 +2009,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   border-bottom: 0;
 }
 
+.console-sheet .logs .log *:not(.data) {
+  user-select: none
+  -webkit-user-select: none;
+}
+
 .console-sheet .logs .log .icon {
   color: #636d83;
   width: 18px;
