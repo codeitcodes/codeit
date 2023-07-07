@@ -2001,6 +2001,8 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   line-height: 1.5;
   color: #a6c3d4;
   border-bottom: 1px solid #f1f1f21c;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .console-sheet .logs .log.no-border-bottom {
@@ -2075,8 +2077,6 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   word-break: break-word;
-  user-select: text;
-  -webkit-user-select: text;
   /* overflow-wrap: anywhere; */
   /* word-break: break-all; */
 }
