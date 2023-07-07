@@ -98,17 +98,17 @@ body b, body strong {
   font-weight: 600;
 }
 
-body a {
+body a[href] {
   color: var(--link-color);
   text-decoration: none;
 }
 
-body a:active {
+body a[href]:active {
   opacity: .5;
 }
 
-body:not(.mobile) a:hover,
-body a:active {
+body:not(.mobile) a[href]:hover,
+body a[href]:active {
   text-decoration: underline;
 }
 
