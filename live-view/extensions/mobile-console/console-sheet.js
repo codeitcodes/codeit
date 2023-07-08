@@ -3,11 +3,12 @@
 
 // @@todo fix error parsing on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
-// @@todo display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
 // @@todo check Android devices
-// @@todo truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
-// @@nextsteps group identical 'log' type console messages
+// @@todo remove unused log token styling from full.css
+// @@todo group identical 'log' type console messages
 
+// @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
+// @@nextsteps truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
 // @@nextsteps expandable objects; JSON viewer?
 
 class ConsoleSheet {
