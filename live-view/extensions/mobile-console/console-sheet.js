@@ -6,7 +6,7 @@
 // @@todo check Android devices
 // @@todo remove unused log token styling from full.css
 // @@todo group identical 'log' type console messages
-// @@todo console sheet close button icon isn’t centered on Safari
+// @@todo console sheet close button icon isn't centered on Safari
 // @@todo clear input when closing console sheet
 
 // @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
