@@ -2900,6 +2900,7 @@ svg path {
 .link-style {
   color: var(--rosemary-lightness-deluxe) !important;
   text-decoration: none;
+  cursor: pointer;
 }
 
 body:not(.mobile) .link-style:hover,
