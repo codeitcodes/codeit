@@ -222,18 +222,17 @@ async function renderSidebarHTML(pageNum = 1) {
   }
 
 
-  const prevTreeLoc = treeLoc.join(',');
-
-
   // get items in current tree from git
   resp = await git.getItems(treeLoc, pageNum);
   
   
-  // if the directory changed while we were fetching the items, return
-  if (treeLoc.join(',') !== prevTreeLoc) {
-    
+  // if switched directory while loading, return
+  if (user !== treeLoc[0] ||
+      repoName !== treeLoc[1].split(':')[0] ||
+      contents !== treeLoc[2]) {
+
     return;
-    
+
   }
   
 
