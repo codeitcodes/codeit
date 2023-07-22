@@ -201,7 +201,26 @@ class ConsoleSheet {
       
       const maxLogLength = this.options.maxLogLength;
       
+      const logEl = actionWrapper.parentElement;
       
+      const dataEl = logEl.querySelector('.data');
+      
+      const textToAdd = remainingText.slice(0, maxLogLength);
+      const newRemainingText = remainingText.slice(maxLogLength);
+      
+      // @@todo validate HTML chars
+      dataEl.textContent += textToAdd;
+      
+      // if all text has been displayed
+      if (newRemainingText === '') {
+        
+        // remove 'show more' button
+        actionWrapper.querySelector('.action.more').remove();
+        actionWrapper.querySelector('.seperator').remove();
+        
+      }
+      
+      setAttr(actionWrapper, 'remainingText', newRemainingText);
       
     } else if (el.classList.contains('copy')) {
       
@@ -209,7 +228,7 @@ class ConsoleSheet {
       
       const dataEl = logEl.querySelector('.data');
       
-      const data = dataEl.textContent;
+      const data = dataEl.textContent + remainingText;
       
       copy(data).then(() => {
         showMessage('Copied log!');
