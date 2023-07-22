@@ -4,7 +4,6 @@
 // @@todo fix error parsing on Safari
 // @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
 // @@todo check Android devices
-// @@todo remove unused log token styling from full.css
 // @@todo group identical 'log' type console messages
 // @@todo console sheet close button icon isn't centered on Safari
 // @@todo clear input when closing console sheet
@@ -247,16 +246,11 @@ class ConsoleSheet {
     
     const inputText = input.textContent;
     
-
-    // clear input
-    
-    this.el.footer.classList.remove('return-enabled');
-
-    input.textContent = '\n';
-    
-    this.el.footer.classList.add('input-empty');
     
     input.focus();
+    
+    // clear input
+    this.clearInput();
     
     
     // scroll to bottom of logs
@@ -468,6 +462,17 @@ class ConsoleSheet {
   }
   
   
+  clearInput() {
+    
+    this.el.footer.classList.remove('return-enabled');
+
+    this.el.input.textContent = '\n';
+    
+    this.el.footer.classList.add('input-empty');
+    
+  }
+  
+  
   show() {
     
     this.el.sheet.classList.add('visible');
@@ -480,6 +485,9 @@ class ConsoleSheet {
   hide() {
     
     this.el.sheet.classList.remove('visible');
+    
+    // clear input
+    this.clearInput();
     
     // make sure the sheet hiding animation plays
     onNextFrame(() => {
