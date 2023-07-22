@@ -2189,12 +2189,9 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   background: var(--rosemary-blue);
   color: #dcddde;
   margin: 0;
-  margin-left: -40px;
-  opacity: 0;
-  /* opacity: .3 !important; */
-  transform: scale(0);
-  /* transition: .1s var(--ease-function);
-  transition-property: margin, transform, opacity; */
+  margin-left: 10.5px;
+  opacity: .27;
+  pointer-events: none;
 }
 
 .console-sheet .footer .return:active {
@@ -2203,9 +2200,8 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 .console-sheet .footer.return-enabled .return {
-  margin-left: 10.5px;
   opacity: 1;
-  transform: none;
+  pointer-events: auto;
 }
 
 .console-sheet .footer .return path {
