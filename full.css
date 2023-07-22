@@ -2123,15 +2123,6 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   margin-left: calc(10.5px + 18px);
 }
 
-.console-sheet .logs .log .action {
-  color: var(--rosemary-lightness-deluxe);
-}
-
-.console-sheet .logs .log .action:active,
-body:not(.mobile) .console-sheet .logs .log .action:hover {
-  text-decoration: underline;
-}
-
 .console-sheet .logs .log .actions .seperator {
   margin: 0 7px;
   color: #636d83;
