@@ -2091,13 +2091,12 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   color: #e5b09f;
 }
 
-/* @@todo */
+/*
 .console-sheet .log .argument.object-value-bigint {
   color: #ababab;
 }
 
-/* .console-sheet .log .argument.object-value-string, */
-/* @@todo */
+// .console-sheet .log .argument.object-value-string,
 .console-sheet .log .argument.object-value-regexp,
 .console-sheet .log .argument.object-value-symbol {
   color: #c1ffd5cc;
@@ -2105,6 +2104,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   word-break: break-all;
   unicode-bidi: -webkit-isolate;
 }
+*/
 
 .console-sheet .log .argument.object-value-null,
 .console-sheet .log .argument.object-value-undefined {
