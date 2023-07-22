@@ -10,6 +10,7 @@
 
 // @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
 // @@nextsteps truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
+// @@nextsteps log history
 // @@nextsteps expandable objects; JSON viewer?
 
 class ConsoleSheet {
