@@ -2902,10 +2902,6 @@ svg path {
   text-decoration: none;
 }
 
-.link-style:active {
-  opacity: .5;
-}
-
 body:not(.mobile) .link-style:hover,
 .link-style:active {
   text-decoration: underline;
