@@ -239,6 +239,9 @@ class ConsoleSheet {
   
   onReturnClick(e) {
     
+    e.preventDefault();
+    
+    
     const input = this.el.input;
     
     const hlInputText = input.innerHTML;
