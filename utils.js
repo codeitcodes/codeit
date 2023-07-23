@@ -83,7 +83,7 @@ let logVersion = () => {
 logVersion();
 
 
-// dev build
+// dev version
 const isDev = (window.location.hostname === 'dev.codeit.codes');
 
 if (isDev) {
