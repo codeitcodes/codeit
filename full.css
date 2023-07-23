@@ -1972,7 +1972,7 @@ body:not(.mobile) .sheet {
   width: 30px;
   height: 30px;
   margin: 0;
-  margin-right: -3.63px;
+  margin-right: calc(((30px - 22.75px) / 2) * -1);
   padding: 0;
 }
 
