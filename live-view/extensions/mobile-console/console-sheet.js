@@ -246,10 +246,10 @@ class ConsoleSheet {
     const inputText = input.textContent;
     
     
-    input.focus();
-    
     // clear input
     this.clearInput();
+    
+    input.focus();
     
     
     // scroll to bottom of logs
