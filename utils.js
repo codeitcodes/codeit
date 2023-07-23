@@ -49,7 +49,6 @@ const body = document.body,
       fileWrapper = sidebar.querySelector('.files'),
 
       versionEl = learnWrapper.querySelector('.version'),
-      learnTitle = learnWrapper.querySelector('.title'),
       logoutButton = learnWrapper.querySelector('.logout'),
       learnAbout = learnWrapper.querySelector('.about'),
       learnShare = learnWrapper.querySelector('.share'),
