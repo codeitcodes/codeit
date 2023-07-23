@@ -51,6 +51,9 @@ class SafariKeyboard {
   
   viewportHandler() {
     
+    // if pinch-zoomed in, return
+    if (window.visualViewport.scale !== 1) return;
+    
     if (!this.keyboardHeight) {
       
       let currFromBottom = (window.visualViewport.height - document.body.clientHeight) * -1;
