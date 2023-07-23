@@ -464,6 +464,12 @@ class ConsoleSheet {
   }
   
   
+  clearLogs() {
+    
+    consoleSheet.el.logWrapper.textContent = '';
+    
+  }
+  
   clearInput() {
     
     this.el.footer.classList.remove('return-enabled');
