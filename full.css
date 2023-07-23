@@ -1966,11 +1966,19 @@ body:not(.mobile) .sheet {
 .sheet .header .close {
   color: #828689;
   background: rgb(255 255 255 / 8%) !important;
-  padding: 3.63px;
-  width: 22.75px;
-  height: 22.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
   margin: 0;
   margin-right: -3.63px;
+  padding: 0;
+}
+
+.sheet .header .close .icon {
+  height: 22.75px;
+  width: 22.75px;
 }
 
 .sheet .items {
