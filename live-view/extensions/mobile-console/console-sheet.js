@@ -195,7 +195,7 @@ class ConsoleSheet {
     
     const remainingText = getAttr(actionWrapper, 'remainingText');
     
-    if (el.classList.contains('more')) {
+    if (actionEl.classList.contains('more')) {
       
       const maxLogLength = this.options.maxLogLength;
       
@@ -220,7 +220,7 @@ class ConsoleSheet {
       
       setAttr(actionWrapper, 'remainingText', newRemainingText);
       
-    } else if (el.classList.contains('copy')) {
+    } else if (actionEl.classList.contains('copy')) {
       
       const logEl = actionWrapper.parentElement;
       
