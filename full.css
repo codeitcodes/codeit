@@ -2000,7 +2000,8 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   font-family: var(--mono-font-family);
   line-height: 1.5;
   color: #a6c3d4;
-  border-bottom: 1px solid #f1f1f21c;
+  /* border-color: #f1f1f21c; */
+  border-bottom: 1px solid hsl(228deg 14% 17%);
   user-select: text;
   -webkit-user-select: text;
 }
