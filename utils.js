@@ -89,7 +89,7 @@ const isDev = (window.location.hostname === 'dev.codeit.codes');
 
 if (isDev) {
 
-  learnTitle.innerHTML += '<sup>dev</sup>';
+  versionEl.innerHTML += '<sup>dev</sup>';
 
 }
 
