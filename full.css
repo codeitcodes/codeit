@@ -2010,7 +2010,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   border-bottom: 0;
 }
 
-.console-sheet .logs .log *:not(.data) {
+.console-sheet .logs .log *:not(.data, .data *) {
   user-select: none;
   -webkit-user-select: none;
 }
