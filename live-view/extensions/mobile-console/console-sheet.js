@@ -213,7 +213,7 @@ class ConsoleSheet {
       if (newRemainingText === '') {
         
         // remove 'show more' button
-        actionWrapper.querySelector('.action.more').remove();
+        actionEl.remove();
         actionWrapper.querySelector('.seperator').remove();
         
       }
