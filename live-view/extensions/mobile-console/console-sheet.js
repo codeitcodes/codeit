@@ -514,7 +514,7 @@ class ConsoleSheet {
       
       const bytes = (new TextEncoder().encode(str)).length;
       
-      return this.formatBytes(bytes);
+      return this.utils.formatBytes(bytes);
       
     },
     
