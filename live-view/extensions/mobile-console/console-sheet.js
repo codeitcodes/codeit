@@ -6,8 +6,6 @@
 // @@todo check Android devices
 // @@todo group identical 'log' type console messages
 // @@todo console sheet close button icon isn't centered on Safari
-// @@todo clear input when closing console sheet
-
 // @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
 // @@nextsteps truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
 // @@nextsteps log history
