@@ -1977,8 +1977,8 @@ body:not(.mobile) .sheet {
 }
 
 .sheet .header .close .icon {
-  height: 22.75px;
-  width: 22.75px;
+  height: 12.5px;
+  width: 12.5px;
 }
 
 .sheet .items {
