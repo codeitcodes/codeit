@@ -73,7 +73,7 @@ const body = document.body,
 
 
 // version
-const version = '3.4.5';
+const version = '3.4.6';
 versionEl.innerText = version;
 
 let logVersion = () => {
