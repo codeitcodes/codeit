@@ -2186,7 +2186,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 .console-sheet .footer.input-empty .input::before {
-  content: 'Type code...';
+  content: 'Run code...';
   color: #636d83;
   pointer-events: none;
   position: absolute;
