@@ -59,7 +59,12 @@ class SafariKeyboard {
       if (currFromBottom === 0) return;
       
       
-      this.changeWrapperBottom(currFromBottom);
+      // if input is focused
+      if (document.activeElement === this.input) {
+        
+        this.changeWrapperBottom(currFromBottom);
+        
+      }
       
       
       if (this.smallestFromBottom === -1
