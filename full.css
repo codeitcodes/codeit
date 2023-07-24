@@ -2063,6 +2063,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   white-space: nowrap;
 }
 
+.console-sheet .logs .log:first-of-type:is(.warn, .error) {
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+
 .console-sheet .logs .log.warn {
   color: hsl(15deg 57% 76%); /* #e5b09f */
   background: hsl(15deg 57% 76% / 4%);
@@ -2093,7 +2098,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 /* logger token styling */
 
 .console-sheet .logs {
-  /* opt out of the browser's scroll anchoring */
+  /* opt out of the browser's native scroll anchoring */
   overflow-anchor: none;
 }
 
