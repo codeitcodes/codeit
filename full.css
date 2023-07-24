@@ -1510,23 +1510,25 @@ body.mobile .sidebar .intro {
   grid-gap: 3.5px;
   color: #b3b3b3;
   font-size: 15px;
-  line-height: 23px;
-  letter-spacing: 0.2px;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
 }
 
 .sidebar .intro .subtitle sup {
   margin-left: 3.5px;
-  margin-right: calc(-7px - 7px + 3.5px);
+  margin-right: calc(-7px * 2 + 3.5px);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   background: linear-gradient(180deg, hsl(223deg 88% 52%), hsl(240deg 86% 55%));
   color: hsl(240deg 87% 92%);
   box-shadow: inset 0px 1px 0 0 hsl(223deg 90% 57%), inset 0px -1px 0 0 hsl(240deg 67% 45%), 0 0 6px 0px hsl(223deg 88% 52% / 21%);
-  padding: 3px 7px;
+  padding: 3.5px 7px;
   border-radius: 30px;
   vertical-align: middle;
   /* text-shadow: 0 0.72px hsl(223deg 90% 57%); */
+  letter-spacing: normal;
+  line-height: normal;
 }
 
 .sidebar .intro .subtitle a {
