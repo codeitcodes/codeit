@@ -1488,7 +1488,7 @@ body.mobile .sidebar .intro {
 
 .sidebar .intro .title {
   color: #f1f1f2e0;
-  margin-bottom: var(--spacing-2);
+  margin-bottom: calc(var(--spacing-1) * 1.75);
   font-weight: 500;
   font-size: 21px;
   letter-spacing: -.002em;
@@ -1636,7 +1636,6 @@ body.mobile .sidebar .button {
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: calc(var(--spacing-1) * 1.75);
   letter-spacing: -.004em;
 }
 
