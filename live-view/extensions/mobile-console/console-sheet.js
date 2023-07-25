@@ -2,9 +2,9 @@
 // mobile console sheet
 
 // @@todo fix focus states on click of return button and action buttons. hide keyboard on scroll?
+// @@todo fix error parsing on Safari
 // @@todo 'jump to bottom' button
 // @@todo group identical logs
-// @@todo fix error parsing on Safari
 
 // @@check Android devices
 // @@check sidebar title overflow on Windows
