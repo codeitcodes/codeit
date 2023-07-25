@@ -127,6 +127,8 @@ class ConsoleSheet {
       
     });
     
+    console.log('length', out.length, rawLogText.length);
+    
     // remove trailing space
     out = out.slice(0, -1);
     rawLogText = rawLogText.slice(0, -1);
