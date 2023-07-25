@@ -1620,8 +1620,12 @@ body.mobile .sidebar .button {
   margin-right: var(--spacing-1);
 }
 
-.sidebar .intro-wrapper .button.large-spacing-top {
+.sidebar .intro-wrapper .button {
   margin-top: calc(var(--spacing-1) * 9);
+}
+
+.sidebar .learn-wrapper .button.large-spacing-top {
+  margin-top: calc(var(--spacing-1) * 10.5);
 }
 
 .sidebar .learn-wrapper .picture-wrapper {
@@ -1635,10 +1639,6 @@ body.mobile .sidebar .button {
   font-size: 24px;
   margin-bottom: calc(var(--spacing-1) * 1.75);
   letter-spacing: -.004em;
-}
-
-.sidebar .learn-wrapper .button {
-  margin-top: calc(var(--spacing-1) * 10.5);
 }
 
 .sidebar .learn-wrapper .logout.button {
