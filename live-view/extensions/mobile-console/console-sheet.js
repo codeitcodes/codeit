@@ -166,7 +166,7 @@ class ConsoleSheet {
       const logSize = this.utils.getStrSize(rawLogText);
       
       moreButtons = `
-      <div class="actions" remainingText="` + escapeHTML(remainingText) + `">
+      <div class="actions" remainingText="` + remainingText + `">
         <div class="more action link-style" onclick="consoleSheet.onLogActionClick(this)">
         Show more
         </div>
