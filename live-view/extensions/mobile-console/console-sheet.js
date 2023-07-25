@@ -1,9 +1,13 @@
 
 // mobile console sheet
 
+// @@todo 'Jump to bottom' button
 // @@todo group identical logs
 // @@todo fix error parsing on Safari
-// @@todo check Android devices
+
+// @@check Android devices
+// @@check sidebar title overflow on Windows
+
 
 // possible next steps:
 // display RegExp, Symbols, BigInt, and empty objects in logger (by calling .toString() on them)
