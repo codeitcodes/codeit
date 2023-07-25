@@ -216,7 +216,8 @@ class ConsoleSheet {
       const textToAdd = remainingText.slice(0, maxLogLength);
       const newRemainingText = remainingText.slice(maxLogLength);
       
-      // @@todo validate HTML chars
+      console.log(textToAdd);
+      
       dataEl.textContent += textToAdd;
       
       // if all text has been displayed
