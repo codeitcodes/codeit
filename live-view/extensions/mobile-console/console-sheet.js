@@ -84,7 +84,7 @@ class ConsoleSheet {
       const maxLogLength = this.options.maxLogLength;
       
       // if log length exceeded max
-      // (don't overflow input logs because their highlighted HTML will break)
+      // (don't overflow input logs because it'll make their highlighted HTML break)
       if (maxLogLength < rawLogText.length
           && log.type !== 'input') {
         
