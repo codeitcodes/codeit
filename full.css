@@ -1483,9 +1483,6 @@ body.mobile .sidebar .intro {
 }
 
 .sidebar .intro .subhead {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
   text-align: center;
 }
 
@@ -1636,10 +1633,8 @@ body.mobile .sidebar .button {
 
 .sidebar .learn-wrapper .title {
   font-size: 24px;
-  margin-bottom: var(--spacing-1);
+  margin-bottom: calc(var(--spacing-1) * 1.75);
   letter-spacing: -.004em;
-  display: flex;
-  align-items: center;
 }
 
 .sidebar .learn-wrapper .logout {
