@@ -1436,7 +1436,7 @@ body.mobile .sidebar .header .title .branch-icon.active {
   width: 120px;
   overflow: hidden;
   border-radius: 50%;
-  margin-bottom: var(--spacing-5);
+  margin-bottom: calc(var(--spacing-1) * 4.75);
   padding: var(--spacing-5);
   box-sizing: border-box;
 }
