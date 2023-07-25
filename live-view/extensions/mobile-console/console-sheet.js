@@ -66,7 +66,7 @@ class ConsoleSheet {
     
     let out = '';
     
-    let rawLogText = '';
+    let rawLogText = ''; // note: this can contain unescaped HTML
     
     let exceededMaxLength = false;
     
@@ -74,8 +74,11 @@ class ConsoleSheet {
       
       let data = argument.data;
       
+      
+      const unescapedArgData = this.utils.unescapeHTML(data);
+      
       // add spaces between adjacent arguments
-      rawLogText += data + ' ';
+      rawLogText += unescapedArgData + ' ';
       
       
       if (exceededMaxLength) return;
@@ -109,8 +112,12 @@ class ConsoleSheet {
           
         }
         
+        
         // slice argument to overflow cap
-        data = data.slice(0, -overflowLength);
+        
+        slicedArgData = unescapedArgData.slice(0, -overflowLength);
+        
+        data = escapeHTML(slicedArgData);
         
       }
       
@@ -161,9 +168,7 @@ class ConsoleSheet {
       const maxLogLength = this.options.maxLogLength;
       
       
-      const unescapedText = this.utils.unescapeHTML(rawLogText);
-      
-      let remainingText = unescapedText.slice(maxLogLength);
+      let remainingText = rawLogText.slice(maxLogLength);
       
       remainingText = escapeHTML(remainingText);
       
@@ -215,8 +220,6 @@ class ConsoleSheet {
       
       const textToAdd = remainingText.slice(0, maxLogLength);
       const newRemainingText = remainingText.slice(maxLogLength);
-      
-      console.log(textToAdd);
       
       dataEl.textContent += textToAdd;
       
