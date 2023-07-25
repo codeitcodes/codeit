@@ -1,7 +1,7 @@
 
 // mobile console sheet
 
-// @@todo fix focus states. hide keyboard on scroll?
+// @@todo fix focus states on click of return button and action buttons. hide keyboard on scroll?
 // @@todo 'jump to bottom' button
 // @@todo group identical logs
 // @@todo fix error parsing on Safari
