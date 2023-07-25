@@ -2503,6 +2503,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   margin-top: calc(var(--spacing-1) * 10.5);
 }
 
+
 .sidebar-background {
   position: fixed;
   top: 0;
