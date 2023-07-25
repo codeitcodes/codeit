@@ -1,15 +1,16 @@
 
 // mobile console sheet
 
+// @@todo check 1 char drop in 'show more' and 'copy all' actions
+// @@todo group identical logs
 // @@todo fix error parsing on Safari
-// @@todo add 'show more' / 'copy all' buttons when log text exceeds a certain length
 // @@todo check Android devices
-// @@todo group identical 'log' type console messages
 
-// @@nextsteps display RegExp, Symbols, BigInt, and empty objects properly in logger (by calling .toString() on them)
-// @@nextsteps truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
-// @@nextsteps log history
-// @@nextsteps expandable objects; JSON viewer?
+// possible next steps:
+// display RegExp, Symbols, BigInt, and empty objects in logger (by calling .toString() on them)
+// truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
+// view and load console code input history
+// expandable objects; JSON viewer
 
 class ConsoleSheet {
   
