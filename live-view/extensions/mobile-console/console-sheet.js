@@ -115,7 +115,7 @@ class ConsoleSheet {
         
         // slice argument to overflow cap
         
-        slicedArgData = unescapedArgData.slice(0, -overflowLength);
+        const slicedArgData = unescapedArgData.slice(0, -overflowLength);
         
         data = escapeHTML(slicedArgData);
         
