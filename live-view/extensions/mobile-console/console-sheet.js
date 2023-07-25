@@ -96,7 +96,8 @@ class ConsoleSheet {
         exceededMaxLength = true;
         
         
-        const totalLogLength = rawLogText.length;
+        // -1 to account for the seperating space
+        const totalLogLength = rawLogText.length - 1;
         
         const overflowLength = totalLogLength - maxLogLength;
 
