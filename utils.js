@@ -74,14 +74,7 @@ const body = document.body,
 
 // version
 let version = '3.4.6';
-versionEl.innerText = version;
-
-let logVersion = () => {
-  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
-}
-
-logVersion();
-
+versionEl.textContent = version;
 
 // dev version
 const isDev = (window.location.hostname === 'dev.codeit.codes');
@@ -92,6 +85,12 @@ if (isDev) {
   versionEl.innerHTML += '<sup>dev</sup>';
 
 }
+
+let logVersion = () => {
+  console.log('%cCodeit ' + version, 'font-style: italic; color: gray');
+}
+
+logVersion();
 
 
 
