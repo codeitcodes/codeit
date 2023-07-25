@@ -1620,7 +1620,7 @@ body.mobile .sidebar .button {
   margin-right: var(--spacing-1);
 }
 
-.sidebar .intro-wrapper .button {
+.sidebar .intro-wrapper .button.large-spacing-top {
   margin-top: calc(var(--spacing-1) * 9);
 }
 
