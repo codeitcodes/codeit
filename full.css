@@ -1970,17 +1970,13 @@ body:not(.mobile) .sheet {
 .sheet .header .close {
   color: #828689;
   background: rgb(255 255 255 / 8%) !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
   margin: 0;
+  padding: 8.75px;
   margin-right: calc(((30px - 22.75px) / 2) * -1);
-  padding: 0;
 }
 
 .sheet .header .close .icon {
+  display: block;
   height: 12.5px;
   width: 12.5px;
 }
@@ -2001,6 +1997,14 @@ body.safari .console-sheet.visible.transitioning-blur {
 
 body.safari .console-sheet:has(> .footer .input:focus) {
   padding-bottom: 0;
+}
+
+.console-sheet .logs:empty::before {
+  content: 'No logs yet';
+  display: block;
+  margin: auto;
+  position: relative;
+  opacity: .27;
 }
 
 .console-sheet .logs .log {
