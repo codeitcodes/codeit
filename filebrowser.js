@@ -399,7 +399,7 @@ async function renderSidebarHTML(pageNum = 1) {
     // stop loading
     stopLoading();
     
-    showMessage('Your Git login expired.', 4000);
+    showMessage('Your login expired.', 4000);
 
     sidebar.classList.add('intro');
 
