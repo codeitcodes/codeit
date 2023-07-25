@@ -2009,7 +2009,8 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   display: block;
   margin: auto;
   position: relative;
-  opacity: .27;
+  color: hsl(221deg 14% 45% / 50%);
+  font-family: var(--mono-font-family);
 }
 
 .console-sheet .logs .log {
