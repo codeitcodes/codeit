@@ -1483,6 +1483,9 @@ body.mobile .sidebar .intro {
 }
 
 .sidebar .intro .subhead {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   text-align: center;
 }
 
