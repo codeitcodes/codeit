@@ -102,7 +102,7 @@ class ConsoleSheet {
 
         
         // +1 to account for the separating space
-        const argLength = (data.length + 1);
+        const argLength = (unescapedArgData.length + 1);
 
         
         const notInOverflowLength = argLength - overflowLength;
