@@ -1495,8 +1495,7 @@ body.mobile .sidebar .intro {
 }
 
 .sidebar .intro.faded .title {
-  /* opacity: .5; */
-  color: hsl(231deg 6% 58%);
+  opacity: .27;
 }
 
 .sidebar .files .intro .title {
