@@ -1303,7 +1303,7 @@ async function checkPushDialogs() {
     }
 
     const dialogResult = await showDialog(forkRepo,
-      'Fork this repository\nto save your changes.',
+      'Fork this repository\nto push your changes.',
       'Fork');
 
     if (dialogResult === false) return 'return';
