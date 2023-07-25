@@ -1619,14 +1619,6 @@ body.mobile .sidebar .button {
   margin-right: var(--spacing-1);
 }
 
-.sidebar .intro-wrapper .button {
-  margin-top: calc(var(--spacing-1) * 9);
-}
-
-.sidebar .learn-wrapper .button.large-spacing-top {
-  margin-top: calc(var(--spacing-1) * 10.5);
-}
-
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
@@ -2512,7 +2504,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
 }
 
 .large-spacing-top {
-  margin-top: var(--spacing-6);
+  margin-top: calc(var(--spacing-1) * 10.5);
 }
 
 .sidebar-background {
