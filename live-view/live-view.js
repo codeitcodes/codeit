@@ -1119,7 +1119,7 @@ async function renderLiveViewHTML(file) {
 
   if (isMobile) {
     
-    // clear live view console logs
+    // clear live view console
     consoleSheet.clearLogs();
     
     // setup live view console
