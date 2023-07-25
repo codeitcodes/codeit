@@ -88,6 +88,7 @@ const isDev = (window.location.hostname === 'dev.codeit.codes');
 
 if (isDev) {
 
+  version += ' [DEV]';
   versionEl.innerHTML += '<sup>dev</sup>';
 
 }
