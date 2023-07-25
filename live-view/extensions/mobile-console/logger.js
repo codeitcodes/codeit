@@ -312,7 +312,7 @@ let logger = {
        * visited to avoid hitting circular references, and a buffer for indentation.
        * Goes 2 levels deep.
        */
-      return function stringify(o, visited, buffer) {
+      return function stringify(o, visited, buffer, inArr) {
         var i, vi, type = '', parts = [], circular = false;
         buffer = buffer || '';
         visited = visited || [];
@@ -399,8 +399,8 @@ let logger = {
           
           let string = o;
           
-          // if not in object
-          if (buffer.length / 2 < 1) {
+          // if not in object or array
+          if ((buffer.length / 2 < 1) && !inArr) {
             
             return string;
             
@@ -451,7 +451,7 @@ let logger = {
         // Stringify each member of the array
         if (type == '[object Array]') {
           for (i = 0; i < o.length; i++) {
-            parts.push(stringify(o[i], visited, buffer));
+            parts.push(stringify(o[i], visited, buffer, true));
           }
           return '[' + parts.join(', ') + ']';
         }
