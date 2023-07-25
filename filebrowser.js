@@ -1154,7 +1154,7 @@ async function checkPushDialogs() {
       // hide dialog
       hideDialog();
 
-    }, 'Login to save this file.', 'Login');
+    }, 'Login to push this file.', 'Login');
 
     return 'return';
 
