@@ -465,12 +465,6 @@ body.notransition .live-view.file-open {
   max-width: unset;
 }
 
-/* todo: desktop live view console */
-.live-view .console {
-  height: 100%;
-  background: #1a1c24;
-}
-
 .live-view .prompt {
   text-align: center;
   padding: 0 20px;
@@ -984,43 +978,6 @@ body.mobile .sidebar .header .title .branch-icon.active {
   transition-property: opacity, transform;
 }
 
-/*
-.sidebar .header .roundbutton.add .icon {
-  transform-origin: center;
-  transition: .18s var(--bounce-function);
-  will-change: transform;
-}
-
-.sidebar .header .roundbutton.add.open .icon {
-  transform: rotate(-45deg);
-  opacity: .9;
-}
-*/
-
-
-/*
-.sidebar .header .options-screen,
-.sidebar .header .title-screen {
-  opacity: 1;
-  overflow: hidden;
-}
-
-.sidebar .header .title-screen {
-  z-index: 1;
-}
-
-.sidebar .header .title-screen > * {
-  transform: translateY(40px);
-  transition: .18s var(--bounce-function);
-  transition-property: transform, opacity;
-  will-change: transform;
-}
-
-.sidebar .header .title-screen.visible > * {
-  transform: none;
-}
-*/
-
 
 .sidebar .header .titlescreen .title::before,
 .sidebar .header .titlescreen .title::after {
@@ -1056,61 +1013,6 @@ body.mobile .sidebar .header .title .branch-icon.active {
 .sidebar .header .titlescreen .title.notransition::after {
   transition: none;
 }
-
-
-/*
-.sidebar .header .options-screen .roundbutton {
-  transform: translateY(-40px);
-  transition: .18s var(--bounce-function);
-  transition-property: transform, opacity;
-  will-change: transform;
-}
-
-.sidebar .header .options-screen:not(.visible) .roundbutton {
-  background: transparent !important;
-}
-
-.sidebar .header .options-screen.visible .roundbutton {
-  transform: none;
-}
-
-.sidebar .header .options-screen.visible .roundbutton.share {
-  transition-delay: .09s;
-}
-
-.sidebar .header .options-screen.visible .roundbutton.branch {
-  transition-delay: .045s;
-}
-
-
-.sidebar .header .options-screen .new-file .icon {
-  / if user dosen't have push access in repo, show clone repo icon /
-  / d: path('M4 20H18V22H4C2.9 22 2 21.1 2 20V6H4V20M22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2H20C21.1 2 22 2.9 22 4M20 4H8V16H20V4M18 6H13V13L15.5 11.5L18 13V6Z'); /
-}
-
-
-.sidebar .header .options-screen .new-repo,
-.sidebar .header .options-screen .clone-repo,
-.sidebar .header .options-screen .global-search {
-  display: none;
-}
-
-.sidebar .header .options-screen.out-of-repo .roundbutton {
-  display: none;
-}
-
-.sidebar .header .options-screen.out-of-repo .roundbutton.new-repo {
-  display: block;
-}
-
-.sidebar .header .options-screen.out-of-repo .roundbutton.share {
-  display: block;
-}
-
-.sidebar .header .options-screen.out-of-repo.visible .roundbutton.share {
-  transition-delay: .045s;
-}
-*/
 
 
 .sidebar .header .search-screen {
@@ -1657,7 +1559,6 @@ body.mobile .sidebar .button {
   transform: translate(-1px, -1px);
   top: 20px;
   left: 20px;
-  /* right: 20px; */
   padding: 3px;
   min-width: 136px;
   max-width: 375px;
@@ -2015,7 +1916,6 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   line-height: 1.5;
   color: #a6c3d4;
   border-bottom: 1px solid hsl(228deg 14% 17%);
-  /* border-color: #f1f1f21c; */
   user-select: text;
   -webkit-user-select: text;
 }
@@ -2108,8 +2008,6 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   word-break: break-word;
-  /* overflow-wrap: anywhere; */
-  /* word-break: break-all; */
 }
 
 .console-sheet .log .argument.object-value-number,
@@ -2178,13 +2076,9 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   align-items: end;
   justify-content: center;
   padding: 10.5px 10.5px;
-  /* background: hsl(233deg 24% 13%); */
-  /* background: hsl(229deg 30% 16% / 34%); */
 }
 
 .console-sheet .footer .input {
-  /* background: hsl(230deg 28% 18%); */
-  /* background: hsl(230deg 26% 15%); */
   background: hsl(230deg 27% 15%);
   flex: 1;
   padding: 7px 14px;
@@ -2244,7 +2138,6 @@ body.safari:has(> .console-sheet.visible) {
   position: fixed;
   inset: 0;
   background: hsl(227deg 11% 16% / 40%);
-  /* transition: .24s var(--cubic-function) opacity; */
   transition: .3s var(--cubic-function) opacity;
   opacity: 0;
   pointer-events: none;
@@ -2448,8 +2341,6 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   padding: 6px 12px;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%);
-  /* left: calc(((100vw - var( --sidebar-width)) / 2) + var(--sidebar-width)); */
-  /* left: calc(var(--sidebar-width) / 2); */
   max-width: 356px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -2976,7 +2867,6 @@ body:not(.mobile) .sidebar .item .push-wrapper:not(.checked):hover .push-svg {
 
 /*
 body:not(.mobile) .sidebar .button:hover {
-  background: hsl(228deg 16% 42%);
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
 }
 */
