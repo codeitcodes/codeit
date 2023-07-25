@@ -9,14 +9,6 @@
 // @@check Android devices
 // @@check sidebar title overflow on Windows
 
-
-// possible next steps:
-// swipe up on header to expand console sheet
-// display RegExp, Symbols, BigInt, and empty objects in logger (by calling .toString() on them)
-// truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
-// view and load console code input history
-// expandable objects; JSON viewer
-
 class ConsoleSheet {
   
   options = {
