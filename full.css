@@ -1637,11 +1637,15 @@ body.mobile .sidebar .button {
   letter-spacing: -.004em;
 }
 
-.sidebar .learn-wrapper .logout {
+.sidebar .learn-wrapper .button {
+  margin-top: calc(var(--spacing-1) * 10.5);
+}
+
+.sidebar .learn-wrapper .logout.button {
   display: none;
 }
 
-.sidebar .learn-wrapper.logout-enabled .logout {
+.sidebar .learn-wrapper.logout-enabled .logout.button {
   display: grid;
 }
 
