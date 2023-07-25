@@ -160,10 +160,13 @@ class ConsoleSheet {
       
       const maxLogLength = this.options.maxLogLength;
       
-      const remainingText = rawLogText.slice(maxLogLength);
       
-      console.log(rawLogText);
-      console.log(remainingText);
+      const unescapedText = this.utils.unescapeHTML(rawLogText);
+      
+      let remainingText = unescapedText.slice(maxLogLength);
+      
+      remainingText = escapeHTML(remainingText);
+      
       
       const logSize = this.utils.getStrSize(rawLogText);
       
@@ -546,6 +549,13 @@ class ConsoleSheet {
       if (resp === '1 bytes') resp = '1 byte';
       
       return resp;
+      
+    },
+    
+    unescapeHTML: (str) => {
+      
+      const doc = new DOMParser().parseFromString(str, 'text/html');
+      return doc.documentElement.textContent;
       
     }
   
