@@ -1,7 +1,6 @@
 
 // mobile console sheet
 
-// @@todo check 1 char drop in 'show more' and 'copy all' actions
 // @@todo group identical logs
 // @@todo fix error parsing on Safari
 // @@todo check Android devices
