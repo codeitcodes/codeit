@@ -2487,12 +2487,8 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   margin-top: var(--spacing-1);
 }
 
-.tiny-spacing-top {
-  margin-top: var(--spacing-2);
-}
-
 .small-spacing-top {
-  margin-top: var(--spacing-4);
+  margin-top: var(--spacing-2);
 }
 
 .medium-spacing-top {
