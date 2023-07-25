@@ -88,6 +88,9 @@ class ConsoleSheet {
       if (maxLogLength < rawLogText.length
           && log.type !== 'input') {
         
+        exceededMaxLength = true;
+        
+        
         const totalLogLength = rawLogText.length;
         
         const overflowLength = totalLogLength - maxLogLength;
@@ -109,8 +112,6 @@ class ConsoleSheet {
         // slice argument to overflow cap
         data = data.slice(0, -overflowLength);
         
-        exceededMaxLength = true;
-        
       }
       
       
@@ -130,8 +131,6 @@ class ConsoleSheet {
     // remove trailing space
     out = out.slice(0, -1);
     rawLogText = rawLogText.slice(0, -1);
-    
-    console.log('rawLogText length', rawLogText.length);
     
     
     // get log icon
@@ -162,6 +161,9 @@ class ConsoleSheet {
       const maxLogLength = this.options.maxLogLength;
       
       const remainingText = rawLogText.slice(maxLogLength);
+      
+      console.log(rawLogText);
+      console.log(remainingText);
       
       const logSize = this.utils.getStrSize(rawLogText);
       
