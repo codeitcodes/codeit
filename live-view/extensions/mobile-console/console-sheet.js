@@ -84,7 +84,8 @@ class ConsoleSheet {
       const maxLogLength = this.options.maxLogLength;
       
       // if log length exceeded max
-      if (maxLogLength < rawLogText.length) {
+      if (maxLogLength < rawLogText.length
+          && log.type !== 'input') {
         
         const totalLogLength = rawLogText.length;
         
