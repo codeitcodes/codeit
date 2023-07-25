@@ -1,7 +1,7 @@
 
 // mobile console sheet
 
-// @@todo 'Jump to bottom' button
+// @@todo 'jump to bottom' button
 // @@todo group identical logs
 // @@todo fix error parsing on Safari
 
@@ -10,6 +10,7 @@
 
 
 // possible next steps:
+// swipe up on header to expand console sheet
 // display RegExp, Symbols, BigInt, and empty objects in logger (by calling .toString() on them)
 // truncuate text (disable 'show more' and leave 'copy all' when log text is over 10 MB)
 // view and load console code input history
