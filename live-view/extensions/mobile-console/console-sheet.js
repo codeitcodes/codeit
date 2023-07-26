@@ -220,7 +220,7 @@ class ConsoleSheet {
         
       });
       
-      action.addEventListener('focus', this.refocusInputIfBlurred);
+      action.addEventListener('focus', this.refocusInputIfBlurred.bind(this));
       
     });
     
@@ -439,7 +439,7 @@ class ConsoleSheet {
 
     
     // refocus input if clicked on return button
-    this.el.return.addEventListener('focus', this.refocusInputIfBlurred);
+    this.el.return.addEventListener('focus', this.refocusInputIfBlurred.bind(this));
     
     
     // add return click listener
