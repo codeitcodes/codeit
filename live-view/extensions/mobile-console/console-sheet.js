@@ -477,7 +477,7 @@ class ConsoleSheet {
   }
   
   
-  // refocus input if was focused but was then blurred
+  // refocus input if it was focused but was then blurred
   refocusInputIfBlurred(e) {
     
     const blurredElement = e.relatedTarget;
