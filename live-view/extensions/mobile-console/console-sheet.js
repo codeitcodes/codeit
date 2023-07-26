@@ -1,7 +1,7 @@
 
 // mobile console sheet
 
-// @@todo fix focus states on click of return button and action buttons. hide keyboard on scroll?
+// @@todo hide keyboard on scroll?
 // @@todo fix empty console safari bug
 // @@todo fix error parsing on Safari
 // @@todo 'jump to bottom' button
