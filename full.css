@@ -1897,7 +1897,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   flex-flow: column;
 }
 
-.console-sheet .logs:not(:has(> .log))::before {
+.console-sheet .logs.empty::before {
   content: 'No logs yet';
   display: block;
   margin: auto;
