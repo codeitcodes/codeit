@@ -1,7 +1,6 @@
 
 // mobile console sheet
 
-// @@todo hide keyboard on scroll?
 // @@todo fix empty console safari bug
 // @@todo fix error parsing on Safari
 // @@todo 'jump to bottom' button
@@ -49,6 +48,8 @@ class ConsoleSheet {
     // to keep the action event listeners
     logWrapper.insertAdjacentHTML('beforeend', logHTML);
     
+    logWrapper.classList.remove('empty');
+
     
     // if was scrolled to bottom
     if (scrolledToBottom) {
@@ -526,7 +527,8 @@ class ConsoleSheet {
   
   clearLogs() {
     
-    consoleSheet.el.logWrapper.textContent = '';
+    this.el.logWrapper.textContent = '';
+    this.el.logWrapper.classList.add('empty');
     
   }
   
