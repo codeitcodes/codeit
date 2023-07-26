@@ -182,13 +182,18 @@ class ConsoleSheet {
       
       const logSize = this.utils.getStrSize(rawLogText);
       
+      
+      // note: the 'tabindex' property on the action elements marks them as 'focusable'.
+      // we can use that to determine whether the input got blurred when the actions were clicked,
+      // and if it did get blurred, we'll refocus it.
+      
       actionButtons = `
       <div class="actions" remainingText="` + remainingText + `">
-        <div class="more action link-style">
+        <div class="more action link-style" tabindex="0">
         Show more
         </div>
         <div class="seperator">·</div>
-        <div class="copy action link-style">
+        <div class="copy action link-style" tabindex="0">
         Copy all (` + logSize + `)
         </div>
       </div>
