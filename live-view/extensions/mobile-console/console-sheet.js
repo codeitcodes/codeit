@@ -45,7 +45,7 @@ class ConsoleSheet {
     const logHTML = this.getLogHTML(log);
     
     // add log to HTML
-    // note: not using innerHTML because we want
+    // note: not using innerHTML += because we want
     // to keep the action event listeners
     logWrapper.insertAdjacentHTML('beforeend', logHTML);
     
