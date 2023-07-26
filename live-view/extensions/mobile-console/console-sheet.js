@@ -185,7 +185,7 @@ class ConsoleSheet {
       
       // note: the 'tabindex' property on the action elements marks them as 'focusable'.
       // we can use that to determine whether the input got blurred when the actions were clicked,
-      // and if it did get blurred, we'll refocus it.
+      // so if the input did get blurred, we'll know we need to refocus it.
       
       actionButtons = `
       <div class="actions" remainingText="` + remainingText + `">
