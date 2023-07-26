@@ -84,7 +84,7 @@ class SafariKeyboard {
 
   onInputFocus() {
     
-    this.wrapperEl.classList.remove('transitioning-blur');
+    this.wrapperEl.classList.remove('safari-transitioning-blur');
     
     if (this.blurTransitionTimeout) {
       
@@ -129,11 +129,11 @@ class SafariKeyboard {
   
   onInputBlur() {
   
-    this.wrapperEl.classList.add('transitioning-blur');
+    this.wrapperEl.classList.add('safari-transitioning-blur');
   
     this.blurTransitionTimeout = window.setTimeout(() => {
       
-      this.wrapperEl.classList.remove('transitioning-blur');
+      this.wrapperEl.classList.remove('safari-transitioning-blur');
       
     }, 270);
     
