@@ -45,7 +45,9 @@ class ConsoleSheet {
     const logHTML = this.getLogHTML(log);
     
     // add log to HTML
-    logWrapper.innerHTML += logHTML;
+    // note: not using innerHTML because we want
+    // to keep the action event listeners
+    logWrapper.insertAdjacentHTML('beforeend', logHTML);
     
     
     // if was scrolled to bottom
