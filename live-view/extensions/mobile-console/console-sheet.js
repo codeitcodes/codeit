@@ -1,7 +1,6 @@
 
 // mobile console sheet
 
-// @@todo fix empty console safari bug
 // @@todo fix error parsing on Safari
 // @@todo 'jump to bottom' button
 // @@todo group identical logs
