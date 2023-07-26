@@ -1881,7 +1881,7 @@ body:not(.mobile) .sheet {
 
 
 body.safari .console-sheet {
-  translate: 0 0;
+  translate: 0 calc(-1 * var(--safari-keyboard-height, 0px));
 }
 
 body.safari .console-sheet.visible.transitioning-blur {
