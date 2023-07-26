@@ -2344,14 +2344,14 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   max-width: 356px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  transition: 0s .18s, .18s var( --bounce-function) opacity;
+  transition: 0s .18s, .18s var( --bounce-function) opacity, 0s translate;
 }
 
 .message.visible {
   padding: 10px 16px;
   opacity: 1;
   border-radius: 11.5px;
-  transition: .18s var( --bounce-function);
+  transition: .18s var( --bounce-function), 0s translate;
 }
 
 .message.animating {
@@ -2359,6 +2359,10 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   border-radius: 8px;
   padding: 6px 12px;
   transition: none;
+}
+
+body.safari .message {
+  translate: 0 calc(-1 * var(--safari-keyboard-height, 0px));
 }
 
 .message svg {
