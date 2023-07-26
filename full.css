@@ -1884,7 +1884,7 @@ body.safari .console-sheet {
   translate: 0 calc(-1 * var(--safari-keyboard-height, 0px));
 }
 
-body.safari .console-sheet.visible.transitioning-blur {
+body.safari .console-sheet.visible.safari-transitioning-blur {
   transition: translate .27s ease;
 }
 
@@ -1897,7 +1897,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   flex-flow: column;
 }
 
-.console-sheet .logs:not(:has(*))::before {
+.console-sheet .logs:not(:has(> .log))::before {
   content: 'No logs yet';
   display: block;
   margin: auto;
