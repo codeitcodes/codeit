@@ -2,6 +2,7 @@
 // mobile console sheet
 
 // @@todo fix focus states on click of return button and action buttons. hide keyboard on scroll?
+// @@todo fix empty console safari bug
 // @@todo fix error parsing on Safari
 // @@todo 'jump to bottom' button
 // @@todo group identical logs
@@ -55,6 +56,13 @@ class ConsoleSheet {
       
     }
     
+    
+    // add log action listeners
+    
+    const lastLog = this.el.logWrapper.querySelector('.log:last-of-type');
+    
+    this.addLogActionListeners(lastLog);
+    
   }
      
   getLogHTML(log) {
@@ -82,8 +90,6 @@ class ConsoleSheet {
       
       
       const maxLogLength = this.options.maxLogLength;
-      
-      console.log('rawLogText', rawLogText.length);
       
       // if log length exceeded max
       // (don't overflow input logs because it'll make their highlighted HTML break)
@@ -158,9 +164,9 @@ class ConsoleSheet {
     }
     
     
-    // add 'show more' buttons to HTML
+    // add action buttons to HTML
     
-    let moreButtons = '';
+    let actionButtons = '';
     
     if (exceededMaxLength) {
       
@@ -174,13 +180,13 @@ class ConsoleSheet {
       
       const logSize = this.utils.getStrSize(rawLogText);
       
-      moreButtons = `
+      actionButtons = `
       <div class="actions" remainingText="` + remainingText + `">
-        <div class="more action link-style" onclick="consoleSheet.onLogActionClick(this)">
+        <div class="more action link-style">
         Show more
         </div>
         <div class="seperator">·</div>
-        <div class="copy action link-style" onclick="consoleSheet.onLogActionClick(this)">
+        <div class="copy action link-style">
         Copy all (` + logSize + `)
         </div>
       </div>
@@ -193,7 +199,7 @@ class ConsoleSheet {
     <div class="log ` + escapeHTML(log.type) + `">
       ` + icon + `
       <div class="data">` + out + `</div>
-      ` + moreButtons + `
+      ` + actionButtons + `
     </div>
     `;
     
@@ -201,6 +207,24 @@ class ConsoleSheet {
     
   }
   
+  
+  addLogActionListeners(log) {
+    
+    const actions = log.querySelectorAll('.actions .action');
+    
+    actions.forEach(action => {
+      
+      action.addEventListener('click', () => {
+        
+        this.onLogActionClick(action);
+        
+      });
+      
+      action.addEventListener('focus', refocusInputIfBlurred);
+      
+    });
+    
+  }
   
   // on click of 'show more' or 'copy all' log actions
   onLogActionClick(actionEl) {
@@ -250,10 +274,7 @@ class ConsoleSheet {
   }
   
   
-  onReturnClick(e) {
-    
-    e.preventDefault();
-    
+  onReturnClick() {
     
     const input = this.el.input;
     
@@ -264,8 +285,6 @@ class ConsoleSheet {
     
     // clear input
     this.clearInput();
-    
-    input.focus();
     
     
     // scroll to bottom of logs
@@ -419,11 +438,15 @@ class ConsoleSheet {
     new ResizeObserver(onInputResize.bind(this)).observe(input);
 
     
+    // refocus input if clicked on return button
+    this.el.return.addEventListener('focus', refocusInputIfBlurred);
+    
+    
     // add return click listener
-    this.el.return.addEventListener('touchend',
+    this.el.return.addEventListener('click',
                                     this.onReturnClick
                                       .bind(this));
-
+    
     
     if (isSafari) {
       
@@ -451,6 +474,22 @@ class ConsoleSheet {
       
     }
 
+  }
+  
+  
+  // refocus input if was focused but was then blurred
+  refocusInputIfBlurred(e) {
+    
+    const blurredElement = e.relatedTarget;
+    
+    if (blurredElement === this.el.input) {
+      
+      e.preventDefault();
+      
+      this.el.input.focus();
+      
+    }
+    
   }
   
   
