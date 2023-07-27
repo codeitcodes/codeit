@@ -637,6 +637,7 @@ class ConsoleSheet {
     header: document.querySelector('.console-sheet .header'),
     close: document.querySelector('.console-sheet .header .close'),
     logWrapper: document.querySelector('.console-sheet .logs'),
+    jumpToBottom: document.querySelector('.console-sheet .jump-to-bottom'),
     footer: document.querySelector('.console-sheet .footer'),
     input: document.querySelector('.console-sheet .footer .input'),
     'return': document.querySelector('.console-sheet .footer .return'),
