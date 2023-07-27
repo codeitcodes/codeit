@@ -227,6 +227,7 @@ class ConsoleSheet {
         
       });
       
+      // refocus input if clicked on action
       action.addEventListener('focus', this.refocusInputIfBlurred.bind(this));
       
     });
@@ -378,9 +379,10 @@ class ConsoleSheet {
     
     
     // jump to bottom on click of button
-    this.el.jumpToBottom.addEventListener('click',
-                                          this.scrollToBottom
-                                            .bind(this));
+    this.el.jumpToBottom
+      .addEventListener('click',
+                        this.scrollToBottom
+                          .bind(this));
 
     // hide 'jump to bottom' button when at bottom
     this.el.logWrapper.addEventListener('scroll', () => {
@@ -390,6 +392,12 @@ class ConsoleSheet {
       this.el.jumpToBottom.classList.toggle('visible', !atBottom);
       
     });
+    
+    // refocus input if clicked on 'jump to bottom' button
+    this.el.jumpToBottom
+      .addEventListener('focus',
+                        this.refocusInputIfBlurred
+                          .bind(this));
     
     
     // init input
@@ -469,9 +477,10 @@ class ConsoleSheet {
     
     
     // add return click listener
-    this.el.return.addEventListener('touchend',
-                                    this.onReturnClick
-                                      .bind(this));
+    this.el.return
+      .addEventListener('touchend',
+                        this.onReturnClick
+                          .bind(this));
     
     
     if (isSafari) {
