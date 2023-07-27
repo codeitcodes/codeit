@@ -380,7 +380,7 @@ class ConsoleSheet {
     
     // jump to bottom on click of button
     this.el.jumpToBottom
-      .addEventListener('click',
+      .addEventListener('touchend',
                         this.scrollToBottom
                           .bind(this));
 
