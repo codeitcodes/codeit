@@ -2,7 +2,7 @@
 // mobile console sheet
 
 // @@todo fix error parsing on Safari
-// @@todo consider changing 'jump to bottom' and 'return' buttons to activate 'ontouchend'
+// @@todo consider changing 'jump to bottom' and 'return' buttons to activate on 'touchend'
 // @@todo 'jump to bottom' button
 // @@todo group identical logs
 
