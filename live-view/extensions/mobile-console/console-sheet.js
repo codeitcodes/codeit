@@ -379,10 +379,13 @@ class ConsoleSheet {
     
     
     // jump to bottom on click of button
-    this.el.jumpToBottom
-      .addEventListener('touchend',
-                        this.scrollToBottom
-                          .bind(this));
+    this.el.jumpToBottom.addEventListener('touchend', () => {
+      
+      this.el.jumpToBottom.classList.remove('visible');
+      
+      this.scrollToBottom();
+      
+    });
 
     // hide 'jump to bottom' button when at bottom
     this.el.logWrapper.addEventListener('scroll', () => {
