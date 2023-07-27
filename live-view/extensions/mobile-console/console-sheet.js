@@ -3,7 +3,6 @@
 
 // @@todo fix error parsing on Safari
 // @@todo consider changing 'jump to bottom' and 'return' buttons to activate on 'touchend'
-// @@todo fix the 'jump to bottom' button being in an invalid position when the input resizes
 // @@todo group identical logs
 
 // @@check Android devices
