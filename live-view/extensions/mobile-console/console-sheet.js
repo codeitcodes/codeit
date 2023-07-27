@@ -375,8 +375,23 @@ class ConsoleSheet {
       this.el.header.classList.toggle('scrolled', scrolledLogs);
       
     });
+    
+    
+    // jump to bottom on click of button
+    this.el.jumpToBottom.addEventListener('click',
+                                          this.scrollToBottom
+                                            .bind(this));
 
-
+    // hide jump to bottom button when at bottom
+    this.el.logWrapper.addEventListener('scroll', () => {
+      
+      const atBottom = this.scrolledToBottom();
+      
+      this.el.jumpToBottom.classList.toggle('visible', !atBottom);
+      
+    });
+    
+    
     // init input
 
     this.el.input.outerHTML = '<cd-el class="input" lang="js"></cd-el>';
