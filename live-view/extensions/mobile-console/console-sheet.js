@@ -387,7 +387,7 @@ class ConsoleSheet {
     // hide jump to bottom button when at bottom
     this.el.logWrapper.addEventListener('scroll', () => {
       
-      const atBottom = this.scrolledToBottom();
+      const atBottom = this.isScrolledToBottom();
       
       this.el.jumpToBottom.classList.toggle('visible', !atBottom);
       
