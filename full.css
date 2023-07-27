@@ -2078,7 +2078,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 .console-sheet .jump-to-bottom {
   position: absolute;
   right: 0;
-  bottom: 59px;
+  bottom: var(--input-height, 59px);
   margin: calc(21px - 3.625px);
   padding: 3.5px;
   background: transparent !important;
