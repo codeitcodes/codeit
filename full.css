@@ -1846,7 +1846,7 @@ body:not(.mobile) .sheet {
   padding: 0 21px;
   height: 59px;
   /* border-bottom: 1px solid rgb(130 134 137 / 25%); */
-  background: hsl(226deg 13% 9%);
+  background: hsl(228deg 16% 9.75%);
   border-radius: inherit;
   transition: box-shadow .1s var(--ease-function);
 }
