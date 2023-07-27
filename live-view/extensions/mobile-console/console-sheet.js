@@ -455,6 +455,10 @@ class ConsoleSheet {
       
       prevInputHeight = currInputHeight;
       
+      
+      // move 'jump to bottom' button
+      this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight);
+      
     }
     
     // when input resizes, update
