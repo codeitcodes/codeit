@@ -383,7 +383,7 @@ class ConsoleSheet {
                                           this.scrollToBottom
                                             .bind(this));
 
-    // hide jump to bottom button when at bottom
+    // hide 'jump to bottom' button when at bottom
     this.el.logWrapper.addEventListener('scroll', () => {
       
       const atBottom = this.isScrolledToBottom();
@@ -457,7 +457,7 @@ class ConsoleSheet {
       
       
       // move 'jump to bottom' button
-      this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight);
+      this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
       
     }
     
