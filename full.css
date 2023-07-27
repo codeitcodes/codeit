@@ -1862,10 +1862,14 @@ body:not(.mobile) .sheet {
 
 .sheet .header .close {
   color: #828689;
-  background: rgb(255 255 255 / 8%) !important;
+  background: hsl(228deg 19% 17%) !important;
   margin: 0;
-  padding: 8.75px;
+  padding: 9.25px;
   margin-right: calc(((30px - 22.75px) / 2) * -1);
+}
+
+.sheet .header .close:active {
+  background: hsl(228deg 19% 17% / 67%) !important;
 }
 
 .sheet .header .close .icon {
