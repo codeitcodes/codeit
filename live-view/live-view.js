@@ -997,7 +997,7 @@ async function handleLiveViewRequest(requestPath) {
       const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
 
 
-      // if not logged in
+      // if not signed in
       // or repository is public
       if (gitToken === ''
           || (repoObj && !repoObj.private)) {
