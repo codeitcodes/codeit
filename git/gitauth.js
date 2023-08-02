@@ -107,7 +107,7 @@ window.addEventListener('load', async () => {
       startLoading();
       
       // show message
-      showMessage('Logging in...', -1);
+      showMessage('Signing in...', -1);
       
       
       // update legacy workflow permission
@@ -126,7 +126,7 @@ window.addEventListener('load', async () => {
       
       
       // hide message
-      if (messageEl.textContent === 'Logging in...') {
+      if (messageEl.textContent === 'Signing in...') {
         hideMessage();
       }
       
@@ -201,7 +201,7 @@ window.addEventListener('load', async () => {
     
     body.classList.add('loaded');
     
-    showMessage('Logging in...', -1);
+    showMessage('Signing in...', -1);
     
     
     // update legacy workflow permission
@@ -220,7 +220,7 @@ window.addEventListener('load', async () => {
     
     
     // hide message
-    if (messageEl.textContent === 'Logging in...') {
+    if (messageEl.textContent === 'Signing in...') {
       hideMessage();
     }
     
