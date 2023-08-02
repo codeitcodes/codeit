@@ -25,7 +25,7 @@ const body = document.body,
       contentWrapper = sidebar.querySelector('.content-wrapper'),
       learnWrapper = sidebar.querySelector('.learn-wrapper'),
 
-      loginButton = introWrapper.querySelector('.login'),
+      signInButton = introWrapper.querySelector('.sign-in'),
 
       loader = contentWrapper.querySelector('.loader'),
       header = contentWrapper.querySelector('.header'),
@@ -1087,8 +1087,8 @@ const offlineScreen = `
   <div class="subhead">
     <div class="title">Looks like you're offline.</div>
   </div>
-  <div class="button secondary medium-spacing-top login">Edit modified files</div>
-  <div class="button teritary tiny-spacing-top login">Try again</div>
+  <div class="button secondary medium-spacing-top">Edit modified files</div>
+  <div class="button teritary tiny-spacing-top">Try again</div>
 </div>
 `;
 
