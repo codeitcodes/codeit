@@ -477,7 +477,6 @@ body.notransition .live-view.file-open {
 }
 
 .live-view .prompt .title {
-  letter-spacing: -.004em;
   color: #f1f1f2e0;
   margin-bottom: calc(7px / 2 * 3);
   font-weight: 500;
@@ -1412,7 +1411,6 @@ body.mobile .sidebar .intro {
   color: #b3b3b3;
   font-size: 15px;
   line-height: 1.5;
-  letter-spacing: 0.1px;
 }
 
 .sidebar .intro .subtitle sup {
