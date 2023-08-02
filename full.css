@@ -1474,19 +1474,18 @@ body.mobile .sidebar .intro {
 }
 
 .sidebar .button {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
   box-sizing: border-box;
-  min-height: 40px;
   white-space: nowrap;
   font-size: 16px;
-  padding: 7px 84px;
+  padding: 7px 29.75px;
   height: 50px;
-  width: 233px;
+  min-width: 233px;
   font-weight: 500;
+  gap: var(--spacing-1);
 }
 
 body.mobile .sidebar .button {
@@ -1517,10 +1516,6 @@ body.mobile .sidebar .button {
   transition: none;
 }
 
-.sidebar .button svg {
-  margin-right: var(--spacing-1);
-}
-
 .sidebar .learn-wrapper .picture-wrapper {
   background: #0b0d1a;
   height: 150px;
@@ -1538,7 +1533,7 @@ body.mobile .sidebar .button {
 }
 
 .sidebar .learn-wrapper.logout-enabled .logout.button {
-  display: grid;
+  display: flex;
 }
 
 .sidebar .learn-wrapper.logout-enabled .share {
