@@ -45,7 +45,7 @@ sidebarToggle.addEventListener('click', () => {
 
 
 // render sidebar
-// call this function when logged in to git
+// call this function when signed in to git
 // to render sidebar
 async function renderSidebarHTML(pageNum = 1) {
 
@@ -60,14 +60,14 @@ async function renderSidebarHTML(pageNum = 1) {
   const [repoName, branch] = repo.split(':');
 
 
-  // if not logged into git
+  // if not signed into git
   // and navigated to Repositories page
   if (gitToken == '' && repo == '') {
 
     // stop loading
     stopLoading();
 
-    // show login screen
+    // show sign-in screen
     sidebar.classList.add('intro');
 
     return;
@@ -258,22 +258,22 @@ async function renderSidebarHTML(pageNum = 1) {
     }
     
     
-    // if not logged in
+    // if not signed in
     if (gitToken == '') {
     
       const dialogResp = await showDialog(async () => {
         
-        await openGitHubLogin();
+        await openGitHubSignIn();
         
         // hide dialog
         hideDialog();
         
-      }, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry logging in.', 'Login', true);
+      }, 'Hmm... the repo you\'re\nlooking for can\'t be found.\nTry signing in.', 'Sign in', true);
       
-      // if chosen to log in, return
+      // if chosen to sign in, return
       if (dialogResp == true) return;
       
-    } else { // if logged in
+    } else { // if signed in
       
       await showDialog(hideDialog, 'Hmm... the repo you\'re\nlooking for can\'t be found.', 'OK', true);
       
@@ -394,12 +394,12 @@ async function renderSidebarHTML(pageNum = 1) {
   if (resp.message && resp.message == 'Bad credentials') {
 
     // if failed to get items,
-    // show login screen
+    // show sign-in screen
 
     // stop loading
     stopLoading();
     
-    showMessage('Your login expired.', 4000);
+    showMessage('Your sign-in token expired.', 4000);
 
     sidebar.classList.add('intro');
 
@@ -1144,17 +1144,17 @@ function pushFileWithCommitMessageHTML(fileEl) {
 
 async function checkPushDialogs() {
 
-  // if not logged in to git
+  // if not signed in to git
   if (gitToken == '') {
 
     showDialog(async () => {
 
-      await openGitHubLogin();
+      await openGitHubSignIn();
 
       // hide dialog
       hideDialog();
 
-    }, 'Login to push this file.', 'Login');
+    }, 'Sign in to push this file.', 'Sign in');
 
     return 'return';
 
@@ -1317,7 +1317,7 @@ async function checkPushDialogs() {
 
       showDialog(async () => {
 
-        await openGitHubLogin();
+        await openGitHubSignIn();
 
         // hide dialog
         hideDialog();
@@ -3630,7 +3630,7 @@ function updateLineNumbersHTML() {
 
 function setupSidebar() {
 
-  // if not logged into git
+  // if not signed into git
   // and navigated to Repositories page
   if (gitToken == '' && treeLoc[1] == '') {
 
@@ -3650,7 +3650,7 @@ function setupSidebar() {
 
     });
 
-  } else { // if logged into git
+  } else { // if signed into git
 
     // render sidebar
     renderSidebarHTML();
