@@ -269,7 +269,7 @@ function openGitHubLogin() {
       });
 
       // open login window
-      openGitHubLoginWindow = window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+      openGitHubLoginWindow = window.open(authURL, 'Sign in with GitHub', 'height=575,width=575');
 
     }
     
