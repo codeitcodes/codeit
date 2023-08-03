@@ -2,7 +2,6 @@
 // mobile console sheet
 
 // @@todo fix error parsing on Safari
-// @@todo fix "jump to bottom" button sometimes reappearing on Safari
 // @@todo group identical logs
 
 // @@check Android devices
@@ -442,7 +441,7 @@ class ConsoleSheet {
       if (isSafari) {
         
         // fix the input snapping up on Safari
-        onInputResize();
+        onInputResize().bind(this);
         
       }
       
