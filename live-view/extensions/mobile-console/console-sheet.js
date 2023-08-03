@@ -558,9 +558,7 @@ class ConsoleSheet {
     
     const logWrapper = this.el.logWrapper;
     
-    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
-    
-    logWrapper.scrollTo(0, maxScroll);
+    logWrapper.scrollTo(0, logWrapper.scrollHeight);
     
   }
   
