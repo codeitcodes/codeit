@@ -438,7 +438,7 @@ class ConsoleSheet {
       
       if (isSafari) {
         
-        // on Safari, fix the input snapping up when typing
+        // fix the input snapping up on Safari
         onInputResize();
         
       }
