@@ -2074,42 +2074,22 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   bottom: calc(var(--input-height, 38px) + (10.5px * 2));
   margin: calc(21px - 3.625px);
   padding: 3.5px;
-  background: transparent !important;
-  transition: .1s var(--ease-function) opacity;
+  border-radius: 50%;
+  background: hsl(228deg 19% 17%);
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  transition: .1s var(--ease-function);
+  transition-property: opacity, transform;
   z-index: 1;
+}
+
+.console-sheet .jump-to-bottom:active {
+  background: #1d1f2a !important; /* hsl(228deg 19% 17% / 67%) */
 }
 
 .console-sheet .jump-to-bottom:not(.visible) {
   opacity: 0;
-  pointer-events: none;
-}
-
-.console-sheet .jump-to-bottom .icon {
-  display: block;
-  clip-path: circle(50% at 50% 50%);
-  transition: .1s var(--ease-function) clip-path;
-}
-
-.console-sheet .jump-to-bottom:not(.visible) .icon {
-  clip-path: circle(0% at 50% 50%);
-}
-
-.console-sheet .jump-to-bottom .background {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: hsl(228deg 19% 17%);
-  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
-  transition: .1s var(--ease-function) transform;
-  z-index: -1;
-}
-
-.console-sheet .jump-to-bottom:active .background {
-  background: #1d1f2a; /* hsl(228deg 19% 17% / 67%) */
-}
-
-.console-sheet .jump-to-bottom:not(.visible) .background {
   transform: scale(0);
+  pointer-events: none;
 }
 
 .console-sheet .footer {
