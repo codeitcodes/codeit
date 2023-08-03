@@ -493,19 +493,23 @@ class ConsoleSheet {
       // fix Safari scrolling the logs up when typing in input
       this.el.logWrapper.addEventListener('scroll', () => {
         
-        const currTime = new Date().getTime();
-        
-        const deltaTime = currTime - safariLastInputTime;
-        
-        if (deltaTime < 1) {
+        onNextFrame(() => {
           
-          this.el.logWrapper.scrollTop = safariLastScrollPos;
+          const currTime = new Date().getTime();
           
-          safariLastInputTime = 0;
+          const deltaTime = currTime - safariLastInputTime;
           
-        }
-        
-        safariLastScrollPos = this.el.logWrapper.scrollTop;
+          if (deltaTime < 1) {
+            
+            this.el.logWrapper.scrollTop = safariLastScrollPos;
+            
+            safariLastInputTime = 0;
+            
+          }
+          
+          safariLastScrollPos = this.el.logWrapper.scrollTop;
+          
+        });
         
       });
       
