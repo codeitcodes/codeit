@@ -17,7 +17,7 @@ const INTERNAL_PATHS = {
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
-}
+};
 
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
