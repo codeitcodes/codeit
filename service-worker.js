@@ -6,11 +6,11 @@ const WORKER_NAME = 'codeit-worker-v761';
 self.importScripts('/worker/client-channel.js');
 
 
-let WORKER_CACHE_ENABLED = false;
+let WORKER_CACHE_ENABLED = true;
 
-if (!isDev) {
+if (isDev) {
   
-  WORKER_CACHE_ENABLED = true;
+  WORKER_CACHE_ENABLED = false;
   
 }
 
