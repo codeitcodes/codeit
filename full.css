@@ -1953,6 +1953,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   width: auto;
   height: auto;
   overflow: visible;
+  min-height: calc(18px + (3px * 2));
 }
 
 .console-sheet .logs .log:has(> .actions .action.more) .data::after {
