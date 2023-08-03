@@ -452,14 +452,14 @@ class ConsoleSheet {
     
     let prevInputHeight = input.clientHeight;
     
-    function onInputResize(this) {
+    function onInputResize(_this) {
       
       const currInputHeight = input.clientHeight;
       
       const heightDelta = currInputHeight - prevInputHeight;
       
       
-      const logWrapper = this.el.logWrapper;
+      const logWrapper = _this.el.logWrapper;
       
       const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
       
@@ -468,7 +468,7 @@ class ConsoleSheet {
       
       if (heightDelta > 0 && wasScrolledToBottom) {
         
-        this.scrollToBottom();
+        _this.scrollToBottom();
         
       }
       
@@ -477,7 +477,7 @@ class ConsoleSheet {
       
       
       // move 'jump to bottom' button
-      this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
+      _this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
       
     }
     
