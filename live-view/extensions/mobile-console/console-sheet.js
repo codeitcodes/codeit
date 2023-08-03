@@ -548,7 +548,7 @@ class ConsoleSheet {
     const scrollTop = logWrapper.scrollTop;
     
     // prevent rounding errors
-    const scrolledToBottom = (Math.abs(maxScroll - scrollTop) < 1);
+    const scrolledToBottom = ((maxScroll - scrollTop) < 1);
     
     return scrolledToBottom;
     
