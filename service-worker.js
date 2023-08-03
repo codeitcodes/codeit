@@ -6,7 +6,14 @@ const WORKER_NAME = 'codeit-worker-v761';
 self.importScripts('/worker/client-channel.js');
 
 
-const TESTING_WORKER_CACHE = false;
+let WORKER_CACHE_ENABLED = false;
+
+if (!isDev) {
+  
+  WORKER_CACHE_ENABLED = true;
+  
+}
+
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -88,7 +95,8 @@ caches.keys().then((keyList) => {
   
   return Promise.all(keyList.map((key) => {
     
-    if (key !== WORKER_NAME || (isDev && !TESTING_WORKER_CACHE)) {
+    if (key !== WORKER_NAME ||
+        !WORKER_CACHE_ENABLED) {
       
       return caches.delete(key);
       
@@ -99,7 +107,7 @@ caches.keys().then((keyList) => {
 });
 
 // precache static resources
-if (!isDev || TESTING_WORKER_CACHE) {
+if (WORKER_CACHE_ENABLED) {
   
   caches.open(WORKER_NAME).then((cache) => {
     
