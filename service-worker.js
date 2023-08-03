@@ -6,6 +6,8 @@ const WORKER_NAME = 'codeit-worker-v760';
 self.importScripts('/worker/client-channel.js');
 
 
+const TESTING_WORKER_CACHE = false;
+
 // list of files to cache
 const FILES_TO_CACHE = [
 
