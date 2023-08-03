@@ -407,7 +407,7 @@ class ConsoleSheet {
     
     // init input
 
-    this.el.input.outerHTML = '<cd-el class="input" lang="js"></cd-el>';
+    this.el.input.outerHTML = '<cd-el class="input" lang="js" tabindex="0"></cd-el>';
 
     this.el.input = this.el.footer.querySelector('.input');
 
