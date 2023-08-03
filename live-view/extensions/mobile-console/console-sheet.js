@@ -558,6 +558,19 @@ class ConsoleSheet {
     
     const logWrapper = this.el.logWrapper;
     
+    // fix Safari lying about the scroll position
+    if (isSafari) {
+      
+      logWrapper.style.overflowY = 'hidden';
+        
+      onNextFrame(() => {
+        
+        logWrapper.style.overflowY = '';
+        
+      });
+      
+    }
+    
     logWrapper.scrollTop = logWrapper.scrollHeight;
     
   }
