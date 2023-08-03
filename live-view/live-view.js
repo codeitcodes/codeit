@@ -706,6 +706,7 @@ if (isMobile) {
         
       } else {
         
+        // show unsupported language message
         showMessage('You can run HTML, Markdown and SVG.', 5000);
         
       }
