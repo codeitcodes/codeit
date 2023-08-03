@@ -282,7 +282,10 @@ class ConsoleSheet {
   }
   
   
-  onReturnClick() {
+  onReturnClick(e) {
+    
+    e.preventDefault();
+    
     
     const input = this.el.input;
     
@@ -379,9 +382,9 @@ class ConsoleSheet {
     
     
     // jump to bottom on click of button
-    this.el.jumpToBottom.addEventListener('touchend', () => {
+    this.el.jumpToBottom.addEventListener('touchend', (e) => {
       
-      this.el.jumpToBottom.classList.remove('visible');
+      e.preventDefault();
       
       this.scrollToBottom();
       
