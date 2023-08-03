@@ -86,7 +86,7 @@ caches.keys().then((keyList) => {
   
   return Promise.all(keyList.map((key) => {
     
-    if (key !== WORKER_NAME || isDev) {
+    if (key !== WORKER_NAME || (isDev && !TESTING_WORKER_CACHE)) {
       
       return caches.delete(key);
       
@@ -97,11 +97,15 @@ caches.keys().then((keyList) => {
 });
 
 // precache static resources
-caches.open(WORKER_NAME).then((cache) => {
+if (!isDev || TESTING_WORKER_CACHE) {
   
-  return cache.addAll(FILES_TO_CACHE);
+  caches.open(WORKER_NAME).then((cache) => {
+    
+    return cache.addAll(FILES_TO_CACHE);
+    
+  });
   
-});
+}
 
 
 self.addEventListener('install', (evt) => {
