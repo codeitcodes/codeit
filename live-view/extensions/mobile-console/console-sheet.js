@@ -499,7 +499,7 @@ class ConsoleSheet {
           
           const deltaTime = currTime - safariLastInputTime;
           
-          if (deltaTime === 0) {
+          if (deltaTime < 1) {
             
             this.el.logWrapper.scrollTop = safariLastScrollPos;
             
