@@ -558,7 +558,7 @@ class ConsoleSheet {
     
     const logWrapper = this.el.logWrapper;
     
-    logWrapper.scrollTo(0, logWrapper.scrollHeight);
+    logWrapper.scrollTop = logWrapper.scrollHeight;
     
   }
   
