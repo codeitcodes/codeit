@@ -552,27 +552,20 @@ class ConsoleSheet {
     
     const logWrapper = this.el.logWrapper;
     
-    const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
-    
-    if (!isSafari) {
-      
-      logWrapper.scrollTo(0, maxScroll);
-      
-    } else {
-      
-      // fix Safari lying about the scroll position
+    // fix Safari lying about the scroll position
+    if (isSafari) {
       
       logWrapper.style.overflowY = 'hidden';
       
       onNextFrame(() => {
         
         logWrapper.style.overflowY = '';
-    
-        logWrapper.scrollTo(0, maxScroll);
         
       });
       
     }
+    
+    logWrapper.scrollTop = logWrapper.scrollHeight;
     
   }
   
