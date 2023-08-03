@@ -437,14 +437,6 @@ class ConsoleSheet {
 
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
       
-      
-      if (isSafari) {
-        
-        // fix the input snapping up on Safari
-        onInputResize(this);
-        
-      }
-      
     });
     
     
@@ -452,14 +444,14 @@ class ConsoleSheet {
     
     let prevInputHeight = input.clientHeight;
     
-    function onInputResize(_this) {
+    function onInputResize() {
       
       const currInputHeight = input.clientHeight;
       
       const heightDelta = currInputHeight - prevInputHeight;
       
       
-      const logWrapper = _this.el.logWrapper;
+      const logWrapper = this.el.logWrapper;
       
       const maxScroll = logWrapper.scrollHeight - logWrapper.clientHeight;
       
@@ -468,7 +460,7 @@ class ConsoleSheet {
       
       if (heightDelta > 0 && wasScrolledToBottom) {
         
-        _this.scrollToBottom();
+        this.scrollToBottom();
         
       }
       
@@ -477,12 +469,12 @@ class ConsoleSheet {
       
       
       // move 'jump to bottom' button
-      _this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
+      this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
       
     }
     
     // when input resizes, update
-    new ResizeObserver(() => { onInputResize(this) }).observe(input);
+    new ResizeObserver(onInputResize.bind(this)).observe(input);
 
     
     // refocus input if clicked on return button
