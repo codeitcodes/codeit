@@ -437,6 +437,14 @@ class ConsoleSheet {
 
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
       
+      
+      if (isSafari) {
+        
+        // fix Safari scrolling the logs up when typing in input
+        safariLastInputTime = new Date().getTime();
+        
+      }
+      
     });
     
     
@@ -475,6 +483,33 @@ class ConsoleSheet {
     
     // when input resizes, update
     new ResizeObserver(onInputResize.bind(this)).observe(input);
+    
+    
+    let safariLastInputTime = 0;
+    let safariLastScrollPos = 0;
+    
+    if (isSafari) {
+      
+      // fix Safari scrolling the logs up when typing in input
+      this.el.logWrapper.addEventListener('scroll', () => {
+        
+        const currTime = new Date().getTime();
+        
+        const deltaTime = currTime - safariLastInputTime;
+        
+        if (deltaTime < 1) {
+          
+          this.el.logWrapper.scrollTop = safariLastScrollPos;
+          
+          safariLastInputTime = 0;
+          
+        }
+        
+        safariLastScrollPos = this.el.logWrapper.scrollTop;
+        
+      });
+      
+    }
 
     
     // refocus input if clicked on return button
