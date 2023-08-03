@@ -2,6 +2,8 @@
 // mobile console sheet
 
 // @@todo fix error parsing on Safari
+// @@todo fix "jump to bottom" button sometimes reappearing on Safari
+// @@todo fix unfocusing the input when the return button gets clicked
 // @@todo consider changing the 'jump to bottom' button to activate on 'touchend'
 // @@todo group identical logs
 
