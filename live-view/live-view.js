@@ -698,11 +698,15 @@ if (isMobile) {
 
       e.preventDefault();
       
-      if (selectedFile.lang == 'html' || selectedFile.lang == 'markup' ||
+      if (selectedFile.lang === 'html' || selectedFile.lang === 'markup' ||
           selectedFile.lang === 'markdown') {
             
         liveView.classList.toggle('visible');
         toggleLiveView(selectedFile);
+        
+      } else {
+        
+        showMessage('You can run HTML, Markdown and SVG.', 5000);
         
       }
 
