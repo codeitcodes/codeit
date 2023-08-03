@@ -470,6 +470,13 @@ class ConsoleSheet {
         
         this.scrollToBottom();
         
+        if (isSafari) {
+          
+          // prevent fixing Safari scroll position, because we scrolled on purpose
+          safariLastInputTime = 0;
+          
+        }
+        
       }
       
       
@@ -478,14 +485,6 @@ class ConsoleSheet {
       
       // move 'jump to bottom' button
       this.el.jumpToBottom.style.setProperty('--input-height', currInputHeight + 'px');
-      
-      
-      if (isSafari) {
-        
-        // prevent fixing Safari scroll position, because we scrolled on purpose
-        safariLastInputTime = 0;
-        
-      }
       
     }
     
