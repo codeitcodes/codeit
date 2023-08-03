@@ -3,8 +3,6 @@
 
 // @@todo fix error parsing on Safari
 // @@todo fix "jump to bottom" button sometimes reappearing on Safari
-// @@todo fix unfocusing the input when the return button gets clicked
-// @@todo consider changing the 'jump to bottom' button to activate on 'touchend'
 // @@todo group identical logs
 
 // @@check Android devices
@@ -437,6 +435,14 @@ class ConsoleSheet {
 
       this.el.footer.classList.toggle('return-enabled', returnEnabled);
       
+      
+      if (isSafari) {
+        
+        // on Safari, fix the input snapping up when typing
+        onInputResize();
+        
+      }
+      
     });
     
     
@@ -444,7 +450,7 @@ class ConsoleSheet {
     
     let prevInputHeight = input.clientHeight;
     
-    function onInputResize(e) {
+    function onInputResize() {
       
       const currInputHeight = input.clientHeight;
       
