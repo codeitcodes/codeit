@@ -441,7 +441,7 @@ class ConsoleSheet {
       if (isSafari) {
         
         // fix the input snapping up on Safari
-        onInputResize().bind(this);
+        onInputResize(this);
         
       }
       
@@ -452,7 +452,7 @@ class ConsoleSheet {
     
     let prevInputHeight = input.clientHeight;
     
-    function onInputResize() {
+    function onInputResize(this) {
       
       const currInputHeight = input.clientHeight;
       
@@ -482,7 +482,7 @@ class ConsoleSheet {
     }
     
     // when input resizes, update
-    new ResizeObserver(onInputResize.bind(this)).observe(input);
+    new ResizeObserver(() => { onInputResize(this) }).observe(input);
 
     
     // refocus input if clicked on return button
