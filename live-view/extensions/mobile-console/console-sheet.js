@@ -482,7 +482,7 @@ class ConsoleSheet {
       
       if (isSafari) {
         
-        // prevent fixing scroll position, because we scrolled on purpose
+        // prevent fixing Safari scroll position, because we scrolled on purpose
         safariLastInputTime = 0;
         
       }
