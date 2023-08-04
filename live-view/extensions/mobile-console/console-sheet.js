@@ -45,8 +45,10 @@ class ConsoleSheet {
     
     let lastLog = logWrapper.querySelector('.log:last-of-type');
     
-    // don't group input logs
+    // if logs are of the same type,
+    // and aren't type 'input'
     if (lastLog &&
+        lastLog.classList.contains(log.type) &&
         log.type !== 'input') {
       
       const lastLogHTML = lastLog.outerHTML;
