@@ -1968,6 +1968,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 .console-sheet .logs .log .data {
   margin-left: 10.5px;
   min-height: calc(39px - (7px * 2) - 1px);
+  flex: 1;
 }
 
 .console-sheet .logs .log:not(:has(.icon)) .data {
