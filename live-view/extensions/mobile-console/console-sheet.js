@@ -51,7 +51,15 @@ class ConsoleSheet {
         lastLog.classList.contains(log.type) &&
         log.type !== 'input') {
       
-      const lastLogHTML = lastLog.outerHTML;
+      let lastLogHTML = lastLog.outerHTML;
+      
+      const duplicateBadgeHTML = `
+        <div class="duplicate-badge">2</div>
+      `.trim();
+      
+      // temporarily remove the 'duplicate' badge from the last log's HTML,
+      // so we can compare it to the current log
+      lastLogHTML.replace(duplicateBadgeHTML, '');
       
       // if the current and last logs are identical
       if (logHTML.trim() === lastLogHTML) {
@@ -89,10 +97,6 @@ class ConsoleSheet {
           // add a new 'duplicate' badge to the log
           
           const dataWrapper = lastLog.querySelector('.data-wrapper');
-          
-          const duplicateBadgeHTML = `
-            <div class="duplicate-badge">2</div>
-          `;
           
           dataWrapper.insertAdjacentHTML('afterbegin', duplicateBadgeHTML);
           
