@@ -92,13 +92,10 @@ let logger = {
     
     } catch(e) {
       
-      let errorMessage = e.toString();
+      const errorMessage = logger.errorEvent.getMessage(e);
       
       // add line and column to message
       //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
-      
-      // add 'Uncaught' to start of message
-      errorMessage = 'Uncaught ' + errorMessage;
       
       
       // propagate errors from context window
