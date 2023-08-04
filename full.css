@@ -1948,7 +1948,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   font-size: 14px;
   font-weight: bold;
   color: var(--background-color);
-  background: var(--text-color);
+  background: #636d83;
   position: relative;
   top: calc(((39px - 1px - 20px) / 2) - 7px);
   padding: 0 5.8px;
@@ -1958,6 +1958,10 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   min-width: 20px;
   transition: .18s ease-out;
   transition-property: box-shadow, filter;
+}
+
+.console-sheet .logs .log:is(.warn, .error, .debug) .duplicate-badge {
+  background: var(--text-color);
 }
 
 .console-sheet .logs .log .duplicate-badge.animating {
