@@ -1972,7 +1972,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   flex: 1;
 }
 
-.console-sheet .logs .log:not(:has(.icon)) .data {
+.console-sheet .logs .log:not(:has(.icon, .duplicate-badge)) .data {
   margin-left: calc(10.5px + 20px);
 }
 
