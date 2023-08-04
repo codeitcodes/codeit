@@ -278,8 +278,12 @@ let logger = {
             // add a seperating space at its end
             if (entryContext !== '') entryContext += ' ';
             
+            // if entry URL exists,
+            // surround it with brackets
+            if (entryURL !== '') entryURL = '(' + entryURL + ')';
+            
             // restructure entry
-            stack[index] = entryContext + '(' + entryURL + ')';
+            stack[index] = entryContext + entryURL;
             
           });
           
