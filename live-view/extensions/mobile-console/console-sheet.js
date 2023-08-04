@@ -43,7 +43,7 @@ class ConsoleSheet {
     
     // group identical consecutive logs
     
-    const lastLog = logWrapper.querySelector('.log:last-of-type');
+    let lastLog = logWrapper.querySelector('.log:last-of-type');
     
     // don't group input logs
     if (lastLog &&
