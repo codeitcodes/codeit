@@ -254,6 +254,9 @@ let logger = {
       }
       
       
+      // re-add the first empty item (because of how split works)
+      stack.unshift('');
+      
       // rejoin stack
       stack = stack.join('    at ');
         
