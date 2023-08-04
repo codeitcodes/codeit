@@ -54,7 +54,7 @@ class ConsoleSheet {
       const lastLogHTML = lastLog.outerHTML;
       
       // if the logs are identical
-      if (logHTML === lastLogHTML) {
+      if (logHTML.trim() === lastLogHTML) {
         
         const duplicateBadge = lastLog.querySelector('.duplicate-badge');
         
