@@ -1922,7 +1922,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   border-bottom: 0;
 }
 
-.console-sheet .logs .log *:not(.data, .data *) {
+.console-sheet .logs .log *:not(.data-wrapper, .data, .data *) {
   user-select: none;
   -webkit-user-select: none;
 }
