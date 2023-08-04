@@ -245,9 +245,9 @@ let logger = {
         // into:
         // '<anonymous>:1:13'
         
-        const evalInfo = stack[0].slice('eval '.length);
+        const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
         
-        const evalStack = evalInfo.split('(')[1].split(', ')[1].split(')')[0];
+        const evalStack = evalInfo.split(', ')[1];
         
         stack = [evalStack];
         
