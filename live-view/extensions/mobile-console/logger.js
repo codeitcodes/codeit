@@ -225,10 +225,12 @@ let logger = {
           stack.forEach((entry, index) => {
             
             // replace index URLs
-            stack[index] = entry.replaceAll(indexURL, '(index)');
+            entry = entry.replaceAll(indexURL, '(index)');
             
             // remove absolute URLs' origin
-            stack[index] = entry.replaceAll(originURL, '');
+            entry = entry.replaceAll(originURL, '');
+            
+            stack[index] = entry;
             
           });
           
