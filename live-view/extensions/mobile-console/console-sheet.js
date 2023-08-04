@@ -57,12 +57,11 @@ class ConsoleSheet {
         <div class="duplicate-badge">2</div>
       `.trim();
       
-      // temporarily remove the 'duplicate' badge from the last log's HTML,
-      // so we can compare it to the current log's HTML
-      lastLogHTML = lastLogHTML.replace(duplicateBadgeHTML, '');
+      const currLogData = logHTML.trim().split('<div class="data">')[1];
+      const lastLogData = lastLogHTML.trim().split('<div class="data">')[1];
       
       // if the current and last logs are identical
-      if (logHTML.trim() === lastLogHTML) {
+      if (currLogData === lastLogData) {
         
         const duplicateBadge = lastLog.querySelector('.duplicate-badge');
         
