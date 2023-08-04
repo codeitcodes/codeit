@@ -46,19 +46,19 @@ class ConsoleSheet {
     let lastLog = logWrapper.querySelector('.log:last-of-type');
     
     // if logs are of the same type,
-    // and aren't type 'input'
+    // and aren't of type 'input'
     if (lastLog &&
         lastLog.classList.contains(log.type) &&
         log.type !== 'input') {
       
       const lastLogHTML = lastLog.outerHTML;
       
-      // if the logs are identical
+      // if the current and last logs are identical
       if (logHTML.trim() === lastLogHTML) {
         
         const duplicateBadge = lastLog.querySelector('.duplicate-badge');
         
-        // if log already has duplicates
+        // if the log already had duplicates
         if (duplicateBadge) {
           
           // bump its 'duplicate' counter
@@ -75,10 +75,21 @@ class ConsoleSheet {
           
         } else {
           
-          // replace its icon with a new 'duplicate' badge
-          lastLog.querySelector('.icon').outerHTML = `
-          <div class="duplicate-badge">2</div>
+          // add a new 'duplicate' badge to the log
+          
+          const dataWrapper = lastLog.querySelector('.data-wrapper');
+          
+          const duplicateBadgeHTML = `
+            <div class="duplicate-badge">2</div>
           `;
+          
+          dataWrapper.insertAdjacentHTML('afterbegin', duplicateBadgeHTML);
+          
+          
+          const logIcon = lastLog.querySelector('.icon');
+          
+          // if the log has an icon, remove it
+          if (logIcon) logIcon.remove();
           
         }
         
@@ -91,7 +102,7 @@ class ConsoleSheet {
     
     
     // add log to HTML
-    // note: not using innerHTML because we want
+    // note: we're not using innerHTML because we want
     // to keep the action event listeners
     logWrapper.insertAdjacentHTML('beforeend', logHTML);
     
