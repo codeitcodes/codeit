@@ -79,7 +79,7 @@ class ConsoleSheet {
           
         }
         
-        // don't render the new log
+        // return so we won't render the duplicate log
         return;
         
       }
