@@ -1,7 +1,6 @@
 
 // mobile console sheet
 
-// @@todo fix error parsing on Safari
 // @@todo group identical logs
 
 // @@check Android devices
