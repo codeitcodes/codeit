@@ -45,13 +45,23 @@ class ConsoleSheet {
     
     let lastLog = logWrapper.querySelector('.log:last-of-type');
     
+    let logsAreOfSameType = false;
+    
+    if (log.type !== 'log') {
+      
+      logsAreOfSameType = lastLog.classList.contains(log.type);
+      
+    } else {
+      
+      // handle the special case for a 'log' type log,
+      // since all logs already have a 'log' class
+      logsAreOfSameType = lastLog.classList.contains('type-log');
+      
+    }
+    
     // if logs are of the same type,
     // and aren't of type 'input'
-    if (lastLog &&
-        (lastLog.classList.contains(log.type) ||
-         (log.type === 'log' &&
-          lastLog.classList.contains('type-log'))
-        ) &&
+    if (logsAreOfSameType &&
         log.type !== 'input') {
       
       let lastLogHTML = lastLog.outerHTML;
