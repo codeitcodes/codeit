@@ -74,13 +74,11 @@ class ConsoleSheet {
           
           if (currValue !== '999+') {
             
-            currValue = Number(currValue);
+            currValue = Number(currValue) + 1;
             
             if (currValue <= 999) {
             
-              console.log(currValue);
-            
-              duplicateBadge.textContent = currValue + 1;
+              duplicateBadge.textContent = currValue;
               
             } else {
               
