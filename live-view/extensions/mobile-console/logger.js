@@ -181,7 +181,7 @@ let logger = {
       
     },
     
-    getMessage: (e) => {
+    getMessage: (e, isLoggerEval = false) => {
       
       let error = e;
       
@@ -196,6 +196,7 @@ let logger = {
       
       const message = (error.name + ': ' + error.message);
       
+      
       // remove error message from stack
       stack = stack.slice(message.length + '\n'.length);
       
@@ -203,39 +204,56 @@ let logger = {
       stack = stack.split('    at ');
       
       
-      // replace absolute URLs with relative URLs in stack
-      
-      // get origin URL
-      const location = logger.cW.location;
-      const originURL = location.origin + location.pathname;
-      const indexURL = originURL + location.search;
-      
-      stack.forEach((entry, index) => {
+      if (!isLoggerEval) {
         
-        // if the entry's URL starts with the origin URL
-        if (entry.startsWith(originURL)) {
+        // replace absolute URLs with relative URLs in stack
+        
+        // get origin URL
+        const location = logger.cW.location;
+        const originURL = location.origin + location.pathname;
+        const indexURL = originURL + location.search;
+        
+        stack.forEach((entry, index) => {
           
-          // if the entry's URL is the index
-          if (entry.startsWith(indexURL + ':')) {
+          // if the entry's URL starts with the origin URL
+          if (entry.startsWith(originURL)) {
             
-            // replace its URL
-            stack[index] = entry.replace(indexURL, '(index)');
-            
-          } else {
-            
-            // remove the origin from the entry's URL
-            stack[index] = entry.replace(originURL, '');
+            // if the entry's URL is the index
+            if (entry.startsWith(indexURL + ':')) {
+              
+              // replace its URL
+              stack[index] = entry.replace(indexURL, '(index)');
+              
+            } else {
+              
+              // remove the origin from the entry's URL
+              stack[index] = entry.replace(originURL, '');
+              
+            }
             
           }
           
-        }
+        });
         
-      });
+      } else {
+        
+        // parses:
+        // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
+        // into:
+        // '<anonymous>:1:13'
+        
+        const evalInfo = stack[0].split('eval ')[1];
+        
+        const evalStack = evalInfo.split('(')[1].split(', ')[1].split(')')[0];
+        
+        stack = [evalStack];
+        
+      }
       
       
       // rejoin stack
       stack = stack.join('    at ');
-      
+        
       // add error message back to stack
       stack = message + '\n' + stack;
       
