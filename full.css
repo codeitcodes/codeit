@@ -1984,13 +1984,13 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 
 .console-sheet .logs .log.warn {
   --text-color: hsl(15deg 57% 76%);
-  --background-color: hsl(15deg 57% 76% / 4%);
+  --background-color: hsl(280deg 6.38% 9.22%); /* hsl(15deg 57% 76% / 4%) */
   --border-color: hsl(0deg 8% 17%); /* hsl(15deg 57% 76% / 11%) */
 }
 
 .console-sheet .logs .log.error {
   --text-color: hsl(354deg 61% 73%);
-  --background-color: hsl(354deg 61% 73% / 4%);
+  --background-color: hsl(300deg 8.7% 9.02%); /* hsl(354deg 61% 73% / 4%) */
   --border-color: hsl(337deg 16% 16%); /* hsl(354deg 61% 73% / 11%) */
 }
 
