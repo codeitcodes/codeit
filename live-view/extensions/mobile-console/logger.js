@@ -92,7 +92,7 @@ let logger = {
     
     } catch(e) {
       
-      const errorMessage = logger.errorEvent.getMessage(e);
+      const errorMessage = logger.errorEvent.getMessage(e, true);
       
       // add line and column to message
       //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
