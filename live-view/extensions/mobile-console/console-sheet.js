@@ -73,6 +73,17 @@ class ConsoleSheet {
             
           }
           
+          
+          // animate its 'duplicate' badge
+          
+          duplicateBadge.classList.add('animating');
+          
+          onNextFrame(() => {
+            
+            duplicateBadge.classList.remove('animating');
+            
+          });
+          
         } else {
           
           // add a new 'duplicate' badge to the log
