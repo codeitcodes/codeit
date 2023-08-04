@@ -1960,10 +1960,6 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   transition-property: box-shadow, filter;
 }
 
-.console-sheet .logs .log:is(.warn, .error, .debug) .duplicate-badge {
-  background: var(--text-color);
-}
-
 .console-sheet .logs .log .duplicate-badge.animating {
   box-shadow: 0 0 0 1.75px var(--text-color);
   filter: saturate(1.4) brightness(1.4);
@@ -2016,6 +2012,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 .console-sheet .logs .log:is(.warn, .error, .debug) .duplicate-badge {
+  background: var(--text-color);
   opacity: .72;
 }
 
