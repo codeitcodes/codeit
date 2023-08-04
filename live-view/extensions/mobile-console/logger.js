@@ -191,8 +191,10 @@ let logger = {
         
         let stack = e.error.stack;
         
+        const message = (e.error.name + ': ' + e.error.message);
+        
         // remove error message from stack
-        stack = stack.slice((e.error.name + ': ' + e.error.message) + '\n'.length);
+        stack = stack.slice(message.length + '\n'.length);
         
         // split stack
         stack = stack.split('    at ');
@@ -233,7 +235,7 @@ let logger = {
         stack = stack.join('    at ');
         
         // add error message back to stack
-        stack = e.message + '\n' + stack;
+        stack = message + '\n' + stack;
         
         errorMessage = stack;
         
