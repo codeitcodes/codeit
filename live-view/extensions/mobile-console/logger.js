@@ -190,17 +190,22 @@ let logger = {
       let stack = error.stack;
       
       const message = (error.name + ': ' + error.message);
+            
       
-      
-      // add line and column to message
-      //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
-      
-      
-      // remove error message from stack
-      stack = stack.slice(message.length);
-      
-      // split stack
-      stack = stack.split('\n    at ');
+      if (!isSafari) {
+          
+        // remove error message from stack
+        stack = stack.slice(message.length);
+        
+        // split stack
+        stack = stack.split('\n    at ');
+        
+      } else {
+        
+        // split stack
+        stack = stack.split('\n');
+        
+      }
       
       // remove the first empty item (because of how split works)
       stack.shift();
@@ -215,40 +220,85 @@ let logger = {
         const originURL = location.origin + location.pathname;
         const indexURL = originURL + location.search;
         
-        stack.forEach((entry, index) => {
-          
-          // if the entry's URL starts with the origin URL
-          if (entry.startsWith(originURL)) {
+        if (!isSafari) {
             
-            // if the entry's URL is the index
-            if (entry.startsWith(indexURL + ':')) {
+          stack.forEach((entry, index) => {
+            
+            // if the entry's URL starts with the origin URL
+            if (entry.startsWith(originURL)) {
               
-              // replace its URL
-              stack[index] = entry.replace(indexURL, '(index)');
-              
-            } else {
-              
-              // remove the origin from the entry's URL
-              stack[index] = entry.replace(originURL, '');
+              // if the entry's URL is the index
+              if (entry.startsWith(indexURL + ':')) {
+                
+                // replace its URL
+                stack[index] = entry.replace(indexURL, '(index)');
+                
+              } else {
+                
+                // remove the origin from the entry's URL
+                stack[index] = entry.replace(originURL, '');
+                
+              }
               
             }
             
-          }
+          });
           
-        });
+        } else {
+          
+          stack.forEach((entry, index) => {
+          
+            const entryURLIndex = entry.indexOf('@');
+            const entryURL = entry.slice(entryURLIndex + 1);
+            const remainingEntry = entry.slice(0, -(entryURLIndex + 1 - entry.length));
+            
+            // if the entry's URL starts with the origin URL
+            if (entryURL.startsWith(originURL)) {
+              
+              // if the entry's URL is the index
+              if (entryURL.startsWith(indexURL + ':')) {
+                
+                // replace its URL
+                stack[index] = remainingEntry + entryURL.replace(indexURL, '(index)');
+                
+              } else {
+                
+                // remove the origin from the entry's URL
+                stack[index] = remainingEntry + entryURL.replace(originURL, '');
+                
+              }
+              
+            }
+            
+          });
+          
+        }
         
       } else {
         
-        // parses:
-        // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
-        // into:
-        // '<anonymous>:1:13'
-        
-        const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
-        
-        const evalStack = evalInfo.split(', ')[1];
-        
-        stack = [evalStack];
+        if (!isSafari) {
+          
+          // parses:
+          // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
+          // into:
+          // '<anonymous>:1:13'
+          
+          const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
+          
+          const evalStack = evalInfo.split(', ')[1];
+          
+          stack = [evalStack];
+          
+        } else {
+          
+          // the error's line number and column number
+          // aren't available in the stack on Safari,
+          // so we get them from the Error object
+          
+          // add line and column to message
+          // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
+          
+        }
         
       }
       
@@ -256,8 +306,18 @@ let logger = {
       // re-add the first empty item (because of how split works)
       stack.unshift('');
       
-      // rejoin stack
-      stack = stack.join('\n    at ');
+      if (!isSafari) {
+        
+        // rejoin stack
+        stack = stack.join('\n    at ');
+        
+      } else {
+        
+        // rejoin stack
+        stack = '\n' + stack.join('\n');
+        
+      }
+      
       
       // add error message back to stack
       stack = message + stack;
