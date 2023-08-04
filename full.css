@@ -1951,7 +1951,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   width: auto;
   height: auto;
   overflow: visible;
-  min-height: calc(18px + (3px * 2));
+  min-height: calc(39px - (7px * 2) - 1px);
 }
 
 .console-sheet .logs .log:has(> .actions .action.more) .data::after {
