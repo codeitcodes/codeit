@@ -273,7 +273,7 @@ let logger = {
               
             }
             
-            // if entry URL and entry context exist,
+            // if both entry URL and entry context exist,
             // surround the entry URL with brackets
             if (entryURL !== '' && entryContext !== '') {
               
