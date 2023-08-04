@@ -78,6 +78,8 @@ class ConsoleSheet {
             
             if (currValue <= 999) {
             
+              console.log(currValue);
+            
               duplicateBadge.textContent = currValue + 1;
               
             } else {
