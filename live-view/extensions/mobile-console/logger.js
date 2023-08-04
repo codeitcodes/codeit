@@ -184,15 +184,22 @@ let logger = {
     getMessage: (e) => {
       
       // get error message
-      let errorMessage = e.error.stack;
+      
+      let errorMessage = e;
+      
+      if (e instanceof ErrorEvent) {
+        
+        errorMessage = e.error.stack;
+        
+      }
       
       
       // replace absolute URLs with relative URLs in message
       
       // get origin URL
       const location = logger.cW.location;
-      let originURL = location.origin + location.pathname;
-            
+      let originURL = location.origin + location.pathname + location.search;
+      
       // remove all origin URL occurences from error message
       errorMessage = errorMessage.replaceAll(originURL, '');
       
