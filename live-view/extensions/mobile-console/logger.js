@@ -192,7 +192,7 @@ let logger = {
         let stack = e.error.stack;
         
         // remove error message from stack
-        stack = stack.slice(e.message.length + '\n'.length);
+        stack = stack.slice((e.error.name + ': ' + e.error.message) + '\n'.length);
         
         // split stack
         stack = stack.split('    at ');
