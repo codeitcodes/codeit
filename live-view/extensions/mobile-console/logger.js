@@ -255,6 +255,16 @@ let logger = {
             
             if (entryContext === 'global code') entryContext = '';
             
+            // if the context is eval code
+            // and it has no URL
+            if (entryContext === 'eval code' && entryURL === '') {
+              
+              // add the error's line number and column number
+              // to the URL
+              entryURL = '<anonymous>:' + error.line + ':' + error.column;
+              
+            }
+            
             // if the entry's URL starts with the origin URL
             if (entryURL.startsWith(originURL)) {
               
@@ -307,10 +317,9 @@ let logger = {
           
           // the error's line number and column number
           // aren't available in the stack on Safari,
-          // so we get them from the Error object
+          // so we need to get them from the Error object
           
-          // add line and column to message
-          // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
+          stack = ['<anonymous>:' + error.line + ':' + error.column];
           
         }
         
