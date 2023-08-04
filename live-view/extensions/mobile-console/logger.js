@@ -216,7 +216,7 @@ let logger = {
             if (entry.startsWith(indexURL + ':')) {
               
               // replace its URL
-              stack[index] = entry.replace(originURL, '(index)');
+              stack[index] = entry.replace(indexURL, '(index)');
               
             } else {
               
