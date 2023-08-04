@@ -203,6 +203,9 @@ let logger = {
       // split stack
       stack = stack.split('    at ');
       
+      // remove the first empty item (because of how split works)
+      stack.shift();
+      
       
       if (!isLoggerEval) {
         
