@@ -10,7 +10,7 @@ let WORKER_CACHE_ENABLED = true;
 
 if (isDev) {
   
-  WORKER_CACHE_ENABLED = false;
+  WORKER_CACHE_ENABLED = true;
   
 }
 
