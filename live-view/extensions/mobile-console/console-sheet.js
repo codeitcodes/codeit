@@ -48,7 +48,10 @@ class ConsoleSheet {
     // if logs are of the same type,
     // and aren't of type 'input'
     if (lastLog &&
-        lastLog.classList.contains(log.type) &&
+        (lastLog.classList.contains(log.type) ||
+         (log.type === 'log' &&
+          lastLog.classList.contains('type-log'))
+        ) &&
         log.type !== 'input') {
       
       let lastLogHTML = lastLog.outerHTML;
@@ -289,8 +292,11 @@ class ConsoleSheet {
     }
     
     
+    let logType = log.type;
+    if (logType === 'log') logType = 'type-log';
+    
     const logHTML = `
-    <div class="log ` + escapeHTML(log.type) + `">
+    <div class="log ` + escapeHTML(logType) + `">
       <div class="data-wrapper">
         ` + icon + `
         <div class="data">` + out + `</div>
