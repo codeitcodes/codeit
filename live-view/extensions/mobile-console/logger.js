@@ -190,7 +190,7 @@ let logger = {
       let stack = error.stack;
       
       const message = (error.name + ': ' + error.message);
-            
+      
       
       if (!isSafari) {
           
@@ -200,15 +200,15 @@ let logger = {
         // split stack
         stack = stack.split('\n    at ');
         
+        // remove the first empty item (because of how split works)
+        stack.shift();
+        
       } else {
         
         // split stack
         stack = stack.split('\n');
         
       }
-      
-      // remove the first empty item (because of how split works)
-      stack.shift();
       
       
       if (!isLoggerEval) {
