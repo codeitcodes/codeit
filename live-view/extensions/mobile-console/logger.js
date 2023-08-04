@@ -189,19 +189,55 @@ let logger = {
       
       if (e.error) {
         
-        errorMessage = e.error.stack;
+        let stack = e.error.stack;
+        
+        // remove error message from stack
+        stack = stack.slice(e.message.length + '\n'.length);
+        
+        // split stack
+        stack = stack.split('    at ');
+        
+        
+        // replace absolute URLs with relative URLs in stack
+        
+        // get origin URL
+        const location = logger.cW.location;
+        const originURL = location.origin + location.pathname + location.search;
+        
+        stack.forEach((entry, index) => {
+          
+          // if the entry's URL starts with the origin URL
+          if (entry.startsWith(originURL)) {
+          
+            const entryAfterOrigin = entry.slice(originURL.length);
+            
+            // if the entry's URL is the index
+            if (entryAfterOrigin[0] === ':') {
+              
+              // replace its URL
+              stack[index] = entry.replace(originURL, '(index)');
+              
+            } else {
+              
+              // remove the origin from the entry's URL
+              stack[index] = entry.replace(originURL, '');
+              
+            }
+            
+          }
+          
+        });
+        
+        
+        // rejoin stack
+        stack = stack.join('    at ');
+        
+        // add error message back to stack
+        stack = e.message + '\n' + stack;
+        
+        errorMessage = stack;
         
       }
-      
-      
-      // replace absolute URLs with relative URLs in message
-      
-      // get origin URL
-      const location = logger.cW.location;
-      let originURL = location.origin + location.pathname + location.search;
-      
-      // remove all origin URL occurences from error message
-      errorMessage = errorMessage.replaceAll(originURL, '');
       
       
       // add 'Uncaught' to start of message
