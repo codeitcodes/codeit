@@ -1034,7 +1034,6 @@ body.mobile .sidebar .header .title .branch-icon.active {
   word-wrap: break-word;
   position: relative;
   height: 100%;
-  outline: none;
   user-select: text;
   -webkit-user-select: text;
   overflow: hidden;
@@ -1183,7 +1182,6 @@ body.mobile .sidebar .header .title .branch-icon.active {
   border-radius: 4px;
   padding: 4px;
   margin: -4px;
-  outline: none;
   user-select: text;
   -webkit-user-select: text;
   text-overflow: clip;
@@ -2821,6 +2819,11 @@ body.safari .push-wrapper.checked .push-svg #check {
 
 svg path {
   pointer-events: none;
+}
+
+
+* {
+  outline: none;
 }
 
 
