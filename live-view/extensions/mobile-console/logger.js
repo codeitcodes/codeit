@@ -250,7 +250,7 @@ let logger = {
           
             const entryURLIndex = entry.indexOf('@');
             
-            let entryContext = entry.slice(0, -(entryURLIndex + 1 - entry.length));            
+            let entryContext = entry.slice(0, -(entry.length - entryURLIndex + 1));            
             let entryURL = entry.slice(entryURLIndex + 1);
             
             if (entryContext === 'global code') entryContext = '';
