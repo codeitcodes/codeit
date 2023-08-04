@@ -47,15 +47,19 @@ class ConsoleSheet {
     
     let logsAreOfSameType = false;
     
-    if (log.type !== 'log') {
+    if (lastLog) {
       
-      logsAreOfSameType = lastLog.classList.contains(log.type);
-      
-    } else {
-      
-      // handle the special case for a 'log' type log,
-      // since all logs already have a 'log' class
-      logsAreOfSameType = lastLog.classList.contains('type-log');
+      if (log.type !== 'log') {
+        
+        logsAreOfSameType = lastLog.classList.contains(log.type);
+        
+      } else {
+        
+        // handle the special case for a 'log' type log,
+        // since all logs already have a 'log' class
+        logsAreOfSameType = lastLog.classList.contains('type-log');
+        
+      }
       
     }
     
