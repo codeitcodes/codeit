@@ -204,17 +204,16 @@ let logger = {
         
         // get origin URL
         const location = logger.cW.location;
-        const originURL = location.origin + location.pathname + location.search;
+        const originURL = location.origin + location.pathname;
+        const indexURL = originURL + location.search;
         
         stack.forEach((entry, index) => {
           
           // if the entry's URL starts with the origin URL
           if (entry.startsWith(originURL)) {
-          
-            const entryAfterOrigin = entry.slice(originURL.length);
             
             // if the entry's URL is the index
-            if (entryAfterOrigin[0] === ':') {
+            if (entry.startsWith(indexURL + ':')) {
               
               // replace its URL
               stack[index] = entry.replace(originURL, '(index)');
