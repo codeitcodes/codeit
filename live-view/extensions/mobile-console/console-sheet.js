@@ -1,8 +1,6 @@
 
 // mobile console sheet
 
-// @@todo group identical logs (that are not of type 'input')
-
 // @@check Android devices
 // @@check sidebar title overflow on Windows
 
