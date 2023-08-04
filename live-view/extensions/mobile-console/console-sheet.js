@@ -202,8 +202,10 @@ class ConsoleSheet {
     
     const logHTML = `
     <div class="log ` + escapeHTML(log.type) + `">
-      ` + icon + `
-      <div class="data">` + out + `</div>
+      <div class="data-wrapper">
+        ` + icon + `
+        <div class="data">` + out + `</div>
+      </div>
       ` + actionButtons + `
     </div>
     `;
