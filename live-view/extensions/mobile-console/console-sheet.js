@@ -265,7 +265,7 @@ class ConsoleSheet {
       setAttr(actionWrapper, 'remainingText', newRemainingText);
       
       
-      // update 'jump to bottom' button if needed
+      // update 'jump to bottom' button if necessary
       
       const atBottom = this.isScrolledToBottom();
       
