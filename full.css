@@ -1951,11 +1951,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   background: var(--text-color);
   position: relative;
   top: calc(((39px - 1px - 20px) / 2) - 7px);
-  padding: 10px 5.8px;
+  padding: 0 5.8px;
   box-sizing: border-box;
   border-radius: 20px;
+  height: 20px;
   min-width: 20px;
-  min-height: 20px;
   transition: .18s ease-out;
   transition-property: box-shadow, filter;
 }
