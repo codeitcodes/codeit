@@ -274,8 +274,12 @@ let logger = {
               
             }
             
+            // if entry context exists,
+            // add a seperating space at its end
+            if (entryContext) entryContext += ' ';
+            
             // restructure entry
-            stack[index] = entryContext + ' (' + entryURL + ')';
+            stack[index] = entryContext + '(' + entryURL + ')';
             
           });
           
