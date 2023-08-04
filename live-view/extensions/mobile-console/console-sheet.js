@@ -57,11 +57,11 @@ class ConsoleSheet {
         <div class="duplicate-badge">2</div>
       `.trim();
       
-      const currLogData = logHTML.trim().split('<div class="data">')[1];
-      const lastLogData = lastLogHTML.trim().split('<div class="data">')[1];
+      const currLogDataAndActions = logHTML.trim().split('<div class="data">')[1];
+      const lastLogDataAndActions = lastLogHTML.trim().split('<div class="data">')[1];
       
       // if the current and last logs are identical
-      if (currLogData === lastLogData) {
+      if (currLogDataAndActions === lastLogDataAndActions) {
         
         const duplicateBadge = lastLog.querySelector('.duplicate-badge');
         
@@ -76,7 +76,15 @@ class ConsoleSheet {
             
             currValue = Number(currValue);
             
-            duplicateBadge.textContent = currValue + 1;
+            if (currValue <= 999) {
+            
+              duplicateBadge.textContent = currValue + 1;
+              
+            } else {
+              
+              duplicateBadge.textContent = '999+';
+              
+            }
             
           }
           
