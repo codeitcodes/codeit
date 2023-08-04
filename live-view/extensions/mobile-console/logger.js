@@ -198,10 +198,10 @@ let logger = {
       
       
       // remove error message from stack
-      stack = stack.slice(message.length + '\n'.length);
+      stack = stack.slice(message.length);
       
       // split stack
-      stack = stack.split('    at ');
+      stack = stack.split('\n    at ');
       
       // remove the first empty item (because of how split works)
       stack.shift();
@@ -258,10 +258,10 @@ let logger = {
       stack.unshift('');
       
       // rejoin stack
-      stack = stack.join('    at ');
-        
+      stack = stack.join('\n    at ');
+      
       // add error message back to stack
-      stack = message + '\n' + stack;
+      stack = message + stack;
       
       errorMessage = stack;
       
