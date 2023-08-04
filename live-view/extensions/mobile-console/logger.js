@@ -107,7 +107,7 @@ let logger = {
       }
       
       
-      throw errorMessage;
+      throw errorMessage.slice('Uncaught '.length);
       
     }
     
