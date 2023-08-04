@@ -273,15 +273,11 @@ let logger = {
               
             }
             
-            // if entry context exists,
-            // add a seperating space at its end
-            if (entryContext !== '') entryContext += ' ';
-            
             // if entry URL and entry context exist,
             // surround the entry URL with brackets
             if (entryURL !== '' && entryContext !== '') {
               
-              entryURL = '(' + entryURL + ')';
+              entryURL = ' (' + entryURL + ')';
               
             }
             
