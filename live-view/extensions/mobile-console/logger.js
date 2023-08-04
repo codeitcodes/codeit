@@ -187,7 +187,7 @@ let logger = {
       
       let errorMessage = e;
       
-      if (e instanceof ErrorEvent) {
+      if (e.error) {
         
         errorMessage = e.error.stack;
         
