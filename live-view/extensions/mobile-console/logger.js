@@ -94,10 +94,6 @@ let logger = {
       
       const errorMessage = logger.errorEvent.getMessage(e, true);
       
-      // add line and column to message
-      //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
-      
-      
       // propagate errors from context window
       if (window !== contextWindow) {
         
@@ -106,8 +102,8 @@ let logger = {
         
       }
       
-      
-      throw errorMessage.slice('Uncaught '.length);
+      throw e;
+      //throw errorMessage.slice('Uncaught '.length);
       
     }
     
@@ -195,6 +191,10 @@ let logger = {
       let stack = error.stack;
       
       const message = (error.name + ': ' + error.message);
+      
+      
+      // add line and column to message
+      //@@ safari error parsing // errorMessage += '\n    at <anonymous>:' + e.line + ':' + e.column;
       
       
       // remove error message from stack
