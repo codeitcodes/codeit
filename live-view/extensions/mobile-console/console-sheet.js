@@ -455,16 +455,9 @@ class ConsoleSheet {
     });
     
     
-    // on click of close button, background, or live view header, hide
+    // on click of close button or live view header, hide
     
     this.el.close.addEventListener('click', () => {
-
-      // hide live view console
-      this.hide();
-
-    });
-
-    this.el.bg.addEventListener('click', () => {
 
       // hide live view console
       this.hide();
@@ -830,9 +823,7 @@ class ConsoleSheet {
     jumpToBottom: document.querySelector('.console-sheet .jump-to-bottom'),
     footer: document.querySelector('.console-sheet .footer'),
     input: document.querySelector('.console-sheet .footer .input'),
-    'return': document.querySelector('.console-sheet .footer .return'),
-
-    bg: document.querySelector('.sheet-background')
+    'return': document.querySelector('.console-sheet .footer .return')
 
   };
   
