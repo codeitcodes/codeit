@@ -224,23 +224,11 @@ let logger = {
             
           stack.forEach((entry, index) => {
             
-            // if the entry's URL starts with the origin URL
-            if (entry.startsWith(originURL)) {
-              
-              // if the entry's URL is the index
-              if (entry.startsWith(indexURL + ':')) {
-                
-                // replace its URL
-                stack[index] = entry.replace(indexURL, '(index)');
-                
-              } else {
-                
-                // remove the origin from the entry's URL
-                stack[index] = entry.replace(originURL, '');
-                
-              }
-              
-            }
+            // replace index URLs
+            stack[index] = entry.replaceAll(indexURL, '(index)');
+            
+            // remove absolute URLs' origin
+            stack[index] = entry.replaceAll(originURL, '');
             
           });
           
@@ -265,23 +253,15 @@ let logger = {
               
             }
             
-            // if the entry's URL starts with the origin URL
-            if (entryURL.startsWith(originURL)) {
-              
-              // if the entry's URL is the index
-              if (entryURL.startsWith(indexURL + ':')) {
-                
-                // replace its URL
-                entryURL = entryURL.replace(indexURL, '(index)');
-                
-              } else {
-                
-                // remove the origin from the entry's URL
-                entryURL = entryURL.replace(originURL, '');
-                
-              }
-              
-            }
+            
+            // replace index URLs
+            entryURL = entryURL.replaceAll(indexURL, '(index)');
+            entryContext = entryContext.replaceAll(indexURL, '(index)');
+            
+            // remove absolute URLs' origin
+            entryURL = entryURL.replaceAll(originURL, '');
+            entryContext = entryContext.replaceAll(originURL, '');
+            
             
             // if both entry URL and entry context exist,
             // surround the entry URL with brackets
