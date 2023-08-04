@@ -254,7 +254,6 @@ let logger = {
             let entryURL = entry.slice(entryURLIndex + 1);
             
             if (entryContext === 'global code') entryContext = '';
-            if (entryContext === 'eval code') entryContext = 'eval';
             
             // if the entry's URL starts with the origin URL
             if (entryURL.startsWith(originURL)) {
