@@ -2009,6 +2009,10 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   opacity: .72;
 }
 
+.console-sheet .logs .log:is(.warn, .error, .debug) .duplicate-badge {
+  opacity: .72;
+}
+
 .console-sheet .logs .log:is(.warn, .error, .debug):has(> .actions .action.more) .data::after,
 .console-sheet .logs .log:is(.warn, .error, .debug) .actions .seperator {
   color: inherit;
