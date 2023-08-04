@@ -240,7 +240,7 @@ let logger = {
       }
       
       
-      // add 'Uncaught' to start of message
+      // add 'Uncaught' to start of error message
       errorMessage = 'Uncaught ' + errorMessage;
       
       
