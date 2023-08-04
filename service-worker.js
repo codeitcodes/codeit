@@ -1,5 +1,5 @@
 
-// update worker name when updating worker
+// update worker name when updating cached files
 const WORKER_NAME = 'codeit-worker-v762';
 
 
