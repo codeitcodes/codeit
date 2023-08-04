@@ -40,13 +40,65 @@ class ConsoleSheet {
     // get log HTML
     const logHTML = this.getLogHTML(log);
     
+    
+    // group identical consecutive logs
+    
+    const lastLog = logWrapper.querySelector('.log:last-of-type');
+    
+    // don't group input logs
+    if (log.type !== 'input') {
+      
+      const lastLogHTML = lastLog.outerHTML;
+      
+      // if the logs are identical
+      if (logHTML === lastLogHTML) {
+        
+        const duplicateBadge = lastLog.querySelector('.duplicate-badge');
+        
+        // if log already has duplicates
+        if (duplicateBadge) {
+          
+          // bump its 'duplicate' counter
+          
+          let currValue = duplicateBadge.textContent;
+          
+          if (currValue !== '999+') {
+            
+            currValue = Number(currValue);
+            
+            duplicateBadge.textContent = currValue + 1;
+            
+          }
+          
+        } else {
+          
+          // replace its icon with a new 'duplicate' badge
+          lastLog.querySelector('.icon').outerHTML = `
+          <div class="duplicate-badge">2</div>
+          `;
+          
+        }
+        
+        return;
+        
+      }
+      
+    }
+    
+    
     // add log to HTML
     // note: not using innerHTML because we want
     // to keep the action event listeners
     logWrapper.insertAdjacentHTML('beforeend', logHTML);
     
-    logWrapper.classList.remove('empty');
-
+    
+    if (logWrapper.classList.contains('empty')) {
+      
+      // remove 'empty' class from log wrapper
+      logWrapper.classList.remove('empty');
+      
+    }
+    
     
     // if was scrolled to bottom
     if (scrolledToBottom) {
@@ -59,7 +111,7 @@ class ConsoleSheet {
     
     // add log action listeners
     
-    const lastLog = this.el.logWrapper.querySelector('.log:last-of-type');
+    lastLog = logWrapper.querySelector('.log:last-of-type');
     
     this.addLogActionListeners(lastLog);
     
