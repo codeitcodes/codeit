@@ -1908,10 +1908,14 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   padding: 7px 21px;
   font-family: var(--mono-font-family);
   line-height: 1.5;
-  color: #a6c3d4;
-  border-bottom: 1px solid hsl(228deg 14% 17%);
   user-select: text;
   -webkit-user-select: text;
+  --text-color: #a6c3d4;
+  --background-color: var(--deep-midnight-blue);
+  --border-color: hsl(228deg 14% 17%);
+  color: var(--text-color);
+  background: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .console-sheet .logs .log.no-border-bottom {
@@ -1936,15 +1940,29 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   top: calc(((39px - 1px - 18px) / 2) - 7px);
 }
 
-.console-sheet .logs .log:is(.warn, .error, .debug) .icon {
-  color: inherit;
-  opacity: .72;
+.console-sheet .logs .log .duplicate-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--background-color);
+  background: var(--text-color);
+  position: relative;
+  top: calc(((39px - 1px - 20px) / 2) - 7px);
+  padding: 10px 5.8px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  transition: .18s ease-out;
+  transition-property: box-shadow, filter;
 }
 
-.console-sheet .logs .log:is(.warn, .error, .debug):has(> .actions .action.more) .data::after,
-.console-sheet .logs .log:is(.warn, .error, .debug) .actions .seperator {
-  color: inherit;
-  opacity: .5;
+.console-sheet .logs .log .duplicate-badge.animating {
+  box-shadow: 0 0 0 1.75px var(--text-color);
+  filter: saturate(1.4) brightness(1.4);
+  transition: none;
 }
 
 .console-sheet .logs .log .data {
@@ -1962,29 +1980,39 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   white-space: nowrap;
 }
 
-.console-sheet .logs .log:first-of-type:is(.warn, .error) {
-  border-top-width: 1px;
-  border-top-style: solid;
-}
-
 .console-sheet .logs .log.warn {
-  color: hsl(15deg 57% 76%); /* #e5b09f */
-  background: hsl(15deg 57% 76% / 4%);
-  box-shadow: inset 0 0 0 1px hsl(15deg 57% 76% / 11%);
-  border-color: hsl(0deg 8% 17%);
-  box-shadow: 0 -1px 0 0 hsl(0deg 8% 17%);
+  --text-color: hsl(15deg 57% 76%);
+  --background-color: hsl(15deg 57% 76% / 4%);
+  --border-color: hsl(0deg 8% 17%); /* hsl(15deg 57% 76% / 11%) */
 }
 
 .console-sheet .logs .log.error {
-  color: hsl(354deg 61% 73%); /* #e49199 */
-  background: hsl(354deg 61% 73% / 4%);
-  box-shadow: inset 0 0 0 1px hsl(354deg 61% 73% / 11%);
-  border-color: hsl(337deg 16% 16%);
-  box-shadow: 0 -1px 0 0 hsl(337deg 16% 16%);
+  --text-color: hsl(354deg 61% 73%);
+  --background-color: hsl(354deg 61% 73% / 4%);
+  --border-color: hsl(337deg 16% 16%); /* hsl(354deg 61% 73% / 11%) */
 }
 
 .console-sheet .logs .log.debug {
-  color: hsl(220deg 100% 65%);
+  --text-color: hsl(220deg 100% 65%);
+}
+
+.console-sheet .logs .log:is(.warn, .error) {
+  box-shadow: 0 -1px 0 0 var(--border-color);
+}
+
+.console-sheet .logs .log:first-of-type:is(.warn, .error) {
+  border-top: 1px solid var(--border-color);
+}
+
+.console-sheet .logs .log:is(.warn, .error, .debug) .icon {
+  color: inherit;
+  opacity: .72;
+}
+
+.console-sheet .logs .log:is(.warn, .error, .debug):has(> .actions .action.more) .data::after,
+.console-sheet .logs .log:is(.warn, .error, .debug) .actions .seperator {
+  color: inherit;
+  opacity: .5;
 }
 
 .console-sheet .logs .log.clear .data::before {
