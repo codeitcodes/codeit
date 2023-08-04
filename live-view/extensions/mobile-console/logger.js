@@ -249,8 +249,12 @@ let logger = {
           stack.forEach((entry, index) => {
           
             const entryURLIndex = entry.indexOf('@');
-            const entryURL = entry.slice(entryURLIndex + 1);
-            const remainingEntry = entry.slice(0, -(entryURLIndex + 1 - entry.length));
+            
+            let entryContext = entry.slice(0, -(entryURLIndex + 1 - entry.length));            
+            let entryURL = entry.slice(entryURLIndex + 1);
+            
+            if (entryContext === 'global code') entryContext = '';
+            if (entryContext === 'eval code') entryContext = 'eval';
             
             // if the entry's URL starts with the origin URL
             if (entryURL.startsWith(originURL)) {
@@ -259,16 +263,19 @@ let logger = {
               if (entryURL.startsWith(indexURL + ':')) {
                 
                 // replace its URL
-                stack[index] = remainingEntry + entryURL.replace(indexURL, '(index)');
+                entryURL = entryURL.replace(indexURL, '(index)');
                 
               } else {
                 
                 // remove the origin from the entry's URL
-                stack[index] = remainingEntry + entryURL.replace(originURL, '');
+                entryURL = entryURL.replace(originURL, '');
                 
               }
               
             }
+            
+            // restructure entry
+            stack[index] = entryContext + ' (' + entryURL + ')';
             
           });
           
@@ -306,17 +313,8 @@ let logger = {
       // re-add the first empty item (because of how split works)
       stack.unshift('');
       
-      if (!isSafari) {
-        
-        // rejoin stack
-        stack = stack.join('\n    at ');
-        
-      } else {
-        
-        // rejoin stack
-        stack = '\n' + stack.join('\n');
-        
-      }
+      // rejoin stack
+      stack = stack.join('\n    at ');
       
       
       // add error message back to stack
