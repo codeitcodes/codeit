@@ -1930,6 +1930,7 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 .console-sheet .logs .log .data-wrapper {
   display: flex;
   flex-flow: row;
+  flex: 1;
 }
 
 .console-sheet .logs .log .icon {
