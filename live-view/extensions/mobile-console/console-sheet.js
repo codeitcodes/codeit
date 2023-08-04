@@ -59,7 +59,7 @@ class ConsoleSheet {
       
       // temporarily remove the 'duplicate' badge from the last log's HTML,
       // so we can compare it to the current log's HTML
-      lastLogHTML.replace(duplicateBadgeHTML, '');
+      lastLogHTML = lastLogHTML.replace(duplicateBadgeHTML, '');
       
       // if the current and last logs are identical
       if (logHTML.trim() === lastLogHTML) {
