@@ -1740,7 +1740,7 @@ body.mobile .context-menu {
 .live-view-menu {
   left: 7px;
   top: 44px;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 24%), inset 0 0 0 1px hsl(228deg 13% 19%);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 24%), inset 0 0 0 1px hsl(228deg 9% 19%);
   z-index: 1001;
 }
 
@@ -1923,12 +1923,17 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   -webkit-user-select: none;
 }
 
+.console-sheet .logs .log .data-wrapper {
+  display: flex;
+  flex-flow: row;
+}
+
 .console-sheet .logs .log .icon {
   color: #636d83;
-  width: 18px;
+  width: 20px; /* for optical alignment with 'duplicate' badge */
   height: 18px;
-  position: absolute;
-  margin-top: 3px;
+  position: relative;
+  top: calc(((39px - 1px - 18px) / 2) - 7px);
 }
 
 .console-sheet .logs .log:is(.warn, .error, .debug) .icon {
@@ -1943,15 +1948,12 @@ body.safari .console-sheet:has(> .footer .input:focus) {
 }
 
 .console-sheet .logs .log .data {
-  flex: 1;
-  margin-left: calc(10.5px + 18px);
-  background: transparent;
-  padding: 0;
-  scroll-padding: 0;
-  width: auto;
-  height: auto;
-  overflow: visible;
+  margin-left: 10.5px;
   min-height: calc(39px - (7px * 2) - 1px);
+}
+
+.console-sheet .logs .log:not(:has(.icon)) .data {
+  margin-left: calc(10.5px + 20px);
 }
 
 .console-sheet .logs .log:has(> .actions .action.more) .data::after {
