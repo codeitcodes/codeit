@@ -248,10 +248,10 @@ let logger = {
           
           stack.forEach((entry, index) => {
           
-            const entryURLIndex = entry.indexOf('@');
+            const entryURLIndex = entry.indexOf('@') + 1;
             
-            let entryContext = entry.slice(0, -(entry.length - entryURLIndex + 1));            
-            let entryURL = entry.slice(entryURLIndex + 1);
+            let entryContext = entry.slice(0, -(entry.length - entryURLIndex));            
+            let entryURL = entry.slice(entryURLIndex);
             
             if (entryContext === 'global code') entryContext = '';
             if (entryContext === 'eval code') entryContext = 'eval';
