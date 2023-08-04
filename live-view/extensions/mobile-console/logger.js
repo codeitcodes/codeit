@@ -183,62 +183,63 @@ let logger = {
     
     getMessage: (e) => {
       
+      let error = e;
+      
+      if (e.error) error = e.error;
+      
+      
       // get error message
       
-      let errorMessage = e;
+      let errorMessage = '';
       
-      if (e.error) {
+      let stack = error.stack;
+      
+      const message = (error.name + ': ' + error.message);
+      
+      // remove error message from stack
+      stack = stack.slice(message.length + '\n'.length);
+      
+      // split stack
+      stack = stack.split('    at ');
+      
+      
+      // replace absolute URLs with relative URLs in stack
+      
+      // get origin URL
+      const location = logger.cW.location;
+      const originURL = location.origin + location.pathname;
+      const indexURL = originURL + location.search;
+      
+      stack.forEach((entry, index) => {
         
-        let stack = e.error.stack;
-        
-        const message = (e.error.name + ': ' + e.error.message);
-        
-        // remove error message from stack
-        stack = stack.slice(message.length + '\n'.length);
-        
-        // split stack
-        stack = stack.split('    at ');
-        
-        
-        // replace absolute URLs with relative URLs in stack
-        
-        // get origin URL
-        const location = logger.cW.location;
-        const originURL = location.origin + location.pathname;
-        const indexURL = originURL + location.search;
-        
-        stack.forEach((entry, index) => {
+        // if the entry's URL starts with the origin URL
+        if (entry.startsWith(originURL)) {
           
-          // if the entry's URL starts with the origin URL
-          if (entry.startsWith(originURL)) {
+          // if the entry's URL is the index
+          if (entry.startsWith(indexURL + ':')) {
             
-            // if the entry's URL is the index
-            if (entry.startsWith(indexURL + ':')) {
-              
-              // replace its URL
-              stack[index] = entry.replace(indexURL, '(index)');
-              
-            } else {
-              
-              // remove the origin from the entry's URL
-              stack[index] = entry.replace(originURL, '');
-              
-            }
+            // replace its URL
+            stack[index] = entry.replace(indexURL, '(index)');
+            
+          } else {
+            
+            // remove the origin from the entry's URL
+            stack[index] = entry.replace(originURL, '');
             
           }
           
-        });
+        }
         
-        
-        // rejoin stack
-        stack = stack.join('    at ');
-        
-        // add error message back to stack
-        stack = message + '\n' + stack;
-        
-        errorMessage = stack;
-        
-      }
+      });
+      
+      
+      // rejoin stack
+      stack = stack.join('    at ');
+      
+      // add error message back to stack
+      stack = message + '\n' + stack;
+      
+      errorMessage = stack;
       
       
       // add 'Uncaught' to start of error message
