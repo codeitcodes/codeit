@@ -264,6 +264,13 @@ class ConsoleSheet {
       
       setAttr(actionWrapper, 'remainingText', newRemainingText);
       
+      
+      // update 'jump to bottom' button if needed
+      
+      const atBottom = this.isScrolledToBottom();
+      
+      this.el.jumpToBottom.classList.toggle('visible', !atBottom);
+      
     } else if (actionEl.classList.contains('copy')) {
       
       const logEl = actionWrapper.parentElement;
