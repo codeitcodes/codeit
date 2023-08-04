@@ -79,6 +79,7 @@ class ConsoleSheet {
           
         }
         
+        // don't render the new log
         return;
         
       }
