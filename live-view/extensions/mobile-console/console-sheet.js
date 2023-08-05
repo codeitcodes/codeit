@@ -576,12 +576,17 @@ class ConsoleSheet {
       
       if (heightDelta > 0 && wasScrolledToBottom) {
         
-        this.scrollToBottom();
-        
-        if (isSafari) {
+        if (!isSafari) {
+          
+          this.scrollToBottom();
+          
+        } else {
           
           // prevent fixing Safari scroll position, because we scrolled on purpose
           safariLastInputTime = 0;
+          
+          this.scrollToBottom();
+          
           safariLastScrollPos = logWrapper.scrollTop;
           
         }
