@@ -582,6 +582,7 @@ class ConsoleSheet {
           
           // prevent fixing Safari scroll position, because we scrolled on purpose
           safariLastInputTime = 0;
+          safariLastScrollPos = logWrapper.scrollTop;
           
         }
         
