@@ -1361,12 +1361,15 @@ body.mobile .sidebar .header .title .branch-icon.active {
   flex-flow: column;
   box-shadow: inset 0 -5px 0 0 hsl(223deg 28% 22%);
   box-sizing: border-box;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding: calc(var(--spacing-1) * 8.35) 10.5px;
 }
 
 body.mobile .sidebar .intro {
   margin-left: calc(-1 * env(safe-area-inset-left, 0px));
+}
+
+.sidebar .intro * {
+  flex-shrink: 0;
 }
 
 .sidebar .files .intro {
@@ -1411,6 +1414,10 @@ body.mobile .sidebar .intro {
   line-height: 1.5;
 }
 
+.sidebar .intro .subtitle:active {
+  opacity: .5;
+}
+
 .sidebar .intro .subtitle sup {
   margin-left: 3.5px;
   margin-right: calc(-7px * 2 + 3.5px);
@@ -1435,6 +1442,12 @@ body.mobile .sidebar .intro {
 .sidebar .intro .subtitle b {
   font-weight: 600;
   color: rgba(241,241,242,0.72);
+}
+
+.sidebar .intro .large-spacer {
+  height: calc(var(--spacing-1) * 10.5);
+  min-height: calc(var(--spacing-1) * 6.5);
+  flex-shrink: 1;
 }
 
 .roundbutton {
