@@ -1766,7 +1766,7 @@ body:not(.mobile) .live-view-menu {
 body:not(.safari) .live-view-menu .icon.share path.ios,
 body.safari .live-view-menu .icon.share path:not(.ios),
 body:not(.safari) .bottom-wrapper .live-buttons .options .share-icon path.ios,
-body.safari .bottom-wrapper .live-buttons .options .share-icon path:not(.ios), {
+body.safari .bottom-wrapper .live-buttons .options .share-icon path:not(.ios) {
   opacity: 0;
 }
 
