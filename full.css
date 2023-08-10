@@ -1753,7 +1753,7 @@ body.mobile .context-menu {
 .live-view-menu {
   left: 7px;
   top: 44px;
-  margin-top: calc(7px * 0.5);
+  margin-top: calc(var(--spacing-1) * 0.5);
   box-shadow: 0 8px 16px rgb(0 0 0 / 24%), 0 0 0 1px #313236; /* rgb(255 255 255 / 15%) */
   z-index: 1001;
 }
