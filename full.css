@@ -304,7 +304,7 @@ body.notransition .bottom-wrapper {
   opacity: .5;
 }
 
-.live-buttons .options :is(path, g) {
+.live-buttons .options :is(.options-icon, .share-icon) {
   opacity: 0;
 }
 
