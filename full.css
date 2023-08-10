@@ -1762,16 +1762,12 @@ body:not(.mobile) .live-view-menu {
   display: none;
 }
 
-.live-view-menu .icon.share path.ios {
-  opacity: 0;
-}
 
-body.safari .live-view-menu .icon.share path {
+body:not(.safari) .live-view-menu .icon.share path.ios,
+body.safari .live-view-menu .icon.share path,
+body:not(.safari) .bottom-wrapper .live-buttons .options .share-icon path.ios,
+body.safari .bottom-wrapper .live-buttons .options .share-icon path, {
   opacity: 0;
-}
-
-body.safari .live-view-menu .icon.share path.ios {
-  opacity: 1;
 }
 
 
