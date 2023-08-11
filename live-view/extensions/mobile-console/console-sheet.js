@@ -2,7 +2,6 @@
 // mobile console sheet
 
 // @@check Android devices
-// @@check sidebar title overflow on Windows
 
 class ConsoleSheet {
   
