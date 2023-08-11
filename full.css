@@ -1881,7 +1881,7 @@ body:not(.mobile) .sheet {
 
 
 .console-sheet.visible {
-  box-shadow: 0 -8px 16px rgb(0 0 0 / 24%), 0 0 0 1px hsl(228deg 5% 24.75%);
+  box-shadow: 0 -8px 16px rgb(0 0 0 / 24%), 0 0 0 1px hsl(230deg 5.08% 23.14%);
 }
 
 body.safari .console-sheet {
