@@ -1,8 +1,6 @@
 
 // mobile console sheet
 
-// @@check Android devices
-
 class ConsoleSheet {
   
   options = {
