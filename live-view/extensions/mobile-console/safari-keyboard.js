@@ -170,7 +170,7 @@ class SafariKeyboard {
   
   changeWrapperBottom(bottom) {
     
-    document.body.style.setProperty('--safari-keyboard-height', bottom + 'px');
+    document.body.style.setProperty('--keyboard-height', bottom + 'px');
     
   }
   
