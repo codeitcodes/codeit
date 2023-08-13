@@ -180,13 +180,8 @@ function checkBottomFloat() {
 
   } else if (document.activeElement !== cd) { // if scrolled up
 
-    // if passed threshold
-    if ((lastScrollTop - st) > 20) {
-
-      // show bottom float
-      bottomWrapper.classList.remove('hidden');
-
-    }
+    // show bottom float
+    bottomWrapper.classList.remove('hidden');
 
   }
 

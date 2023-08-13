@@ -1,5 +1,5 @@
 
-// github login
+// github sign-in
 
 window.addEventListener('load', async () => {
 
@@ -58,7 +58,7 @@ window.addEventListener('load', async () => {
     
   }
 
-  loginButton.addEventListener('click', openGitHubLogin);
+  signInButton.addEventListener('click', openGitHubSignIn);
 
   window.addEventListener('message', async (event) => {
     
@@ -107,7 +107,7 @@ window.addEventListener('load', async () => {
       startLoading();
       
       // show message
-      showMessage('Logging in...', -1);
+      showMessage('Signing in...', -1);
       
       
       // update legacy workflow permission
@@ -126,7 +126,7 @@ window.addEventListener('load', async () => {
       
       
       // hide message
-      if (messageEl.textContent === 'Logging in...') {
+      if (messageEl.textContent === 'Signing in...') {
         hideMessage();
       }
       
@@ -201,7 +201,7 @@ window.addEventListener('load', async () => {
     
     body.classList.add('loaded');
     
-    showMessage('Logging in...', -1);
+    showMessage('Signing in...', -1);
     
     
     // update legacy workflow permission
@@ -220,7 +220,7 @@ window.addEventListener('load', async () => {
     
     
     // hide message
-    if (messageEl.textContent === 'Logging in...') {
+    if (messageEl.textContent === 'Signing in...') {
       hideMessage();
     }
     
@@ -232,10 +232,10 @@ window.addEventListener('load', async () => {
 });
 
 
-let openGitHubLoginWindow;
-let openGitHubLoginListener;
+let openGitHubSignInWindow;
+let openGitHubSignInListener;
 
-function openGitHubLogin() {
+function openGitHubSignIn() {
 
   return new Promise(resolve => {
 
@@ -247,20 +247,20 @@ function openGitHubLogin() {
 
     } else {
 
-      if (openGitHubLoginWindow) {
+      if (openGitHubSignInWindow) {
         
-        openGitHubLoginWindow.close();
-        window.removeEventListener('message', openGitHubLoginListener);
+        openGitHubSignInWindow.close();
+        window.removeEventListener('message', openGitHubSignInListener);
         
       }
       
-      openGitHubLoginListener = window.addEventListener('message', (event) => {
+      openGitHubSignInListener = window.addEventListener('message', (event) => {
 
         // if received a git code
         if (event.origin === window.location.origin &&
             event.data.startsWith('gitCode=')) {
 
-          window.removeEventListener('message', openGitHubLoginListener);
+          window.removeEventListener('message', openGitHubSignInListener);
 
           resolve();
 
@@ -268,8 +268,8 @@ function openGitHubLogin() {
 
       });
 
-      // open login window
-      openGitHubLoginWindow = window.open(authURL, 'Login with GitHub', 'height=575,width=575');
+      // open sign-in window
+      openGitHubSignInWindow = window.open(authURL, 'Sign in with GitHub', 'height=575,width=575');
 
     }
     

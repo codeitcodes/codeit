@@ -3,10 +3,6 @@
 // service worker/client communication channel
 
 
-// update worker name when updating worker
-const WORKER_NAME = 'codeit-worker-v658';
-
-
 // internal paths
 const INTERNAL_PATHS = {
 
@@ -21,10 +17,12 @@ const INTERNAL_PATHS = {
   clientId: 'https://codeit.codes/worker/getClientId',
   clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
-}
+};
 
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+const isDev = (self.origin === 'https://dev.codeit.codes');
 
 
 // key                : value
@@ -177,8 +175,6 @@ workerChannel.addEventListener('message', (event) => {
   if (event.data.type === 'hello') workerChannel.postMessage('hello!');
   
 });
-
-if (self.origin === 'https://dev.codeit.codes') self.registration.update();
 
 
 // handle fetch request

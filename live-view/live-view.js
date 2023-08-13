@@ -369,72 +369,97 @@ async function setupLiveView() {
 
 // open live view when swiped up on bottom float
 function addBottomSwipeListener() {
-
-  let yBoundary = 30;
-
-  let currentY;
-  let initialY;
-  let yOffset = 0;
-
-  let active = false;
-  let click = false;
-  let swiped = false;
-
-  let direction = 0;
   
-  bottomWrapper.addEventListener('touchstart', dragStart, false);
-  bottomWrapper.addEventListener('touchend', dragEnd, false);
-  bottomWrapper.addEventListener('touchmove', drag, false);
+  // init Draggable
+  bottomWrapper.Draggable = new Draggable(bottomWrapper);
   
-  function dragStart(e) {
-
-    if (e.type === 'touchstart') {
-      initialY = e.touches[0].clientY - yOffset;
-    } else {
-      initialY = e.clientY - yOffset;
-    }
-
-    active = true;
-    click = true;
-    swiped = false;
-
-  }
-
-  function dragEnd(e) {
-
-    initialY = currentY;
-
-    const clickedOnOptions = (e.target === liveButtonOptions);
-
-    // if clicked and bottom float is expanded
-    if (click && bottomWrapper.classList.contains('expanded')) {
-
-      // if did not click on options button
-      if (!clickedOnOptions) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
+  const draggable = bottomWrapper.Draggable;
+  
+  
+  // on swipe
+  draggable.on('swipe', (e) => {
+    
+    const isMediaViewer = bottomWrapper.classList.contains('file-open');
+    
+    // if live view is in media viewer mode, return
+    if (isMediaViewer) return;
+    
+    
+    const isExpanded = bottomWrapper.classList.contains('expanded');
+    
+    if (e.direction == 'up') {
+    
+      // if swiped up and bottom float isn't expanded
+      if (!isExpanded) {
+        
+        // expand bottom float
+        bottomWrapper.classList.add('expanded');
+    
+        // if live view is closed, open it
+        if (!liveViewToggle) toggleLiveView(selectedFile);
+    
+      }
+    
+    } else if (e.direction == 'down') {
+    
+      // if swiped down and bottom float is expanded
+      if (isExpanded) {
+        
         // retract bottom float
         bottomWrapper.classList.remove('expanded');
-
-        toggleLiveView(selectedFile);
-
+        
+        // if live view is open, close it
+        if (liveViewToggle) toggleLiveView(selectedFile);
+        
       }
-
-    } else if (click) { // if clicked and bottom float not expanded
+    
+    }
+    
+  });
+  
+  
+  // on click
+  bottomWrapper.addEventListener('click', (e) => {
+    
+    const clickedOnOptions = (e.target === liveButtonOptions);
+    
+    const isExpanded = bottomWrapper.classList.contains('expanded');
+    
+    // if bottom float is expanded
+    if (isExpanded) {
+    
+      // if did not click on options button
+      if (!clickedOnOptions) {
+    
+        // retract bottom float
+        bottomWrapper.classList.remove('expanded');
+        
+        // if live view is open, close it
+        if (liveViewToggle) toggleLiveView(selectedFile);
+        
+        
+        if (consoleSheet.isVisible()) {
+  
+          // hide live view console
+          consoleSheet.hide();
+  
+        }
+    
+      }
+    
+    } else { // if bottom float not expanded
       
       // if clicked the bottom float's swipe hitbox
       // but not the bottom float itself
       if (e.target === bottomWrapper) {
-                
+        
         // get caret range from point
         
         // disable bottom float hitbox
         bottomWrapper.style.pointerEvents = 'none';
         
-        const pointX = e.changedTouches[0].clientX,
-              pointY = e.changedTouches[0].clientY;
+        const pointX = e.clientX,
+              pointY = e.clientY;
         
         const range = document.caretRangeFromPoint(pointX, pointY);
         
@@ -456,77 +481,8 @@ function addBottomSwipeListener() {
       }
       
     }
-
-    yOffset = 0;
-    active = false;
-    swiped = false;
-
-  }
-
-  function drag(e) {
-
-    if (active) {
-
-      e.preventDefault();
-
-      if (e.type === 'touchmove') {
-        currentY = e.touches[0].clientY - initialY;
-      } else {
-        currentY = e.clientY - initialY;
-      }
-
-      yOffset = currentY;
-
-      // check swipe direction
-      if (yOffset < 0) {
-        direction = 'up';
-      } else {
-        direction = 'down';
-      }
-
-      // check if passed swipe boundary
-      if (Math.abs(yOffset) > yBoundary
-          || swiped) {
-        swiped = true;
-      } else {
-        swiped = false;
-      }
-
-      if (direction == 'up') {
-
-        // if swiped up and bottom float isn't expanded
-        if (swiped && !bottomWrapper.classList.contains('expanded')
-            && !bottomFloat.classList.contains('file-open')) {
-
-          // expand bottom float
-          bottomWrapper.classList.add('expanded');
-
-          // if live view is closed
-          if (!liveViewToggle) toggleLiveView(selectedFile);
-
-        }
-
-      } else if (direction == 'down') {
-
-        // if swiped down and bottom float is expanded
-        if (swiped && bottomWrapper.classList.contains('expanded')
-            && !bottomFloat.classList.contains('file-open')) {
-
-          // retract bottom float
-          bottomWrapper.classList.remove('expanded');
-
-          // if live view is open
-          if (liveViewToggle) toggleLiveView(selectedFile);
-          
-        }
-
-      }
-
-      click = false;
-
-    }
-
-  }
+    
+  });
 
 }
 
@@ -551,17 +507,21 @@ if (isMobile) {
   addBottomSwipeListener();
   
   
-  // live view mobile menu
-  
+  // when clicked on options button
   liveButtonOptions.addEventListener('click', () => {
     
-    shareLiveViewLink();
-    
-    /*
-    // if clicked on options button, toggle menu
-    liveViewMenu.classList.toggle('visible');
-    liveButtonOptions.classList.toggle('active');
-    */
+    // if options icon is visible
+    if (liveButtonOptions.classList.contains('options-visible')) {
+      
+      // toggle menu
+      liveViewMenu.classList.toggle('visible');
+      liveButtonOptions.classList.toggle('active');
+      
+    } else { // if share icon is visible
+      
+      shareLiveViewLink();
+      
+    }
   
   });
   
@@ -583,13 +543,24 @@ if (isMobile) {
     
   }
 
-  /*
+  
+  // live view mobile menu
+  
   liveMenuShare.addEventListener('click', shareLiveViewLink);
   
   liveMenuConsole.addEventListener('click', () => {
     
-    // show live view console
-    consoleSheet.el.sheet.classList.add('visible');
+    // toggle live view console
+    
+    if (!consoleSheet.isVisible()) {
+
+      consoleSheet.show();
+
+    } else {
+    
+      consoleSheet.hide();
+      
+    }
     
   });
   
@@ -620,7 +591,6 @@ if (isMobile) {
     liveButtonOptions.classList.remove('active');
     
   });
-  */
 
 } else {
 
@@ -728,11 +698,16 @@ if (isMobile) {
 
       e.preventDefault();
       
-      if (selectedFile.lang == 'html' || selectedFile.lang == 'markup' ||
+      if (selectedFile.lang === 'html' || selectedFile.lang === 'markup' ||
           selectedFile.lang === 'markdown') {
             
         liveView.classList.toggle('visible');
         toggleLiveView(selectedFile);
+        
+      } else {
+        
+        // show unsupported language message
+        showMessage('You can run HTML, Markdown and SVG.', 5000);
         
       }
 
@@ -810,21 +785,47 @@ function toggleLiveView(file) {
 
     if (isMobile) {
     
+      // change status bar color
       document.querySelector('meta[name="theme-color"]').content = '#1a1c24';
     
-    } else {
+    }
+    
+    
+    // if on desktop
+    if (!isMobile) {
       
-      liveToggle.classList.remove('popout-hidden');
+      // show popout option in live view options if opening HTML file
+      if (file.lang == 'html' || file.lang == 'markup') {
+        
+        liveToggle.classList.remove('popout-hidden');
+        
+      } else {
+        
+        liveToggle.classList.add('popout-hidden');
+        
+      }
+      
+    } else { // if on mobile
+      
+      // show console option in live view options if opening HTML file
+      if (file.lang == 'html' || file.lang == 'markup') {
+        
+        liveButtonOptions.classList.add('options-visible');
+        
+      } else {
+        
+        liveButtonOptions.classList.remove('options-visible');
+        
+      }
       
     }
     
+    
     if (file.lang == 'html' || file.lang == 'markup') {
-
+      
       renderLiveViewHTML(file);
 
     } else if (file.lang === 'markdown') {
-      
-      liveToggle.classList.add('popout-hidden');
       
       renderLiveViewMarkdown(file);
       
@@ -844,7 +845,8 @@ function toggleLiveView(file) {
 
       // show loader
       liveView.classList.remove('loaded');
-
+      
+      // change status bar color
       document.querySelector('meta[name="theme-color"]').content = '#313744';
 
     }
@@ -1000,7 +1002,7 @@ async function handleLiveViewRequest(requestPath) {
       const repoObj = modifiedRepos[fileUser + '/' + fileRepo.split(':')[0]];
 
 
-      // if not logged in
+      // if not signed in
       // or repository is public
       if (gitToken === ''
           || (repoObj && !repoObj.private)) {
@@ -1100,39 +1102,12 @@ async function handleLiveViewRequest(requestPath) {
 // render live view for HTML files
 async function renderLiveViewHTML(file) {
 
-  // if iOS version is lower than minimum
-
-  if (isSafari) {
-    
-    const safariVersion = Number(navigator.userAgent.split('Version/')[1].split(' Safari')[0]);
-    
-    if (safariVersion < 15.4) {
-    
-      // show message and return
-      
-      liveView.innerHTML = `
-      <div class="prompt">
-        <div class="title">Upgrade iOS to run this file</div>
-        <a class="desc link" href="https://support.apple.com/kb/HT204204" target="_blank">Here's how</a>
-      </div>
-      `;
-      
-      liveView.classList.add('centered-contents');
-      liveView.classList.add('loaded');
-      
-      return;
-      
-    }
-    
-  }
-
-
   // if service worker isn't installed yet
   if (workerInstallPromise) {
         
     // wait until finished installing
     await workerInstallPromise;
-            
+    
   }
   
   if (!workerClientId) await workerInstallPromise;
@@ -1145,8 +1120,21 @@ async function renderLiveViewHTML(file) {
   
 
   const liveFrame = liveView.querySelector('.live-frame');
+  const liveFrameWindow = liveFrame.contentWindow;
 
-  liveFrame.contentWindow.addEventListener('load', () => {
+  if (isMobile) {
+    
+    // clear live view console
+    consoleSheet.clearLogs();
+    
+    // setup live view console
+    logger.init(liveFrameWindow,
+                consoleSheet.logCallback
+                  .bind(consoleSheet));
+    
+  }
+
+  liveFrameWindow.addEventListener('load', () => {
     
     liveView.classList.add('loaded');
     
@@ -1251,7 +1239,7 @@ async function renderLiveViewMarkdown(file) {
     
     fetchPromises.push((async (i) => {
       
-      await loadStyleSheet(window.location.origin + '/dark-theme.css', frameDoc.body);
+      await loadStyleSheet(window.location.origin + '/editor-theme.css', frameDoc.body);
 
       frameDoc.body.querySelectorAll('pre').forEach(pre => {
         

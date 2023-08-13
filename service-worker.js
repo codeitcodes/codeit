@@ -1,6 +1,19 @@
-'use strict';
+
+// update worker name when updating cached files
+const WORKER_NAME = 'codeit-worker-v763';
+
 
 self.importScripts('/worker/client-channel.js');
+
+
+let WORKER_CACHE_ENABLED = true;
+
+if (isDev) {
+  
+  WORKER_CACHE_ENABLED = false;
+  
+}
+
 
 // list of files to cache
 const FILES_TO_CACHE = [
@@ -34,12 +47,17 @@ const FILES_TO_CACHE = [
 
   '/live-view/live-view.js',
   
+  '/live-view/extensions/draggable.js',
   '/live-view/extensions/beautifier.min.js',
+  
+  '/live-view/extensions/mobile-console/console-sheet.js',
+  '/live-view/extensions/mobile-console/logger.js',
+  '/live-view/extensions/mobile-console/safari-keyboard.js',
   
   '/live-view/extensions/marked.min.js',
   '/live-view/extensions/markdown-dark.css',
   
-  '/dark-theme.css',
+  '/editor-theme.css',
 
   '/fonts/fonts.css',
 
@@ -74,17 +92,30 @@ const FILES_TO_CACHE = [
 
 // remove previous cached data
 caches.keys().then((keyList) => {
+  
   return Promise.all(keyList.map((key) => {
-    if (key !== WORKER_NAME) {
+    
+    if (key !== WORKER_NAME ||
+        !WORKER_CACHE_ENABLED) {
+      
       return caches.delete(key);
+      
     }
+    
   }));
+  
 });
 
 // precache static resources
-caches.open(WORKER_NAME).then((cache) => {
-  return cache.addAll(FILES_TO_CACHE);
-});
+if (WORKER_CACHE_ENABLED) {
+  
+  caches.open(WORKER_NAME).then((cache) => {
+    
+    return cache.addAll(FILES_TO_CACHE);
+    
+  });
+  
+}
 
 
 self.addEventListener('install', (evt) => {
