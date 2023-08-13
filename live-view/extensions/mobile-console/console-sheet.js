@@ -684,6 +684,20 @@ class ConsoleSheet {
         
       });
       
+      // fix soft-hiding keyboard on Android
+      navigator.virtualKeyboard.addEventListener('geometrychange', () => {
+        
+        const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        
+        if (document.activeElement === input &&
+            keyboardHeight === 0) {
+          
+          input.blur();
+              
+        }
+        
+      });
+      
     }
 
     
