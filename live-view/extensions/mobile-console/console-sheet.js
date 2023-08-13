@@ -109,7 +109,7 @@ class ConsoleSheet {
             
             duplicateBadge.classList.remove('animating');
             
-          }, 1);
+          }, 0);
           
         } else {
           
