@@ -680,9 +680,9 @@ class ConsoleSheet {
         
       });
       
-      navigator.virtualKeyboard.addEventListener('geometrychange', () => {
+      navigator.virtualKeyboard.addEventListener('geometrychange', (e) => {
         
-        let keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        let keyboardHeight = e.target.boundingRect.height;
         
         body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
         
