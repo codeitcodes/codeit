@@ -105,11 +105,23 @@ class ConsoleSheet {
           
           duplicateBadge.classList.add('animating');
           
-          window.setTimeout(() => {
+          if (isSafari) {
             
-            duplicateBadge.classList.remove('animating');
+            onNextFrame(() => {
+              
+              duplicateBadge.classList.remove('animating');
+              
+            });
             
-          }, 0);
+          } else {
+            
+            window.setTimeout(() => {
+              
+              duplicateBadge.classList.remove('animating');
+              
+            }, 0);
+            
+          }
           
         } else {
           
