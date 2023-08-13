@@ -1834,6 +1834,7 @@ body:not(.mobile) .sheet {
   border-radius: inherit;
   padding-bottom: 12px;
   margin-bottom: -12px;
+  z-index: 1;
 }
 
 .sheet .header {
