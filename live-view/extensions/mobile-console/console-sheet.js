@@ -692,8 +692,6 @@ class ConsoleSheet {
         
         
         // prevent soft-hiding keyboard on Android
-          
-        keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
         
         if (document.activeElement === input &&
             keyboardHeight === 0) {
