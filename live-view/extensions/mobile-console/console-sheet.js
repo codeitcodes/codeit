@@ -660,6 +660,21 @@ class ConsoleSheet {
       });
       
     }
+    
+    
+    // enable virtual keyboard control for the console sheet
+    
+    input.on('focus', () => {
+      
+      navigator.virtualKeyboard.overlaysContent = true;
+      
+    });
+    
+    input.on('blur', () => {
+      
+      navigator.virtualKeyboard.overlaysContent = false;
+      
+    });
 
     
     // refocus input if clicked on return button
