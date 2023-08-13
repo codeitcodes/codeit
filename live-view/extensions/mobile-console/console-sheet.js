@@ -105,11 +105,11 @@ class ConsoleSheet {
           
           duplicateBadge.classList.add('animating');
           
-          window.setTimeout(() => {
+          onNextFrame(() => {
             
             duplicateBadge.classList.remove('animating');
             
-          }, 0);
+          });
           
         } else {
           
