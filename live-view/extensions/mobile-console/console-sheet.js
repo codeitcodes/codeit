@@ -125,6 +125,22 @@ class ConsoleSheet {
           // if the log has an icon, remove it
           if (logIcon) logIcon.remove();
           
+          
+          // fix Safari not updating the data's margin-left
+          if (isSafari) {
+            
+            const data = dataWrapper.querySelector('.data');
+            
+            data.style.outline = 'none';
+            
+            onNextFrame(() => {
+              
+              data.style.outline = '';
+              
+            });
+            
+          }
+          
         }
         
         // return so we won't add the new log
