@@ -131,11 +131,11 @@ class ConsoleSheet {
             
             const data = dataWrapper.querySelector('.data');
             
-            data.style.outline = 'none';
+            data.classList.add('safari-margin-left-update');
             
             onNextFrame(() => {
               
-              data.style.outline = '';
+              data.classList.remove('safari-margin-left-update');
               
             });
             
