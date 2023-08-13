@@ -164,7 +164,7 @@ function checkBottomFloat() {
     if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
 
       // set timeout
-      window.setTimeout(() => {
+      //window.setTimeout(() => {
 
         // if still on bottom of codeit
         if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
@@ -174,19 +174,14 @@ function checkBottomFloat() {
 
         }
 
-      }, 400);
+      //}, 400);
 
     }
 
   } else if (document.activeElement !== cd) { // if scrolled up
 
-    // if passed threshold
-    if ((lastScrollTop - st) > 20) {
-
-      // show bottom float
-      bottomWrapper.classList.remove('hidden');
-
-    }
+    // show bottom float
+    bottomWrapper.classList.remove('hidden');
 
   }
 
