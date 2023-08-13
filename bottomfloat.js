@@ -164,7 +164,7 @@ function checkBottomFloat() {
     if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
 
       // set timeout
-      //window.setTimeout(() => {
+      window.setTimeout(() => {
 
         // if still on bottom of codeit
         if (cd.scrollTop >= (cd.scrollHeight - cd.offsetHeight - 1)) {
@@ -174,7 +174,7 @@ function checkBottomFloat() {
 
         }
 
-      //}, 400);
+      }, 400);
 
     }
 
