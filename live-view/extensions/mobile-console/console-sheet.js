@@ -670,10 +670,6 @@ class ConsoleSheet {
         
         navigator.virtualKeyboard.overlaysContent = true;
         
-        const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
-        
-        body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
-        
       });
       
       input.on('blur', () => {
@@ -688,6 +684,8 @@ class ConsoleSheet {
       navigator.virtualKeyboard.addEventListener('geometrychange', () => {
         
         const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        
+        body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
         
         if (document.activeElement === input &&
             keyboardHeight === 0) {
