@@ -668,11 +668,17 @@ class ConsoleSheet {
       
       navigator.virtualKeyboard.overlaysContent = true;
       
+      const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+      
+      body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
+      
     });
     
     input.on('blur', () => {
       
       navigator.virtualKeyboard.overlaysContent = false;
+      
+      body.style.setProperty('--keyboard-height', 0);
       
     });
 
