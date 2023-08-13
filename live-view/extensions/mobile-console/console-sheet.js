@@ -696,7 +696,18 @@ class ConsoleSheet {
         if (document.activeElement === input &&
             keyboardHeight === 0) {
           
-          input.blur();
+          onNextFrame(() => {
+            
+            keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+            
+            if (document.activeElement === input &&
+                keyboardHeight === 0) {
+            
+              input.blur();
+              
+            }
+            
+          });
               
         }
         
