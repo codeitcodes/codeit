@@ -1986,6 +1986,11 @@ body.safari .console-sheet:has(> .footer .input:focus) {
   margin-left: calc(10.5px + 20px);
 }
 
+body.safari .console-sheet .logs .log .data.safari-margin-left-update {
+  /* set a meaningless style to make Safari update the data's margin-left */
+  outline: none;
+}
+
 .console-sheet .logs .log:has(> .actions .action.more) .data::after {
   content: '...';
   color: #636d83;
