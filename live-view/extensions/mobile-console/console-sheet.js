@@ -664,23 +664,27 @@ class ConsoleSheet {
     
     // enable virtual keyboard control for the console sheet
     
-    input.on('focus', () => {
+    if (!isSafari) {
       
-      navigator.virtualKeyboard.overlaysContent = true;
+      input.on('focus', () => {
+        
+        navigator.virtualKeyboard.overlaysContent = true;
+        
+        const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        
+        body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
+        
+      });
       
-      const keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+      input.on('blur', () => {
+        
+        navigator.virtualKeyboard.overlaysContent = false;
+        
+        body.style.setProperty('--keyboard-height', 0);
+        
+      });
       
-      body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
-      
-    });
-    
-    input.on('blur', () => {
-      
-      navigator.virtualKeyboard.overlaysContent = false;
-      
-      body.style.setProperty('--keyboard-height', 0);
-      
-    });
+    }
 
     
     // refocus input if clicked on return button
