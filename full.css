@@ -2964,7 +2964,6 @@ body.mobile {
   width: 100vw;
   overflow-x: hidden;
   --sidebar-width: 100vw;
-  --keyboard-height: env(keyboard-inset-height, 0px);
 }
 
 body.mobile.expanded {
