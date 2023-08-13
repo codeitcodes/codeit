@@ -1785,6 +1785,7 @@ body.safari .bottom-wrapper .live-buttons .options .share-icon path:not(.ios) {
   border-radius: 11px 11px 0 0;
   pointer-events: none;
   will-change: transform;
+  translate: 0 calc(-1 * var(--keyboard-height, 0px));
   transition: .3s var(--cubic-function),
               0s .3s var(--bounce-function) bottom,
               .1s .29s var(--ease-function) box-shadow,
@@ -1884,15 +1885,11 @@ body:not(.mobile) .sheet {
   box-shadow: 0 -8px 16px rgb(0 0 0 / 24%), 0 0 0 1px #38393e; /* rgb(255 255 255 / 15%) */
 }
 
-body.safari .console-sheet {
-  translate: 0 calc(-1 * var(--safari-keyboard-height, 0px));
-}
-
 body.safari .console-sheet.visible.safari-transitioning-blur {
   transition: translate .27s ease;
 }
 
-body.safari .console-sheet:has(> .footer .input:focus) {
+body.safari .console-sheet:focus-within {
   padding-bottom: 0;
 }
 
@@ -2419,6 +2416,7 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   max-width: 356px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  translate: 0 calc(-1 * var(--keyboard-height, 0px));
   transition: 0s .18s, .18s var( --bounce-function) opacity, 0s translate;
 }
 
@@ -2434,10 +2432,6 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   border-radius: 8px;
   padding: 6px 12px;
   transition: none;
-}
-
-body.safari .message {
-  translate: 0 calc(-1 * var(--safari-keyboard-height, 0px));
 }
 
 .message svg {
