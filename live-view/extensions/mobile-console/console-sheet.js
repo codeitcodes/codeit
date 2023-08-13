@@ -707,7 +707,7 @@ class ConsoleSheet {
               
             }
             
-          }, 70);
+          }, 200);
               
         }
         
