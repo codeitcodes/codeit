@@ -676,7 +676,11 @@ class ConsoleSheet {
         
         navigator.virtualKeyboard.overlaysContent = false;
         
-        body.style.setProperty('--keyboard-height', 0);
+        onNextFrame(() => {
+          
+          body.style.setProperty('--keyboard-height', 0);
+          
+        });
         
       });
       
@@ -688,18 +692,15 @@ class ConsoleSheet {
         
         
         // prevent soft-hiding keyboard on Android
-        onNextFrame(() => {
           
-          keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
+        
+        if (document.activeElement === input &&
+            keyboardHeight === 0) {
           
-          if (document.activeElement === input &&
-              keyboardHeight === 0) {
-            
-            input.blur();
-                
-          }
-          
-        });
+          input.blur();
+              
+        }
         
       });
       
