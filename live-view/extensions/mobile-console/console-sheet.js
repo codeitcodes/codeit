@@ -701,7 +701,7 @@ class ConsoleSheet {
         const inputFocusTimeDelta = currTime - lastInputFocusTime;
         
         if (document.activeElement === input &&
-            inputFocusTimeDelta !== 0 &&
+            inputFocusTimeDelta < 100 &&
             keyboardHeight === 0) {
           
           input.blur();
