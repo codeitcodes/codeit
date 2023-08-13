@@ -666,9 +666,13 @@ class ConsoleSheet {
     
     if (!isSafari) {
       
+      let lastInputFocusTime = 0;
+      
       input.on('focus', () => {
         
         navigator.virtualKeyboard.overlaysContent = true;
+        
+        lastInputFocusTime = new Date().getTime();
         
       });
       
@@ -693,21 +697,14 @@ class ConsoleSheet {
         
         // prevent soft-hiding keyboard on Android
         
+        const currTime = new Date().getTime();
+        const inputFocusTimeDelta = currTime - lastInputFocusTime;
+        
         if (document.activeElement === input &&
+            inputFocusTimeDelta !== 0 &&
             keyboardHeight === 0) {
           
-          onNextFrame(() => {
-            
-            keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
-            
-            if (document.activeElement === input &&
-                keyboardHeight === 0) {
-            
-              input.blur();
-              
-            }
-            
-          });
+          input.blur();
               
         }
         
