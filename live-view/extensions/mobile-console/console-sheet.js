@@ -692,6 +692,12 @@ class ConsoleSheet {
         
         let keyboardHeight = e.target.boundingRect.height;
         
+        if (document.activeElement !== input) {
+          
+          keyboardHeight = 0;
+          
+        }
+        
         body.style.setProperty('--keyboard-height', keyboardHeight + 'px');
         
         
