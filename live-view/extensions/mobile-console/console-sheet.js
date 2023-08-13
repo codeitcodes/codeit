@@ -696,7 +696,7 @@ class ConsoleSheet {
         if (document.activeElement === input &&
             keyboardHeight === 0) {
           
-          onNextFrame(() => {
+          window.setTimeout(() => {
             
             keyboardHeight = navigator.virtualKeyboard.boundingRect.height;
             
@@ -707,7 +707,7 @@ class ConsoleSheet {
               
             }
             
-          });
+          }, 70);
               
         }
         
