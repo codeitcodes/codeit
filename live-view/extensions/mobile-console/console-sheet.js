@@ -775,6 +775,8 @@ class ConsoleSheet {
     this.el.logWrapper.textContent = '';
     this.el.logWrapper.classList.add('empty');
     
+    this.el.jumpToBottom.classList.remove('visible');
+    
   }
   
   clearInput() {
