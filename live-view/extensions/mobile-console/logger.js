@@ -332,8 +332,11 @@ let logger = {
         entryURL = entryURL.replaceAll(originURL, '');
         
         
+        const line = error.line ?? 0;
+        const column = error.column ?? 0;
+        
         // save entry in stack
-        stack = [entryURL + ':' + error.line + ':' + error.column];
+        stack = [entryURL + ':' + line + ':' + column];
         
       }
       
