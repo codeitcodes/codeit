@@ -3116,6 +3116,7 @@ body {
 
 .footer--simple {
   align-items: center;
+  justify-content: center;
   padding-top: 0
 }
 
@@ -3125,7 +3126,6 @@ body {
 
 .footer__primary {
   margin: 0;
-  margin-right: -7px;
 }
 
 .footer__end {
@@ -4375,18 +4375,8 @@ body {
     justify-content: center
   }
   
-  #footer .footer {
-    flex-direction: column;
-  }
-  
   #footer .footer__social {
     margin: 15px auto;
-  }
-  
-  #footer .footer__primary {
-    margin: auto;
-    margin-bottom: 15px;
-    margin-top: 5px;
   }
 }
 
