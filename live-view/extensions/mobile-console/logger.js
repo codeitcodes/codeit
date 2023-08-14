@@ -203,7 +203,7 @@ let logger = {
         // remove the first empty item (because of how split works)
         stack.shift();
         
-      } else {
+      } else if (stack) {
         
         // split stack
         stack = stack.split('\n');
@@ -211,7 +211,110 @@ let logger = {
       }
       
       
-      if (!isLoggerEval) {
+      if (stack) {
+          
+        if (!isLoggerEval) {
+          
+          // replace absolute URLs with relative URLs in stack
+          
+          // get origin URL
+          const location = logger.cW.location;
+          const originURL = location.origin + location.pathname;
+          const indexURL = originURL + location.search;
+          
+          if (!isSafari) {
+              
+            stack.forEach((entry, index) => {
+              
+              // replace index URLs
+              entry = entry.replaceAll(indexURL, '(index)');
+              
+              // remove absolute URLs' origin
+              entry = entry.replaceAll(originURL, '');
+              
+              stack[index] = entry;
+              
+            });
+            
+          } else {
+            
+            stack.forEach((entry, index) => {
+            
+              const entryURLIndex = entry.indexOf('@');
+              
+              let entryContext = entry.slice(0, entryURLIndex);            
+              let entryURL = entry.slice(entryURLIndex + 1);
+              
+              if (entryContext === 'global code') entryContext = '';
+              
+              // if the context is eval code
+              // and it has no URL
+              if (entryContext === 'eval code' && entryURL === '') {
+                
+                // add the error's line number and column number
+                // to the URL
+                entryURL = '<anonymous>:' + error.line + ':' + error.column;
+                
+              }
+              
+              
+              // replace index URLs
+              entryURL = entryURL.replaceAll(indexURL, '(index)');
+              entryContext = entryContext.replaceAll(indexURL, '(index)');
+              
+              // remove absolute URLs' origin
+              entryURL = entryURL.replaceAll(originURL, '');
+              entryContext = entryContext.replaceAll(originURL, '');
+              
+              
+              // if both entry URL and entry context exist,
+              // surround the entry URL with brackets
+              if (entryURL !== '' && entryContext !== '') {
+                
+                entryURL = ' (' + entryURL + ')';
+                
+              }
+              
+              // restructure entry
+              stack[index] = entryContext + entryURL;
+              
+            });
+            
+          }
+          
+        } else {
+          
+          if (!isSafari) {
+            
+            // parses:
+            // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
+            // into:
+            // '<anonymous>:1:13'
+            
+            const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
+            
+            const evalStack = evalInfo.split(', ')[1];
+            
+            stack = [evalStack];
+            
+          } else {
+            
+            // the error's line number and column number
+            // aren't available in the stack on Safari,
+            // so we need to get them from the Error object
+            
+            stack = ['<anonymous>:' + error.line + ':' + error.column];
+            
+          }
+          
+        }
+        
+      } else if (isSafari) {
+        
+        // the error's line number and column number
+        // sometimes aren't available in the stack on Safari,
+        // so we need to get them from the Error object
+        
         
         // replace absolute URLs with relative URLs in stack
         
@@ -220,90 +323,20 @@ let logger = {
         const originURL = location.origin + location.pathname;
         const indexURL = originURL + location.search;
         
-        if (!isSafari) {
-            
-          stack.forEach((entry, index) => {
-            
-            // replace index URLs
-            entry = entry.replaceAll(indexURL, '(index)');
-            
-            // remove absolute URLs' origin
-            entry = entry.replaceAll(originURL, '');
-            
-            stack[index] = entry;
-            
-          });
-          
-        } else {
-          
-          stack.forEach((entry, index) => {
-          
-            const entryURLIndex = entry.indexOf('@');
-            
-            let entryContext = entry.slice(0, entryURLIndex);            
-            let entryURL = entry.slice(entryURLIndex + 1);
-            
-            if (entryContext === 'global code') entryContext = '';
-            
-            // if the context is eval code
-            // and it has no URL
-            if (entryContext === 'eval code' && entryURL === '') {
-              
-              // add the error's line number and column number
-              // to the URL
-              entryURL = '<anonymous>:' + error.line + ':' + error.column;
-              
-            }
-            
-            
-            // replace index URLs
-            entryURL = entryURL.replaceAll(indexURL, '(index)');
-            entryContext = entryContext.replaceAll(indexURL, '(index)');
-            
-            // remove absolute URLs' origin
-            entryURL = entryURL.replaceAll(originURL, '');
-            entryContext = entryContext.replaceAll(originURL, '');
-            
-            
-            // if both entry URL and entry context exist,
-            // surround the entry URL with brackets
-            if (entryURL !== '' && entryContext !== '') {
-              
-              entryURL = ' (' + entryURL + ')';
-              
-            }
-            
-            // restructure entry
-            stack[index] = entryContext + entryURL;
-            
-          });
-          
-        }
+        let entryURL = error.sourceURL;
         
-      } else {
+        // replace index URLs
+        entryURL = entryURL.replaceAll(indexURL, '(index)');
         
-        if (!isSafari) {
-          
-          // parses:
-          // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
-          // into:
-          // '<anonymous>:1:13'
-          
-          const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
-          
-          const evalStack = evalInfo.split(', ')[1];
-          
-          stack = [evalStack];
-          
-        } else {
-          
-          // the error's line number and column number
-          // aren't available in the stack on Safari,
-          // so we need to get them from the Error object
-          
-          stack = ['<anonymous>:' + error.line + ':' + error.column];
-          
-        }
+        // remove absolute URLs' origin
+        entryURL = entryURL.replaceAll(originURL, '');
+        
+        
+        const line = error.line ?? 0;
+        const column = error.column ?? 0;
+        
+        // save entry in stack
+        stack = [entryURL + ':' + line + ':' + column];
         
       }
       
