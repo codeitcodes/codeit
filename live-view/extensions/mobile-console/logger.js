@@ -315,6 +315,14 @@ let logger = {
         // sometimes aren't available in the stack on Safari,
         // so we need to get them from the Error object
         
+        
+        // replace absolute URLs with relative URLs in stack
+        
+        // get origin URL
+        const location = logger.cW.location;
+        const originURL = location.origin + location.pathname;
+        const indexURL = originURL + location.search;
+        
         let entryURL = error.sourceURL;
         
         // replace index URLs
@@ -322,6 +330,7 @@ let logger = {
         
         // remove absolute URLs' origin
         entryURL = entryURL.replaceAll(originURL, '');
+        
         
         // save entry in stack
         stack = [entryURL + ':' + error.line + ':' + error.column];
