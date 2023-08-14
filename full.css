@@ -1890,7 +1890,7 @@ body.safari .console-sheet.visible.safari-transitioning-blur {
   transition: translate .27s ease;
 }
 
-body.safari .console-sheet:focus-within {
+body.safari .console-sheet:has(> .footer .input:focus) {
   padding-bottom: 0;
 }
 
@@ -2145,7 +2145,7 @@ body.safari .console-sheet .logs .log .data.safari-margin-left-update {
   pointer-events: none;
 }
 
-body.safari .console-sheet:focus-within .jump-to-bottom {
+body.safari .console-sheet:has(> .footer .input:focus) .jump-to-bottom {
   translate: 0 0;
 }
 
