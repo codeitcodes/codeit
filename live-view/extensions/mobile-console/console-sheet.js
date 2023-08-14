@@ -69,8 +69,11 @@ class ConsoleSheet {
         <div class="duplicate-badge">2</div>
       `.trim();
       
-      const currLogDataAndActions = logHTML.trim().split('<div class="data')[1];
-      const lastLogDataAndActions = lastLogHTML.trim().split('<div class="data')[1];
+      let tempLogHTML = logHTML.replace('<div class="data safari-margin-left-update">', '<div class="data">');
+      let tempLastLogHTML = lastLogHTML.replace('<div class="data safari-margin-left-update">', '<div class="data">');
+      
+      const currLogDataAndActions = tempLogHTML.trim().split('<div class="data">')[1];
+      const lastLogDataAndActions = tempLastLogHTML.trim().split('<div class="data">')[1];
       
       // if the current and last logs are identical
       if (currLogDataAndActions === lastLogDataAndActions) {
