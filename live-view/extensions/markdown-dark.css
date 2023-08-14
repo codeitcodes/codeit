@@ -103,10 +103,6 @@ body a[href] {
   text-decoration: none;
 }
 
-body a[href]:active {
-  opacity: .5;
-}
-
 body:not(.mobile) a[href]:hover,
 body a[href]:active {
   text-decoration: underline;
