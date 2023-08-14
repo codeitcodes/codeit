@@ -2131,6 +2131,7 @@ body.safari .console-sheet .logs .log .data.safari-margin-left-update {
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
   transition: .1s var(--ease-function);
   transition-property: opacity, transform;
+  translate: 0 calc(-1 * env(safe-area-inset-bottom, 0px));
   z-index: 1;
 }
 
@@ -2142,6 +2143,10 @@ body.safari .console-sheet .logs .log .data.safari-margin-left-update {
   opacity: 0;
   transform: scale(0);
   pointer-events: none;
+}
+
+body.safari .console-sheet:focus-within .jump-to-bottom {
+  translate: 0 0;
 }
 
 .console-sheet .footer {
