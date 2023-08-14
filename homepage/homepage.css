@@ -3233,11 +3233,13 @@ body {
   flex-wrap: wrap;
   font-size: 16px;
   justify-content: center;
+  gap: 13px;
+  padding: 13px 13px;
+  row-gap: 6px;
 }
 
 .footer__linkRow a {
   color: inherit;
-  margin: 0 7px
 }
 
 .footer__linkGroups {
