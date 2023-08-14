@@ -2406,6 +2406,10 @@ body:not(.mobile) .dialog .button:not(:active):hover {
   z-index: 1003;
 }
 
+body.safari .console-sheet:has(> .footer .input:focus) ~ .message-wrapper {
+  bottom: 15px;
+}
+
 .message {
   white-space: nowrap;
   display: flex;
