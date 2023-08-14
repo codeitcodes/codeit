@@ -3232,6 +3232,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   font-size: 16px;
+  justify-content: center;
 }
 
 .footer__linkRow a {
