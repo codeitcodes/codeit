@@ -211,97 +211,101 @@ let logger = {
       }
       
       
-      if (!isLoggerEval && stack) {
-        
-        // replace absolute URLs with relative URLs in stack
-        
-        // get origin URL
-        const location = logger.cW.location;
-        const originURL = location.origin + location.pathname;
-        const indexURL = originURL + location.search;
-        
-        if (!isSafari) {
+      if (stack) {
+          
+        if (!isLoggerEval) {
+          
+          // replace absolute URLs with relative URLs in stack
+          
+          // get origin URL
+          const location = logger.cW.location;
+          const originURL = location.origin + location.pathname;
+          const indexURL = originURL + location.search;
+          
+          if (!isSafari) {
+              
+            stack.forEach((entry, index) => {
+              
+              // replace index URLs
+              entry = entry.replaceAll(indexURL, '(index)');
+              
+              // remove absolute URLs' origin
+              entry = entry.replaceAll(originURL, '');
+              
+              stack[index] = entry;
+              
+            });
             
-          stack.forEach((entry, index) => {
+          } else {
             
-            // replace index URLs
-            entry = entry.replaceAll(indexURL, '(index)');
+            stack.forEach((entry, index) => {
             
-            // remove absolute URLs' origin
-            entry = entry.replaceAll(originURL, '');
+              const entryURLIndex = entry.indexOf('@');
+              
+              let entryContext = entry.slice(0, entryURLIndex);            
+              let entryURL = entry.slice(entryURLIndex + 1);
+              
+              if (entryContext === 'global code') entryContext = '';
+              
+              // if the context is eval code
+              // and it has no URL
+              if (entryContext === 'eval code' && entryURL === '') {
+                
+                // add the error's line number and column number
+                // to the URL
+                entryURL = '<anonymous>:' + error.line + ':' + error.column;
+                
+              }
+              
+              
+              // replace index URLs
+              entryURL = entryURL.replaceAll(indexURL, '(index)');
+              entryContext = entryContext.replaceAll(indexURL, '(index)');
+              
+              // remove absolute URLs' origin
+              entryURL = entryURL.replaceAll(originURL, '');
+              entryContext = entryContext.replaceAll(originURL, '');
+              
+              
+              // if both entry URL and entry context exist,
+              // surround the entry URL with brackets
+              if (entryURL !== '' && entryContext !== '') {
+                
+                entryURL = ' (' + entryURL + ')';
+                
+              }
+              
+              // restructure entry
+              stack[index] = entryContext + entryURL;
+              
+            });
             
-            stack[index] = entry;
-            
-          });
+          }
           
         } else {
           
-          stack.forEach((entry, index) => {
-          
-            const entryURLIndex = entry.indexOf('@');
+          if (!isSafari) {
             
-            let entryContext = entry.slice(0, entryURLIndex);            
-            let entryURL = entry.slice(entryURLIndex + 1);
+            // parses:
+            // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
+            // into:
+            // '<anonymous>:1:13'
             
-            if (entryContext === 'global code') entryContext = '';
+            const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
             
-            // if the context is eval code
-            // and it has no URL
-            if (entryContext === 'eval code' && entryURL === '') {
-              
-              // add the error's line number and column number
-              // to the URL
-              entryURL = '<anonymous>:' + error.line + ':' + error.column;
-              
-            }
+            const evalStack = evalInfo.split(', ')[1];
             
+            stack = [evalStack];
             
-            // replace index URLs
-            entryURL = entryURL.replaceAll(indexURL, '(index)');
-            entryContext = entryContext.replaceAll(indexURL, '(index)');
+          } else {
             
-            // remove absolute URLs' origin
-            entryURL = entryURL.replaceAll(originURL, '');
-            entryContext = entryContext.replaceAll(originURL, '');
+            // the error's line number and column number
+            // aren't available in the stack on Safari,
+            // so we need to get them from the Error object
             
+            stack = ['<anonymous>:' + error.line + ':' + error.column];
             
-            // if both entry URL and entry context exist,
-            // surround the entry URL with brackets
-            if (entryURL !== '' && entryContext !== '') {
-              
-              entryURL = ' (' + entryURL + ')';
-              
-            }
-            
-            // restructure entry
-            stack[index] = entryContext + entryURL;
-            
-          });
-          
-        }
-        
-      } else if (stack) {
-        
-        if (!isSafari) {
-          
-          // parses:
-          // 'eval (eval at run (logger.js:91:14), <anonymous>:1:13)'
-          // into:
-          // '<anonymous>:1:13'
-          
-          const evalInfo = stack[0].slice('eval ('.length, -(')'.length));
-          
-          const evalStack = evalInfo.split(', ')[1];
-          
-          stack = [evalStack];
-          
-        } else {
-          
-          // the error's line number and column number
-          // aren't available in the stack on Safari,
-          // so we need to get them from the Error object
-          
-          stack = ['<anonymous>:' + error.line + ':' + error.column];
+          }
           
         }
         
