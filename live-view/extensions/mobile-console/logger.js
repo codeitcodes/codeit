@@ -203,7 +203,7 @@ let logger = {
         // remove the first empty item (because of how split works)
         stack.shift();
         
-      } else {
+      } else if (stack) {
         
         // split stack
         stack = stack.split('\n');
@@ -211,7 +211,7 @@ let logger = {
       }
       
       
-      if (!isLoggerEval) {
+      if (!isLoggerEval && stack) {
         
         // replace absolute URLs with relative URLs in stack
         
@@ -280,7 +280,7 @@ let logger = {
           
         }
         
-      } else {
+      } else if (stack) {
         
         if (!isSafari) {
           
@@ -304,6 +304,23 @@ let logger = {
           stack = ['<anonymous>:' + error.line + ':' + error.column];
           
         }
+        
+      } else if (isSafari) {
+        
+        // the error's line number and column number
+        // sometimes aren't available in the stack on Safari,
+        // so we need to get them from the Error object
+        
+        let entryURL = error.sourceURL;
+        
+        // replace index URLs
+        entryURL = entryURL.replaceAll(indexURL, '(index)');
+        
+        // remove absolute URLs' origin
+        entryURL = entryURL.replaceAll(originURL, '');
+        
+        // save entry in stack
+        stack = [entryURL + ':' + error.line + ':' + error.column];
         
       }
       
