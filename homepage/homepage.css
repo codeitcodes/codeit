@@ -3231,6 +3231,7 @@ body {
 .footer__linkRow {
   display: flex;
   flex-wrap: wrap;
+  font-size: 16px;
 }
 
 .footer__linkRow a {
