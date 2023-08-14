@@ -1789,7 +1789,7 @@ body.safari .bottom-wrapper .live-buttons .options .share-icon path:not(.ios) {
   transition: .3s var(--cubic-function),
               0s .3s var(--bounce-function) bottom,
               .1s .29s var(--ease-function) box-shadow,
-              0s translate;
+              0s translate, 0s padding-bottom;
   z-index: 1001;
 }
 
