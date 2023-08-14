@@ -1810,7 +1810,7 @@ body.safari .bottom-wrapper .live-buttons .options .share-icon path:not(.ios) {
   transition: .3s var(--cubic-function),
               .3s .09s var(--bounce-function) bottom,
               .1s var(--ease-function) box-shadow,
-              0s translate;
+              0s translate, 0s padding-bottom;
 }
 
 body:not(.mobile) .sheet {
