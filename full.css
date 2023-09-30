@@ -788,7 +788,7 @@ body.notransition .sidebar {
 }
 
 .sidebar.loading .loader {
-  animation: loader .72s var(--cubic-function) infinite;
+  animation: loader .72s ease-in-out infinite;
 }
 
 @keyframes loader {
