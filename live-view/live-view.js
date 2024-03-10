@@ -1010,18 +1010,6 @@ async function handleLiveViewRequest(requestPath) {
         // get public file from git as ReadableStream
         respObj = await git.getPublicFileAsStream(liveFileDir, fileName);
         
-        // if couldn't fetch file
-        if (respObj.errorCode) {
-          
-          // return an error
-          const respStatus = respObj.errorCode;
-          
-          return {
-            fileContent: '',
-            respStatus: respStatus
-          };
-        }
-        
         //In case of LFS:
         var contentString = new TextDecoder().decode(respObj);
         if(contentString.startsWith("version https://git-lfs.github.com/spec/")){
