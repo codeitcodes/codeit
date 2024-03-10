@@ -1025,7 +1025,7 @@ async function handleLiveViewRequest(requestPath) {
         //In case of LFS:
         var contentString = new TextDecoder().decode(respObj);
         if(contentString.startsWith("version https://git-lfs.github.com/spec/")){
-          respObj = await git.getPublicFileLFSAsStream(liveFileDir, fileName);
+          respObj = await git.getPublicLFSFileAsStream(liveFileDir, fileName);
         }
         
       } else {
