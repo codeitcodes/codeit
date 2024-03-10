@@ -129,7 +129,7 @@ let git = {
   'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
     //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
     // map tree location
-    let query = 'https://raw.githubusercontent.com';
+    let query = 'https://api.github.com';
     const [user, repo, contents] = treeLoc;
 
     // get repository branch
