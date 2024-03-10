@@ -1014,15 +1014,15 @@ async function handleLiveViewRequest(requestPath) {
         if (respObj.errorCode) {
           
           // return an error
-          
           const respStatus = respObj.errorCode;
           
           return {
             fileContent: '',
             respStatus: respStatus
           };
-          
         }
+        
+        //In case of LFS:
         
       } else {
 
