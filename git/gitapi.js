@@ -126,7 +126,7 @@ let git = {
     },
     
    // get file from LFS as ReadableStream
-  'getPublicLFSFileAsStream': async (fileName) => {
+  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
     //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
     //  "download_url": "https://media.githubusercontent.com/media/KostaMalsev/WebGPT/main/weights/gpt2/transformer.h.0.attn.bias_gpt.bin",
 
