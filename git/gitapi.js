@@ -123,7 +123,7 @@ let git = {
         errorCode: resp.status
       };
       
-    }
+    },
     
    // get file from LFS as ReadableStream
   'getPublicLFSFileAsStream': async (fileName) => {
