@@ -125,6 +125,32 @@ let git = {
       
     }
     
+   // get file from LFS as ReadableStream
+  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
+    
+    // map tree location
+    let query = 'https://raw.githubusercontent.com';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        errorCode: resp.status
+      };
+      
+    }
+    
     
     // get data from response
     
