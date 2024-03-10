@@ -124,35 +124,6 @@ let git = {
       };
       
     }
-  },
-    
-   // get file from LFS as ReadableStream
-  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
-    //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
-    //  "download_url": "https://media.githubusercontent.com/media/KostaMalsev/WebGPT/main/weights/gpt2/transformer.h.0.attn.bias_gpt.bin",
-
-    // map tree location
-    let query = 'https://media.githubusercontent.com/media';
-    const [user, repo, contents] = treeLoc;
-
-    // get repository branch
-    let [repoName, branch] = repo.split(':');
-  
-    query += '/' + user + '/' + repoName +
-             '/' + branch +
-             '/' + contents + '/' + fileName;
-  
-    // get the query
-    const resp = await fetch(query);
-    
-    // if received an error
-    if (String(resp.status).startsWith('4')) {
-      
-      return {
-        errorCode: resp.status
-      };
-      
-    }
     
     
     // get data from response
@@ -212,6 +183,62 @@ let git = {
 
     return resp;
 
+  },
+  
+  
+   // get file from LFS as ReadableStream
+  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
+    //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
+    //  "download_url": "https://media.githubusercontent.com/media/KostaMalsev/WebGPT/main/weights/gpt2/transformer.h.0.attn.bias_gpt.bin",
+
+    // map tree location
+    let query = 'https://media.githubusercontent.com/media';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        errorCode: resp.status
+      };
+      
+    }
+    
+    
+    // get data from response
+    
+    const reader = resp.body.getReader();
+    let buffer = [];
+    
+    async function readChunk() {
+      
+      const chunk = await reader.read();
+      
+      // if finished reading, return
+      if (chunk.done) return;
+      
+      // add new chunk to buffer
+      buffer = new Uint8Array([...buffer, ...chunk.value]);
+      
+      // read next chunk
+      return readChunk();
+      
+    }
+    
+    await readChunk();
+
+    return buffer;
+    
   },
 
   // get a repository
