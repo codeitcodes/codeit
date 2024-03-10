@@ -127,7 +127,7 @@ let git = {
     
    // get file from LFS as ReadableStream
   'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
-    
+    //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
     // map tree location
     let query = 'https://raw.githubusercontent.com';
     const [user, repo, contents] = treeLoc;
@@ -140,7 +140,11 @@ let git = {
              '/' + contents + '/' + fileName;
   
     // get the query
-    const resp = await fetch(query);
+    const premResponse = await fetch(query);
+    
+    let urlLFS = premResponse.git_url;
+    
+    const resp = await fetch(urlLFS);
     
     // if received an error
     if (String(resp.status).startsWith('4')) {
