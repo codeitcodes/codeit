@@ -126,10 +126,12 @@ let git = {
     }
     
    // get file from LFS as ReadableStream
-  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
+  'getPublicLFSFileAsStream': async (fileName) => {
     //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
+    //  "download_url": "https://media.githubusercontent.com/media/KostaMalsev/WebGPT/main/weights/gpt2/transformer.h.0.attn.bias_gpt.bin",
+
     // map tree location
-    let query = 'https://api.github.com';
+    let query = 'https://media.githubusercontent.com/media';
     const [user, repo, contents] = treeLoc;
 
     // get repository branch
@@ -140,11 +142,7 @@ let git = {
              '/' + contents + '/' + fileName;
   
     // get the query
-    const premResponse = await fetch(query);
-    
-    let urlLFS = premResponse.git_url;
-    
-    const resp = await fetch(urlLFS);
+    const resp = await fetch(query);
     
     // if received an error
     if (String(resp.status).startsWith('4')) {
