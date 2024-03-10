@@ -217,27 +217,8 @@ let git = {
     
     // get data from response
     
-    const reader = resp.body.getReader();
-    let buffer = [];
-    
-    async function readChunk() {
-      
-      const chunk = await reader.read();
-      
-      // if finished reading, return
-      if (chunk.done) return;
-      
-      // add new chunk to buffer
-      buffer = new Uint8Array([...buffer, ...chunk.value]);
-      
-      // read next chunk
-      return readChunk();
-      
-    }
-    
-    await readChunk();
-
-    return buffer;
+    const buffer = await resp.arrayBuffer();
+    return new Float32Array(buffer);
     
   },
 
