@@ -181,9 +181,6 @@ let git = {
     
     const buffer = await resp.arrayBuffer();
 
-    // @@debug
-    console.debug(buffer);
-
     return buffer;
     
   },
