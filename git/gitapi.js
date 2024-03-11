@@ -181,16 +181,10 @@ let git = {
     
     const buffer = await resp.arrayBuffer();
 
+    // @@debug
+    console.debug(buffer);
+
     return buffer;
-    
-    /*
-    // get data from response
-    if(isText(buffer)){
-      return new Uint8Array(buffer);
-    }else{
-      return new Float32Array(buffer);
-    }
-    */
     
   },
 
