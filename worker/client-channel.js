@@ -3,26 +3,25 @@
 // service worker/client communication channel
 
 
+const ORIGIN_URL = self.location.origin;
+
 // internal paths
 const INTERNAL_PATHS = {
 
-  internal: 'https://codeit.codes/',
-  internal_: 'https://dev.codeit.codes/',
+  internal: ORIGIN_URL,
 
-  run: 'https://codeit.codes/run',
-  run_: 'https://dev.codeit.codes/run',
+  run: ORIGIN_URL + '/run',
   
   relLivePath: ('/run/' + '_/'.repeat(15)),
   
-  clientId: 'https://codeit.codes/worker/getClientId',
-  clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  clientId: ORIGIN_URL + '/worker/getClientId'
 
 };
 
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-const isDev = (self.origin === 'https://dev.codeit.codes');
+const isDev = (ORIGIN_URL === 'https://dev.codeit.codes');
 
 
 // key                : value
@@ -39,7 +38,7 @@ function getPathType(path) {
 
     if (path.startsWith(type[1])) {
 
-      pathType = type[0].replaceAll('_', '');
+      pathType = type[0];
 
     }
 
