@@ -29,15 +29,6 @@ const beforeUnloadListener = (event) => {
 };
 
 
-async function isText(arrBuff) {
-  
-  const decoder = new TextDecoder('utf-8');
-  const decodedText = decoder.decode(arrBuff);
-  
-  return (decodedText.length > 0);
-}
-
-
 let git = {
 
   // get a blob
@@ -160,6 +151,48 @@ let git = {
     return buffer;
     
   },
+  
+   // get public LFS file content as ReadableStream
+  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
+
+    // map tree location
+    let query = 'https://media.githubusercontent.com/media';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        errorCode: resp.status
+      };
+      
+    }
+
+    
+    const buffer = await resp.arrayBuffer();
+
+    return buffer;
+    
+    /*
+    // get data from response
+    if(isText(buffer)){
+      return new Uint8Array(buffer);
+    }else{
+      return new Float32Array(buffer);
+    }
+    */
+    
+  },
 
   // get items in tree
   'getItems': async (treeLoc, page = 1) => {
@@ -194,47 +227,6 @@ let git = {
 
   },
   
-  
-   // get file from LFS as ReadableStream
-  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
-    //curl -u {username}:{personal access token'} https://api.github.com/repos/{organisation}/{repository}/contents/{file or folder path}
-    //  "download_url": "https://media.githubusercontent.com/media/KostaMalsev/WebGPT/main/weights/gpt2/transformer.h.0.attn.bias_gpt.bin",
-
-    // map tree location
-    let query = 'https://media.githubusercontent.com/media';
-    const [user, repo, contents] = treeLoc;
-
-    // get repository branch
-    let [repoName, branch] = repo.split(':');
-  
-    query += '/' + user + '/' + repoName +
-             '/' + branch +
-             '/' + contents + '/' + fileName;
-  
-    // get the query
-    const resp = await fetch(query);
-    
-    
-    
-    // if received an error
-    if (String(resp.status).startsWith('4')) {
-      return {
-        errorCode: resp.status
-      };
-      
-    }
-    
-    const buffer = await resp.arrayBuffer();
-    
-    // get data from response
-    if(isText(buffer)){
-      return new Uint8Array(buffer);
-    }else{
-      return new Float32Array(buffer);
-    }
-    
-  },
-
   // get a repository
   'getRepo': async (treeLoc) => {
 
