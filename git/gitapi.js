@@ -29,12 +29,12 @@ const beforeUnloadListener = (event) => {
 };
 
 
-async function isText(resp) {
+async function isText(arrBuff) {
   
   //const response = await fetch('https://example.com/data');
-  const arrayBuffer = await resp.arrayBuffer();
+  //const arrayBuffer = await resp.arrayBuffer();
   const decoder = new TextDecoder('utf-8');
-  const decodedText = decoder.decode(arrayBuffer);
+  const decodedText = decoder.decode(arrBuff);
   
   return (decodedText.length > 0);
 }
