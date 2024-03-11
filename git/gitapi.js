@@ -229,7 +229,7 @@ let git = {
     const buffer = await resp.arrayBuffer();
     
     // get data from response
-    if(isText(resp)){
+    if(isText(buffer)){
       return new Float32Array(buffer);
     }else{
       return new Uint8Array(buffer);
