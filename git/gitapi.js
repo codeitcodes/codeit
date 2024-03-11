@@ -29,7 +29,7 @@ const beforeUnloadListener = (event) => {
 };
 
 
-function ifText(resp) {
+function isText(resp) {
   
   //const response = await fetch('https://example.com/data');
   const arrayBuffer = await resp.arrayBuffer();
