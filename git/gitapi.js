@@ -29,6 +29,17 @@ const beforeUnloadListener = (event) => {
 };
 
 
+function ifText(resp) {
+  
+  //const response = await fetch('https://example.com/data');
+  const arrayBuffer = await resp.arrayBuffer();
+  const decoder = new TextDecoder('utf-8');
+  const decodedText = decoder.decode(arrayBuffer);
+  
+  return (decodedText.length > 0);
+}
+
+
 let git = {
 
   // get a blob
@@ -205,20 +216,24 @@ let git = {
     // get the query
     const resp = await fetch(query);
     
+    
+    
     // if received an error
     if (String(resp.status).startsWith('4')) {
-      
       return {
         errorCode: resp.status
       };
       
     }
     
+    const buffer = await resp.arrayBuffer();
     
     // get data from response
-    
-    const buffer = await resp.arrayBuffer();
-    return new Float32Array(buffer);
+    if(isText(resp)){
+      return new Float32Array(buffer);
+    }else{
+      return new Uint8Array(buffer);
+    }
     
   },
 
