@@ -230,9 +230,9 @@ let git = {
     
     // get data from response
     if(isText(buffer)){
-      return new Float32Array(buffer);
-    }else{
       return new Uint8Array(buffer);
+    }else{
+      return new Float32Array(buffer);
     }
     
   },
