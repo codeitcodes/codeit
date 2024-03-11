@@ -14,10 +14,9 @@ const INTERNAL_PATHS = {
   
   relLivePath: ('/run/' + '_/'.repeat(15)),
   
- /* clientId: 'https://codeit.codes/worker/getClientId',
-  clientId_: 'https://dev.codeit.codes/worker/getClientId',*/
-  clientId: 'https://codeit-mu.vercel.app/worker/getClientId',
-  clientId_: 'https://dev.codeit.codes/worker/getClientId',
+ clientId: 'https://codeit.codes/worker/getClientId',
+clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  
 
 };
 
