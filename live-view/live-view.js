@@ -1023,11 +1023,19 @@ async function handleLiveViewRequest(requestPath) {
           };
           
         }
+
         
-        //In case of LFS:
-        var contentString = new TextDecoder().decode(respObj);
-        if(contentString.startsWith("version https://git-lfs.github.com/spec/")){
+        // if the file's stored with Git LFS
+        // (see: https://github.com/git-lfs/git-lfs/blob/main/docs/spec.md)
+        
+        const fileContentStr = new TextDecoder().decode(respObj);
+
+        const isLFS = fileContentStr.startsWith('version https://git-lfs.github.com/spec/');
+        
+        if (isLFS) {
+        
           respObj = await git.getPublicLFSFileAsStream(liveFileDir, fileName);
+        
         }
         
       } else {
