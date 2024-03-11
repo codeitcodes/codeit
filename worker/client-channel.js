@@ -6,16 +6,16 @@
 // internal paths
 const INTERNAL_PATHS = {
 
-  internal: 'https://codeit-mu.vercel.app/',
+  internal: 'https://codeit.codes/',
   internal_: 'https://dev.codeit.codes/',
 
-  run: 'https://codeit-mu.vercel.app/run',
+  run: 'https://codeit.codes/run',
   run_: 'https://dev.codeit.codes/run',
   
   relLivePath: ('/run/' + '_/'.repeat(15)),
   
- clientId: 'https://codeit.codes/worker/getClientId',
-clientId_: 'https://dev.codeit.codes/worker/getClientId',
+  clientId: 'https://codeit.codes/worker/getClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getClientId',
   
 
 };
