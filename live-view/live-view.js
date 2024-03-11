@@ -1009,6 +1009,7 @@ async function handleLiveViewRequest(requestPath) {
         
         // get public file from git as ReadableStream
         respObj = await git.getPublicFileAsStream(liveFileDir, fileName);
+
         
         // if couldn't fetch file
         if (respObj.errorCode) {
@@ -1035,6 +1036,21 @@ async function handleLiveViewRequest(requestPath) {
         if (isLFS) {
         
           respObj = await git.getPublicLFSFileAsStream(liveFileDir, fileName);
+
+          
+          // if couldn't fetch file
+          if (respObj.errorCode) {
+            
+            // return an error
+            
+            const respStatus = respObj.errorCode;
+            
+            return {
+              fileContent: '',
+              respStatus: respStatus
+            };
+            
+          }
         
         }
         
