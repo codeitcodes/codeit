@@ -3,25 +3,26 @@
 // service worker/client communication channel
 
 
-const ORIGIN_URL = self.location.origin;
-
 // internal paths
 const INTERNAL_PATHS = {
 
-  internal: ORIGIN_URL,
+  internal: 'https://codeit.codes/',
+  internal_: 'https://dev.codeit.codes/',
 
-  run: ORIGIN_URL + '/run',
+  run: 'https://codeit.codes/run',
+  run_: 'https://dev.codeit.codes/run',
   
   relLivePath: ('/run/' + '_/'.repeat(15)),
   
-  clientId: ORIGIN_URL + '/worker/getClientId'
+  clientId: 'https://codeit.codes/worker/getClientId',
+  clientId_: 'https://dev.codeit.codes/worker/getClientId',
 
 };
 
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-const isDev = (ORIGIN_URL === 'https://dev.codeit.codes');
+const isDev = (self.location.origin === 'https://dev.codeit.codes');
 
 
 // key                : value
@@ -38,7 +39,7 @@ function getPathType(path) {
 
     if (path.startsWith(type[1])) {
 
-      pathType = type[0];
+      pathType = type[0].replaceAll('_', '');
 
     }
 
@@ -294,4 +295,3 @@ self.addEventListener('fetch', (evt) => {
   evt.respondWith(handleFetchRequest(evt.request, evt));
 
 });
-
