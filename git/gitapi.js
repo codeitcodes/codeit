@@ -151,6 +151,39 @@ let git = {
     return buffer;
     
   },
+  
+   // get public LFS file content as ReadableStream
+  'getPublicLFSFileAsStream': async (treeLoc, fileName) => {
+
+    // map tree location
+    let query = 'https://media.githubusercontent.com/media';
+    const [user, repo, contents] = treeLoc;
+
+    // get repository branch
+    let [repoName, branch] = repo.split(':');
+  
+    query += '/' + user + '/' + repoName +
+             '/' + branch +
+             '/' + contents + '/' + fileName;
+  
+    // get the query
+    const resp = await fetch(query);
+    
+    // if received an error
+    if (String(resp.status).startsWith('4')) {
+      
+      return {
+        errorCode: resp.status
+      };
+      
+    }
+
+    
+    const buffer = await resp.arrayBuffer();
+
+    return buffer;
+    
+  },
 
   // get items in tree
   'getItems': async (treeLoc, page = 1) => {
@@ -184,7 +217,7 @@ let git = {
     return resp;
 
   },
-
+  
   // get a repository
   'getRepo': async (treeLoc) => {
 

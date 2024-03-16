@@ -22,7 +22,7 @@ const INTERNAL_PATHS = {
 
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-const isDev = (self.origin === 'https://dev.codeit.codes');
+const isDev = (self.location.origin === 'https://dev.codeit.codes');
 
 
 // key                : value
@@ -295,4 +295,3 @@ self.addEventListener('fetch', (evt) => {
   evt.respondWith(handleFetchRequest(evt.request, evt));
 
 });
-

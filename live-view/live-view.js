@@ -1009,6 +1009,7 @@ async function handleLiveViewRequest(requestPath) {
         
         // get public file from git as ReadableStream
         respObj = await git.getPublicFileAsStream(liveFileDir, fileName);
+
         
         // if couldn't fetch file
         if (respObj.errorCode) {
@@ -1022,6 +1023,35 @@ async function handleLiveViewRequest(requestPath) {
             respStatus: respStatus
           };
           
+        }
+
+        
+        // if the file's stored with Git LFS
+        // (see: https://github.com/git-lfs/git-lfs/blob/main/docs/spec.md)
+        
+        const fileContentStr = new TextDecoder().decode(respObj);
+
+        const isLFS = fileContentStr.startsWith('version https://git-lfs.github.com/spec/');
+        
+        if (isLFS) {
+        
+          respObj = await git.getPublicLFSFileAsStream(liveFileDir, fileName);
+
+          
+          // if couldn't fetch file
+          if (respObj.errorCode) {
+            
+            // return an error
+            
+            const respStatus = respObj.errorCode;
+            
+            return {
+              fileContent: '',
+              respStatus: respStatus
+            };
+            
+          }
+        
         }
         
       } else {
