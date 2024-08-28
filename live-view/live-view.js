@@ -1062,9 +1062,10 @@ async function handleLiveViewRequest(requestPath) {
    
     
         // if file is over 1MB
-        if (resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') {
+        if ((resp.errors && resp.errors.length > 0 && resp.errors[0].code === 'too_large') ||
+            (resp.size && resp.size >= 1000000 && resp.content === '')) {
     
-          console.log('[Live view] File', fileName, 'over 1MB, fetching from blob API');
+          // console.log('[Live view] File', fileName, 'over 1MB, fetching from blob API');
     
           // fetch file directory
           const dirResp = await git.getItems(liveFileDir);
