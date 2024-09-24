@@ -260,6 +260,40 @@ body :is(blockquote, .markdown-alert)::before {
   border-radius: 10px;
 }
 
+body .markdown-alert {
+  padding: .5em 1em;
+  padding-left: calc(1em + 0.25em);
+  position: relative;
+}
+
+body .markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1;
+}
+
+body .markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--rosemary-lighter);
+}
+
+body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: hsl(15deg 57% 76%);
+}
+
+body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: hsl(354deg 61% 73%);
+}
+
+body .markdown-alert .markdown-alert-title svg {
+  margin-right: 8px;
+  fill: currentColor;
+}
+
+body .markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
 body dl {
   padding: 0;
 }
@@ -301,40 +335,6 @@ body .footnotes ol {
 
 body li > p {
   margin-top: 16px;
-}
-
-body .markdown-alert {
-  padding: .5em 1em;
-  padding-left: calc(1em + 0.25em);
-  position: relative;
-}
-
-body .markdown-alert .markdown-alert-title {
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  line-height: 1;
-}
-
-body .markdown-alert.markdown-alert-note .markdown-alert-title {
-  color: var(--rosemary-lighter);
-}
-
-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
-  color: hsl(15deg 57% 76%);
-}
-
-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
-  color: hsl(354deg 61% 73%);
-}
-
-body .markdown-alert .markdown-alert-title svg {
-  margin-right: 8px;
-  fill: currentColor;
-}
-
-body .markdown-alert > :last-child {
-  margin-bottom: 0;
 }
 
 body cd-el {
