@@ -296,7 +296,7 @@ body .markdown-alert .markdown-alert-title {
   display: flex;
   font-weight: 500;
   align-items: center;
-  margin-bottom: .5em;
+  margin-bottom: 0.25em;
 }
 
 body .markdown-alert.markdown-alert-note .markdown-alert-title {
