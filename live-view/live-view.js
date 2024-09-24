@@ -1194,10 +1194,14 @@ async function renderLiveViewMarkdown(file) {
     // load markdown compiler
     await loadScript('live-view/extensions/markdown/marked.min.js');
 
+    
     // apply markdown compiler extensions
+    
     marked.use(markedAlert());
     marked.use(markedFootnote());
     marked.use(markedBidi());
+    
+    marked.use(markedKatex({ throwOnError: false }));
     
   }
   
