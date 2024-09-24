@@ -4896,7 +4896,6 @@ html, body {
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
   font-synthesis: none;
-  overscroll-behavior: none;
   user-select: text;
   -webkit-user-select: text;
   -webkit-touch-callout: none;
