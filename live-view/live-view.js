@@ -1192,7 +1192,11 @@ async function renderLiveViewMarkdown(file) {
       typeof DOMPurify === 'undefined') {
     
     // load markdown compiler
-    await loadScript('live-view/extensions/marked.min.js');
+    await loadScript('live-view/extensions/markdown/marked.min.js');
+
+    // apply markdown compiler extensions
+    marked.use(markedAlert());
+    marked.use(markedFootnote());
     
   }
   
@@ -1253,7 +1257,7 @@ async function renderLiveViewMarkdown(file) {
   
   fetchPromises.push((async (i) => {
     
-    await loadStyleSheet(window.location.origin + '/live-view/extensions/markdown-dark.css', frameDoc.head)
+    await loadStyleSheet(window.location.origin + '/live-view/extensions/markdown/markdown-dark.css', frameDoc.head)
     
     fetchPromises.splice(i, 1);
   })(fetchPromises.length));
