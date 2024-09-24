@@ -15,7 +15,7 @@ html, body {
   inset: 0;
   z-index: 1000;
   pointer-events: none;
-  box-shadow: inset 0 0 0 2px rgb(104 187 228 / 50%);
+  box-shadow: inset 0 0 0 2px hsl(223deg 86% 64% / 50%);
 }
 
 ::selection {
