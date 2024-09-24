@@ -320,6 +320,14 @@ body .markdown-alert.markdown-alert-note .markdown-alert-title {
   color: var(--rosemary-lighter);
 }
 
+body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: hsl(15deg 57% 76%);
+}
+
+body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: hsl(354deg 61% 73%);
+}
+
 body .markdown-alert .markdown-alert-title svg {
   margin-right: 8px;
   fill: currentColor;
