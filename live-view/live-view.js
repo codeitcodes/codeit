@@ -1197,6 +1197,7 @@ async function renderLiveViewMarkdown(file) {
     // apply markdown compiler extensions
     marked.use(markedAlert());
     marked.use(markedFootnote());
+    marked.use(markedBidi());
     
   }
   
@@ -1210,7 +1211,6 @@ async function renderLiveViewMarkdown(file) {
   frameDoc.body.innerHTML = html;
     
   if (isMobile) frameDoc.body.classList.add('mobile');
-  setAttr(frameDoc.body, 'dir', 'auto');
   
   frameDoc.body.querySelectorAll('a[href]:not([target="_blank"])').forEach(link => {
     
