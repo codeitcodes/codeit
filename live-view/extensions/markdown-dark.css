@@ -277,17 +277,35 @@ body .markdown-alert.markdown-alert-note .markdown-alert-title {
   color: var(--rosemary-lighter);
 }
 
-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+body .markdown-alert.markdown-alert-tip .markdown-alert-title,
+body .markdown-alert.markdown-alert-tip::before {
+  color: hsl(42deg 87% 60% / 93%);
+}
+
+body .markdown-alert.markdown-alert-important .markdown-alert-title,
+body .markdown-alert.markdown-alert-important::before {
+  color: #ce8de2;
+}
+
+body .markdown-alert.markdown-alert-warning .markdown-alert-title,
+body .markdown-alert.markdown-alert-warning::before {
   color: hsl(15deg 57% 76%);
 }
 
-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+body .markdown-alert.markdown-alert-caution .markdown-alert-title,
+body .markdown-alert.markdown-alert-caution::before {
   color: hsl(354deg 61% 73%);
+}
+
+body .markdown-alert:not(.markdown-alert-note)::before {
+  background: currentColor;
+  opacity: 0.11;
 }
 
 body .markdown-alert .markdown-alert-title svg {
   margin-right: 8px;
   fill: currentColor;
+  opacity: .72;
 }
 
 body .markdown-alert > :last-child {
