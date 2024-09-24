@@ -375,10 +375,6 @@ body .footnotes {
   border-top: 1px solid var(--color-border-default);
 }
 
-body .footnotes ol {
-  padding-left: 16px;
-}
-
 body li > p {
   margin-top: 16px;
 }
