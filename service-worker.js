@@ -1,6 +1,6 @@
 
 // update worker name when updating cached files
-const WORKER_NAME = 'codeit-worker-v773';
+const WORKER_NAME = 'codeit-worker-v774';
 
 
 self.importScripts('/worker/client-channel.js');
@@ -54,8 +54,8 @@ const FILES_TO_CACHE = [
   '/live-view/extensions/mobile-console/logger.js',
   '/live-view/extensions/mobile-console/safari-keyboard.js',
   
-  '/live-view/extensions/marked.min.js',
-  '/live-view/extensions/markdown-dark.css',
+  '/live-view/extensions/markdown/marked.min.js',
+  '/live-view/extensions/markdown/markdown-dark.css',
   
   '/editor-theme.css',
 

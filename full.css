@@ -2008,7 +2008,7 @@ body.safari .console-sheet .logs .log .data.safari-margin-left-update {
 }
 
 .console-sheet .logs .log.debug {
-  --text-color: hsl(220deg 100% 65%);
+  --text-color: var(--rosemary-lighter);
 }
 
 .console-sheet .logs .log:is(.warn, .error) {
