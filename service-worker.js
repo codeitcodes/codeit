@@ -1,6 +1,6 @@
 
 // update worker name when updating cached files
-const WORKER_NAME = 'codeit-worker-v779';
+const WORKER_NAME = 'codeit-worker-v780';
 
 
 self.importScripts('/worker/client-channel.js');
