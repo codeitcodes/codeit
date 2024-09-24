@@ -118,7 +118,7 @@ body form {
   display: none;
 }
 
-body p, body blockquote, body ul, body ol, body dl, body table, body pre, body details, body img, body cd-el {
+body p, body blockquote, body .markdown-alert, body ul, body ol, body dl, body table, body pre, body details, body img, body cd-el {
   margin-top: 0;
   margin-bottom: 16px;
 }
@@ -249,7 +249,7 @@ body blockquote {
   padding-left: calc(1em + 0.25em);
 }
 
-body blockquote::before {
+body :is(blockquote, .markdown-alert)::before {
   content: '';
   height: 100%;
   width: 0.25em;
@@ -304,9 +304,9 @@ body li > p {
 }
 
 body .markdown-alert {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: .25em solid var(--color-border-default);
+  padding: .5em 1em;
+  padding-left: calc(1em + 0.25em);
+  position: relative;
 }
 
 body .markdown-alert .markdown-alert-title {
@@ -396,4 +396,3 @@ html, body {
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
 }
-
