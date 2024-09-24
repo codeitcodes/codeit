@@ -18,12 +18,6 @@ html, body {
   box-shadow: inset 0 0 0 2px hsl(223deg 86% 64% / 50%);
 }
 
-:focus-visible {
-  box-shadow: 0 0 0 2px hsl(223deg 86% 64% / 50%);
-  outline: none;
-  border-radius: 2px;
-}
-
 ::selection {
   background: rgba(255, 255, 255, 0.15);
 }
