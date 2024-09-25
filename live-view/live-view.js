@@ -1246,7 +1246,7 @@ async function renderLiveViewMarkdown(file) {
         
         e.preventDefault();
         
-        const target = frameDoc.querySelector(href);
+        const target = frameDoc.querySelector(href.toLowerCase());
         target.scrollIntoView();
         
       };
