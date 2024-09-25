@@ -1213,6 +1213,7 @@ async function renderLiveViewMarkdown(file) {
   frameDoc.body.innerHTML = html;
     
   if (isMobile) frameDoc.body.classList.add('mobile');
+  if (isSafari) frameDoc.body.classList.add('safari');
   
   frameDoc.body.querySelectorAll('a[href]:not([target="_blank"])').forEach(link => {
     
