@@ -1200,7 +1200,7 @@ async function renderLiveViewMarkdown(file) {
     marked.use(markedAlert());
     marked.use(markedFootnote());
     marked.use(markedBidi());
-        
+    
   }
   
   
@@ -1245,7 +1245,7 @@ async function renderLiveViewMarkdown(file) {
         
         e.preventDefault();
         
-        const target = frameDoc.querySelector(href);
+        const target = frameDoc.querySelector(href.toLowerCase());
         target.scrollIntoView();
         
       };
