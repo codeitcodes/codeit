@@ -1200,7 +1200,8 @@ async function renderLiveViewMarkdown(file) {
     marked.use(markedAlert());
     marked.use(markedFootnote());
     marked.use(markedBidi());
-        
+    marked.use(gfmHeadingId());
+    
   }
   
   
