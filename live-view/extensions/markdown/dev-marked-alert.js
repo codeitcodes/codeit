@@ -1,8 +1,8 @@
-(function(i, n) {
-  typeof exports == "object" && typeof module < "u" ? module.exports = n() : typeof define == "function" && define.amd ? define(n) : (i = typeof globalThis < "u" ? globalThis : i || self, i.markedAlert = n())
+(function(n, s) {
+  typeof exports == "object" && typeof module < "u" ? module.exports = s() : typeof define == "function" && define.amd ? define(s) : (n = typeof globalThis < "u" ? globalThis : n || self, n.markedAlert = s())
 })(this, function() {
   "use strict";
-  const i = [{
+  const n = [{
     type: "note",
     icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11 7H13V9H11V7ZM11 11H13V17H11V11ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"></path> </svg>'
   }, {
@@ -19,50 +19,56 @@
     icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z" fill="currentColor"></path> </svg>'
   }];
 
-  function n(a) {
-    return a.length ? Object.values([...i, ...a].reduce((s, r) => (s[r.type] = r, s), {})) : i
+  function s(a) {
+    return a.length ? Object.values([...n, ...a].reduce((r, o) => (r[o.type] = o, r), {})) : n
   }
 
-  function h(a) {
-    return `^(?:\\[\\!${a.toUpperCase()}\\])s*? ?`
+  function c(a) {
+    return `^(?:\\[\\!${a.toUpperCase()}\\])s*?
+?`
   }
 
-  function f(a) {
+  function u(a) {
     return a.slice(0, 1).toUpperCase() + a.slice(1).toLowerCase()
   }
 
-  function m(a = {}) {
+  function f(a = {}) {
     const {
-      className: s = "markdown-alert",
-      variants: r = []
-    } = a, g = n(r);
+      className: r = "markdown-alert",
+      variants: o = []
+    } = a, g = s(o);
     return {
       walkTokens(e) {
-        var t, p, d, v;
+        var t, p, d;
         if (e.type !== "blockquote") return;
-        const o = g.find(({
-          type: c
-        }) => new RegExp(h(c)).test(e.text));
-        if (o) {
+        const l = g.find(({
+          type: i
+        }) => new RegExp(c(i)).test(e.text));
+        if (l) {
           const {
-            type: c,
-            icon: Z,
-            title: w = f(c),
-            titleClassName: x = `${s}-title`
-          } = o;
+            type: i,
+            icon: m,
+            title: w = u(i),
+            titleClassName: Z = `${r}-title`
+          } = l;
           Object.assign(e, {
             type: "alert",
             meta: {
-              className: s,
-              variant: c,
-              icon: Z,
+              className: r,
+              variant: i,
+              icon: m,
               title: w,
-              titleClassName: x
+              titleClassName: Z
             }
           });
-          const l = (t = e.tokens) == null ? void 0 : t[0],
-            u = (p = l.raw) == null ? void 0 : p.replace(new RegExp(h(c)), "").trim();
-          u ? (l.tokens = this.Lexer.lexInline(u), (d = e.tokens) == null || d.splice(0, 1, l)) : (v = e.tokens) == null || v.shift()
+          const v = (t = e.tokens) == null ? void 0 : t[0];
+          if ((p = v.raw) == null ? void 0 : p.replace(new RegExp(c(i)), "").trim()) {
+            const h = v.tokens[0];
+            Object.assign(h, {
+              raw: h.raw.replace(new RegExp(c(i)), ""),
+              text: h.text.replace(new RegExp(c(i)), "")
+            })
+          } else(d = e.tokens) == null || d.shift()
         }
       },
       extensions: [{
@@ -70,13 +76,16 @@
         level: "block",
         renderer({
           meta: e,
-          tokens: o = []
+          tokens: l = []
         }) {
-          let t = `<div class="${e.className} ${e.className}-${e.variant}"> `;
-          return t += `<p class="${e.titleClassName}">`, t += e.icon, t += e.title, t += `</p> `, t += this.parser.parse(o), t += `</div> `, t
+          let t = `<div class="${e.className} ${e.className}-${e.variant}">
+`;
+          return t += `<p class="${e.titleClassName}">`, t += e.icon, t += e.title, t += `</p>
+`, t += this.parser.parse(l), t += `</div>
+`, t
         }
       }]
     }
   }
-  return m
+  return f
 });
